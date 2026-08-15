@@ -1,0 +1,54 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const result = await lightbase.query('school_blog_posts', {
+  filter: { field: 'status', op: 'eq', value: 'published' },
+  sort: 'publishedAt:desc',
+  limit: 20,
+});
+const posts = result.data || [];
+const categories = [...new Set(posts.map(p => p.category).filter(Boolean))];
+---
+
+<PlatformLayout title="News & Blog - Minhaajulhudaa School" platform="school">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">News & Blog</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Stay updated with the latest news, events, and articles from Minhaajulhudaa School.</p>
+
+    {categories.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8">
+        <button class="badge badge-primary">All</button>
+        {categories.map(cat => (
+          <span class="badge" style="background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-muted);">{cat}</span>
+        ))}
+      </div>
+    )}
+
+    {posts.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {posts.map((post) => (
+          <article class="card card-hover overflow-hidden">
+            <div class="aspect-[16/9] bg-[rgb(5,179,77,0.1)]">
+              {post.featuredImageUrl && <img src={post.featuredImageUrl} alt={post.title} class="w-full h-full object-cover" loading="lazy" />}
+            </div>
+            <div class="p-6">
+              <span class="badge badge-accent mb-3">{post.category}</span>
+              <h2 class="font-bold mb-2 line-clamp-2">{post.title}</h2>
+              <p class="text-sm mb-4 line-clamp-3" style="color: var(--color-muted);">{post.excerpt}</p>
+              <div class="flex items-center justify-between text-xs" style="color: var(--color-muted);">
+                <span>{post.authorName}</span>
+                <span>{post.readingTimeMinutes} min read</span>
+              </div>
+              <a href={`/school/news/${post.slug}`} class="btn btn-outline w-full mt-4">Read More</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="card p-12 text-center">
+        <p style="color: var(--color-muted);">No articles published yet.</p>
+      </div>
+    )}
+  </section>
+</PlatformLayout>

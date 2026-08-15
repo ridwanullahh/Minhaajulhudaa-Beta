@@ -1,0 +1,140 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../lib/lightbase';
+
+const classes = await lightbase.query('school_classes', { filter: { field: 'active', op: 'eq', value: true }, limit: 20 });
+---
+
+<PlatformLayout title="Admission - Minhaajulhudaa School" platform="school">
+  <section class="container-app py-12 max-w-3xl">
+    <span class="badge badge-accent mb-4">Admissions Open 2026/2027</span>
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Apply for Admission</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Complete the form below to apply for admission. Our admissions team will review your application and contact you within 5 business days.</p>
+
+    <form id="admission-form" class="card p-6 md:p-8 space-y-6">
+      <!-- Student Info -->
+      <div>
+        <h2 class="text-lg font-bold mb-4 pb-2 border-b" style="border-color: var(--color-border);">Student Information</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">First Name *</label>
+            <input type="text" name="studentFirstName" required class="input" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Last Name *</label>
+            <input type="text" name="studentLastName" required class="input" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Date of Birth *</label>
+            <input type="date" name="studentDateOfBirth" required class="input" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Gender *</label>
+            <select name="studentGender" required class="input">
+              <option value="">Select...</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium mb-1">Applying for Class *</label>
+            <select name="appliedClass" required class="input">
+              <option value="">Select a class...</option>
+              {classes.data.map(cls => <option value={cls.name}>{cls.name} ({cls.level.replace('-', ' ')})</option>)}
+            </select>
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium mb-1">Previous School</label>
+            <input type="text" name="previousSchool" class="input" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Guardian Info -->
+      <div>
+        <h2 class="text-lg font-bold mb-4 pb-2 border-b" style="border-color: var(--color-border);">Guardian Information</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium mb-1">Guardian Name *</label>
+            <input type="text" name="guardianName" required class="input" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Phone *</label>
+            <input type="tel" name="guardianPhone" required class="input" placeholder="+234..." />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Email *</label>
+            <input type="email" name="guardianEmail" required class="input" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Occupation</label>
+            <input type="text" name="guardianOccupation" class="input" />
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium mb-1">Address *</label>
+            <textarea name="address" required class="input" rows="2"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Info -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Additional Information</label>
+        <textarea name="additionalInfo" class="input" rows="4" placeholder="Any special needs, medical conditions, or other information we should know..."></textarea>
+      </div>
+
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary flex-1">Submit Application</button>
+        <button type="reset" class="btn btn-ghost">Reset</button>
+      </div>
+    </form>
+
+    <div id="form-message" class="hidden mt-4 p-4 rounded-lg"></div>
+  </section>
+
+  <script is:inline>
+    document.getElementById('admission-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      const msg = document.getElementById('form-message');
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+      data.applicationId = 'MHS-APP/' + new Date().getFullYear() + '/' + Math.random().toString(36).substring(2, 8).toUpperCase();
+      data.status = 'pending';
+      data.submittedAt = new Date().toISOString();
+
+      try {
+        const response = await fetch('/api/school/admission', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (response.ok) {
+          msg.className = 'mt-4 p-4 rounded-lg';
+          msg.style.background = 'rgb(5,179,77,0.1)';
+          msg.style.color = 'var(--color-primary)';
+          msg.textContent = 'Application submitted successfully! Your application ID is ' + data.applicationId + '. We will contact you within 5 business days.';
+          msg.classList.remove('hidden');
+          form.reset();
+          msg.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          throw new Error(result.error || 'Submission failed');
+        }
+      } catch (err) {
+        msg.className = 'mt-4 p-4 rounded-lg';
+        msg.style.background = 'rgb(220,38,38,0.1)';
+        msg.style.color = '#DC2626';
+        msg.textContent = 'Error: ' + err.message + '. Please try again or contact us directly.';
+        msg.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Submit Application';
+      }
+    });
+  </script>
+</PlatformLayout>

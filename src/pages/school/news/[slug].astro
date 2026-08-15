@@ -1,0 +1,88 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+export async function getStaticPaths() {
+  const result = await lightbase.query('school_blog_posts', {
+    filter: { field: 'status', op: 'eq', value: 'published' },
+    limit: 100,
+  });
+  const posts = result.data || [];
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+const related = await lightbase.query('school_blog_posts', {
+  filter: { and: [
+    { field: 'status', op: 'eq', value: 'published' },
+    { field: 'category', op: 'eq', value: post.category },
+    { field: 'slug', op: 'neq', value: post.slug },
+  ]},
+  limit: 3,
+});
+---
+
+<PlatformLayout title={`${post.title} - Minhaajulhudaa School`} platform="school">
+  <article class="container-app py-12 max-w-3xl">
+    <a href="/school/news" class="text-sm font-medium mb-6 inline-flex items-center gap-1" style="color: var(--color-primary);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to News
+    </a>
+
+    <span class="badge badge-accent mb-4">{post.category}</span>
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">{post.title}</h1>
+
+    <div class="flex items-center gap-4 mb-8 text-sm" style="color: var(--color-muted);">
+      <span>{post.authorName}</span>
+      <span>{new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+      <span>{post.readingTimeMinutes} min read</span>
+    </div>
+
+    {post.featuredImageUrl && (
+      <img src={post.featuredImageUrl} alt={post.title} class="w-full aspect-[16/9] object-cover rounded-2xl mb-8" />
+    )}
+
+    <div class="prose prose-lg max-w-none">
+      {post.content.split('\n').map((para) => {
+        if (para.startsWith('## ')) {
+          return <h2 class="text-2xl font-bold mt-8 mb-4">{para.replace('## ', '')}</h2>;
+        }
+        if (para.startsWith('1. ') || para.startsWith('2. ') || para.startsWith('3. ') || para.startsWith('4. ') || para.startsWith('5. ')) {
+          return <p class="mb-2 leading-relaxed" style="color: var(--color-muted);">{para}</p>;
+        }
+        if (para.trim()) {
+          return <p class="mb-4 leading-relaxed" style="color: var(--color-muted);">{para}</p>;
+        }
+        return null;
+      })}
+    </div>
+
+    {post.tags && post.tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mt-8 pt-8 border-t" style="border-color: var(--color-border);">
+        {post.tags.map(tag => <span class="badge badge-primary">#{tag}</span>)}
+      </div>
+    )}
+  </article>
+
+  {related.data && related.data.length > 0 && (
+    <section class="container-app py-12">
+      <h2 class="text-2xl font-bold mb-6">Related Articles</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {related.data.map((r) => (
+          <a href={`/school/news/${r.slug}`} class="card card-hover overflow-hidden">
+            <div class="aspect-[16/9] bg-[rgb(5,179,77,0.1)]">
+              {r.featuredImageUrl && <img src={r.featuredImageUrl} alt={r.title} class="w-full h-full object-cover" loading="lazy" />}
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-sm line-clamp-2">{r.title}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</PlatformLayout>
