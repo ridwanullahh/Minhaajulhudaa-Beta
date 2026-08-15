@@ -11,6 +11,7 @@ const packages = await lightbase.query('travels_packages', {
 const selectedSlug = Astro.url.searchParams.get('package');
 const selectedPkg = selectedSlug ? packages.data.find(p => p.slug === selectedSlug) : packages.data[0];
 ---
+export const prerender = true;
 
 <PlatformLayout title="Book Your Journey - Minhaajulhudaa Travels" platform="travels">
   <section class="container-app py-12 max-w-3xl">

@@ -29,6 +29,11 @@ export const POST: APIRoute = async ({ request }) => {
       body.bookingNumber = 'MHS-TRV/' + new Date().getFullYear() + '/' + Date.now().toString(36).toUpperCase();
     }
 
+    // Generate customer ID if not provided
+    if (!body.customerId) {
+      body.customerId = 'CUST-' + Date.now().toString(36).toUpperCase();
+    }
+
     body.packageId = pkgResult.id;
     body.packageTitle = pkgResult.title;
     body.status = 'pending';
