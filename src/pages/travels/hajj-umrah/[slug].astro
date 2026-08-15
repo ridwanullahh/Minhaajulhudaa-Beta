@@ -22,6 +22,7 @@ const itineraries = await lightbase.query('travels_itineraries', {
   limit: 30,
 });
 ---
+export const prerender = true;
 
 <PlatformLayout title={`${pkg.title} - Minhaajulhudaa Travels`} platform="travels">
   <section class="container-app py-12 max-w-4xl">

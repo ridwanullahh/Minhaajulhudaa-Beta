@@ -68,7 +68,7 @@ export const travelsSchemas = [
       { name: 'packageTitle', type: 'string' },
       { name: 'customerId', type: 'string', required: true, indexed: true },
       { name: 'customerName', type: 'string', required: true },
-      { name: 'customerEmail', type: 'email', required: true },
+      { name: 'customerEmail', type: 'email', required: true, indexed: true },
       { name: 'customerPhone', type: 'phone', required: true },
       { name: 'travelers', type: 'array', of: 'json', default: [] },
       { name: 'travelerCount', type: 'integer', default: 1 },

@@ -10,6 +10,7 @@ const result = await lightbase.query('charity_faq', {
 const faqs = result.data || [];
 const categories = [...new Set(faqs.map(f => f.category).filter(Boolean))];
 ---
+export const prerender = true;
 
 <PlatformLayout title="FAQ - Minhaajulhudaa Charity" platform="charity">
   <section class="container-app py-12 max-w-3xl">
