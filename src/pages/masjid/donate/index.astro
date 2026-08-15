@@ -1,0 +1,223 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const campaignsResult = await lightbase.query('masjid_donation_campaigns', {
+  filter: { field: 'status', op: 'eq', value: 'active' },
+  limit: 20,
+});
+const campaigns = campaignsResult.data || [];
+
+const categories = [
+  { id: 'zakaat', name: 'Zakaat', desc: 'Obligatory annual charity', icon: 'coin' },
+  { id: 'sadaqah', name: 'Sadaqah', desc: 'Voluntary charity', icon: 'heart' },
+  { id: 'waqf', name: 'Waqf', desc: 'Endowment for perpetual reward', icon: 'building' },
+  { id: 'construction', name: 'Construction', desc: 'Masjid expansion and maintenance', icon: 'home' },
+  { id: 'operational', name: 'Operational', desc: 'Day-to-day masjid operations', icon: 'gear' },
+  { id: 'emergency', name: 'Emergency', desc: 'Urgent community needs', icon: 'alert' },
+];
+---
+
+<PlatformLayout title="Donate - Minhaajulhudaa Masjid" platform="masjid">
+  <section class="container-app py-12">
+    <div class="text-center mb-12">
+      <span class="badge badge-accent mb-4">Support the Masjid</span>
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Donate for the Sake of Allah</h1>
+      <p class="arabic text-xl mb-4" dir="rtl">مَن ذَا الَّذِي يُقْرِضُ اللَّهَ قَرْضًا حَسَنًا</p>
+      <p style="color: var(--color-muted);" class="max-w-2xl mx-auto">"Who is it that would loan Allah a goodly loan so He will multiply it for him many times over?" - Quran 2:245</p>
+    </div>
+
+    <!-- Donation Form -->
+    <div class="card p-6 md:p-8 mb-8 max-w-2xl mx-auto">
+      <form id="donation-form" class="space-y-6">
+        <!-- Amount Selection -->
+        <div>
+          <label class="block text-sm font-medium mb-3">Select Amount (NGN)</label>
+          <div class="grid grid-cols-4 gap-2 mb-3">
+            {[5000, 10000, 25000, 50000].map(amt => (
+              <button type="button" class="amount-btn p-3 rounded-lg text-sm font-semibold border" style="border-color: var(--color-border);" data-amount={amt}>₦{amt.toLocaleString()}</button>
+            ))}
+          </div>
+          <input type="number" name="amount" id="custom-amount" placeholder="Or enter custom amount" class="input" min="100" required />
+        </div>
+
+        <!-- Category -->
+        <div>
+          <label class="block text-sm font-medium mb-3">Donation Category</label>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+            {categories.map(cat => (
+              <button type="button" class="category-btn p-3 rounded-lg text-sm border text-left" style="border-color: var(--color-border);" data-category={cat.id}>
+                <div class="font-semibold">{cat.name}</div>
+                <div class="text-xs" style="color: var(--color-muted);">{cat.desc}</div>
+              </button>
+            ))}
+          </div>
+          <input type="hidden" name="category" id="category-input" value="sadaqah" required />
+        </div>
+
+        <!-- Donor Info -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">Name *</label>
+            <input type="text" name="donorName" required class="input" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Email *</label>
+            <input type="email" name="donorEmail" required class="input" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Phone</label>
+            <input type="tel" name="donorPhone" class="input" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Donation Type</label>
+            <select name="type" class="input">
+              <option value="one-time">One-time</option>
+              <option value="recurring">Recurring (Monthly)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Anonymous -->
+        <label class="flex items-center gap-2 text-sm">
+          <input type="checkbox" name="isAnonymous" class="w-4 h-4" />
+          <span>Make this donation anonymous</span>
+        </label>
+
+        <!-- Message -->
+        <div>
+          <label class="block text-sm font-medium mb-1">Message (optional)</label>
+          <textarea name="message" class="input" rows="3" placeholder="Any message or dua..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-full">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Donate Now
+        </button>
+      </form>
+      <div id="form-message" class="hidden mt-4 p-4 rounded-lg"></div>
+    </div>
+
+    <!-- Active Campaigns -->
+    {campaigns.length > 0 && (
+      <div>
+        <h2 class="text-2xl font-bold mb-6 text-center">Or Support a Campaign</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {campaigns.map((campaign) => {
+            const progress = Math.round((campaign.raisedAmount / campaign.goalAmount) * 100);
+            return (
+              <div class="card card-hover overflow-hidden">
+                <div class="aspect-[16/9]">
+                  {campaign.imageUrl && <img src={campaign.imageUrl} alt={campaign.title} class="w-full h-full object-cover" loading="lazy" />}
+                </div>
+                <div class="p-6">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="badge badge-primary">{campaign.category}</span>
+                    {campaign.isUrgent && <span class="badge badge-accent">Urgent</span>}
+                  </div>
+                  <h3 class="font-bold mb-2">{campaign.title}</h3>
+                  <p class="text-sm mb-4 line-clamp-2" style="color: var(--color-muted);">{campaign.description.substring(0, 120)}...</p>
+                  <div class="mb-3">
+                    <div class="flex justify-between text-sm mb-1">
+                      <span class="font-semibold" style="color: var(--color-primary);">₦{campaign.raisedAmount.toLocaleString()}</span>
+                      <span style="color: var(--color-muted);">of ₦{campaign.goalAmount.toLocaleString()}</span>
+                    </div>
+                    <div class="h-2 rounded-full" style="background: var(--color-border);">
+                      <div class="h-full rounded-full" style={`width: ${progress}%; background: var(--color-primary);`}></div>
+                    </div>
+                  </div>
+                  <button class="btn btn-outline w-full donate-to-campaign" data-campaign-id={campaign.id} data-campaign-title={campaign.title} data-category={campaign.category}>
+                    Donate to this Campaign
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    )}
+  </section>
+
+  <script is:inline>
+    // Amount buttons
+    document.querySelectorAll('.amount-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.amount-btn').forEach(b => {
+          b.classList.remove('border-[var(--color-primary)]', 'bg-[rgb(5,179,77,0.05)]');
+          b.style.borderColor = 'var(--color-border)';
+        });
+        btn.classList.add('border-[var(--color-primary)]', 'bg-[rgb(5,179,77,0.05)]');
+        btn.style.borderColor = 'var(--color-primary)';
+        document.getElementById('custom-amount').value = btn.dataset.amount;
+      });
+    });
+
+    // Category buttons
+    document.querySelectorAll('.category-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.category-btn').forEach(b => {
+          b.classList.remove('border-[var(--color-primary)]', 'bg-[rgb(5,179,77,0.05)]');
+          b.style.borderColor = 'var(--color-border)';
+        });
+        btn.classList.add('border-[var(--color-primary)]', 'bg-[rgb(5,179,77,0.05)]');
+        btn.style.borderColor = 'var(--color-primary)';
+        document.getElementById('category-input').value = btn.dataset.category;
+      });
+    });
+
+    // Campaign donate buttons
+    document.querySelectorAll('.donate-to-campaign').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('category-input').value = btn.dataset.category;
+        document.querySelector('#donation-form').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Form submission
+    document.getElementById('donation-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      const msg = document.getElementById('form-message');
+      btn.disabled = true;
+      btn.textContent = 'Processing...';
+
+      const data = Object.fromEntries(new FormData(form));
+      data.isAnonymous = data.isAnonymous === 'on';
+      data.reference = 'MAS-DON-' + Date.now().toString(36).toUpperCase();
+      data.status = 'pending';
+      data.currency = 'NGN';
+      data.method = 'card';
+      data.donatedAt = new Date().toISOString();
+
+      try {
+        const response = await fetch('/api/masjid/donate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (response.ok) {
+          msg.className = 'mt-4 p-4 rounded-lg';
+          msg.style.background = 'rgb(5,179,77,0.1)';
+          msg.style.color = 'var(--color-primary)';
+          msg.innerHTML = 'Jazakum Allahu Khairan! Your donation of ₦' + parseInt(data.amount).toLocaleString() + ' has been received. Reference: ' + data.reference + '<br><br>In a production environment, you would be redirected to a secure payment gateway (Paystack) to complete the transaction.';
+          msg.classList.remove('hidden');
+          form.reset();
+          msg.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          throw new Error(result.error || 'Donation failed');
+        }
+      } catch (err) {
+        msg.className = 'mt-4 p-4 rounded-lg';
+        msg.style.background = 'rgb(220,38,38,0.1)';
+        msg.style.color = '#DC2626';
+        msg.textContent = 'Error: ' + err.message;
+        msg.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Donate Now';
+      }
+    });
+  </script>
+</PlatformLayout>

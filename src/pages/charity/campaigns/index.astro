@@ -1,0 +1,69 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const result = await lightbase.query('charity_campaigns', {
+  filter: { field: 'status', op: 'eq', value: 'active' },
+  sort: 'isUrgent:desc',
+  limit: 50,
+});
+const campaigns = result.data || [];
+const categories = [...new Set(campaigns.map(c => c.category).filter(Boolean))];
+---
+
+<PlatformLayout title="Campaigns - Minhaajulhudaa Charity" platform="charity">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Our Campaigns</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Support a cause that matters to you. Every donation makes a real difference.</p>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap gap-2 mb-8">
+      <button class="badge badge-primary">All</button>
+      {categories.map(cat => (
+        <span class="badge" style="background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-muted);">{cat}</span>
+      ))}
+    </div>
+
+    <!-- Campaigns Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {campaigns.map((campaign) => {
+        const progress = Math.round((campaign.raisedAmount / campaign.goalAmount) * 100);
+        return (
+          <div class="card card-hover overflow-hidden">
+            <div class="aspect-[16/9] relative">
+              {campaign.imageUrl && <img src={campaign.imageUrl} alt={campaign.title} class="w-full h-full object-cover" loading="lazy" />}
+              <div class="absolute top-3 left-3 flex gap-2">
+                <span class="badge badge-primary">{campaign.category}</span>
+                {campaign.isUrgent && <span class="badge badge-accent">Urgent</span>}
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold mb-2">{campaign.title}</h3>
+              <p class="text-sm mb-4 line-clamp-2" style="color: var(--color-muted);">{campaign.shortDescription}</p>
+              <div class="mb-4">
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="font-semibold" style="color: var(--color-primary);">₦{campaign.raisedAmount.toLocaleString()}</span>
+                  <span style="color: var(--color-muted);">of ₦{campaign.goalAmount.toLocaleString()}</span>
+                </div>
+                <div class="h-2 rounded-full" style="background: var(--color-border);">
+                  <div class="h-full rounded-full" style={`width: ${progress}%; background: var(--color-primary);`}></div>
+                </div>
+                <div class="text-xs mt-1" style="color: var(--color-muted);">{progress}% funded - {campaign.beneficiaryCount} beneficiaries</div>
+              </div>
+              <a href={`/charity/campaigns/${campaign.slug}`} class="btn btn-primary w-full">
+                Donate Now
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    {campaigns.length === 0 && (
+      <div class="card p-12 text-center">
+        <p style="color: var(--color-muted);">No active campaigns at the moment.</p>
+      </div>
+    )}
+  </section>
+</PlatformLayout>
