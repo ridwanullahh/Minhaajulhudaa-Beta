@@ -1,0 +1,326 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../lib/lightbase';
+
+// Fetch Quran config and available reciters
+const quranConfig = await lightbase.findOne('masjid_quran_config', { field: 'active', op: 'eq', value: true });
+
+// List of available reciters (from Quran.com API)
+const reciters = [
+  { id: 'mishary-rashid-alafasy', name: 'Mishary Rashid Alafasy', style: 'Melodic' },
+  { id: 'abdul-basit-abdus-samad', name: 'Abdul Basit Abdus-Samad', style: 'Mujawwad' },
+  { id: 'abdur-rahman-as-sudais', name: 'Abdur Rahman As-Sudais', style: 'Murattal' },
+  { id: 'saood-bin-ibrahim-shuraim', name: 'Saood bin Ibrahim Shuraim', style: 'Murattal' },
+  { id: 'maher-al-muaiqly', name: 'Maher Al Muaiqly', style: 'Murattal' },
+  { id: 'mohamed-siddiq-al-minshawi', name: 'Mohamed Siddiq Al-Minshawi', style: 'Mujawwad' },
+  { id: 'mohammad-ayyoub', name: 'Mohammad Ayyoub', style: 'Murattal' },
+  { id: 'nasser-al-qatami', name: 'Nasser Al Qatami', style: 'Murattal' },
+];
+
+// Juz list for quick selection
+const juzList = Array.from({ length: 30 }, (_, i) => i + 1);
+---
+
+<PlatformLayout title="Qur'an Player - Minhaajulhudaa Masjid" platform="masjid">
+  <section class="container-app py-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-8">
+        <span class="badge badge-accent mb-4">24/7 Qur'an Player</span>
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Holy Qur'an Player</h1>
+        <p class="arabic text-2xl mb-4" dir="rtl">القرآن الكريم</p>
+        <p style="color: var(--color-muted);">Listen to the beautiful recitation of the Holy Qur'an, 24/7. Choose your favorite reciter and surah.</p>
+      </div>
+
+      <!-- Player Card -->
+      <div class="card p-6 md:p-8 mb-6" style="background: linear-gradient(135deg, rgb(5,179,77,0.05), rgb(242,185,28,0.05));">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <div class="text-xs uppercase tracking-wide mb-1" style="color: var(--color-muted);">Now Playing</div>
+            <h2 id="now-playing-surah" class="text-xl font-bold">Surah Al-Fatihah</h2>
+            <p id="now-playing-reciter" class="text-sm" style="color: var(--color-muted);">Mishary Rashid Alafasy</p>
+          </div>
+          <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: var(--color-primary);">
+            <svg id="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="pause-icon" width="28" height="28" viewBox="0 0 24 24" fill="white" style="display:none;"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+          </div>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="mb-4">
+          <div class="flex justify-between text-xs mb-2" style="color: var(--color-muted);">
+            <span id="current-time">0:00</span>
+            <span id="duration">--:--</span>
+          </div>
+          <div class="h-2 rounded-full cursor-pointer" id="progress-bar" style="background: var(--color-border);">
+            <div class="h-full rounded-full transition-all" id="progress-fill" style="width: 0%; background: var(--color-primary);"></div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center justify-center gap-4">
+          <button id="prev-btn" class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: var(--color-surface); border: 1px solid var(--color-border);" aria-label="Previous">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 20L9 12l10-8v16zM5 19V5"/></svg>
+          </button>
+          <button id="play-btn" class="w-14 h-14 rounded-full flex items-center justify-center" style="background: var(--color-primary);" aria-label="Play/Pause">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" id="play-icon-main"><path d="M8 5v14l11-7z"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" id="pause-icon-main" style="display:none;"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+          </button>
+          <button id="next-btn" class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: var(--color-surface); border: 1px solid var(--color-border);" aria-label="Next">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4l10 8-10 8V4zM19 5v14"/></svg>
+          </button>
+        </div>
+
+        <!-- Volume -->
+        <div class="flex items-center gap-3 mt-4">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-muted);"><path d="M11 5L6 9H2v6h4l5 4V5z"/></svg>
+          <input type="range" id="volume" min="0" max="100" value="80" class="flex-1" />
+        </div>
+      </div>
+
+      <!-- Reciter Selection -->
+      <div class="card p-6 mb-6">
+        <h3 class="font-bold mb-4">Select Reciter</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="reciter-list">
+          {reciters.map((reciter, i) => (
+            <button
+              class={`reciter-btn p-3 rounded-lg text-sm text-left border transition-all ${i === 0 ? 'border-[var(--color-primary)] bg-[rgb(5,179,77,0.05)]' : ''}`}
+              style="border-color: var(--color-border);"
+              data-reciter-id={reciter.id}
+              data-reciter-name={reciter.name}
+            >
+              <div class="font-semibold">{reciter.name}</div>
+              <div class="text-xs" style="color: var(--color-muted);">{reciter.style}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Surah Quick Select -->
+      <div class="card p-6 mb-6">
+        <h3 class="font-bold mb-4">Select Surah</h3>
+        <div class="grid grid-cols-3 md:grid-cols-5 gap-2 max-h-64 overflow-y-auto" id="surah-list">
+          <!-- Surahs will be populated by JavaScript from Quran.com API -->
+          <div class="col-span-full text-center py-8" style="color: var(--color-muted);">
+            <p class="text-sm">Loading surahs...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Juz Quick Select -->
+      <div class="card p-6">
+        <h3 class="font-bold mb-4">Quick Juz Selection</h3>
+        <div class="grid grid-cols-6 md:grid-cols-10 gap-2">
+          {juzList.map(juz => (
+            <button class="juz-btn p-2 rounded-lg text-sm font-medium border hover:border-[var(--color-primary)]" style="border-color: var(--color-border);" data-juz={juz}>
+              {juz}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <audio id="quran-audio" preload="metadata"></audio>
+
+  <script is:inline define:vars={{ quranConfig }}>
+    const audio = document.getElementById('quran-audio');
+    const playBtn = document.getElementById('play-btn');
+    const playIcon = document.getElementById('play-icon-main');
+    const pauseIcon = document.getElementById('pause-icon-main');
+    const playIconTop = document.getElementById('play-icon');
+    const pauseIconTop = document.getElementById('pause-icon');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const progressBar = document.getElementById('progress-bar');
+    const progressFill = document.getElementById('progress-fill');
+    const currentTimeEl = document.getElementById('current-time');
+    const durationEl = document.getElementById('duration');
+    const volumeSlider = document.getElementById('volume');
+    const nowPlayingSurah = document.getElementById('now-playing-surah');
+    const nowPlayingReciter = document.getElementById('now-playing-reciter');
+    const surahList = document.getElementById('surah-list');
+
+    let currentReciterId = 'mishary-rashid-alafasy';
+    let currentReciterName = 'Mishary Rashid Alafasy';
+    let currentSurah = 1;
+    let currentSurahName = 'Al-Fatihah';
+    let surahs = [];
+
+    // Fetch surahs from Quran.com API
+    async function fetchSurahs() {
+      try {
+        const response = await fetch('https://api.quran.com/api/v4/chapters?language=en');
+        const data = await response.json();
+        surahs = data.chapters;
+        renderSurahs();
+      } catch (err) {
+        surahList.innerHTML = '<div class="col-span-full text-center py-4 text-sm" style="color: var(--color-muted);">Could not load surahs. Please check your connection.</div>';
+      }
+    }
+
+    function renderSurahs() {
+      surahList.innerHTML = surahs.map(s => `
+        <button class="surah-btn p-2 rounded-lg text-xs text-left border hover:border-[var(--color-primary)]" style="border-color: var(--color-border);" data-surah-id="${s.id}" data-surah-name="${s.name_simple}">
+          <div class="font-semibold">${s.id}. ${s.name_simple}</div>
+          <div style="color: var(--color-muted);">${s.name_arabic}</div>
+        </button>
+      `).join('');
+
+      document.querySelectorAll('.surah-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentSurah = parseInt(btn.dataset.surahId);
+          currentSurahName = btn.dataset.surahName;
+          playSurah();
+        });
+      });
+    }
+
+    // Reciter mapping to Quran.com API recitation IDs
+    const reciterMap = {
+      'mishary-rashid-alafasy': 1,
+      'abdul-basit-abdus-samad': 2,
+      'abdur-rahman-as-sudais': 3,
+      'saood-bin-ibrahim-shuraim': 4,
+      'maher-al-muaiqly': 5,
+      'mohamed-siddiq-al-minshawi': 6,
+      'mohammad-ayyoub': 7,
+      'nasser-al-qatami': 8,
+    };
+
+    async function playSurah() {
+      const recitationId = reciterMap[currentReciterId] || 1;
+      try {
+        const response = await fetch(`https://api.quran.com/api/v4/recitations/${recitationId}/by_chapter/${currentSurah}`);
+        const data = await response.json();
+        if (data.audio_files && data.audio_files.length > 0) {
+          const audioUrl = data.audio_files[0].url.startsWith('http')
+            ? data.audio_files[0].url
+            : 'https://verses.quran.com/' + data.audio_files[0].url;
+          audio.src = audioUrl;
+          nowPlayingSurah.textContent = 'Surah ' + currentSurahName;
+          nowPlayingReciter.textContent = currentReciterName;
+          audio.play();
+          updatePlayIcons(true);
+        }
+      } catch (err) {
+        console.error('Playback error:', err);
+      }
+    }
+
+    function updatePlayIcons(isPlaying) {
+      if (isPlaying) {
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+        playIconTop.style.display = 'none';
+        pauseIconTop.style.display = 'block';
+      } else {
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+        playIconTop.style.display = 'block';
+        pauseIconTop.style.display = 'none';
+      }
+    }
+
+    // Event listeners
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        if (!audio.src) playSurah();
+        else audio.play();
+        updatePlayIcons(true);
+      } else {
+        audio.pause();
+        updatePlayIcons(false);
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progressFill.style.width = percent + '%';
+      currentTimeEl.textContent = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      durationEl.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('ended', () => {
+      updatePlayIcons(false);
+      // Auto-play next surah
+      if (currentSurah < 114) {
+        currentSurah++;
+        const surah = surahs.find(s => s.id === currentSurah);
+        if (surah) currentSurahName = surah.name_simple;
+        playSurah();
+      }
+    });
+
+    progressBar.addEventListener('click', (e) => {
+      const rect = progressBar.getBoundingClientRect();
+      const percent = (e.clientX - rect.left) / rect.width;
+      if (audio.duration) audio.currentTime = percent * audio.duration;
+    });
+
+    volumeSlider.addEventListener('input', (e) => {
+      audio.volume = e.target.value / 100;
+    });
+
+    audio.volume = 0.8;
+
+    prevBtn.addEventListener('click', () => {
+      if (currentSurah > 1) {
+        currentSurah--;
+        const surah = surahs.find(s => s.id === currentSurah);
+        if (surah) currentSurahName = surah.name_simple;
+        playSurah();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentSurah < 114) {
+        currentSurah++;
+        const surah = surahs.find(s => s.id === currentSurah);
+        if (surah) currentSurahName = surah.name_simple;
+        playSurah();
+      }
+    });
+
+    // Reciter selection
+    document.querySelectorAll('.reciter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.reciter-btn').forEach(b => {
+          b.classList.remove('border-[var(--color-primary)]', 'bg-[rgb(5,179,77,0.05)]');
+          b.style.borderColor = 'var(--color-border)';
+        });
+        btn.classList.add('border-[var(--color-primary)]', 'bg-[rgb(5,179,77,0.05)]');
+        btn.style.borderColor = 'var(--color-primary)';
+        currentReciterId = btn.dataset.reciterId;
+        currentReciterName = btn.dataset.reciterName;
+        if (audio.src) playSurah();
+      });
+    });
+
+    // Juz selection - play first surah of juz
+    document.querySelectorAll('.juz-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const juz = parseInt(btn.dataset.juz);
+        // Map juz to starting surah (simplified)
+        const juzStartSurah = [1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 14, 15, 17, 18, 21, 23, 25, 27, 29, 33, 36, 39, 46, 51, 58, 67, 78, 92];
+        currentSurah = juzStartSurah[juz - 1];
+        const surah = surahs.find(s => s.id === currentSurah);
+        if (surah) currentSurahName = surah.name_simple;
+        playSurah();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return '0:00';
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    // Initialize
+    fetchSurahs();
+  </script>
+</PlatformLayout>

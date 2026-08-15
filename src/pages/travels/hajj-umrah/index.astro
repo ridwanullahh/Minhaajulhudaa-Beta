@@ -1,0 +1,81 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const result = await lightbase.query('travels_packages', {
+  filter: { field: 'status', op: 'eq', value: 'active' },
+  sort: 'isFeatured:desc',
+  limit: 50,
+});
+const packages = result.data || [];
+const types = [...new Set(packages.map(p => p.type).filter(Boolean))];
+---
+
+<PlatformLayout title="Hajj & Umrah Packages - Minhaajulhudaa Travels" platform="travels">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Hajj & Umrah Packages</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Choose from our carefully curated packages for your sacred journey.</p>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap gap-2 mb-8">
+      <button class="badge badge-primary">All Packages</button>
+      {types.map(type => (
+        <span class="badge" style="background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-muted);">{type.replace('-', ' ')}</span>
+      ))}
+    </div>
+
+    <!-- Packages Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {packages.map((pkg) => (
+        <div class="card card-hover overflow-hidden">
+          <div class="aspect-[16/9] relative">
+            {pkg.imageUrl && <img src={pkg.imageUrl} alt={pkg.title} class="w-full h-full object-cover" loading="lazy" />}
+            <div class="absolute top-3 left-3 flex gap-2">
+              <span class="badge badge-primary">{pkg.type.replace('-', ' ')}</span>
+              <span class="badge badge-accent uppercase">{pkg.tier}</span>
+            </div>
+            {pkg.isFeatured && (
+              <div class="absolute top-3 right-3">
+                <span class="badge" style="background: var(--color-accent); color: var(--color-brand-dark);">Featured</span>
+              </div>
+            )}
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-lg mb-1">{pkg.title}</h3>
+            <p class="text-sm mb-3" style="color: var(--color-muted);">{pkg.destination}</p>
+            <p class="text-sm mb-4 line-clamp-2" style="color: var(--color-muted);">{pkg.shortDescription}</p>
+
+            <div class="flex items-center gap-4 text-xs mb-4" style="color: var(--color-muted);">
+              <span class="flex items-center gap-1">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                {pkg.duration}
+              </span>
+              <span class="flex items-center gap-1">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                {pkg.availableSlots} slots
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <div class="text-2xl font-extrabold" style="color: var(--color-primary);">₦{pkg.basePrice.toLocaleString()}</div>
+                <div class="text-xs" style="color: var(--color-muted);">per person</div>
+              </div>
+            </div>
+
+            <div class="flex gap-2">
+              <a href={`/travels/hajj-umrah/${pkg.slug}`} class="btn btn-outline flex-1">Details</a>
+              <a href={`/travels/book?package=${pkg.slug}`} class="btn btn-primary flex-1">Book Now</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {packages.length === 0 && (
+      <div class="card p-12 text-center">
+        <p style="color: var(--color-muted);">No packages available at the moment.</p>
+      </div>
+    )}
+  </section>
+</PlatformLayout>
