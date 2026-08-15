@@ -1,0 +1,311 @@
+Bismillah Ar-Rahman Ar-Raheem. Ash-hadu an laa ilaaha illa-Llah wahdaHu lasharikalaHu, wa ash-hadu anna Muhammadan Abduhu wa Rasooluh. Laa hawla wa laa quwwata illaa biLLAH. Hasbiyallaahu laa ilaaha illaa Huwa, 'alayhi tawakkaltu wa Huwa Rabbul-'Arshil-'Azeem. SubhaanALLAH wa bihamdih, SubhaanALLAHil-'azeem, AlhamduliLLAH, Laa ilaaha illa-ALLAH, wa ALLAHU AKBAR, walaa hawla walaa quwwata illaa biLLAH. Astaghfirullaaha wa atoobu ilayh.
+
+
+
+Minhaajulhudaa is a Multi platform organization that have a Masjid, School, Charity Organization and Travels and Tours company each of this platform should have a features rich dedicated platform's apps inside same codebase with a dedicated sub directory slug / and one platform should not affect the other atall with proper maintainability for each platform. 
+
+
+Also, though so many foundation have been laid but there are so many features of all the platforms that have not been implemented to ensure the platforms are production ready, you need to audit the current state and complete the platform fully. Below is the original specs for your reference;  
+
+# 🌐 **Minhaajulhudaa School Platform** – `/school`
+
+### 🎓 **Public Pages**
+
+- Homepage with hero section, mission, vision, values, preposition, why choose us, features, classes overview, programs, CTA's sections ....
+    
+- About Us Page
+    
+- Programs archive and single post page
+    
+- Admission info + form
+    
+- Available Classes directory archive and single post page
+    
+- School calendar & events
+    
+- News & blog archive and single post page
+    
+- Photo/video gallery 
+- Epayment system page(s)
+- Ecommerce store related pages archives, single, cart, checkout 
+- Elibrary pages archive and single post page 
+- Wiki Knowledgebase Pages archive and single post page
+- E courses Pages archive and single post page
+    
+- Contact page
+    
+
+### 🔐 **Admin Panel (CMS)**
+
+- Manage:
+    
+    - Pages (About, Contact, etc.)
+        
+    - Blog posts
+        
+    - Announcements
+        
+    - Events & calendar
+        
+    - Student records
+        
+    - Staff profiles
+        
+    - Admission applications
+        
+    - Academic schedules
+    - Classes  
+    - Programs 
+    - Elibrary
+    - Wiki
+    
+        
+- Media Manager (images/videos)
+    
+
+- **LMS** (Learning Management System)
+    
+    - Courses, lessons, quizzes, assignments
+        
+    - Student enrollment & progress tracking
+        
+- **Online Exam System**
+    
+- **Student Portal**
+    
+    - Results, assignments, messages
+        
+- **Payment System**
+    
+    - For tuition, uniforms, etc.
+        
+- **School Shop**
+    
+    - Books, uniforms, supplies
+        
+
+---
+
+# 🕌 **Minhaajulhudaa Masjid Platform** – `/masjid`
+
+### 📣 **Public Pages**
+
+- Masjid homepage including prayer timings, announcements.... 
+    
+- About the masjid
+    
+- Activities & programs
+    
+- Media (audio, video, books) Modern Library with app like feel 
+- Audios Player Library 
+    
+- Events calendar
+    
+- Blog
+- Donation
+    
+- Contact page
+    
+
+### 🔐 **Admin Panel (CMS)**
+
+- Manage:
+    
+    - Prayer times manually (Adhan & Iqamah) 
+        
+    - Events/programs
+        
+    - Audio library (link with archive.org)
+        
+    - Bookstore (digital & physical)
+        
+    - Donations
+        
+    - Blog articles
+        
+    - Gallery uploads
+        
+    - Embedded live links
+        
+
+- **24/7 Qur'an Player (easily accessible and controllable by User/visitor for best experience**
+    
+    - Streams Qur’an via API or preloaded MP3s
+        
+- **Audios Lab**
+    
+    - Connect to `archive.org`
+        
+    - Filter by speaker/topic/date
+        
+    - Download/share feature
+        
+- **Prayer Time Scheduler**
+    
+    - Manual override
+        
+    - Option to upload a CSV for monthly schedule
+        
+- **Digital Library**
+    
+    - PDF viewer, search, category/tag system
+        
+- **Donation System**
+    
+    - One-time and recurring
+        
+    - Zakaat, Sadaqah, Waqf
+        
+        
+
+---
+
+# ❤️ **Minhaajulhudaa Charity Foundation Platform** – `/charity`
+
+### 🙌 **Public Pages**
+
+- Homepage
+- About Us (Mission, Vision, Our Work)
+    
+- Projects and Campaigns
+    
+- How to Help
+    
+- Blog 
+- FAQ
+    
+- Testimonials 
+- Success stories/Showcases 
+    
+- Contact page
+    
+
+### 🔐 **Admin Panel (CMS)**
+
+- Manage:
+    
+    - Projects & campaigns
+        
+    - Donation receipts & tracking
+        
+    - Blog articles
+        
+    - Success stories
+        
+    - Volunteer registrations
+        
+    - Financial reports
+        
+    - Media (photos/videos)
+    - Testimonials 
+- Success stories/Showcases
+        
+
+- **Donation Platform**
+    
+    - Multi-campaign support (Zakaat, Water, Food, Orphans)
+        
+    - Progress tracking (e.g., % funded)
+        
+    - Recurring donations
+        
+    - Manual donation logging
+        
+- **Volunteer Signups**
+    
+    - Role-based assignments
+        
+- **Impact Tracker**
+    
+    - Show metrics (Meals served, Families helped)
+        
+- **Beneficiary Database** (admin only)
+    
+- **Charity Shop** (optional)
+    
+    - Merchandise to raise funds
+        
+- **Email Notifications & Receipts**
+    
+
+---
+
+# ✈️ **Minhaajulhudaa Travels & Tours Platform** – `/travels`
+
+### 🌍 **Public Pages**
+
+- Homepage with featured packages
+    
+- About Us
+    
+- Hajj & Umrah Services
+    
+- Local/International Tours
+    
+- Booking Page
+    
+- Reviews
+    
+- Travel Guide & Resources
+    
+- Blog 
+- Courses archive and single post page with neccessary LMS system for user
+    
+
+### 🔐 **Admin Panel (CMS)**
+
+- Manage:
+    
+    - Packages (create/edit tours)
+        
+    - Travel dates & availability
+        
+    - Bookings (manual + online)
+        
+    - Payments
+        
+    - Customer messages
+        
+    - Blogs & travel guides
+        
+    - Gallery
+        
+
+- **Booking Engine**
+    
+    - Select package → Choose dates → Pay
+        
+    - Group bookings
+        
+- **Payment Integration**
+    
+    - Secure payment gateways (Paystack, etc.)
+        
+- **Dynamic Pricing**
+    
+    - Based on date, group size
+        
+- **Travel Resource Library**
+    
+    - Passport, visa info, checklists
+        
+- **Customer Dashboard**
+    
+    - Itinerary, invoices, communications, LMS, packages...
+        
+- **Review System**
+    
+
+---
+
+## 🧱 **Shared Modules Across All Platforms**
+
+These features should be developed as shared services/components with global theming:
+
+|Module|Description|
+|---|---|
+|CMS Engine|Page builder, media manager, modular content editing|
+|Blog System|Rich blog editor, categories, tags, SEO-friendly|
+|Shop System|Products, cart, checkout, inventory|
+|Donation Engine|Customizable campaigns, receipts, payment gateway|
+|LMS Engine|Courses, video/lesson uploads, progress tracking (for school)|
