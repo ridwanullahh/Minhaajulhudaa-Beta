@@ -1,0 +1,302 @@
+@import "tailwindcss";
+
+/* === Brand Design Tokens (Tailwind v4 @theme) === */
+@theme {
+  /* Brand Colors */
+  --color-brand-green: #05B34D;
+  --color-brand-gold: #F2B91C;
+  --color-brand-dark: #181F25;
+  --color-brand-bg: #E9FBF1;
+  --color-brand-white: #FFFFFF;
+
+  /* Semantic - Light Mode Defaults */
+  --color-primary: #05B34D;
+  --color-accent: #F2B91C;
+  --color-foreground: #181F25;
+  --color-background: #E9FBF1;
+  --color-surface: #FFFFFF;
+  --color-muted: #6B7280;
+  --color-border: #D1FAE5;
+
+  /* Status Colors */
+  --color-success: #05B34D;
+  --color-warning: #F2B91C;
+  --color-error: #DC2626;
+  --color-info: #2563EB;
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-arabic: "Amiri", "Scheherazade New", serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+
+  /* Container */
+  --breakpoint-xs: 480px;
+}
+
+/* === Dark Mode Theme Override === */
+@layer base {
+  :root {
+    --color-primary: #05B34D;
+    --color-accent: #F2B91C;
+    --color-foreground: #181F25;
+    --color-background: #E9FBF1;
+    --color-surface: #FFFFFF;
+    --color-muted: #6B7280;
+    --color-border: #D1FAE5;
+    color-scheme: light;
+  }
+
+  [data-theme="dark"] {
+    --color-primary: #05B34D;
+    --color-accent: #F2B91C;
+    --color-foreground: #FFFFFF;
+    --color-background: #181F25;
+    --color-surface: #1E2730;
+    --color-muted: #9CA3AF;
+    --color-border: #2D3A45;
+    color-scheme: dark;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    min-height: 100vh;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior-y: none;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-foreground);
+  }
+
+  /* Arabic text */
+  [lang="ar"], .arabic {
+    font-family: var(--font-arabic);
+    direction: rtl;
+  }
+
+  /* Focus styles */
+  *:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-muted);
+  }
+
+  /* Selection */
+  ::selection {
+    background: var(--color-primary);
+    color: white;
+  }
+}
+
+/* === Utility Classes === */
+@layer components {
+  .container-app {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-app {
+      padding-inline: 2rem;
+    }
+  }
+
+  .card {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    min-height: 44px;
+    border: none;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: white;
+  }
+  .btn-primary:hover {
+    background: #049a40;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgb(5 179 77 / 0.3);
+  }
+
+  .btn-accent {
+    background: var(--color-accent);
+    color: var(--color-brand-dark);
+  }
+  .btn-accent:hover {
+    background: #d9a516;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-foreground);
+    border: 1px solid var(--color-border);
+  }
+  .btn-ghost:hover {
+    background: var(--color-surface);
+    border-color: var(--color-primary);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+  }
+  .btn-outline:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-foreground);
+    font-size: 0.875rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    min-height: 44px;
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgb(5 179 77 / 0.1);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .badge-primary {
+    background: rgb(5 179 77 / 0.1);
+    color: var(--color-primary);
+  }
+
+  .badge-accent {
+    background: rgb(242 185 28 / 0.15);
+    color: #b8860a;
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--color-border) 0%,
+      var(--color-surface) 50%,
+      var(--color-border) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-md);
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .slide-up {
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

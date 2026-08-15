@@ -1,0 +1,34 @@
+{
+  "name": "minhaajulhudaa-beta",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Minhaajulhudaa multi-platform organization (School, Masjid, Charity, Travels) built with Astro and Lightbase",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "db:create": "node scripts/create-collections.mjs",
+    "db:seed": "node scripts/seed-data.mjs",
+    "db:verify": "node scripts/verify-seed.mjs",
+    "db:setup": "npm run db:create && npm run db:seed && npm run db:verify"
+  },
+  "dependencies": {
+    "astro": "^5.0.0",
+    "@astrojs/sitemap": "^3.2.1",
+    "@tailwindcss/vite": "^4.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "bcryptjs": "^2.4.3",
+    "cookie": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie": "^0.6.0"
+  },
+  "allowScripts": {
+    "esbuild@0.25.12": true,
+    "esbuild@0.27.7": true,
+    "sharp@0.34.5": true
+  }
+}
