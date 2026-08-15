@@ -1,0 +1,66 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../lib/lightbase';
+
+const page = await lightbase.findOne('masjid_pages', { field: 'slug', op: 'eq', value: 'about' });
+const imams = await lightbase.query('masjid_imams', { filter: { field: 'active', op: 'eq', value: true }, limit: 4 });
+---
+
+<PlatformLayout title="About - Minhaajulhudaa Masjid" platform="masjid">
+  <section class="container-app py-12 max-w-4xl">
+    <span class="badge badge-accent mb-4">About Us</span>
+    <h1 class="text-3xl md:text-5xl font-extrabold mb-6">About Minhaajulhudaa Masjid</h1>
+    <p class="text-lg mb-8" style="color: var(--color-muted);">A center for prayer, learning, and community - serving the Ummah with devotion since 2020.</p>
+
+    {page && page.content && page.content.map((block) => {
+      if (block.type === 'text') return <p class="text-base leading-relaxed mb-4 max-w-3xl" style="color: var(--color-muted);">{block.body}</p>;
+      return null;
+    })}
+
+    {!page && (
+      <p class="text-base leading-relaxed mb-4" style="color: var(--color-muted);">Minhaajulhudaa Masjid was established in 2020 to serve the growing Muslim community in Lagos. Our masjid provides a spiritual home for daily prayers, Jumu'ah, Taraweeh during Ramadan, and a center for Islamic learning and community activities.</p>
+    )}
+
+    <!-- Imams -->
+    {imams.data && imams.data.length > 0 && (
+      <div class="mt-12">
+        <h2 class="text-2xl font-bold mb-6">Our Imams & Staff</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {imams.data.map((imam) => (
+            <div class="card p-6 text-center">
+              <div class="w-20 h-20 rounded-full mx-auto mb-3 flex items-center justify-center text-2xl font-bold" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">
+                {imam.name.charAt(0)}
+              </div>
+              <h3 class="font-semibold text-sm">{imam.name}</h3>
+              <p class="text-xs mb-2" style="color: var(--color-muted);">{imam.title}</p>
+              <p class="text-xs" style="color: var(--color-muted);">{imam.bio.substring(0, 80)}...</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Services -->
+    <div class="mt-12">
+      <h2 class="text-2xl font-bold mb-6">Our Services</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="card p-6">
+          <h3 class="font-bold mb-2">Daily Prayers</h3>
+          <p class="text-sm" style="color: var(--color-muted);">All five daily prayers with congregation, plus Jumu'ah khutbah every Friday.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-bold mb-2">Islamic Education</h3>
+          <p class="text-sm" style="color: var(--color-muted);">Halaqahs, Qur'an classes, Tajweed workshops, and youth Islamic studies.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-bold mb-2">Community Services</h3>
+          <p class="text-sm" style="color: var(--color-muted);">Counseling, nikah services, janazah arrangements, and community iftars.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-bold mb-2">Digital Library</h3>
+          <p class="text-sm" style="color: var(--color-muted);">Access to Islamic books, audio lectures, and Qur'an recitations online.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</PlatformLayout>

@@ -1,0 +1,58 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../lib/lightbase';
+
+const page = await lightbase.findOne('charity_pages', { field: 'slug', op: 'eq', value: 'about' });
+const metrics = await lightbase.query('charity_impact_metrics', { limit: 8 });
+const partners = await lightbase.query('charity_partners', { filter: { field: 'status', op: 'eq', value: 'active' }, limit: 8 });
+---
+
+<PlatformLayout title="About - Minhaajulhudaa Charity" platform="charity">
+  <section class="container-app py-12 max-w-4xl">
+    <span class="badge badge-accent mb-4">About Us</span>
+    <h1 class="text-3xl md:text-5xl font-extrabold mb-6">About Minhaajulhudaa Charity Foundation</h1>
+    <p class="text-lg mb-8" style="color: var(--color-muted);">Serving humanity with compassion since 2022.</p>
+
+    {page && page.content && page.content.map((block) => {
+      if (block.type === 'text') return <p class="text-base leading-relaxed mb-4 max-w-3xl" style="color: var(--color-muted);">{block.body}</p>;
+      return null;
+    })}
+
+    {!page && (
+      <>
+        <p class="text-base leading-relaxed mb-4" style="color: var(--color-muted);">Minhaajulhudaa Charity Foundation was established in 2022 to serve vulnerable communities across Nigeria. Inspired by the Islamic principles of compassion and social justice, we work to alleviate poverty, provide education, ensure access to clean water, and respond to emergencies.</p>
+        <p class="text-base leading-relaxed mb-4" style="color: var(--color-muted);">Our approach is holistic - we address immediate needs through emergency relief while investing in long-term solutions through education, skills training, and sustainable development projects.</p>
+      </>
+    )}
+
+    <!-- Impact Metrics -->
+    {metrics.data && metrics.data.length > 0 && (
+      <div class="mt-12">
+        <h2 class="text-2xl font-bold mb-6 text-center">Our Impact</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {metrics.data.slice(0, 8).map((metric) => (
+            <div class="card p-6 text-center">
+              <div class="text-3xl font-extrabold mb-1" style="color: var(--color-primary);">{metric.value.toLocaleString()}+</div>
+              <div class="text-sm" style="color: var(--color-muted);">{metric.metricLabel}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Partners -->
+    {partners.data && partners.data.length > 0 && (
+      <div class="mt-12">
+        <h2 class="text-2xl font-bold mb-6 text-center">Our Partners</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {partners.data.map((partner) => (
+            <div class="card p-6 text-center">
+              <h3 class="font-semibold text-sm">{partner.name}</h3>
+              <p class="text-xs" style="color: var(--color-muted);">{partner.type}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </section>
+</PlatformLayout>
