@@ -23,12 +23,14 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    const validCategories = ['zakaat', 'sadaqah', 'waqf', 'emergency', 'general', 'water', 'food', 'orphans', 'education', 'medical', 'shelter'];
+    const validCategories = ['zakaat', 'sadaqah', 'waqf', 'emergency', 'general'];
     if (!validCategories.includes(body.category)) {
-      return new Response(JSON.stringify({ error: 'Invalid donation category' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      // Map campaign categories to donation categories
+      const categoryMap: Record<string, string> = {
+        water: 'sadaqah', food: 'sadaqah', orphans: 'sadaqah', education: 'sadaqah',
+        medical: 'emergency', shelter: 'emergency',
+      };
+      body.category = categoryMap[body.category] || 'general';
     }
 
     if (!body.reference) {
