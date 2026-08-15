@@ -1,0 +1,64 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+export async function getStaticPaths() {
+  const result = await lightbase.query('travels_resources', {
+    filter: { field: 'status', op: 'eq', value: 'published' },
+    limit: 50,
+  });
+  const resources = result.data || [];
+  return resources.map((resource) => ({
+    params: { slug: resource.slug },
+    props: { resource },
+  }));
+}
+
+const { resource } = Astro.props;
+---
+
+<PlatformLayout title={`${resource.title} - Minhaajulhudaa Travels`} platform="travels">
+  <article class="container-app py-12 max-w-3xl">
+    <a href="/travels/guide" class="text-sm font-medium mb-6 inline-flex items-center gap-1" style="color: var(--color-primary);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      All Resources
+    </a>
+
+    <span class="badge badge-accent mb-4 capitalize">{resource.category}</span>
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">{resource.title}</h1>
+
+    {resource.tags && resource.tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8">
+        {resource.tags.map(tag => <span class="badge badge-primary">#{tag}</span>)}
+      </div>
+    )}
+
+    <div class="prose prose-lg max-w-none">
+      {resource.content.split('\n').map((para) => {
+        if (para.startsWith('## ')) return <h2 class="text-2xl font-bold mt-8 mb-4">{para.replace('## ', '')}</h2>;
+        if (para.trim()) return <p class="mb-4 leading-relaxed" style="color: var(--color-muted);">{para}</p>;
+        return null;
+      })}
+    </div>
+
+    {resource.attachments && resource.attachments.length > 0 && (
+      <div class="mt-8 pt-8 border-t" style="border-color: var(--color-border);">
+        <h3 class="font-bold mb-4">Attachments</h3>
+        <div class="space-y-2">
+          {resource.attachments.map(att => (
+            <a href={att.url || '#'} class="card p-4 flex items-center gap-3 card-hover">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span class="text-sm font-medium">{att.title || 'Download'}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="mt-12 card p-6 text-center" style="background: rgb(5,179,77,0.05);">
+      <h3 class="font-bold mb-2">Ready for Your Journey?</h3>
+      <p class="text-sm mb-4" style="color: var(--color-muted);">Browse our packages and book your sacred journey today.</p>
+      <a href="/travels/hajj-umrah" class="btn btn-primary">View Packages</a>
+    </div>
+  </article>
+</PlatformLayout>

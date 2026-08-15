@@ -1,0 +1,84 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+---
+
+<PlatformLayout title="Contact - Minhaajulhudaa Travels" platform="travels">
+  <section class="container-app py-12 max-w-4xl">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Contact Us</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Have questions about our packages? We're here to help.</p>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <div class="card p-6 text-center">
+        <div class="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center" style="background: rgb(5,179,77,0.1);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 class="font-semibold mb-1">Visit Us</h3>
+        <p class="text-sm" style="color: var(--color-muted);">Minhaajulhudaa Travels Office, Lagos</p>
+      </div>
+      <div class="card p-6 text-center">
+        <div class="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center" style="background: rgb(242,185,28,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-accent);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3 class="font-semibold mb-1">Call Us</h3>
+        <p class="text-sm" style="color: var(--color-muted);">+234 800 000 0004</p>
+      </div>
+      <div class="card p-6 text-center">
+        <div class="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center" style="background: rgb(5,179,77,0.1);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3 class="font-semibold mb-1">Email Us</h3>
+        <p class="text-sm" style="color: var(--color-muted);">travels@minhaajulhudaa.com</p>
+      </div>
+    </div>
+
+    <form id="contact-form" class="card p-6 md:p-8 space-y-4">
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Name *</label>
+          <input type="text" name="name" required class="input" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Email *</label>
+          <input type="email" name="email" required class="input" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Phone</label>
+          <input type="tel" name="phone" class="input" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Subject *</label>
+          <input type="text" name="subject" required class="input" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Message *</label>
+        <textarea name="message" required class="input" rows="5"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary w-full">Send Message</button>
+    </form>
+    <div id="form-message" class="hidden mt-4 p-4 rounded-lg"></div>
+  </section>
+
+  <script is:inline>
+    document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      const msg = document.getElementById('form-message');
+      btn.disabled = true; btn.textContent = 'Sending...';
+      const data = Object.fromEntries(new FormData(form));
+      data.platform = 'travels'; data.status = 'new'; data.createdAt = new Date().toISOString();
+      try {
+        const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        if (response.ok) {
+          msg.style.background = 'rgb(5,179,77,0.1)'; msg.style.color = 'var(--color-primary)';
+          msg.textContent = 'Message sent successfully! We will get back to you soon.';
+          msg.classList.remove('hidden'); form.reset();
+        } else throw new Error('Failed');
+      } catch (err) {
+        msg.style.background = 'rgb(220,38,38,0.1)'; msg.style.color = '#DC2626';
+        msg.textContent = 'Error: ' + err.message; msg.classList.remove('hidden');
+      } finally { btn.disabled = false; btn.textContent = 'Send Message'; }
+    });
+  </script>
+</PlatformLayout>

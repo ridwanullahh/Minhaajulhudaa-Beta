@@ -1,0 +1,50 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../lib/lightbase';
+
+const result = await lightbase.query('charity_faq', {
+  filter: { field: 'status', op: 'eq', value: 'active' },
+  sort: 'order:asc',
+  limit: 30,
+});
+const faqs = result.data || [];
+const categories = [...new Set(faqs.map(f => f.category).filter(Boolean))];
+---
+
+<PlatformLayout title="FAQ - Minhaajulhudaa Charity" platform="charity">
+  <section class="container-app py-12 max-w-3xl">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Frequently Asked Questions</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Find answers to common questions about our charity work.</p>
+
+    {categories.map(category => (
+      <div class="mb-8">
+        <h2 class="text-xl font-bold mb-4 capitalize">{category}</h2>
+        <div class="space-y-3">
+          {faqs.filter(f => f.category === category).map((faq) => (
+            <details class="card p-4 group">
+              <summary class="font-semibold text-sm cursor-pointer flex items-center justify-between">
+                {faq.question}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform group-open:rotate-180" style="color: var(--color-primary);">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </summary>
+              <p class="text-sm mt-3" style="color: var(--color-muted);">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    {faqs.length === 0 && (
+      <div class="card p-12 text-center">
+        <p style="color: var(--color-muted);">No FAQs available yet.</p>
+      </div>
+    )}
+
+    <div class="card p-6 mt-8 text-center" style="background: rgb(5,179,77,0.05);">
+      <h3 class="font-bold mb-2">Still have questions?</h3>
+      <p class="text-sm mb-4" style="color: var(--color-muted);">We're here to help. Reach out to us anytime.</p>
+      <a href="/charity/contact" class="btn btn-primary">Contact Us</a>
+    </div>
+  </section>
+</PlatformLayout>

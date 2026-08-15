@@ -1,0 +1,42 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const result = await lightbase.query('charity_success_stories', {
+  filter: { field: 'status', op: 'eq', value: 'published' },
+  sort: 'publishedAt:desc',
+  limit: 20,
+});
+const stories = result.data || [];
+---
+
+<PlatformLayout title="Success Stories - Minhaajulhudaa Charity" platform="charity">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Success Stories</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Real stories of lives changed through your support.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {stories.map((story) => (
+        <article class="card card-hover overflow-hidden">
+          <div class="aspect-[16/9]">
+            {story.imageUrl && <img src={story.imageUrl} alt={story.title} class="w-full h-full object-cover" loading="lazy" />}
+          </div>
+          <div class="p-6">
+            <h2 class="font-bold text-lg mb-2">{story.title}</h2>
+            <p class="text-sm mb-4 line-clamp-3" style="color: var(--color-muted);">{story.summary}</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs" style="color: var(--color-muted);">{story.location}</span>
+              <a href={`/charity/stories/${story.slug}`} class="text-sm font-medium" style="color: var(--color-primary);">Read Story</a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    {stories.length === 0 && (
+      <div class="card p-12 text-center">
+        <p style="color: var(--color-muted);">No stories published yet.</p>
+      </div>
+    )}
+  </section>
+</PlatformLayout>

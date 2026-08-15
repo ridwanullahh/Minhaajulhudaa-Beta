@@ -1,0 +1,65 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const result = await lightbase.query('travels_resources', {
+  filter: { field: 'status', op: 'eq', value: 'published' },
+  limit: 30,
+});
+const resources = result.data || [];
+const categories = [...new Set(resources.map(r => r.category).filter(Boolean))];
+
+const categoryIcons: Record<string, string> = {
+  visa: 'M9 11l3 3L22 4',
+  passport: 'M20 7h-4V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v3H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z',
+  packing: 'M20 7h-4V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v3H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z',
+  rituals: 'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z',
+  health: 'M22 12h-4l-3 9L9 3l-3 9H2',
+  currency: 'M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6',
+  emergency: 'M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01',
+  tips: 'M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-4M9 11V7a3 3 0 0 1 6 0v4',
+};
+---
+
+<PlatformLayout title="Travel Guide - Minhaajulhudaa Travels" platform="travels">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Travel Guide & Resources</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Everything you need to know for a smooth and spiritually fulfilling journey.</p>
+
+    <!-- Category Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+      {categories.map((category) => (
+        <a href={`#category-${category}`} class="card card-hover p-6 text-center">
+          <div class="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center" style="background: rgb(5,179,77,0.1);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);">
+              <path d={categoryIcons[category] || 'M12 2v20M2 12h20'}/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-sm capitalize">{category}</h3>
+        </a>
+      ))}
+    </div>
+
+    <!-- Resources by Category -->
+    {categories.map(category => (
+      <div id={`category-${category}`} class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 capitalize">{category} Guide</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {resources.filter(r => r.category === category).map((resource) => (
+            <article class="card card-hover p-6">
+              <h3 class="font-bold mb-2">{resource.title}</h3>
+              <p class="text-sm mb-4 line-clamp-3" style="color: var(--color-muted);">{resource.content.substring(0, 200)}...</p>
+              <a href={`/travels/guide/${resource.slug}`} class="text-sm font-medium" style="color: var(--color-primary);">Read More</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    {resources.length === 0 && (
+      <div class="card p-12 text-center">
+        <p style="color: var(--color-muted);">No resources available yet.</p>
+      </div>
+    )}
+  </section>
+</PlatformLayout>
