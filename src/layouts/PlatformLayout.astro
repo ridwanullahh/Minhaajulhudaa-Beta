@@ -1,0 +1,26 @@
+---
+/**
+ * PlatformLayout - wraps platform pages with header, footer, and bottom nav
+ */
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/navigation/Header.astro';
+import Footer from '../components/navigation/Footer.astro';
+import BottomNav from '../components/navigation/BottomNav.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  platform?: string;
+}
+
+const { title, description, platform } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} platform={platform}>
+  <Header platform={platform} currentPath={Astro.url.pathname} />
+  <main class="min-h-screen pb-20 lg:pb-0">
+    <slot />
+  </main>
+  <Footer platform={platform} />
+  <BottomNav platform={platform} currentPath={Astro.url.pathname} />
+</BaseLayout>

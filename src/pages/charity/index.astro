@@ -1,0 +1,195 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../lib/lightbase';
+
+const [campaignsResult, metricsResult, storiesResult, testimonialsResult, blogResult] = await Promise.all([
+  lightbase.query('charity_campaigns', { filter: { field: 'status', op: 'eq', value: 'active' }, sort: 'isUrgent:desc', limit: 3 }),
+  lightbase.query('charity_impact_metrics', { limit: 8 }),
+  lightbase.query('charity_success_stories', { filter: { field: 'status', op: 'eq', value: 'published' }, sort: 'publishedAt:desc', limit: 2 }),
+  lightbase.query('charity_testimonials', { filter: { field: 'status', op: 'eq', value: 'approved' }, limit: 3 }),
+  lightbase.query('charity_blog_posts', { filter: { field: 'status', op: 'eq', value: 'published' }, sort: 'publishedAt:desc', limit: 3 }),
+]);
+
+const campaigns = campaignsResult.data || [];
+const metrics = metricsResult.data || [];
+const stories = storiesResult.data || [];
+const testimonials = testimonialsResult.data || [];
+const blogPosts = blogResult.data || [];
+
+// Calculate total raised
+const totalRaised = campaigns.reduce((sum, c) => sum + (c.raisedAmount || 0), 0);
+const totalBeneficiaries = metrics.find(m => m.metricKey === 'families_helped')?.value || 0;
+---
+
+<PlatformLayout title="Minhaajulhudaa Charity - Serving Humanity" platform="charity">
+  <!-- Hero -->
+  <section class="relative overflow-hidden" style="background: linear-gradient(135deg, rgb(5,179,77,0.08), rgb(242,185,28,0.05));">
+    <div class="container-app py-12 md:py-20">
+      <div class="max-w-3xl fade-in">
+        <span class="badge badge-accent mb-4">Serving Humanity with Compassion</span>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+          Together We Can <span style="color: var(--color-primary);">Change Lives</span>
+        </h1>
+        <p class="text-lg md:text-xl mb-8" style="color: var(--color-muted);">
+          Bringing relief and hope to those in need. Your donation provides clean water, food, education, and emergency aid to vulnerable communities.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="/charity/campaigns" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Donate Now
+          </a>
+          <a href="/charity/how-to-help" class="btn btn-ghost">How to Help</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Stats -->
+  {metrics.length > 0 && (
+    <section class="container-app -mt-8 relative z-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {metrics.slice(0, 4).map((metric) => (
+          <div class="card p-6 text-center">
+            <div class="text-3xl md:text-4xl font-extrabold mb-1" style="color: var(--color-primary);">{metric.value.toLocaleString()}+</div>
+            <div class="text-sm" style="color: var(--color-muted);">{metric.metricLabel}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Active Campaigns -->
+  {campaigns.length > 0 && (
+    <section class="container-app py-16">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold">Active Campaigns</h2>
+          <p class="text-sm mt-1" style="color: var(--color-muted);">Support a cause that matters to you</p>
+        </div>
+        <a href="/charity/campaigns" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {campaigns.map((campaign) => {
+          const progress = Math.round((campaign.raisedAmount / campaign.goalAmount) * 100);
+          return (
+            <div class="card card-hover overflow-hidden">
+              <div class="aspect-[16/9]">
+                {campaign.imageUrl && <img src={campaign.imageUrl} alt={campaign.title} class="w-full h-full object-cover" loading="lazy" />}
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="badge badge-primary">{campaign.category}</span>
+                  {campaign.isUrgent && <span class="badge badge-accent">Urgent</span>}
+                </div>
+                <h3 class="font-bold mb-2">{campaign.title}</h3>
+                <p class="text-sm mb-4 line-clamp-2" style="color: var(--color-muted);">{campaign.shortDescription}</p>
+                <div class="mb-3">
+                  <div class="flex justify-between text-sm mb-1">
+                    <span class="font-semibold" style="color: var(--color-primary);">₦{campaign.raisedAmount.toLocaleString()}</span>
+                    <span style="color: var(--color-muted);">of ₦{campaign.goalAmount.toLocaleString()}</span>
+                  </div>
+                  <div class="h-2 rounded-full" style="background: var(--color-border);">
+                    <div class="h-full rounded-full" style={`width: ${progress}%; background: var(--color-primary);`}></div>
+                  </div>
+                </div>
+                <a href={`/charity/campaigns/${campaign.slug}`} class="btn btn-primary w-full">Donate Now</a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  )}
+
+  <!-- How to Help -->
+  <section class="container-app py-16">
+    <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">How You Can Help</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="card p-8 text-center">
+        <div class="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background: rgb(5,179,77,0.1);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3 class="font-bold mb-2">Donate</h3>
+        <p class="text-sm" style="color: var(--color-muted);">Your financial contribution funds our campaigns and provides direct relief to those in need.</p>
+        <a href="/charity/campaigns" class="btn btn-outline mt-4 w-full">Donate Now</a>
+      </div>
+      <div class="card p-8 text-center">
+        <div class="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background: rgb(242,185,28,0.15);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-accent);"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="font-bold mb-2">Volunteer</h3>
+        <p class="text-sm" style="color: var(--color-muted);">Share your time and skills. Join our team of dedicated volunteers making a difference on the ground.</p>
+        <a href="/charity/how-to-help" class="btn btn-outline mt-4 w-full">Join Us</a>
+      </div>
+      <div class="card p-8 text-center">
+        <div class="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background: rgb(5,179,77,0.1);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+        </div>
+        <h3 class="font-bold mb-2">Spread the Word</h3>
+        <p class="text-sm" style="color: var(--color-muted);">Share our campaigns with your network. Awareness multiplies impact and brings more support.</p>
+        <a href="/charity/campaigns" class="btn btn-outline mt-4 w-full">Share</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Stories -->
+  {stories.length > 0 && (
+    <section class="container-app py-16">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold">Success Stories</h2>
+        <a href="/charity/stories" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {stories.map((story) => (
+          <div class="card card-hover overflow-hidden">
+            <div class="aspect-[16/9]">
+              {story.imageUrl && <img src={story.imageUrl} alt={story.title} class="w-full h-full object-cover" loading="lazy" />}
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold mb-2">{story.title}</h3>
+              <p class="text-sm mb-4 line-clamp-3" style="color: var(--color-muted);">{story.summary}</p>
+              <a href={`/charity/stories/${story.slug}`} class="text-sm font-medium" style="color: var(--color-primary);">Read Story</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Testimonials -->
+  {testimonials.length > 0 && (
+    <section class="container-app py-16">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">What Our Supporters Say</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {testimonials.map((t) => (
+          <div class="card p-6">
+            <div class="flex gap-1 mb-4">
+              {Array.from({ length: t.rating }).map(() => (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-accent);">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              ))}
+            </div>
+            <p class="text-sm mb-4" style="color: var(--color-muted);">"{t.content}"</p>
+            <div>
+              <div class="font-semibold text-sm">{t.authorName}</div>
+              <div class="text-xs" style="color: var(--color-muted);">{t.authorRole}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="container-app py-16">
+    <div class="card p-8 md:p-12 text-center" style="background: linear-gradient(135deg, rgb(5,179,77,0.1), rgb(242,185,28,0.1));">
+      <h2 class="text-2xl md:text-4xl font-bold mb-4">Be the Change You Wish to See</h2>
+      <p class="mb-8 max-w-2xl mx-auto" style="color: var(--color-muted);">Every donation, no matter how small, makes a real difference in someone's life. Join us in serving humanity.</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="/charity/campaigns" class="btn btn-primary">Donate Now</a>
+        <a href="/charity/how-to-help" class="btn btn-ghost">Become a Volunteer</a>
+      </div>
+    </div>
+  </section>
+</PlatformLayout>
