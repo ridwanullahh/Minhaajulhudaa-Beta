@@ -1,0 +1,115 @@
+---
+/**
+ * Footer component
+ */
+import { PLATFORMS, BRAND } from '../../lib/constants';
+
+interface Props {
+  platform?: string;
+}
+
+const { platform } = Astro.props;
+const platformConfig = platform ? PLATFORMS[platform as keyof typeof PLATFORMS] : null;
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t mt-16" style="border-color: var(--color-border); background: var(--color-surface);">
+  <div class="container-app py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Brand -->
+      <div class="md:col-span-1">
+        <div class="flex items-center gap-2 mb-4">
+          <svg width="28" height="28" viewBox="0 0 64 64">
+            <rect width="64" height="64" rx="14" fill="var(--color-primary)"/>
+            <path d="M32 12 L48 20 V36 C48 44 40 50 32 52 C24 50 16 44 16 36 V20 Z" fill="none" stroke="var(--color-accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M32 22 V42 M24 28 H40 M24 36 H40" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="32" cy="32" r="3" fill="var(--color-accent)"/>
+          </svg>
+          <span class="font-bold" style="font-family: var(--font-heading);">
+            {platformConfig ? platformConfig.name : BRAND.name}
+          </span>
+        </div>
+        <p class="text-sm" style="color: var(--color-muted);">
+          {platformConfig ? platformConfig.description : BRAND.tagline}
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="font-semibold mb-4 text-sm">Quick Links</h4>
+        <ul class="space-y-2 text-sm" style="color: var(--color-muted);">
+          {platform === 'school' && (
+            <>
+              <li><a href="/school" class="hover:text-[var(--color-primary)]">Home</a></li>
+              <li><a href="/school/about" class="hover:text-[var(--color-primary)]">About</a></li>
+              <li><a href="/school/admission" class="hover:text-[var(--color-primary)]">Admission</a></li>
+              <li><a href="/school/news" class="hover:text-[var(--color-primary)]">News</a></li>
+            </>
+          )}
+          {platform === 'masjid' && (
+            <>
+              <li><a href="/masjid" class="hover:text-[var(--color-primary)]">Home</a></li>
+              <li><a href="/masjid/about" class="hover:text-[var(--color-primary)]">About</a></li>
+              <li><a href="/masjid/quran" class="hover:text-[var(--color-primary)]">Qur'an Player</a></li>
+              <li><a href="/masjid/donate" class="hover:text-[var(--color-primary)]">Donate</a></li>
+            </>
+          )}
+          {platform === 'charity' && (
+            <>
+              <li><a href="/charity" class="hover:text-[var(--color-primary)]">Home</a></li>
+              <li><a href="/charity/campaigns" class="hover:text-[var(--color-primary)]">Campaigns</a></li>
+              <li><a href="/charity/how-to-help" class="hover:text-[var(--color-primary)]">How to Help</a></li>
+              <li><a href="/charity/faq" class="hover:text-[var(--color-primary)]">FAQ</a></li>
+            </>
+          )}
+          {platform === 'travels' && (
+            <>
+              <li><a href="/travels" class="hover:text-[var(--color-primary)]">Home</a></li>
+              <li><a href="/travels/hajj-umrah" class="hover:text-[var(--color-primary)]">Hajj & Umrah</a></li>
+              <li><a href="/travels/book" class="hover:text-[var(--color-primary)]">Book Now</a></li>
+              <li><a href="/travels/guide" class="hover:text-[var(--color-primary)]">Travel Guide</a></li>
+            </>
+          )}
+          {!platform && (
+            <>
+              <li><a href="/school" class="hover:text-[var(--color-primary)]">School</a></li>
+              <li><a href="/masjid" class="hover:text-[var(--color-primary)]">Masjid</a></li>
+              <li><a href="/charity" class="hover:text-[var(--color-primary)]">Charity</a></li>
+              <li><a href="/travels" class="hover:text-[var(--color-primary)]">Travels</a></li>
+            </>
+          )}
+        </ul>
+      </div>
+
+      <!-- Platforms -->
+      <div>
+        <h4 class="font-semibold mb-4 text-sm">Platforms</h4>
+        <ul class="space-y-2 text-sm" style="color: var(--color-muted);">
+          <li><a href="/school" class="hover:text-[var(--color-primary)]">School</a></li>
+          <li><a href="/masjid" class="hover:text-[var(--color-primary)]">Masjid</a></li>
+          <li><a href="/charity" class="hover:text-[var(--color-primary)]">Charity</a></li>
+          <li><a href="/travels" class="hover:text-[var(--color-primary)]">Travels</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="font-semibold mb-4 text-sm">Contact</h4>
+        <ul class="space-y-2 text-sm" style="color: var(--color-muted);">
+          <li>Lagos, Nigeria</li>
+          <li>info@minhaajulhudaa.com</li>
+          <li>+234 800 000 0000</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4" style="border-color: var(--color-border);">
+      <p class="text-xs" style="color: var(--color-muted);">
+        {year} {BRAND.name}. All rights reserved.
+      </p>
+      <p class="text-xs arabic" style="color: var(--color-muted);" dir="rtl">
+        بسم الله الرحمن الرحيم
+      </p>
+    </div>
+  </div>
+</footer>

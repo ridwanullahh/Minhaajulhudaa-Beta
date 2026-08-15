@@ -1,0 +1,188 @@
+---
+/**
+ * Header component - sticky top navigation with logo, nav, platform switcher, theme toggle
+ */
+import { PLATFORMS, NAV_ITEMS, BRAND } from '../../lib/constants';
+
+interface Props {
+  platform?: string;
+  currentPath?: string;
+}
+
+const { platform, currentPath = Astro.url.pathname } = Astro.props;
+const navItems = platform ? NAV_ITEMS[platform as keyof typeof NAV_ITEMS] : [];
+const platformConfig = platform ? PLATFORMS[platform as keyof typeof PLATFORMS] : null;
+const allPlatforms = Object.values(PLATFORMS);
+---
+
+<header class="sticky top-0 z-50 backdrop-blur-lg" style="background: rgb(255 255 255 / 0.85); border-bottom: 1px solid var(--color-border);">
+  <div class="container-app flex items-center justify-between h-16">
+    <!-- Logo + Platform Name -->
+    <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-2">
+        <svg width="32" height="32" viewBox="0 0 64 64" class="shrink-0">
+          <rect width="64" height="64" rx="14" fill="var(--color-primary)"/>
+          <path d="M32 12 L48 20 V36 C48 44 40 50 32 52 C24 50 16 44 16 36 V20 Z" fill="none" stroke="var(--color-accent)" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M32 22 V42 M24 28 H40 M24 36 H40" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="32" cy="32" r="3" fill="var(--color-accent)"/>
+        </svg>
+        <span class="font-bold text-base hidden sm:block" style="font-family: var(--font-heading);">
+          {platformConfig ? platformConfig.name : BRAND.name}
+        </span>
+      </a>
+    </div>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-1">
+      {navItems.slice(0, 7).map((item) => (
+        <a
+          href={item.href}
+          class={`px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-[rgb(5,179,77,0.1)] ${currentPath === item.href ? 'text-[var(--color-primary)]' : ''}`}
+          style={currentPath === item.href ? 'color: var(--color-primary);' : ''}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Right: Platform Switcher + Theme Toggle + Mobile Menu -->
+    <div class="flex items-center gap-2">
+      <!-- Platform Switcher (desktop) -->
+      <div class="relative hidden md:block" id="platform-switcher">
+        <button
+          class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border"
+          style="border-color: var(--color-border);"
+          id="platform-switcher-btn"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          <span class="hidden lg:inline">Platforms</span>
+        </button>
+        <div
+          class="absolute right-0 top-full mt-2 w-56 card p-2 hidden"
+          id="platform-switcher-menu"
+          style="z-index: 100;"
+        >
+          {allPlatforms.map((p) => (
+            <a
+              href={p.path}
+              class={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm hover:bg-[rgb(5,179,77,0.08)] transition-colors ${platform === p.slug ? 'bg-[rgb(5,179,77,0.1)]' : ''}`}
+            >
+              <span class="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold" style={`background: ${p.accent === 'gold' ? 'rgb(242,185,28,0.15)' : 'rgb(5,179,77,0.1)'}; color: var(--color-primary);`}>
+                {p.name.charAt(0)}
+              </span>
+              <div>
+                <div class="font-semibold">{p.name}</div>
+                <div class="text-xs" style="color: var(--color-muted);">{p.tagline}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Theme Toggle -->
+      <button id="theme-toggle" class="w-10 h-10 rounded-lg flex items-center justify-center border" style="border-color: var(--color-border);" aria-label="Toggle theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="theme-icon-light">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="theme-icon-dark" style="display:none;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 rounded-lg flex items-center justify-center border" style="border-color: var(--color-border);" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Drawer -->
+  <div id="mobile-menu" class="lg:hidden hidden border-t" style="border-color: var(--color-border); background: var(--color-surface);">
+    <nav class="container-app py-4 flex flex-col gap-1">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class={`px-4 py-3 rounded-lg text-sm font-medium ${currentPath === item.href ? 'bg-[rgb(5,179,77,0.1)]' : ''}`}
+          style={currentPath === item.href ? 'color: var(--color-primary);' : ''}
+        >
+          {item.label}
+        </a>
+      ))}
+      <div class="border-t mt-2 pt-3" style="border-color: var(--color-border);">
+        <div class="text-xs font-semibold uppercase tracking-wide mb-2" style="color: var(--color-muted);">Switch Platform</div>
+        <div class="grid grid-cols-2 gap-2">
+          {allPlatforms.map((p) => (
+            <a href={p.path} class={`px-3 py-2 rounded-lg text-sm font-medium border text-center ${platform === p.slug ? 'border-[var(--color-primary)] bg-[rgb(5,179,77,0.05)]' : ''}`} style="border-color: var(--color-border);">
+              {p.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  // Theme toggle
+  function setupThemeToggle() {
+    const toggle = document.getElementById('theme-toggle');
+    const lightIcon = document.querySelector('.theme-icon-light');
+    const darkIcon = document.querySelector('.theme-icon-dark');
+
+    function updateIcons() {
+      const theme = document.documentElement.getAttribute('data-theme');
+      if (theme === 'dark') {
+        lightIcon.style.display = 'none';
+        darkIcon.style.display = 'block';
+      } else {
+        lightIcon.style.display = 'block';
+        darkIcon.style.display = 'none';
+      }
+    }
+    updateIcons();
+
+    toggle?.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('minhaaj-theme', next);
+      updateIcons();
+    });
+  }
+
+  // Mobile menu
+  function setupMobileMenu() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn?.addEventListener('click', () => {
+      menu?.classList.toggle('hidden');
+    });
+  }
+
+  // Platform switcher
+  function setupPlatformSwitcher() {
+    const btn = document.getElementById('platform-switcher-btn');
+    const menu = document.getElementById('platform-switcher-menu');
+    btn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menu?.classList.toggle('hidden');
+    });
+    document.addEventListener('click', (e) => {
+      if (!menu?.contains(e.target as Node) && !btn?.contains(e.target as Node)) {
+        menu?.classList.add('hidden');
+      }
+    });
+  }
+
+  setupThemeToggle();
+  setupMobileMenu();
+  setupPlatformSwitcher();
+</script>

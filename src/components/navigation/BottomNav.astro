@@ -1,0 +1,34 @@
+---
+/**
+ * Mobile bottom navigation - native app-like tab bar
+ */
+import { NAV_ITEMS } from '../../lib/constants';
+
+interface Props {
+  platform: string;
+  currentPath?: string;
+}
+
+const { platform, currentPath = Astro.url.pathname } = Astro.props;
+const navItems = NAV_ITEMS[platform as keyof typeof NAV_ITEMS] || [];
+// Show only the most important 5 items in bottom nav
+const bottomItems = navItems.slice(0, 5);
+---
+
+<nav class="lg:hidden fixed bottom-0 left-0 right-0 z-50 backdrop-blur-lg" style="background: rgb(255 255 255 / 0.95); border-top: 1px solid var(--color-border); padding-bottom: env(safe-area-inset-bottom);">
+  <div class="flex items-center justify-around h-14">
+    {bottomItems.map((item) => {
+      const isActive = currentPath === item.href || (item.href !== `/${platform}` && currentPath.startsWith(item.href));
+      return (
+        <a
+          href={item.href}
+          class="flex flex-col items-center justify-center gap-0.5 px-2 py-1 min-w-[60px]"
+          style={isActive ? 'color: var(--color-primary);' : 'color: var(--color-muted);'}
+        >
+          <div class="w-1 h-1 rounded-full" style={isActive ? 'background: var(--color-primary);' : 'background: transparent;'}></div>
+          <span class="text-[10px] font-medium">{item.label}</span>
+        </a>
+      );
+    })}
+  </div>
+</nav>

@@ -1,0 +1,261 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../lib/lightbase';
+
+// Fetch real data from Lightbase
+const today = new Date().toISOString().split('T')[0];
+const [prayerTimesResult, announcementsResult, eventsResult, audiosResult, campaignsResult, imamsResult] = await Promise.all([
+  lightbase.findOne('masjid_prayer_times', { field: 'date', op: 'eq', value: today }),
+  lightbase.query('masjid_announcements', { filter: { field: 'active', op: 'eq', value: true }, limit: 3 }),
+  lightbase.query('masjid_events', { sort: 'startDate:asc', limit: 3 }),
+  lightbase.query('masjid_audios', { filter: { field: 'status', op: 'eq', value: 'active' }, sort: 'date:desc', limit: 4 }),
+  lightbase.query('masjid_donation_campaigns', { filter: { field: 'status', op: 'eq', value: 'active' }, limit: 3 }),
+  lightbase.query('masjid_imams', { filter: { field: 'active', op: 'eq', value: true }, limit: 4 }),
+]);
+
+const prayerTimes = prayerTimesResult;
+const announcements = announcementsResult.data || [];
+const events = eventsResult.data || [];
+const audios = audiosResult.data || [];
+const campaigns = campaignsResult.data || [];
+const imams = imamsResult.data || [];
+
+const prayers = prayerTimes ? [
+  { name: 'Fajr', adhan: prayerTimes.fajrAdhan, iqamah: prayerTimes.fajrIqamah, icon: 'sunrise' },
+  { name: 'Sunrise', adhan: prayerTimes.sunrise, iqamah: '', icon: 'sun' },
+  { name: 'Dhuhr', adhan: prayerTimes.dhuhrAdhan, iqamah: prayerTimes.dhuhrIqamah, icon: 'noon' },
+  { name: 'Asr', adhan: prayerTimes.asrAdhan, iqamah: prayerTimes.asrIqamah, icon: 'afternoon' },
+  { name: 'Maghrib', adhan: prayerTimes.maghribAdhan, iqamah: prayerTimes.maghribIqamah, icon: 'sunset' },
+  { name: 'Isha', adhan: prayerTimes.ishaAdhan, iqamah: prayerTimes.ishaIqamah, icon: 'night' },
+] : [];
+---
+
+<PlatformLayout title="Minhaajulhudaa Masjid - Community & Worship" platform="masjid">
+  <!-- Hero with Prayer Times -->
+  <section class="relative overflow-hidden" style="background: linear-gradient(135deg, rgb(5,179,77,0.08), rgb(242,185,28,0.05));">
+    <div class="container-app py-8 md:py-12">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div class="fade-in">
+          <span class="badge badge-accent mb-4">Assalamu Alaikum</span>
+          <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-4">
+            Welcome to <span style="color: var(--color-primary);">Minhaajulhudaa</span> Masjid
+          </h1>
+          <p class="text-lg mb-6" style="color: var(--color-muted);">
+            A center for prayer, learning, and community. Join us for daily prayers, halaqahs, and spiritual growth.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="/masjid/quran" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+              Qur'an Player
+            </a>
+            <a href="/masjid/donate" class="btn btn-accent">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              Donate
+            </a>
+          </div>
+        </div>
+
+        <!-- Prayer Times Card -->
+        <div class="card p-6 fade-in">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 class="text-lg font-bold">Prayer Times</h2>
+              <p class="text-xs" style="color: var(--color-muted);">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            </div>
+            <div class="text-xs px-2 py-1 rounded" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">Today</div>
+          </div>
+          <div class="space-y-2">
+            {prayers.map((prayer) => (
+              <div class="flex items-center justify-between py-2 border-b last:border-0" style="border-color: var(--color-border);">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: rgb(5,179,77,0.1);">
+                    {prayer.icon === 'sunrise' && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M17 18a5 5 0 0 0-10 0M12 2v7M4.22 10.22l1.42 1.42M1 18h2M21 18h2M18.36 11.64l1.42-1.42M23 22H1M8 6l4-4 4 4"/></svg>}
+                    {prayer.icon === 'sun' && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-accent);"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2"/></svg>}
+                    {prayer.icon === 'noon' && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-accent);"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>}
+                    {prayer.icon === 'afternoon' && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M12 2v6m0 0l4 4m-4-4l-4 4m4 10v-6m0 0l4-4m-4 4l-4-4"/></svg>}
+                    {prayer.icon === 'sunset' && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-accent);"><path d="M17 18a5 5 0 0 0-10 0M12 9V2M4.22 10.22l1.42 1.42M1 18h2M21 18h2M18.36 11.64l1.42-1.42M23 22H1"/></svg>}
+                    {prayer.icon === 'night' && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>}
+                  </div>
+                  <span class="font-medium text-sm">{prayer.name}</span>
+                </div>
+                <div class="text-right">
+                  <div class="font-semibold text-sm">{prayer.adhan}</div>
+                  {prayer.iqamah && <div class="text-xs" style="color: var(--color-muted);">Iqamah: {prayer.iqamah}</div>}
+                </div>
+              </div>
+            ))}
+          </div>
+          {prayers.length === 0 && (
+            <div class="text-center py-8" style="color: var(--color-muted);">
+              <p class="text-sm">Prayer times will be available soon.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Announcements -->
+  {announcements.length > 0 && (
+    <section class="container-app py-8">
+      <div class="space-y-3">
+        {announcements.map((ann) => (
+          <div class="card p-4 flex items-start gap-3">
+            <div class={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${ann.type === 'urgent' ? 'bg-[rgb(220,38,38,0.1)]' : ann.type === 'success' ? 'bg-[rgb(5,179,77,0.1)]' : 'bg-[rgb(242,185,28,0.15)]'}`}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style={`color: ${ann.type === 'urgent' ? '#DC2626' : ann.type === 'success' ? 'var(--color-primary)' : 'var(--color-accent)'};`}>
+                <path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-semibold text-sm mb-1">{ann.title}</h3>
+              <p class="text-sm" style="color: var(--color-muted);">{ann.message}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Quick Access Cards -->
+  <section class="container-app py-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <a href="/masjid/quran" class="card card-hover p-6 text-center">
+        <div class="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center" style="background: rgb(5,179,77,0.1);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3 class="font-semibold text-sm">Qur'an Player</h3>
+        <p class="text-xs" style="color: var(--color-muted);">24/7 streaming</p>
+      </a>
+      <a href="/masjid/audios" class="card card-hover p-6 text-center">
+        <div class="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center" style="background: rgb(242,185,28,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-accent);"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <h3 class="font-semibold text-sm">Audio Library</h3>
+        <p class="text-xs" style="color: var(--color-muted);">Lectures & Khutbahs</p>
+      </a>
+      <a href="/masjid/library" class="card card-hover p-6 text-center">
+        <div class="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center" style="background: rgb(5,179,77,0.1);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <h3 class="font-semibold text-sm">Digital Library</h3>
+        <p class="text-xs" style="color: var(--color-muted);">Books & PDFs</p>
+      </a>
+      <a href="/masjid/donate" class="card card-hover p-6 text-center">
+        <div class="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center" style="background: rgb(242,185,28,0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-accent);"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3 class="font-semibold text-sm">Donate</h3>
+        <p class="text-xs" style="color: var(--color-muted);">Support the Masjid</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Donation Campaigns -->
+  {campaigns.length > 0 && (
+    <section class="container-app py-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold">Support Our Campaigns</h2>
+        <a href="/masjid/donate" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {campaigns.map((campaign) => {
+          const progress = Math.round((campaign.raisedAmount / campaign.goalAmount) * 100);
+          return (
+            <div class="card card-hover overflow-hidden">
+              <div class="aspect-[16/9]">
+                {campaign.imageUrl && <img src={campaign.imageUrl} alt={campaign.title} class="w-full h-full object-cover" loading="lazy" />}
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="badge badge-primary">{campaign.category}</span>
+                  {campaign.isUrgent && <span class="badge badge-accent">Urgent</span>}
+                </div>
+                <h3 class="font-bold mb-2">{campaign.title}</h3>
+                <p class="text-sm mb-4 line-clamp-2" style="color: var(--color-muted);">{campaign.description.substring(0, 100)}...</p>
+                <div class="mb-2">
+                  <div class="flex justify-between text-sm mb-1">
+                    <span class="font-semibold" style="color: var(--color-primary);">₦{campaign.raisedAmount.toLocaleString()}</span>
+                    <span style="color: var(--color-muted);">of ₦{campaign.goalAmount.toLocaleString()}</span>
+                  </div>
+                  <div class="h-2 rounded-full" style="background: var(--color-border);">
+                    <div class="h-full rounded-full" style={`width: ${progress}%; background: var(--color-primary);`}></div>
+                  </div>
+                </div>
+                <a href={`/masjid/donate?campaign=${campaign.slug}`} class="btn btn-primary w-full mt-4">Donate Now</a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  )}
+
+  <!-- Latest Audios -->
+  {audios.length > 0 && (
+    <section class="container-app py-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold">Latest Audios</h2>
+        <a href="/masjid/audios" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {audios.map((audio) => (
+          <div class="card p-4 flex items-center gap-4">
+            <button class="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style="background: var(--color-primary);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold text-sm truncate">{audio.title}</h3>
+              <p class="text-xs" style="color: var(--color-muted);">{audio.speaker} - {audio.category}</p>
+            </div>
+            <div class="text-xs" style="color: var(--color-muted);">
+              {Math.floor(audio.duration / 60)}:{String(audio.duration % 60).padStart(2, '0')}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Upcoming Events -->
+  {events.length > 0 && (
+    <section class="container-app py-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold">Upcoming Events</h2>
+        <a href="/masjid/events" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
+      </div>
+      <div class="space-y-3">
+        {events.map((event) => (
+          <div class="card p-4 flex items-center gap-4">
+            <div class="text-center shrink-0">
+              <div class="text-2xl font-extrabold" style="color: var(--color-primary);">{new Date(event.startDate).getDate()}</div>
+              <div class="text-xs uppercase" style="color: var(--color-muted);">{new Date(event.startDate).toLocaleDateString('en-US', { month: 'short' })}</div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-semibold text-sm">{event.title}</h3>
+              <p class="text-xs" style="color: var(--color-muted);">{new Date(event.startDate).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} - {event.location || 'Masjid'}</p>
+            </div>
+            <span class="badge badge-accent">{event.category}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Imams -->
+  {imams.length > 0 && (
+    <section class="container-app py-8">
+      <h2 class="text-2xl font-bold mb-6 text-center">Our Imams & Staff</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {imams.map((imam) => (
+          <div class="card p-6 text-center">
+            <div class="w-16 h-16 rounded-full mx-auto mb-3 flex items-center justify-center text-xl font-bold" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">
+              {imam.name.charAt(0)}
+            </div>
+            <h3 class="font-semibold text-sm">{imam.name}</h3>
+            <p class="text-xs" style="color: var(--color-muted);">{imam.title}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+</PlatformLayout>
