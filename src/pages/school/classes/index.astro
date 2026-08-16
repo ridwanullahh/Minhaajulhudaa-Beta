@@ -9,7 +9,6 @@ const result = await lightbase.query('school_classes', {
 const classes = result.data || [];
 const levels = [...new Set(classes.map((c: any) => c.level).filter(Boolean))];
 ---
-export const prerender = true;
 
 <PlatformLayout title="Classes - Minhaajulhudaa School" platform="school">
   <section class="container-app py-12">

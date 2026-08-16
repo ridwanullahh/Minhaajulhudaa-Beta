@@ -6,7 +6,6 @@ const page = await lightbase.findOne('charity_pages', { field: 'slug', op: 'eq',
 const metrics = await lightbase.query('charity_impact_metrics', { limit: 8 });
 const partners = await lightbase.query('charity_partners', { filter: { field: 'status', op: 'eq', value: 'active' }, limit: 8 });
 ---
-export const prerender = true;
 
 <PlatformLayout title="About - Minhaajulhudaa Charity" platform="charity">
   <section class="container-app py-12 max-w-4xl">

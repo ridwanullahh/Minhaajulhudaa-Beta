@@ -11,7 +11,6 @@ const result = await lightbase.query('school_products', {
 const products = result.data || [];
 const categories = [...new Set(products.map((p: any) => p.category).filter(Boolean))];
 ---
-export const prerender = true;
 
 <PlatformLayout title="School Shop - Minhaajulhudaa School" platform="school">
   <section class="container-app py-12">

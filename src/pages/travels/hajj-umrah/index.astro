@@ -10,7 +10,6 @@ const result = await lightbase.query('travels_packages', {
 const packages = result.data || [];
 const types = [...new Set(packages.map(p => p.type).filter(Boolean))];
 ---
-export const prerender = true;
 
 <PlatformLayout title="Hajj & Umrah Packages - Minhaajulhudaa Travels" platform="travels">
   <section class="container-app py-12">

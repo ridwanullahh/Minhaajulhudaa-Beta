@@ -20,7 +20,6 @@ const blogPosts = blogResult.data || [];
 const totalRaised = campaigns.reduce((sum, c) => sum + (c.raisedAmount || 0), 0);
 const totalBeneficiaries = metrics.find(m => m.metricKey === 'families_helped')?.value || 0;
 ---
-export const prerender = true;
 
 <PlatformLayout title="Minhaajulhudaa Charity - Serving Humanity" platform="charity">
   <!-- Hero -->

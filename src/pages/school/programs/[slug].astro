@@ -21,7 +21,6 @@ if (!program) {
 const relatedResult = await lightbase.findMany('school_programs', { field: 'category', op: 'eq', value: program.category }, { limit: 3 });
 const filteredRelated = relatedResult.filter((p: any) => p.slug !== program.slug);
 ---
-export const prerender = true;
 
 <PlatformLayout title={`${program.title} - Programs`} description={program.shortDescription || program.description} platform="school">
   <section class="container-app py-12">

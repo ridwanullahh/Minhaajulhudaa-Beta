@@ -10,7 +10,6 @@ const result = await lightbase.query('school_blog_posts', {
 const posts = result.data || [];
 const categories = [...new Set(posts.map(p => p.category).filter(Boolean))];
 ---
-export const prerender = true;
 
 <PlatformLayout title="News & Blog - Minhaajulhudaa School" platform="school">
   <section class="container-app py-12">

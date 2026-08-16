@@ -5,11 +5,15 @@
  * Server-side only - never expose the API key to the client.
  */
 
-const BASE_URL = import.meta.env.LIGHTBASE_BASE_URL || process.env.LIGHTBASE_BASE_URL;
-const API_KEY = import.meta.env.LIGHTBASE_API_KEY || process.env.LIGHTBASE_API_KEY;
-const PROJECT_ID = import.meta.env.LIGHTBASE_PROJECT_ID || process.env.LIGHTBASE_PROJECT_ID;
+// Lazy env reads: module-level constants crash astro build on PaaS
+// platforms that set env vars only at runtime, not during build.
+const _env = () => ({
+  BASE_URL: (import.meta.env.LIGHTBASE_BASE_URL || process.env.LIGHTBASE_BASE_URL || '').replace(/\/+$/, ''),
+  API_KEY: import.meta.env.LIGHTBASE_API_KEY || process.env.LIGHTBASE_API_KEY || '',
+  PROJECT_ID: import.meta.env.LIGHTBASE_PROJECT_ID || process.env.LIGHTBASE_PROJECT_ID || '',
+});
 
-if (!BASE_URL || !API_KEY || !PROJECT_ID) {
+if (!_env().BASE_URL || !_env().API_KEY || !_env().PROJECT_ID) {
   // Allow build-time import without env (SSR pages import at module level)
   console.warn('[lightbase] Missing env vars - client will fail at runtime if used without env');
 }
@@ -82,9 +86,14 @@ class LightbaseClient {
   private projectId: string;
 
   constructor() {
-    this.baseUrl = BASE_URL || '';
-    this.apiKey = API_KEY || '';
-    this.projectId = PROJECT_ID || '';
+    const e = _env();
+    this.baseUrl = e.BASE_URL;
+    this.apiKey = e.API_KEY;
+    this.projectId = e.PROJECT_ID;
+  }
+
+  isConfigured(): boolean {
+    return Boolean(this.baseUrl && this.apiKey && this.projectId);
   }
 
   private getHeaders(contentType = 'application/json'): Record<string, string> {
@@ -99,6 +108,12 @@ class LightbaseClient {
     path: string,
     options: RequestInit = {}
   ): Promise<T> {
+    if (!this.isConfigured()) {
+      throw new LightbaseError(
+        'Lightbase not configured: missing LIGHTBASE_BASE_URL, LIGHTBASE_API_KEY, or LIGHTBASE_PROJECT_ID env vars',
+        500, path, options.method || 'GET'
+      );
+    }
     const url = `${this.baseUrl}${path}`;
     const headers = {
       ...this.getHeaders(),
