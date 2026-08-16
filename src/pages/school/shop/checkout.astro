@@ -1,0 +1,181 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+---
+
+<PlatformLayout title="Checkout - Minhaajulhudaa School" platform="school">
+  <section class="container-app py-12 max-w-3xl">
+    <a href="/school/shop/cart" class="text-sm font-medium mb-6 inline-flex items-center gap-1" style="color: var(--color-primary);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Cart
+    </a>
+
+    <h1 class="text-3xl font-extrabold mb-8">Checkout</h1>
+
+    <div id="checkout-empty" class="card p-12 text-center hidden">
+      <p class="font-bold mb-2">Your cart is empty</p>
+      <a href="/school/shop" class="btn btn-primary inline-block">Browse Shop</a>
+    </div>
+
+    <form id="checkout-form" class="space-y-8">
+      <!-- Order Items Summary -->
+      <div class="card p-6">
+        <h3 class="font-bold mb-4">Order Items</h3>
+        <div id="checkout-items" class="space-y-3"></div>
+        <div class="pt-4 mt-4" style="border-top: 1px solid var(--color-border);">
+          <div class="flex justify-between text-sm mb-1"><span style="color: var(--color-muted);">Subtotal</span><span id="co-subtotal" class="font-medium"></span></div>
+          <div class="flex justify-between text-sm mb-2"><span style="color: var(--color-muted);">Delivery</span><span id="co-delivery" class="font-medium"></span></div>
+          <div class="flex justify-between text-lg font-bold pt-2" style="border-top: 1px solid var(--color-border);">
+            <span>Total</span><span id="co-total" style="color: var(--color-primary);"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Details -->
+      <div class="card p-6">
+        <h3 class="font-bold mb-4">Customer Details</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-2" for="co-name">Full Name *</label>
+            <input id="co-name" name="name" type="text" class="input" placeholder="Your full name" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2" for="co-email">Email *</label>
+            <input id="co-email" name="email" type="email" class="input" placeholder="your@email.com" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2" for="co-phone">Phone *</label>
+            <input id="co-phone" name="phone" type="tel" class="input" placeholder="08012345678" required />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2" for="co-student">Student ID (optional)</label>
+            <input id="co-student" name="studentId" type="text" class="input" placeholder="MHS-2024-001" />
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="block text-sm font-medium mb-2" for="co-address">Delivery Address *</label>
+          <textarea id="co-address" name="address" class="input" rows="3" placeholder="Full delivery address" required></textarea>
+        </div>
+        <div class="mt-4">
+          <label class="block text-sm font-medium mb-2" for="co-notes">Order Notes (optional)</label>
+          <textarea id="co-notes" name="notes" class="input" rows="2" placeholder="Any special instructions"></textarea>
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="card p-6">
+        <h3 class="font-bold mb-4">Payment Method</h3>
+        <div class="space-y-3">
+          <label class="flex items-center gap-3 p-3 rounded-lg cursor-pointer" style="border: 1px solid var(--color-border);">
+            <input type="radio" name="paymentMethod" value="paystack" checked class="accent-[#05B34D]" />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            <span class="text-sm font-medium">Pay with Card (Paystack)</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg cursor-pointer" style="border: 1px solid var(--color-border);">
+            <input type="radio" name="paymentMethod" value="bank_transfer" class="accent-[#05B34D]" />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>
+            <span class="text-sm font-medium">Bank Transfer</span>
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" id="place-order-btn" class="btn btn-primary w-full text-lg py-4">Place Order</button>
+      <div id="checkout-message" class="hidden p-4 rounded-lg text-sm"></div>
+    </form>
+  </section>
+
+  <script is:inline>
+    const CART_KEY = 'school_shop_cart';
+    const DELIVERY_FEE = 1500;
+
+    function getCart() {
+      try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch { return []; }
+    }
+
+    (function init() {
+      const cart = getCart();
+      const emptyEl = document.getElementById('checkout-empty');
+      const form = document.getElementById('checkout-form');
+
+      if (cart.length === 0) {
+        emptyEl.classList.remove('hidden');
+        form.classList.add('hidden');
+        return;
+      }
+
+      let subtotal = 0;
+      const itemsEl = document.getElementById('checkout-items');
+      itemsEl.innerHTML = cart.map(item => {
+        const lineTotal = item.price * item.quantity;
+        subtotal += lineTotal;
+        return `<div class="flex justify-between text-sm"><span>${item.title} x${item.quantity}</span><span class="font-medium">₦${lineTotal.toLocaleString()}</span></div>`;
+      }).join('');
+
+      const delivery = subtotal > 10000 ? 0 : DELIVERY_FEE;
+      document.getElementById('co-subtotal').textContent = '\u20A6' + subtotal.toLocaleString();
+      document.getElementById('co-delivery').textContent = delivery === 0 ? 'Free' : '\u20A6' + delivery.toLocaleString();
+      document.getElementById('co-total').textContent = '\u20A6' + (subtotal + delivery).toLocaleString();
+    })();
+
+    document.getElementById('checkout-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const cart = getCart();
+      if (cart.length === 0) return;
+
+      const btn = document.getElementById('place-order-btn');
+      const msg = document.getElementById('checkout-message');
+      btn.disabled = true;
+      btn.textContent = 'Processing...';
+      msg.classList.add('hidden');
+
+      const form = e.target;
+      const data = Object.fromEntries(new FormData(form));
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const delivery = subtotal > 10000 ? 0 : DELIVERY_FEE;
+
+      const orderData = {
+        ...data,
+        items: cart,
+        subtotal,
+        deliveryFee: delivery,
+        totalAmount: subtotal + delivery,
+        reference: 'SCH-ORD-' + Date.now().toString(36).toUpperCase(),
+        status: 'pending',
+        platform: 'school',
+        createdAt: new Date().toISOString(),
+      };
+
+      try {
+        const response = await fetch('/api/school/shop', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(orderData),
+        });
+        const result = await response.json();
+
+        if (response.ok) {
+          if (data.paymentMethod === 'paystack' && result.authorization_url) {
+            localStorage.removeItem(CART_KEY);
+            window.location.href = result.authorization_url;
+          } else {
+            msg.style.background = 'rgb(5,179,77,0.1)';
+            msg.style.color = 'var(--color-primary)';
+            msg.innerHTML = 'Order placed successfully! Reference: ' + orderData.reference + '. Bank transfer details will be sent to ' + data.email;
+            msg.classList.remove('hidden');
+            localStorage.removeItem(CART_KEY);
+            form.reset();
+          }
+        } else {
+          throw new Error(result.error || 'Order failed');
+        }
+      } catch (err) {
+        msg.style.background = 'rgb(220,38,38,0.1)';
+        msg.style.color = '#DC2626';
+        msg.textContent = 'Error: ' + err.message;
+        msg.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Place Order';
+      }
+    });
+  </script>
+</PlatformLayout>

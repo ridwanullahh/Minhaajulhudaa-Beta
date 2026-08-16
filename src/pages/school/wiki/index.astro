@@ -41,7 +41,7 @@ articles.forEach((article: any) => {
             </h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {catArticles.map((article: any) => (
-                <a href={`#${article.slug}`} class="card card-hover p-5 block">
+                <a href={`/school/wiki/${article.slug}`} class="card card-hover p-5 block">
                   <h3 class="font-bold text-sm mb-1">{article.title}</h3>
                   {article.excerpt && <p class="text-xs" style="color: var(--color-muted);">{article.excerpt.substring(0, 100)}</p>}
                 </a>
