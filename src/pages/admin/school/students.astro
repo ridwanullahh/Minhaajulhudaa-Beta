@@ -1,0 +1,112 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const result = await lightbase.query('school_students', {
+  sort: 'lastName:asc',
+  limit: 100,
+});
+const students = result.data || [];
+---
+
+<AdminLayout title="Student Records" platform="school" section="students">
+  <div class="flex items-center justify-between mb-6 fade-in">
+    <div>
+      <h2 class="text-lg font-bold">Students</h2>
+      <p class="text-sm" style="color: var(--color-muted);">{students.length} total students</p>
+    </div>
+    <button id="toggle-form-btn" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Add Student
+    </button>
+  </div>
+
+  <!-- Create Form -->
+  <div id="create-form" class="hidden card p-6 mb-6">
+    <h3 class="font-bold mb-4">Add New Student</h3>
+    <form id="student-form" class="space-y-4">
+      <div class="grid md:grid-cols-3 gap-4">
+        <div><label class="block text-sm font-medium mb-1" for="s-first">First Name</label><input id="s-first" name="firstName" class="input" required /></div>
+        <div><label class="block text-sm font-medium mb-1" for="s-last">Last Name</label><input id="s-last" name="lastName" class="input" required /></div>
+        <div><label class="block text-sm font-medium mb-1" for="s-class">Class</label><input id="s-class" name="className" class="input" /></div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div><label class="block text-sm font-medium mb-1" for="s-gender">Gender</label>
+          <select id="s-gender" name="gender" class="input"><option value="male">Male</option><option value="female">Female</option></select></div>
+        <div><label class="block text-sm font-medium mb-1" for="s-guardian">Guardian Name</label><input id="s-guardian" name="guardianName" class="input" /></div>
+        <div><label class="block text-sm font-medium mb-1" for="s-phone">Guardian Phone</label><input id="s-phone" name="guardianPhone" class="input" /></div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><label class="block text-sm font-medium mb-1" for="s-email">Guardian Email</label><input id="s-email" name="guardianEmail" class="input" type="email" /></div>
+        <div><label class="block text-sm font-medium mb-1" for="s-enrollment">Enrollment Status</label>
+          <select id="s-enrollment" name="enrollmentStatus" class="input"><option value="active">Active</option><option value="inactive">Inactive</option><option value="graduated">Graduated</option></select></div>
+      </div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Add Student</button>
+        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Students Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Name</th>
+          <th class="p-4 font-medium hidden md:table-cell">Class</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Gender</th>
+          <th class="p-4 font-medium hidden lg:table-cell">Guardian</th>
+          <th class="p-4 font-medium text-right">Status</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {students.map((s: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-4 font-medium">{s.firstName} {s.lastName}</td>
+              <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{s.className || '-'}</td>
+              <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{s.gender || '-'}</td>
+              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{s.guardianName || '-'}</td>
+              <td class="p-4 text-right"><span class={s.enrollmentStatus === 'active' ? 'badge badge-primary' : 'badge'}>{s.enrollmentStatus || '-'}</span></td>
+              <td class="p-4 text-right">
+                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-student={s.id}>Edit</button>
+                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-student={s.id}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {students.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No students registered yet.</div>}
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggle-form-btn');
+    const cancelBtn = document.getElementById('cancel-form-btn');
+    const createForm = document.getElementById('create-form');
+    toggleBtn?.addEventListener('click', () => createForm?.classList.toggle('hidden'));
+    cancelBtn?.addEventListener('click', () => createForm?.classList.add('hidden'));
+
+    document.getElementById('student-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, string> = {};
+      fd.forEach((v, k) => { body[k] = v as string; });
+      try {
+        const res = await fetch('/api/admin/school/students', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) window.location.reload(); else { const err = await res.json(); alert(err.error || 'Failed'); }
+      } catch { alert('Network error'); }
+    });
+
+    document.querySelectorAll('[data-delete-student]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this student record?')) return;
+        const id = btn.getAttribute('data-delete-student');
+        try {
+          const res = await fetch(`/api/admin/school/students?id=${id}`, { method: 'DELETE' });
+          if (res.ok) window.location.reload(); else alert('Failed to delete');
+        } catch { alert('Network error'); }
+      });
+    });
+  </script>
+</AdminLayout>

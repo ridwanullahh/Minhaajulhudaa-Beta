@@ -1,0 +1,79 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+const result = await lightbase.query('school_products', {
+  filter: { field: 'status', op: 'eq', value: 'active' },
+  sort: 'title:asc',
+  limit: 50,
+});
+const products = result.data || [];
+const categories = [...new Set(products.map((p: any) => p.category).filter(Boolean))];
+---
+export const prerender = true;
+
+<PlatformLayout title="School Shop - Minhaajulhudaa School" platform="school">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">School Shop</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Purchase uniforms, books, supplies, and more. All proceeds support the school.</p>
+
+    {categories.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8">
+        <button class="badge badge-primary" data-filter="all">All</button>
+        {categories.map((cat: string) => (
+          <button class="badge" style="background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-muted);" data-filter={cat}>{cat.replace(/-/g, ' ')}</button>
+        ))}
+      </div>
+    )}
+
+    {products.length > 0 ? (
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6" id="products-grid">
+        {products.map((product: any) => (
+          <div class="card card-hover overflow-hidden product-card" data-category={product.category}>
+            <div class="aspect-square bg-[rgb(5,179,77,0.05)] relative">
+              {product.imageUrl ? (
+                <img src={product.imageUrl} alt={product.title} class="w-full h-full object-cover" loading="lazy" />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-primary);"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                </div>
+              )}
+              {(product.stockQuantity !== undefined && product.stockQuantity <= 0) && (
+                <div class="absolute top-2 right-2"><span class="badge" style="background: rgb(220,38,38,0.9); color: white;">Out of Stock</span></div>
+              )}
+            </div>
+            <div class="p-4">
+              <h2 class="font-bold text-sm mb-1 line-clamp-1">{product.title}</h2>
+              {product.category && <p class="text-xs mb-2" style="color: var(--color-muted);">{product.category.replace(/-/g, ' ')}</p>}
+              <div class="flex items-center justify-between">
+                <span class="font-bold" style="color: var(--color-primary);">{product.price ? formatCurrency(product.price) : 'Free'}</span>
+                <a href={`/school/shop/${product.slug}`} class="text-xs font-medium" style="color: var(--color-primary);">View</a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="card p-12 text-center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <p style="color: var(--color-muted);">No products available at this time.</p>
+      </div>
+    )}
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('.product-card').forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            (card as HTMLElement).style.display = '';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</PlatformLayout>

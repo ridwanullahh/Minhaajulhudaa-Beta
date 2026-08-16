@@ -1,0 +1,86 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const result = await lightbase.query('school_programs', {
+  sort: 'title:asc',
+  limit: 50,
+});
+const programs = result.data || [];
+const categories = [...new Set(programs.map((p: any) => p.category).filter(Boolean))];
+---
+export const prerender = true;
+
+<PlatformLayout title="Programs - Minhaajulhudaa School" platform="school">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Our Programs</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Explore our comprehensive range of academic, Islamic, and extracurricular programs designed to develop well-rounded students.</p>
+
+    {categories.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8">
+        <button class="badge badge-primary" data-filter="all">All</button>
+        {categories.map((cat: string) => (
+          <button class="badge" style="background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-muted);" data-filter={cat}>{cat.replace(/-/g, ' ')}</button>
+        ))}
+      </div>
+    )}
+
+    {programs.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="programs-grid">
+        {programs.map((program: any) => (
+          <div class="card card-hover overflow-hidden program-card" data-category={program.category}>
+            <div class="aspect-[16/9] bg-[rgb(5,179,77,0.05)] flex items-center justify-center">
+              {program.imageUrl ? (
+                <img src={program.imageUrl} alt={program.title} class="w-full h-full object-cover" loading="lazy" />
+              ) : (
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-primary);">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+              )}
+            </div>
+            <div class="p-6">
+              <span class="badge badge-primary mb-3">{program.category ? program.category.replace(/-/g, ' ') : 'General'}</span>
+              <h2 class="font-bold text-lg mb-2">{program.title}</h2>
+              <p class="text-sm mb-4" style="color: var(--color-muted);">{program.shortDescription || (program.description ? program.description.substring(0, 140) : '')}</p>
+              <div class="flex items-center justify-between text-xs" style="color: var(--color-muted);">
+                <span>{program.duration || 'Flexible'}</span>
+                {program.status && <span class={program.status === 'open' ? 'badge badge-primary' : 'badge'}>{program.status}</span>}
+              </div>
+              <a href={`/school/programs/${program.slug}`} class="btn btn-outline w-full mt-4">View Details</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="card p-12 text-center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </svg>
+        <p style="color: var(--color-muted);">No programs available yet. Please check back later.</p>
+      </div>
+    )}
+  </section>
+
+  <section class="container-app py-12">
+    <div class="card p-8 md:p-12 text-center" style="background: linear-gradient(135deg, rgb(5,179,77,0.08), rgb(242,185,28,0.08));">
+      <h2 class="text-2xl font-bold mb-4">Ready to Enroll?</h2>
+      <p class="mb-6" style="color: var(--color-muted);">Begin your child's journey of knowledge and faith today.</p>
+      <a href="/school/admission" class="btn btn-primary">Apply for Admission</a>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('.program-card').forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            (card as HTMLElement).style.display = '';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</PlatformLayout>

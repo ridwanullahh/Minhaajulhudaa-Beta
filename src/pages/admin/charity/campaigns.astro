@@ -1,0 +1,193 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { generateCSRFToken, formatCurrency, slugify } from '../../../lib/utils';
+
+const campaigns = await lightbase.query('charity_campaigns', { sort: 'createdAt:desc', limit: 50 });
+const allCampaigns = campaigns.data || [];
+const csrfToken = generateCSRFToken();
+---
+
+<AdminLayout title="Campaigns" platform="charity" section="campaigns">
+  <div class="flex items-center justify-between mb-6 fade-in">
+    <div>
+      <h2 class="text-lg font-bold">Campaigns</h2>
+      <p class="text-sm" style="color: var(--color-muted);">{allCampaigns.length} total campaigns</p>
+    </div>
+    <button id="toggle-form-btn" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      New Campaign
+    </button>
+  </div>
+
+  <!-- Create/Edit Form -->
+  <div id="create-form" class="hidden card p-6 mb-6">
+    <h3 id="form-title" class="font-bold mb-4">Create New Campaign</h3>
+    <form id="campaign-form" class="space-y-4">
+      <input type="hidden" name="csrfToken" value={csrfToken} />
+      <input type="hidden" name="editId" id="edit-id" value="" />
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="c-title">Title</label>
+          <input id="c-title" name="title" class="input" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="c-category">Category</label>
+          <select id="c-category" name="category" class="input">
+            <option value="zakaat">Zakaat</option>
+            <option value="sadaqah">Sadaqah</option>
+            <option value="water">Water</option>
+            <option value="food">Food</option>
+            <option value="orphans">Orphans</option>
+            <option value="education">Education</option>
+            <option value="emergency">Emergency</option>
+            <option value="construction">Construction</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="c-goal">Goal Amount (NGN)</label>
+          <input id="c-goal" name="goalAmount" type="number" class="input" required min="0" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="c-deadline">Deadline</label>
+          <input id="c-deadline" name="deadline" type="date" class="input" />
+        </div>
+        <div class="flex items-end gap-2 pb-1">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" name="isUrgent" class="w-4 h-4 rounded" style="accent-color: var(--color-primary);" />
+            <span class="text-sm font-medium">Mark as Urgent</span>
+          </label>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="c-short">Short Description</label>
+        <textarea id="c-short" name="shortDescription" class="input" rows="2"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="c-desc">Full Description</label>
+        <textarea id="c-desc" name="description" class="input" rows="6"></textarea>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="c-image">Image URL</label>
+          <input id="c-image" name="imageUrl" class="input" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="c-status">Status</label>
+          <select id="c-status" name="status" class="input">
+            <option value="active">Active</option>
+            <option value="draft">Draft</option>
+            <option value="completed">Completed</option>
+            <option value="paused">Paused</option>
+          </select>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Save Campaign</button>
+        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Campaigns Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Title</th>
+          <th class="p-4 font-medium hidden md:table-cell">Category</th>
+          <th class="p-4 font-medium text-right">Raised / Goal</th>
+          <th class="p-4 font-medium text-right hidden sm:table-cell">Progress</th>
+          <th class="p-4 font-medium text-right">Status</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allCampaigns.map((c: any) => {
+            const pct = c.goalAmount ? Math.round(((c.raisedAmount || 0) / c.goalAmount) * 100) : 0;
+            return (
+              <tr style="border-top: 1px solid var(--color-border);">
+                <td class="p-4">
+                  <div class="font-medium">{c.title}</div>
+                  {c.isUrgent && <span class="badge badge-accent text-xs mt-1">Urgent</span>}
+                </td>
+                <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{c.category || '-'}</span></td>
+                <td class="p-4 text-right">
+                  <div class="font-medium" style="color: var(--color-primary);">{formatCurrency(c.raisedAmount || 0)}</div>
+                  <div class="text-xs" style="color: var(--color-muted);">of {formatCurrency(c.goalAmount || 0)}</div>
+                </td>
+                <td class="p-4 text-right hidden sm:table-cell">
+                  <div class="w-20 h-1.5 rounded-full mx-auto" style="background: var(--color-border);">
+                    <div class="h-full rounded-full" style={`width: ${Math.min(pct, 100)}%; background: var(--color-primary);`}></div>
+                  </div>
+                  <div class="text-xs mt-1" style="color: var(--color-muted);">{pct}%</div>
+                </td>
+                <td class="p-4 text-right"><span class={c.status === 'active' ? 'badge badge-primary' : c.status === 'completed' ? 'badge badge-primary' : 'badge badge-accent'}>{c.status}</span></td>
+                <td class="p-4 text-right">
+                  <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-campaign={c.id} data-title={c.title} data-category={c.category || ''} data-goal={c.goalAmount || ''} data-deadline={c.deadline || ''} data-short={c.shortDescription || ''} data-desc={c.description || ''} data-image={c.imageUrl || ''} data-status={c.status || 'active'} data-urgent={c.isUrgent ? 'true' : 'false'}>Edit</button>
+                  <button class="text-xs font-medium" style="color: #DC2626;" data-delete-campaign={c.id}>Delete</button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+    {allCampaigns.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No campaigns yet. Create your first campaign above.</div>}
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggle-form-btn');
+    const cancelBtn = document.getElementById('cancel-form-btn');
+    const createForm = document.getElementById('create-form');
+    const formTitle = document.getElementById('form-title');
+    toggleBtn?.addEventListener('click', () => { createForm?.classList.toggle('hidden'); formTitle!.textContent = 'Create New Campaign'; });
+    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id') as HTMLInputElement).value = ''; (document.getElementById('campaign-form') as HTMLFormElement).reset(); });
+
+    // Edit
+    document.querySelectorAll('[data-edit-campaign]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        createForm?.classList.remove('hidden');
+        formTitle!.textContent = 'Edit Campaign';
+        (document.getElementById('edit-id') as HTMLInputElement).value = btn.getAttribute('data-edit-campaign') || '';
+        (document.getElementById('c-title') as HTMLInputElement).value = btn.getAttribute('data-title') || '';
+        (document.getElementById('c-category') as HTMLSelectElement).value = btn.getAttribute('data-category') || 'zakaat';
+        (document.getElementById('c-goal') as HTMLInputElement).value = btn.getAttribute('data-goal') || '';
+        (document.getElementById('c-deadline') as HTMLInputElement).value = btn.getAttribute('data-deadline') || '';
+        (document.getElementById('c-short') as HTMLTextAreaElement).value = btn.getAttribute('data-short') || '';
+        (document.getElementById('c-desc') as HTMLTextAreaElement).value = btn.getAttribute('data-desc') || '';
+        (document.getElementById('c-image') as HTMLInputElement).value = btn.getAttribute('data-image') || '';
+        (document.getElementById('c-status') as HTMLSelectElement).value = btn.getAttribute('data-status') || 'active';
+        const urgentCheckbox = document.querySelector('[name=isUrgent]') as HTMLInputElement;
+        if (urgentCheckbox) urgentCheckbox.checked = btn.getAttribute('data-urgent') === 'true';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Submit
+    document.getElementById('campaign-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, any> = {};
+      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'isUrgent' ? (v as string === 'on') : (k === 'goalAmount' ? Number(v) : v); });
+      body.slug = body.title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
+      const editId = (document.getElementById('edit-id') as HTMLInputElement).value;
+      try {
+        const url = editId ? `/api/admin/charity/campaigns?id=${editId}` : '/api/admin/charity/campaigns';
+        const method = editId ? 'PATCH' : 'POST';
+        const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) { window.location.reload(); } else { const err = await res.json(); alert(err.error || 'Failed'); }
+      } catch { alert('Network error'); }
+    });
+
+    // Delete
+    document.querySelectorAll('[data-delete-campaign]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this campaign?')) return;
+        const id = btn.getAttribute('data-delete-campaign');
+        try { const res = await fetch(`/api/admin/charity/campaigns?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else alert('Failed'); } catch { alert('Network error'); }
+      });
+    });
+  </script>
+</AdminLayout>

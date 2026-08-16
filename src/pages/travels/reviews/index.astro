@@ -1,0 +1,120 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const result = await lightbase.query('travels_reviews', {
+  filter: { field: 'status', op: 'eq', value: 'approved' },
+  sort: 'rating:desc,_created_at:desc',
+  limit: 100,
+});
+
+const reviews = result.data || [];
+
+const avgRating = reviews.length > 0
+  ? (reviews.reduce((sum: number, r: any) => sum + (r.rating || 0), 0) / reviews.length).toFixed(1)
+  : '0.0';
+
+const ratingDistribution = [5, 4, 3, 2, 1].map(star => ({
+  star,
+  count: reviews.filter((r: any) => r.rating === star).length,
+}));
+---
+export const prerender = true;
+
+<PlatformLayout title="Customer Reviews - Minhaajulhudaa Travels" platform="travels">
+  <!-- Hero -->
+  <section class="relative overflow-hidden" style="background: linear-gradient(135deg, rgb(242,185,28,0.08), rgb(5,179,77,0.05));">
+    <div class="container-app py-12 md:py-16">
+      <div class="max-w-3xl fade-in">
+        <span class="badge badge-accent mb-4">Verified Reviews</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
+          What Our <span style="color: var(--color-primary);">Pilgrims</span> Say
+        </h1>
+        <p class="text-lg" style="color: var(--color-muted);">Real reviews from verified travelers who trusted us with their sacred journeys.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rating Summary -->
+  <section class="container-app py-12">
+    <div class="card p-6 md:p-8 mb-12">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div class="text-center md:text-left">
+          <div class="text-5xl font-extrabold mb-2" style="color: var(--color-primary);">{avgRating}</div>
+          <div class="flex gap-1 justify-center md:justify-start mb-2">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill={i < Math.round(parseFloat(avgRating)) ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="2" style="color: var(--color-accent);">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            ))}
+          </div>
+          <div class="text-sm" style="color: var(--color-muted);">Based on {reviews.length} reviews</div>
+        </div>
+        <div class="space-y-2">
+          {ratingDistribution.map(({ star, count }) => {
+            const pct = reviews.length > 0 ? (count / reviews.length) * 100 : 0;
+            return (
+              <div class="flex items-center gap-3 text-sm">
+                <span class="w-8 text-right font-medium">{star}</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-accent);"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <div class="flex-1 h-2 rounded-full" style="background: var(--color-border);">
+                  <div class="h-2 rounded-full" style={`width: ${pct}%; background: var(--color-accent);`}></div>
+                </div>
+                <span class="w-8" style="color: var(--color-muted);">{count}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews List -->
+    {reviews.length > 0 ? (
+      <div class="space-y-6">
+        {reviews.map((review: any) => (
+          <div class="card p-6">
+            <div class="flex items-start justify-between mb-3">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">
+                  {(review.customerName || 'A').charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <div class="font-semibold">{review.customerName || 'Anonymous'}</div>
+                  {review.packageTitle && <div class="text-xs" style="color: var(--color-muted);">{review.packageTitle}</div>}
+                </div>
+              </div>
+              <div class="flex gap-0.5">
+                {Array.from({ length: review.rating || 0 }).map(() => (
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-accent);"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                ))}
+              </div>
+            </div>
+            {review.title && <h3 class="font-bold mb-2">{review.title}</h3>}
+            <p class="text-sm" style="color: var(--color-muted);">{review.content}</p>
+            {review.adminResponse && (
+              <div class="mt-4 p-4 rounded-lg" style="background: rgb(5,179,77,0.05); border: 1px solid var(--color-border);">
+                <div class="text-xs font-bold mb-1" style="color: var(--color-primary);">Minhaajulhudaa Response</div>
+                <p class="text-sm" style="color: var(--color-muted);">{review.adminResponse}</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="card p-12 text-center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-muted);" class="mx-auto mb-4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <h3 class="font-bold text-lg mb-2">No Reviews Yet</h3>
+        <p class="text-sm" style="color: var(--color-muted);">Be the first to share your experience with us.</p>
+      </div>
+    )}
+  </section>
+
+  <!-- CTA -->
+  <section class="container-app py-16">
+    <div class="card p-8 md:p-12 text-center" style="background: linear-gradient(135deg, rgb(5,179,77,0.1), rgb(242,185,28,0.1));">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">Trusted by Hundreds of Pilgrims</h2>
+      <p class="mb-8 max-w-2xl mx-auto" style="color: var(--color-muted);">Join the growing family of satisfied travelers. Book your next journey with confidence.</p>
+      <a href="/travels/book" class="btn btn-primary">Book Your Journey</a>
+    </div>
+  </section>
+</PlatformLayout>

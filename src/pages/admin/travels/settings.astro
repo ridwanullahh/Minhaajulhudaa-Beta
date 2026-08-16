@@ -1,0 +1,84 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const settingsResult = await lightbase.findOne('travels_settings', { field: 'key', op: 'eq', value: 'general' });
+const settings = settingsResult || {};
+---
+
+<AdminLayout title="Settings" platform="travels" section="settings">
+  <div class="mb-6">
+    <h2 class="font-bold text-lg">Settings</h2>
+    <p class="text-sm" style="color: var(--color-muted);">Platform configuration and preferences</p>
+  </div>
+
+  <div class="grid lg:grid-cols-2 gap-6">
+    <!-- General Settings -->
+    <div class="card p-6">
+      <h3 class="font-bold mb-4">General Information</h3>
+      <form id="general-form" class="space-y-4">
+        <div><label class="text-sm font-medium block mb-1">Agency Name</label><input id="s-agencyName" class="input" value={settings.agencyName || 'Minhaajulhudaa Travels'} /></div>
+        <div><label class="text-sm font-medium block mb-1">Tagline</label><input id="s-tagline" class="input" value={settings.tagline || 'Your Trusted Partner for Sacred Journeys'} /></div>
+        <div><label class="text-sm font-medium block mb-1">Contact Email</label><input id="s-contactEmail" class="input" type="email" value={settings.contactEmail || ''} /></div>
+        <div><label class="text-sm font-medium block mb-1">Contact Phone</label><input id="s-contactPhone" class="input" value={settings.contactPhone || ''} /></div>
+        <div><label class="text-sm font-medium block mb-1">Address</label><textarea id="s-address" class="input" rows="2">{settings.address || ''}</textarea></div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </form>
+    </div>
+
+    <!-- Operations Settings -->
+    <div class="card p-6">
+      <h3 class="font-bold mb-4">Operations</h3>
+      <form id="ops-form" class="space-y-4">
+        <div><label class="text-sm font-medium block mb-1">Default Currency</label>
+          <select id="s-defaultCurrency" class="input">
+            <option value="NGN" {(settings.defaultCurrency || 'NGN') === 'NGN' ? 'selected' : ''}>NGN</option>
+            <option value="USD" {settings.defaultCurrency === 'USD' ? 'selected' : ''}>USD</option>
+            <option value="SAR" {settings.defaultCurrency === 'SAR' ? 'selected' : ''}>SAR</option>
+          </select>
+        </div>
+        <div><label class="text-sm font-medium block mb-1">Max Travelers Per Booking</label><input id="s-maxTravelers" type="number" class="input" value={settings.maxTravelers || 20} /></div>
+        <div><label class="text-sm font-medium block mb-1">Booking Expiry (hours)</label><input id="s-bookingExpiryHours" type="number" class="input" value={settings.bookingExpiryHours || 48} /></div>
+        <div><label class="text-sm font-medium block mb-1">Payment Gateway</label>
+          <select id="s-paymentGateway" class="input">
+            <option value="paystack" {(settings.paymentGateway || 'paystack') === 'paystack' ? 'selected' : ''}>Paystack</option>
+            <option value="manual" {settings.paymentGateway === 'manual' ? 'selected' : ''}>Manual</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="s-installmentsEnabled" {settings.installmentsEnabled !== false ? 'checked' : ''} />
+          <label for="s-installmentsEnabled" class="text-sm font-medium">Enable Installment Payments</label>
+        </div>
+        <div><label class="text-sm font-medium block mb-1">IATA/License Number</label><input id="s-licenseNumber" class="input" value={settings.licenseNumber || ''} /></div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function saveSettings(prefix: string, key: string) {
+      const form = document.getElementById(prefix + '-form') as HTMLFormElement;
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const body: any = { key };
+        form.querySelectorAll('input, select, textarea').forEach((el) => {
+          const input = el as HTMLInputElement;
+          if (input.type === 'checkbox') body[input.id.replace(prefix + '-', '')] = input.checked;
+          else if (input.type === 'number') body[input.id.replace(prefix + '-', '')] = parseFloat(input.value) || 0;
+          else body[input.id.replace(prefix + '-', '')] = input.value;
+        });
+        fetch('/api/admin/travels/content?collection=travels_settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        }).then(r => r.json()).then(() => {
+          const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+          btn.textContent = 'Saved!';
+          setTimeout(() => { btn.textContent = 'Save Changes'; }, 2000);
+        }).catch(() => {});
+      });
+    }
+    saveSettings('s', 'general');
+    saveSettings('ops', 'operations');
+  </script>
+</AdminLayout>

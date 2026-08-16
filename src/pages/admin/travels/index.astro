@@ -1,0 +1,142 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+const today = new Date().toISOString().split('T')[0];
+const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString();
+
+const [bookingsToday, bookingsMonth, pendingPayments, upcomingDepartures, revenueAgg, activePackages] = await Promise.all([
+  lightbase.count('travels_bookings', { field: 'bookedAt', op: 'gte', value: today }).catch(() => 0),
+  lightbase.count('travels_bookings', { field: 'bookedAt', op: 'gte', value: monthStart }).catch(() => 0),
+  lightbase.count('travels_bookings', { field: 'paymentStatus', op: 'eq', value: 'unpaid' }).catch(() => 0),
+  lightbase.query('travels_bookings', { filter: { field: 'status', op: 'eq', value: 'confirmed' }, sort: 'startDate:asc', limit: 5 }).catch(() => ({ data: [] })),
+  lightbase.aggregate('travels_payments', {
+    aggregations: [{ field: 'amount', op: 'sum', alias: 'totalRevenue' }],
+  }).catch(() => ({ totalRevenue: 0 })),
+  lightbase.count('travels_packages', { field: 'status', op: 'eq', value: 'active' }).catch(() => 0),
+]);
+
+const recentBookings = await lightbase.query('travels_bookings', {
+  sort: 'bookedAt:desc',
+  limit: 8,
+}).catch(() => ({ data: [] }));
+
+const stats = [
+  { label: 'Bookings Today', value: bookingsToday, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>', color: 'rgb(5,179,77,0.1)', textColor: 'var(--color-primary)' },
+  { label: 'Bookings This Month', value: bookingsMonth, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>', color: 'rgb(37,99,235,0.1)', textColor: '#2563EB' },
+  { label: 'Revenue', value: formatCurrency(revenueAgg?.totalRevenue || 0), icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>', color: 'rgb(5,179,77,0.1)', textColor: 'var(--color-primary)' },
+  { label: 'Pending Payments', value: pendingPayments, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>', color: 'rgb(242,185,28,0.15)', textColor: 'var(--color-accent)' },
+  { label: 'Active Packages', value: activePackages, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>', color: 'rgb(37,99,235,0.1)', textColor: '#2563EB' },
+  { label: 'Upcoming Departures', value: (upcomingDepartures.data || []).length, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>', color: 'rgb(5,179,77,0.1)', textColor: 'var(--color-primary)' },
+];
+
+const quickActions = [
+  { label: 'New Package', href: '/admin/travels/packages', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>' },
+  { label: 'View Bookings', href: '/admin/travels/bookings', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>' },
+  { label: 'Manage Payments', href: '/admin/travels/payments', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>' },
+  { label: 'Manage Reviews', href: '/admin/travels/reviews', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' },
+];
+
+const statusBadge = (status: string) => {
+  switch (status) {
+    case 'confirmed': return 'badge badge-primary';
+    case 'completed': return 'badge badge-primary';
+    case 'pending': return 'badge badge-accent';
+    case 'cancelled': return 'badge';
+    default: return 'badge';
+  }
+};
+---
+
+<AdminLayout title="Dashboard" platform="travels" section="dashboard">
+  <!-- Stats Grid -->
+  <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-8 fade-in">
+    {stats.map((stat) => (
+      <div class="card p-5">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center" style={`background: ${stat.color}; color: ${stat.textColor};`}>
+            <Fragment set:html={stat.icon} />
+          </div>
+        </div>
+        <div class="text-2xl font-extrabold mb-1">{stat.value}</div>
+        <div class="text-xs" style="color: var(--color-muted);">{stat.label}</div>
+      </div>
+    ))}
+  </div>
+
+  <div class="grid lg:grid-cols-3 gap-6">
+    <!-- Recent Bookings -->
+    <div class="lg:col-span-2 card p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-bold">Recent Bookings</h2>
+        <a href="/admin/travels/bookings" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
+      </div>
+      {(recentBookings.data || []).length > 0 ? (
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr style="color: var(--color-muted); border-bottom: 1px solid var(--color-border);">
+              <th class="text-left pb-3 font-medium">Booking</th>
+              <th class="text-left pb-3 font-medium hidden sm:table-cell">Customer</th>
+              <th class="text-right pb-3 font-medium hidden md:table-cell">Amount</th>
+              <th class="text-right pb-3 font-medium">Status</th>
+            </tr></thead>
+            <tbody>
+              {(recentBookings.data || []).map((b: any) => (
+                <tr style="border-bottom: 1px solid var(--color-border);">
+                  <td class="py-3 font-medium">{b.bookingNumber || b.id?.slice(0,8)}</td>
+                  <td class="py-3 hidden sm:table-cell" style="color: var(--color-muted);">{b.customerName || '-'}</td>
+                  <td class="py-3 text-right hidden md:table-cell font-medium">{b.totalAmount ? formatCurrency(b.totalAmount) : '-'}</td>
+                  <td class="py-3 text-right"><span class={statusBadge(b.status)}>{b.status || '-'}</span></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : <p class="text-sm" style="color: var(--color-muted);">No bookings yet.</p>}
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card p-6">
+      <h2 class="font-bold mb-4">Quick Actions</h2>
+      <div class="space-y-2">
+        {quickActions.map((action) => (
+          <a href={action.href} class="flex items-center gap-3 p-3 rounded-lg transition-colors hover:bg-[rgb(5,179,77,0.05)]" style="color: var(--color-foreground);">
+            <span style="color: var(--color-primary);"><Fragment set:html={action.icon} /></span>
+            <span class="text-sm font-medium">{action.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Upcoming Departures -->
+  {(upcomingDepartures.data || []).length > 0 && (
+    <div class="card p-6 mt-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-bold">Upcoming Departures</h2>
+        <a href="/admin/travels/bookings" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr style="color: var(--color-muted); border-bottom: 1px solid var(--color-border);">
+            <th class="text-left pb-3 font-medium">Booking</th>
+            <th class="text-left pb-3 font-medium hidden sm:table-cell">Package</th>
+            <th class="text-left pb-3 font-medium hidden md:table-cell">Start Date</th>
+            <th class="text-right pb-3 font-medium">Travelers</th>
+          </tr></thead>
+          <tbody>
+            {(upcomingDepartures.data || []).map((b: any) => (
+              <tr style="border-bottom: 1px solid var(--color-border);">
+                <td class="py-3 font-medium">{b.bookingNumber || b.id?.slice(0,8)}</td>
+                <td class="py-3 hidden sm:table-cell" style="color: var(--color-muted);">{b.packageTitle || '-'}</td>
+                <td class="py-3 hidden md:table-cell" style="color: var(--color-muted);">{b.startDate ? new Date(b.startDate).toLocaleDateString() : '-'}</td>
+                <td class="py-3 text-right font-medium">{b.travelerCount || 1}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )}
+</AdminLayout>

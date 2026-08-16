@@ -1,0 +1,159 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const statusFilter = Astro.url.searchParams.get('status') || '';
+const filterParam = statusFilter ? { field: 'status', op: 'eq', value: statusFilter } : undefined;
+
+const reviewsResult = await lightbase.query('travels_reviews', {
+  filter: filterParam,
+  sort: '_created_at:desc',
+  limit: 100,
+}).catch(() => ({ data: [] }));
+
+const reviews = reviewsResult.data || [];
+
+const [avgAgg, totalCount] = await Promise.all([
+  lightbase.aggregate('travels_reviews', {
+    aggregations: [{ field: 'rating', op: 'avg', alias: 'avgRating' }],
+    filter: { field: 'status', op: 'eq', value: 'approved' },
+  }).catch(() => ({ avgRating: 0 })),
+  lightbase.count('travels_reviews', { field: 'status', op: 'eq', value: 'pending' }).catch(() => 0),
+]);
+
+const statusBadge = (status: string) => {
+  switch (status) {
+    case 'approved': return 'badge badge-primary';
+    case 'pending': return 'badge badge-accent';
+    case 'rejected': return 'badge';
+    default: return 'badge';
+  }
+};
+---
+
+<AdminLayout title="Reviews" platform="travels" section="reviews">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="font-bold text-lg">Reviews</h2>
+      <p class="text-sm" style="color: var(--color-muted);">Moderate and respond to customer reviews</p>
+    </div>
+  </div>
+
+  <!-- Rating Analytics -->
+  <div class="grid grid-cols-3 gap-4 mb-6">
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-accent);">{(avgAgg.avgRating || 0).toFixed(1)}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Average Rating</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-accent);">{totalCount}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Pending Moderation</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold">{reviews.length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Total Reviews</div>
+    </div>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="flex gap-2 mb-6">
+    <a href="/admin/travels/reviews" class:list={['btn text-xs', !statusFilter ? 'btn-primary' : 'btn-ghost']}>All</a>
+    <a href="/admin/travels/reviews?status=pending" class:list={['btn text-xs', statusFilter === 'pending' ? 'btn-primary' : 'btn-ghost']}>Pending</a>
+    <a href="/admin/travels/reviews?status=approved" class:list={['btn text-xs', statusFilter === 'approved' ? 'btn-primary' : 'btn-ghost']}>Approved</a>
+    <a href="/admin/travels/reviews?status=rejected" class:list={['btn text-xs', statusFilter === 'rejected' ? 'btn-primary' : 'btn-ghost']}>Rejected</a>
+  </div>
+
+  <div class="space-y-4">
+    {reviews.length > 0 ? reviews.map((r: any) => (
+      <div class="card p-6">
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">
+              {(r.customerName || 'A').charAt(0).toUpperCase()}
+            </div>
+            <div>
+              <div class="font-semibold">{r.customerName || 'Anonymous'}</div>
+              <div class="text-xs" style="color: var(--color-muted);">{r.packageTitle || ''} {r._created_at ? '- ' + new Date(r._created_at).toLocaleDateString() : ''}</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="flex gap-0.5">
+              {Array.from({ length: r.rating || 0 }).map(() => (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-accent);"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              ))}
+            </div>
+            <span class={statusBadge(r.status)}>{r.status || 'pending'}</span>
+          </div>
+        </div>
+        {r.title && <h3 class="font-bold mb-2">{r.title}</h3>}
+        <p class="text-sm mb-4" style="color: var(--color-muted);">{r.content}</p>
+        {r.adminResponse && (
+          <div class="mb-4 p-3 rounded-lg text-sm" style="background: rgb(5,179,77,0.05); border: 1px solid var(--color-border);">
+            <span class="font-bold" style="color: var(--color-primary);">Response: </span>{r.adminResponse}
+          </div>
+        )}
+        <div class="flex flex-wrap gap-2">
+          {r.status !== 'approved' && (
+            <button class="btn btn-primary text-xs" data-id={r.id} data-action="approve" onclick="moderateReview(this)">Approve</button>
+          )}
+          {r.status !== 'rejected' && (
+            <button class="btn btn-ghost text-xs" data-id={r.id} data-action="reject" onclick="moderateReview(this)">Reject</button>
+          )}
+          <button class="btn btn-outline text-xs" data-id={r.id} onclick="openResponseModal(this)">Respond</button>
+        </div>
+      </div>
+    )) : (
+      <div class="card p-12 text-center" style="color: var(--color-muted);">No reviews found.</div>
+    )}
+  </div>
+
+  <!-- Response Modal -->
+  <div id="response-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/40" id="response-overlay"></div>
+    <div class="relative w-full max-w-lg rounded-2xl p-6" style="background: var(--color-surface);">
+      <h3 class="font-bold text-lg mb-4">Respond to Review</h3>
+      <form id="response-form" class="space-y-4">
+        <input type="hidden" id="r-id" />
+        <div><label class="text-sm font-medium block mb-1">Your Response</label><textarea id="r-response" class="input" rows="4" required></textarea></div>
+        <div class="flex justify-end gap-3">
+          <button type="button" class="btn btn-ghost" onclick="document.getElementById('response-modal')!.classList.add('hidden')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Response</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function moderateReview(btn: HTMLButtonElement) {
+      const id = btn.dataset.id;
+      const action = btn.dataset.action;
+      const status = action === 'approve' ? 'approved' : 'rejected';
+      if (confirm(action === 'approve' ? 'Approve this review?' : 'Reject this review?')) {
+        fetch('/api/admin/travels/reviews?id=' + id, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status }),
+        }).then(() => location.reload()).catch(() => {});
+      }
+    }
+
+    (window as any).openResponseModal = function(btn: HTMLElement) {
+      (document.getElementById('r-id') as HTMLInputElement).value = btn.dataset.id || '';
+      (document.getElementById('r-response') as HTMLTextAreaElement).value = '';
+      document.getElementById('response-modal')!.classList.remove('hidden');
+    };
+
+    document.getElementById('response-overlay')!.addEventListener('click', () => document.getElementById('response-modal')!.classList.add('hidden'));
+
+    document.getElementById('response-form')!.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = (document.getElementById('r-id') as HTMLInputElement).value;
+      const adminResponse = (document.getElementById('r-response') as HTMLTextAreaElement).value;
+      fetch('/api/admin/travels/reviews?id=' + id, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ adminResponse, status: 'approved' }),
+      }).then(() => location.reload()).catch(() => {});
+    });
+  </script>
+</AdminLayout>

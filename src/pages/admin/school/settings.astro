@@ -1,0 +1,63 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const result = await lightbase.query('school_settings', { limit: 1 });
+const settings = (result.data || [{}])[0] || {};
+---
+
+<AdminLayout title="Platform Settings" platform="school" section="settings">
+  <div class="mb-6 fade-in">
+    <h2 class="text-lg font-bold">School Settings</h2>
+    <p class="text-sm" style="color: var(--color-muted);">Configure platform-wide settings.</p>
+  </div>
+
+  <form id="settings-form" class="space-y-8 max-w-2xl">
+    <!-- General -->
+    <div class="card p-6">
+      <h3 class="font-bold mb-4">General Information</h3>
+      <div class="space-y-4">
+        <div><label class="block text-sm font-medium mb-1" for="set-name">School Name</label><input id="set-name" name="schoolName" class="input" value={settings.schoolName || 'Minhaajulhudaa School'} /></div>
+        <div><label class="block text-sm font-medium mb-1" for="set-tagline">Tagline</label><input id="set-tagline" name="tagline" class="input" value={settings.tagline || ''} /></div>
+        <div><label class="block text-sm font-medium mb-1" for="set-email">Contact Email</label><input id="set-email" name="email" class="input" type="email" value={settings.email || ''} /></div>
+        <div><label class="block text-sm font-medium mb-1" for="set-phone">Phone</label><input id="set-phone" name="phone" class="input" value={settings.phone || ''} /></div>
+        <div><label class="block text-sm font-medium mb-1" for="set-address">Address</label><textarea id="set-address" name="address" class="input" rows="2">{settings.address || ''}</textarea></div>
+      </div>
+    </div>
+
+    <!-- Academic -->
+    <div class="card p-6">
+      <h3 class="font-bold mb-4">Academic Settings</h3>
+      <div class="space-y-4">
+        <div><label class="block text-sm font-medium mb-1" for="set-session">Current Session</label><input id="set-session" name="currentSession" class="input" value={settings.currentSession || ''} placeholder="e.g. 2025/2026" /></div>
+        <div><label class="block text-sm font-medium mb-1" for="set-term">Current Term</label><input id="set-term" name="currentTerm" class="input" value={settings.currentTerm || ''} placeholder="e.g. First Term" /></div>
+        <div><label class="block text-sm font-medium mb-1" for="set-resume">Resumption Date</label><input id="set-resume" name="resumptionDate" class="input" type="date" value={settings.resumptionDate || ''} /></div>
+      </div>
+    </div>
+
+    <!-- Social -->
+    <div class="card p-6">
+      <h3 class="font-bold mb-4">Social Media</h3>
+      <div class="space-y-4">
+        <div><label class="block text-sm font-medium mb-1" for="set-facebook">Facebook</label><input id="set-facebook" name="facebookUrl" class="input" value={settings.facebookUrl || ''} /></div>
+        <div><label class="block text-sm font-medium mb-1" for="set-instagram">Instagram</label><input id="set-instagram" name="instagramUrl" class="input" value={settings.instagramUrl || ''} /></div>
+        <div><label class="block text-sm font-medium mb-1" for="set-twitter">Twitter/X</label><input id="set-twitter" name="twitterUrl" class="input" value={settings.twitterUrl || ''} /></div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Settings</button>
+  </form>
+
+  <script>
+    document.getElementById('settings-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, string> = {};
+      fd.forEach((v, k) => { body[k] = v as string; });
+      try {
+        const res = await fetch('/api/admin/school/content', { method: 'PUT', headers: { 'Content-Type': 'application/json', 'x-collection': 'school_settings' }, body: JSON.stringify(body) });
+        if (res.ok) alert('Settings saved.'); else { const err = await res.json(); alert(err.error || 'Failed'); }
+      } catch { alert('Network error'); }
+    });
+  </script>
+</AdminLayout>

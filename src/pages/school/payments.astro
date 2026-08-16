@@ -1,0 +1,57 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+
+---
+<PlatformLayout title="E-Payments - Minhaajulhudaa School" platform="school">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">E-Payment Portal</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Pay school fees, view invoices, and manage payment history securely online.</p>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <div class="card p-6 text-center">
+        <div class="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4" style="background: rgb(5,179,77,0.1);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <h3 class="font-bold mb-2">Pay Fees</h3>
+        <p class="text-sm" style="color: var(--color-muted);">Pay tuition, transport, and other fees using your preferred payment method.</p>
+      </div>
+      <div class="card p-6 text-center">
+        <div class="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4" style="background: rgb(242,185,28,0.15);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-accent);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3 class="font-bold mb-2">View Invoices</h3>
+        <p class="text-sm" style="color: var(--color-muted);">Look up invoices by student ID and download receipts.</p>
+      </div>
+      <div class="card p-6 text-center">
+        <div class="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4" style="background: rgb(5,179,77,0.1);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3 class="font-bold mb-2">Payment History</h3>
+        <p class="text-sm" style="color: var(--color-muted);">Track all past payments and outstanding balances.</p>
+      </div>
+    </div>
+
+    <!-- Invoice Lookup -->
+    <div class="card p-6 md:p-8 max-w-2xl mx-auto">
+      <h2 class="text-xl font-bold mb-6 text-center">Look Up Invoice</h2>
+      <form id="invoice-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-2" for="student-id">Student ID</label>
+          <input id="student-id" type="text" class="input" placeholder="Enter student ID (e.g. MHS-2024-001)" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-full">Search Invoices</button>
+      </form>
+      <div id="invoice-results" class="mt-6"></div>
+    </div>
+
+    <!-- Payment Methods -->
+    <div class="max-w-2xl mx-auto mt-8">
+      <h3 class="font-bold text-center mb-4">Accepted Payment Methods</h3>
+      <div class="flex flex-wrap justify-center gap-4">
+        <div class="card px-4 py-3 flex items-center gap-2 text-sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Card</div>
+        <div class="card px-4 py-3 flex items-center gap-2 text-sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>Bank Transfer</div>
+        <div class="card px-4 py-3 flex items-center gap-2 text-sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>Mobile Money</div>
+      </div>
+    </div>
+  </section>
+</PlatformLayout>

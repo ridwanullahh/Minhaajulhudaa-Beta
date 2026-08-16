@@ -1,0 +1,106 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+export const prerender = true;
+
+let videos: any[] = [];
+try {
+  const result = await lightbase.query('masjid_videos', {
+    filter: { field: 'status', op: 'eq', value: 'published' },
+    sort: 'publishedAt:desc',
+    limit: 100,
+  });
+  videos = result.data || [];
+} catch {}
+
+const categories = [...new Set(videos.map(v => v.category).filter(Boolean))];
+---
+
+<PlatformLayout title="Video Library - Minhaajulhudaa Masjid" platform="masjid">
+  <!-- Hero -->
+  <section class="relative overflow-hidden" style="background: linear-gradient(135deg, rgb(5,179,77,0.08), rgb(242,185,28,0.05));">
+    <div class="container-app py-12 md:py-16 text-center fade-in">
+      <span class="badge badge-primary mb-4">Media</span>
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-4">
+        Video <span style="color: var(--color-primary);">Library</span>
+      </h1>
+      <p class="text-lg max-w-2xl mx-auto" style="color: var(--color-muted);">
+        Watch recorded khutbahs, lectures, programs, and live stream archives from our masjid.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-app py-8 md:py-12">
+    <!-- Featured Video -->
+    {videos.length > 0 && videos[0].isFeatured && (
+      <div class="card overflow-hidden mb-8 fade-in">
+        <div class="grid md:grid-cols-2">
+          <div class="aspect-video bg-[var(--color-brand-dark)] relative">
+            {videos[0].thumbnailUrl ? (
+              <img src={videos[0].thumbnailUrl} alt={videos[0].title} class="w-full h-full object-cover" />
+            ) : (
+              <div class="w-full h-full flex items-center justify-center">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              </div>
+            )}
+            <a href={videos[0].videoUrl || '#'} target="_blank" class="absolute inset-0 flex items-center justify-center">
+              <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: var(--color-primary);">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </a>
+          </div>
+          <div class="p-6 md:p-8 flex flex-col justify-center">
+            <span class="badge badge-accent mb-3 w-fit">Featured</span>
+            <h2 class="text-2xl font-bold mb-3">{videos[0].title}</h2>
+            <p class="mb-4" style="color: var(--color-muted);">{videos[0].description?.substring(0, 200)}</p>
+            <div class="flex items-center gap-4 text-sm" style="color: var(--color-muted);">
+              {videos[0].speaker && <span>By {videos[0].speaker}</span>}
+              {videos[0].duration && <span>{Math.floor(videos[0].duration / 60)}:{String(videos[0].duration % 60).padStart(2, '0')}</span>}
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Video Grid -->
+    {videos.length > 0 ? (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {videos.map((video) => (
+          <a href={video.videoUrl || '#'} target="_blank" class="card card-hover overflow-hidden block">
+            <div class="aspect-video relative" style="background: var(--color-brand-dark);">
+              {video.thumbnailUrl ? (
+                <img src={video.thumbnailUrl} alt={video.title} class="w-full h-full object-cover" loading="lazy" />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                </div>
+              )}
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: var(--color-primary);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+              {video.duration && (
+                <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded text-xs font-medium" style="background: rgb(0,0,0,0.75); color: white;">{Math.floor(video.duration / 60)}:{String(video.duration % 60).padStart(2, '0')}</div>
+              )}
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-sm mb-1 line-clamp-2">{video.title}</h3>
+              <div class="flex items-center justify-between text-xs" style="color: var(--color-muted);">
+                <span>{video.speaker || 'Minhaajulhudaa'}</span>
+                <span class="badge badge-primary">{video.category}</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="card p-12 text-center fade-in" style="color: var(--color-muted);">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4 opacity-40"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        <p class="font-medium">No videos available yet.</p>
+        <p class="text-sm mt-1">Check back soon for recorded lectures and programs.</p>
+      </div>
+    )}
+  </section>
+</PlatformLayout>

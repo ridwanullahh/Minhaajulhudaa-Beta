@@ -1,0 +1,85 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const result = await lightbase.query('travels_packages', {
+  filter: { field: 'category', op: 'eq', value: 'tour' },
+  sort: 'isFeatured:desc',
+  limit: 100,
+});
+
+const tours = result.data || [];
+---
+export const prerender = true;
+
+<PlatformLayout title="Tours - Minhaajulhudaa Travels" platform="travels">
+  <!-- Hero -->
+  <section class="relative overflow-hidden" style="background: linear-gradient(135deg, rgb(242,185,28,0.08), rgb(5,179,77,0.05));">
+    <div class="container-app py-12 md:py-20">
+      <div class="max-w-3xl fade-in">
+        <span class="badge badge-accent mb-4">Explore the World</span>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+          Local &amp; International <span style="color: var(--color-primary);">Tours</span>
+        </h1>
+        <p class="text-lg md:text-xl mb-8" style="color: var(--color-muted);">
+          Discover breathtaking destinations with expertly curated tour packages. From local landmarks to international adventures.
+        </p>
+        <a href="/travels/book" class="btn btn-primary">
+          Book a Tour
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tours Grid -->
+  <section class="container-app py-12">
+    {tours.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {tours.map((tour) => (
+          <a href={`/travels/tours/${tour.slug}`} class="card card-hover overflow-hidden block">
+            <div class="aspect-[16/10] relative">
+              {tour.imageUrl && <img src={tour.imageUrl} alt={tour.title} class="w-full h-full object-cover" loading="lazy" />}
+              <div class="absolute top-3 left-3 flex gap-2">
+                <span class="badge badge-primary">{tour.type ? tour.type.replace(/-/g, ' ') : 'Tour'}</span>
+                {tour.tier && <span class="badge badge-accent uppercase">{tour.tier}</span>}
+              </div>
+              {tour.isFeatured && (
+                <div class="absolute top-3 right-3">
+                  <span class="badge" style="background: var(--color-accent); color: var(--color-brand-dark);">Featured</span>
+                </div>
+              )}
+            </div>
+            <div class="p-5">
+              <h3 class="font-bold text-lg mb-1">{tour.title}</h3>
+              <p class="text-sm mb-2" style="color: var(--color-muted);">{tour.destination}{tour.duration ? ` - ${tour.duration}` : ''}</p>
+              {tour.shortDescription && <p class="text-sm mb-4 line-clamp-2" style="color: var(--color-muted);">{tour.shortDescription}</p>}
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-xl font-extrabold" style="color: var(--color-primary);">&#8358;{tour.basePrice?.toLocaleString() || '0'}</div>
+                  <div class="text-xs" style="color: var(--color-muted);">per person</div>
+                </div>
+                <span class="btn btn-outline text-xs">View Details</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="card p-12 text-center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-muted);" class="mx-auto mb-4"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <h3 class="font-bold text-lg mb-2">No Tours Available</h3>
+        <p class="text-sm" style="color: var(--color-muted);">We are preparing exciting tour packages. Check back soon.</p>
+      </div>
+    )}
+  </section>
+
+  <!-- CTA -->
+  <section class="container-app py-16">
+    <div class="card p-8 md:p-12 text-center" style="background: linear-gradient(135deg, rgb(5,179,77,0.1), rgb(242,185,28,0.1));">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">Cannot Find What You Are Looking For?</h2>
+      <p class="mb-8 max-w-2xl mx-auto" style="color: var(--color-muted);">We can create custom tour packages tailored to your preferences. Reach out and let us plan your dream trip.</p>
+      <a href="/travels/contact" class="btn btn-primary">Request Custom Tour</a>
+    </div>
+  </section>
+</PlatformLayout>

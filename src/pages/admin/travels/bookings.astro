@@ -1,0 +1,129 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+const statusFilter = Astro.url.searchParams.get('status') || '';
+const filterParam = statusFilter ? { field: 'status', op: 'eq', value: statusFilter } : undefined;
+
+const bookingsResult = await lightbase.query('travels_bookings', {
+  filter: filterParam,
+  sort: 'bookedAt:desc',
+  limit: 100,
+}).catch(() => ({ data: [] }));
+
+const bookings = bookingsResult.data || [];
+
+const counts = await Promise.all([
+  lightbase.count('travels_bookings', { field: 'status', op: 'eq', value: 'pending' }).catch(() => 0),
+  lightbase.count('travels_bookings', { field: 'status', op: 'eq', value: 'confirmed' }).catch(() => 0),
+  lightbase.count('travels_bookings', { field: 'status', op: 'eq', value: 'completed' }).catch(() => 0),
+  lightbase.count('travels_bookings', { field: 'status', op: 'eq', value: 'cancelled' }).catch(() => 0),
+]);
+
+const pipeline = [
+  { status: 'pending', label: 'Pending', count: counts[0], color: 'var(--color-accent)' },
+  { status: 'confirmed', label: 'Confirmed', count: counts[1], color: 'var(--color-primary)' },
+  { status: 'completed', label: 'Completed', count: counts[2], color: 'var(--color-primary)' },
+  { status: 'cancelled', label: 'Cancelled', count: counts[3], color: 'var(--color-muted)' },
+];
+
+const statusBadge = (status: string) => {
+  switch (status) {
+    case 'confirmed': return 'badge badge-primary';
+    case 'completed': return 'badge badge-primary';
+    case 'pending': return 'badge badge-accent';
+    case 'cancelled': return 'badge';
+    default: return 'badge';
+  }
+};
+
+const paymentBadge = (status: string) => {
+  switch (status) {
+    case 'paid': return 'badge badge-primary';
+    case 'partial': return 'badge badge-accent';
+    case 'unpaid': return 'badge';
+    default: return 'badge';
+  }
+};
+---
+
+<AdminLayout title="Bookings" platform="travels" section="bookings">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="font-bold text-lg">Bookings</h2>
+      <p class="text-sm" style="color: var(--color-muted);">Manage booking pipeline</p>
+    </div>
+  </div>
+
+  <!-- Pipeline Summary -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    {pipeline.map((stage) => (
+      <a href={`/admin/travels/bookings?status=${stage.status}`} class:list={['card p-4 cursor-pointer transition-all', statusFilter === stage.status ? 'ring-2' : 'card-hover']} style={statusFilter === stage.status ? `border-color: ${stage.color}; --tw-ring-color: ${stage.color};` : ''}>
+        <div class="text-2xl font-extrabold" style={`color: ${stage.color};`}>{stage.count}</div>
+        <div class="text-sm font-medium" style="color: var(--color-muted);">{stage.label}</div>
+      </a>
+    ))}
+  </div>
+
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr style="color: var(--color-muted); border-bottom: 1px solid var(--color-border);">
+          <th class="text-left p-4 font-medium">Booking</th>
+          <th class="text-left p-4 font-medium hidden sm:table-cell">Customer</th>
+          <th class="text-left p-4 font-medium hidden md:table-cell">Package</th>
+          <th class="text-right p-4 font-medium hidden lg:table-cell">Amount</th>
+          <th class="text-center p-4 font-medium hidden sm:table-cell">Booking</th>
+          <th class="text-center p-4 font-medium hidden sm:table-cell">Payment</th>
+          <th class="text-right p-4 font-medium">Actions</th>
+        </tr></thead>
+        <tbody>
+          {bookings.length > 0 ? bookings.map((b: any) => (
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-4">
+                <div class="font-medium">{b.bookingNumber || b.id?.slice(0,8)}</div>
+                <div class="text-xs" style="color: var(--color-muted);">{b.travelerCount || 1} traveler(s)</div>
+              </td>
+              <td class="p-4 hidden sm:table-cell">
+                <div class="font-medium">{b.customerName || '-'}</div>
+                <div class="text-xs" style="color: var(--color-muted);">{b.customerEmail || '-'}</div>
+              </td>
+              <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{b.packageTitle || '-'}</td>
+              <td class="p-4 text-right hidden lg:table-cell font-medium">{b.totalAmount ? formatCurrency(b.totalAmount) : '-'}</td>
+              <td class="p-4 text-center hidden sm:table-cell"><span class={statusBadge(b.status)}>{b.status || '-'}</span></td>
+              <td class="p-4 text-center hidden sm:table-cell"><span class={paymentBadge(b.paymentStatus)}>{b.paymentStatus || '-'}</span></td>
+              <td class="p-4 text-right">
+                <select class="input text-xs py-1 px-2 w-auto" data-booking-id={b.id} data-endpoint="/api/admin/travels/bookings" onchange="updateBookingStatus(this)">
+                  <option value="pending" {b.status === 'pending' ? 'selected' : ''}>Pending</option>
+                  <option value="confirmed" {b.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
+                  <option value="completed" {b.status === 'completed' ? 'selected' : ''}>Completed</option>
+                  <option value="cancelled" {b.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+                </select>
+              </td>
+            </tr>
+          )) : (
+            <tr><td colspan="7" class="p-12 text-center" style="color: var(--color-muted);">No bookings found.</td></tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function updateBookingStatus(el: HTMLSelectElement) {
+      const id = el.dataset.bookingId;
+      const ep = el.dataset.endpoint;
+      const status = el.value;
+      if (confirm('Update booking status to ' + status + '?')) {
+        fetch(ep + '?id=' + id, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status })
+        }).then(r => r.json()).then(() => location.reload()).catch(() => location.reload());
+      } else {
+        location.reload();
+      }
+    }
+  </script>
+</AdminLayout>

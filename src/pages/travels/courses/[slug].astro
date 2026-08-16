@@ -1,0 +1,122 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+export async function getStaticPaths() {
+  try {
+    const result = await lightbase.query('travels_courses', {
+      filter: { field: 'status', op: 'eq', value: 'published' },
+      limit: 100,
+    });
+    return (result.data || []).filter(doc => doc.slug).map(doc => ({ params: { slug: doc.slug }, props: { course: doc } }));
+  } catch { return []; }
+}
+
+const { course } = Astro.props;
+
+let lessons: any[] = [];
+try {
+  const lessonsResult = await lightbase.query('travels_lessons', {
+    filter: { field: 'courseId', op: 'eq', value: course.id },
+    sort: 'order:asc',
+    limit: 50,
+  });
+  lessons = lessonsResult.data || [];
+} catch {}
+---
+export const prerender = true;
+
+<PlatformLayout title={`${course.title} - Travels Courses`} platform="travels">
+  <section class="container-app py-12 max-w-4xl">
+    <a href="/travels/courses" class="text-sm font-medium mb-6 inline-flex items-center gap-1" style="color: var(--color-primary);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      All Courses
+    </a>
+
+    {course.featuredImage && <img src={course.featuredImage} alt={course.title} class="w-full aspect-[16/9] object-cover rounded-2xl mb-8" />}
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="md:col-span-2">
+        <div class="flex gap-2 mb-4">
+          {course.level && <span class="badge badge-primary capitalize">{course.level}</span>}
+          {course.isFree && <span class="badge badge-accent">Free</span>}
+        </div>
+        <h1 class="text-2xl md:text-3xl font-extrabold mb-4">{course.title}</h1>
+        <p class="text-lg mb-6" style="color: var(--color-muted);">{course.description}</p>
+
+        <!-- What You Will Learn -->
+        {course.learningOutcomes && course.learningOutcomes.length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-xl font-bold mb-4">What You Will Learn</h2>
+            <div class="space-y-2">
+              {course.learningOutcomes.map((outcome: string) => (
+                <div class="flex items-start gap-2 text-sm">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);" class="shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>{outcome}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Lessons -->
+        {lessons.length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-xl font-bold mb-4">Course Content ({lessons.length} lessons)</h2>
+            <div class="space-y-3">
+              {lessons.map((lesson: any, i: number) => (
+                <div class="card p-4 flex items-center gap-4">
+                  <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">
+                    {i + 1}
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="font-medium text-sm truncate">{lesson.title}</div>
+                    {lesson.duration && <div class="text-xs" style="color: var(--color-muted);">{lesson.duration}</div>}
+                  </div>
+                  {lesson.isFree && <span class="badge badge-primary text-xs">Free</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <Fragment set:html={course.content || ''} />
+      </div>
+
+      <!-- Sidebar -->
+      <div class="md:col-span-1">
+        <div class="card p-6 sticky top-20">
+          <div class="mb-4">
+            {course.isFree ? (
+              <div class="text-3xl font-extrabold" style="color: var(--color-primary);">Free</div>
+            ) : (
+              <div class="text-3xl font-extrabold" style="color: var(--color-primary);">&#8358;{course.price?.toLocaleString() || '0'}</div>
+            )}
+          </div>
+
+          <div class="space-y-3 mb-6 text-sm">
+            {course.level && (
+              <div class="flex justify-between">
+                <span style="color: var(--color-muted);">Level</span>
+                <span class="font-medium capitalize">{course.level}</span>
+              </div>
+            )}
+            {course.duration && (
+              <div class="flex justify-between">
+                <span style="color: var(--color-muted);">Duration</span>
+                <span class="font-medium">{course.duration}</span>
+              </div>
+            )}
+            <div class="flex justify-between">
+              <span style="color: var(--color-muted);">Lessons</span>
+              <span class="font-medium">{lessons.length}</span>
+            </div>
+          </div>
+
+          <button class="btn btn-primary w-full mb-3">Enroll Now</button>
+          <a href="/travels/contact" class="btn btn-ghost w-full">Ask a Question</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</PlatformLayout>

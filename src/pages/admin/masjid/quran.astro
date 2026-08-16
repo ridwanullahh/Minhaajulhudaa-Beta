@@ -1,0 +1,122 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+let quranConfig: any = null;
+try {
+  quranConfig = await lightbase.findOne('masjid_quran_config', {});
+} catch {}
+---
+
+<AdminLayout title="Quran Config" platform="masjid" section="quran">
+  <div class="mb-6 fade-in">
+    <h2 class="text-xl font-bold">Quran Player Configuration</h2>
+    <p class="text-sm" style="color: var(--color-muted);">Configure the 24/7 Quran streaming player</p>
+  </div>
+
+  <div class="grid lg:grid-cols-2 gap-6">
+    <div class="card p-6 fade-in">
+      <h3 class="font-bold mb-4">Player Settings</h3>
+      <form id="quran-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Default Reciter</label>
+          <input type="text" name="defaultReciter" class="input" value={quranConfig?.defaultReciter || ''} placeholder="e.g. Mishary Rashid Alafasy" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Streaming Source URL</label>
+          <input type="url" name="streamingUrl" class="input" value={quranConfig?.streamingUrl || ''} placeholder="https://..." />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Backup Stream URL</label>
+          <input type="url" name="backupStreamUrl" class="input" value={quranConfig?.backupStreamUrl || ''} placeholder="https://..." />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-sm font-medium mb-1">Default Surah</label>
+            <input type="text" name="defaultSurah" class="input" value={quranConfig?.defaultSurah || ''} placeholder="e.g. Al-Baqarah" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Default Ayah</label>
+            <input type="number" name="defaultAyah" class="input" value={quranConfig?.defaultAyah || ''} placeholder="1" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Playlist Rotation Mode</label>
+          <select name="rotationMode" class="input">
+            <option value="continuous" selected={quranConfig?.rotationMode === 'continuous'}>Continuous (loop all)</option>
+            <option value="sequential" selected={quranConfig?.rotationMode === 'sequential'}>Sequential (stop at end)</option>
+            <option value="shuffle" selected={quranConfig?.rotationMode === 'shuffle'}>Shuffle</option>
+            <option value="single" selected={quranConfig?.rotationMode === 'single'}>Single Track Repeat</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="checkbox" name="autoPlay" id="autoPlay" class="w-4 h-4" checked={quranConfig?.autoPlay !== false} />
+          <label for="autoPlay" class="text-sm">Auto-play on page load</label>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="checkbox" name="showMiniPlayer" id="showMiniPlayer" class="w-4 h-4" checked={quranConfig?.showMiniPlayer !== false} />
+          <label for="showMiniPlayer" class="text-sm">Show floating mini-player on all pages</label>
+        </div>
+        <div class="pt-2">
+          <button type="submit" class="btn btn-primary">Save Configuration</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="space-y-6">
+      <div class="card p-6 fade-in">
+        <h3 class="font-bold mb-4">Available Reciters</h3>
+        <div class="space-y-2 text-sm">
+          {['Mishary Rashid Alafasy', 'Abdul Rahman Al-Sudais', 'Maher Al Muaiqly', 'Abdul Basit', 'Nasser Al-Qatami', 'Saad Al-Ghamdi'].map(r => (
+            <div class="flex items-center justify-between p-2 rounded" style="border: 1px solid var(--color-border);">
+              <span>{r}</span>
+              <button class="text-xs font-medium" style="color: var(--color-primary);" onclick="document.querySelector('[name=defaultReciter]').value='{r}'">Set as Default</button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="card p-6 fade-in">
+        <h3 class="font-bold mb-4">Current Status</h3>
+        <div class="space-y-3 text-sm">
+          <div class="flex justify-between">
+            <span style="color: var(--color-muted);">Default Reciter</span>
+            <span class="font-medium">{quranConfig?.defaultReciter || 'Not set'}</span>
+          </div>
+          <div class="flex justify-between">
+            <span style="color: var(--color-muted);">Streaming URL</span>
+            <span class="font-medium truncate max-w-[200px]">{quranConfig?.streamingUrl || 'Not set'}</span>
+          </div>
+          <div class="flex justify-between">
+            <span style="color: var(--color-muted);">Rotation</span>
+            <span class="font-medium">{quranConfig?.rotationMode || 'continuous'}</span>
+          </div>
+          <div class="flex justify-between">
+            <span style="color: var(--color-muted);">Auto-play</span>
+            <span class={quranConfig?.autoPlay !== false ? 'badge badge-primary' : 'badge'}>{quranConfig?.autoPlay !== false ? 'Enabled' : 'Disabled'}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    document.getElementById('quran-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const data = Object.fromEntries(fd);
+      data.autoPlay = !!data.autoPlay;
+      data.showMiniPlayer = !!data.showMiniPlayer;
+      if (data.defaultAyah) data.defaultAyah = parseInt(data.defaultAyah);
+      try {
+        const res = await fetch('/api/admin/masjid/content', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'x-collection': 'masjid_quran_config' },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json();
+        if (json.success) { alert('Saved'); window.location.reload(); } else { alert(json.error || 'Failed'); }
+      } catch (err) { alert('Request failed'); }
+    });
+  </script>
+</AdminLayout>

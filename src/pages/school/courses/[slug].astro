@@ -1,0 +1,99 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+export async function getStaticPaths() {
+  try {
+    const result = await lightbase.query('school_courses', { limit: 100 });
+    const courses = (result.data || []).filter((c: any) => c.slug);
+    return courses.map((c: any) => ({ params: { slug: c.slug }, props: { course: c } }));
+  } catch {
+    return [];
+  }
+}
+
+const { course } = Astro.props;
+
+if (!course) {
+  return Astro.redirect('/school/courses');
+}
+
+const modulesResult = await lightbase.findMany('school_lessons', { field: 'courseId', op: 'eq', value: course.id }, { sort: 'order:asc', limit: 50 });
+---
+export const prerender = true;
+
+<PlatformLayout title={`${course.title} - E-Courses`} description={course.excerpt} platform="school">
+  <section class="container-app py-12">
+    <a href="/school/courses" class="inline-flex items-center gap-2 text-sm mb-6" style="color: var(--color-muted);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Courses
+    </a>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <div class="aspect-video rounded-xl overflow-hidden mb-8 bg-[rgb(5,179,77,0.05)]">
+          {course.thumbnailUrl ? (
+            <img src={course.thumbnailUrl} alt={course.title} class="w-full h-full object-cover" />
+          ) : (
+            <div class="w-full h-full flex items-center justify-center">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-primary);"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            </div>
+          )}
+        </div>
+
+        {course.category && <span class="badge badge-primary mb-3">{course.category.replace(/-/g, ' ')}</span>}
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-4">{course.title}</h1>
+
+        {course.description && <div class="mb-8" set:html={course.description} />}
+
+        {modulesResult.length > 0 && (
+          <div class="card p-6">
+            <h2 class="text-xl font-bold mb-4">Course Curriculum</h2>
+            <div class="space-y-3">
+              {modulesResult.map((lesson: any, i: number) => (
+                <div class="flex items-center gap-4 p-3 rounded-lg" style="background: var(--color-background);">
+                  <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">{i + 1}</div>
+                  <div class="flex-1 min-w-0">
+                    <h3 class="font-medium text-sm">{lesson.title}</h3>
+                    {lesson.duration && <span class="text-xs" style="color: var(--color-muted);">{lesson.duration}</span>}
+                  </div>
+                  {lesson.type && <span class="text-xs" style="color: var(--color-muted);">{lesson.type}</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <aside class="space-y-6">
+        <div class="card p-6">
+          <div class="text-3xl font-extrabold mb-4" style="color: var(--color-primary);">
+            {course.isFree ? 'Free' : (course.price ? formatCurrency(course.price) : '')}
+          </div>
+          <button class="btn btn-primary w-full mb-3">Enroll Now</button>
+          <dl class="space-y-3 text-sm mt-4">
+            {course.instructorName && (
+              <div class="flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span class="font-medium">{course.instructorName}</span>
+              </div>
+            )}
+            {course.duration && (
+              <div class="flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-muted);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span class="font-medium">{course.duration}</span>
+              </div>
+            )}
+            {course.level && (
+              <div class="flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-muted);"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                <span class="font-medium">{course.level}</span>
+              </div>
+            )}
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </section>
+</PlatformLayout>

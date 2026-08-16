@@ -1,0 +1,198 @@
+---
+/**
+ * AdminLayout - sidebar navigation, topbar with user info, content area
+ */
+import BaseLayout from './BaseLayout.astro';
+import { getSessionCookieValue, requireAuth, hasAccess } from '../lib/auth';
+
+interface Props {
+  title?: string;
+  platform: string;
+  section?: string;
+}
+
+const { title = 'Admin', platform, section = 'dashboard' } = Astro.props;
+
+const session = getSessionCookieValue(Astro.request);
+if (!session) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
+if (!hasAccess(session, platform)) {
+  return Astro.redirect('/admin/login');
+}
+
+const fullName = `${session.role === 'super_admin' ? 'Super' : ''} Admin`;
+
+const sidebarItems = [
+  { id: 'dashboard', label: 'Dashboard', href: `/admin/${platform}`, icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>' },
+  { id: 'content', label: 'Content', href: `/admin/${platform}/content`, icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>' },
+  { id: 'blog', label: 'Blog', href: `/admin/${platform}/blog`, icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>' },
+  { id: 'media', label: 'Media', href: `/admin/${platform}/media`, icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>' },
+];
+
+if (platform === 'school') {
+  sidebarItems.push(
+    { id: 'students', label: 'Students', href: '/admin/school/students', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>' },
+    { id: 'staff', label: 'Staff', href: '/admin/school/staff', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
+    { id: 'classes', label: 'Classes', href: '/admin/school/classes', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>' },
+    { id: 'programs', label: 'Programs', href: '/admin/school/programs', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>' },
+    { id: 'admissions', label: 'Admissions', href: '/admin/school/admissions', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' },
+    { id: 'courses', label: 'LMS', href: '/admin/school/courses', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' },
+    { id: 'exams', label: 'Exams', href: '/admin/school/exams', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M9 15l2 2 4-4"/></svg>' },
+    { id: 'payments', label: 'Payments', href: '/admin/school/payments', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>' },
+    { id: 'shop', label: 'Shop', href: '/admin/school/shop', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>' },
+  );
+}
+
+if (platform === 'masjid') {
+  sidebarItems.push(
+    { id: 'prayer-times', label: 'Prayer Times', href: '/admin/masjid/prayer-times', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
+    { id: 'audios', label: 'Audio Library', href: '/admin/masjid/audios', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>' },
+    { id: 'donations', label: 'Donations', href: '/admin/masjid/donations', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>' },
+    { id: 'events', label: 'Events', href: '/admin/masjid/events', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' },
+    { id: 'quran', label: 'Quran Config', href: '/admin/masjid/quran', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>' },
+  );
+}
+
+if (platform === 'charity') {
+  sidebarItems.push(
+    { id: 'campaigns', label: 'Campaigns', href: '/admin/charity/campaigns', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' },
+    { id: 'donations', label: 'Donations', href: '/admin/charity/donations', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>' },
+    { id: 'volunteers', label: 'Volunteers', href: '/admin/charity/volunteers', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
+    { id: 'beneficiaries', label: 'Beneficiaries', href: '/admin/charity/beneficiaries', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' },
+    { id: 'impact', label: 'Impact', href: '/admin/charity/impact', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>' },
+    { id: 'reports', label: 'Reports', href: '/admin/charity/reports', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' },
+  );
+}
+
+if (platform === 'travels') {
+  sidebarItems.push(
+    { id: 'packages', label: 'Packages', href: '/admin/travels/packages', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>' },
+    { id: 'bookings', label: 'Bookings', href: '/admin/travels/bookings', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>' },
+    { id: 'payments', label: 'Payments', href: '/admin/travels/payments', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>' },
+    { id: 'customers', label: 'Customers', href: '/admin/travels/customers', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>' },
+    { id: 'reviews', label: 'Reviews', href: '/admin/travels/reviews', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' },
+    { id: 'courses', label: 'LMS', href: '/admin/travels/courses', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' },
+    { id: 'pricing', label: 'Pricing', href: '/admin/travels/pricing', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>' },
+  );
+}
+
+sidebarItems.push(
+  { id: 'settings', label: 'Settings', href: `/admin/${platform}/settings`, icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>' },
+);
+---
+
+<BaseLayout title={`${title} | Admin`}>
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside id="admin-sidebar" class="hidden lg:flex flex-col w-64 border-r fixed top-0 left-0 bottom-0 z-40 overflow-y-auto" style="background: var(--color-surface); border-color: var(--color-border);">
+      <!-- Logo -->
+      <div class="h-16 flex items-center gap-2 px-5 border-b shrink-0" style="border-color: var(--color-border);">
+        <a href="/" class="flex items-center gap-2">
+          <svg width="28" height="28" viewBox="0 0 64 64">
+            <rect width="64" height="64" rx="14" fill="var(--color-primary)"/>
+            <path d="M32 12 L48 20 V36 C48 44 40 50 32 52 C24 50 16 44 16 36 V20 Z" fill="none" stroke="var(--color-accent)" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="32" cy="32" r="3" fill="var(--color-accent)"/>
+          </svg>
+          <span class="font-bold text-sm" style="font-family: var(--font-heading);">Minhaajulhudaa</span>
+        </a>
+      </div>
+
+      <!-- Platform Badge -->
+      <div class="px-5 py-3 border-b" style="border-color: var(--color-border);">
+        <a href={`/${platform}`} class="badge badge-primary text-xs capitalize">{platform} Platform</a>
+      </div>
+
+      <!-- Nav Items -->
+      <nav class="flex-1 py-3 px-3">
+        {sidebarItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={['flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium mb-0.5 transition-colors', section === item.id ? 'bg-[rgb(5,179,77,0.1)]' : '']}
+            style={section === item.id ? 'color: var(--color-primary);' : 'color: var(--color-muted);'}
+          >
+            <Fragment set:html={item.icon} />
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- User -->
+      <div class="border-t p-4" style="border-color: var(--color-border);">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">
+            {fullName.charAt(0)}
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-semibold truncate">{fullName}</div>
+            <div class="text-xs truncate" style="color: var(--color-muted);">{session.email}</div>
+          </div>
+          <form method="POST" action="/api/auth/logout">
+            <button type="submit" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(220,38,38,0.1)]" style="color: var(--color-muted);" title="Logout">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 lg:ml-64">
+      <!-- Top Bar -->
+      <div class="sticky top-0 z-30 h-16 border-b flex items-center justify-between px-4 lg:px-6 backdrop-blur-lg" style="background: color-mix(in srgb, var(--color-surface) 85%, transparent); border-color: var(--color-border);">
+        <div class="flex items-center gap-3">
+          <!-- Mobile sidebar toggle -->
+          <button id="sidebar-toggle" class="lg:hidden w-10 h-10 rounded-lg flex items-center justify-center border" style="border-color: var(--color-border);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+          </button>
+          <h1 class="text-lg font-bold capitalize">{title || section}</h1>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href={`/${platform}`} class="btn btn-ghost text-xs hidden sm:inline-flex" target="_blank">View Site</a>
+          <a href="/admin" class="btn btn-ghost text-xs hidden sm:inline-flex">All Platforms</a>
+        </div>
+      </div>
+
+      <!-- Page Content -->
+      <div class="p-4 lg:p-6">
+        <slot />
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile sidebar overlay -->
+  <div id="sidebar-overlay" class="lg:hidden fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/40" id="sidebar-overlay-bg"></div>
+    <aside class="absolute left-0 top-0 bottom-0 w-72 overflow-y-auto shadow-xl" style="background: var(--color-surface);">
+      <div class="h-16 flex items-center justify-between px-5 border-b" style="border-color: var(--color-border);">
+        <span class="font-bold text-sm" style="font-family: var(--font-heading);">Minhaajulhudaa</span>
+        <button id="sidebar-close" class="w-8 h-8 rounded-lg flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <nav class="py-3 px-3">
+        {sidebarItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={['flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium mb-0.5', section === item.id ? 'bg-[rgb(5,179,77,0.1)]' : '']}
+            style={section === item.id ? 'color: var(--color-primary);' : 'color: var(--color-muted);'}
+          >
+            <Fragment set:html={item.icon} />
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </aside>
+  </div>
+
+  <script is:inline>
+    const toggle = document.getElementById('sidebar-toggle');
+    const overlay = document.getElementById('sidebar-overlay');
+    const close = document.getElementById('sidebar-close');
+    const overlayBg = document.getElementById('sidebar-overlay-bg');
+
+    toggle?.addEventListener('click', () => overlay?.classList.remove('hidden'));
+    close?.addEventListener('click', () => overlay?.classList.add('hidden'));
+    overlayBg?.addEventListener('click', () => overlay?.classList.add('hidden'));
+  </script>
+</BaseLayout>

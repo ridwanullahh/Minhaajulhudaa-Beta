@@ -1,0 +1,134 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const volunteers = await lightbase.query('charity_volunteers', { sort: 'createdAt:desc', limit: 100 });
+const allVolunteers = volunteers.data || [];
+const pendingCount = allVolunteers.filter((v: any) => v.status === 'pending').length;
+const approvedCount = allVolunteers.filter((v: any) => v.status === 'approved').length;
+const rejectedCount = allVolunteers.filter((v: any) => v.status === 'rejected').length;
+---
+
+<AdminLayout title="Volunteers" platform="charity" section="volunteers">
+  <!-- Stats -->
+  <div class="grid grid-cols-3 gap-4 mb-6 fade-in">
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-accent);">{pendingCount}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Pending Review</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-primary);">{approvedCount}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Approved</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold">{allVolunteers.length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Total Applications</div>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="text-lg font-bold">Volunteer Applications</h2>
+      <p class="text-sm" style="color: var(--color-muted);">Review and manage volunteer registrations</p>
+    </div>
+  </div>
+
+  <!-- Volunteers Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Name</th>
+          <th class="p-4 font-medium hidden md:table-cell">Email</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Phone</th>
+          <th class="p-4 font-medium hidden lg:table-cell">Skills</th>
+          <th class="p-4 font-medium hidden lg:table-cell">Role</th>
+          <th class="p-4 font-medium text-right">Status</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allVolunteers.map((v: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-4">
+                <div class="font-medium">{v.firstName} {v.lastName}</div>
+                <div class="text-xs" style="color: var(--color-muted);">Applied {v.createdAt ? new Date(v.createdAt).toLocaleDateString() : ''}</div>
+              </td>
+              <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{v.email}</td>
+              <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{v.phone || '-'}</td>
+              <td class="p-4 hidden lg:table-cell">
+                <div class="flex flex-wrap gap-1">
+                  {(v.skills || []).slice(0, 2).map((s: string) => <span class="badge text-xs">{s}</span>)}
+                  {(v.skills || []).length > 2 && <span class="text-xs" style="color: var(--color-muted);">+{v.skills.length - 2}</span>}
+                </div>
+              </td>
+              <td class="p-4 hidden lg:table-cell"><span class="badge badge-accent">{v.assignedRole || '-'}</span></td>
+              <td class="p-4 text-right">
+                <span class={v.status === 'approved' ? 'badge badge-primary' : v.status === 'pending' ? 'badge badge-accent' : 'badge'}>{v.status}</span>
+              </td>
+              <td class="p-4 text-right">
+                {v.status === 'pending' && (
+                  <>
+                    <button class="text-xs font-medium mr-2" style="color: var(--color-primary);" data-approve-vol={v.id}>Approve</button>
+                    <button class="text-xs font-medium mr-3" style="color: #DC2626;" data-reject-vol={v.id}>Reject</button>
+                  </>
+                )}
+                {v.status === 'approved' && (
+                  <button class="text-xs font-medium mr-3" style="color: var(--color-muted);" data-role-vol={v.id} data-current-role={v.assignedRole || ''}>Assign Role</button>
+                )}
+                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-vol={v.id}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {allVolunteers.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No volunteer applications yet.</div>}
+  </div>
+
+  <script>
+    // Approve
+    document.querySelectorAll('[data-approve-vol]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-approve-vol');
+        try {
+          const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: 'approved' }) });
+          if (res.ok) window.location.reload(); else alert('Failed');
+        } catch { alert('Network error'); }
+      });
+    });
+
+    // Reject
+    document.querySelectorAll('[data-reject-vol]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-reject-vol');
+        try {
+          const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: 'rejected' }) });
+          if (res.ok) window.location.reload(); else alert('Failed');
+        } catch { alert('Network error'); }
+      });
+    });
+
+    // Assign Role
+    document.querySelectorAll('[data-role-vol]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-role-vol');
+        const current = btn.getAttribute('data-current-role') || '';
+        const role = prompt('Assign role (e.g. field_worker, coordinator, fundraiser):', current);
+        if (role === null) return;
+        try {
+          const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ assignedRole: role }) });
+          if (res.ok) window.location.reload(); else alert('Failed');
+        } catch { alert('Network error'); }
+      });
+    });
+
+    // Delete
+    document.querySelectorAll('[data-delete-vol]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this volunteer?')) return;
+        const id = btn.getAttribute('data-delete-vol');
+        try { const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else alert('Failed'); } catch { alert('Network error'); }
+      });
+    });
+  </script>
+</AdminLayout>

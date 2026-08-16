@@ -1,0 +1,149 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../lib/lightbase';
+
+let testimonials: any[] = [];
+try {
+  const result = await lightbase.query('charity_testimonials', {
+    filter: { field: 'status', op: 'eq', value: 'approved' },
+    sort: 'createdAt:desc',
+    limit: 100,
+  });
+  testimonials = result.data || [];
+} catch {}
+
+const donors = testimonials.filter((t: any) => t.type === 'donor');
+const beneficiaries = testimonials.filter((t: any) => t.type === 'beneficiary');
+const partners = testimonials.filter((t: any) => t.type === 'partner');
+---
+export const prerender = true;
+
+<PlatformLayout title="Testimonials - Minhaajulhudaa Charity" platform="charity">
+  <!-- Hero -->
+  <section class="relative overflow-hidden" style="background: linear-gradient(135deg, rgb(5,179,77,0.08), rgb(242,185,28,0.05));">
+    <div class="container-app py-12 md:py-16">
+      <div class="max-w-3xl fade-in">
+        <span class="badge badge-accent mb-4">Voices of Impact</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">Testimonials</h1>
+        <p class="text-lg" style="color: var(--color-muted);">Hear from our donors, beneficiaries, and partners about the impact of your generosity.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-app py-16">
+    {testimonials.length > 0 ? (
+      <>
+        <!-- Donor Testimonials -->
+        {donors.length > 0 && (
+          <div class="mb-16">
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-2">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              Donors
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {donors.map((t: any) => (
+                <div class="card p-6">
+                  <div class="flex gap-1 mb-4">
+                    {Array.from({ length: t.rating || 5 }).map(() => (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-accent);">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    ))}
+                  </div>
+                  <p class="text-sm mb-6" style="color: var(--color-muted); line-height: 1.7;">"{t.content}"</p>
+                  <div class="flex items-center gap-3">
+                    {t.authorPhoto ? (
+                      <img src={t.authorPhoto} alt={t.authorName} class="w-10 h-10 rounded-full object-cover" />
+                    ) : (
+                      <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">{(t.authorName || 'A').charAt(0)}</div>
+                    )}
+                    <div>
+                      <div class="font-semibold text-sm">{t.authorName}</div>
+                      <div class="text-xs" style="color: var(--color-muted);">{t.authorRole}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Beneficiary Testimonials -->
+        {beneficiaries.length > 0 && (
+          <div class="mb-16">
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-2">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Beneficiaries
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {beneficiaries.map((t: any) => (
+                <div class="card p-6">
+                  <div class="flex gap-1 mb-4">
+                    {Array.from({ length: t.rating || 5 }).map(() => (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-accent);">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    ))}
+                  </div>
+                  <p class="text-sm mb-6" style="color: var(--color-muted); line-height: 1.7;">"{t.content}"</p>
+                  <div class="flex items-center gap-3">
+                    {t.authorPhoto ? (
+                      <img src={t.authorPhoto} alt={t.authorName} class="w-10 h-10 rounded-full object-cover" />
+                    ) : (
+                      <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: rgb(242,185,28,0.15); color: var(--color-accent);">{(t.authorName || 'B').charAt(0)}</div>
+                    )}
+                    <div>
+                      <div class="font-semibold text-sm">{t.authorName}</div>
+                      <div class="text-xs" style="color: var(--color-muted);">{t.authorRole}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Partner Testimonials -->
+        {partners.length > 0 && (
+          <div>
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-2">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+              Partners
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {partners.map((t: any) => (
+                <div class="card p-6">
+                  <div class="flex gap-1 mb-4">
+                    {Array.from({ length: t.rating || 5 }).map(() => (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-accent);">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    ))}
+                  </div>
+                  <p class="text-sm mb-6" style="color: var(--color-muted); line-height: 1.7;">"{t.content}"</p>
+                  <div class="flex items-center gap-3">
+                    {t.authorPhoto ? (
+                      <img src={t.authorPhoto} alt={t.authorName} class="w-10 h-10 rounded-full object-cover" />
+                    ) : (
+                      <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: rgb(37,99,235,0.1); color: #2563EB;">{(t.authorName || 'P').charAt(0)}</div>
+                    )}
+                    <div>
+                      <div class="font-semibold text-sm">{t.authorName}</div>
+                      <div class="text-xs" style="color: var(--color-muted);">{t.authorRole}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </>
+    ) : (
+      <div class="card p-12 text-center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <h3 class="font-bold text-lg mb-2">No Testimonials Yet</h3>
+        <p class="text-sm" style="color: var(--color-muted);">Testimonials from our community will appear here.</p>
+      </div>
+    )}
+  </section>
+</PlatformLayout>

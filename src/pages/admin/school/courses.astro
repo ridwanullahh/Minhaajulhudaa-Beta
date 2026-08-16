@@ -1,0 +1,120 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+const [coursesResult, lessonsCount] = await Promise.all([
+  lightbase.query('school_courses', { sort: 'title:asc', limit: 100 }),
+  lightbase.count('school_lessons'),
+]);
+const courses = coursesResult.data || [];
+---
+
+<AdminLayout title="LMS Course Management" platform="school" section="courses">
+  <div class="flex items-center justify-between mb-6 fade-in">
+    <div>
+      <h2 class="text-lg font-bold">Courses</h2>
+      <p class="text-sm" style="color: var(--color-muted);">{courses.length} courses, {lessonsCount} lessons</p>
+    </div>
+    <button id="toggle-form-btn" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Add Course
+    </button>
+  </div>
+
+  <!-- Create Form -->
+  <div id="create-form" class="hidden card p-6 mb-6">
+    <h3 class="font-bold mb-4">Add New Course</h3>
+    <form id="course-form" class="space-y-4">
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><label class="block text-sm font-medium mb-1" for="cr-title">Title</label><input id="cr-title" name="title" class="input" required /></div>
+        <div><label class="block text-sm font-medium mb-1" for="cr-slug">Slug</label><input id="cr-slug" name="slug" class="input" /></div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div><label class="block text-sm font-medium mb-1" for="cr-category">Category</label><input id="cr-category" name="category" class="input" /></div>
+        <div><label class="block text-sm font-medium mb-1" for="cr-instructor">Instructor</label><input id="cr-instructor" name="instructorName" class="input" /></div>
+        <div><label class="block text-sm font-medium mb-1" for="cr-duration">Duration</label><input id="cr-duration" name="duration" class="input" /></div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><label class="block text-sm font-medium mb-1" for="cr-price">Price (0 for free)</label><input id="cr-price" name="price" class="input" type="number" value="0" /></div>
+        <div><label class="block text-sm font-medium mb-1" for="cr-status">Status</label>
+          <select id="cr-status" name="status" class="input"><option value="draft">Draft</option><option value="published">Published</option></select></div>
+      </div>
+      <div><label class="block text-sm font-medium mb-1" for="cr-excerpt">Excerpt</label><textarea id="cr-excerpt" name="excerpt" class="input" rows="2"></textarea></div>
+      <div><label class="block text-sm font-medium mb-1" for="cr-desc">Description</label><textarea id="cr-desc" name="description" class="input" rows="5"></textarea></div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Create Course</button>
+        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Courses Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Title</th>
+          <th class="p-4 font-medium hidden md:table-cell">Category</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Instructor</th>
+          <th class="p-4 font-medium hidden lg:table-cell">Price</th>
+          <th class="p-4 font-medium text-right">Status</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {courses.map((c: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-4 font-medium">{c.title}</td>
+              <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{c.category || '-'}</span></td>
+              <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{c.instructorName || '-'}</td>
+              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{c.isFree ? 'Free' : (c.price ? formatCurrency(c.price) : '-')}</td>
+              <td class="p-4 text-right"><span class={c.status === 'published' ? 'badge badge-primary' : 'badge badge-accent'}>{c.status}</span></td>
+              <td class="p-4 text-right">
+                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-course={c.id}>Edit</button>
+                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-course={c.id}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {courses.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No courses created yet.</div>}
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggle-form-btn');
+    const cancelBtn = document.getElementById('cancel-form-btn');
+    const createForm = document.getElementById('create-form');
+    toggleBtn?.addEventListener('click', () => createForm?.classList.toggle('hidden'));
+    cancelBtn?.addEventListener('click', () => createForm?.classList.add('hidden'));
+
+    const titleInput = document.getElementById('cr-title') as HTMLInputElement;
+    const slugInput = document.getElementById('cr-slug') as HTMLInputElement;
+    titleInput?.addEventListener('input', () => {
+      slugInput.value = titleInput.value.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
+    });
+
+    document.getElementById('course-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, any> = {};
+      fd.forEach((v, k) => { body[k] = k === 'price' ? parseFloat(v as string) || 0 : v; });
+      body.isFree = !body.price || body.price === 0;
+      try {
+        const res = await fetch('/api/admin/school/courses', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) window.location.reload(); else { const err = await res.json(); alert(err.error || 'Failed'); }
+      } catch { alert('Network error'); }
+    });
+
+    document.querySelectorAll('[data-delete-course]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this course?')) return;
+        const id = btn.getAttribute('data-delete-course');
+        try {
+          const res = await fetch(`/api/admin/school/courses?id=${id}`, { method: 'DELETE' });
+          if (res.ok) window.location.reload(); else alert('Failed');
+        } catch { alert('Network error'); }
+      });
+    });
+  </script>
+</AdminLayout>

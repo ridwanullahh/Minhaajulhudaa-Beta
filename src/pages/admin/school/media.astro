@@ -1,0 +1,82 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const result = await lightbase.query('school_media', {
+  sort: 'createdAt:desc',
+  limit: 100,
+});
+const media = result.data || [];
+---
+
+<AdminLayout title="Media Manager" platform="school" section="media">
+  <div class="flex items-center justify-between mb-6 fade-in">
+    <div>
+      <h2 class="text-lg font-bold">Media</h2>
+      <p class="text-sm" style="color: var(--color-muted);">{media.length} files uploaded</p>
+    </div>
+    <button id="upload-btn" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Upload
+    </button>
+  </div>
+
+  <!-- Upload Area -->
+  <div id="upload-area" class="hidden card p-6 mb-6">
+    <h3 class="font-bold mb-4">Upload File</h3>
+    <form id="upload-form" class="space-y-4">
+      <div class="border-2 border-dashed rounded-xl p-8 text-center cursor-pointer" id="drop-zone">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-3" style="color: var(--color-muted);"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p class="text-sm" style="color: var(--color-muted);">Drag and drop files here, or click to browse.</p>
+        <input type="file" id="file-input" class="hidden" accept="image/*,video/*,.pdf,.doc,.docx" />
+      </div>
+      <div><label class="block text-sm font-medium mb-1" for="m-folder">Folder</label><input id="m-folder" name="folder" class="input" placeholder="e.g. gallery, blog" /></div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary" disabled>Upload</button>
+        <button type="button" id="cancel-upload-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Media Grid -->
+  {media.length > 0 ? (
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      {media.map((m: any) => (
+        <div class="card overflow-hidden group relative">
+          <div class="aspect-square bg-[rgb(5,179,77,0.05)]">
+            {m.fileType?.startsWith('image') && m.url ? (
+              <img src={m.url} alt={m.fileName} class="w-full h-full object-cover" loading="lazy" />
+            ) : (
+              <div class="w-full h-full flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-muted);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+            )}
+          </div>
+          <div class="p-2">
+            <p class="text-xs truncate">{m.fileName || m.name || '-'}</p>
+            <p class="text-xs" style="color: var(--color-muted);">{m.folder || '-'}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="card p-12 text-center">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <p style="color: var(--color-muted);">No media files uploaded yet.</p>
+    </div>
+  )}
+
+  <script>
+    const uploadBtn = document.getElementById('upload-btn');
+    const uploadArea = document.getElementById('upload-area');
+    const cancelUploadBtn = document.getElementById('cancel-upload-btn');
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input') as HTMLInputElement;
+    const submitBtn = document.querySelector('#upload-form button[type=submit]') as HTMLButtonElement;
+
+    uploadBtn?.addEventListener('click', () => uploadArea?.classList.toggle('hidden'));
+    cancelUploadBtn?.addEventListener('click', () => uploadArea?.classList.add('hidden'));
+    dropZone?.addEventListener('click', () => fileInput?.click());
+    fileInput?.addEventListener('change', () => { submitBtn.disabled = !fileInput.files?.length; });
+  </script>
+</AdminLayout>

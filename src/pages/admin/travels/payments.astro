@@ -1,0 +1,151 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+const paymentsResult = await lightbase.query('travels_payments', {
+  sort: '_created_at:desc',
+  limit: 100,
+}).catch(() => ({ data: [] }));
+
+const payments = paymentsResult.data || [];
+
+const [totalPaid, pendingPayments] = await Promise.all([
+  lightbase.aggregate('travels_payments', {
+    aggregations: [{ field: 'amount', op: 'sum', alias: 'total' }],
+    filter: { field: 'status', op: 'eq', value: 'completed' },
+  }).catch(() => ({ total: 0 })),
+  lightbase.count('travels_payments', { field: 'status', op: 'eq', value: 'pending' }).catch(() => 0),
+]);
+
+const statusBadge = (status: string) => {
+  switch (status) {
+    case 'completed': return 'badge badge-primary';
+    case 'pending': return 'badge badge-accent';
+    case 'refunded': return 'badge';
+    case 'failed': return 'badge';
+    default: return 'badge';
+  }
+};
+---
+
+<AdminLayout title="Payments" platform="travels" section="payments">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="font-bold text-lg">Payments</h2>
+      <p class="text-sm" style="color: var(--color-muted);">Track payments, installments, and refunds</p>
+    </div>
+    <button id="btn-new-payment" class="btn btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Record Payment
+    </button>
+  </div>
+
+  <!-- Stats -->
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-primary);">{formatCurrency(totalPaid.total || 0)}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Total Collected</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-accent);">{pendingPayments}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Pending Payments</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold">{payments.length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Total Transactions</div>
+    </div>
+  </div>
+
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr style="color: var(--color-muted); border-bottom: 1px solid var(--color-border);">
+          <th class="text-left p-4 font-medium">Reference</th>
+          <th class="text-left p-4 font-medium hidden sm:table-cell">Booking</th>
+          <th class="text-left p-4 font-medium hidden md:table-cell">Method</th>
+          <th class="text-right p-4 font-medium">Amount</th>
+          <th class="text-center p-4 font-medium hidden sm:table-cell">Type</th>
+          <th class="text-center p-4 font-medium">Status</th>
+        </tr></thead>
+        <tbody>
+          {payments.length > 0 ? payments.map((p: any) => (
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-4 font-medium">{p.reference || p.id?.slice(0,8)}</td>
+              <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{p.bookingNumber || p.bookingId?.slice(0,8) || '-'}</td>
+              <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{p.method ? p.method.replace(/_/g, ' ').toUpperCase() : '-'}</td>
+              <td class="p-4 text-right font-medium">{p.amount ? formatCurrency(p.amount) : '-'}</td>
+              <td class="p-4 text-center hidden sm:table-cell"><span class="badge" style="background: rgb(37,99,235,0.1); color: #2563EB;">{p.paymentType || 'full'}</span></td>
+              <td class="p-4 text-center"><span class={statusBadge(p.status)}>{p.status || '-'}</span></td>
+            </tr>
+          )) : (
+            <tr><td colspan="6" class="p-12 text-center" style="color: var(--color-muted);">No payments recorded.</td></tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Record Payment Modal -->
+  <div id="modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/40" id="modal-overlay"></div>
+    <div class="relative w-full max-w-lg rounded-2xl p-6" style="background: var(--color-surface);">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="font-bold text-lg">Record Payment</h3>
+        <button id="modal-close" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(220,38,38,0.1)]">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="payment-form" class="space-y-4">
+        <div><label class="text-sm font-medium block mb-1">Booking ID</label><input id="f-bookingId" class="input" required /></div>
+        <div><label class="text-sm font-medium block mb-1">Amount (NGN)</label><input id="f-amount" type="number" class="input" required /></div>
+        <div><label class="text-sm font-medium block mb-1">Method</label>
+          <select id="f-method" class="input">
+            <option value="card">Card</option>
+            <option value="bank_transfer">Bank Transfer</option>
+            <option value="cash">Cash</option>
+            <option value="mobile_money">Mobile Money</option>
+          </select>
+        </div>
+        <div><label class="text-sm font-medium block mb-1">Type</label>
+          <select id="f-paymentType" class="input">
+            <option value="full">Full Payment</option>
+            <option value="installment">Installment</option>
+            <option value="deposit">Deposit</option>
+            <option value="refund">Refund</option>
+          </select>
+        </div>
+        <div><label class="text-sm font-medium block mb-1">Reference</label><input id="f-reference" class="input" /></div>
+        <div class="flex justify-end gap-3 pt-2">
+          <button type="button" id="modal-cancel" class="btn btn-ghost">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Payment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    document.getElementById('btn-new-payment')!.addEventListener('click', () => modal!.classList.remove('hidden'));
+    document.getElementById('modal-close')!.addEventListener('click', () => modal!.classList.add('hidden'));
+    document.getElementById('modal-overlay')!.addEventListener('click', () => modal!.classList.add('hidden'));
+    document.getElementById('modal-cancel')!.addEventListener('click', () => modal!.classList.add('hidden'));
+    document.getElementById('payment-form')!.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const body = {
+        bookingId: (document.getElementById('f-bookingId') as HTMLInputElement).value,
+        amount: parseFloat((document.getElementById('f-amount') as HTMLInputElement).value) || 0,
+        method: (document.getElementById('f-method') as HTMLSelectElement).value,
+        paymentType: (document.getElementById('f-paymentType') as HTMLSelectElement).value,
+        reference: (document.getElementById('f-reference') as HTMLInputElement).value,
+        status: 'completed',
+        paidAt: new Date().toISOString(),
+      };
+      fetch('/api/admin/travels/payments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      }).then(() => location.reload()).catch(() => {});
+    });
+  </script>
+</AdminLayout>

@@ -1,0 +1,159 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+const [donations, campaigns] = await Promise.all([
+  lightbase.query('charity_donations', { sort: 'createdAt:desc', limit: 500 }),
+  lightbase.query('charity_campaigns', { limit: 50 }),
+]);
+
+const allDonations = donations.data || [];
+const allCampaigns = campaigns.data || [];
+
+const totalDonated = allDonations.reduce((s: number, d: any) => s + (d.amount || 0), 0);
+
+// Group by payment method
+const byMethod: Record<string, number> = {};
+allDonations.forEach((d: any) => { const m = d.paymentMethod || 'other'; byMethod[m] = (byMethod[m] || 0) + (d.amount || 0); });
+
+// Group by category (campaign)
+const byCategory: Record<string, number> = {};
+allCampaigns.forEach((c: any) => {
+  const cat = c.category || 'other';
+  byCategory[cat] = (byCategory[cat] || 0) + (c.raisedAmount || 0);
+});
+
+// Monthly breakdown
+const monthlyData: Record<string, number> = {};
+allDonations.forEach((d: any) => {
+  if (!d.createdAt) return;
+  const month = new Date(d.createdAt).toISOString().slice(0, 7);
+  monthlyData[month] = (monthlyData[month] || 0) + (d.amount || 0);
+});
+const sortedMonths = Object.entries(monthlyData).sort((a, b) => a[0].localeCompare(b[0]));
+const maxMonthly = Math.max(...sortedMonths.map(([, v]) => v), 1);
+
+const maxMethodVal = Math.max(...Object.values(byMethod), 1);
+const maxCatVal = Math.max(...Object.values(byCategory), 1);
+---
+
+<AdminLayout title="Financial Reports" platform="charity" section="reports">
+  <!-- Summary Stats -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8 fade-in">
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-primary);">{formatCurrency(totalDonated)}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Total Donations Received</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold">{allDonations.length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Total Transactions</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold">{allCampaigns.length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Campaigns</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-accent);">{sortedMonths.length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Active Months</div>
+    </div>
+  </div>
+
+  <div class="grid lg:grid-cols-2 gap-6 mb-6">
+    <!-- Monthly Donation Chart -->
+    <div class="card p-6">
+      <h3 class="font-bold mb-4">Monthly Donations</h3>
+      {sortedMonths.length > 0 ? (
+        <div class="space-y-3">
+          {sortedMonths.map(([month, amount]) => {
+            const pct = Math.round((amount / maxMonthly) * 100);
+            return (
+              <div class="flex items-center gap-3">
+                <span class="text-xs w-16 shrink-0 font-medium" style="color: var(--color-muted);">{month}</span>
+                <div class="flex-1 h-6 rounded" style="background: var(--color-border);">
+                  <div class="h-full rounded flex items-center justify-end pr-2 text-xs font-bold text-white" style={`width: ${Math.max(pct, 2)}%; background: var(--color-primary);`}>{pct > 10 ? formatCurrency(amount) : ''}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : <p class="text-sm" style="color: var(--color-muted);">No donation data available.</p>}
+    </div>
+
+    <!-- By Payment Method -->
+    <div class="card p-6">
+      <h3 class="font-bold mb-4">By Payment Method</h3>
+      {Object.keys(byMethod).length > 0 ? (
+        <div class="space-y-3">
+          {Object.entries(byMethod).map(([method, amount]) => {
+            const pct = Math.round((amount / maxMethodVal) * 100);
+            return (
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="capitalize font-medium">{method.replace('_', ' ')}</span>
+                  <span class="font-bold" style="color: var(--color-primary);">{formatCurrency(amount)}</span>
+                </div>
+                <div class="h-3 rounded-full" style="background: var(--color-border);">
+                  <div class="h-full rounded-full" style={`width: ${pct}%; background: var(--color-accent);`}></div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : <p class="text-sm" style="color: var(--color-muted);">No data available.</p>}
+    </div>
+  </div>
+
+  <!-- By Category -->
+  <div class="card p-6 mb-6">
+    <h3 class="font-bold mb-4">By Campaign Category</h3>
+    {Object.keys(byCategory).length > 0 ? (
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {Object.entries(byCategory).map(([category, amount]) => (
+          <div class="p-4 rounded-lg" style="background: var(--color-background);">
+            <div class="text-xs font-medium mb-1" style="color: var(--color-muted);">{category}</div>
+            <div class="text-lg font-bold" style="color: var(--color-primary);">{formatCurrency(amount)}</div>
+            <div class="mt-2 h-2 rounded-full" style="background: var(--color-border);">
+              <div class="h-full rounded-full" style={`width: ${Math.round((amount / maxCatVal) * 100)}%; background: var(--color-primary);`}></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : <p class="text-sm" style="color: var(--color-muted);">No campaign data available.</p>}
+  </div>
+
+  <!-- Campaign Financial Breakdown -->
+  <div class="card overflow-hidden">
+    <div class="p-6 border-b" style="border-color: var(--color-border);">
+      <h3 class="font-bold">Campaign Financial Breakdown</h3>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Campaign</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Category</th>
+          <th class="p-4 font-medium text-right">Goal</th>
+          <th class="p-4 font-medium text-right">Raised</th>
+          <th class="p-4 font-medium text-right">Progress</th>
+        </tr></thead>
+        <tbody>
+          {allCampaigns.map((c: any) => {
+            const pct = c.goalAmount ? Math.round(((c.raisedAmount || 0) / c.goalAmount) * 100) : 0;
+            return (
+              <tr style="border-top: 1px solid var(--color-border);">
+                <td class="p-4 font-medium">{c.title}</td>
+                <td class="p-4 hidden sm:table-cell"><span class="badge badge-accent">{c.category}</span></td>
+                <td class="p-4 text-right" style="color: var(--color-muted);">{formatCurrency(c.goalAmount || 0)}</td>
+                <td class="p-4 text-right font-medium" style="color: var(--color-primary);">{formatCurrency(c.raisedAmount || 0)}</td>
+                <td class="p-4 text-right">
+                  <span class={pct >= 100 ? 'badge badge-primary' : 'badge badge-accent'}>{pct}%</span>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+    {allCampaigns.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No campaigns yet.</div>}
+  </div>
+</AdminLayout>

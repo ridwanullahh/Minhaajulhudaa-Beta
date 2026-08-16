@@ -1,0 +1,131 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+const [studentsCount, pendingApps, activeCourses, paymentsAgg] = await Promise.all([
+  lightbase.count('school_students'),
+  lightbase.count('school_admission_applications', { field: 'status', op: 'eq', value: 'pending' }),
+  lightbase.count('school_courses', { field: 'status', op: 'eq', value: 'published' }),
+  lightbase.aggregate('school_payments', {
+    aggregations: [{ field: 'amount', op: 'sum', alias: 'totalRevenue' }],
+  }).catch(() => ({ totalRevenue: 0 })),
+]);
+
+const recentApps = await lightbase.query('school_admission_applications', {
+  filter: { field: 'status', op: 'eq', value: 'pending' },
+  sort: 'submittedAt:desc',
+  limit: 5,
+});
+
+const recentPayments = await lightbase.query('school_payments', {
+  sort: 'createdAt:desc',
+  limit: 5,
+});
+
+const stats = [
+  { label: 'Total Students', value: studentsCount, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>', color: 'rgb(5,179,77,0.1)', textColor: 'var(--color-primary)' },
+  { label: 'Pending Applications', value: pendingApps, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>', color: 'rgb(242,185,28,0.15)', textColor: 'var(--color-accent)' },
+  { label: 'Active Courses', value: activeCourses, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>', color: 'rgb(37,99,235,0.1)', textColor: '#2563EB' },
+  { label: 'Total Revenue', value: formatCurrency(paymentsAgg?.totalRevenue || 0), icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>', color: 'rgb(5,179,77,0.1)', textColor: 'var(--color-primary)' },
+];
+
+const quickActions = [
+  { label: 'New Blog Post', href: '/admin/school/blog', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>' },
+  { label: 'Review Applications', href: '/admin/school/admissions', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>' },
+  { label: 'Manage Classes', href: '/admin/school/classes', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>' },
+  { label: 'View Payments', href: '/admin/school/payments', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>' },
+];
+---
+
+<AdminLayout title="Dashboard" platform="school" section="dashboard">
+  <!-- Stats Grid -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8 fade-in">
+    {stats.map((stat) => (
+      <div class="card p-5">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center" style={`background: ${stat.color}; color: ${stat.textColor};`}>
+            <Fragment set:html={stat.icon} />
+          </div>
+        </div>
+        <div class="text-2xl font-extrabold mb-1">{stat.value}</div>
+        <div class="text-xs" style="color: var(--color-muted);">{stat.label}</div>
+      </div>
+    ))}
+  </div>
+
+  <div class="grid lg:grid-cols-3 gap-6">
+    <!-- Recent Applications -->
+    <div class="lg:col-span-2 card p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-bold">Recent Applications</h2>
+        <a href="/admin/school/admissions" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
+      </div>
+      {(recentApps.data || []).length > 0 ? (
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr style="color: var(--color-muted); border-bottom: 1px solid var(--color-border);">
+              <th class="text-left pb-3 font-medium">Name</th>
+              <th class="text-left pb-3 font-medium hidden sm:table-cell">Class</th>
+              <th class="text-left pb-3 font-medium hidden md:table-cell">Date</th>
+              <th class="text-right pb-3 font-medium">Status</th>
+            </tr></thead>
+            <tbody>
+              {(recentApps.data || []).map((app: any) => (
+                <tr style="border-bottom: 1px solid var(--color-border);">
+                  <td class="py-3 font-medium">{app.studentFirstName} {app.studentLastName}</td>
+                  <td class="py-3 hidden sm:table-cell" style="color: var(--color-muted);">{app.appliedClass}</td>
+                  <td class="py-3 hidden md:table-cell" style="color: var(--color-muted);">{app.submittedAt ? new Date(app.submittedAt).toLocaleDateString() : ''}</td>
+                  <td class="py-3 text-right"><span class="badge badge-accent">{app.status}</span></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : <p class="text-sm" style="color: var(--color-muted);">No pending applications.</p>}
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card p-6">
+      <h2 class="font-bold mb-4">Quick Actions</h2>
+      <div class="space-y-2">
+        {quickActions.map((action) => (
+          <a href={action.href} class="flex items-center gap-3 p-3 rounded-lg transition-colors hover:bg-[rgb(5,179,77,0.05)]" style="color: var(--color-foreground);">
+            <span style="color: var(--color-primary);"><Fragment set:html={action.icon} /></span>
+            <span class="text-sm font-medium">{action.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Payments -->
+  <div class="card p-6 mt-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="font-bold">Recent Payments</h2>
+      <a href="/admin/school/payments" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
+    </div>
+    {(recentPayments.data || []).length > 0 ? (
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr style="color: var(--color-muted); border-bottom: 1px solid var(--color-border);">
+            <th class="text-left pb-3 font-medium">Reference</th>
+            <th class="text-left pb-3 font-medium hidden sm:table-cell">Student</th>
+            <th class="text-right pb-3 font-medium">Amount</th>
+            <th class="text-right pb-3 font-medium hidden md:table-cell">Status</th>
+          </tr></thead>
+          <tbody>
+            {(recentPayments.data || []).map((p: any) => (
+              <tr style="border-bottom: 1px solid var(--color-border);">
+                <td class="py-3 font-medium">{p.reference || p.id}</td>
+                <td class="py-3 hidden sm:table-cell" style="color: var(--color-muted);">{p.studentName || '-'}</td>
+                <td class="py-3 text-right font-medium">{p.amount ? formatCurrency(p.amount) : '-'}</td>
+                <td class="py-3 text-right"><span class={p.status === 'completed' ? 'badge badge-primary' : 'badge'}>{p.status || '-'}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : <p class="text-sm" style="color: var(--color-muted);">No payments recorded yet.</p>}
+  </div>
+</AdminLayout>

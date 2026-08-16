@@ -1,0 +1,106 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatDate } from '../../../lib/utils';
+
+export async function getStaticPaths() {
+  try {
+    const result = await lightbase.query('charity_blog_posts', { limit: 100 });
+    return (result.data || []).filter((doc: any) => doc.slug).map((doc: any) => ({
+      params: { slug: doc.slug },
+      props: { post: doc },
+    }));
+  } catch { return []; }
+}
+
+const { post } = Astro.props;
+const isPublished = post.status === 'published';
+
+let relatedPosts: any[] = [];
+try {
+  if (post.category) {
+    const result = await lightbase.query('charity_blog_posts', {
+      filter: { field: 'category', op: 'eq', value: post.category },
+      sort: 'publishedAt:desc',
+      limit: 3,
+    });
+    relatedPosts = (result.data || []).filter((p: any) => p.id !== post.id);
+  }
+} catch {}
+---
+export const prerender = true;
+
+<PlatformLayout title={`${post.title} - Charity Blog`} platform="charity">
+  <article class="container-app py-8 md:py-12 fade-in">
+    <div class="max-w-3xl mx-auto">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm mb-8" style="color: var(--color-muted);">
+        <a href="/charity" class="hover:underline">Charity</a>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <a href="/charity/blog" class="hover:underline">Blog</a>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <span style="color: var(--color-foreground);">{post.title}</span>
+      </nav>
+
+      <!-- Header -->
+      <header class="mb-8">
+        {post.category && <span class="badge badge-primary text-xs mb-4">{post.category}</span>}
+        <h1 class="text-3xl md:text-4xl font-extrabold leading-tight mb-4">{post.title}</h1>
+        <div class="flex items-center gap-4 text-sm" style="color: var(--color-muted);">
+          {post.authorName && (
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">{post.authorName.charAt(0)}</div>
+              <span class="font-medium" style="color: var(--color-foreground);">{post.authorName}</span>
+            </div>
+          )}
+          {post.publishedAt && <span>{formatDate(post.publishedAt, 'long')}</span>}
+          {post.readingTimeMinutes && <span>{post.readingTimeMinutes} min read</span>}
+        </div>
+      </header>
+
+      <!-- Featured Image -->
+      {post.featuredImageUrl && (
+        <div class="aspect-[16/9] rounded-xl overflow-hidden mb-8">
+          <img src={post.featuredImageUrl} alt={post.title} class="w-full h-full object-cover" />
+        </div>
+      )}
+
+      <!-- Content -->
+      <div class="prose max-w-none" style="color: var(--color-foreground); line-height: 1.8;">
+        <Fragment set:html={post.content || ''} />
+      </div>
+
+      <!-- Tags -->
+      {post.tags && post.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-8 pt-8" style="border-top: 1px solid var(--color-border);">
+          {post.tags.map((tag: string) => (
+            <span class="badge text-xs">{tag}</span>
+          ))}
+        </div>
+      )}
+
+      <!-- CTA -->
+      <div class="card p-8 mt-12 text-center" style="background: linear-gradient(135deg, rgb(5,179,77,0.08), rgb(242,185,28,0.05));">
+        <h3 class="font-bold text-xl mb-2">Support Our Mission</h3>
+        <p class="text-sm mb-4" style="color: var(--color-muted);">Your donations make stories like this possible. Join us in making a difference.</p>
+        <a href="/charity/campaigns" class="btn btn-primary">Donate Now</a>
+      </div>
+
+      <!-- Related Posts -->
+      {relatedPosts.length > 0 && (
+        <div class="mt-16">
+          <h3 class="font-bold text-xl mb-6">Related Articles</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {relatedPosts.slice(0, 3).map((rp: any) => (
+              <a href={`/charity/blog/${rp.slug}`} class="card card-hover p-4 block">
+                <span class="text-xs" style="color: var(--color-muted);">{rp.category || ''}</span>
+                <h4 class="font-bold text-sm mt-1 mb-2 leading-snug">{rp.title}</h4>
+                <span class="text-xs" style="color: var(--color-muted);">{rp.publishedAt ? formatDate(rp.publishedAt) : ''}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </article>
+</PlatformLayout>

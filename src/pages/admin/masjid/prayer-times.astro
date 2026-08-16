@@ -1,0 +1,176 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const now = new Date();
+const year = now.getFullYear();
+const month = now.getMonth();
+const monthName = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+const startDate = new Date(year, month, 1).toISOString().split('T')[0];
+const endDate = new Date(year, month, daysInMonth).toISOString().split('T')[0];
+
+let prayerTimes: any[] = [];
+try {
+  const result = await lightbase.query('masjid_prayer_times', {
+    filter: { field: 'date', op: 'gte', value: startDate },
+    sort: 'date:asc',
+    limit: 35,
+  });
+  prayerTimes = result.data || [];
+} catch {}
+
+const timesMap = new Map<string, any>();
+prayerTimes.forEach(pt => timesMap.set(pt.date, pt));
+---
+
+<AdminLayout title="Prayer Times" platform="masjid" section="prayer-times">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 fade-in">
+    <div>
+      <h2 class="text-xl font-bold">Prayer Time Management</h2>
+      <p class="text-sm" style="color: var(--color-muted);">Manage Adhan and Iqamah times for {monthName}</p>
+    </div>
+    <div class="flex gap-2">
+      <button id="btn-bulk-import" class="btn btn-ghost text-xs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        CSV Import
+      </button>
+      <button id="btn-add-prayer" class="btn btn-primary text-xs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add / Edit Times
+      </button>
+    </div>
+  </div>
+
+  <!-- Monthly Table -->
+  <div class="card overflow-hidden fade-in">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr style="background: var(--color-background); color: var(--color-muted);">
+            <th class="text-left p-3 font-medium">Date</th>
+            <th class="text-center p-3 font-medium">Fajr</th>
+            <th class="text-center p-3 font-medium">Sunrise</th>
+            <th class="text-center p-3 font-medium">Dhuhr</th>
+            <th class="text-center p-3 font-medium">Asr</th>
+            <th class="text-center p-3 font-medium">Maghrib</th>
+            <th class="text-center p-3 font-medium">Isha</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: daysInMonth }).map((_, i) => {
+            const dayNum = i + 1;
+            const dateStr = new Date(year, month, dayNum).toISOString().split('T')[0];
+            const pt = timesMap.get(dateStr);
+            const dayOfWeek = new Date(year, month, dayNum).toLocaleDateString('en-US', { weekday: 'short' });
+            const isToday = dateStr === new Date().toISOString().split('T')[0];
+            return (
+              <tr style={isToday ? 'background: rgb(5,179,77,0.05);' : ''} class:list={['border-t', isToday ? 'font-semibold' : '']}>
+                <td class="p-3" style="border-color: var(--color-border);">
+                  <span class={isToday ? 'text-primary font-bold' : ''} style={isToday ? 'color: var(--color-primary);' : ''}>{dayOfWeek}</span>
+                  <span class="text-xs ml-1" style="color: var(--color-muted);">{dayNum}</span>
+                </td>
+                <td class="p-3 text-center" style="border-color: var(--color-border);">
+                  <div class="text-xs">{pt?.fajrAdhan || '-'}</div>
+                  {pt?.fajrIqamah && <div class="text-xs" style="color: var(--color-muted);">{pt.fajrIqamah}</div>}
+                </td>
+                <td class="p-3 text-center" style="border-color: var(--color-border);">
+                  <div class="text-xs">{pt?.sunrise || '-'}</div>
+                </td>
+                <td class="p-3 text-center" style="border-color: var(--color-border);">
+                  <div class="text-xs">{pt?.dhuhrAdhan || '-'}</div>
+                  {pt?.dhuhrIqamah && <div class="text-xs" style="color: var(--color-muted);">{pt.dhuhrIqamah}</div>}
+                </td>
+                <td class="p-3 text-center" style="border-color: var(--color-border);">
+                  <div class="text-xs">{pt?.asrAdhan || '-'}</div>
+                  {pt?.asrIqamah && <div class="text-xs" style="color: var(--color-muted);">{pt.asrIqamah}</div>}
+                </td>
+                <td class="p-3 text-center" style="border-color: var(--color-border);">
+                  <div class="text-xs">{pt?.maghribAdhan || '-'}</div>
+                  {pt?.maghribIqamah && <div class="text-xs" style="color: var(--color-muted);">{pt.maghribIqamah}</div>}
+                </td>
+                <td class="p-3 text-center" style="border-color: var(--color-border);">
+                  <div class="text-xs">{pt?.ishaAdhan || '-'}</div>
+                  {pt?.ishaIqamah && <div class="text-xs" style="color: var(--color-muted);">{pt.ishaIqamah}</div>}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Prayer Time Form Modal -->
+  <div id="modal-prayer" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/40" id="modal-prayer-bg"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div class="card p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto relative" style="background: var(--color-surface);">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="font-bold text-lg">Set Prayer Times</h3>
+          <button id="modal-prayer-close" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(220,38,38,0.1)]">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <form id="prayer-form" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">Date</label>
+            <input type="date" name="date" class="input" required />
+          </div>
+          {[{label:'Fajr', adhan:'fajrAdhan', iqamah:'fajrIqamah'},{label:'Sunrise', adhan:'sunrise', iqamah:''},{label:'Dhuhr', adhan:'dhuhrAdhan', iqamah:'dhuhrIqamah'},{label:'Asr', adhan:'asrAdhan', iqamah:'asrIqamah'},{label:'Maghrib', adhan:'maghribAdhan', iqamah:'maghribIqamah'},{label:'Isha', adhan:'ishaAdhan', iqamah:'ishaIqamah'}].map(p => (
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-medium mb-1">{p.label} Adhan</label>
+                  <input type="time" name={p.adhan} class="input" />
+                </div>
+                {p.iqamah && (
+                  <div>
+                    <label class="block text-xs font-medium mb-1">{p.label} Iqamah</label>
+                    <input type="time" name={p.iqamah} class="input" />
+                  </div>
+                )}
+              </div>
+            ))}
+          <div class="flex justify-end gap-2 pt-2">
+            <button type="button" id="modal-prayer-cancel" class="btn btn-ghost">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Prayer Times</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const modal = document.getElementById('modal-prayer');
+    const openBtn = document.getElementById('btn-add-prayer');
+    const closeBtn = document.getElementById('modal-prayer-close');
+    const cancelBtn = document.getElementById('modal-prayer-cancel');
+    const bg = document.getElementById('modal-prayer-bg');
+    const form = document.getElementById('prayer-form');
+
+    const open = () => { modal.classList.remove('hidden'); form.querySelector('[name=date]').value = new Date().toISOString().split('T')[0]; };
+    const close = () => modal.classList.add('hidden');
+
+    openBtn?.addEventListener('click', open);
+    closeBtn?.addEventListener('click', close);
+    cancelBtn?.addEventListener('click', close);
+    bg?.addEventListener('click', close);
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd);
+      try {
+        const res = await fetch('/api/admin/masjid/prayer-times', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json();
+        if (json.success) { window.location.reload(); }
+        else { alert(json.error || 'Failed to save'); }
+      } catch (err) { alert('Request failed'); }
+    });
+  </script>
+</AdminLayout>

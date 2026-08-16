@@ -1,0 +1,172 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency, generateCSRFToken } from '../../../lib/utils';
+
+const donations = await lightbase.query('charity_donations', { sort: 'createdAt:desc', limit: 100 });
+const allDonations = donations.data || [];
+const csrfToken = generateCSRFToken();
+
+const totalAmount = allDonations.reduce((sum: number, d: any) => sum + (d.amount || 0), 0);
+---
+
+<AdminLayout title="Donations" platform="charity" section="donations">
+  <!-- Stats -->
+  <div class="grid grid-cols-3 gap-4 mb-6 fade-in">
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-primary);">{formatCurrency(totalAmount)}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Total Amount</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold">{allDonations.length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Total Donations</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-accent);">{formatCurrency(allDonations.length ? Math.round(totalAmount / allDonations.length) : 0)}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Average Donation</div>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="text-lg font-bold">Donation Records</h2>
+      <p class="text-sm" style="color: var(--color-muted);">View, log, and manage all donations</p>
+    </div>
+    <div class="flex gap-2">
+      <button id="export-csv-btn" class="btn btn-ghost text-xs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export CSV
+      </button>
+      <button id="toggle-log-btn" class="btn btn-primary text-xs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        Log Donation
+      </button>
+    </div>
+  </div>
+
+  <!-- Manual Log Form -->
+  <div id="log-form" class="hidden card p-6 mb-6">
+    <h3 class="font-bold mb-4">Log Manual Donation</h3>
+    <form id="donation-form" class="space-y-4">
+      <input type="hidden" name="csrfToken" value={csrfToken} />
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="d-name">Donor Name</label>
+          <input id="d-name" name="donorName" class="input" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="d-email">Donor Email</label>
+          <input id="d-email" name="donorEmail" type="email" class="input" />
+        </div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="d-amount">Amount (NGN)</label>
+          <input id="d-amount" name="amount" type="number" class="input" required min="0" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="d-method">Payment Method</label>
+          <select id="d-method" name="paymentMethod" class="input">
+            <option value="cash">Cash</option>
+            <option value="bank_transfer">Bank Transfer</option>
+            <option value="card">Card</option>
+            <option value="mobile_money">Mobile Money</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="d-campaign">Campaign</label>
+          <input id="d-campaign" name="campaignTitle" class="input" placeholder="Optional campaign" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="d-ref">Reference / Notes</label>
+        <input id="d-ref" name="reference" class="input" />
+      </div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Save Donation</button>
+        <button type="button" id="cancel-log-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Donations Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Donor</th>
+          <th class="p-4 font-medium hidden md:table-cell">Campaign</th>
+          <th class="p-4 font-medium text-right">Amount</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Method</th>
+          <th class="p-4 font-medium text-right hidden lg:table-cell">Date</th>
+          <th class="p-4 font-medium text-right">Status</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allDonations.map((d: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-4">
+                <div class="font-medium">{d.donorName || 'Anonymous'}</div>
+                <div class="text-xs" style="color: var(--color-muted);">{d.donorEmail || ''}</div>
+              </td>
+              <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{d.campaignTitle || '-'}</td>
+              <td class="p-4 text-right font-medium" style="color: var(--color-primary);">{formatCurrency(d.amount || 0)}</td>
+              <td class="p-4 hidden sm:table-cell"><span class="badge badge-accent">{d.paymentMethod || '-'}</span></td>
+              <td class="p-4 text-right hidden lg:table-cell" style="color: var(--color-muted);">{d.createdAt ? new Date(d.createdAt).toLocaleDateString() : '-'}</td>
+              <td class="p-4 text-right"><span class={d.status === 'completed' ? 'badge badge-primary' : 'badge badge-accent'}>{d.status || 'completed'}</span></td>
+              <td class="p-4 text-right">
+                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-receipt={d.id}>Receipt</button>
+                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-donation={d.id}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {allDonations.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No donations recorded yet.</div>}
+  </div>
+
+  <script>
+    const toggleLog = document.getElementById('toggle-log-btn');
+    const cancelLog = document.getElementById('cancel-log-btn');
+    const logForm = document.getElementById('log-form');
+    toggleLog?.addEventListener('click', () => logForm?.classList.toggle('hidden'));
+    cancelLog?.addEventListener('click', () => logForm?.classList.add('hidden'));
+
+    document.getElementById('donation-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, any> = {};
+      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'amount' ? Number(v) : v; });
+      body.status = 'completed';
+      body.source = 'manual';
+      try {
+        const res = await fetch('/api/admin/charity/donations', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) { window.location.reload(); } else { const err = await res.json(); alert(err.error || 'Failed'); }
+      } catch { alert('Network error'); }
+    });
+
+    document.querySelectorAll('[data-delete-donation]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this donation record?')) return;
+        const id = btn.getAttribute('data-delete-donation');
+        try { const res = await fetch(`/api/admin/charity/donations?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else alert('Failed'); } catch { alert('Network error'); }
+      });
+    });
+
+    // Export CSV
+    document.getElementById('export-csv-btn')?.addEventListener('click', () => {
+      const rows = Array.from(document.querySelectorAll('table tbody tr'));
+      const csv = ['Donor,Email,Campaign,Amount,Method,Date,Status'];
+      rows.forEach(row => {
+        const cells = Array.from(row.querySelectorAll('td'));
+        csv.push(cells.map(c => `"${c.textContent?.trim().replace(/\n/g, ' ')}"`).join(','));
+      });
+      const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'charity_donations.csv';
+      a.click();
+    });
+  </script>
+</AdminLayout>

@@ -1,0 +1,114 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { generateCSRFToken } from '../../../lib/utils';
+
+let settings: any = {};
+try {
+  const result = await lightbase.query('charity_settings', { limit: 1 });
+  const docs = result.data || [];
+  settings = docs[0] || {};
+} catch {}
+
+const csrfToken = generateCSRFToken();
+---
+
+<AdminLayout title="Settings" platform="charity" section="settings">
+  <div class="mb-6 fade-in">
+    <h2 class="text-lg font-bold">Charity Platform Settings</h2>
+    <p class="text-sm" style="color: var(--color-muted);">Configure platform-wide settings</p>
+  </div>
+
+  <form id="settings-form" class="space-y-6 max-w-2xl">
+    <input type="hidden" name="csrfToken" value={csrfToken} />
+    <input type="hidden" name="settingsId" value={settings.id || ''} />
+
+    <!-- General -->
+    <div class="card p-6">
+      <h3 class="font-bold mb-4">General Information</h3>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-name">Organization Name</label>
+          <input id="s-name" name="orgName" class="input" value={settings.orgName || 'Minhaajulhudaa Charity Foundation'} />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-tagline">Tagline</label>
+          <input id="s-tagline" name="tagline" class="input" value={settings.tagline || 'Serving Humanity with Compassion'} />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-email">Contact Email</label>
+          <input id="s-email" name="contactEmail" type="email" class="input" value={settings.contactEmail || ''} />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-phone">Contact Phone</label>
+          <input id="s-phone" name="contactPhone" class="input" value={settings.contactPhone || ''} />
+        </div>
+      </div>
+    </div>
+
+    <!-- Banking -->
+    <div class="card p-6">
+      <h3 class="font-bold mb-4">Banking Information</h3>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-bank">Bank Name</label>
+          <input id="s-bank" name="bankName" class="input" value={settings.bankName || ''} />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-acct">Account Number</label>
+          <input id="s-acct" name="accountNumber" class="input" value={settings.accountNumber || ''} />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-acctname">Account Name</label>
+          <input id="s-acctname" name="accountName" class="input" value={settings.accountName || ''} />
+        </div>
+      </div>
+    </div>
+
+    <!-- Donation Settings -->
+    <div class="card p-6">
+      <h3 class="font-bold mb-4">Donation Settings</h3>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-currency">Default Currency</label>
+          <select id="s-currency" name="defaultCurrency" class="input">
+            <option value="NGN" selected={settings.defaultCurrency === 'NGN'}>NGN</option>
+            <option value="USD" selected={settings.defaultCurrency === 'USD'}>USD</option>
+            <option value="GBP" selected={settings.defaultCurrency === 'GBP'}>GBP</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-min">Minimum Donation</label>
+          <input id="s-min" name="minimumDonation" type="number" class="input" value={settings.minimumDonation || 100} min="0" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-receipt">Receipt Footer Message</label>
+          <textarea id="s-receipt" name="receiptFooter" class="input" rows="2">{settings.receiptFooter || 'JazakAllahu Khairan for your generous contribution.'}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Settings</button>
+  </form>
+
+  <script>
+    document.getElementById('settings-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, any> = {};
+      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = v; });
+      const settingsId = (document.querySelector('[name=settingsId]') as HTMLInputElement).value;
+      try {
+        let url = '/api/admin/charity/content';
+        let method = 'POST';
+        if (settingsId) {
+          url = `/api/admin/charity/content?id=${settingsId}`;
+          method = 'PATCH';
+        }
+        body.collection = 'charity_settings';
+        const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) { alert('Settings saved successfully'); } else { const err = await res.json(); alert(err.error || 'Failed'); }
+      } catch { alert('Network error'); }
+    });
+  </script>
+</AdminLayout>

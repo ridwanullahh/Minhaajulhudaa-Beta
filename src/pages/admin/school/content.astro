@@ -1,0 +1,130 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const [pages, announcements, events] = await Promise.all([
+  lightbase.query('school_pages', { sort: 'title:asc', limit: 50 }),
+  lightbase.query('school_announcements', { sort: 'createdAt:desc', limit: 20 }),
+  lightbase.query('school_events', { sort: 'startDate:desc', limit: 20 }),
+]);
+
+const allPages = pages.data || [];
+const allAnnouncements = announcements.data || [];
+const allEvents = events.data || [];
+---
+
+<AdminLayout title="Content Management" platform="school" section="content">
+  <div class="flex items-center justify-between mb-6 fade-in">
+    <div>
+      <h2 class="text-lg font-bold">Content Management</h2>
+      <p class="text-sm" style="color: var(--color-muted);">Manage pages, announcements, and events.</p>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="flex gap-1 mb-6 border-b" style="border-color: var(--color-border);">
+    <button class="content-tab px-4 py-2.5 text-sm font-medium border-b-2" data-tab="pages" style="border-color: var(--color-primary); color: var(--color-primary);">Pages ({allPages.length})</button>
+    <button class="content-tab px-4 py-2.5 text-sm font-medium border-b-2" data-tab="announcements" style="border-color: transparent; color: var(--color-muted);">Announcements ({allAnnouncements.length})</button>
+    <button class="content-tab px-4 py-2.5 text-sm font-medium border-b-2" data-tab="events" style="border-color: transparent; color: var(--color-muted);">Events ({allEvents.length})</button>
+  </div>
+
+  <!-- Pages Tab -->
+  <div id="tab-pages" class="content-panel">
+    <div class="card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+            <th class="p-4 font-medium">Title</th>
+            <th class="p-4 font-medium hidden md:table-cell">Slug</th>
+            <th class="p-4 font-medium hidden sm:table-cell">Status</th>
+            <th class="p-4 font-medium text-right">Actions</th>
+          </tr></thead>
+          <tbody>
+            {allPages.map((pg: any) => (
+              <tr style="border-top: 1px solid var(--color-border);">
+                <td class="p-4 font-medium">{pg.title}</td>
+                <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{pg.slug}</td>
+                <td class="p-4 hidden sm:table-cell"><span class={pg.status === 'published' ? 'badge badge-primary' : 'badge badge-accent'}>{pg.status}</span></td>
+                <td class="p-4 text-right">
+                  <div class="flex items-center justify-end gap-2">
+                    <a href={`/api/admin/school/content?id=${pg.id}`} class="text-xs font-medium" style="color: var(--color-primary);">Edit</a>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {allPages.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No pages created yet.</div>}
+    </div>
+  </div>
+
+  <!-- Announcements Tab -->
+  <div id="tab-announcements" class="content-panel hidden">
+    <div class="card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+            <th class="p-4 font-medium">Title</th>
+            <th class="p-4 font-medium hidden md:table-cell">Type</th>
+            <th class="p-4 font-medium hidden sm:table-cell">Date</th>
+            <th class="p-4 font-medium text-right">Actions</th>
+          </tr></thead>
+          <tbody>
+            {allAnnouncements.map((ann: any) => (
+              <tr style="border-top: 1px solid var(--color-border);">
+                <td class="p-4 font-medium">{ann.title}</td>
+                <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{ann.type || '-'}</td>
+                <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{ann.createdAt ? new Date(ann.createdAt).toLocaleDateString() : '-'}</td>
+                <td class="p-4 text-right">
+                  <button class="text-xs font-medium" style="color: var(--color-primary);" data-delete-announcement={ann.id}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {allAnnouncements.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No announcements yet.</div>}
+    </div>
+  </div>
+
+  <!-- Events Tab -->
+  <div id="tab-events" class="content-panel hidden">
+    <div class="card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+            <th class="p-4 font-medium">Title</th>
+            <th class="p-4 font-medium hidden md:table-cell">Category</th>
+            <th class="p-4 font-medium hidden sm:table-cell">Date</th>
+            <th class="p-4 font-medium text-right">Actions</th>
+          </tr></thead>
+          <tbody>
+            {allEvents.map((ev: any) => (
+              <tr style="border-top: 1px solid var(--color-border);">
+                <td class="p-4 font-medium">{ev.title}</td>
+                <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{ev.category || '-'}</span></td>
+                <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{ev.startDate ? new Date(ev.startDate).toLocaleDateString() : '-'}</td>
+                <td class="p-4 text-right">
+                  <button class="text-xs font-medium" style="color: var(--color-primary);" data-delete-event={ev.id}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {allEvents.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No events yet.</div>}
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.content-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.content-tab').forEach(t => { t.style.borderColor = 'transparent'; t.style.color = 'var(--color-muted)'; });
+        tab.style.borderColor = 'var(--color-primary)'; tab.style.color = 'var(--color-primary)';
+        document.querySelectorAll('.content-panel').forEach(p => p.classList.add('hidden'));
+        document.getElementById('tab-' + tab.dataset.tab)?.classList.remove('hidden');
+      });
+    });
+  </script>
+</AdminLayout>

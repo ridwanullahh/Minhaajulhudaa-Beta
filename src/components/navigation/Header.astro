@@ -15,7 +15,7 @@ const platformConfig = platform ? PLATFORMS[platform as keyof typeof PLATFORMS] 
 const allPlatforms = Object.values(PLATFORMS);
 ---
 
-<header class="sticky top-0 z-50 backdrop-blur-lg" style="background: rgb(255 255 255 / 0.85); border-bottom: 1px solid var(--color-border);">
+<header class="sticky top-0 z-50 backdrop-blur-lg border-b" style="background: color-mix(in srgb, var(--color-surface) 85%, transparent); border-color: var(--color-border);">
   <div class="container-app flex items-center justify-between h-16">
     <!-- Logo + Platform Name -->
     <div class="flex items-center gap-3">
