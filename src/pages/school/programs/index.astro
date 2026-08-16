@@ -2,11 +2,16 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const result = await lightbase.query('school_programs', {
-  sort: 'title:asc',
-  limit: 50,
-});
-const programs = result.data || [];
+let programs: any[] = [];
+try {
+  const result = await lightbase.query('school_programs', {
+    sort: 'title:asc',
+    limit: 50,
+  });
+  programs = result.data || [];
+} catch (err) {
+  console.error('[school/programs] query error:', err);
+}
 const categories = [...new Set(programs.map((p: any) => p.category).filter(Boolean))];
 ---
 

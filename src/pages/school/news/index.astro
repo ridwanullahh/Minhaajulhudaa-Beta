@@ -2,12 +2,17 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const result = await lightbase.query('school_blog_posts', {
-  filter: { field: 'status', op: 'eq', value: 'published' },
-  sort: 'publishedAt:desc',
-  limit: 20,
-});
-const posts = result.data || [];
+let posts: any[] = [];
+try {
+  const result = await lightbase.query('school_blog_posts', {
+    filter: { field: 'status', op: 'eq', value: 'published' },
+    sort: 'publishedAt:desc',
+    limit: 20,
+  });
+  posts = result.data || [];
+} catch (err) {
+  console.error('[school/news] query error:', err);
+}
 const categories = [...new Set(posts.map(p => p.category).filter(Boolean))];
 ---
 

@@ -3,15 +3,20 @@ import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
 export async function getStaticPaths() {
-  const result = await lightbase.query('charity_success_stories', {
-    filter: { field: 'status', op: 'eq', value: 'published' },
-    limit: 50,
-  });
-  const stories = result.data || [];
-  return stories.map((story) => ({
-    params: { slug: story.slug },
-    props: { story },
-  }));
+  try {
+    const result = await lightbase.query('charity_success_stories', {
+      filter: { field: 'status', op: 'eq', value: 'published' },
+      limit: 50,
+    });
+    const stories = result.data || [];
+    return stories.map((story) => ({
+      params: { slug: story.slug },
+      props: { story },
+    }));
+  } catch (err) {
+    console.error('[charity/stories/[slug]] getStaticPaths error:', err);
+    return [];
+  }
 }
 
 const { story } = Astro.props;
@@ -20,12 +25,17 @@ if (!story) {
   return Astro.redirect('/charity/stories');
 }
 
-const relatedStories = await lightbase.query('charity_success_stories', {
-  filter: { field: 'status', op: 'eq', value: 'published' },
-  sort: 'publishedAt:desc',
-  limit: 3,
-});
-const related = (relatedStories.data || []).filter((s: any) => s.slug !== story.slug).slice(0, 3);
+let related: any[] = [];
+try {
+  const relatedStories = await lightbase.query('charity_success_stories', {
+    filter: { field: 'status', op: 'eq', value: 'published' },
+    sort: 'publishedAt:desc',
+    limit: 5,
+  });
+  related = (relatedStories.data || []).filter(function(s) { return s.slug !== story.slug; }).slice(0, 3);
+} catch (err) {
+  console.error('[charity/stories/[slug]] related query error:', err);
+}
 ---
 
 <PlatformLayout title={`${story.title} - Success Stories - Minhaajulhudaa Charity`} platform="charity">
@@ -68,12 +78,16 @@ const related = (relatedStories.data || []).filter((s: any) => s.slug !== story.
         <div class="mt-8 p-6 rounded-2xl" style="background: rgb(5,179,77,0.05); border: 1px solid rgb(5,179,77,0.15);">
           <h3 class="font-bold mb-4" style="color: var(--color-primary);">Impact Metrics</h3>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {Object.entries(story.impactMetrics).map(([key, value]: [string, any]) => (
-              <div class="text-center">
-                <div class="text-2xl font-extrabold" style="color: var(--color-primary);">{value}</div>
-                <div class="text-xs mt-1" style="color: var(--color-muted);">{key.replace(/([A-Z])/g, ' $1').trim()}</div>
-              </div>
-            ))}
+            {Object.entries(story.impactMetrics).map(function(entry) {
+              const key = entry[0];
+              const value = entry[1];
+              return (
+                <div class="text-center">
+                  <div class="text-2xl font-extrabold" style="color: var(--color-primary);">{value}</div>
+                  <div class="text-xs mt-1" style="color: var(--color-muted);">{key.replace(/([A-Z])/g, ' $1').trim()}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
@@ -91,17 +105,19 @@ const related = (relatedStories.data || []).filter((s: any) => s.slug !== story.
       <div class="mt-12 pt-8" style="border-top: 1px solid var(--color-border);">
         <h2 class="text-xl font-bold mb-6">More Stories</h2>
         <div class="grid md:grid-cols-3 gap-6">
-          {related.map((r: any) => (
-            <a href={`/charity/stories/${r.slug}`} class="card card-hover overflow-hidden block">
-              <div class="aspect-[16/9]">
-                {r.imageUrl ? <img src={r.imageUrl} alt={r.title} class="w-full h-full object-cover" loading="lazy" /> : <div class="w-full h-full" style="background: var(--color-surface);"></div>}
-              </div>
-              <div class="p-4">
-                <h3 class="font-bold text-sm mb-1">{r.title}</h3>
-                <p class="text-xs line-clamp-2" style="color: var(--color-muted);">{r.summary}</p>
-              </div>
-            </a>
-          ))}
+          {related.map(function(r) {
+            return (
+              <a href={`/charity/stories/${r.slug}`} class="card card-hover overflow-hidden block">
+                <div class="aspect-[16/9]">
+                  {r.imageUrl ? <img src={r.imageUrl} alt={r.title} class="w-full h-full object-cover" loading="lazy" /> : <div class="w-full h-full" style="background: var(--color-surface);"></div>}
+                </div>
+                <div class="p-4">
+                  <h3 class="font-bold text-sm mb-1">{r.title}</h3>
+                  <p class="text-xs line-clamp-2" style="color: var(--color-muted);">{r.summary}</p>
+                </div>
+              </a>
+            );
+          })}
         </div>
       </div>
     )}

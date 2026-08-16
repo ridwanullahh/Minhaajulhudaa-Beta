@@ -136,6 +136,7 @@ const allPlatforms = Object.values(PLATFORMS);
     const toggle = document.getElementById('theme-toggle');
     const lightIcon = document.querySelector('.theme-icon-light');
     const darkIcon = document.querySelector('.theme-icon-dark');
+    if (!toggle || !lightIcon || !darkIcon) return;
 
     function updateIcons() {
       const theme = document.documentElement.getAttribute('data-theme');
@@ -149,7 +150,7 @@ const allPlatforms = Object.values(PLATFORMS);
     }
     updateIcons();
 
-    toggle?.addEventListener('click', () => {
+    toggle.addEventListener('click', function() {
       const current = document.documentElement.getAttribute('data-theme');
       const next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
@@ -162,8 +163,9 @@ const allPlatforms = Object.values(PLATFORMS);
   function setupMobileMenu() {
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
-    btn?.addEventListener('click', () => {
-      menu?.classList.toggle('hidden');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', function() {
+      menu.classList.toggle('hidden');
     });
   }
 
@@ -171,13 +173,14 @@ const allPlatforms = Object.values(PLATFORMS);
   function setupPlatformSwitcher() {
     const btn = document.getElementById('platform-switcher-btn');
     const menu = document.getElementById('platform-switcher-menu');
-    btn?.addEventListener('click', (e) => {
+    if (!btn || !menu) return;
+    btn.addEventListener('click', function(e) {
       e.stopPropagation();
-      menu?.classList.toggle('hidden');
+      menu.classList.toggle('hidden');
     });
-    document.addEventListener('click', (e) => {
-      if (!menu?.contains(e.target as Node) && !btn?.contains(e.target as Node)) {
-        menu?.classList.add('hidden');
+    document.addEventListener('click', function(e) {
+      if (!menu.contains(e.target) && !btn.contains(e.target)) {
+        menu.classList.add('hidden');
       }
     });
   }

@@ -2,13 +2,17 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const result = await lightbase.query('travels_packages', {
-  filter: { field: 'category', op: 'eq', value: 'tour' },
-  sort: 'isFeatured:desc',
-  limit: 100,
-});
-
-const tours = result.data || [];
+let tours: any[] = [];
+try {
+  const result = await lightbase.query('travels_packages', {
+    filter: { field: 'category', op: 'eq', value: 'tour' },
+    sort: 'isFeatured:desc',
+    limit: 100,
+  });
+  tours = result.data || [];
+} catch (err) {
+  console.error('[travels/tours] query error:', err);
+}
 ---
 
 <PlatformLayout title="Tours - Minhaajulhudaa Travels" platform="travels">
