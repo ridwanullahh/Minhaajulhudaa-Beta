@@ -1,0 +1,102 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../lib/lightbase';
+
+const result = await lightbase.query('travels_gallery', {
+  sort: 'order:asc,title:asc',
+  limit: 100,
+});
+const allItems = result.data || [];
+const categories = [...new Set(allItems.map((r: any) => r.category).filter(Boolean))];
+---
+
+<PlatformLayout title="Gallery - Minhaajulhudaa Travels" platform="travels">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Travel Gallery</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Explore moments from our journeys — destinations, pilgrimages, and memories.</p>
+
+    <!-- Category Filter -->
+    <div class="flex flex-wrap gap-2 mb-8" id="gallery-filters">
+      <button data-filter="all" class="btn btn-primary text-xs filter-btn">All</button>
+      {categories.map((cat) => (
+        <button data-filter={cat} class="btn btn-ghost text-xs filter-btn capitalize">{cat}</button>
+      ))}
+    </div>
+
+    <!-- Masonry Grid -->
+    <div id="gallery-grid" class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+      {allItems.map((item: any) => (
+        <div
+          class="gallery-item break-inside-avoid card overflow-hidden group relative cursor-pointer"
+          data-category={item.category || ''}
+        >
+          <div class="relative overflow-hidden rounded-xl">
+            <img
+              src={item.imageUrl || '/placeholder.jpg'}
+              alt={item.title || 'Gallery image'}
+              class="w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              style="min-height: 180px; max-height: 400px;"
+              loading="lazy"
+            />
+            <!-- Title Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+              <h3 class="text-white font-bold text-sm leading-tight mb-1">{item.title || ''}</h3>
+              {item.category && (
+                <span class="badge badge-primary text-xs w-fit capitalize">{item.category}</span>
+              )}
+            </div>
+          </div>
+          {item.description && (
+            <div class="p-3">
+              <p class="text-xs line-clamp-2" style="color: var(--color-muted);">{item.description}</p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    {allItems.length === 0 && (
+      <div class="card p-12 text-center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+        <p style="color: var(--color-muted);">No gallery items yet. Check back soon!</p>
+      </div>
+    )}
+  </section>
+
+  <style>
+    .gallery-item.hidden {
+      display: none;
+    }
+    .filter-btn.active {
+      background: var(--color-primary) !important;
+      color: #fff !important;
+    }
+  </style>
+
+  <script is:inline>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.gallery-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active', 'btn-primary'));
+        btn.classList.add('active', 'btn-primary');
+        const filter = btn.getAttribute('data-filter');
+        items.forEach(item => {
+          if (filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Set initial active state
+    document.querySelector('.filter-btn[data-filter="all"]')?.classList.add('active');
+  </script>
+</PlatformLayout>

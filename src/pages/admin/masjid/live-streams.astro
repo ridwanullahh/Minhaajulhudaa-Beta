@@ -1,0 +1,200 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const streamsResult = await lightbase.query('masjid_live_streams', { sort: 'createdAt:desc', limit: 100 });
+const streams = streamsResult.data || [];
+---
+
+<AdminLayout title="Live Streams" platform="masjid" section="live-streams">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 fade-in">
+    <div>
+      <h2 class="text-xl font-bold">Live Stream Configuration</h2>
+      <p class="text-sm" style="color: var(--color-muted);">{streams.length} streams</p>
+    </div>
+    <button id="btn-add-stream" class="btn btn-primary text-xs">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add Stream
+    </button>
+  </div>
+
+  <div class="card overflow-hidden fade-in">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr style="background: var(--color-background); color: var(--color-muted);">
+            <th class="text-left p-3 font-medium">Title</th>
+            <th class="text-left p-3 font-medium hidden sm:table-cell">Platform</th>
+            <th class="text-left p-3 font-medium hidden md:table-cell">Schedule</th>
+            <th class="text-left p-3 font-medium hidden md:table-cell">Is Live</th>
+            <th class="text-left p-3 font-medium hidden lg:table-cell">Featured</th>
+            <th class="text-right p-3 font-medium">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {streams.map((stream: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-3 font-medium">{stream.title}</td>
+              <td class="p-3 hidden sm:table-cell">
+                <span class="badge badge-primary">{stream.platform || '-'}</span>
+              </td>
+              <td class="p-3 hidden md:table-cell" style="color: var(--color-muted);">{stream.schedule || '-'}</td>
+              <td class="p-3 hidden md:table-cell">
+                {stream.isLive ? (
+                  <span class="badge" style="background: rgba(5,179,77,0.15); color: #05B34D;">Live</span>
+                ) : (
+                  <span class="badge" style="background: rgba(156,163,175,0.15); color: #9CA3AF;">Offline</span>
+                )}
+              </td>
+              <td class="p-3 hidden lg:table-cell">
+                {stream.isFeatured ? (
+                  <span class="badge" style="background: rgba(5,179,77,0.15); color: #05B34D;">Featured</span>
+                ) : (
+                  <span class="badge" style="background: rgba(156,163,175,0.15); color: #9CA3AF;">No</span>
+                )}
+              </td>
+              <td class="p-3 text-right">
+                <div class="flex items-center justify-end gap-1">
+                  <button class="btn-edit-stream w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(5,179,77,0.1)]" data-id={stream.id} title="Edit">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </button>
+                  <button class="btn-delete-stream w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(220,38,38,0.1)]" data-id={stream.id} title="Delete">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #DC2626;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {streams.length === 0 && <p class="text-sm p-6 text-center" style="color: var(--color-muted);">No live streams yet.</p>}
+    </div>
+  </div>
+
+  <!-- Stream Modal -->
+  <div id="modal-stream" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/40" id="modal-stream-bg"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div class="card p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto relative" style="background: var(--color-surface);">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="font-bold text-lg" id="modal-stream-title">Add Stream</h3>
+          <button id="modal-stream-close" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(220,38,38,0.1)]">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <form id="stream-form" class="space-y-4">
+          <input type="hidden" name="id" id="stream-id" />
+          <div>
+            <label class="block text-sm font-medium mb-1">Title</label>
+            <input type="text" name="title" class="input" required placeholder="Stream title" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm font-medium mb-1">Platform</label>
+              <select name="platform" class="input">
+                <option value="youtube">YouTube</option>
+                <option value="facebook">Facebook</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Schedule</label>
+              <input type="text" name="schedule" class="input" placeholder="e.g. Fri 1:00 PM" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Stream URL</label>
+            <input type="url" name="streamUrl" class="input" placeholder="https://youtube.com/live/..." />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Thumbnail URL</label>
+            <input type="url" name="thumbnailUrl" class="input" placeholder="https://..." />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Description</label>
+            <textarea name="description" class="input" rows="3" placeholder="Brief description"></textarea>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" name="isLive" id="stream-isLive" class="w-4 h-4 rounded" />
+              <label for="stream-isLive" class="text-sm font-medium">Is Live</label>
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="checkbox" name="isFeatured" id="stream-isFeatured" class="w-4 h-4 rounded" />
+              <label for="stream-isFeatured" class="text-sm font-medium">Featured</label>
+            </div>
+          </div>
+          <div class="flex justify-end gap-2 pt-2">
+            <button type="button" id="modal-stream-cancel" class="btn btn-ghost">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Stream</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const modal = document.getElementById('modal-stream');
+    const openBtn = document.getElementById('btn-add-stream');
+    const closeBtn = document.getElementById('modal-stream-close');
+    const cancelBtn = document.getElementById('modal-stream-cancel');
+    const bg = document.getElementById('modal-stream-bg');
+    const form = document.getElementById('stream-form');
+    const titleEl = document.getElementById('modal-stream-title');
+    const idEl = document.getElementById('stream-id');
+    let editMode = false;
+
+    const open = () => { modal.classList.remove('hidden'); editMode = false; titleEl.textContent = 'Add Stream'; form.reset(); idEl.value = ''; };
+    const close = () => modal.classList.add('hidden');
+
+    openBtn?.addEventListener('click', open);
+    closeBtn?.addEventListener('click', close);
+    cancelBtn?.addEventListener('click', close);
+    bg?.addEventListener('click', close);
+
+    document.querySelectorAll('.btn-edit-stream').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.id;
+        try {
+          const res = await fetch('/api/admin/masjid/live-streams?id=' + id);
+          const data = await res.json();
+          editMode = true; titleEl.textContent = 'Edit Stream'; idEl.value = id;
+          form.title.value = data.title || '';
+          form.platform.value = data.platform || 'youtube';
+          form.schedule.value = data.schedule || '';
+          form.streamUrl.value = data.streamUrl || '';
+          form.thumbnailUrl.value = data.thumbnailUrl || '';
+          form.description.value = data.description || '';
+          form.isLive.checked = !!data.isLive;
+          form.isFeatured.checked = !!data.isFeatured;
+          modal.classList.remove('hidden');
+        } catch(e) { alert('Failed to load stream'); }
+      });
+    });
+
+    document.querySelectorAll('.btn-delete-stream').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this stream?')) return;
+        try {
+          await fetch('/api/admin/masjid/live-streams?id=' + btn.dataset.id, { method: 'DELETE' });
+          window.location.reload();
+        } catch(e) { alert('Failed to delete'); }
+      });
+    });
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd);
+      data.isLive = !!data.isLive;
+      data.isFeatured = !!data.isFeatured;
+      try {
+        const method = editMode ? 'PATCH' : 'POST';
+        const url = editMode ? '/api/admin/masjid/live-streams?id=' + data.id : '/api/admin/masjid/live-streams';
+        const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        const json = await res.json();
+        if (json.success) { window.location.reload(); } else { alert(json.error || 'Failed'); }
+      } catch (err) { alert('Request failed'); }
+    });
+  </script>
+</AdminLayout>

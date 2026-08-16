@@ -1,0 +1,201 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const [quizzesResult, coursesResult] = await Promise.all([
+  lightbase.query('school_quizzes', { sort: 'title:asc', limit: 200 }),
+  lightbase.query('school_courses', { sort: 'title:asc', limit: 100 }),
+]);
+const quizzes = quizzesResult.data || [];
+const courses = coursesResult.data || [];
+const courseMap = new Map<string, string>((courses as any[]).map((c: any) => [c.id, c.title]));
+---
+
+<AdminLayout title="Quiz Management" platform="school" section="quizzes">
+  <div class="flex items-center justify-between mb-6 fade-in">
+    <div>
+      <h2 class="text-lg font-bold">Quizzes</h2>
+      <p class="text-sm" style="color: var(--color-muted);">{quizzes.length} quizzes across {courses.length} courses</p>
+    </div>
+    <button id="toggle-form-btn" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Add Quiz
+    </button>
+  </div>
+
+  <!-- Create Form -->
+  <div id="create-form" class="hidden card p-6 mb-6">
+    <h3 class="font-bold mb-4">Add New Quiz</h3>
+    <form id="quiz-form" class="space-y-4">
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><label class="block text-sm font-medium mb-1" for="cr-title">Title</label><input id="cr-title" name="title" class="input" required /></div>
+        <div><label class="block text-sm font-medium mb-1" for="cr-courseId">Course</label>
+          <select id="cr-courseId" name="courseId" class="input" required>
+            <option value="">Select Course</option>
+            {courses.map((c: any) => <option value={c.id}>{c.title}</option>)}
+          </select>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div><label class="block text-sm font-medium mb-1" for="cr-timeLimit">Time Limit (mins)</label><input id="cr-timeLimit" name="timeLimit" class="input" type="number" min="0" value="30" /></div>
+        <div><label class="block text-sm font-medium mb-1" for="cr-passingScore">Passing Score (%)</label><input id="cr-passingScore" name="passingScore" class="input" type="number" min="0" max="100" value="50" /></div>
+      </div>
+      <div><label class="block text-sm font-medium mb-1" for="cr-description">Description</label><textarea id="cr-description" name="description" class="input" rows="3"></textarea></div>
+      <div><label class="block text-sm font-medium mb-1" for="cr-questions">Questions (JSON)</label>
+        <textarea id="cr-questions" name="questions" class="input font-mono text-xs" rows="8" placeholder='[{"question":"...","options":["A","B","C","D"],"correctAnswer":"A"}]'></textarea>
+      </div>
+      <div class="flex items-center gap-2">
+        <input id="cr-isPublished" name="isPublished" type="checkbox" class="w-4 h-4" />
+        <label for="cr-isPublished" class="text-sm font-medium">Published</label>
+      </div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Create Quiz</button>
+        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="edit-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center" style="background: rgba(0,0,0,0.5);">
+    <div class="card p-6 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+      <h3 class="font-bold mb-4">Edit Quiz</h3>
+      <form id="edit-form" class="space-y-4">
+        <input type="hidden" id="ed-id" name="id" />
+        <div class="grid md:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-medium mb-1" for="ed-title">Title</label><input id="ed-title" name="title" class="input" required /></div>
+          <div><label class="block text-sm font-medium mb-1" for="ed-courseId">Course</label>
+            <select id="ed-courseId" name="courseId" class="input" required>
+              <option value="">Select Course</option>
+              {courses.map((c: any) => <option value={c.id}>{c.title}</option>)}
+            </select>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-medium mb-1" for="ed-timeLimit">Time Limit (mins)</label><input id="ed-timeLimit" name="timeLimit" class="input" type="number" min="0" /></div>
+          <div><label class="block text-sm font-medium mb-1" for="ed-passingScore">Passing Score (%)</label><input id="ed-passingScore" name="passingScore" class="input" type="number" min="0" max="100" /></div>
+        </div>
+        <div><label class="block text-sm font-medium mb-1" for="ed-description">Description</label><textarea id="ed-description" name="description" class="input" rows="3"></textarea></div>
+        <div><label class="block text-sm font-medium mb-1" for="ed-questions">Questions (JSON)</label>
+          <textarea id="ed-questions" name="questions" class="input font-mono text-xs" rows="8"></textarea>
+        </div>
+        <div class="flex items-center gap-2">
+          <input id="ed-isPublished" name="isPublished" type="checkbox" class="w-4 h-4" />
+          <label for="ed-isPublished" class="text-sm font-medium">Published</label>
+        </div>
+        <div class="flex gap-3">
+          <button type="submit" class="btn btn-primary">Update Quiz</button>
+          <button type="button" id="cancel-edit-btn" class="btn btn-ghost">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Quizzes Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Title</th>
+          <th class="p-4 font-medium hidden md:table-cell">Course</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Questions</th>
+          <th class="p-4 font-medium hidden lg:table-cell">Time Limit</th>
+          <th class="p-4 font-medium hidden lg:table-cell">Passing Score</th>
+          <th class="p-4 font-medium text-right">Published</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {quizzes.map((q: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-4 font-medium">{q.title}</td>
+              <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{courseMap.get(q.courseId) || '-'}</span></td>
+              <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{Array.isArray(q.questions) ? q.questions.length : 0}</td>
+              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{q.timeLimit ? q.timeLimit + ' min' : '-'}</td>
+              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{q.passingScore != null ? q.passingScore + '%' : '-'}</td>
+              <td class="p-4 text-right"><span class={q.isPublished ? 'badge badge-primary' : 'badge badge-accent'}>{q.isPublished ? 'Yes' : 'No'}</span></td>
+              <td class="p-4 text-right">
+                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-quiz={q.id}>Edit</button>
+                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-quiz={q.id}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {quizzes.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No quizzes created yet.</div>}
+  </div>
+
+  <script define:vars={{ quizzes }}>
+    const toggleBtn = document.getElementById('toggle-form-btn');
+    const cancelBtn = document.getElementById('cancel-form-btn');
+    const createForm = document.getElementById('create-form');
+    toggleBtn?.addEventListener('click', () => createForm?.classList.toggle('hidden'));
+    cancelBtn?.addEventListener('click', () => createForm?.classList.add('hidden'));
+
+    document.getElementById('quiz-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, any> = {};
+      fd.forEach((v, k) => {
+        if (k === 'isPublished') { body[k] = (v as string) === 'on'; return; }
+        if (k === 'timeLimit' || k === 'passingScore') { body[k] = parseFloat(v as string) || 0; return; }
+        if (k === 'questions') { try { body[k] = JSON.parse(v as string); } catch { body[k] = []; } return; }
+        body[k] = v;
+      });
+      try {
+        const res = await fetch('/api/admin/school/quizzes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) window.location.reload(); else { const err = await res.json(); alert(err.error || 'Failed'); }
+      } catch { alert('Network error'); }
+    });
+
+    document.querySelectorAll('[data-delete-quiz]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this quiz?')) return;
+        const id = btn.getAttribute('data-delete-quiz');
+        try {
+          const res = await fetch(`/api/admin/school/quizzes?id=${id}`, { method: 'DELETE' });
+          if (res.ok) window.location.reload(); else alert('Failed');
+        } catch { alert('Network error'); }
+      });
+    });
+
+    const editModal = document.getElementById('edit-modal');
+    const cancelEditBtn = document.getElementById('cancel-edit-btn');
+    cancelEditBtn?.addEventListener('click', () => editModal?.classList.add('hidden'));
+    editModal?.addEventListener('click', (e) => { if (e.target === editModal) editModal.classList.add('hidden'); });
+
+    document.querySelectorAll('[data-edit-quiz]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-edit-quiz');
+        const item = quizzes.find((q: any) => q.id === id);
+        if (!item) return;
+        (document.getElementById('ed-id') as HTMLInputElement).value = item.id;
+        (document.getElementById('ed-title') as HTMLInputElement).value = item.title || '';
+        (document.getElementById('ed-courseId') as HTMLSelectElement).value = item.courseId || '';
+        (document.getElementById('ed-timeLimit') as HTMLInputElement).value = item.timeLimit || 0;
+        (document.getElementById('ed-passingScore') as HTMLInputElement).value = item.passingScore || 0;
+        (document.getElementById('ed-description') as HTMLTextAreaElement).value = item.description || '';
+        (document.getElementById('ed-questions') as HTMLTextAreaElement).value = Array.isArray(item.questions) ? JSON.stringify(item.questions, null, 2) : '';
+        (document.getElementById('ed-isPublished') as HTMLInputElement).checked = !!item.isPublished;
+        editModal?.classList.remove('hidden');
+      });
+    });
+
+    document.getElementById('edit-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, any> = {};
+      fd.forEach((v, k) => {
+        if (k === 'isPublished') { body[k] = (v as string) === 'on'; return; }
+        if (k === 'timeLimit' || k === 'passingScore') { body[k] = parseFloat(v as string) || 0; return; }
+        if (k === 'questions') { try { body[k] = JSON.parse(v as string); } catch { body[k] = []; } return; }
+        if (k === 'id') return;
+        body[k] = v;
+      });
+      const id = (document.getElementById('ed-id') as HTMLInputElement).value;
+      try {
+        const res = await fetch(`/api/admin/school/quizzes?id=${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) window.location.reload(); else { const err = await res.json(); alert(err.error || 'Failed'); }
+      } catch { alert('Network error'); }
+    });
+  </script>
+</AdminLayout>

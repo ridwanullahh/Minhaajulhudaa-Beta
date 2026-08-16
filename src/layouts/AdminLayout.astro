@@ -148,6 +148,16 @@ sidebarItems.push(
           <h1 class="text-lg font-bold capitalize">{title || section}</h1>
         </div>
         <div class="flex items-center gap-2">
+          <!-- Theme Toggle -->
+          <button id="admin-theme-toggle" class="w-9 h-9 rounded-lg flex items-center justify-center border" style="border-color: var(--color-border);" aria-label="Toggle theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="admin-theme-icon-light">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="admin-theme-icon-dark" style="display:none;">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
           <a href={`/${platform}`} class="btn btn-ghost text-xs hidden sm:inline-flex" target="_blank">View Site</a>
           <a href="/admin" class="btn btn-ghost text-xs hidden sm:inline-flex">All Platforms</a>
         </div>
@@ -194,5 +204,33 @@ sidebarItems.push(
     toggle?.addEventListener('click', () => overlay?.classList.remove('hidden'));
     close?.addEventListener('click', () => overlay?.classList.add('hidden'));
     overlayBg?.addEventListener('click', () => overlay?.classList.add('hidden'));
+
+    // Admin theme toggle
+    (function() {
+      const btn = document.getElementById('admin-theme-toggle');
+      const lightIcon = document.querySelector('.admin-theme-icon-light');
+      const darkIcon = document.querySelector('.admin-theme-icon-dark');
+      if (!btn || !lightIcon || !darkIcon) return;
+
+      function updateIcons() {
+        const theme = document.documentElement.getAttribute('data-theme');
+        if (theme === 'dark') {
+          lightIcon.style.display = 'none';
+          darkIcon.style.display = 'block';
+        } else {
+          lightIcon.style.display = 'block';
+          darkIcon.style.display = 'none';
+        }
+      }
+      updateIcons();
+
+      btn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('minhaaj-theme', next);
+        updateIcons();
+      });
+    })();
   </script>
 </BaseLayout>

@@ -1,0 +1,167 @@
+---
+import { lightbase } from '../../lib/lightbase';
+
+let config: any = null;
+try {
+  config = await lightbase.findOne('masjid_quran_player_config', {});
+} catch {}
+---
+
+{config?.isPlaying && (
+  <div id="quran-floating-player" class="fixed bottom-4 right-4 z-[9999]" style="font-family: system-ui, -apple-system, sans-serif;">
+    <!-- Minimized View -->
+    <div id="qfp-minimized" class="hidden w-14 h-14 rounded-full flex items-center justify-center cursor-pointer shadow-lg transition-transform hover:scale-105"
+      style="background: #05B34D;">
+      <button id="qfp-play-min" class="w-full h-full rounded-full flex items-center justify-center" title="Play/Pause">
+        <svg id="qfp-icon-play-min" width="22" height="22" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>
+        <svg id="qfp-icon-pause-min" width="22" height="22" viewBox="0 0 24 24" fill="white" stroke="none" class="hidden"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      </button>
+    </div>
+
+    <!-- Expanded View -->
+    <div id="qfp-expanded" class="card overflow-hidden shadow-xl" style="width: 320px; background: #181F25; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px;">
+      <!-- Header -->
+      <div class="flex items-center justify-between px-4 py-3" style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+        <div class="flex items-center gap-2 min-w-0">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#05B34D" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          <span class="text-xs font-semibold truncate" style="color: #05B34D;">Quran Player</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <button id="qfp-minimize" class="w-7 h-7 rounded-md flex items-center justify-center transition-colors" style="color: #9CA3AF;" title="Minimize">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          </button>
+          <button id="qfp-close" class="w-7 h-7 rounded-md flex items-center justify-center transition-colors" style="color: #9CA3AF;" title="Close">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Track Info -->
+      <div class="px-4 py-3">
+        <p class="text-sm font-bold truncate" style="color: #FFFFFF;">{config.currentSurah || 'Surah'}</p>
+        <p class="text-xs truncate" style="color: #9CA3AF;">{config.currentReciter || 'Reciter'}</p>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center justify-center gap-4 px-4 pb-3">
+        <button id="qfp-play-btn" class="w-10 h-10 rounded-full flex items-center justify-center transition-colors" style="background: #05B34D;" title="Play/Pause">
+          <svg id="qfp-icon-play" width="18" height="18" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="5,3 19,12 5,21"/></svg>
+          <svg id="qfp-icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="white" stroke="none" class="hidden"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+        <div class="flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          <input id="qfp-volume" type="range" min="0" max="1" step="0.05" value="0.8" class="w-20" style="accent-color: #05B34D;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Audio Element -->
+    {config.audioUrl && <audio id="qfp-audio" src={config.audioUrl} preload="metadata"></audio>}
+  </div>
+)}
+
+<style>
+  #qfp-volume {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.2);
+    outline: none;
+  }
+  #qfp-volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #05B34D;
+    cursor: pointer;
+  }
+  #qfp-volume::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #05B34D;
+    cursor: pointer;
+    border: none;
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    if (sessionStorage.getItem('quran-player-closed') === 'true') return;
+
+    const player = document.getElementById('quran-floating-player');
+    if (!player) return;
+
+    const minimized = document.getElementById('qfp-minimized');
+    const expanded = document.getElementById('qfp-expanded');
+    const playBtn = document.getElementById('qfp-play-btn');
+    const playMin = document.getElementById('qfp-play-min');
+    const minimizeBtn = document.getElementById('qfp-minimize');
+    const closeBtn = document.getElementById('qfp-close');
+    const volumeSlider = document.getElementById('qfp-volume');
+    const audio = document.getElementById('qfp-audio');
+    const iconPlay = document.getElementById('qfp-icon-play');
+    const iconPause = document.getElementById('qfp-icon-pause');
+    const iconPlayMin = document.getElementById('qfp-icon-play-min');
+    const iconPauseMin = document.getElementById('qfp-icon-pause-min');
+
+    let isPlaying = false;
+
+    function updateIcons() {
+      if (isPlaying) {
+        iconPlay?.classList.add('hidden');
+        iconPause?.classList.remove('hidden');
+        iconPlayMin?.classList.add('hidden');
+        iconPauseMin?.classList.remove('hidden');
+      } else {
+        iconPlay?.classList.remove('hidden');
+        iconPause?.classList.add('hidden');
+        iconPlayMin?.classList.remove('hidden');
+        iconPauseMin?.classList.add('hidden');
+      }
+    }
+
+    function togglePlay() {
+      if (!audio) return;
+      if (isPlaying) {
+        audio.pause();
+        isPlaying = false;
+      } else {
+        audio.play().catch(() => {});
+        isPlaying = true;
+      }
+      updateIcons();
+    }
+
+    playBtn?.addEventListener('click', togglePlay);
+    playMin?.addEventListener('click', function() {
+      minimized.classList.add('hidden');
+      expanded.classList.remove('hidden');
+    });
+
+    minimizeBtn?.addEventListener('click', function() {
+      expanded.classList.add('hidden');
+      minimized.classList.remove('hidden');
+    });
+
+    closeBtn?.addEventListener('click', function() {
+      player.style.display = 'none';
+      sessionStorage.setItem('quran-player-closed', 'true');
+    });
+
+    volumeSlider?.addEventListener('input', function() {
+      if (audio) audio.volume = parseFloat(volumeSlider.value);
+    });
+
+    if (audio) {
+      audio.volume = 0.8;
+      audio.addEventListener('play', function() { isPlaying = true; updateIcons(); });
+      audio.addEventListener('pause', function() { isPlaying = false; updateIcons(); });
+    }
+
+    updateIcons();
+  })();
+</script>

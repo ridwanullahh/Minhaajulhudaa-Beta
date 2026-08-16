@@ -1,0 +1,183 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { generateCSRFToken } from '../../../lib/utils';
+
+const stories = await lightbase.query('charity_success_stories', { sort: 'publishedAt:desc', limit: 50 });
+const allStories = stories.data || [];
+const csrfToken = generateCSRFToken();
+---
+
+<AdminLayout title="Success Stories" platform="charity" section="success-stories">
+  <div class="flex items-center justify-between mb-6 fade-in">
+    <div>
+      <h2 class="text-lg font-bold">Success Stories</h2>
+      <p class="text-sm" style="color: var(--color-muted);">{allStories.length} total stories</p>
+    </div>
+    <button id="toggle-form-btn" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      New Story
+    </button>
+  </div>
+
+  <!-- Create/Edit Form -->
+  <div id="create-form" class="hidden card p-6 mb-6">
+    <h3 id="form-title" class="font-bold mb-4">Create New Story</h3>
+    <form id="story-form" class="space-y-4">
+      <input type="hidden" name="csrfToken" value={csrfToken} />
+      <input type="hidden" name="editId" id="edit-id" value="" />
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-title">Title</label>
+          <input id="s-title" name="title" class="input" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-category">Category</label>
+          <select id="s-category" name="category" class="input">
+            <option value="zakaat">Zakaat</option>
+            <option value="sadaqah">Sadaqah</option>
+            <option value="water">Water</option>
+            <option value="food">Food</option>
+            <option value="orphans">Orphans</option>
+            <option value="education">Education</option>
+            <option value="emergency">Emergency</option>
+            <option value="construction">Construction</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-location">Location</label>
+          <input id="s-location" name="location" class="input" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-beneficiary">Beneficiary Name</label>
+          <input id="s-beneficiary" name="beneficiaryName" class="input" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="s-summary">Summary</label>
+        <textarea id="s-summary" name="summary" class="input" rows="2"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="s-content">Full Content</label>
+        <textarea id="s-content" name="content" class="input" rows="6"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="s-testimonial">Beneficiary Testimonial</label>
+        <textarea id="s-testimonial" name="testimonial" class="input" rows="3"></textarea>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-image">Image URL</label>
+          <input id="s-image" name="imageUrl" class="input" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="s-status">Status</label>
+          <select id="s-status" name="status" class="input">
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="s-impact">Impact Metrics (JSON)</label>
+        <textarea id="s-impact" name="impactMetrics" class="input" rows="2" placeholder='{"familiesHelped": 50, "amountDistributed": 100000}'></textarea>
+      </div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Save Story</button>
+        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Stories Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Title</th>
+          <th class="p-4 font-medium hidden md:table-cell">Category</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Location</th>
+          <th class="p-4 font-medium text-right">Status</th>
+          <th class="p-4 font-medium text-right hidden sm:table-cell">Published Date</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allStories.map((s: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-4">
+                <div class="font-medium">{s.title}</div>
+                {s.beneficiaryName && <div class="text-xs" style="color: var(--color-muted);">{s.beneficiaryName}</div>}
+              </td>
+              <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{s.category || '-'}</span></td>
+              <td class="p-4 hidden sm:table-cell">{s.location || '-'}</td>
+              <td class="p-4 text-right"><span class={s.status === 'published' ? 'badge badge-primary' : 'badge badge-accent'}>{s.status || 'draft'}</span></td>
+              <td class="p-4 text-right hidden sm:table-cell text-xs" style="color: var(--color-muted);">{s.publishedAt ? new Date(s.publishedAt).toLocaleDateString() : '-'}</td>
+              <td class="p-4 text-right">
+                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-story={s.id} data-title={s.title || ''} data-category={s.category || 'zakaat'} data-summary={s.summary || ''} data-content={s.content || ''} data-image={s.imageUrl || ''} data-location={s.location || ''} data-beneficiary={s.beneficiaryName || ''} data-testimonial={s.testimonial || ''} data-impact={typeof s.impactMetrics === 'object' ? JSON.stringify(s.impactMetrics) : s.impactMetrics || ''} data-status={s.status || 'draft'}>Edit</button>
+                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-story={s.id}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {allStories.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No success stories yet. Add your first story above.</div>}
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggle-form-btn');
+    const cancelBtn = document.getElementById('cancel-form-btn');
+    const createForm = document.getElementById('create-form');
+    const formTitle = document.getElementById('form-title');
+    toggleBtn?.addEventListener('click', () => { createForm?.classList.toggle('hidden'); formTitle!.textContent = 'Create New Story'; });
+    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id') as HTMLInputElement).value = ''; (document.getElementById('story-form') as HTMLFormElement).reset(); });
+
+    // Edit
+    document.querySelectorAll('[data-edit-story]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        createForm?.classList.remove('hidden');
+        formTitle!.textContent = 'Edit Story';
+        (document.getElementById('edit-id') as HTMLInputElement).value = btn.getAttribute('data-edit-story') || '';
+        (document.getElementById('s-title') as HTMLInputElement).value = btn.getAttribute('data-title') || '';
+        (document.getElementById('s-category') as HTMLSelectElement).value = btn.getAttribute('data-category') || 'zakaat';
+        (document.getElementById('s-summary') as HTMLTextAreaElement).value = btn.getAttribute('data-summary') || '';
+        (document.getElementById('s-content') as HTMLTextAreaElement).value = btn.getAttribute('data-content') || '';
+        (document.getElementById('s-image') as HTMLInputElement).value = btn.getAttribute('data-image') || '';
+        (document.getElementById('s-location') as HTMLInputElement).value = btn.getAttribute('data-location') || '';
+        (document.getElementById('s-beneficiary') as HTMLInputElement).value = btn.getAttribute('data-beneficiary') || '';
+        (document.getElementById('s-testimonial') as HTMLTextAreaElement).value = btn.getAttribute('data-testimonial') || '';
+        (document.getElementById('s-impact') as HTMLTextAreaElement).value = btn.getAttribute('data-impact') || '';
+        (document.getElementById('s-status') as HTMLSelectElement).value = btn.getAttribute('data-status') || 'draft';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Submit
+    document.getElementById('story-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, any> = {};
+      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = v; });
+      body.slug = body.title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
+      if (body.impactMetrics) { try { body.impactMetrics = JSON.parse(body.impactMetrics); } catch { delete body.impactMetrics; } }
+      const editId = (document.getElementById('edit-id') as HTMLInputElement).value;
+      try {
+        const url = editId ? `/api/admin/charity/success-stories?id=${editId}` : '/api/admin/charity/success-stories';
+        const method = editId ? 'PATCH' : 'POST';
+        const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) { window.location.reload(); } else { const err = await res.json(); alert(err.error || 'Failed'); }
+      } catch { alert('Network error'); }
+    });
+
+    // Delete
+    document.querySelectorAll('[data-delete-story]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this story?')) return;
+        const id = btn.getAttribute('data-delete-story');
+        try { const res = await fetch(`/api/admin/charity/success-stories?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else alert('Failed'); } catch { alert('Network error'); }
+      });
+    });
+  </script>
+</AdminLayout>
