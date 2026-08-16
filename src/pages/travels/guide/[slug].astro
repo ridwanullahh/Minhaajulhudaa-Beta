@@ -3,18 +3,29 @@ import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
 export async function getStaticPaths() {
-  const result = await lightbase.query('travels_resources', {
-    filter: { field: 'status', op: 'eq', value: 'published' },
-    limit: 50,
-  });
-  const resources = result.data || [];
-  return resources.map((resource) => ({
-    params: { slug: resource.slug },
-    props: { resource },
-  }));
+  try {
+    const result = await lightbase.query('travels_resources', {
+      filter: { field: 'status', op: 'eq', value: 'published' },
+      limit: 50,
+    });
+    const resources = result.data || [];
+    return resources.map(function(resource) {
+      return {
+        params: { slug: resource.slug },
+        props: { resource },
+      };
+    });
+  } catch (err) {
+    console.error('[travels/guide/[slug]] getStaticPaths error:', err);
+    return [];
+  }
 }
 
 const { resource } = Astro.props;
+
+if (!resource) {
+  return Astro.redirect('/travels/guide');
+}
 ---
 
 <PlatformLayout title={`${resource.title} - Minhaajulhudaa Travels`} platform="travels">
@@ -29,12 +40,12 @@ const { resource } = Astro.props;
 
     {resource.tags && resource.tags.length > 0 && (
       <div class="flex flex-wrap gap-2 mb-8">
-        {resource.tags.map(tag => <span class="badge badge-primary">#{tag}</span>)}
+        {resource.tags.map(function(tag) { return <span class="badge badge-primary">#{tag}</span>; })}
       </div>
     )}
 
     <div class="prose prose-lg max-w-none">
-      {resource.content.split('\n').map((para) => {
+      {resource.content.split('\n').map(function(para) {
         if (para.startsWith('## ')) return <h2 class="text-2xl font-bold mt-8 mb-4">{para.replace('## ', '')}</h2>;
         if (para.trim()) return <p class="mb-4 leading-relaxed" style="color: var(--color-muted);">{para}</p>;
         return null;
@@ -45,12 +56,14 @@ const { resource } = Astro.props;
       <div class="mt-8 pt-8 border-t" style="border-color: var(--color-border);">
         <h3 class="font-bold mb-4">Attachments</h3>
         <div class="space-y-2">
-          {resource.attachments.map(att => (
-            <a href={att.url || '#'} class="card p-4 flex items-center gap-3 card-hover">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              <span class="text-sm font-medium">{att.title || 'Download'}</span>
-            </a>
-          ))}
+          {resource.attachments.map(function(att) {
+            return (
+              <a href={att.url || '#'} class="card p-4 flex items-center gap-3 card-hover">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span class="text-sm font-medium">{att.title || 'Download'}</span>
+              </a>
+            );
+          })}
         </div>
       </div>
     )}

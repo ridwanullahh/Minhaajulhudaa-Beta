@@ -3,12 +3,17 @@ import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatCurrency } from '../../../lib/utils';
 
-const result = await lightbase.query('school_courses', {
-  filter: { field: 'status', op: 'eq', value: 'published' },
-  sort: 'title:asc',
-  limit: 50,
-});
-const courses = result.data || [];
+let courses: any[] = [];
+try {
+  const result = await lightbase.query('school_courses', {
+    filter: { field: 'status', op: 'eq', value: 'published' },
+    sort: 'title:asc',
+    limit: 50,
+  });
+  courses = result.data || [];
+} catch (err) {
+  console.error('[school/courses] query error:', err);
+}
 const categories = [...new Set(courses.map((c: any) => c.category).filter(Boolean))];
 ---
 

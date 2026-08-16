@@ -10,6 +10,9 @@ export async function getStaticPaths() {
 }
 
 const { event } = Astro.props;
+if (!event) {
+  return Astro.redirect('/masjid/events');
+}
 ---
 
 <PlatformLayout title={`${event.title} - Events`} platform="masjid">

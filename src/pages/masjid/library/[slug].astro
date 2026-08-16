@@ -10,6 +10,9 @@ export async function getStaticPaths() {
 }
 
 const { book } = Astro.props;
+if (!book) {
+  return Astro.redirect('/masjid/library');
+}
 ---
 
 <PlatformLayout title={`${book.title} - Digital Library`} platform="masjid">

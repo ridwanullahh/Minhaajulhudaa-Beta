@@ -13,6 +13,9 @@ export async function getStaticPaths() {
 }
 
 const { course } = Astro.props;
+if (!course) {
+  return Astro.redirect('/travels/courses');
+}
 
 let lessons: any[] = [];
 try {

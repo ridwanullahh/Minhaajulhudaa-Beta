@@ -3,27 +3,42 @@ import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
 export async function getStaticPaths() {
-  const result = await lightbase.query('school_blog_posts', {
-    filter: { field: 'status', op: 'eq', value: 'published' },
-    limit: 100,
-  });
-  const posts = result.data || [];
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  try {
+    const result = await lightbase.query('school_blog_posts', {
+      filter: { field: 'status', op: 'eq', value: 'published' },
+      limit: 100,
+    });
+    const posts = result.data || [];
+    return posts.map((post) => ({
+      params: { slug: post.slug },
+      props: { post },
+    }));
+  } catch (err) {
+    console.error('[school/news/[slug]] getStaticPaths error:', err);
+    return [];
+  }
 }
 
 const { post } = Astro.props;
 
-const related = await lightbase.query('school_blog_posts', {
-  filter: { and: [
-    { field: 'status', op: 'eq', value: 'published' },
-    { field: 'category', op: 'eq', value: post.category },
-    { field: 'slug', op: 'neq', value: post.slug },
-  ]},
-  limit: 3,
-});
+if (!post) {
+  return Astro.redirect('/school/news');
+}
+
+let relatedData: any[] = [];
+try {
+  const related = await lightbase.query('school_blog_posts', {
+    filter: { and: [
+      { field: 'status', op: 'eq', value: 'published' },
+      { field: 'category', op: 'eq', value: post.category },
+      { field: 'slug', op: 'neq', value: post.slug },
+    ]},
+    limit: 3,
+  });
+  relatedData = related.data || [];
+} catch (err) {
+  console.error('[school/news/[slug]] related query error:', err);
+}
 ---
 
 <PlatformLayout title={`${post.title} - Minhaajulhudaa School`} platform="school">
@@ -68,11 +83,11 @@ const related = await lightbase.query('school_blog_posts', {
     )}
   </article>
 
-  {related.data && related.data.length > 0 && (
+  {relatedData.length > 0 && (
     <section class="container-app py-12">
       <h2 class="text-2xl font-bold mb-6">Related Articles</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {related.data.map((r) => (
+        {relatedData.map((r) => (
           <a href={`/school/news/${r.slug}`} class="card card-hover overflow-hidden">
             <div class="aspect-[16/9] bg-[rgb(5,179,77,0.1)]">
               {r.featuredImageUrl && <img src={r.featuredImageUrl} alt={r.title} class="w-full h-full object-cover" loading="lazy" />}

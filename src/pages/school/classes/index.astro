@@ -2,11 +2,16 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const result = await lightbase.query('school_classes', {
-  sort: 'name:asc',
-  limit: 50,
-});
-const classes = result.data || [];
+let classes: any[] = [];
+try {
+  const result = await lightbase.query('school_classes', {
+    sort: 'name:asc',
+    limit: 50,
+  });
+  classes = result.data || [];
+} catch (err) {
+  console.error('[school/classes] query error:', err);
+}
 const levels = [...new Set(classes.map((c: any) => c.level).filter(Boolean))];
 ---
 

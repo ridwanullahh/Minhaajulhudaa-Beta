@@ -2,12 +2,17 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const result = await lightbase.query('travels_packages', {
-  filter: { field: 'status', op: 'eq', value: 'active' },
-  sort: 'isFeatured:desc',
-  limit: 50,
-});
-const packages = result.data || [];
+let packages: any[] = [];
+try {
+  const result = await lightbase.query('travels_packages', {
+    filter: { field: 'status', op: 'eq', value: 'active' },
+    sort: 'isFeatured:desc',
+    limit: 50,
+  });
+  packages = result.data || [];
+} catch (err) {
+  console.error('[travels/hajj-umrah] query error:', err);
+}
 const types = [...new Set(packages.map(p => p.type).filter(Boolean))];
 ---
 

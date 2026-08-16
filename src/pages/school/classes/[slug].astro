@@ -18,8 +18,13 @@ if (!cls) {
   return Astro.redirect('/school/classes');
 }
 
-const relatedClasses = await lightbase.findMany('school_classes', { field: 'level', op: 'eq', value: cls.level }, { limit: 3 });
-const filteredRelated = relatedClasses.filter((c: any) => c.slug !== cls.slug);
+let filteredRelated: any[] = [];
+try {
+  const relatedClasses = await lightbase.findMany('school_classes', { field: 'level', op: 'eq', value: cls.level }, { limit: 3 });
+  filteredRelated = relatedClasses.filter(function(c) { return c.slug !== cls.slug; });
+} catch (err) {
+  console.error('[school/classes/[slug]] related query error:', err);
+}
 ---
 
 <PlatformLayout title={`${cls.name} - Classes`} description={`Class details for ${cls.name}`} platform="school">

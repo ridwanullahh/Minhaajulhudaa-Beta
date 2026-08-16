@@ -3,23 +3,37 @@ import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
 export async function getStaticPaths() {
-  const result = await lightbase.query('charity_campaigns', {
-    filter: { field: 'status', op: 'eq', value: 'active' },
-    limit: 50,
-  });
-  const campaigns = result.data || [];
-  return campaigns.map((campaign) => ({
-    params: { slug: campaign.slug },
-    props: { campaign },
-  }));
+  try {
+    const result = await lightbase.query('charity_campaigns', {
+      filter: { field: 'status', op: 'eq', value: 'active' },
+      limit: 50,
+    });
+    const campaigns = result.data || [];
+    return campaigns.map((campaign) => ({
+      params: { slug: campaign.slug },
+      props: { campaign },
+    }));
+  } catch (err) {
+    console.error('[charity/campaigns/[slug]] getStaticPaths error:', err);
+    return [];
+  }
 }
 
 const { campaign } = Astro.props;
+if (!campaign) {
+  return Astro.redirect('/charity/campaigns');
+}
 
-const updates = await lightbase.query('charity_campaign_updates', {
-  filter: { field: 'campaignId', op: 'eq', value: campaign.id },
-  limit: 5,
-});
+let updates: any[] = [];
+try {
+  const updatesResult = await lightbase.query('charity_campaign_updates', {
+    filter: { field: 'campaignId', op: 'eq', value: campaign.id },
+    limit: 5,
+  });
+  updates = updatesResult.data || [];
+} catch (err) {
+  console.error('[charity/campaigns/[slug]] updates query error:', err);
+}
 ---
 
 <PlatformLayout title={`${campaign.title} - Minhaajulhudaa Charity`} platform="charity">
@@ -78,11 +92,11 @@ const updates = await lightbase.query('charity_campaign_updates', {
     </div>
 
     <!-- Campaign Updates -->
-    {updates.data && updates.data.length > 0 && (
+    {updates.length > 0 && (
       <div class="mt-12">
         <h2 class="text-2xl font-bold mb-6">Campaign Updates</h2>
         <div class="space-y-4">
-          {updates.data.map((update) => (
+          {updates.map((update) => (
             <div class="card p-6">
               <div class="text-xs mb-2" style="color: var(--color-muted);">{new Date(update.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
               <h3 class="font-bold mb-2">{update.title}</h3>
@@ -95,9 +109,9 @@ const updates = await lightbase.query('charity_campaign_updates', {
   </section>
 
   <script is:inline>
-    document.querySelectorAll('.amount-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.amount-btn').forEach(b => {
+    document.querySelectorAll('.amount-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.amount-btn').forEach(function(b) {
           b.classList.remove('border-[var(--color-primary)]', 'bg-[rgb(5,179,77,0.05)]');
           b.style.borderColor = 'var(--color-border)';
         });
@@ -107,7 +121,7 @@ const updates = await lightbase.query('charity_campaign_updates', {
       });
     });
 
-    document.getElementById('campaign-donation-form')?.addEventListener('submit', async (e) => {
+    document.getElementById('campaign-donation-form')?.addEventListener('submit', async function(e) {
       e.preventDefault();
       const form = e.target;
       const btn = form.querySelector('button[type="submit"]');

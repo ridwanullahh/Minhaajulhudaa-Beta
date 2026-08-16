@@ -2,11 +2,16 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const result = await lightbase.query('school_wiki_articles', {
-  sort: 'title:asc',
-  limit: 100,
-});
-const articles = result.data || [];
+let articles: any[] = [];
+try {
+  const result = await lightbase.query('school_wiki_articles', {
+    sort: 'title:asc',
+    limit: 100,
+  });
+  articles = result.data || [];
+} catch (err) {
+  console.error('[school/wiki] query error:', err);
+}
 const categories = [...new Set(articles.map((a: any) => a.category).filter(Boolean))];
 
 const articlesByCategory = new Map<string, any[]>();

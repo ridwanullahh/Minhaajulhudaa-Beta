@@ -2,11 +2,16 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const result = await lightbase.query('travels_resources', {
-  filter: { field: 'status', op: 'eq', value: 'published' },
-  limit: 30,
-});
-const resources = result.data || [];
+let resources: any[] = [];
+try {
+  const result = await lightbase.query('travels_resources', {
+    filter: { field: 'status', op: 'eq', value: 'published' },
+    limit: 30,
+  });
+  resources = result.data || [];
+} catch (err) {
+  console.error('[travels/guide] query error:', err);
+}
 const categories = [...new Set(resources.map(r => r.category).filter(Boolean))];
 
 const categoryIcons: Record<string, string> = {
