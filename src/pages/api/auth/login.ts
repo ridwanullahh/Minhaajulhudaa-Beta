@@ -6,10 +6,10 @@ import type { APIRoute } from 'astro';
 import { authenticateAdmin, createSession, createSessionCookie } from '../../../lib/auth';
 import { generateCSRFToken } from '../../../lib/utils';
 
-export const POST: APIRoute = async ({ request, cookies }) => {
+export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
-    const { email, password } = body;
+    const { email, password, platform } = body;
 
     if (!email || !password) {
       return new Response(JSON.stringify({ error: 'Email and password are required' }), {
@@ -18,7 +18,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       });
     }
 
-    const admin = await authenticateAdmin(email, password);
+    const admin = await authenticateAdmin(email, password, platform);
     if (!admin) {
       return new Response(JSON.stringify({ error: 'Invalid email or password' }), {
         status: 401,
