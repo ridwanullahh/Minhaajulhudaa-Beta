@@ -1,0 +1,172 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const courses = await lightbase.query('travels_courses', { sort: '_created_at:desc', limit: 100 }).catch(() => ({ data: [] }));
+const allCourses = courses.data || [];
+
+const statusBadge = (status: string) => {
+  switch (status) {
+    case 'published': return 'badge badge-primary';
+    case 'draft': return 'badge badge-accent';
+    default: return 'badge';
+  }
+};
+---
+
+<AdminLayout title="LMS Courses" platform="travels" section="courses">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="font-bold text-lg">LMS Courses</h2>
+      <p class="text-sm" style="color: var(--color-muted);">Manage travel education courses</p>
+    </div>
+    <button id="btn-new-course" class="btn btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      New Course
+    </button>
+  </div>
+
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr style="color: var(--color-muted); border-bottom: 1px solid var(--color-border);">
+          <th class="text-left p-4 font-medium">Course</th>
+          <th class="text-left p-4 font-medium hidden md:table-cell">Level</th>
+          <th class="text-left p-4 font-medium hidden lg:table-cell">Duration</th>
+          <th class="text-right p-4 font-medium hidden sm:table-cell">Price</th>
+          <th class="text-center p-4 font-medium">Status</th>
+          <th class="text-right p-4 font-medium">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allCourses.length > 0 ? allCourses.map((c: any) => (
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-4">
+                <div class="font-medium">{c.title || '-'}</div>
+                <div class="text-xs" style="color: var(--color-muted);">{c.slug || '-'}</div>
+              </td>
+              <td class="p-4 hidden md:table-cell capitalize" style="color: var(--color-muted);">{c.level || '-'}</td>
+              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{c.duration || '-'}</td>
+              <td class="p-4 text-right hidden sm:table-cell font-medium">{c.isFree ? 'Free' : ('\u20A6' + (c.price?.toLocaleString() || '0'))}</td>
+              <td class="p-4 text-center"><span class={statusBadge(c.status)}>{c.status || 'draft'}</span></td>
+              <td class="p-4 text-right">
+                <div class="flex justify-end gap-1">
+                  <button class="btn btn-ghost text-xs px-2 py-1 btn-edit" data-id={c.id} title="Edit">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </button>
+                  <button class="btn btn-ghost text-xs px-2 py-1 btn-delete" data-id={c.id} title="Delete" style="color: var(--color-error);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          )) : (
+            <tr><td colspan="6" class="p-12 text-center" style="color: var(--color-muted);">No courses found.</td></tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/40" id="modal-overlay"></div>
+    <div class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl p-6" style="background: var(--color-surface);">
+      <div class="flex items-center justify-between mb-6">
+        <h3 id="modal-title" class="font-bold text-lg">New Course</h3>
+        <button id="modal-close" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(220,38,38,0.1)]">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="modal-form" class="space-y-4">
+        <input type="hidden" id="form-id" />
+        <div class="grid grid-cols-2 gap-4">
+          <div class="col-span-2"><label class="text-sm font-medium block mb-1">Title</label><input id="form-title" class="input" required /></div>
+          <div><label class="text-sm font-medium block mb-1">Level</label>
+            <select id="form-level" class="input">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+          <div><label class="text-sm font-medium block mb-1">Duration</label><input id="form-duration" class="input" placeholder="e.g. 3 hours" /></div>
+          <div><label class="text-sm font-medium block mb-1">Price (NGN, 0 for free)</label><input id="form-price" type="number" class="input" value="0" /></div>
+          <div><label class="text-sm font-medium block mb-1">Status</label>
+            <select id="form-status" class="input">
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+            </select>
+          </div>
+          <div class="col-span-2"><label class="text-sm font-medium block mb-1">Short Description</label><textarea id="form-shortDescription" class="input" rows="2"></textarea></div>
+          <div class="col-span-2"><label class="text-sm font-medium block mb-1">Full Description</label><textarea id="form-description" class="input" rows="4"></textarea></div>
+          <div class="col-span-2"><label class="text-sm font-medium block mb-1">Learning Outcomes (comma-separated)</label><input id="form-learningOutcomes" class="input" /></div>
+          <div class="col-span-2"><label class="text-sm font-medium block mb-1">Featured Image URL</label><input id="form-featuredImage" class="input" /></div>
+        </div>
+        <div class="flex justify-end gap-3 pt-2">
+          <button type="button" id="modal-cancel" class="btn btn-ghost">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Course</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const fields = ['title','level','duration','price','status','shortDescription','description','learningOutcomes','featuredImage'];
+      const modal = document.getElementById('modal');
+      const form = document.getElementById('modal-form') as HTMLFormElement;
+      const title = document.getElementById('modal-title');
+
+      function openModal(isEdit: boolean, data?: any) {
+        title!.textContent = isEdit ? 'Edit Course' : 'New Course';
+        fields.forEach(f => {
+          const el = document.getElementById('form-' + f) as HTMLInputElement;
+          if (el) {
+            if (f === 'learningOutcomes') el.value = Array.isArray(data?.[f]) ? data[f].join(', ') : (data?.[f] || '');
+            else el.value = data?.[f] ?? (f === 'price' ? '0' : '');
+          }
+        });
+        (document.getElementById('form-id') as HTMLInputElement).value = data?.id || '';
+        modal!.classList.remove('hidden');
+      }
+
+      document.getElementById('btn-new-course')!.addEventListener('click', () => openModal(false));
+      document.querySelectorAll('.btn-edit').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = (btn as HTMLElement).dataset.id;
+          fetch('/api/admin/travels/courses?id=' + id).then(r => r.json()).then(data => openModal(true, data.document || data)).catch(() => {});
+        });
+      });
+
+      document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = (btn as HTMLElement).dataset.id;
+          if (confirm('Delete this course?')) {
+            fetch('/api/admin/travels/courses?id=' + id, { method: 'DELETE' }).then(() => location.reload()).catch(() => {});
+          }
+        });
+      });
+
+      document.getElementById('modal-close')!.addEventListener('click', () => modal!.classList.add('hidden'));
+      document.getElementById('modal-overlay')!.addEventListener('click', () => modal!.classList.add('hidden'));
+      document.getElementById('modal-cancel')!.addEventListener('click', () => modal!.classList.add('hidden'));
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = (document.getElementById('form-id') as HTMLInputElement).value;
+        const body: any = {};
+        fields.forEach(f => {
+          const el = document.getElementById('form-' + f) as HTMLInputElement;
+          if (el) {
+            if (f === 'price') body[f] = parseFloat(el.value) || 0;
+            else if (f === 'learningOutcomes') body[f] = el.value.split(',').map(s => s.trim()).filter(Boolean);
+            else body[f] = el.value;
+          }
+        });
+        body.isFree = (body.price || 0) === 0;
+        const ep = id ? '/api/admin/travels/courses?id=' + id : '/api/admin/travels/courses';
+        const method = id ? 'PATCH' : 'POST';
+        fetch(ep, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(() => location.reload()).catch(() => {});
+      });
+    })();
+  </script>
+</AdminLayout>

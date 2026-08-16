@@ -1,0 +1,130 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+export async function getStaticPaths() {
+  try {
+    const result = await lightbase.query('school_programs', { limit: 100 });
+    const programs = (result.data || []).filter((p: any) => p.slug);
+    return programs.map((p: any) => ({ params: { slug: p.slug }, props: { program: p } }));
+  } catch {
+    return [];
+  }
+}
+
+const { program } = Astro.props;
+
+if (!program) {
+  return Astro.redirect('/school/programs');
+}
+
+const relatedResult = await lightbase.findMany('school_programs', { field: 'category', op: 'eq', value: program.category }, { limit: 3 });
+const filteredRelated = relatedResult.filter((p: any) => p.slug !== program.slug);
+---
+export const prerender = true;
+
+<PlatformLayout title={`${program.title} - Programs`} description={program.shortDescription || program.description} platform="school">
+  <section class="container-app py-12">
+    <a href="/school/programs" class="inline-flex items-center gap-2 text-sm mb-6" style="color: var(--color-muted);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Programs
+    </a>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        {program.imageUrl && (
+          <div class="aspect-[16/9] rounded-xl overflow-hidden mb-8">
+            <img src={program.imageUrl} alt={program.title} class="w-full h-full object-cover" />
+          </div>
+        )}
+
+        <span class="badge badge-primary mb-4">{program.category ? program.category.replace(/-/g, ' ') : 'General'}</span>
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-6">{program.title}</h1>
+
+        <div class="mb-8">
+          {program.description && <div set:html={program.description} />}
+        </div>
+
+        {program.curriculum && (
+          <div class="card p-6 mb-8">
+            <h2 class="text-xl font-bold mb-4">Curriculum</h2>
+            <div set:html={program.curriculum} />
+          </div>
+        )}
+
+        {program.outcomes && (
+          <div class="card p-6 mb-8">
+            <h2 class="text-xl font-bold mb-4">Learning Outcomes</h2>
+            <div set:html={program.outcomes} />
+          </div>
+        )}
+      </div>
+
+      <aside class="space-y-6">
+        <div class="card p-6">
+          <h3 class="font-bold mb-4">Program Details</h3>
+          <dl class="space-y-4 text-sm">
+            {program.duration && (
+              <div class="flex justify-between">
+                <dt style="color: var(--color-muted);">Duration</dt>
+                <dd class="font-medium">{program.duration}</dd>
+              </div>
+            )}
+            {program.level && (
+              <div class="flex justify-between">
+                <dt style="color: var(--color-muted);">Level</dt>
+                <dd class="font-medium">{program.level}</dd>
+              </div>
+            )}
+            {program.category && (
+              <div class="flex justify-between">
+                <dt style="color: var(--color-muted);">Category</dt>
+                <dd class="font-medium">{program.category.replace(/-/g, ' ')}</dd>
+              </div>
+            )}
+            {program.status && (
+              <div class="flex justify-between">
+                <dt style="color: var(--color-muted);">Status</dt>
+                <dd><span class={program.status === 'open' ? 'badge badge-primary' : 'badge'}>{program.status}</span></dd>
+              </div>
+            )}
+            {program.fee && (
+              <div class="flex justify-between">
+                <dt style="color: var(--color-muted);">Fee</dt>
+                <dd class="font-medium">{program.fee}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+
+        {program.requirements && (
+          <div class="card p-6">
+            <h3 class="font-bold mb-4">Requirements</h3>
+            <div set:html={program.requirements} />
+          </div>
+        )}
+
+        <div class="card p-6" style="background: linear-gradient(135deg, rgb(5,179,77,0.08), rgb(242,185,28,0.08));">
+          <h3 class="font-bold mb-2">Interested in this program?</h3>
+          <p class="text-sm mb-4" style="color: var(--color-muted);">Apply now to secure a place for your child.</p>
+          <a href="/school/admission" class="btn btn-primary w-full">Apply Now</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {filteredRelated.length > 0 && (
+    <section class="container-app py-12">
+      <h2 class="text-2xl font-bold mb-6">Related Programs</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {filteredRelated.map((p: any) => (
+          <a href={`/school/programs/${p.slug}`} class="card card-hover p-6">
+            <span class="badge badge-primary mb-3">{p.category ? p.category.replace(/-/g, ' ') : 'General'}</span>
+            <h3 class="font-bold mb-2">{p.title}</h3>
+            <p class="text-sm" style="color: var(--color-muted);">{p.duration || 'Flexible duration'}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</PlatformLayout>

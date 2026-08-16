@@ -1,0 +1,72 @@
+---
+/**
+ * Admin Hub - Platform selection for admins
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getSessionCookieValue } from '../../lib/auth';
+import { PLATFORMS } from '../../lib/constants';
+
+const session = getSessionCookieValue(Astro.request);
+if (!session) {
+  return Astro.redirect('/admin/login');
+}
+
+const platforms = Object.values(PLATFORMS);
+const accessiblePlatforms = session.role === 'super_admin'
+  ? platforms
+  : platforms.filter((p) => session.platforms.includes(p.slug));
+---
+
+<BaseLayout title="Admin Dashboard - Minhaajulhudaa">
+  <div class="min-h-screen p-4 md:p-8" style="background: var(--color-background);">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="mb-8 fade-in">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+          <div>
+            <h1 class="text-2xl md:text-3xl font-bold">Admin Dashboard</h1>
+            <p class="text-sm mt-1" style="color: var(--color-muted);">Welcome back, {session.email}. Select a platform to manage.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="badge badge-primary capitalize">{session.role.replace('_', ' ')}</span>
+            <form method="POST" action="/api/auth/logout">
+              <button type="submit" class="btn btn-ghost text-sm">Logout</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Platform Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {accessiblePlatforms.map((platform) => (
+          <a href={`/admin/${platform.slug}`} class="card card-hover p-6 group fade-in">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center" style={`background: ${platform.accent === 'gold' ? 'rgb(242,185,28,0.15)' : 'rgb(5,179,77,0.1)'};`}>
+                {platform.slug === 'school' && (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                )}
+                {platform.slug === 'masjid' && (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6M12 3v2"/></svg>
+                )}
+                {platform.slug === 'charity' && (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                )}
+                {platform.slug === 'travels' && (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+                )}
+              </div>
+              <div>
+                <h3 class="text-lg font-bold">{platform.name}</h3>
+                <p class="text-sm" style="color: var(--color-muted);">{platform.tagline}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-sm font-medium" style="color: var(--color-primary);">
+              Manage Platform
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

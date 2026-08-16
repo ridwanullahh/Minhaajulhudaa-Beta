@@ -1,0 +1,173 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+const [donationsAgg, donationsMonthAgg, audiosCount, eventsCount, announcementsCount, galleryCount] = await Promise.all([
+  lightbase.aggregate('masjid_donations', {
+    aggregations: [
+      { field: 'amount', op: 'sum', alias: 'totalDonations' },
+      { field: 'amount', op: 'count', alias: 'donationCount' },
+    ],
+  }).catch(() => ({ totalDonations: 0, donationCount: 0 })),
+  lightbase.aggregate('masjid_donations', {
+    filter: { field: 'donatedAt', op: 'gte', value: new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString() },
+    aggregations: [{ field: 'amount', op: 'sum', alias: 'monthTotal' }],
+  }).catch(() => ({ monthTotal: 0 })),
+  lightbase.count('masjid_audios'),
+  lightbase.count('masjid_events'),
+  lightbase.count('masjid_announcements'),
+  lightbase.count('masjid_gallery'),
+]);
+
+const today = new Date().toISOString().split('T')[0];
+const todayPrayerTimes = await lightbase.findOne('masjid_prayer_times', { field: 'date', op: 'eq', value: today }).catch(() => null);
+
+const recentAnnouncements = await lightbase.query('masjid_announcements', { sort: 'createdAt:desc', limit: 5 });
+const recentDonations = await lightbase.query('masjid_donations', { sort: 'donatedAt:desc', limit: 5 });
+const activeCampaigns = await lightbase.query('masjid_donation_campaigns', { filter: { field: 'status', op: 'eq', value: 'active' }, limit: 5 });
+
+const stats = [
+  { label: 'Total Donations', value: formatCurrency(donationsAgg?.totalDonations || 0), icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>', color: 'rgb(5,179,77,0.1)', textColor: 'var(--color-primary)' },
+  { label: 'This Month', value: formatCurrency(donationsMonthAgg?.monthTotal || 0), icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>', color: 'rgb(242,185,28,0.15)', textColor: 'var(--color-accent)' },
+  { label: 'Audios', value: audiosCount, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>', color: 'rgb(37,99,235,0.1)', textColor: '#2563EB' },
+  { label: 'Events', value: eventsCount, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>', color: 'rgb(5,179,77,0.1)', textColor: 'var(--color-primary)' },
+  { label: 'Announcements', value: announcementsCount, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>', color: 'rgb(242,185,28,0.15)', textColor: 'var(--color-accent)' },
+  { label: 'Gallery Items', value: galleryCount, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>', color: 'rgb(37,99,235,0.1)', textColor: '#2563EB' },
+];
+
+const quickActions = [
+  { label: 'Add Prayer Time', href: '/admin/masjid/prayer-times', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l4 2"/></svg>' },
+  { label: 'Create Event', href: '/admin/masjid/events', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>' },
+  { label: 'Upload Audio', href: '/admin/masjid/audios', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>' },
+  { label: 'Write Blog Post', href: '/admin/masjid/blog', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>' },
+];
+---
+
+<AdminLayout title="Dashboard" platform="masjid" section="dashboard">
+  <!-- Stats Grid -->
+  <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8 fade-in">
+    {stats.map((stat) => (
+      <div class="card p-4">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center mb-3" style={`background: ${stat.color}; color: ${stat.textColor};`}>
+          <Fragment set:html={stat.icon} />
+        </div>
+        <div class="text-xl font-extrabold mb-0.5 truncate">{stat.value}</div>
+        <div class="text-xs" style="color: var(--color-muted);">{stat.label}</div>
+      </div>
+    ))}
+  </div>
+
+  <div class="grid lg:grid-cols-3 gap-6">
+    <!-- Today's Prayer Times -->
+    <div class="card p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-bold">Today's Prayer Times</h2>
+        <a href="/admin/masjid/prayer-times" class="text-xs font-medium" style="color: var(--color-primary);">Manage</a>
+      </div>
+      {todayPrayerTimes ? (
+        <div class="space-y-2 text-sm">
+          {[{n:'Fajr',a:'fajrAdhan',i:'fajrIqamah'},{n:'Dhuhr',a:'dhuhrAdhan',i:'dhuhrIqamah'},{n:'Asr',a:'asrAdhan',i:'asrIqamah'},{n:'Maghrib',a:'maghribAdhan',i:'maghribIqamah'},{n:'Isha',a:'ishaAdhan',i:'ishaIqamah'}].map(p => (
+            <div class="flex items-center justify-between py-1.5" style="border-bottom: 1px solid var(--color-border);">
+              <span class="font-medium">{p.n}</span>
+              <div class="text-right">
+                <span class="font-medium">{todayPrayerTimes[p.a] || '-'}</span>
+                {todayPrayerTimes[p.i] && <span class="text-xs ml-2" style="color: var(--color-muted);">Iq: {todayPrayerTimes[p.i]}</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p class="text-sm" style="color: var(--color-muted);">No prayer times set for today.</p>
+      )}
+    </div>
+
+    <!-- Recent Announcements -->
+    <div class="card p-6">
+      <h2 class="font-bold mb-4">Recent Announcements</h2>
+      {(recentAnnouncements.data || []).length > 0 ? (
+        <div class="space-y-3">
+          {(recentAnnouncements.data || []).slice(0, 5).map((ann: any) => (
+            <div class="flex items-start gap-2">
+              <div class="w-2 h-2 rounded-full mt-1.5 shrink-0" style={`background: ${ann.type === 'urgent' ? '#DC2626' : 'var(--color-primary)'};`}></div>
+              <div class="min-w-0">
+                <p class="text-sm font-medium truncate">{ann.title}</p>
+                <p class="text-xs" style="color: var(--color-muted);">{ann.active ? 'Active' : 'Inactive'}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : <p class="text-sm" style="color: var(--color-muted);">No announcements.</p>}
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card p-6">
+      <h2 class="font-bold mb-4">Quick Actions</h2>
+      <div class="space-y-2">
+        {quickActions.map((action) => (
+          <a href={action.href} class="flex items-center gap-3 p-3 rounded-lg transition-colors hover:bg-[rgb(5,179,77,0.05)]" style="color: var(--color-foreground);">
+            <span style="color: var(--color-primary);"><Fragment set:html={action.icon} /></span>
+            <span class="text-sm font-medium">{action.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Active Campaigns -->
+  {(activeCampaigns.data || []).length > 0 && (
+    <div class="card p-6 mt-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-bold">Active Campaigns</h2>
+        <a href="/admin/masjid/donations" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {(activeCampaigns.data || []).map((c: any) => {
+          const pct = c.goalAmount ? Math.round((c.raisedAmount / c.goalAmount) * 100) : 0;
+          return (
+            <div class="p-4 rounded-lg" style="background: var(--color-background);">
+              <h3 class="font-semibold text-sm mb-2">{c.title}</h3>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="font-medium" style="color: var(--color-primary);">{formatCurrency(c.raisedAmount || 0)}</span>
+                <span style="color: var(--color-muted);">of {formatCurrency(c.goalAmount || 0)}</span>
+              </div>
+              <div class="h-1.5 rounded-full" style="background: var(--color-border);">
+                <div class="h-full rounded-full" style={`width: ${Math.min(pct, 100)}%; background: var(--color-primary);`}></div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  )}
+
+  <!-- Recent Donations -->
+  <div class="card p-6 mt-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="font-bold">Recent Donations</h2>
+      <a href="/admin/masjid/donations" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
+    </div>
+    {(recentDonations.data || []).length > 0 ? (
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr style="color: var(--color-muted); border-bottom: 1px solid var(--color-border);">
+            <th class="text-left pb-3 font-medium">Donor</th>
+            <th class="text-left pb-3 font-medium hidden sm:table-cell">Category</th>
+            <th class="text-right pb-3 font-medium">Amount</th>
+            <th class="text-right pb-3 font-medium hidden md:table-cell">Status</th>
+          </tr></thead>
+          <tbody>
+            {(recentDonations.data || []).map((d: any) => (
+              <tr style="border-bottom: 1px solid var(--color-border);">
+                <td class="py-3 font-medium">{d.isAnonymous ? 'Anonymous' : (d.donorName || '-')}</td>
+                <td class="py-3 hidden sm:table-cell" style="color: var(--color-muted);">{d.category}</td>
+                <td class="py-3 text-right font-medium">{d.amount ? formatCurrency(d.amount) : '-'}</td>
+                <td class="py-3 text-right"><span class={d.status === 'completed' ? 'badge badge-primary' : 'badge badge-accent'}>{d.status || '-'}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : <p class="text-sm" style="color: var(--color-muted);">No donations recorded yet.</p>}
+  </div>
+</AdminLayout>

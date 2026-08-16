@@ -1,0 +1,152 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { generateCSRFToken } from '../../../lib/utils';
+
+const posts = await lightbase.query('school_blog_posts', {
+  sort: 'publishedAt:desc',
+  limit: 50,
+});
+const allPosts = posts.data || [];
+
+const csrfToken = generateCSRFToken();
+---
+
+<AdminLayout title="Blog Management" platform="school" section="blog">
+  <div class="flex items-center justify-between mb-6 fade-in">
+    <div>
+      <h2 class="text-lg font-bold">Blog Posts</h2>
+      <p class="text-sm" style="color: var(--color-muted);">{allPosts.length} total posts</p>
+    </div>
+    <button id="toggle-form-btn" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      New Post
+    </button>
+  </div>
+
+  <!-- Create Form -->
+  <div id="create-form" class="hidden card p-6 mb-6">
+    <h3 class="font-bold mb-4">Create New Post</h3>
+    <form id="blog-form" class="space-y-4">
+      <input type="hidden" name="csrfToken" value={csrfToken} />
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="post-title">Title</label>
+          <input id="post-title" name="title" class="input" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="post-category">Category</label>
+          <input id="post-category" name="category" class="input" placeholder="e.g. News, Events" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="post-slug">Slug</label>
+        <input id="post-slug" name="slug" class="input" placeholder="auto-generated-from-title" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="post-excerpt">Excerpt</label>
+        <textarea id="post-excerpt" name="excerpt" class="input" rows="2"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="post-content">Content</label>
+        <textarea id="post-content" name="content" class="input" rows="8"></textarea>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="post-author">Author</label>
+          <input id="post-author" name="authorName" class="input" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="post-image">Featured Image URL</label>
+          <input id="post-image" name="featuredImageUrl" class="input" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="post-status">Status</label>
+          <select id="post-status" name="status" class="input">
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
+          </select>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Create Post</button>
+        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Posts Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Title</th>
+          <th class="p-4 font-medium hidden md:table-cell">Category</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Author</th>
+          <th class="p-4 font-medium hidden lg:table-cell">Date</th>
+          <th class="p-4 font-medium text-right">Status</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allPosts.map((post: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-4 font-medium">{post.title}</td>
+              <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{post.category || '-'}</span></td>
+              <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{post.authorName || '-'}</td>
+              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : '-'}</td>
+              <td class="p-4 text-right"><span class={post.status === 'published' ? 'badge badge-primary' : 'badge badge-accent'}>{post.status}</span></td>
+              <td class="p-4 text-right">
+                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-post={post.id}>Edit</button>
+                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-post={post.id}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {allPosts.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No blog posts yet. Create your first post above.</div>}
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggle-form-btn');
+    const cancelBtn = document.getElementById('cancel-form-btn');
+    const createForm = document.getElementById('create-form');
+    toggleBtn?.addEventListener('click', () => createForm?.classList.toggle('hidden'));
+    cancelBtn?.addEventListener('click', () => createForm?.classList.add('hidden'));
+
+    // Auto-slug from title
+    const titleInput = document.getElementById('post-title') as HTMLInputElement;
+    const slugInput = document.getElementById('post-slug') as HTMLInputElement;
+    titleInput?.addEventListener('input', () => {
+      slugInput.value = titleInput.value.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
+    });
+
+    // Create post
+    document.getElementById('blog-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, string> = {};
+      fd.forEach((v, k) => { body[k] = v as string; });
+      body.readingTimeMinutes = String(Math.max(1, Math.ceil((body.content || '').split(/\s+/).length / 200)));
+      if (!body.publishedAt) body.publishedAt = new Date().toISOString();
+
+      try {
+        const res = await fetch('/api/admin/school/blog', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) { window.location.reload(); }
+        else { const err = await res.json(); alert(err.error || 'Failed to create post'); }
+      } catch { alert('Network error'); }
+    });
+
+    // Delete post
+    document.querySelectorAll('[data-delete-post]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this post?')) return;
+        const id = btn.getAttribute('data-delete-post');
+        try {
+          const res = await fetch(`/api/admin/school/blog?id=${id}`, { method: 'DELETE' });
+          if (res.ok) window.location.reload(); else alert('Failed to delete');
+        } catch { alert('Network error'); }
+      });
+    });
+  </script>
+</AdminLayout>

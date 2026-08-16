@@ -1,0 +1,75 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+export const prerender = true;
+
+let posts: any[] = [];
+try {
+  const result = await lightbase.query('masjid_blog_posts', {
+    filter: { field: 'status', op: 'eq', value: 'published' },
+    sort: 'publishedAt:desc',
+    limit: 100,
+  });
+  posts = result.data || [];
+} catch {}
+
+const categories = [...new Set(posts.map(p => p.category).filter(Boolean))].sort();
+---
+
+<PlatformLayout title="Blog - Minhaajulhudaa Masjid" platform="masjid">
+  <!-- Hero -->
+  <section class="relative overflow-hidden" style="background: linear-gradient(135deg, rgb(5,179,77,0.08), rgb(242,185,28,0.05));">
+    <div class="container-app py-12 md:py-16 text-center fade-in">
+      <span class="badge badge-primary mb-4">Blog</span>
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-4">
+        Masjid <span style="color: var(--color-primary);">Blog</span>
+      </h1>
+      <p class="text-lg max-w-2xl mx-auto" style="color: var(--color-muted);">
+        Articles on Islamic topics, community updates, and spiritual guidance from our scholars.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-app py-8 md:py-12">
+    {posts.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+        {posts.map((post, index) => (
+          <a href={post.slug ? `/masjid/blog/${post.slug}` : '#'} class:list={['card card-hover overflow-hidden block', index === 0 ? 'md:col-span-2 lg:col-span-1 lg:row-span-2' : '']}>
+            {post.featuredImage ? (
+              <div class:list={['overflow-hidden', index === 0 ? 'aspect-[16/9]' : 'aspect-[16/10]']}>
+                <img src={post.featuredImage} alt={post.title} class="w-full h-full object-cover" loading="lazy" />
+              </div>
+            ) : (
+              <div class:list={['flex items-center justify-center', index === 0 ? 'aspect-[16/9]' : 'aspect-[16/10]']} style="background: var(--color-border);">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-muted); opacity: 0.4;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </div>
+            )}
+            <div class="p-5">
+              <div class="flex items-center gap-2 mb-2">
+                {post.category && <span class="badge badge-primary text-xs">{post.category}</span>}
+                {post.publishedAt && (
+                  <span class="text-xs" style="color: var(--color-muted);">{new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                )}
+              </div>
+              <h2 class:list={['font-bold mb-2', index === 0 ? 'text-xl' : 'text-base']} style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{post.title}</h2>
+              <p class="text-sm line-clamp-3" style="color: var(--color-muted);">{post.excerpt || post.content?.substring(0, 150)}</p>
+              {post.authorName && (
+                <div class="flex items-center gap-2 mt-4 pt-3" style="border-top: 1px solid var(--color-border);">
+                  <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">{post.authorName.charAt(0)}</div>
+                  <span class="text-xs font-medium">{post.authorName}</span>
+                </div>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="card p-12 text-center fade-in" style="color: var(--color-muted);">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4 opacity-40"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <p class="font-medium">No blog posts yet.</p>
+        <p class="text-sm mt-1">Check back soon for articles and updates.</p>
+      </div>
+    )}
+  </section>
+</PlatformLayout>

@@ -1,0 +1,186 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+const rules = await lightbase.query('travels_pricing_rules', { sort: 'priority:desc', limit: 100 }).catch(() => ({ data: [] }));
+const allRules = rules.data || [];
+
+const typeBadge = (type: string) => {
+  switch (type) {
+    case 'early_bird': return 'badge badge-primary';
+    case 'group_discount': return 'badge badge-accent';
+    case 'seasonal': return 'badge';
+    case 'date_based': return 'badge';
+    case 'last_minute': return 'badge';
+    default: return 'badge';
+  }
+};
+---
+
+<AdminLayout title="Pricing" platform="travels" section="pricing">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="font-bold text-lg">Dynamic Pricing</h2>
+      <p class="text-sm" style="color: var(--color-muted);">Date-based pricing, group discounts, early bird, and seasonal rules</p>
+    </div>
+    <button id="btn-new-rule" class="btn btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      New Rule
+    </button>
+  </div>
+
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr style="color: var(--color-muted); border-bottom: 1px solid var(--color-border);">
+          <th class="text-left p-4 font-medium">Rule</th>
+          <th class="text-left p-4 font-medium hidden md:table-cell">Type</th>
+          <th class="text-left p-4 font-medium hidden lg:table-cell">Applies To</th>
+          <th class="text-right p-4 font-medium">Adjustment</th>
+          <th class="text-center p-4 font-medium hidden sm:table-cell">Status</th>
+          <th class="text-right p-4 font-medium">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allRules.length > 0 ? allRules.map((rule: any) => (
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td class="p-4">
+                <div class="font-medium">{rule.name || '-'}</div>
+                <div class="text-xs" style="color: var(--color-muted);">Priority: {rule.priority || 0}</div>
+              </td>
+              <td class="p-4 hidden md:table-cell"><span class={typeBadge(rule.type)}>{rule.type ? rule.type.replace(/_/g, ' ').toUpperCase() : '-'}</span></td>
+              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{rule.appliesTo || 'all'}</td>
+              <td class="p-4 text-right font-medium">
+                {rule.adjustmentType === 'percentage' ? `${rule.adjustmentValue || 0}%` : formatCurrency(rule.adjustmentValue || 0)}
+                <span class="text-xs" style="color: var(--color-muted);"> {rule.adjustmentType === 'percentage' ? 'off' : 'off'}</span>
+              </td>
+              <td class="p-4 text-center hidden sm:table-cell"><span class={rule.isActive !== false ? 'badge badge-primary' : 'badge'}>{rule.isActive !== false ? 'Active' : 'Inactive'}</span></td>
+              <td class="p-4 text-right">
+                <div class="flex justify-end gap-1">
+                  <button class="btn btn-ghost text-xs px-2 py-1 btn-edit" data-id={rule.id} title="Edit">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </button>
+                  <button class="btn btn-ghost text-xs px-2 py-1 btn-delete" data-id={rule.id} title="Delete" style="color: var(--color-error);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          )) : (
+            <tr><td colspan="6" class="p-12 text-center" style="color: var(--color-muted);">No pricing rules configured.</td></tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/40" id="modal-overlay"></div>
+    <div class="relative w-full max-w-lg rounded-2xl p-6" style="background: var(--color-surface);">
+      <div class="flex items-center justify-between mb-6">
+        <h3 id="modal-title" class="font-bold text-lg">New Pricing Rule</h3>
+        <button id="modal-close" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(220,38,38,0.1)]">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <form id="modal-form" class="space-y-4">
+        <input type="hidden" id="form-id" />
+        <div><label class="text-sm font-medium block mb-1">Rule Name</label><input id="form-name" class="input" required /></div>
+        <div><label class="text-sm font-medium block mb-1">Type</label>
+          <select id="form-type" class="input">
+            <option value="date_based">Date-Based</option>
+            <option value="group_discount">Group Discount</option>
+            <option value="early_bird">Early Bird</option>
+            <option value="seasonal">Seasonal Surcharge</option>
+            <option value="last_minute">Last Minute Deal</option>
+          </select>
+        </div>
+        <div><label class="text-sm font-medium block mb-1">Applies To (package type or 'all')</label><input id="form-appliesTo" class="input" value="all" /></div>
+        <div class="grid grid-cols-2 gap-4">
+          <div><label class="text-sm font-medium block mb-1">Adjustment Value</label><input id="form-adjustmentValue" type="number" class="input" required /></div>
+          <div><label class="text-sm font-medium block mb-1">Adjustment Type</label>
+            <select id="form-adjustmentType" class="input">
+              <option value="percentage">Percentage</option>
+              <option value="fixed">Fixed Amount</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div><label class="text-sm font-medium block mb-1">Start Date</label><input id="form-startDate" type="date" class="input" /></div>
+          <div><label class="text-sm font-medium block mb-1">End Date</label><input id="form-endDate" type="date" class="input" /></div>
+        </div>
+        <div><label class="text-sm font-medium block mb-1">Priority (higher = applied first)</label><input id="form-priority" type="number" class="input" value="0" /></div>
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="form-isActive" checked /> <label for="form-isActive" class="text-sm font-medium">Active</label>
+        </div>
+        <div class="flex justify-end gap-3 pt-2">
+          <button type="button" id="modal-cancel" class="btn btn-ghost">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Rule</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const fields = ['name','type','appliesTo','adjustmentValue','adjustmentType','startDate','endDate','priority','isActive'];
+      const modal = document.getElementById('modal');
+      const form = document.getElementById('modal-form') as HTMLFormElement;
+      const title = document.getElementById('modal-title');
+
+      function openModal(isEdit: boolean, data?: any) {
+        title!.textContent = isEdit ? 'Edit Pricing Rule' : 'New Pricing Rule';
+        fields.forEach(f => {
+          const el = document.getElementById('form-' + f) as HTMLInputElement;
+          if (el) {
+            if (f === 'isActive') el.checked = data?.[f] !== false;
+            else el.value = data?.[f] ?? (f === 'appliesTo' ? 'all' : f === 'priority' ? '0' : '');
+          }
+        });
+        (document.getElementById('form-id') as HTMLInputElement).value = data?.id || '';
+        modal!.classList.remove('hidden');
+      }
+
+      document.getElementById('btn-new-rule')!.addEventListener('click', () => openModal(false));
+      document.querySelectorAll('.btn-edit').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = (btn as HTMLElement).dataset.id;
+          fetch('/api/admin/travels/packages?id=' + id).catch(() => {});
+          // Pricing rules use generic content API
+          fetch('/api/admin/travels/content?collection=travels_pricing_rules&id=' + id).then(r => r.json()).then(data => openModal(true, data.document || data)).catch(() => {});
+        });
+      });
+
+      document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = (btn as HTMLElement).dataset.id;
+          if (confirm('Delete this rule?')) {
+            fetch('/api/admin/travels/content?collection=travels_pricing_rules&id=' + id, { method: 'DELETE' }).then(() => location.reload()).catch(() => {});
+          }
+        });
+      });
+
+      document.getElementById('modal-close')!.addEventListener('click', () => modal!.classList.add('hidden'));
+      document.getElementById('modal-overlay')!.addEventListener('click', () => modal!.classList.add('hidden'));
+      document.getElementById('modal-cancel')!.addEventListener('click', () => modal!.classList.add('hidden'));
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = (document.getElementById('form-id') as HTMLInputElement).value;
+        const body: any = {};
+        fields.forEach(f => {
+          const el = document.getElementById('form-' + f) as HTMLInputElement;
+          if (el) {
+            if (f === 'isActive') body[f] = el.checked;
+            else if (f === 'adjustmentValue' || f === 'priority') body[f] = parseFloat(el.value) || 0;
+            else body[f] = el.value;
+          }
+        });
+        const ep = id ? '/api/admin/travels/content?collection=travels_pricing_rules&id=' + id : '/api/admin/travels/content?collection=travels_pricing_rules';
+        const method = id ? 'PATCH' : 'POST';
+        fetch(ep, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(() => location.reload()).catch(() => {});
+      });
+    })();
+  </script>
+</AdminLayout>

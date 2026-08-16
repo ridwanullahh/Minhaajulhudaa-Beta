@@ -1,0 +1,103 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../lib/lightbase';
+import { formatDate } from '../../lib/utils';
+
+const result = await lightbase.query('school_events', {
+  sort: 'startDate:asc',
+  limit: 50,
+});
+const events = result.data || [];
+const categories = [...new Set(events.map((e: any) => e.category).filter(Boolean))];
+
+const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+const eventsByMonth = new Map<string, any[]>();
+events.forEach((ev: any) => {
+  if (ev.startDate) {
+    const d = new Date(ev.startDate);
+    const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+    if (!eventsByMonth.has(key)) eventsByMonth.set(key, []);
+    eventsByMonth.get(key)!.push(ev);
+  }
+});
+const sortedMonths = [...eventsByMonth.keys()].sort();
+---
+export const prerender = true;
+
+<PlatformLayout title="School Calendar - Minhaajulhudaa School" platform="school">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">School Calendar</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Stay up to date with upcoming events, exams, holidays, and activities.</p>
+
+    {categories.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8">
+        <button class="badge badge-primary" data-filter="all">All Events</button>
+        {categories.map((cat: string) => (
+          <button class="badge" style="background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-muted);" data-filter={cat}>{cat.replace(/-/g, ' ')}</button>
+        ))}
+      </div>
+    )}
+
+    {events.length > 0 ? (
+      <div id="events-list">
+        {sortedMonths.map((monthKey) => {
+          const [year, month] = monthKey.split('-');
+          const monthEvents = eventsByMonth.get(monthKey) || [];
+          return (
+            <div class="mb-10">
+              <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                {monthNames[parseInt(month) - 1]} {year}
+              </h2>
+              <div class="space-y-3">
+                {monthEvents.map((ev: any) => (
+                  <div class="card p-4 md:p-6 flex flex-col md:flex-row md:items-center gap-4 event-item" data-category={ev.category}>
+                    <div class="flex-shrink-0 w-14 h-14 rounded-xl flex flex-col items-center justify-center" style="background: rgb(5,179,77,0.1);">
+                      <span class="text-xs font-medium" style="color: var(--color-primary);">{monthNames[new Date(ev.startDate).getMonth()].substring(0, 3)}</span>
+                      <span class="text-xl font-extrabold" style="color: var(--color-primary);">{new Date(ev.startDate).getDate()}</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <h3 class="font-bold mb-1">{ev.title}</h3>
+                      <p class="text-sm" style="color: var(--color-muted);">{ev.description ? ev.description.substring(0, 120) : ''}</p>
+                    </div>
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                      {ev.category && <span class="badge badge-accent hidden sm:inline-flex">{ev.category.replace(/-/g, ' ')}</span>}
+                      {ev.startTime && <span class="text-xs" style="color: var(--color-muted);">{ev.startTime}</span>}
+                      {ev.location && (
+                        <span class="text-xs flex items-center gap-1" style="color: var(--color-muted);">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                          {ev.location}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    ) : (
+      <div class="card p-12 text-center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <p style="color: var(--color-muted);">No upcoming events at this time.</p>
+      </div>
+    )}
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('.event-item').forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            (item as HTMLElement).style.display = '';
+          } else {
+            (item as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</PlatformLayout>

@@ -1,0 +1,79 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+
+---
+
+<AdminLayout title="Media Manager" platform="charity" section="media">
+  <div class="mb-6 fade-in">
+    <h2 class="text-lg font-bold">Media Manager</h2>
+    <p class="text-sm" style="color: var(--color-muted);">Upload and manage images, documents, and other media files.</p>
+  </div>
+
+  <!-- Upload Area -->
+  <div class="card p-8 mb-6 text-center" style="border: 2px dashed var(--color-border);">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+    <h3 class="font-bold mb-2">Upload Files</h3>
+    <p class="text-sm mb-4" style="color: var(--color-muted);">Drag and drop files here, or click to browse. Supports images, PDFs, and documents.</p>
+    <form id="upload-form" class="inline-block">
+      <input type="file" id="file-input" name="file" class="hidden" accept="image/*,.pdf,.doc,.docx" multiple />
+      <button type="button" id="browse-btn" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Browse Files
+      </button>
+    </form>
+    <div id="upload-progress" class="hidden mt-4">
+      <div class="w-48 h-2 rounded-full mx-auto" style="background: var(--color-border);">
+        <div id="upload-bar" class="h-full rounded-full" style="background: var(--color-primary); width: 0%; transition: width 0.3s;"></div>
+      </div>
+      <p id="upload-status" class="text-xs mt-2" style="color: var(--color-muted);">Uploading...</p>
+    </div>
+  </div>
+
+  <!-- Media Grid (placeholder - loads via API) -->
+  <div id="media-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <!-- Items loaded dynamically -->
+  </div>
+  <div id="media-empty" class="card p-12 text-center">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+    <h3 class="font-bold text-lg mb-2">No Media Files</h3>
+    <p class="text-sm" style="color: var(--color-muted);">Upload your first media file using the button above.</p>
+  </div>
+
+  <script>
+    const browseBtn = document.getElementById('browse-btn');
+    const fileInput = document.getElementById('file-input') as HTMLInputElement;
+    browseBtn?.addEventListener('click', () => fileInput.click());
+
+    fileInput?.addEventListener('change', async () => {
+      const files = fileInput.files;
+      if (!files || files.length === 0) return;
+
+      const progress = document.getElementById('upload-progress');
+      const bar = document.getElementById('upload-bar');
+      const status = document.getElementById('upload-status');
+      progress?.classList.remove('hidden');
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        status!.textContent = `Uploading ${file.name}...`;
+        bar!.style.width = `${((i) / files.length) * 100}%`;
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('path', `charity/${file.name}`);
+
+        try {
+          const res = await fetch('/api/admin/charity/content', {
+            method: 'POST',
+            body: formData,
+          });
+          if (!res.ok) { status!.textContent = `Failed: ${file.name}`; }
+        } catch { status!.textContent = `Error: ${file.name}`; }
+      }
+
+      bar!.style.width = '100%';
+      status!.textContent = 'Upload complete!';
+      setTimeout(() => window.location.reload(), 1000);
+    });
+  </script>
+</AdminLayout>

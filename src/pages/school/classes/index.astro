@@ -1,0 +1,99 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const result = await lightbase.query('school_classes', {
+  sort: 'name:asc',
+  limit: 50,
+});
+const classes = result.data || [];
+const levels = [...new Set(classes.map((c: any) => c.level).filter(Boolean))];
+---
+export const prerender = true;
+
+<PlatformLayout title="Classes - Minhaajulhudaa School" platform="school">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Classes Directory</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Browse all available classes by level. Each class is led by qualified teachers with structured curricula.</p>
+
+    {levels.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8">
+        <button class="badge badge-primary" data-filter="all">All</button>
+        {levels.map((level: string) => (
+          <button class="badge" style="background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-muted);" data-filter={level}>{level.replace(/-/g, ' ')}</button>
+        ))}
+      </div>
+    )}
+
+    {classes.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="classes-grid">
+        {classes.map((cls: any) => (
+          <div class="card card-hover p-6 class-card" data-level={cls.level}>
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h2 class="text-lg font-bold">{cls.name}</h2>
+                <span class="badge badge-accent mt-1">{cls.level ? cls.level.replace(/-/g, ' ') : 'N/A'}</span>
+              </div>
+              {cls.active !== false ? (
+                <span class="badge badge-primary">Active</span>
+              ) : (
+                <span class="badge" style="background: rgb(220,38,38,0.1); color: #DC2626;">Inactive</span>
+              )}
+            </div>
+            
+            <dl class="space-y-3 text-sm mb-4">
+              {cls.teacherName && (
+                <div class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <span style="color: var(--color-muted);">Teacher:</span>
+                  <span class="font-medium">{cls.teacherName}</span>
+                </div>
+              )}
+              {cls.schedule && (
+                <div class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-muted);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span style="color: var(--color-muted);">Schedule:</span>
+                  <span class="font-medium">{cls.schedule}</span>
+                </div>
+              )}
+            </dl>
+
+            {cls.capacity && (
+              <div class="mb-4">
+                <div class="flex justify-between text-xs mb-1">
+                  <span style="color: var(--color-muted);">Enrollment</span>
+                  <span class="font-medium">{cls.currentEnrollment || 0}/{cls.capacity}</span>
+                </div>
+                <div class="w-full h-2 rounded-full" style="background: var(--color-border);">
+                  <div class="h-2 rounded-full" style={`background: var(--color-primary); width: ${Math.min(100, ((cls.currentEnrollment || 0) / cls.capacity) * 100)}%;`}></div>
+                </div>
+              </div>
+            )}
+
+            <a href={`/school/classes/${cls.slug}`} class="btn btn-outline w-full">View Details</a>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="card p-12 text-center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        <p style="color: var(--color-muted);">No classes available yet.</p>
+      </div>
+    )}
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('.class-card').forEach(card => {
+          if (filter === 'all' || card.dataset.level === filter) {
+            (card as HTMLElement).style.display = '';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</PlatformLayout>

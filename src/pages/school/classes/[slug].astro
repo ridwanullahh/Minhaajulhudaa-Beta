@@ -1,0 +1,124 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+export async function getStaticPaths() {
+  try {
+    const result = await lightbase.query('school_classes', { limit: 100 });
+    const classes = (result.data || []).filter((c: any) => c.slug);
+    return classes.map((c: any) => ({ params: { slug: c.slug }, props: { cls: c } }));
+  } catch {
+    return [];
+  }
+}
+
+const { cls } = Astro.props;
+
+if (!cls) {
+  return Astro.redirect('/school/classes');
+}
+
+const relatedClasses = await lightbase.findMany('school_classes', { field: 'level', op: 'eq', value: cls.level }, { limit: 3 });
+const filteredRelated = relatedClasses.filter((c: any) => c.slug !== cls.slug);
+---
+export const prerender = true;
+
+<PlatformLayout title={`${cls.name} - Classes`} description={`Class details for ${cls.name}`} platform="school">
+  <section class="container-app py-12">
+    <a href="/school/classes" class="inline-flex items-center gap-2 text-sm mb-6" style="color: var(--color-muted);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Classes
+    </a>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-3 mb-6">
+          <h1 class="text-3xl md:text-4xl font-extrabold">{cls.name}</h1>
+          {cls.active !== false ? (
+            <span class="badge badge-primary">Active</span>
+          ) : (
+            <span class="badge" style="background: rgb(220,38,38,0.1); color: #DC2626;">Inactive</span>
+          )}
+        </div>
+
+        <span class="badge badge-accent mb-6">{cls.level ? cls.level.replace(/-/g, ' ') : 'N/A'}</span>
+
+        {cls.description && (
+          <div class="card p-6 mb-6">
+            <h2 class="text-xl font-bold mb-4">About This Class</h2>
+            <div set:html={cls.description} />
+          </div>
+        )}
+
+        {cls.curriculum && (
+          <div class="card p-6 mb-6">
+            <h2 class="text-xl font-bold mb-4">Curriculum</h2>
+            <div set:html={cls.curriculum} />
+          </div>
+        )}
+      </div>
+
+      <aside class="space-y-6">
+        <div class="card p-6">
+          <h3 class="font-bold mb-4">Class Details</h3>
+          <dl class="space-y-4 text-sm">
+            {cls.teacherName && (
+              <div class="flex justify-between">
+                <dt style="color: var(--color-muted);">Teacher</dt>
+                <dd class="font-medium">{cls.teacherName}</dd>
+              </div>
+            )}
+            {cls.level && (
+              <div class="flex justify-between">
+                <dt style="color: var(--color-muted);">Level</dt>
+                <dd class="font-medium">{cls.level.replace(/-/g, ' ')}</dd>
+              </div>
+            )}
+            {cls.schedule && (
+              <div class="flex justify-between">
+                <dt style="color: var(--color-muted);">Schedule</dt>
+                <dd class="font-medium">{cls.schedule}</dd>
+              </div>
+            )}
+            {cls.room && (
+              <div class="flex justify-between">
+                <dt style="color: var(--color-muted);">Room</dt>
+                <dd class="font-medium">{cls.room}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+
+        {cls.capacity && (
+          <div class="card p-6">
+            <h3 class="font-bold mb-4">Enrollment</h3>
+            <div class="text-center mb-4">
+              <div class="text-4xl font-extrabold" style="color: var(--color-primary);">{cls.currentEnrollment || 0}</div>
+              <div class="text-sm" style="color: var(--color-muted);">of {cls.capacity} seats</div>
+            </div>
+            <div class="w-full h-3 rounded-full" style="background: var(--color-border);">
+              <div class="h-3 rounded-full transition-all" style={`background: var(--color-primary); width: ${Math.min(100, ((cls.currentEnrollment || 0) / cls.capacity) * 100)}%;`}></div>
+            </div>
+            <p class="text-xs mt-2 text-center" style="color: var(--color-muted);">{cls.capacity - (cls.currentEnrollment || 0)} seats remaining</p>
+          </div>
+        )}
+
+        <a href="/school/admission" class="btn btn-primary w-full">Enroll Now</a>
+      </aside>
+    </div>
+  </section>
+
+  {filteredRelated.length > 0 && (
+    <section class="container-app py-12">
+      <h2 class="text-2xl font-bold mb-6">Other {cls.level ? cls.level.replace(/-/g, ' ') : ''} Classes</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {filteredRelated.map((c: any) => (
+          <a href={`/school/classes/${c.slug}`} class="card card-hover p-6">
+            <h3 class="font-bold mb-2">{c.name}</h3>
+            <p class="text-sm" style="color: var(--color-muted);">{c.teacherName || 'TBD'} -- {c.schedule || ''}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</PlatformLayout>

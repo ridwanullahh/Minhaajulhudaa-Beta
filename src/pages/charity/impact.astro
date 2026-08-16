@@ -1,0 +1,110 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../lib/lightbase';
+
+let metrics: any[] = [];
+try {
+  const result = await lightbase.query('charity_impact_metrics', { sort: 'value:desc', limit: 50 });
+  metrics = result.data || [];
+} catch {}
+
+// Group by category
+const grouped: Record<string, any[]> = {};
+metrics.forEach((m: any) => {
+  const cat = m.category || 'General';
+  if (!grouped[cat]) grouped[cat] = [];
+  grouped[cat].push(m);
+});
+
+const topMetrics = metrics.slice(0, 6);
+const maxValue = Math.max(...topMetrics.map((m: any) => m.value || 0), 1);
+---
+export const prerender = true;
+
+<PlatformLayout title="Our Impact - Minhaajulhudaa Charity" platform="charity">
+  <!-- Hero -->
+  <section class="relative overflow-hidden" style="background: linear-gradient(135deg, rgb(5,179,77,0.08), rgb(242,185,28,0.05));">
+    <div class="container-app py-12 md:py-16">
+      <div class="max-w-3xl fade-in">
+        <span class="badge badge-accent mb-4">Measurable Change</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">Our Impact</h1>
+        <p class="text-lg" style="color: var(--color-muted);">Transparent tracking of every life touched, every meal served, and every community uplifted through your support.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Impact Stats -->
+  {topMetrics.length > 0 && (
+    <section class="container-app -mt-8 relative z-10">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        {topMetrics.map((metric: any) => (
+          <div class="card p-5 text-center">
+            <div class="text-3xl md:text-4xl font-extrabold mb-1" style="color: var(--color-primary);">{(metric.value || 0).toLocaleString()}</div>
+            <div class="text-xs" style="color: var(--color-muted);">{metric.metricLabel}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Visual Chart -->
+  {topMetrics.length > 0 && (
+    <section class="container-app py-16">
+      <h2 class="text-2xl font-bold mb-8">Impact at a Glance</h2>
+      <div class="card p-6 md:p-8">
+        <div class="flex flex-col gap-4">
+          {topMetrics.map((metric: any) => {
+            const pct = Math.round(((metric.value || 0) / maxValue) * 100);
+            return (
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="font-medium">{metric.metricLabel}</span>
+                  <span class="font-bold" style="color: var(--color-primary);">{(metric.value || 0).toLocaleString()}</span>
+                </div>
+                <div class="h-4 rounded-full" style="background: var(--color-border);">
+                  <div class="h-full rounded-full transition-all" style={`width: ${pct}%; background: linear-gradient(90deg, var(--color-primary), rgb(5,179,77,0.7));`}></div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Category Breakdown -->
+  {Object.keys(grouped).length > 0 && (
+    <section class="container-app pb-16">
+      <h2 class="text-2xl font-bold mb-8">Impact by Category</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {Object.entries(grouped).map(([category, items]) => (
+          <div class="card p-6">
+            <h3 class="font-bold mb-4 flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full" style="background: var(--color-primary);"></span>
+              {category}
+            </h3>
+            <div class="space-y-3">
+              {items.map((item: any) => (
+                <div class="flex justify-between text-sm">
+                  <span style="color: var(--color-muted);">{item.metricLabel}</span>
+                  <span class="font-bold">{(item.value || 0).toLocaleString()}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Empty State -->
+  {metrics.length === 0 && (
+    <section class="container-app py-16">
+      <div class="card p-12 text-center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <h3 class="font-bold text-lg mb-2">Impact Data Coming Soon</h3>
+        <p class="text-sm" style="color: var(--color-muted);">We are compiling our impact metrics. Check back soon to see the difference your support makes.</p>
+      </div>
+    </section>
+  )}
+</PlatformLayout>

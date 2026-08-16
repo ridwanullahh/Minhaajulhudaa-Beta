@@ -1,0 +1,147 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const allResult = await lightbase.query('school_admission_applications', {
+  sort: 'submittedAt:desc',
+  limit: 100,
+});
+const allApps = allResult.data || [];
+
+const statusCounts = { pending: 0, reviewed: 0, accepted: 0, rejected: 0 };
+allApps.forEach((app: any) => { if (statusCounts[app.status as keyof typeof statusCounts] !== undefined) statusCounts[app.status as keyof typeof statusCounts]++; });
+---
+
+<AdminLayout title="Admission Management" platform="school" section="admissions">
+  <div class="mb-6 fade-in">
+    <h2 class="text-lg font-bold">Admissions Pipeline</h2>
+    <p class="text-sm" style="color: var(--color-muted);">{allApps.length} total applications</p>
+  </div>
+
+  <!-- Pipeline Stats -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div class="card p-4">
+      <div class="text-2xl font-extrabold" style="color: var(--color-accent);">{statusCounts.pending}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Pending</div>
+    </div>
+    <div class="card p-4">
+      <div class="text-2xl font-extrabold" style="color: #2563EB;">{statusCounts.reviewed}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Reviewed</div>
+    </div>
+    <div class="card p-4">
+      <div class="text-2xl font-extrabold" style="color: var(--color-primary);">{statusCounts.accepted}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Accepted</div>
+    </div>
+    <div class="card p-4">
+      <div class="text-2xl font-extrabold" style="color: #DC2626;">{statusCounts.rejected}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Rejected</div>
+    </div>
+  </div>
+
+  <!-- Filter -->
+  <div class="flex flex-wrap gap-2 mb-6">
+    <button class="badge badge-primary adm-filter" data-status="all">All ({allApps.length})</button>
+    <button class="badge adm-filter" style="background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-muted);" data-status="pending">Pending ({statusCounts.pending})</button>
+    <button class="badge adm-filter" style="background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-muted);" data-status="reviewed">Reviewed ({statusCounts.reviewed})</button>
+    <button class="badge adm-filter" style="background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-muted);" data-status="accepted">Accepted ({statusCounts.accepted})</button>
+    <button class="badge adm-filter" style="background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-muted);" data-status="rejected">Rejected ({statusCounts.rejected})</button>
+  </div>
+
+  <!-- Applications Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Applicant</th>
+          <th class="p-4 font-medium hidden md:table-cell">Application ID</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Class</th>
+          <th class="p-4 font-medium hidden lg:table-cell">Submitted</th>
+          <th class="p-4 font-medium text-right">Status</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allApps.map((app: any) => (
+            <tr class="adm-row" data-status={app.status} style="border-top: 1px solid var(--color-border);">
+              <td class="p-4 font-medium">{app.studentFirstName} {app.studentLastName}</td>
+              <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{app.applicationId || app.id}</td>
+              <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{app.appliedClass || '-'}</td>
+              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{app.submittedAt ? new Date(app.submittedAt).toLocaleDateString() : '-'}</td>
+              <td class="p-4 text-right">
+                <select class="input text-xs py-1 px-2" style="width: auto; min-height: 32px;" data-update-status={app.id}>
+                  <option value="pending" {app.status === 'pending' ? 'selected' : ''}>Pending</option>
+                  <option value="reviewed" {app.status === 'reviewed' ? 'selected' : ''}>Reviewed</option>
+                  <option value="accepted" {app.status === 'accepted' ? 'selected' : ''}>Accepted</option>
+                  <option value="rejected" {app.status === 'rejected' ? 'selected' : ''}>Rejected</option>
+                </select>
+              </td>
+              <td class="p-4 text-right">
+                <button class="text-xs font-medium" style="color: var(--color-primary);" data-view-app={app.id}>View</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {allApps.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No applications yet.</div>}
+  </div>
+
+  <!-- Detail Modal -->
+  <div id="detail-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/40" id="modal-bg"></div>
+    <div class="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-xl p-6" style="background: var(--color-surface);">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-lg">Application Details</h3>
+        <button id="close-modal" class="w-8 h-8 rounded-lg flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script>
+    // Filter
+    document.querySelectorAll('.adm-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const status = btn.dataset.status;
+        document.querySelectorAll('.adm-row').forEach(row => {
+          (row as HTMLElement).style.display = (status === 'all' || row.dataset.status === status) ? '' : 'none';
+        });
+      });
+    });
+
+    // Status update
+    document.querySelectorAll('[data-update-status]').forEach(select => {
+      select.addEventListener('change', async () => {
+        const id = select.dataset.updateStatus;
+        const status = (select as HTMLSelectElement).value;
+        try {
+          const res = await fetch('/api/admin/school/admissions', {
+            method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, status }),
+          });
+          if (res.ok) window.location.reload(); else alert('Failed to update');
+        } catch { alert('Network error'); }
+      });
+    });
+
+    // View details
+    const modal = document.getElementById('detail-modal');
+    const modalContent = document.getElementById('modal-content');
+    document.querySelectorAll('[data-view-app]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.viewApp;
+        try {
+          const res = await fetch(`/api/admin/school/admissions?id=${id}`);
+          if (res.ok) {
+            const data = await res.json();
+            modalContent!.innerHTML = '<pre class="text-sm overflow-x-auto" style="color: var(--color-foreground);">' + JSON.stringify(data, null, 2) + '</pre>';
+            modal?.classList.remove('hidden');
+          }
+        } catch { alert('Failed to load'); }
+      });
+    });
+    document.getElementById('close-modal')?.addEventListener('click', () => modal?.classList.add('hidden'));
+    document.getElementById('modal-bg')?.addEventListener('click', () => modal?.classList.add('hidden'));
+  </script>
+</AdminLayout>

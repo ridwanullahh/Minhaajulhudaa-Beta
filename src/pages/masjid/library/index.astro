@@ -1,0 +1,81 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+export const prerender = true;
+
+let books: any[] = [];
+try {
+  const result = await lightbase.query('masjid_books', {
+    filter: { field: 'status', op: 'eq', value: 'published' },
+    sort: 'title:asc',
+    limit: 100,
+  });
+  books = result.data || [];
+} catch {}
+
+const categories = [...new Set(books.map(b => b.category).filter(Boolean))].sort();
+---
+
+<PlatformLayout title="Digital Library - Minhaajulhudaa Masjid" platform="masjid">
+  <!-- Hero -->
+  <section class="relative overflow-hidden" style="background: linear-gradient(135deg, rgb(5,179,77,0.08), rgb(242,185,28,0.05));">
+    <div class="container-app py-12 md:py-16 text-center fade-in">
+      <span class="badge badge-primary mb-4">Library</span>
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-4">
+        Digital <span style="color: var(--color-primary);">Library</span>
+      </h1>
+      <p class="text-lg max-w-2xl mx-auto" style="color: var(--color-muted);">
+        Browse our collection of Islamic books, PDFs, and digital resources for your learning journey.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-app py-8 md:py-12">
+    <!-- Category Tabs -->
+    {categories.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8 fade-in">
+        <a href="/masjid/library" class="btn btn-primary btn-sm">All</a>
+        {categories.map(cat => (
+          <a href={`/masjid/library?category=${encodeURIComponent(cat)}`} class="btn btn-ghost btn-sm">{cat}</a>
+        ))}
+      </div>
+    )}
+
+    {books.length > 0 ? (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 fade-in">
+        {books.map((book) => (
+          <a href={book.slug ? `/masjid/library/${book.slug}` : '#'} class="card card-hover overflow-hidden block">
+            <div class="aspect-[3/4] relative" style="background: var(--color-border);">
+              {book.coverUrl ? (
+                <img src={book.coverUrl} alt={book.title} class="w-full h-full object-cover" loading="lazy" />
+              ) : (
+                <div class="w-full h-full flex flex-col items-center justify-center gap-2">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-muted); opacity: 0.4;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                  <span class="text-xs" style="color: var(--color-muted);">No Cover</span>
+                </div>
+              )}
+              {book.format && (
+                <div class="absolute top-2 right-2 px-2 py-0.5 rounded text-xs font-medium" style="background: var(--color-primary); color: white;">{book.format}</div>
+              )}
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-sm mb-1 line-clamp-2">{book.title}</h3>
+              {book.author && <p class="text-xs mb-2" style="color: var(--color-muted);">by {book.author}</p>}
+              <div class="flex items-center justify-between">
+                {book.category && <span class="badge badge-accent">{book.category}</span>}
+                {book.pages && <span class="text-xs" style="color: var(--color-muted);">{book.pages} pages</span>}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="card p-12 text-center fade-in" style="color: var(--color-muted);">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4 opacity-40"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <p class="font-medium">No books available yet.</p>
+        <p class="text-sm mt-1">Check back soon for Islamic literature and resources.</p>
+      </div>
+    )}
+  </section>
+</PlatformLayout>

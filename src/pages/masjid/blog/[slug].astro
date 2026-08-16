@@ -1,0 +1,84 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+export async function getStaticPaths() {
+  try {
+    const result = await lightbase.query('masjid_blog_posts', { limit: 200 });
+    return (result.data || []).filter(doc => doc.slug).map(doc => ({ params: { slug: doc.slug }, props: { post: doc } }));
+  } catch { return []; }
+}
+
+const { post } = Astro.props;
+
+let relatedPosts: any[] = [];
+try {
+  const result = await lightbase.query('masjid_blog_posts', {
+    filter: { field: 'category', op: 'eq', value: post.category },
+    sort: 'publishedAt:desc',
+    limit: 4,
+  });
+  relatedPosts = (result.data || []).filter((p: any) => p.id !== post.id).slice(0, 3);
+} catch {}
+---
+
+<PlatformLayout title={`${post.title} - Blog`} platform="masjid">
+  <article class="container-app py-8 md:py-12 max-w-3xl mx-auto">
+    <a href="/masjid/blog" class="inline-flex items-center gap-2 text-sm font-medium mb-6" style="color: var(--color-primary);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Blog
+    </a>
+
+    <div class="fade-in">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        {post.category && <span class="badge badge-primary">{post.category}</span>}
+        {post.tags && post.tags.map((tag: string) => <span class="badge">{tag}</span>)}
+      </div>
+      <h1 class="text-2xl md:text-4xl font-extrabold mb-4 leading-tight">{post.title}</h1>
+      <div class="flex items-center gap-3 mb-6 pb-6" style="border-bottom: 1px solid var(--color-border);">
+        {post.authorName && (
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">{post.authorName.charAt(0)}</div>
+            <div>
+              <div class="text-sm font-semibold">{post.authorName}</div>
+              <div class="text-xs" style="color: var(--color-muted);">{post.authorEmail || ''}</div>
+            </div>
+          </div>
+        )}
+        {post.publishedAt && (
+          <span class="text-sm" style="color: var(--color-muted);">{new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+        )}
+      </div>
+
+      {post.featuredImage && (
+        <div class="rounded-xl overflow-hidden mb-8">
+          <img src={post.featuredImage} alt={post.title} class="w-full object-cover" />
+        </div>
+      )}
+
+      <div class="prose max-w-none text-base leading-relaxed" style="color: var(--color-muted);">
+        {post.content ? post.content.split('\n').map(para => {
+          if (para.startsWith('### ')) return <h3 class="text-xl font-bold mt-6 mb-3" style="color: var(--color-foreground);">{para.replace('### ', '')}</h3>;
+          if (para.startsWith('## ')) return <h2 class="text-2xl font-bold mt-8 mb-4" style="color: var(--color-foreground);">{para.replace('## ', '')}</h2>;
+          if (para.startsWith('# ')) return <h1 class="text-3xl font-bold mt-8 mb-4" style="color: var(--color-foreground);">{para.replace('# ', '')}</h1>;
+          if (para.trim() === '') return <div class="h-2"></div>;
+          return <p class="mb-4">{para}</p>;
+        }) : <p>No content available.</p>}
+      </div>
+    </div>
+  </article>
+
+  {relatedPosts.length > 0 && (
+    <section class="container-app py-12" style="border-top: 1px solid var(--color-border);">
+      <h2 class="text-xl font-bold mb-6">Related Posts</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {relatedPosts.map((rp: any) => (
+          <a href={`/masjid/blog/${rp.slug}`} class="card card-hover p-5 block">
+            <h3 class="font-bold text-sm mb-2 line-clamp-2">{rp.title}</h3>
+            <p class="text-xs line-clamp-2" style="color: var(--color-muted);">{rp.excerpt || rp.content?.substring(0, 100)}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</PlatformLayout>

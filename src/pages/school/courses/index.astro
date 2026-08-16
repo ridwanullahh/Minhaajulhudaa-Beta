@@ -1,0 +1,82 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+const result = await lightbase.query('school_courses', {
+  filter: { field: 'status', op: 'eq', value: 'published' },
+  sort: 'title:asc',
+  limit: 50,
+});
+const courses = result.data || [];
+const categories = [...new Set(courses.map((c: any) => c.category).filter(Boolean))];
+---
+export const prerender = true;
+
+<PlatformLayout title="E-Courses - Minhaajulhudaa School" platform="school">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">E-Courses</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Enroll in online courses to enhance your learning beyond the classroom.</p>
+
+    {categories.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8">
+        <button class="badge badge-primary" data-filter="all">All</button>
+        {categories.map((cat: string) => (
+          <button class="badge" style="background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-muted);" data-filter={cat}>{cat.replace(/-/g, ' ')}</button>
+        ))}
+      </div>
+    )}
+
+    {courses.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="courses-grid">
+        {courses.map((course: any) => (
+          <div class="card card-hover overflow-hidden course-card" data-category={course.category}>
+            <div class="aspect-video bg-[rgb(5,179,77,0.05)] relative">
+              {course.thumbnailUrl ? (
+                <img src={course.thumbnailUrl} alt={course.title} class="w-full h-full object-cover" loading="lazy" />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-primary);"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                </div>
+              )}
+              {course.isFree && <div class="absolute top-2 left-2"><span class="badge badge-accent">Free</span></div>}
+            </div>
+            <div class="p-6">
+              {course.category && <span class="badge badge-primary mb-3">{course.category.replace(/-/g, ' ')}</span>}
+              <h2 class="font-bold mb-2 line-clamp-2">{course.title}</h2>
+              {course.excerpt && <p class="text-sm mb-4 line-clamp-2" style="color: var(--color-muted);">{course.excerpt}</p>}
+              <div class="flex items-center justify-between text-xs mb-4" style="color: var(--color-muted);">
+                {course.instructorName && <span>{course.instructorName}</span>}
+                {course.duration && <span>{course.duration}</span>}
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-bold" style="color: var(--color-primary);">{course.isFree ? 'Free' : (course.price ? formatCurrency(course.price) : '')}</span>
+                <a href={`/school/courses/${course.slug}`} class="btn btn-outline text-xs">View Course</a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="card p-12 text-center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        <p style="color: var(--color-muted);">No courses available yet.</p>
+      </div>
+    )}
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('.course-card').forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            (card as HTMLElement).style.display = '';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</PlatformLayout>

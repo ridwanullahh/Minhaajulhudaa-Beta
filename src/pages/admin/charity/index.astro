@@ -1,0 +1,143 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+const [donationsAgg, activeCampaigns, allCampaigns, volunteerCount, pendingVolunteers, beneficiaryCount, recentDonations, recentVolunteers] = await Promise.all([
+  lightbase.aggregate('charity_donations', {
+    aggregations: [{ field: 'amount', op: 'sum', alias: 'totalDonations' }],
+  }).catch(() => ({ totalDonations: 0 })),
+  lightbase.count('charity_campaigns', { field: 'status', op: 'eq', value: 'active' }),
+  lightbase.query('charity_campaigns', { sort: 'createdAt:desc', limit: 5 }),
+  lightbase.count('charity_volunteers'),
+  lightbase.count('charity_volunteers', { field: 'status', op: 'eq', value: 'pending' }),
+  lightbase.count('charity_beneficiaries'),
+  lightbase.query('charity_donations', { sort: 'createdAt:desc', limit: 5 }),
+  lightbase.query('charity_volunteers', { sort: 'createdAt:desc', limit: 5 }),
+]);
+
+const stats = [
+  { label: 'Total Donations', value: formatCurrency(donationsAgg?.totalDonations || 0), icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>', color: 'rgb(5,179,77,0.1)', textColor: 'var(--color-primary)' },
+  { label: 'Active Campaigns', value: activeCampaigns, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>', color: 'rgb(242,185,28,0.15)', textColor: 'var(--color-accent)' },
+  { label: 'Volunteers', value: volunteerCount, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>', color: 'rgb(37,99,235,0.1)', textColor: '#2563EB' },
+  { label: 'Beneficiaries', value: beneficiaryCount, icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>', color: 'rgb(5,179,77,0.1)', textColor: 'var(--color-primary)' },
+];
+
+const quickActions = [
+  { label: 'New Campaign', href: '/admin/charity/campaigns', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>' },
+  { label: 'Review Volunteers', href: '/admin/charity/volunteers', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>' },
+  { label: 'Log Donation', href: '/admin/charity/donations', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>' },
+  { label: 'Update Impact', href: '/admin/charity/impact', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>' },
+];
+---
+
+<AdminLayout title="Dashboard" platform="charity" section="dashboard">
+  <!-- Stats Grid -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8 fade-in">
+    {stats.map((stat) => (
+      <div class="card p-5">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center" style={`background: ${stat.color}; color: ${stat.textColor};`}>
+            <Fragment set:html={stat.icon} />
+          </div>
+        </div>
+        <div class="text-2xl font-extrabold mb-1">{stat.value}</div>
+        <div class="text-xs" style="color: var(--color-muted);">{stat.label}</div>
+      </div>
+    ))}
+  </div>
+
+  <div class="grid lg:grid-cols-3 gap-6">
+    <!-- Recent Donations -->
+    <div class="lg:col-span-2 card p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-bold">Recent Donations</h2>
+        <a href="/admin/charity/donations" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
+      </div>
+      {(recentDonations.data || []).length > 0 ? (
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr style="color: var(--color-muted); border-bottom: 1px solid var(--color-border);">
+              <th class="text-left pb-3 font-medium">Donor</th>
+              <th class="text-left pb-3 font-medium hidden sm:table-cell">Campaign</th>
+              <th class="text-right pb-3 font-medium">Amount</th>
+              <th class="text-right pb-3 font-medium hidden md:table-cell">Date</th>
+            </tr></thead>
+            <tbody>
+              {(recentDonations.data || []).map((d: any) => (
+                <tr style="border-bottom: 1px solid var(--color-border);">
+                  <td class="py-3 font-medium">{d.donorName || d.donorEmail || '-'}</td>
+                  <td class="py-3 hidden sm:table-cell" style="color: var(--color-muted);">{d.campaignTitle || '-'}</td>
+                  <td class="py-3 text-right font-medium" style="color: var(--color-primary);">{formatCurrency(d.amount || 0)}</td>
+                  <td class="py-3 text-right hidden md:table-cell" style="color: var(--color-muted);">{d.createdAt ? new Date(d.createdAt).toLocaleDateString() : ''}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : <p class="text-sm" style="color: var(--color-muted);">No donations recorded yet.</p>}
+    </div>
+
+    <!-- Quick Actions + Pending -->
+    <div class="space-y-6">
+      <div class="card p-6">
+        <h2 class="font-bold mb-4">Quick Actions</h2>
+        <div class="space-y-2">
+          {quickActions.map((action) => (
+            <a href={action.href} class="flex items-center gap-3 p-3 rounded-lg transition-colors hover:bg-[rgb(5,179,77,0.05)]" style="color: var(--color-foreground);">
+              <span style="color: var(--color-primary);"><Fragment set:html={action.icon} /></span>
+              <span class="text-sm font-medium">{action.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="card p-6">
+        <h2 class="font-bold mb-4">Pending Volunteers</h2>
+        <div class="text-3xl font-extrabold" style="color: var(--color-accent);">{pendingVolunteers}</div>
+        <p class="text-xs mt-1" style="color: var(--color-muted);">applications awaiting review</p>
+        <a href="/admin/charity/volunteers" class="btn btn-outline mt-3 w-full text-xs">Review Applications</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Campaigns -->
+  <div class="card p-6 mt-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="font-bold">Campaigns</h2>
+      <a href="/admin/charity/campaigns" class="text-sm font-medium" style="color: var(--color-primary);">Manage All</a>
+    </div>
+    {(allCampaigns.data || []).length > 0 ? (
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+            <th class="p-3 font-medium">Title</th>
+            <th class="p-3 font-medium hidden sm:table-cell">Category</th>
+            <th class="p-3 font-medium text-right">Progress</th>
+            <th class="p-3 font-medium text-right">Status</th>
+          </tr></thead>
+          <tbody>
+            {(allCampaigns.data || []).map((c: any) => {
+              const pct = c.goalAmount ? Math.round(((c.raisedAmount || 0) / c.goalAmount) * 100) : 0;
+              return (
+                <tr style="border-top: 1px solid var(--color-border);">
+                  <td class="p-3 font-medium">{c.title}</td>
+                  <td class="p-3 hidden sm:table-cell"><span class="badge badge-accent">{c.category || '-'}</span></td>
+                  <td class="p-3 text-right">
+                    <div class="flex items-center justify-end gap-2">
+                      <div class="w-16 h-1.5 rounded-full" style="background: var(--color-border);">
+                        <div class="h-full rounded-full" style={`width: ${Math.min(pct, 100)}%; background: var(--color-primary);`}></div>
+                      </div>
+                      <span class="text-xs font-medium">{pct}%</span>
+                    </div>
+                  </td>
+                  <td class="p-3 text-right"><span class={c.status === 'active' ? 'badge badge-primary' : 'badge badge-accent'}>{c.status || '-'}</span></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    ) : <p class="text-sm" style="color: var(--color-muted);">No campaigns yet.</p>}
+  </div>
+</AdminLayout>

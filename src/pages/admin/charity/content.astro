@@ -1,0 +1,140 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const [pages, testimonials, stories] = await Promise.all([
+  lightbase.query('charity_pages', { sort: 'title:asc', limit: 50 }),
+  lightbase.query('charity_testimonials', { sort: 'createdAt:desc', limit: 20 }),
+  lightbase.query('charity_success_stories', { sort: 'createdAt:desc', limit: 20 }),
+]);
+
+const allPages = pages.data || [];
+const allTestimonials = testimonials.data || [];
+const allStories = stories.data || [];
+---
+
+<AdminLayout title="Content Management" platform="charity" section="content">
+  <div class="flex items-center justify-between mb-6 fade-in">
+    <div>
+      <h2 class="text-lg font-bold">Content Management</h2>
+      <p class="text-sm" style="color: var(--color-muted);">Manage pages, testimonials, and success stories.</p>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="flex gap-1 mb-6 border-b" style="border-color: var(--color-border);">
+    <button class="content-tab px-4 py-2.5 text-sm font-medium border-b-2" data-tab="pages" style="border-color: var(--color-primary); color: var(--color-primary);">Pages ({allPages.length})</button>
+    <button class="content-tab px-4 py-2.5 text-sm font-medium border-b-2" data-tab="testimonials" style="border-color: transparent; color: var(--color-muted);">Testimonials ({allTestimonials.length})</button>
+    <button class="content-tab px-4 py-2.5 text-sm font-medium border-b-2" data-tab="stories" style="border-color: transparent; color: var(--color-muted);">Stories ({allStories.length})</button>
+  </div>
+
+  <!-- Pages Tab -->
+  <div id="tab-pages" class="content-panel">
+    <div class="card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+            <th class="p-4 font-medium">Title</th>
+            <th class="p-4 font-medium hidden md:table-cell">Slug</th>
+            <th class="p-4 font-medium hidden sm:table-cell">Status</th>
+            <th class="p-4 font-medium text-right">Actions</th>
+          </tr></thead>
+          <tbody>
+            {allPages.map((pg: any) => (
+              <tr style="border-top: 1px solid var(--color-border);">
+                <td class="p-4 font-medium">{pg.title}</td>
+                <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{pg.slug}</td>
+                <td class="p-4 hidden sm:table-cell"><span class={pg.status === 'published' ? 'badge badge-primary' : 'badge badge-accent'}>{pg.status}</span></td>
+                <td class="p-4 text-right">
+                  <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-delete-content={pg.id} data-collection="charity_pages">Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {allPages.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No pages created yet.</div>}
+    </div>
+  </div>
+
+  <!-- Testimonials Tab -->
+  <div id="tab-testimonials" class="content-panel hidden">
+    <div class="card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+            <th class="p-4 font-medium">Author</th>
+            <th class="p-4 font-medium hidden md:table-cell">Type</th>
+            <th class="p-4 font-medium hidden sm:table-cell">Status</th>
+            <th class="p-4 font-medium text-right">Actions</th>
+          </tr></thead>
+          <tbody>
+            {allTestimonials.map((t: any) => (
+              <tr style="border-top: 1px solid var(--color-border);">
+                <td class="p-4 font-medium">{t.authorName}</td>
+                <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{t.type || 'donor'}</span></td>
+                <td class="p-4 hidden sm:table-cell"><span class={t.status === 'approved' ? 'badge badge-primary' : 'badge badge-accent'}>{t.status}</span></td>
+                <td class="p-4 text-right">
+                  <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-delete-content={t.id} data-collection="charity_testimonials">Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {allTestimonials.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No testimonials yet.</div>}
+    </div>
+  </div>
+
+  <!-- Stories Tab -->
+  <div id="tab-stories" class="content-panel hidden">
+    <div class="card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+            <th class="p-4 font-medium">Title</th>
+            <th class="p-4 font-medium hidden md:table-cell">Campaign</th>
+            <th class="p-4 font-medium hidden sm:table-cell">Status</th>
+            <th class="p-4 font-medium text-right">Actions</th>
+          </tr></thead>
+          <tbody>
+            {allStories.map((s: any) => (
+              <tr style="border-top: 1px solid var(--color-border);">
+                <td class="p-4 font-medium">{s.title}</td>
+                <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{s.campaignTitle || '-'}</td>
+                <td class="p-4 hidden sm:table-cell"><span class={s.status === 'published' ? 'badge badge-primary' : 'badge badge-accent'}>{s.status}</span></td>
+                <td class="p-4 text-right">
+                  <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-delete-content={s.id} data-collection="charity_success_stories">Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {allStories.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No stories yet.</div>}
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.content-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.content-tab').forEach(t => { t.style.borderColor = 'transparent'; t.style.color = 'var(--color-muted)'; });
+        tab.style.borderColor = 'var(--color-primary)'; tab.style.color = 'var(--color-primary)';
+        document.querySelectorAll('.content-panel').forEach(p => p.classList.add('hidden'));
+        document.getElementById('tab-' + tab.dataset.tab)?.classList.remove('hidden');
+      });
+    });
+
+    document.querySelectorAll('[data-delete-content]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this item?')) return;
+        const id = btn.getAttribute('data-delete-content');
+        const collection = btn.getAttribute('data-collection');
+        try {
+          const res = await fetch(`/api/admin/charity/content?id=${id}&collection=${collection}`, { method: 'DELETE' });
+          if (res.ok) window.location.reload(); else alert('Failed');
+        } catch { alert('Network error'); }
+      });
+    });
+  </script>
+</AdminLayout>

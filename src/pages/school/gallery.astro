@@ -1,0 +1,59 @@
+---
+import PlatformLayout from '../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../lib/lightbase';
+
+const result = await lightbase.query('school_gallery_albums', {
+  sort: 'createdAt:desc',
+  limit: 50,
+});
+const albums = result.data || [];
+---
+export const prerender = true;
+
+<PlatformLayout title="Gallery - Minhaajulhudaa School" platform="school">
+  <section class="container-app py-12">
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Gallery</h1>
+    <p style="color: var(--color-muted);" class="mb-8">Browse photos and videos from school events, activities, and daily life at Minhaajulhudaa School.</p>
+
+    {albums.length > 0 ? (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {albums.map((album: any) => (
+          <div class="card card-hover overflow-hidden group">
+            <div class="aspect-[4/3] bg-[rgb(5,179,77,0.05)] relative overflow-hidden">
+              {album.coverImageUrl ? (
+                <img src={album.coverImageUrl} alt={album.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-primary);"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+              )}
+              {album.type === 'video' && (
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: rgb(0,0,0,0.6);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div class="p-5">
+              <h2 class="font-bold mb-1">{album.title}</h2>
+              {album.description && <p class="text-sm mb-3" style="color: var(--color-muted);">{album.description.substring(0, 80)}</p>}
+              <div class="flex items-center justify-between text-xs" style="color: var(--color-muted);">
+                <span class="flex items-center gap-1">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  {album.mediaCount || 0} items
+                </span>
+                {album.createdAt && <span>{new Date(album.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="card p-12 text-center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <p style="color: var(--color-muted);">No gallery albums yet. Check back soon.</p>
+      </div>
+    )}
+  </section>
+</PlatformLayout>

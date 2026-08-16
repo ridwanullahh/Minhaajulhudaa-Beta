@@ -1,0 +1,172 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { generateCSRFToken } from '../../../lib/utils';
+
+const beneficiaries = await lightbase.query('charity_beneficiaries', { sort: 'createdAt:desc', limit: 100 });
+const allBeneficiaries = beneficiaries.data || [];
+const verifiedCount = allBeneficiaries.filter((b: any) => b.verificationStatus === 'verified').length;
+const pendingCount = allBeneficiaries.filter((b: any) => b.verificationStatus === 'pending').length;
+const csrfToken = generateCSRFToken();
+---
+
+<AdminLayout title="Beneficiaries" platform="charity" section="beneficiaries">
+  <!-- Stats -->
+  <div class="grid grid-cols-3 gap-4 mb-6 fade-in">
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold">{allBeneficiaries.length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Total Beneficiaries</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-primary);">{verifiedCount}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Verified</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-accent);">{pendingCount}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Pending Verification</div>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="text-lg font-bold">Beneficiary Database</h2>
+      <p class="text-sm" style="color: var(--color-muted);">Manage and review beneficiary records</p>
+    </div>
+    <button id="toggle-add-btn" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Add Beneficiary
+    </button>
+  </div>
+
+  <!-- Add Form -->
+  <div id="add-form" class="hidden card p-6 mb-6">
+    <h3 class="font-bold mb-4">Add Beneficiary</h3>
+    <form id="beneficiary-form" class="space-y-4">
+      <input type="hidden" name="csrfToken" value={csrfToken} />
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="b-name">Full Name</label>
+          <input id="b-name" name="fullName" class="input" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="b-phone">Phone</label>
+          <input id="b-phone" name="phone" class="input" />
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="b-location">Location</label>
+          <input id="b-location" name="location" class="input" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="b-category">Category</label>
+          <select id="b-category" name="category" class="input">
+            <option value="orphan">Orphan</option>
+            <option value="widow">Widow</option>
+            <option value="elderly">Elderly</option>
+            <option value="disabled">Disabled</option>
+            <option value="family">Family</option>
+            <option value="student">Student</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="b-needs">Needs Assessment</label>
+        <textarea id="b-needs" name="needsAssessment" class="input" rows="3"></textarea>
+      </div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Add Beneficiary</button>
+        <button type="button" id="cancel-add-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Name</th>
+          <th class="p-4 font-medium hidden md:table-cell">Category</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Location</th>
+          <th class="p-4 font-medium hidden lg:table-cell">Assistance History</th>
+          <th class="p-4 font-medium text-right">Verification</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allBeneficiaries.map((b: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-4">
+                <div class="font-medium">{b.fullName}</div>
+                <div class="text-xs" style="color: var(--color-muted);">{b.phone || ''}</div>
+              </td>
+              <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{b.category || '-'}</span></td>
+              <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{b.location || '-'}</td>
+              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{b.assistanceCount || 0} times</td>
+              <td class="p-4 text-right">
+                <span class={b.verificationStatus === 'verified' ? 'badge badge-primary' : 'badge badge-accent'}>{b.verificationStatus || 'pending'}</span>
+              </td>
+              <td class="p-4 text-right">
+                {b.verificationStatus === 'pending' && (
+                  <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-verify-ben={b.id}>Verify</button>
+                )}
+                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-ben={b.id}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {allBeneficiaries.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No beneficiaries registered yet.</div>}
+  </div>
+
+  <script>
+    const toggleAdd = document.getElementById('toggle-add-btn');
+    const cancelAdd = document.getElementById('cancel-add-btn');
+    const addForm = document.getElementById('add-form');
+    toggleAdd?.addEventListener('click', () => addForm?.classList.toggle('hidden'));
+    cancelAdd?.addEventListener('click', () => addForm?.classList.add('hidden'));
+
+    document.getElementById('beneficiary-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, string> = {};
+      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = v as string; });
+      body.verificationStatus = 'pending';
+      try {
+        const res = await fetch('/api/admin/charity/volunteers', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ collection: 'charity_beneficiaries', ...body }),
+        });
+        if (res.ok) window.location.reload(); else alert('Failed');
+      } catch { alert('Network error'); }
+    });
+
+    document.querySelectorAll('[data-verify-ben]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-verify-ben');
+        try {
+          const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ collection: 'charity_beneficiaries', verificationStatus: 'verified' }),
+          });
+          if (res.ok) window.location.reload(); else alert('Failed');
+        } catch { alert('Network error'); }
+      });
+    });
+
+    document.querySelectorAll('[data-delete-ben]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this beneficiary record?')) return;
+        const id = btn.getAttribute('data-delete-ben');
+        try {
+          const res = await fetch(`/api/admin/charity/volunteers?id=${id}&collection=charity_beneficiaries`, { method: 'DELETE' });
+          if (res.ok) window.location.reload(); else alert('Failed');
+        } catch { alert('Network error'); }
+      });
+    });
+  </script>
+</AdminLayout>

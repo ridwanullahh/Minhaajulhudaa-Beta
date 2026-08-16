@@ -1,0 +1,186 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { generateCSRFToken } from '../../../lib/utils';
+
+const metrics = await lightbase.query('charity_impact_metrics', { sort: 'value:desc', limit: 100 });
+const allMetrics = metrics.data || [];
+const csrfToken = generateCSRFToken();
+
+const categories = [...new Set(allMetrics.map((m: any) => m.category).filter(Boolean))];
+const totalValue = allMetrics.reduce((sum: number, m: any) => sum + (m.value || 0), 0);
+---
+
+<AdminLayout title="Impact Metrics" platform="charity" section="impact">
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6 fade-in">
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-primary);">{allMetrics.length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Total Metrics</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold" style="color: var(--color-accent);">{categories.length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Categories</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold">{totalValue.toLocaleString()}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Combined Impact</div>
+    </div>
+    <div class="card p-5">
+      <div class="text-2xl font-extrabold">{allMetrics.length > 0 ? Math.round(totalValue / allMetrics.length).toLocaleString() : 0}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Average Per Metric</div>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="text-lg font-bold">Impact Metrics</h2>
+      <p class="text-sm" style="color: var(--color-muted);">Track and update impact numbers</p>
+    </div>
+    <button id="toggle-metric-btn" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Add Metric
+    </button>
+  </div>
+
+  <!-- Add Form -->
+  <div id="metric-form" class="hidden card p-6 mb-6">
+    <h3 class="font-bold mb-4">Add / Update Metric</h3>
+    <form id="impact-form" class="space-y-4">
+      <input type="hidden" name="csrfToken" value={csrfToken} />
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="m-label">Metric Label</label>
+          <input id="m-label" name="metricLabel" class="input" required placeholder="e.g. Families Helped" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="m-key">Metric Key</label>
+          <input id="m-key" name="metricKey" class="input" required placeholder="e.g. families_helped" />
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="m-value">Value</label>
+          <input id="m-value" name="value" type="number" class="input" required min="0" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="m-category">Category</label>
+          <select id="m-category" name="category" class="input">
+            {categories.map((c: string) => <option value={c}>{c}</option>)}
+            <option value="General">General</option>
+            <option value="Food">Food</option>
+            <option value="Water">Water</option>
+            <option value="Education">Education</option>
+            <option value="Health">Health</option>
+            <option value="Emergency">Emergency</option>
+          </select>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Save Metric</button>
+        <button type="button" id="cancel-metric-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Visual Chart -->
+  {allMetrics.length > 0 && (
+    <div class="card p-6 mb-6">
+      <h3 class="font-bold mb-4">Impact Overview</h3>
+      <div class="flex flex-col gap-3">
+        {allMetrics.slice(0, 8).map((m: any) => {
+          const maxVal = Math.max(...allMetrics.map((x: any) => x.value || 0), 1);
+          const pct = Math.round(((m.value || 0) / maxVal) * 100);
+          return (
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="font-medium">{m.metricLabel}</span>
+                <span class="font-bold" style="color: var(--color-primary);">{(m.value || 0).toLocaleString()}</span>
+              </div>
+              <div class="h-3 rounded-full" style="background: var(--color-border);">
+                <div class="h-full rounded-full" style={`width: ${pct}%; background: linear-gradient(90deg, var(--color-primary), rgb(5,179,77,0.6));`}></div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  )}
+
+  <!-- Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Label</th>
+          <th class="p-4 font-medium hidden md:table-cell">Key</th>
+          <th class="p-4 font-medium text-right">Value</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Category</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allMetrics.map((m: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-4 font-medium">{m.metricLabel}</td>
+              <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{m.metricKey}</td>
+              <td class="p-4 text-right font-bold" style="color: var(--color-primary);">{(m.value || 0).toLocaleString()}</td>
+              <td class="p-4 hidden sm:table-cell"><span class="badge badge-accent">{m.category || '-'}</span></td>
+              <td class="p-4 text-right">
+                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-metric={m.id} data-label={m.metricLabel} data-key={m.metricKey} data-value={m.value || 0} data-cat={m.category || 'General'}>Edit</button>
+                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-metric={m.id}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {allMetrics.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No impact metrics tracked yet.</div>}
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggle-metric-btn');
+    const cancelBtn = document.getElementById('cancel-metric-btn');
+    const form = document.getElementById('metric-form');
+    toggleBtn?.addEventListener('click', () => form?.classList.toggle('hidden'));
+    cancelBtn?.addEventListener('click', () => { form?.classList.add('hidden'); (document.getElementById('impact-form') as HTMLFormElement).reset(); });
+
+    // Edit
+    document.querySelectorAll('[data-edit-metric]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        form?.classList.remove('hidden');
+        (document.getElementById('m-label') as HTMLInputElement).value = btn.getAttribute('data-label') || '';
+        (document.getElementById('m-key') as HTMLInputElement).value = btn.getAttribute('data-key') || '';
+        (document.getElementById('m-value') as HTMLInputElement).value = btn.getAttribute('data-value') || '';
+        (document.getElementById('m-category') as HTMLSelectElement).value = btn.getAttribute('data-cat') || 'General';
+        form?.setAttribute('data-edit-id', btn.getAttribute('data-edit-metric') || '');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Submit
+    document.getElementById('impact-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, any> = {};
+      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'value' ? Number(v) : v; });
+      const editId = form?.getAttribute('data-edit-id');
+      try {
+        if (editId) {
+          const res = await fetch(`/api/admin/charity/impact?id=${editId}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+          if (res.ok) window.location.reload(); else alert('Failed');
+        } else {
+          const res = await fetch('/api/admin/charity/impact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+          if (res.ok) window.location.reload(); else { const err = await res.json(); alert(err.error || 'Failed'); }
+        }
+      } catch { alert('Network error'); }
+    });
+
+    // Delete
+    document.querySelectorAll('[data-delete-metric]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this metric?')) return;
+        const id = btn.getAttribute('data-delete-metric');
+        try { const res = await fetch(`/api/admin/charity/impact?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else alert('Failed'); } catch { alert('Network error'); }
+      });
+    });
+  </script>
+</AdminLayout>

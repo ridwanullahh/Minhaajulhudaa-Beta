@@ -1,0 +1,109 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency } from '../../../lib/utils';
+
+const [invoices, payments] = await Promise.all([
+  lightbase.query('school_invoices', { sort: 'createdAt:desc', limit: 50 }),
+  lightbase.query('school_payments', { sort: 'createdAt:desc', limit: 50 }),
+]);
+const allInvoices = invoices.data || [];
+const allPayments = payments.data || [];
+
+const revenueAgg = await lightbase.aggregate('school_payments', {
+  aggregations: [{ field: 'amount', op: 'sum', alias: 'total' }],
+}).catch(() => ({ total: 0 }));
+---
+
+<AdminLayout title="Payment Management" platform="school" section="payments">
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6 fade-in">
+    <div class="card p-4">
+      <div class="text-2xl font-extrabold" style="color: var(--color-primary);">{formatCurrency(revenueAgg?.total || 0)}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Total Revenue</div>
+    </div>
+    <div class="card p-4">
+      <div class="text-2xl font-extrabold">{allPayments.length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Payments</div>
+    </div>
+    <div class="card p-4">
+      <div class="text-2xl font-extrabold">{allInvoices.length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Invoices</div>
+    </div>
+    <div class="card p-4">
+      <div class="text-2xl font-extrabold" style="color: var(--color-accent);">{allInvoices.filter((i: any) => i.status === 'unpaid' || i.status === 'pending').length}</div>
+      <div class="text-xs" style="color: var(--color-muted);">Outstanding</div>
+    </div>
+  </div>
+
+  <div class="flex gap-1 mb-6 border-b" style="border-color: var(--color-border);">
+    <button class="pay-tab px-4 py-2.5 text-sm font-medium border-b-2" data-tab="payments" style="border-color: var(--color-primary); color: var(--color-primary);">Payments</button>
+    <button class="pay-tab px-4 py-2.5 text-sm font-medium border-b-2" data-tab="invoices" style="border-color: transparent; color: var(--color-muted);">Invoices</button>
+  </div>
+
+  <div id="tab-payments" class="pay-panel">
+    <div class="card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+            <th class="p-4 font-medium">Reference</th>
+            <th class="p-4 font-medium hidden md:table-cell">Student</th>
+            <th class="p-4 font-medium hidden sm:table-cell">Method</th>
+            <th class="p-4 font-medium text-right">Amount</th>
+            <th class="p-4 font-medium text-right">Status</th>
+          </tr></thead>
+          <tbody>
+            {allPayments.map((p: any) => (
+              <tr style="border-top: 1px solid var(--color-border);">
+                <td class="p-4 font-medium">{p.reference || p.id}</td>
+                <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{p.studentName || '-'}</td>
+                <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{p.method || '-'}</td>
+                <td class="p-4 text-right font-medium">{p.amount ? formatCurrency(p.amount) : '-'}</td>
+                <td class="p-4 text-right"><span class={p.status === 'completed' ? 'badge badge-primary' : 'badge'}>{p.status || '-'}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {allPayments.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No payments recorded.</div>}
+    </div>
+  </div>
+
+  <div id="tab-invoices" class="pay-panel hidden">
+    <div class="card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+            <th class="p-4 font-medium">Invoice #</th>
+            <th class="p-4 font-medium hidden md:table-cell">Student</th>
+            <th class="p-4 font-medium hidden sm:table-cell">Description</th>
+            <th class="p-4 font-medium text-right">Amount</th>
+            <th class="p-4 font-medium text-right">Status</th>
+          </tr></thead>
+          <tbody>
+            {allInvoices.map((inv: any) => (
+              <tr style="border-top: 1px solid var(--color-border);">
+                <td class="p-4 font-medium">{inv.invoiceNumber || inv.id}</td>
+                <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{inv.studentName || '-'}</td>
+                <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{inv.description || '-'}</td>
+                <td class="p-4 text-right font-medium">{inv.amount ? formatCurrency(inv.amount) : '-'}</td>
+                <td class="p-4 text-right"><span class={inv.status === 'paid' ? 'badge badge-primary' : 'badge badge-accent'}>{inv.status || '-'}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {allInvoices.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No invoices created.</div>}
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.pay-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.pay-tab').forEach(t => { t.style.borderColor = 'transparent'; t.style.color = 'var(--color-muted)'; });
+        tab.style.borderColor = 'var(--color-primary)'; tab.style.color = 'var(--color-primary)';
+        document.querySelectorAll('.pay-panel').forEach(p => p.classList.add('hidden'));
+        document.getElementById('tab-' + tab.dataset.tab)?.classList.remove('hidden');
+      });
+    });
+  </script>
+</AdminLayout>

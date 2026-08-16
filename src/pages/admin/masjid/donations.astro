@@ -1,0 +1,255 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatCurrency, formatDate } from '../../../lib/utils';
+
+const [campaignsResult, donationsResult] = await Promise.all([
+  lightbase.query('masjid_donation_campaigns', { sort: 'createdAt:desc', limit: 100 }),
+  lightbase.query('masjid_donations', { sort: 'donatedAt:desc', limit: 100 }),
+]);
+
+const campaigns = campaignsResult.data || [];
+const donations = donationsResult.data || [];
+
+const totalAgg = await lightbase.aggregate('masjid_donations', {
+  aggregations: [{ field: 'amount', op: 'sum', alias: 'total' }, { field: 'amount', op: 'count', alias: 'count' }],
+}).catch(() => ({ total: 0, count: 0 }));
+---
+
+<AdminLayout title="Donations" platform="masjid" section="donations">
+  <!-- Summary Stats -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8 fade-in">
+    <div class="card p-4">
+      <div class="text-xs" style="color: var(--color-muted);">Total Raised</div>
+      <div class="text-xl font-extrabold" style="color: var(--color-primary);">{formatCurrency(totalAgg?.total || 0)}</div>
+    </div>
+    <div class="card p-4">
+      <div class="text-xs" style="color: var(--color-muted);">Total Donations</div>
+      <div class="text-xl font-extrabold">{totalAgg?.count || 0}</div>
+    </div>
+    <div class="card p-4">
+      <div class="text-xs" style="color: var(--color-muted);">Active Campaigns</div>
+      <div class="text-xl font-extrabold" style="color: var(--color-accent);">{campaigns.filter(c => c.status === 'active').length}</div>
+    </div>
+    <div class="card p-4">
+      <div class="text-xs" style="color: var(--color-muted);">Total Campaigns</div>
+      <div class="text-xl font-extrabold">{campaigns.length}</div>
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 fade-in">
+    <h2 class="text-xl font-bold">Campaigns</h2>
+    <button id="btn-add-campaign" class="btn btn-primary text-xs">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      New Campaign
+    </button>
+  </div>
+
+  <div class="card overflow-hidden mb-8 fade-in">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr style="background: var(--color-background); color: var(--color-muted);">
+            <th class="text-left p-3 font-medium">Campaign</th>
+            <th class="text-left p-3 font-medium hidden sm:table-cell">Category</th>
+            <th class="text-right p-3 font-medium">Raised</th>
+            <th class="text-right p-3 font-medium">Goal</th>
+            <th class="text-right p-3 font-medium">Status</th>
+            <th class="text-right p-3 font-medium">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {campaigns.map((c: any) => {
+            const pct = c.goalAmount ? Math.round((c.raisedAmount / c.goalAmount) * 100) : 0;
+            return (
+              <tr style="border-top: 1px solid var(--color-border);">
+                <td class="p-3 font-medium">{c.title}</td>
+                <td class="p-3 hidden sm:table-cell"><span class="badge badge-primary">{c.category}</span></td>
+                <td class="p-3 text-right font-medium" style="color: var(--color-primary);">{formatCurrency(c.raisedAmount || 0)}</td>
+                <td class="p-3 text-right" style="color: var(--color-muted);">{formatCurrency(c.goalAmount || 0)}</td>
+                <td class="p-3 text-right"><span class={c.status === 'active' ? 'badge badge-primary' : 'badge'}>{c.status}</span></td>
+                <td class="p-3 text-right">
+                  <div class="flex items-center justify-end gap-1">
+                    <button class="btn-edit-campaign w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(5,179,77,0.1)]" data-id={c.id} title="Edit">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </button>
+                    <button class="btn-delete-campaign w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(220,38,38,0.1)]" data-id={c.id} title="Delete">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #DC2626;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      {campaigns.length === 0 && <p class="text-sm p-6 text-center" style="color: var(--color-muted);">No campaigns yet.</p>}
+    </div>
+  </div>
+
+  <h2 class="text-xl font-bold mb-4">Donation Records</h2>
+  <div class="card overflow-hidden fade-in">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr style="background: var(--color-background); color: var(--color-muted);">
+            <th class="text-left p-3 font-medium">Donor</th>
+            <th class="text-left p-3 font-medium hidden sm:table-cell">Reference</th>
+            <th class="text-left p-3 font-medium hidden md:table-cell">Category</th>
+            <th class="text-left p-3 font-medium hidden lg:table-cell">Date</th>
+            <th class="text-right p-3 font-medium">Amount</th>
+            <th class="text-right p-3 font-medium">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {donations.map((d: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-3 font-medium">{d.isAnonymous ? 'Anonymous' : (d.donorName || '-')}</td>
+              <td class="p-3 hidden sm:table-cell" style="color: var(--color-muted);">{d.reference || '-'}</td>
+              <td class="p-3 hidden md:table-cell"><span class="badge badge-primary">{d.category}</span></td>
+              <td class="p-3 hidden lg:table-cell" style="color: var(--color-muted);">{d.donatedAt ? formatDate(d.donatedAt, 'date') : '-'}</td>
+              <td class="p-3 text-right font-medium">{d.amount ? formatCurrency(d.amount) : '-'}</td>
+              <td class="p-3 text-right"><span class={d.status === 'completed' ? 'badge badge-primary' : 'badge badge-accent'}>{d.status || '-'}</span></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {donations.length === 0 && <p class="text-sm p-6 text-center" style="color: var(--color-muted);">No donations yet.</p>}
+    </div>
+  </div>
+
+  <!-- Campaign Modal -->
+  <div id="modal-campaign" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/40" id="modal-campaign-bg"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div class="card p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto relative" style="background: var(--color-surface);">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="font-bold text-lg" id="modal-campaign-title">New Campaign</h3>
+          <button id="modal-campaign-close" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(220,38,38,0.1)]">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <form id="campaign-form" class="space-y-4">
+          <input type="hidden" name="id" id="campaign-id" />
+          <div>
+            <label class="block text-sm font-medium mb-1">Campaign Title</label>
+            <input type="text" name="title" class="input" required placeholder="Campaign title" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm font-medium mb-1">Category</label>
+              <select name="category" class="input">
+                <option value="zakaat">Zakaat</option>
+                <option value="sadaqah">Sadaqah</option>
+                <option value="waqf">Waqf</option>
+                <option value="construction">Construction</option>
+                <option value="operational">Operational</option>
+                <option value="emergency">Emergency</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Status</label>
+              <select name="status" class="input">
+                <option value="active">Active</option>
+                <option value="paused">Paused</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm font-medium mb-1">Goal Amount (NGN)</label>
+              <input type="number" name="goalAmount" class="input" required placeholder="1000000" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Raised Amount</label>
+              <input type="number" name="raisedAmount" class="input" placeholder="0" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Description</label>
+            <textarea name="description" class="input" rows="3" placeholder="Campaign description"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Image URL</label>
+            <input type="url" name="imageUrl" class="input" placeholder="https://..." />
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="checkbox" name="isUrgent" id="isUrgent" class="w-4 h-4" />
+            <label for="isUrgent" class="text-sm">Mark as urgent</label>
+          </div>
+          <div class="flex justify-end gap-2 pt-2">
+            <button type="button" id="modal-campaign-cancel" class="btn btn-ghost">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Campaign</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const modal = document.getElementById('modal-campaign');
+    const openBtn = document.getElementById('btn-add-campaign');
+    const closeBtn = document.getElementById('modal-campaign-close');
+    const cancelBtn = document.getElementById('modal-campaign-cancel');
+    const bg = document.getElementById('modal-campaign-bg');
+    const form = document.getElementById('campaign-form');
+    const titleEl = document.getElementById('modal-campaign-title');
+    const idEl = document.getElementById('campaign-id');
+    let editMode = false;
+
+    const open = () => { modal.classList.remove('hidden'); editMode = false; titleEl.textContent = 'New Campaign'; form.reset(); idEl.value = ''; form.raisedAmount.value = '0'; };
+    const close = () => modal.classList.add('hidden');
+
+    openBtn?.addEventListener('click', open);
+    closeBtn?.addEventListener('click', close);
+    cancelBtn?.addEventListener('click', close);
+    bg?.addEventListener('click', close);
+
+    document.querySelectorAll('.btn-edit-campaign').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.id;
+        try {
+          const res = await fetch('/api/admin/masjid/donations?id=' + id);
+          const data = await res.json();
+          editMode = true; titleEl.textContent = 'Edit Campaign'; idEl.value = id;
+          form.title.value = data.title || '';
+          form.category.value = data.category || 'sadaqah';
+          form.status.value = data.status || 'active';
+          form.goalAmount.value = data.goalAmount || '';
+          form.raisedAmount.value = data.raisedAmount || '0';
+          form.description.value = data.description || '';
+          form.imageUrl.value = data.imageUrl || '';
+          form.isUrgent.checked = !!data.isUrgent;
+          modal.classList.remove('hidden');
+        } catch(e) { alert('Failed to load'); }
+      });
+    });
+
+    document.querySelectorAll('.btn-delete-campaign').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this campaign?')) return;
+        try {
+          await fetch('/api/admin/masjid/donations?id=' + btn.dataset.id, { method: 'DELETE' });
+          window.location.reload();
+        } catch(e) { alert('Failed'); }
+      });
+    });
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd);
+      data.goalAmount = parseFloat(data.goalAmount) || 0;
+      data.raisedAmount = parseFloat(data.raisedAmount) || 0;
+      data.isUrgent = !!data.isUrgent;
+      try {
+        const method = editMode ? 'PATCH' : 'POST';
+        const url = editMode ? '/api/admin/masjid/donations?id=' + data.id : '/api/admin/masjid/donations';
+        const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        const json = await res.json();
+        if (json.success) { window.location.reload(); } else { alert(json.error || 'Failed'); }
+      } catch (err) { alert('Request failed'); }
+    });
+  </script>
+</AdminLayout>
