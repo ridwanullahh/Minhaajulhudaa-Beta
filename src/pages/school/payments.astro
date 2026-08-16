@@ -53,5 +53,45 @@ import PlatformLayout from '../../layouts/PlatformLayout.astro';
         <div class="card px-4 py-3 flex items-center gap-2 text-sm"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>Mobile Money</div>
       </div>
     </div>
-  </section>
+
+  <script is:inline>
+    document.getElementById('invoice-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      const results = document.getElementById('invoice-results');
+      btn.disabled = true;
+      btn.textContent = 'Searching...';
+      const studentId = document.getElementById('student-id').value.trim();
+      if (!studentId) return;
+      try {
+        const res = await fetch('/api/school/payments?studentId=' + encodeURIComponent(studentId));
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error);
+        if (data.invoices.length === 0 && data.payments.length === 0) {
+          results.innerHTML = '<div class="p-4 text-center text-sm" style="color: var(--color-muted);">No invoices or payments found for this Student ID.</div>';
+        } else {
+          let html = '';
+          if (data.invoices.length > 0) {
+            html += '<h3 class="font-bold mt-4 mb-3">Invoices</h3>';
+            html += '<div class="space-y-3">' + data.invoices.map(inv => {
+              const isPaid = inv.status === 'paid';
+              return '<div class="card p-4 flex justify-between items-center"><div><div class="font-medium text-sm">' + (inv.title || inv.description || 'Invoice') + '</div><div class="text-xs" style="color: var(--color-muted);">' + (inv.dueDate ? 'Due: ' + new Date(inv.dueDate).toLocaleDateString() : '') + '</div></div><div class="text-right"><div class="font-bold" style="color: var(--color-primary);">\u20A6' + (inv.amount || 0).toLocaleString() + '</div><span class="badge ' + (isPaid ? 'badge-primary' : 'badge-accent') + '">' + inv.status + '</span></div></div>';
+            }).join('') + '</div>';
+          }
+          if (data.payments.length > 0) {
+            html += '<h3 class="font-bold mt-6 mb-3">Payment History</h3>';
+            html += '<div class="space-y-3">' + data.payments.map(pay => {
+              return '<div class="card p-4 flex justify-between items-center"><div><div class="font-medium text-sm">' + (pay.reference || 'Payment') + '</div><div class="text-xs" style="color: var(--color-muted);">' + new Date(pay.createdAt).toLocaleDateString() + '</div></div><div class="text-right"><div class="font-bold">\u20A6' + (pay.amount || 0).toLocaleString() + '</div><span class="badge badge-primary">' + pay.status + '</span></div></div>';
+            }).join('') + '</div>';
+          }
+          results.innerHTML = html;
+        }
+      } catch (err) {
+        results.innerHTML = '<div class="p-4 text-center text-sm" style="color: #DC2626;">' + err.message + '</div>';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Search Invoices';
+      }
+    });
+  </script>
 </PlatformLayout>
