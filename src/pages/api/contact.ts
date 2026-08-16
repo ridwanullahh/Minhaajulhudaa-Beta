@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { lightbase } from '../../lib/lightbase';
+import { sendPlatformEmail, isConfigured as emailConfigured } from '../../lib/email';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -30,11 +31,25 @@ export const POST: APIRoute = async ({ request }) => {
 
     const result = await lightbase.insert('contact_submissions', body);
 
+    // Send confirmation email to the user
+    if (emailConfigured()) {
+      try {
+        await sendPlatformEmail(body.platform as any, 'contact_received', {
+          email: body.email,
+          variables: {
+            name: body.name,
+            subject: body.subject,
+            platform_name: body.platform.charAt(0).toUpperCase() + body.platform.slice(1),
+          },
+        });
+      } catch { /* email failure non-critical */ }
+    }
+
     return new Response(JSON.stringify({ success: true, document: result.document }), {
       status: 201,
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch (err) {
+  } catch (err: any) {
     return new Response(JSON.stringify({ error: err.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
