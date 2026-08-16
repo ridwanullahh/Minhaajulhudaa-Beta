@@ -73,8 +73,8 @@ const inStock = product.stockQuantity === undefined || product.stockQuantity > 0
     </div>
   </section>
 
-  <script is:inline>
-    const productData = { id: '{product.id}', title: '{product.title}', price: {product.price || 0}, imageUrl: '{product.imageUrl || ''}', slug: '{product.slug}' };
+  <script define:vars={{ product }}>
+    const productData = { id: product.id, title: product.title, price: product.price || 0, imageUrl: product.imageUrl || '', slug: product.slug };
     const CART_KEY = 'school_shop_cart';
 
     function getCart() {
