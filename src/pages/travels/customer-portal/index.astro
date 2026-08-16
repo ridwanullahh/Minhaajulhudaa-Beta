@@ -1,0 +1,232 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+---
+
+<PlatformLayout title="Customer Portal - Minhaajulhudaa Travels" platform="travels">
+  <section class="container-app py-12">
+    <div class="max-w-2xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-primary);">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <h1 class="text-3xl font-extrabold mb-2">Customer Portal</h1>
+        <p style="color: var(--color-muted);">Look up your booking details by email or booking reference.</p>
+      </div>
+
+      <!-- Search Form -->
+      <div class="card p-6 mb-8">
+        <form id="lookup-form" class="flex flex-col sm:flex-row gap-3">
+          <div class="flex-1">
+            <label class="block text-xs font-medium mb-1" style="color: var(--color-muted);">Email or Booking Reference</label>
+            <input
+              type="text"
+              id="lookup-input"
+              class="input w-full"
+              placeholder="e.g. john@example.com or BK-20240101"
+              required
+            />
+          </div>
+          <div class="flex items-end">
+            <button type="submit" class="btn btn-primary w-full sm:w-auto" id="lookup-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              Search
+            </button>
+          </div>
+        </form>
+        <div id="lookup-error" class="hidden mt-3 text-sm" style="color: #dc2626;"></div>
+      </div>
+
+      <!-- Results Area -->
+      <div id="results-area" class="hidden">
+        <!-- Booking Card -->
+        <div class="card p-6 mb-6" id="booking-card">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold">Booking Details</h2>
+            <span id="booking-status" class="badge text-xs capitalize"></span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <div class="text-xs font-medium mb-1" style="color: var(--color-muted);">Booking Reference</div>
+              <div class="font-semibold text-sm" id="booking-ref">-</div>
+            </div>
+            <div>
+              <div class="text-xs font-medium mb-1" style="color: var(--color-muted);">Package</div>
+              <div class="font-semibold text-sm" id="booking-package">-</div>
+            </div>
+            <div>
+              <div class="text-xs font-medium mb-1" style="color: var(--color-muted);">Travel Dates</div>
+              <div class="font-semibold text-sm" id="booking-dates">-</div>
+            </div>
+            <div>
+              <div class="text-xs font-medium mb-1" style="color: var(--color-muted);">Travellers</div>
+              <div class="font-semibold text-sm" id="booking-travellers">-</div>
+            </div>
+            <div>
+              <div class="text-xs font-medium mb-1" style="color: var(--color-muted);">Customer Name</div>
+              <div class="font-semibold text-sm" id="booking-name">-</div>
+            </div>
+            <div>
+              <div class="text-xs font-medium mb-1" style="color: var(--color-muted);">Email</div>
+              <div class="font-semibold text-sm" id="booking-email">-</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Card -->
+        <div class="card p-6 mb-6" id="payment-card">
+          <h2 class="text-lg font-bold mb-4">Payment Summary</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="p-4 rounded-xl" style="background: var(--color-background);">
+              <div class="text-xs font-medium mb-1" style="color: var(--color-muted);">Total Amount</div>
+              <div class="text-xl font-bold" id="payment-amount">-</div>
+            </div>
+            <div class="p-4 rounded-xl" style="background: var(--color-background);">
+              <div class="text-xs font-medium mb-1" style="color: var(--color-muted);">Amount Paid</div>
+              <div class="text-xl font-bold" style="color: var(--color-primary);" id="payment-paid">-</div>
+            </div>
+            <div class="p-4 rounded-xl" style="background: var(--color-background);">
+              <div class="text-xs font-medium mb-1" style="color: var(--color-muted);">Payment Status</div>
+              <div class="text-sm font-bold" id="payment-status">-</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Itinerary Card -->
+        <div class="card p-6" id="itinerary-card">
+          <h2 class="text-lg font-bold mb-4">Itinerary</h2>
+          <div id="itinerary-list" class="space-y-3">
+            <p class="text-sm" style="color: var(--color-muted);">No itinerary details available.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="card p-12 text-center">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-4" style="color: var(--color-muted);">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <p style="color: var(--color-muted);">Enter your email or booking reference to view your booking details.</p>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    const form = document.getElementById('lookup-form');
+    const input = document.getElementById('lookup-input');
+    const resultsArea = document.getElementById('results-area');
+    const emptyState = document.getElementById('empty-state');
+    const errorDiv = document.getElementById('lookup-error');
+    const lookupBtn = document.getElementById('lookup-btn');
+
+    function setStatus(el, status) {
+      const s = (status || '').toLowerCase();
+      el.className = 'badge text-xs capitalize ';
+      if (s === 'confirmed' || s === 'paid') {
+        el.classList.add('badge-success');
+      } else if (s === 'pending') {
+        el.classList.add('badge-warning');
+      } else if (s === 'cancelled' || s === 'overdue') {
+        el.classList.add('badge-danger');
+      } else {
+        el.classList.add('badge-ghost');
+      }
+      el.textContent = status;
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '-';
+      try {
+        return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      } catch { return dateStr; }
+    }
+
+    function formatCurrency(amount) {
+      if (!amount && amount !== 0) return '-';
+      return '₹' + Number(amount).toLocaleString('en-IN');
+    }
+
+    function renderItinerary(itinerary) {
+      const list = document.getElementById('itinerary-list');
+      if (!itinerary || !Array.isArray(itinerary) || itinerary.length === 0) {
+        list.innerHTML = '<p class="text-sm" style="color: var(--color-muted);">No itinerary details available.</p>';
+        return;
+      }
+      list.innerHTML = itinerary.map((item, i) => `
+        <div class="flex gap-4 items-start">
+          <div class="flex flex-col items-center">
+            <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">${i + 1}</div>
+            ${i < itinerary.length - 1 ? '<div class="w-0.5 h-full mt-1" style="background: var(--color-border); min-height: 24px;"></div>' : ''}
+          </div>
+          <div class="pb-4">
+            <div class="font-semibold text-sm">${item.day || 'Day ' + (i + 1)}</div>
+            <div class="text-sm" style="color: var(--color-muted);">${item.title || item.description || ''}</div>
+            ${item.description && item.title ? '<div class="text-xs mt-1" style="color: var(--color-muted);">' + item.description + '</div>' : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const value = input.value.trim();
+      if (!value) return;
+
+      errorDiv.classList.add('hidden');
+      lookupBtn.disabled = true;
+      lookupBtn.textContent = 'Searching...';
+
+      try {
+        const isEmail = value.includes('@');
+        const params = isEmail ? `email=${encodeURIComponent(value)}` : `reference=${encodeURIComponent(value)}`;
+        const res = await fetch(`/api/travels/book?${params}`);
+        const data = await res.json();
+
+        if (!res.ok || data.error) {
+          errorDiv.textContent = data.error || 'No booking found. Please check your details and try again.';
+          errorDiv.classList.remove('hidden');
+          resultsArea.classList.add('hidden');
+          emptyState.classList.remove('hidden');
+          return;
+        }
+
+        const booking = data.data || data;
+
+        // Populate booking details
+        document.getElementById('booking-ref').textContent = booking.reference || booking.id || '-';
+        document.getElementById('booking-package').textContent = booking.packageName || booking.package || '-';
+        document.getElementById('booking-dates').textContent = (booking.startDate ? formatDate(booking.startDate) + ' — ' + formatDate(booking.endDate) : '-') || '-';
+        document.getElementById('booking-travellers').textContent = booking.travellers || booking.noOfTravellers || '-';
+        document.getElementById('booking-name').textContent = booking.customerName || booking.name || '-';
+        document.getElementById('booking-email').textContent = booking.email || '-';
+        setStatus(document.getElementById('booking-status'), booking.status || 'N/A');
+
+        // Payment info
+        document.getElementById('payment-amount').textContent = formatCurrency(booking.totalAmount || booking.amount);
+        document.getElementById('payment-paid').textContent = formatCurrency(booking.amountPaid || booking.paidAmount || 0);
+        setStatus(document.getElementById('payment-status'), booking.paymentStatus || booking.payment_status || 'N/A');
+
+        // Itinerary
+        renderItinerary(booking.itinerary);
+
+        resultsArea.classList.remove('hidden');
+        emptyState.classList.add('hidden');
+      } catch (err) {
+        errorDiv.textContent = 'Something went wrong. Please try again later.';
+        errorDiv.classList.remove('hidden');
+        resultsArea.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+      } finally {
+        lookupBtn.disabled = false;
+        lookupBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Search';
+      }
+    });
+  </script>
+</PlatformLayout>

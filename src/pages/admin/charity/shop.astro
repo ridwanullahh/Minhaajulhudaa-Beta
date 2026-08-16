@@ -1,0 +1,165 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { generateCSRFToken, formatCurrency } from '../../../lib/utils';
+
+const products = await lightbase.query('charity_products', { sort: 'title:asc', limit: 50 });
+const allProducts = products.data || [];
+const csrfToken = generateCSRFToken();
+---
+
+<AdminLayout title="Shop" platform="charity" section="shop">
+  <div class="flex items-center justify-between mb-6 fade-in">
+    <div>
+      <h2 class="text-lg font-bold">Charity Shop</h2>
+      <p class="text-sm" style="color: var(--color-muted);">{allProducts.length} total products</p>
+    </div>
+    <button id="toggle-form-btn" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      New Product
+    </button>
+  </div>
+
+  <!-- Create/Edit Form -->
+  <div id="create-form" class="hidden card p-6 mb-6">
+    <h3 id="form-title" class="font-bold mb-4">Create New Product</h3>
+    <form id="product-form" class="space-y-4">
+      <input type="hidden" name="csrfToken" value={csrfToken} />
+      <input type="hidden" name="editId" id="edit-id" value="" />
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="p-title">Title</label>
+          <input id="p-title" name="title" class="input" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="p-category">Category</label>
+          <select id="p-category" name="category" class="input">
+            <option value="merchandise">Merchandise</option>
+            <option value="books">Books</option>
+            <option value="gifts">Gifts</option>
+            <option value="clothing">Clothing</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="p-desc">Description</label>
+        <textarea id="p-desc" name="description" class="input" rows="3"></textarea>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="p-price">Price (NGN)</label>
+          <input id="p-price" name="price" type="number" class="input" min="0" step="0.01" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="p-stock">Stock Quantity</label>
+          <input id="p-stock" name="stockQuantity" type="number" class="input" min="0" value="0" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="p-status">Status</label>
+          <select id="p-status" name="status" class="input">
+            <option value="active">Active</option>
+            <option value="draft">Draft</option>
+            <option value="out-of-stock">Out of Stock</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="p-image">Image URL</label>
+        <input id="p-image" name="imageUrl" class="input" />
+      </div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Save Product</button>
+        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Products Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Title</th>
+          <th class="p-4 font-medium text-right">Price</th>
+          <th class="p-4 font-medium hidden md:table-cell">Category</th>
+          <th class="p-4 font-medium text-right hidden sm:table-cell">Stock</th>
+          <th class="p-4 font-medium text-right">Status</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allProducts.map((p: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-4">
+                <div class="font-medium">{p.title}</div>
+                {p.description && <div class="text-xs truncate max-w-xs" style="color: var(--color-muted);">{p.description}</div>}
+              </td>
+              <td class="p-4 text-right font-medium" style="color: var(--color-primary);">{formatCurrency(p.price || 0)}</td>
+              <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{p.category || '-'}</span></td>
+              <td class="p-4 text-right hidden sm:table-cell">
+                <span class={(p.stockQuantity || 0) > 0 ? '' : 'text-red-500 font-medium'}>{p.stockQuantity || 0}</span>
+              </td>
+              <td class="p-4 text-right"><span class={p.status === 'active' ? 'badge badge-primary' : 'badge badge-accent'}>{p.status || 'active'}</span></td>
+              <td class="p-4 text-right">
+                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-product={p.id} data-title={p.title || ''} data-category={p.category || 'merchandise'} data-desc={p.description || ''} data-price={p.price || 0} data-stock={p.stockQuantity || 0} data-image={p.imageUrl || ''} data-status={p.status || 'active'}>Edit</button>
+                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-product={p.id}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {allProducts.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No products yet. Add your first product above.</div>}
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggle-form-btn');
+    const cancelBtn = document.getElementById('cancel-form-btn');
+    const createForm = document.getElementById('create-form');
+    const formTitle = document.getElementById('form-title');
+    toggleBtn?.addEventListener('click', () => { createForm?.classList.toggle('hidden'); formTitle!.textContent = 'Create New Product'; });
+    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id') as HTMLInputElement).value = ''; (document.getElementById('product-form') as HTMLFormElement).reset(); });
+
+    // Edit
+    document.querySelectorAll('[data-edit-product]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        createForm?.classList.remove('hidden');
+        formTitle!.textContent = 'Edit Product';
+        (document.getElementById('edit-id') as HTMLInputElement).value = btn.getAttribute('data-edit-product') || '';
+        (document.getElementById('p-title') as HTMLInputElement).value = btn.getAttribute('data-title') || '';
+        (document.getElementById('p-category') as HTMLSelectElement).value = btn.getAttribute('data-category') || 'merchandise';
+        (document.getElementById('p-desc') as HTMLTextAreaElement).value = btn.getAttribute('data-desc') || '';
+        (document.getElementById('p-price') as HTMLInputElement).value = btn.getAttribute('data-price') || '0';
+        (document.getElementById('p-stock') as HTMLInputElement).value = btn.getAttribute('data-stock') || '0';
+        (document.getElementById('p-image') as HTMLInputElement).value = btn.getAttribute('data-image') || '';
+        (document.getElementById('p-status') as HTMLSelectElement).value = btn.getAttribute('data-status') || 'active';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Submit
+    document.getElementById('product-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, any> = {};
+      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'price' || k === 'stockQuantity' ? Number(v) : v; });
+      body.slug = body.title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
+      const editId = (document.getElementById('edit-id') as HTMLInputElement).value;
+      try {
+        const url = editId ? `/api/admin/charity/shop?id=${editId}` : '/api/admin/charity/shop';
+        const method = editId ? 'PATCH' : 'POST';
+        const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) { window.location.reload(); } else { const err = await res.json(); alert(err.error || 'Failed'); }
+      } catch { alert('Network error'); }
+    });
+
+    // Delete
+    document.querySelectorAll('[data-delete-product]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this product?')) return;
+        const id = btn.getAttribute('data-delete-product');
+        try { const res = await fetch(`/api/admin/charity/shop?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else alert('Failed'); } catch { alert('Network error'); }
+      });
+    });
+  </script>
+</AdminLayout>

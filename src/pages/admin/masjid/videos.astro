@@ -1,0 +1,202 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { formatDate } from '../../../lib/utils';
+
+const videosResult = await lightbase.query('masjid_videos', { sort: 'date:desc', limit: 100 });
+const videos = videosResult.data || [];
+---
+
+<AdminLayout title="Videos" platform="masjid" section="videos">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 fade-in">
+    <div>
+      <h2 class="text-xl font-bold">Video Management</h2>
+      <p class="text-sm" style="color: var(--color-muted);">{videos.length} videos</p>
+    </div>
+    <button id="btn-add-video" class="btn btn-primary text-xs">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add Video
+    </button>
+  </div>
+
+  <div class="card overflow-hidden fade-in">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr style="background: var(--color-background); color: var(--color-muted);">
+            <th class="text-left p-3 font-medium">Title</th>
+            <th class="text-left p-3 font-medium hidden sm:table-cell">Speaker</th>
+            <th class="text-left p-3 font-medium hidden md:table-cell">Category</th>
+            <th class="text-left p-3 font-medium hidden lg:table-cell">Duration</th>
+            <th class="text-left p-3 font-medium hidden lg:table-cell">Date</th>
+            <th class="text-left p-3 font-medium hidden md:table-cell">Published</th>
+            <th class="text-right p-3 font-medium">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {videos.map((video: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-3 font-medium">{video.title}</td>
+              <td class="p-3 hidden sm:table-cell" style="color: var(--color-muted);">{video.speaker || '-'}</td>
+              <td class="p-3 hidden md:table-cell"><span class="badge badge-primary">{video.category}</span></td>
+              <td class="p-3 hidden lg:table-cell" style="color: var(--color-muted);">{video.duration || '-'}</td>
+              <td class="p-3 hidden lg:table-cell" style="color: var(--color-muted);">{video.date ? formatDate(video.date, 'date') : '-'}</td>
+              <td class="p-3 hidden md:table-cell">
+                {video.isPublished ? (
+                  <span class="badge" style="background: rgba(5,179,77,0.15); color: #05B34D;">Published</span>
+                ) : (
+                  <span class="badge" style="background: rgba(220,38,38,0.15); color: #DC2626;">Draft</span>
+                )}
+              </td>
+              <td class="p-3 text-right">
+                <div class="flex items-center justify-end gap-1">
+                  <button class="btn-edit-video w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(5,179,77,0.1)]" data-id={video.id} title="Edit">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </button>
+                  <button class="btn-delete-video w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(220,38,38,0.1)]" data-id={video.id} title="Delete">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #DC2626;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {videos.length === 0 && <p class="text-sm p-6 text-center" style="color: var(--color-muted);">No videos yet.</p>}
+    </div>
+  </div>
+
+  <!-- Video Modal -->
+  <div id="modal-video" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/40" id="modal-video-bg"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div class="card p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto relative" style="background: var(--color-surface);">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="font-bold text-lg" id="modal-video-title">Add Video</h3>
+          <button id="modal-video-close" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(220,38,38,0.1)]">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <form id="video-form" class="space-y-4">
+          <input type="hidden" name="id" id="video-id" />
+          <div>
+            <label class="block text-sm font-medium mb-1">Title</label>
+            <input type="text" name="title" class="input" required placeholder="Video title" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm font-medium mb-1">Speaker</label>
+              <input type="text" name="speaker" class="input" placeholder="Speaker name" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Category</label>
+              <select name="category" class="input">
+                <option value="khutbah">Khutbah</option>
+                <option value="lecture">Lecture</option>
+                <option value="halaqah">Halaqah</option>
+                <option value="documentary">Documentary</option>
+                <option value="quran">Quran</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Video URL</label>
+            <input type="url" name="videoUrl" class="input" required placeholder="https://youtube.com/watch?v=..." />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Thumbnail URL</label>
+            <input type="url" name="thumbnailUrl" class="input" placeholder="https://..." />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm font-medium mb-1">Duration</label>
+              <input type="text" name="duration" class="input" placeholder="1:23:45" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Date</label>
+              <input type="date" name="date" class="input" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Description</label>
+            <textarea name="description" class="input" rows="3" placeholder="Brief description"></textarea>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="checkbox" name="isPublished" id="video-isPublished" class="w-4 h-4 rounded" />
+            <label for="video-isPublished" class="text-sm font-medium">Published</label>
+          </div>
+          <div class="flex justify-end gap-2 pt-2">
+            <button type="button" id="modal-video-cancel" class="btn btn-ghost">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Video</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const modal = document.getElementById('modal-video');
+    const openBtn = document.getElementById('btn-add-video');
+    const closeBtn = document.getElementById('modal-video-close');
+    const cancelBtn = document.getElementById('modal-video-cancel');
+    const bg = document.getElementById('modal-video-bg');
+    const form = document.getElementById('video-form');
+    const titleEl = document.getElementById('modal-video-title');
+    const idEl = document.getElementById('video-id');
+    let editMode = false;
+
+    const open = () => { modal.classList.remove('hidden'); editMode = false; titleEl.textContent = 'Add Video'; form.reset(); idEl.value = ''; };
+    const close = () => modal.classList.add('hidden');
+
+    openBtn?.addEventListener('click', open);
+    closeBtn?.addEventListener('click', close);
+    cancelBtn?.addEventListener('click', close);
+    bg?.addEventListener('click', close);
+
+    document.querySelectorAll('.btn-edit-video').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.id;
+        try {
+          const res = await fetch('/api/admin/masjid/videos?id=' + id);
+          const data = await res.json();
+          editMode = true; titleEl.textContent = 'Edit Video'; idEl.value = id;
+          form.title.value = data.title || '';
+          form.speaker.value = data.speaker || '';
+          form.category.value = data.category || 'lecture';
+          form.videoUrl.value = data.videoUrl || '';
+          form.thumbnailUrl.value = data.thumbnailUrl || '';
+          form.duration.value = data.duration || '';
+          form.date.value = data.date ? data.date.slice(0,10) : '';
+          form.description.value = data.description || '';
+          form.isPublished.checked = !!data.isPublished;
+          modal.classList.remove('hidden');
+        } catch(e) { alert('Failed to load video'); }
+      });
+    });
+
+    document.querySelectorAll('.btn-delete-video').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this video?')) return;
+        try {
+          await fetch('/api/admin/masjid/videos?id=' + btn.dataset.id, { method: 'DELETE' });
+          window.location.reload();
+        } catch(e) { alert('Failed to delete'); }
+      });
+    });
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd);
+      data.isPublished = !!data.isPublished;
+      try {
+        const method = editMode ? 'PATCH' : 'POST';
+        const url = editMode ? '/api/admin/masjid/videos?id=' + data.id : '/api/admin/masjid/videos';
+        const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        const json = await res.json();
+        if (json.success) { window.location.reload(); } else { alert(json.error || 'Failed'); }
+      } catch (err) { alert('Request failed'); }
+    });
+  </script>
+</AdminLayout>

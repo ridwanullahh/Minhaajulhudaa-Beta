@@ -1,0 +1,173 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { generateCSRFToken, formatCurrency } from '../../../lib/utils';
+
+const donors = await lightbase.query('charity_donors', { sort: 'name:asc', limit: 50 });
+const allDonors = donors.data || [];
+const csrfToken = generateCSRFToken();
+---
+
+<AdminLayout title="Donors" platform="charity" section="donors">
+  <div class="flex items-center justify-between mb-6 fade-in">
+    <div>
+      <h2 class="text-lg font-bold">Donors</h2>
+      <p class="text-sm" style="color: var(--color-muted);">{allDonors.length} total donors</p>
+    </div>
+    <button id="toggle-form-btn" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      New Donor
+    </button>
+  </div>
+
+  <!-- Create/Edit Form -->
+  <div id="create-form" class="hidden card p-6 mb-6">
+    <h3 id="form-title" class="font-bold mb-4">Create New Donor</h3>
+    <form id="donor-form" class="space-y-4">
+      <input type="hidden" name="csrfToken" value={csrfToken} />
+      <input type="hidden" name="editId" id="edit-id" value="" />
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="d-name">Name</label>
+          <input id="d-name" name="name" class="input" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="d-email">Email</label>
+          <input id="d-email" name="email" type="email" class="input" />
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="d-phone">Phone</label>
+          <input id="d-phone" name="phone" class="input" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="d-type">Donor Type</label>
+          <select id="d-type" name="donorType" class="input">
+            <option value="individual">Individual</option>
+            <option value="organization">Organization</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="d-address">Address</label>
+        <input id="d-address" name="address" class="input" />
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="d-total">Total Donated</label>
+          <input id="d-total" name="totalDonated" type="number" class="input" min="0" value="0" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="d-count">Donation Count</label>
+          <input id="d-count" name="donationCount" type="number" class="input" min="0" value="0" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="d-status">Status</label>
+          <select id="d-status" name="status" class="input">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="d-notes">Notes</label>
+        <textarea id="d-notes" name="notes" class="input" rows="3"></textarea>
+      </div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Save Donor</button>
+        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Donors Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Name</th>
+          <th class="p-4 font-medium hidden md:table-cell">Email</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Type</th>
+          <th class="p-4 font-medium text-right">Total Donated</th>
+          <th class="p-4 font-medium text-right hidden sm:table-cell">Donation Count</th>
+          <th class="p-4 font-medium text-right">Status</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allDonors.map((d: any) => (
+            <tr style="border-top: 1px solid var(--color-border);">
+              <td class="p-4">
+                <div class="font-medium">{d.name}</div>
+                {d.phone && <div class="text-xs" style="color: var(--color-muted);">{d.phone}</div>}
+              </td>
+              <td class="p-4 hidden md:table-cell">{d.email || '-'}</td>
+              <td class="p-4 hidden sm:table-cell"><span class="badge badge-accent">{d.donorType || 'individual'}</span></td>
+              <td class="p-4 text-right font-medium" style="color: var(--color-primary);">{formatCurrency(d.totalDonated || 0)}</td>
+              <td class="p-4 text-right hidden sm:table-cell">{d.donationCount || 0}</td>
+              <td class="p-4 text-right"><span class={d.status === 'active' ? 'badge badge-primary' : 'badge badge-accent'}>{d.status || 'active'}</span></td>
+              <td class="p-4 text-right">
+                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-donor={d.id} data-name={d.name || ''} data-email={d.email || ''} data-phone={d.phone || ''} data-type={d.donorType || 'individual'} data-address={d.address || ''} data-total={d.totalDonated || 0} data-count={d.donationCount || 0} data-status={d.status || 'active'} data-notes={d.notes || ''}>Edit</button>
+                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-donor={d.id}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {allDonors.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No donors yet. Add your first donor above.</div>}
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggle-form-btn');
+    const cancelBtn = document.getElementById('cancel-form-btn');
+    const createForm = document.getElementById('create-form');
+    const formTitle = document.getElementById('form-title');
+    toggleBtn?.addEventListener('click', () => { createForm?.classList.toggle('hidden'); formTitle!.textContent = 'Create New Donor'; });
+    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id') as HTMLInputElement).value = ''; (document.getElementById('donor-form') as HTMLFormElement).reset(); });
+
+    // Edit
+    document.querySelectorAll('[data-edit-donor]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        createForm?.classList.remove('hidden');
+        formTitle!.textContent = 'Edit Donor';
+        (document.getElementById('edit-id') as HTMLInputElement).value = btn.getAttribute('data-edit-donor') || '';
+        (document.getElementById('d-name') as HTMLInputElement).value = btn.getAttribute('data-name') || '';
+        (document.getElementById('d-email') as HTMLInputElement).value = btn.getAttribute('data-email') || '';
+        (document.getElementById('d-phone') as HTMLInputElement).value = btn.getAttribute('data-phone') || '';
+        (document.getElementById('d-type') as HTMLSelectElement).value = btn.getAttribute('data-type') || 'individual';
+        (document.getElementById('d-address') as HTMLInputElement).value = btn.getAttribute('data-address') || '';
+        (document.getElementById('d-total') as HTMLInputElement).value = btn.getAttribute('data-total') || '0';
+        (document.getElementById('d-count') as HTMLInputElement).value = btn.getAttribute('data-count') || '0';
+        (document.getElementById('d-status') as HTMLSelectElement).value = btn.getAttribute('data-status') || 'active';
+        (document.getElementById('d-notes') as HTMLTextAreaElement).value = btn.getAttribute('data-notes') || '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Submit
+    document.getElementById('donor-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, any> = {};
+      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'totalDonated' || k === 'donationCount' ? Number(v) : v; });
+      body.slug = body.name.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
+      const editId = (document.getElementById('edit-id') as HTMLInputElement).value;
+      try {
+        const url = editId ? `/api/admin/charity/donors?id=${editId}` : '/api/admin/charity/donors';
+        const method = editId ? 'PATCH' : 'POST';
+        const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) { window.location.reload(); } else { const err = await res.json(); alert(err.error || 'Failed'); }
+      } catch { alert('Network error'); }
+    });
+
+    // Delete
+    document.querySelectorAll('[data-delete-donor]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this donor?')) return;
+        const id = btn.getAttribute('data-delete-donor');
+        try { const res = await fetch(`/api/admin/charity/donors?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else alert('Failed'); } catch { alert('Network error'); }
+      });
+    });
+  </script>
+</AdminLayout>

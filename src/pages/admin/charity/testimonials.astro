@@ -1,0 +1,178 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+import { generateCSRFToken } from '../../../lib/utils';
+
+const testimonials = await lightbase.query('charity_testimonials', { sort: 'createdAt:desc', limit: 50 });
+const allTestimonials = testimonials.data || [];
+const csrfToken = generateCSRFToken();
+---
+
+<AdminLayout title="Testimonials" platform="charity" section="testimonials">
+  <div class="flex items-center justify-between mb-6 fade-in">
+    <div>
+      <h2 class="text-lg font-bold">Testimonials</h2>
+      <p class="text-sm" style="color: var(--color-muted);">{allTestimonials.length} total testimonials</p>
+    </div>
+    <button id="toggle-form-btn" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      New Testimonial
+    </button>
+  </div>
+
+  <!-- Create/Edit Form -->
+  <div id="create-form" class="hidden card p-6 mb-6">
+    <h3 id="form-title" class="font-bold mb-4">Create New Testimonial</h3>
+    <form id="testimonial-form" class="space-y-4">
+      <input type="hidden" name="csrfToken" value={csrfToken} />
+      <input type="hidden" name="editId" id="edit-id" value="" />
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="t-name">Name</label>
+          <input id="t-name" name="name" class="input" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="t-title">Title</label>
+          <input id="t-title" name="title" class="input" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="t-content">Content</label>
+        <textarea id="t-content" name="content" class="input" rows="5" required></textarea>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="t-rating">Rating (1-5)</label>
+          <select id="t-rating" name="rating" class="input">
+            <option value="5">5 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="2">2 Stars</option>
+            <option value="1">1 Star</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="t-platform">Platform</label>
+          <input id="t-platform" name="platform" class="input" placeholder="e.g. Website, Google" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="t-photo">Photo URL</label>
+          <input id="t-photo" name="photoUrl" class="input" />
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="t-status">Status</label>
+          <select id="t-status" name="status" class="input">
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
+          </select>
+        </div>
+        <div class="flex items-end pb-1">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" name="isFeatured" class="w-4 h-4 rounded" style="accent-color: var(--color-primary);" />
+            <span class="text-sm font-medium">Featured</span>
+          </label>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Save Testimonial</button>
+        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Testimonials Table -->
+  <div class="card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
+          <th class="p-4 font-medium">Name</th>
+          <th class="p-4 font-medium hidden md:table-cell">Title</th>
+          <th class="p-4 font-medium">Rating</th>
+          <th class="p-4 font-medium hidden sm:table-cell">Featured</th>
+          <th class="p-4 font-medium text-right">Status</th>
+          <th class="p-4 font-medium text-right">Actions</th>
+        </tr></thead>
+        <tbody>
+          {allTestimonials.map((t: any) => {
+            const stars = Array.from({ length: 5 }, (_, i) => {
+              const filled = i < (t.rating || 0);
+              return `<svg width="14" height="14" viewBox="0 0 24 24" fill="${filled ? 'var(--color-primary)' : 'none'}" stroke="${filled ? 'var(--color-primary)' : 'var(--color-muted)'}" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+            }).join('');
+            return (
+              <tr style="border-top: 1px solid var(--color-border);">
+                <td class="p-4">
+                  <div class="font-medium">{t.name}</div>
+                  {t.platform && <div class="text-xs" style="color: var(--color-muted);">{t.platform}</div>}
+                </td>
+                <td class="p-4 hidden md:table-cell">{t.title || '-'}</td>
+                <td class="p-4"><div class="flex gap-0.5" set:html={stars} /></td>
+                <td class="p-4 hidden sm:table-cell">{t.isFeatured ? '<span class="badge badge-primary">Featured</span>' : '-'}</td>
+                <td class="p-4 text-right"><span class={t.status === 'published' ? 'badge badge-primary' : 'badge badge-accent'}>{t.status || 'draft'}</span></td>
+                <td class="p-4 text-right">
+                  <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-testimonial={t.id} data-name={t.name || ''} data-title={t.title || ''} data-content={t.content || ''} data-rating={t.rating || 5} data-photo={t.photoUrl || ''} data-featured={t.isFeatured ? 'true' : 'false'} data-status={t.status || 'draft'} data-platform={t.platform || ''}>Edit</button>
+                  <button class="text-xs font-medium" style="color: #DC2626;" data-delete-testimonial={t.id}>Delete</button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+    {allTestimonials.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No testimonials yet. Add your first testimonial above.</div>}
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggle-form-btn');
+    const cancelBtn = document.getElementById('cancel-form-btn');
+    const createForm = document.getElementById('create-form');
+    const formTitle = document.getElementById('form-title');
+    toggleBtn?.addEventListener('click', () => { createForm?.classList.toggle('hidden'); formTitle!.textContent = 'Create New Testimonial'; });
+    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id') as HTMLInputElement).value = ''; (document.getElementById('testimonial-form') as HTMLFormElement).reset(); });
+
+    // Edit
+    document.querySelectorAll('[data-edit-testimonial]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        createForm?.classList.remove('hidden');
+        formTitle!.textContent = 'Edit Testimonial';
+        (document.getElementById('edit-id') as HTMLInputElement).value = btn.getAttribute('data-edit-testimonial') || '';
+        (document.getElementById('t-name') as HTMLInputElement).value = btn.getAttribute('data-name') || '';
+        (document.getElementById('t-title') as HTMLInputElement).value = btn.getAttribute('data-title') || '';
+        (document.getElementById('t-content') as HTMLTextAreaElement).value = btn.getAttribute('data-content') || '';
+        (document.getElementById('t-rating') as HTMLSelectElement).value = btn.getAttribute('data-rating') || '5';
+        (document.getElementById('t-photo') as HTMLInputElement).value = btn.getAttribute('data-photo') || '';
+        (document.getElementById('t-status') as HTMLSelectElement).value = btn.getAttribute('data-status') || 'draft';
+        (document.getElementById('t-platform') as HTMLInputElement).value = btn.getAttribute('data-platform') || '';
+        const featuredCheckbox = document.querySelector('[name=isFeatured]') as HTMLInputElement;
+        if (featuredCheckbox) featuredCheckbox.checked = btn.getAttribute('data-featured') === 'true';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Submit
+    document.getElementById('testimonial-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const body: Record<string, any> = {};
+      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'rating' ? Number(v) : k === 'isFeatured' ? (v as string === 'on') : v; });
+      body.slug = body.name.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
+      const editId = (document.getElementById('edit-id') as HTMLInputElement).value;
+      try {
+        const url = editId ? `/api/admin/charity/testimonials?id=${editId}` : '/api/admin/charity/testimonials';
+        const method = editId ? 'PATCH' : 'POST';
+        const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (res.ok) { window.location.reload(); } else { const err = await res.json(); alert(err.error || 'Failed'); }
+      } catch { alert('Network error'); }
+    });
+
+    // Delete
+    document.querySelectorAll('[data-delete-testimonial]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this testimonial?')) return;
+        const id = btn.getAttribute('data-delete-testimonial');
+        try { const res = await fetch(`/api/admin/charity/testimonials?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else alert('Failed'); } catch { alert('Network error'); }
+      });
+    });
+  </script>
+</AdminLayout>
