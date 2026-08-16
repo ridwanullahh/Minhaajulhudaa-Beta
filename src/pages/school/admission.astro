@@ -4,7 +4,6 @@ import { lightbase } from '../../lib/lightbase';
 
 const classes = await lightbase.query('school_classes', { filter: { field: 'active', op: 'eq', value: true }, limit: 20 });
 ---
-export const prerender = true;
 
 <PlatformLayout title="Admission - Minhaajulhudaa School" platform="school">
   <section class="container-app py-12 max-w-3xl">

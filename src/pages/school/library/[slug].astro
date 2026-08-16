@@ -18,7 +18,6 @@ if (!book) {
   return Astro.redirect('/school/library');
 }
 ---
-export const prerender = true;
 
 <PlatformLayout title={`${book.title} - E-Library`} platform="school">
   <section class="container-app py-12">

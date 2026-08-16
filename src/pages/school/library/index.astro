@@ -9,7 +9,6 @@ const result = await lightbase.query('school_library_books', {
 const books = result.data || [];
 const categories = [...new Set(books.map((b: any) => b.category).filter(Boolean))];
 ---
-export const prerender = true;
 
 <PlatformLayout title="E-Library - Minhaajulhudaa School" platform="school">
   <section class="container-app py-12">

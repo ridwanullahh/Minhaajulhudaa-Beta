@@ -4,7 +4,6 @@ import { lightbase } from '../../lib/lightbase';
 
 const roles = await lightbase.query('charity_volunteer_roles', { filter: { field: 'status', op: 'eq', value: 'open' }, limit: 10 });
 ---
-export const prerender = true;
 
 <PlatformLayout title="How to Help - Minhaajulhudaa Charity" platform="charity">
   <section class="container-app py-12 max-w-4xl">

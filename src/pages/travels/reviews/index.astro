@@ -19,7 +19,6 @@ const ratingDistribution = [5, 4, 3, 2, 1].map(star => ({
   count: reviews.filter((r: any) => r.rating === star).length,
 }));
 ---
-export const prerender = true;
 
 <PlatformLayout title="Customer Reviews - Minhaajulhudaa Travels" platform="travels">
   <!-- Hero -->

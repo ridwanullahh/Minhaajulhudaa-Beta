@@ -21,7 +21,6 @@ if (!course) {
 
 const modulesResult = await lightbase.findMany('school_lessons', { field: 'courseId', op: 'eq', value: course.id }, { sort: 'order:asc', limit: 50 });
 ---
-export const prerender = true;
 
 <PlatformLayout title={`${course.title} - E-Courses`} description={course.excerpt} platform="school">
   <section class="container-app py-12">
