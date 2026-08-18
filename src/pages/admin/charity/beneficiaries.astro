@@ -160,12 +160,12 @@ const csrfToken = generateCSRFToken();
 
     document.querySelectorAll('[data-delete-ben]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this beneficiary record?')) return;
-        const id = btn.getAttribute('data-delete-ben');
-        try {
-          const res = await fetch(`/api/admin/charity/volunteers?id=${id}&collection=charity_beneficiaries`, { method: 'DELETE' });
-          if (res.ok) window.location.reload(); else showToast('Failed', 'error');
-        } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this beneficiary record?', async function() {        const id = btn.getAttribute('data-delete-ben');
+          try {
+            const res = await fetch(`/api/admin/charity/volunteers?id=${id}&collection=charity_beneficiaries`, { method: 'DELETE' });
+            if (res.ok) window.location.reload(); else showToast('Failed', 'error');
+          } catch { showToast('Network error', 'error'); }
+        });
       });
     });
   </script>

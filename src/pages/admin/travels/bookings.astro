@@ -115,15 +115,13 @@ const paymentBadge = (status: string) => {
       const id = el.dataset.bookingId;
       const ep = el.dataset.endpoint;
       const status = el.value;
-      if (confirm('Update booking status to ' + status + '?')) {
+      showConfirm('Update booking status to ' + status + '?', function() {
         fetch(ep + '?id=' + id, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status })
         }).then(r => r.json()).then(() => location.reload()).catch(() => location.reload());
-      } else {
-        location.reload();
-      }
+      }, 'Confirm Status Update');
     }
   </script>
 </AdminLayout>

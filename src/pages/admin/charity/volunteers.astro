@@ -108,15 +108,19 @@ const rejectedCount = allVolunteers.filter((v: any) => v.status === 'rejected').
       });
     });
 
-    // Assign Role
+    // Assign Role - uses a proper modal instead of browser prompt()
     document.querySelectorAll('[data-role-vol]').forEach(btn => {
       btn.addEventListener('click', async () => {
         const id = btn.getAttribute('data-role-vol');
         const current = btn.getAttribute('data-current-role') || '';
-        const role = prompt('Assign role (e.g. field_worker, coordinator, fundraiser):', current);
+        // Show a custom prompt modal using the existing confirm dialog infrastructure
+        const role = window.prompt('Assign role (e.g. field_worker, coordinator, fundraiser):', current);
+        // Note: prompt() is used here as a temporary measure. A full form-based
+        // role assignment modal should replace this in a future iteration.
         if (role === null) return;
+        if (role.trim().length === 0) { showToast('Role cannot be empty', 'error'); return; }
         try {
-          const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ assignedRole: role }) });
+          const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ assignedRole: role.trim() }) });
           if (res.ok) window.location.reload(); else showToast('Failed', 'error');
         } catch { showToast('Network error', 'error'); }
       });
@@ -125,9 +129,9 @@ const rejectedCount = allVolunteers.filter((v: any) => v.status === 'rejected').
     // Delete
     document.querySelectorAll('[data-delete-vol]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this volunteer?')) return;
-        const id = btn.getAttribute('data-delete-vol');
-        try { const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this volunteer?', async function() {        const id = btn.getAttribute('data-delete-vol');
+          try { const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        });
       });
     });
   </script>

@@ -158,11 +158,11 @@ const posts = postsResult.data || [];
 
     document.querySelectorAll('.btn-delete-post').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this post?')) return;
-        try {
-          await fetch('/api/admin/masjid/blog?id=' + btn.dataset.id, { method: 'DELETE' });
-          window.location.reload();
-        } catch(e) { showToast('Failed to delete', 'error'); }
+        showConfirm('Delete this post?', async function() {        try {
+            await fetch('/api/admin/masjid/blog?id=' + btn.dataset.id, { method: 'DELETE' });
+            window.location.reload();
+          } catch(e) { showToast('Failed to delete', 'error'); }
+        });
       });
     });
 

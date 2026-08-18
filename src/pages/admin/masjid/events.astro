@@ -162,11 +162,11 @@ const events = eventsResult.data || [];
 
     document.querySelectorAll('.btn-delete-event').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this event?')) return;
-        try {
-          await fetch('/api/admin/masjid/events?id=' + btn.dataset.id, { method: 'DELETE' });
-          window.location.reload();
-        } catch(e) { showToast('Failed to delete', 'error'); }
+        showConfirm('Delete this event?', async function() {        try {
+            await fetch('/api/admin/masjid/events?id=' + btn.dataset.id, { method: 'DELETE' });
+            window.location.reload();
+          } catch(e) { showToast('Failed to delete', 'error'); }
+        });
       });
     });
 

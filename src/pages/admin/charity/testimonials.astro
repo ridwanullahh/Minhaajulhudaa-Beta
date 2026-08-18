@@ -169,9 +169,9 @@ const csrfToken = generateCSRFToken();
     // Delete
     document.querySelectorAll('[data-delete-testimonial]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this testimonial?')) return;
-        const id = btn.getAttribute('data-delete-testimonial');
-        try { const res = await fetch(`/api/admin/charity/testimonials?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this testimonial?', async function() {        const id = btn.getAttribute('data-delete-testimonial');
+          try { const res = await fetch(`/api/admin/charity/testimonials?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        });
       });
     });
   </script>

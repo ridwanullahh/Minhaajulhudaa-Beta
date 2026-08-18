@@ -174,9 +174,9 @@ const csrfToken = generateCSRFToken();
     // Delete
     document.querySelectorAll('[data-delete-story]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this story?')) return;
-        const id = btn.getAttribute('data-delete-story');
-        try { const res = await fetch(`/api/admin/charity/success-stories?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this story?', async function() {        const id = btn.getAttribute('data-delete-story');
+          try { const res = await fetch(`/api/admin/charity/success-stories?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        });
       });
     });
   </script>

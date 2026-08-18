@@ -128,13 +128,13 @@ const statusBadge = (status: string) => {
       const id = btn.dataset.id;
       const action = btn.dataset.action;
       const status = action === 'approve' ? 'approved' : 'rejected';
-      if (confirm(action === 'approve' ? 'Approve this review?' : 'Reject this review?')) {
+      showConfirm(action === 'approve' ? 'Approve this review?' : 'Reject this review?', function() {
         fetch('/api/admin/travels/reviews?id=' + id, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status }),
         }).then(() => location.reload()).catch(() => {});
-      }
+      });
     }
 
     (window as any).openResponseModal = function(btn: HTMLElement) {

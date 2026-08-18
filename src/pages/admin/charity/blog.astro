@@ -166,9 +166,9 @@ const csrfToken = generateCSRFToken();
     // Delete
     document.querySelectorAll('[data-delete-post]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this post?')) return;
-        const id = btn.getAttribute('data-delete-post');
-        try { const res = await fetch(`/api/admin/charity/blog?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this post?', async function() {        const id = btn.getAttribute('data-delete-post');
+          try { const res = await fetch(`/api/admin/charity/blog?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        });
       });
     });
   </script>

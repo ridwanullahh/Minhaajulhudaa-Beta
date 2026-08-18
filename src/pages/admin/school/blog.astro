@@ -140,12 +140,12 @@ const csrfToken = generateCSRFToken();
     // Delete post
     document.querySelectorAll('[data-delete-post]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this post?')) return;
-        const id = btn.getAttribute('data-delete-post');
-        try {
-          const res = await fetch(`/api/admin/school/blog?id=${id}`, { method: 'DELETE' });
-          if (res.ok) window.location.reload(); else showToast('Failed to delete', 'error');
-        } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this post?', async function() {        const id = btn.getAttribute('data-delete-post');
+          try {
+            const res = await fetch(`/api/admin/school/blog?id=${id}`, { method: 'DELETE' });
+            if (res.ok) window.location.reload(); else showToast('Failed to delete', 'error');
+          } catch { showToast('Network error', 'error'); }
+        });
       });
     });
   </script>

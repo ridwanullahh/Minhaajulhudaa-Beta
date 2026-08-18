@@ -127,13 +127,13 @@ const allStories = stories.data || [];
 
     document.querySelectorAll('[data-delete-content]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this item?')) return;
-        const id = btn.getAttribute('data-delete-content');
-        const collection = btn.getAttribute('data-collection');
-        try {
-          const res = await fetch(`/api/admin/charity/content?id=${id}&collection=${collection}`, { method: 'DELETE' });
-          if (res.ok) window.location.reload(); else showToast('Failed', 'error');
-        } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this item?', async function() {        const id = btn.getAttribute('data-delete-content');
+          const collection = btn.getAttribute('data-collection');
+          try {
+            const res = await fetch(`/api/admin/charity/content?id=${id}&collection=${collection}`, { method: 'DELETE' });
+            if (res.ok) window.location.reload(); else showToast('Failed', 'error');
+          } catch { showToast('Network error', 'error'); }
+        });
       });
     });
   </script>
