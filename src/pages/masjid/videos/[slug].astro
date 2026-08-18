@@ -1,0 +1,138 @@
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const { slug } = Astro.params;
+
+let video: any = null;
+try {
+  video = await lightbase.findOne('masjid_videos', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[masjid/videos/[slug]] fetch error:', err);
+}
+
+if (!video) {
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
+}
+
+let relatedVideos: any[] = [];
+try {
+  const result = await lightbase.query('masjid_videos', {
+    filter: { and: [
+      { field: 'category', op: 'eq', value: video.category || '' },
+      { field: 'slug', op: 'neq', value: video.slug },
+    ]},
+    limit: 4,
+  });
+  relatedVideos = (result.data || []).slice(0, 3);
+} catch {}
+---
+
+<PlatformLayout title={`${video.title} - Videos`} platform="masjid">
+  <section class="container-app py-8 md:py-12 max-w-4xl">
+    <a href="/masjid/videos" class="inline-flex items-center gap-2 text-sm font-medium mb-6" style="color: var(--color-primary);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Videos
+    </a>
+
+    <div class="fade-in">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        {video.category && <span class="badge badge-primary">{video.category}</span>}
+        {video.duration && <span class="badge badge-accent">{video.duration}</span>}
+      </div>
+      <h1 class="text-2xl md:text-3xl font-extrabold mb-4">{video.title}</h1>
+
+      <!-- Video Player -->
+      <div class="aspect-video rounded-xl overflow-hidden mb-6 card" style="border: none;">
+        {video.videoUrl ? (
+          <video controls class="w-full h-full" preload="metadata">
+            <source src={video.videoUrl} type="video/mp4" />
+            Your browser does not support the video element.
+          </video>
+        ) : video.embedUrl ? (
+          <iframe src={video.embedUrl} class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        ) : (
+          <div class="w-full h-full flex items-center justify-center" style="background: var(--color-surface);">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-muted);"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
+        )}
+      </div>
+
+      <!-- Details bar -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6" style="border-bottom: 1px solid var(--color-border);">
+        <div class="flex items-center gap-3">
+          {video.speaker && (
+            <div class="flex items-center gap-2">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: rgb(5,179,77,0.1); color: var(--color-primary);">
+                {video.speaker.charAt(0)}
+              </div>
+              <div>
+                <div class="text-sm font-semibold">{video.speaker}</div>
+                <div class="text-xs" style="color: var(--color-muted);">Speaker</div>
+              </div>
+            </div>
+          )}
+        </div>
+        <button id="share-btn" class="btn btn-ghost text-sm inline-flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Share
+        </button>
+      </div>
+
+      <!-- Description -->
+      {video.description && (
+        <div class="mb-8">
+          <h2 class="font-bold mb-3">About this video</h2>
+          <div class="text-sm leading-relaxed" style="color: var(--color-muted);">
+            {video.description.split('\n').map((para: string) => para.trim() ? <p class="mb-3">{para}</p> : null)}
+          </div>
+        </div>
+      )}
+
+      <!-- Tags -->
+      {video.tags && video.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mb-8">
+          {video.tags.map((tag: string) => <span class="badge">#{tag}</span>)}
+        </div>
+      )}
+    </div>
+
+    <!-- Related Videos -->
+    {relatedVideos.length > 0 && (
+      <div class="mt-12 pt-8" style="border-top: 1px solid var(--color-border);">
+        <h2 class="text-xl font-bold mb-6">Related Videos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {relatedVideos.map((rv: any) => (
+            <a href={`/masjid/videos/${rv.slug}`} class="card card-hover overflow-hidden block">
+              <div class="aspect-video flex items-center justify-center" style="background: rgb(5,179,77,0.05);">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-primary);"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-sm line-clamp-2 mb-1">{rv.title}</h3>
+                {rv.speaker && <p class="text-xs" style="color: var(--color-muted);">{rv.speaker}</p>}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </section>
+
+  <script is:inline>
+    document.getElementById('share-btn')?.addEventListener('click', async function() {
+      const url = window.location.href;
+      if (navigator.share) {
+        try { await navigator.share({ url }); } catch {}
+      } else if (navigator.clipboard) {
+        try {
+          await navigator.clipboard.writeText(url);
+          const btn = document.getElementById('share-btn');
+          const original = btn.innerHTML;
+          btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+          setTimeout(() => { btn.innerHTML = original; }, 2000);
+        } catch {}
+      }
+    });
+  </script>
+</PlatformLayout>
