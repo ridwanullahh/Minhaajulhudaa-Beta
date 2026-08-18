@@ -2,6 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatDate } from '../../../lib/utils';
+import RichTextEditor from '../../../components/RichTextEditor.astro';
 
 const audiosResult = await lightbase.query('masjid_audios', { sort: 'date:desc', limit: 100 });
 const audios = audiosResult.data || [];
@@ -107,7 +108,7 @@ const audios = audiosResult.data || [];
           </div>
           <div>
             <label class="block text-sm font-medium mb-1">Description</label>
-            <textarea name="description" class="input" rows="3" placeholder="Brief description"></textarea>
+            <RichTextEditor name="description" id="audio-description" label="" rows={5} placeholder="Audio description in Markdown..." />
           </div>
           <div class="flex justify-end gap-2 pt-2">
             <button type="button" id="modal-audio-cancel" class="btn btn-ghost">Cancel</button>

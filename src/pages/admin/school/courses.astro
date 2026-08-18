@@ -2,6 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatCurrency } from '../../../lib/utils';
+import RichTextEditor from '../../../components/RichTextEditor.astro';
 
 const [coursesResult, lessonsCount] = await Promise.all([
   lightbase.query('school_courses', { sort: 'title:asc', limit: 100 }),
@@ -41,7 +42,7 @@ const courses = coursesResult.data || [];
           <select id="cr-status" name="status" class="input"><option value="draft">Draft</option><option value="published">Published</option></select></div>
       </div>
       <div><label class="block text-sm font-medium mb-1" for="cr-excerpt">Excerpt</label><textarea id="cr-excerpt" name="excerpt" class="input" rows="2"></textarea></div>
-      <div><label class="block text-sm font-medium mb-1" for="cr-desc">Description</label><textarea id="cr-desc" name="description" class="input" rows="5"></textarea></div>
+      <div><label class="block text-sm font-medium mb-1" for="cr-desc">Description</label><RichTextEditor id="cr-desc" name="description" label="" rows={6} placeholder="Course description in Markdown..." /></div>
       <div class="flex gap-3">
         <button type="submit" class="btn btn-primary">Create Course</button>
         <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>

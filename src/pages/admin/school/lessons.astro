@@ -1,6 +1,7 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
+import RichTextEditor from '../../../components/RichTextEditor.astro';
 
 const [lessonsResult, coursesResult] = await Promise.all([
   lightbase.query('school_lessons', { sort: 'order:asc,title:asc', limit: 200 }),
@@ -48,7 +49,7 @@ const courseMap = new Map<string, string>((courses as any[]).map((c: any) => [c.
         <div><label class="block text-sm font-medium mb-1" for="cr-order">Order</label><input id="cr-order" name="order" class="input" type="number" min="0" value="0" /></div>
       </div>
       <div><label class="block text-sm font-medium mb-1" for="cr-videoUrl">Video URL</label><input id="cr-videoUrl" name="videoUrl" class="input" placeholder="https://..." /></div>
-      <div><label class="block text-sm font-medium mb-1" for="cr-content">Content</label><textarea id="cr-content" name="content" class="input" rows="5"></textarea></div>
+      <div><label class="block text-sm font-medium mb-1" for="cr-content">Content</label><RichTextEditor id="cr-content" name="content" label="" rows={8} placeholder="Lesson content in Markdown..." /></div>
       <div class="flex items-center gap-2">
         <input id="cr-isPublished" name="isPublished" type="checkbox" class="w-4 h-4" />
         <label for="cr-isPublished" class="text-sm font-medium">Published</label>
@@ -87,7 +88,7 @@ const courseMap = new Map<string, string>((courses as any[]).map((c: any) => [c.
           <div><label class="block text-sm font-medium mb-1" for="ed-order">Order</label><input id="ed-order" name="order" class="input" type="number" min="0" /></div>
         </div>
         <div><label class="block text-sm font-medium mb-1" for="ed-videoUrl">Video URL</label><input id="ed-videoUrl" name="videoUrl" class="input" placeholder="https://..." /></div>
-        <div><label class="block text-sm font-medium mb-1" for="ed-content">Content</label><textarea id="ed-content" name="content" class="input" rows="5"></textarea></div>
+        <div><label class="block text-sm font-medium mb-1" for="ed-content">Content</label><RichTextEditor id="ed-content" name="content" label="" rows={8} placeholder="Lesson content in Markdown..." /></div>
         <div class="flex items-center gap-2">
           <input id="ed-isPublished" name="isPublished" type="checkbox" class="w-4 h-4" />
           <label for="ed-isPublished" class="text-sm font-medium">Published</label>

@@ -2,6 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { generateCSRFToken, formatCurrency, slugify } from '../../../lib/utils';
+import RichTextEditor from '../../../components/RichTextEditor.astro';
 
 const campaigns = await lightbase.query('charity_campaigns', { sort: 'createdAt:desc', limit: 50 });
 const allCampaigns = campaigns.data || [];
@@ -67,7 +68,7 @@ const csrfToken = generateCSRFToken();
       </div>
       <div>
         <label class="block text-sm font-medium mb-1" for="c-desc">Full Description</label>
-        <textarea id="c-desc" name="description" class="input" rows="6"></textarea>
+        <RichTextEditor id="c-desc" name="description" label="" rows={8} placeholder="Campaign description in Markdown..." />
       </div>
       <div class="grid md:grid-cols-2 gap-4">
         <div>

@@ -2,6 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatDate } from '../../../lib/utils';
+import RichTextEditor from '../../../components/RichTextEditor.astro';
 
 const posts = await lightbase.query('travels_blog_posts', { sort: 'publishedAt:desc', limit: 100 }).catch(() => ({ data: [] }));
 const allPosts = posts.data || [];
@@ -85,7 +86,7 @@ const statusBadge = (status: string) => {
           <div><label class="text-sm font-medium block mb-1">Category</label><input id="form-category" class="input" /></div>
           <div><label class="text-sm font-medium block mb-1">Author</label><input id="form-authorName" class="input" /></div>
           <div class="col-span-2"><label class="text-sm font-medium block mb-1">Excerpt</label><textarea id="form-excerpt" class="input" rows="2"></textarea></div>
-          <div class="col-span-2"><label class="text-sm font-medium block mb-1">Content (HTML)</label><textarea id="form-content" class="input" rows="6"></textarea></div>
+          <div class="col-span-2"><label class="text-sm font-medium block mb-1">Content</label><RichTextEditor id="form-content" name="content" label="" rows={8} placeholder="Write your blog post content in Markdown..." /></div>
           <div><label class="text-sm font-medium block mb-1">Status</label>
             <select id="form-status" class="input">
               <option value="draft">Draft</option>

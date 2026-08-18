@@ -2,6 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatDate } from '../../../lib/utils';
+import RichTextEditor from '../../../components/RichTextEditor.astro';
 
 const postsResult = await lightbase.query('masjid_blog_posts', { sort: 'publishedAt:desc', limit: 100 });
 const posts = postsResult.data || [];
@@ -102,7 +103,7 @@ const posts = postsResult.data || [];
           </div>
           <div>
             <label class="block text-sm font-medium mb-1">Content</label>
-            <textarea name="content" class="input" rows="8" placeholder="Full article content..." style="font-family: monospace;"></textarea>
+            <RichTextEditor name="content" id="post-content" label="" rows={12} placeholder="Write your blog post content in Markdown..." />
           </div>
           <div>
             <label class="block text-sm font-medium mb-1">Tags (comma separated)</label>

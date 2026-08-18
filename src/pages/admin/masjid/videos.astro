@@ -2,6 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatDate } from '../../../lib/utils';
+import RichTextEditor from '../../../components/RichTextEditor.astro';
 
 const videosResult = await lightbase.query('masjid_videos', { sort: 'date:desc', limit: 100 });
 const videos = videosResult.data || [];
@@ -120,7 +121,7 @@ const videos = videosResult.data || [];
           </div>
           <div>
             <label class="block text-sm font-medium mb-1">Description</label>
-            <textarea name="description" class="input" rows="3" placeholder="Brief description"></textarea>
+            <RichTextEditor name="description" id="video-description" label="" rows={5} placeholder="Video description in Markdown..." />
           </div>
           <div class="flex items-center gap-2">
             <input type="checkbox" name="isPublished" id="video-isPublished" class="w-4 h-4 rounded" />

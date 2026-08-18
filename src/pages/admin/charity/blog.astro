@@ -2,6 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { generateCSRFToken } from '../../../lib/utils';
+import RichTextEditor from '../../../components/RichTextEditor.astro';
 
 const posts = await lightbase.query('charity_blog_posts', { sort: 'publishedAt:desc', limit: 50 });
 const allPosts = posts.data || [];
@@ -45,8 +46,8 @@ const csrfToken = generateCSRFToken();
         <textarea id="post-excerpt" name="excerpt" class="input" rows="2"></textarea>
       </div>
       <div>
-        <label class="block text-sm font-medium mb-1" for="post-content">Content (HTML)</label>
-        <textarea id="post-content" name="content" class="input" rows="10"></textarea>
+        <label class="block text-sm font-medium mb-1" for="post-content">Content</label>
+        <RichTextEditor id="post-content" name="content" label="" rows={12} placeholder="Write your blog post content in Markdown..." />
       </div>
       <div class="grid md:grid-cols-3 gap-4">
         <div>

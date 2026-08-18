@@ -3,6 +3,7 @@ import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatCurrency } from '../../../lib/utils';
 import { sanitizeHtml } from '../../../lib/sanitize';
+import { renderMarkdown } from '../../../lib/markdown';
 
 const { slug } = Astro.params;
 
@@ -48,7 +49,7 @@ try {
         {course.category && <span class="badge badge-primary mb-3">{course.category.replace(/-/g, ' ')}</span>}
         <h1 class="text-3xl md:text-4xl font-extrabold mb-4">{course.title}</h1>
 
-        {course.description && <div class="mb-8" set:html={sanitizeHtml(course.description)} />}
+        {course.description && <div class="mb-8" set:html={renderMarkdown(course.description)} />}
 
         {modulesResult.length > 0 && (
           <div class="card p-6">

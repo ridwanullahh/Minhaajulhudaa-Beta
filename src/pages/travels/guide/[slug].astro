@@ -1,6 +1,8 @@
 ---
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
+import { renderMarkdown } from '../../../lib/markdown';
+import ArticleMeta from '../../../components/ArticleMeta.astro';
 
 const { slug } = Astro.params;
 
@@ -8,38 +10,34 @@ let resource: any = null;
 try {
   resource = await lightbase.findOne('travels_resources', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
-  console.error('[travels/guide/[slug].astro] fetch error:', err);
+  console.error('[travels/guide/[slug]] fetch error:', err);
 }
 
 if (!resource) {
   Astro.response.status = 404;
   return Astro.redirect('/404');
 }
+
+const renderedContent = renderMarkdown(resource.content || '');
 ---
 
-<PlatformLayout title={`${resource.title} - Minhaajulhudaa Travels`} platform="travels">
+<PlatformLayout title={`${resource.title} - Minhaajulhudaa Travels`} description={resource.summary || resource.content?.substring(0, 160)} platform="travels">
   <article class="container-app py-12 max-w-3xl">
     <a href="/travels/guide" class="text-sm font-medium mb-6 inline-flex items-center gap-1" style="color: var(--color-primary);">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       All Resources
     </a>
 
-    <span class="badge badge-accent mb-4 capitalize">{resource.category}</span>
     <h1 class="text-3xl md:text-4xl font-extrabold mb-4">{resource.title}</h1>
 
-    {resource.tags && resource.tags.length > 0 && (
-      <div class="flex flex-wrap gap-2 mb-8">
-        {resource.tags.map(function(tag) { return <span class="badge badge-primary">#{tag}</span>; })}
-      </div>
-    )}
+    <ArticleMeta
+      title={resource.title}
+      content={resource.content}
+      category={resource.category}
+      tags={resource.tags}
+    />
 
-    <div class="prose prose-lg max-w-none">
-      {resource.content.split('\n').map(function(para) {
-        if (para.startsWith('## ')) return <h2 class="text-2xl font-bold mt-8 mb-4">{para.replace('## ', '')}</h2>;
-        if (para.trim()) return <p class="mb-4 leading-relaxed" style="color: var(--color-muted);">{para}</p>;
-        return null;
-      })}
-    </div>
+    <div class="prose prose-lg max-w-none article-content" set:html={renderedContent} />
 
     {resource.attachments && resource.attachments.length > 0 && (
       <div class="mt-8 pt-8 border-t" style="border-color: var(--color-border);">
@@ -63,4 +61,25 @@ if (!resource) {
       <a href="/travels/hajj-umrah" class="btn btn-primary">View Packages</a>
     </div>
   </article>
+
+  <style is:global>
+    .article-content h1 { font-size: 2rem; font-weight: 700; margin: 1.5rem 0 1rem; }
+    .article-content h2 { font-size: 1.5rem; font-weight: 700; margin: 1.5rem 0 0.75rem; }
+    .article-content h3 { font-size: 1.25rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
+    .article-content p { margin: 0.75rem 0; line-height: 1.8; color: var(--color-muted); }
+    .article-content ul, .article-content ol { margin: 0.75rem 0; padding-left: 1.5rem; }
+    .article-content ul { list-style: disc; }
+    .article-content ol { list-style: decimal; }
+    .article-content li { margin: 0.375rem 0; color: var(--color-muted); }
+    .article-content blockquote { border-left: 3px solid var(--color-primary); padding-left: 1rem; margin: 1rem 0; color: var(--color-muted); font-style: italic; }
+    .article-content code { background: var(--color-surface); padding: 0.125rem 0.375rem; border-radius: 3px; font-size: 0.875em; }
+    .article-content pre { background: var(--color-surface); padding: 0.75rem; border-radius: 6px; overflow-x: auto; margin: 0.75rem 0; }
+    .article-content pre code { background: none; padding: 0; }
+    .article-content table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .article-content th, .article-content td { border: 1px solid var(--color-border); padding: 0.5rem; text-align: left; }
+    .article-content th { background: var(--color-surface); font-weight: 600; }
+    .article-content hr { border: none; border-top: 1px solid var(--color-border); margin: 1.5rem 0; }
+    .article-content img { max-width: 100%; height: auto; border-radius: 6px; }
+    .article-content a { color: var(--color-primary); text-decoration: underline; }
+  </style>
 </PlatformLayout>

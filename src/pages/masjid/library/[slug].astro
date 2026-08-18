@@ -1,6 +1,7 @@
 ---
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
+import { renderMarkdown } from '../../../lib/markdown';
 
 const { slug } = Astro.params;
 
@@ -57,9 +58,7 @@ if (!book) {
 
         <div class="card p-6 mb-6">
           <h2 class="font-bold mb-3">Description</h2>
-          <div class="text-sm leading-relaxed" style="color: var(--color-muted);">
-            {book.description ? book.description.split('\n').map(para => <p class="mb-2">{para}</p>) : <p>No description available.</p>}
-          </div>
+          <div class="text-sm leading-relaxed article-content" set:html={renderMarkdown(book.description || 'No description available.')} />
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
