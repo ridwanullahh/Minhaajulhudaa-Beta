@@ -15,6 +15,16 @@ if (!pkg) {
   Astro.response.status = 404;
   return Astro.redirect('/404');
 }
+
+let itineraries: any[] = [];
+try {
+  const itinResult = await lightbase.query('travels_itineraries', {
+    filter: { field: 'packageId', op: 'eq', value: pkg.id },
+    sort: 'day:asc',
+    limit: 30,
+  });
+  itineraries = itinResult.data || [];
+} catch {}
 ---
 
 <PlatformLayout title={`${pkg.title} - Minhaajulhudaa Travels`} platform="travels">

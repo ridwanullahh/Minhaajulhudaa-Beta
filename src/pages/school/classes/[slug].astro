@@ -15,6 +15,14 @@ if (!cls) {
   Astro.response.status = 404;
   return Astro.redirect('/404');
 }
+
+let filteredRelated: any[] = [];
+try {
+  const relatedClasses = await lightbase.findMany('school_classes', { field: 'level', op: 'eq', value: cls.level }, { limit: 4 });
+  filteredRelated = relatedClasses.filter(function(c: any) { return c.slug !== cls.slug; }).slice(0, 3);
+} catch (err) {
+  console.error('[school/classes/[slug]] related query error:', err);
+}
 ---
 
 <PlatformLayout title={`${cls.name} - Classes`} description={`Class details for ${cls.name}`} platform="school">

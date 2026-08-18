@@ -15,6 +15,21 @@ if (!post) {
   Astro.response.status = 404;
   return Astro.redirect('/404');
 }
+
+let relatedData: any[] = [];
+try {
+  const related = await lightbase.query('school_blog_posts', {
+    filter: { and: [
+      { field: 'status', op: 'eq', value: 'published' },
+      { field: 'category', op: 'eq', value: post.category },
+      { field: 'slug', op: 'neq', value: post.slug },
+    ]},
+    limit: 3,
+  });
+  relatedData = related.data || [];
+} catch (err) {
+  console.error('[school/news/[slug]] related query error:', err);
+}
 ---
 
 <PlatformLayout title={`${post.title} - Minhaajulhudaa School`} platform="school">

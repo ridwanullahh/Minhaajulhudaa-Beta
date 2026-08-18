@@ -16,6 +16,20 @@ if (!post) {
   Astro.response.status = 404;
   return Astro.redirect('/404');
 }
+
+const isPublished = post.status === 'published';
+
+let relatedPosts: any[] = [];
+try {
+  if (post.category) {
+    const result = await lightbase.query('charity_blog_posts', {
+      filter: { field: 'category', op: 'eq', value: post.category },
+      sort: 'publishedAt:desc',
+      limit: 3,
+    });
+    relatedPosts = (result.data || []).filter((p: any) => p.id !== post.id);
+  }
+} catch {}
 ---
 
 <PlatformLayout title={`${post.title} - Charity Blog`} platform="charity">

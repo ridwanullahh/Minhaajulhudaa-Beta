@@ -15,6 +15,18 @@ if (!article) {
   Astro.response.status = 404;
   return Astro.redirect('/404');
 }
+
+let related: any[] = [];
+try {
+  const relatedResult = await lightbase.query('school_wiki_articles', {
+    filter: { field: 'category', op: 'eq', value: article.category || '' },
+    sort: 'title:asc',
+    limit: 10,
+  });
+  related = (relatedResult.data || []).filter(function(a: any) { return a.slug !== article.slug; }).slice(0, 5);
+} catch (err) {
+  console.error('[school/wiki/[slug]] related query error:', err);
+}
 ---
 
 <PlatformLayout title={`${article.title} - Wiki - Minhaajulhudaa School`} platform="school">

@@ -15,6 +15,16 @@ if (!course) {
   Astro.response.status = 404;
   return Astro.redirect('/404');
 }
+
+let lessons: any[] = [];
+try {
+  const lessonsResult = await lightbase.query('travels_lessons', {
+    filter: { field: 'courseId', op: 'eq', value: course.id },
+    sort: 'order:asc',
+    limit: 50,
+  });
+  lessons = lessonsResult.data || [];
+} catch {}
 ---
 
 <PlatformLayout title={`${course.title} - Travels Courses`} platform="travels">

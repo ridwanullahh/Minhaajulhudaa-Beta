@@ -16,6 +16,8 @@ if (!product) {
   Astro.response.status = 404;
   return Astro.redirect('/404');
 }
+
+const inStock = product.stockQuantity === undefined || product.stockQuantity > 0;
 ---
 
 <PlatformLayout title={`${product.title} - School Shop`} platform="school">
