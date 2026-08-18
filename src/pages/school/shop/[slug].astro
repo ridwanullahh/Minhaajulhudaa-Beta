@@ -3,23 +3,19 @@ import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatCurrency } from '../../../lib/utils';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('school_products', { limit: 100 });
-    const products = (result.data || []).filter((p: any) => p.slug);
-    return products.map((p: any) => ({ params: { slug: p.slug }, props: { product: p } }));
-  } catch {
-    return [];
-  }
-}
+const { slug } = Astro.params;
 
-const { product } = Astro.props;
+let product: any = null;
+try {
+  product = await lightbase.findOne('school_products', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[school/shop/[slug].astro] fetch error:', err);
+}
 
 if (!product) {
-  return Astro.redirect('/school/shop');
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
 }
-
-const inStock = product.stockQuantity === undefined || product.stockQuantity > 0;
 ---
 
 <PlatformLayout title={`${product.title} - School Shop`} platform="school">

@@ -2,42 +2,18 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('school_blog_posts', {
-      filter: { field: 'status', op: 'eq', value: 'published' },
-      limit: 100,
-    });
-    const posts = result.data || [];
-    return posts.map((post) => ({
-      params: { slug: post.slug },
-      props: { post },
-    }));
-  } catch (err) {
-    console.error('[school/news/[slug]] getStaticPaths error:', err);
-    return [];
-  }
-}
+const { slug } = Astro.params;
 
-const { post } = Astro.props;
+let post: any = null;
+try {
+  post = await lightbase.findOne('school_blog_posts', { and: [{ field: 'status', op: 'eq', value: "published" }, { field: 'slug', op: 'eq', value: slug }] });
+} catch (err) {
+  console.error('[school/news/[slug].astro] fetch error:', err);
+}
 
 if (!post) {
-  return Astro.redirect('/school/news');
-}
-
-let relatedData: any[] = [];
-try {
-  const related = await lightbase.query('school_blog_posts', {
-    filter: { and: [
-      { field: 'status', op: 'eq', value: 'published' },
-      { field: 'category', op: 'eq', value: post.category },
-      { field: 'slug', op: 'neq', value: post.slug },
-    ]},
-    limit: 3,
-  });
-  relatedData = related.data || [];
-} catch (err) {
-  console.error('[school/news/[slug]] related query error:', err);
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
 }
 ---
 

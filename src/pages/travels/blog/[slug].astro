@@ -3,19 +3,18 @@ import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatDate } from '../../../lib/utils';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('travels_blog_posts', {
-      filter: { field: 'status', op: 'eq', value: 'published' },
-      limit: 100,
-    });
-    return (result.data || []).filter(doc => doc.slug).map(doc => ({ params: { slug: doc.slug }, props: { post: doc } }));
-  } catch { return []; }
+const { slug } = Astro.params;
+
+let post: any = null;
+try {
+  post = await lightbase.findOne('travels_blog_posts', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[travels/blog/[slug].astro] fetch error:', err);
 }
 
-const { post } = Astro.props;
 if (!post) {
-  return Astro.redirect('/travels/blog');
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
 }
 ---
 

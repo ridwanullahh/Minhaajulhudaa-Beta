@@ -2,16 +2,18 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('masjid_books', { limit: 200 });
-    return (result.data || []).filter(doc => doc.slug).map(doc => ({ params: { slug: doc.slug }, props: { book: doc } }));
-  } catch { return []; }
+const { slug } = Astro.params;
+
+let book: any = null;
+try {
+  book = await lightbase.findOne('masjid_books', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[masjid/library/[slug].astro] fetch error:', err);
 }
 
-const { book } = Astro.props;
 if (!book) {
-  return Astro.redirect('/masjid/library');
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
 }
 ---
 

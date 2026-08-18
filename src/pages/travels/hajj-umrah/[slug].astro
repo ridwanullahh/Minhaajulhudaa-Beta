@@ -2,41 +2,18 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('travels_packages', {
-      filter: { field: 'status', op: 'eq', value: 'active' },
-      limit: 50,
-    });
-    const packages = result.data || [];
-    return packages.map(function(pkg) {
-      return {
-        params: { slug: pkg.slug },
-        props: { pkg },
-      };
-    });
-  } catch (err) {
-    console.error('[travels/hajj-umrah/[slug]] getStaticPaths error:', err);
-    return [];
-  }
-}
+const { slug } = Astro.params;
 
-const { pkg } = Astro.props;
+let pkg: any = null;
+try {
+  pkg = await lightbase.findOne('travels_packages', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[travels/hajj-umrah/[slug].astro] fetch error:', err);
+}
 
 if (!pkg) {
-  return Astro.redirect('/travels/hajj-umrah');
-}
-
-let itinerariesData: any[] = [];
-try {
-  const itineraries = await lightbase.query('travels_itineraries', {
-    filter: { field: 'packageId', op: 'eq', value: pkg.id },
-    sort: 'day:asc',
-    limit: 30,
-  });
-  itinerariesData = itineraries.data || [];
-} catch (err) {
-  console.error('[travels/hajj-umrah/[slug]] itineraries query error:', err);
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
 }
 ---
 

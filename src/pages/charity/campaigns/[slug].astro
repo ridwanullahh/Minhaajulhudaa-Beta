@@ -2,37 +2,18 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('charity_campaigns', {
-      filter: { field: 'status', op: 'eq', value: 'active' },
-      limit: 50,
-    });
-    const campaigns = result.data || [];
-    return campaigns.map((campaign) => ({
-      params: { slug: campaign.slug },
-      props: { campaign },
-    }));
-  } catch (err) {
-    console.error('[charity/campaigns/[slug]] getStaticPaths error:', err);
-    return [];
-  }
-}
+const { slug } = Astro.params;
 
-const { campaign } = Astro.props;
-if (!campaign) {
-  return Astro.redirect('/charity/campaigns');
-}
-
-let updates: any[] = [];
+let campaign: any = null;
 try {
-  const updatesResult = await lightbase.query('charity_campaign_updates', {
-    filter: { field: 'campaignId', op: 'eq', value: campaign.id },
-    limit: 5,
-  });
-  updates = updatesResult.data || [];
+  campaign = await lightbase.findOne('charity_campaigns', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
-  console.error('[charity/campaigns/[slug]] updates query error:', err);
+  console.error('[charity/campaigns/[slug].astro] fetch error:', err);
+}
+
+if (!campaign) {
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
 }
 ---
 

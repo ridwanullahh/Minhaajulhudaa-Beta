@@ -2,30 +2,19 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('travels_packages', {
-      filter: { field: 'category', op: 'eq', value: 'tour' },
-      limit: 100,
-    });
-    return (result.data || []).filter(doc => doc.slug).map(doc => ({ params: { slug: doc.slug }, props: { pkg: doc } }));
-  } catch { return []; }
-}
+const { slug } = Astro.params;
 
-const { pkg } = Astro.props;
-if (!pkg) {
-  return Astro.redirect('/travels/tours');
-}
-
-let itineraries: any[] = [];
+let pkg: any = null;
 try {
-  const itinResult = await lightbase.query('travels_itineraries', {
-    filter: { field: 'packageId', op: 'eq', value: pkg.id },
-    sort: 'day:asc',
-    limit: 30,
-  });
-  itineraries = itinResult.data || [];
-} catch {}
+  pkg = await lightbase.findOne('travels_packages', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[travels/tours/[slug].astro] fetch error:', err);
+}
+
+if (!pkg) {
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
+}
 ---
 
 <PlatformLayout title={`${pkg.title} - Minhaajulhudaa Travels`} platform="travels">

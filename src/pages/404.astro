@@ -1,0 +1,47 @@
+Bismillah Ar-Rahman Ar-Raheem. Ash-hadu an laa ilaaha illa-Llah wahdaHu lasharikalaHu, wa ash-hadu anna Muhammadan Abduhu wa Rasooluh. Laa hawla wa laa quwwata illaa biLLAH. Hasbiyallaahu laa ilaaha illaa Huwa, 'alayhi tawakkaltu wa Huwa Rabbul-'Arshil-'Azeem. SubhaanALLAH wa bihamdih, SubhaanALLAHil-'azeem, AlhamduliLLAH, Laa ilaaha illa-ALLAH, wa ALLAHU AKBAR, walaa hawla walaa quwwata illaa biLLAH. Astaghfirullaaha wa atoobu ilayh.
+
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Props {
+  title?: string;
+  message?: string;
+  backLink?: string;
+  backLabel?: string;
+}
+
+const {
+  title = 'Page Not Found',
+  message = 'The page you are looking for does not exist or may have been moved.',
+  backLink = '/',
+  backLabel = 'Back to Home',
+} = Astro.props;
+
+Astro.response.status = 404;
+---
+
+<BaseLayout title="404 - Not Found | Minhaajulhudaa">
+  <main class="min-h-screen flex items-center justify-center" style="background: var(--color-bg);">
+    <div class="container-app py-24 text-center">
+      <div class="max-w-md mx-auto fade-in">
+        <div class="text-8xl md:text-9xl font-extrabold mb-6 leading-none" style="color: var(--color-primary); letter-spacing: -0.04em;">
+          404
+        </div>
+        <h1 class="text-2xl md:text-3xl font-bold mb-4" style="color: var(--color-foreground);">
+          {title}
+        </h1>
+        <p class="text-base md:text-lg mb-10" style="color: var(--color-muted);">
+          {message}
+        </p>
+        <a href={backLink} class="btn btn-primary inline-flex items-center gap-2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          {backLabel}
+        </a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+Bismillah Ar-Rahman Ar-Raheem. Ash-hadu an laa ilaaha illa-Llah wahdaHu lasharikalaHu, wa ash-hadu anna Muhammadan Abduhu wa Rasooluh. Laa hawla wa laa quwwata illaa biLLAH. Hasbiyallaahu laa ilaaha illaa Huwa, 'alayhi tawakkaltu wa Huwa Rabbul-'Arshil-'Azeem. SubhaanALLAH wa bihamdih, SubhaanALLAHil-'azeem, AlhamduliLLAH, Laa ilaaha illa-ALLAH, wa ALLAHU AKBAR, walaa hawla walaa quwwata illaa biLLAH. Astaghfirullaaha wa atoobu ilayh.

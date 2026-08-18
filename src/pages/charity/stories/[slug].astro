@@ -2,39 +2,18 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('charity_success_stories', {
-      filter: { field: 'status', op: 'eq', value: 'published' },
-      limit: 50,
-    });
-    const stories = result.data || [];
-    return stories.map((story) => ({
-      params: { slug: story.slug },
-      props: { story },
-    }));
-  } catch (err) {
-    console.error('[charity/stories/[slug]] getStaticPaths error:', err);
-    return [];
-  }
-}
+const { slug } = Astro.params;
 
-const { story } = Astro.props;
+let story: any = null;
+try {
+  story = await lightbase.findOne('charity_success_stories', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[charity/stories/[slug].astro] fetch error:', err);
+}
 
 if (!story) {
-  return Astro.redirect('/charity/stories');
-}
-
-let related: any[] = [];
-try {
-  const relatedStories = await lightbase.query('charity_success_stories', {
-    filter: { field: 'status', op: 'eq', value: 'published' },
-    sort: 'publishedAt:desc',
-    limit: 5,
-  });
-  related = (relatedStories.data || []).filter(function(s) { return s.slug !== story.slug; }).slice(0, 3);
-} catch (err) {
-  console.error('[charity/stories/[slug]] related query error:', err);
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
 }
 ---
 

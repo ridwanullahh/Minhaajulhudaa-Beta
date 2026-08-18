@@ -2,29 +2,18 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('travels_resources', {
-      filter: { field: 'status', op: 'eq', value: 'published' },
-      limit: 50,
-    });
-    const resources = result.data || [];
-    return resources.map(function(resource) {
-      return {
-        params: { slug: resource.slug },
-        props: { resource },
-      };
-    });
-  } catch (err) {
-    console.error('[travels/guide/[slug]] getStaticPaths error:', err);
-    return [];
-  }
+const { slug } = Astro.params;
+
+let resource: any = null;
+try {
+  resource = await lightbase.findOne('travels_resources', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[travels/guide/[slug].astro] fetch error:', err);
 }
 
-const { resource } = Astro.props;
-
 if (!resource) {
-  return Astro.redirect('/travels/guide');
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
 }
 ---
 

@@ -2,27 +2,19 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('masjid_blog_posts', { limit: 200 });
-    return (result.data || []).filter(doc => doc.slug).map(doc => ({ params: { slug: doc.slug }, props: { post: doc } }));
-  } catch { return []; }
-}
+const { slug } = Astro.params;
 
-const { post } = Astro.props;
-if (!post) {
-  return Astro.redirect('/masjid/blog');
-}
-
-let relatedPosts: any[] = [];
+let post: any = null;
 try {
-  const result = await lightbase.query('masjid_blog_posts', {
-    filter: { field: 'category', op: 'eq', value: post.category },
-    sort: 'publishedAt:desc',
-    limit: 4,
-  });
-  relatedPosts = (result.data || []).filter((p: any) => p.id !== post.id).slice(0, 3);
-} catch {}
+  post = await lightbase.findOne('masjid_blog_posts', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[masjid/blog/[slug].astro] fetch error:', err);
+}
+
+if (!post) {
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
+}
 ---
 
 <PlatformLayout title={`${post.title} - Blog`} platform="masjid">
