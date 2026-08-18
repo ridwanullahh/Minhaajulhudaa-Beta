@@ -170,8 +170,8 @@ prayerTimes.forEach(pt => timesMap.set(pt.date, pt));
         });
         const json = await res.json();
         if (json.success) { window.location.reload(); }
-        else { alert(json.error || 'Failed to save'); }
-      } catch (err) { alert('Request failed'); }
+        else { showToast(json.error || 'Failed to save', 'error'); }
+      } catch (err) { showToast('Request failed', 'error'); }
     });
 
     // CSV Import
@@ -192,13 +192,13 @@ prayerTimes.forEach(pt => timesMap.set(pt.date, pt));
         });
         const json = await res.json();
         if (json.success) {
-          alert('CSV imported successfully! ' + (json.count || '') + ' rows processed.');
+          showToast('CSV imported successfully! ' + (json.count || '') + ' rows processed.', 'error');
           window.location.reload();
         } else {
-          alert(json.error || 'Import failed');
+          showToast(json.error || 'Import failed', 'error');
         }
       } catch (err) {
-        alert('Upload failed: ' + (err.message || 'Unknown error'));
+        showToast('Upload failed: ' + (err.message || 'Unknown error'), 'error');
       } finally {
         csvBtn.disabled = false;
         csvBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> CSV Import';

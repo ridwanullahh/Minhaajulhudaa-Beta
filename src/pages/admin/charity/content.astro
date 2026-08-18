@@ -132,8 +132,8 @@ const allStories = stories.data || [];
         const collection = btn.getAttribute('data-collection');
         try {
           const res = await fetch(`/api/admin/charity/content?id=${id}&collection=${collection}`, { method: 'DELETE' });
-          if (res.ok) window.location.reload(); else alert('Failed');
-        } catch { alert('Network error'); }
+          if (res.ok) window.location.reload(); else showToast('Failed', 'error');
+        } catch { showToast('Network error', 'error'); }
       });
     });
   </script>

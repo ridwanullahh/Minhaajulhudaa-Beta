@@ -23,4 +23,36 @@ const { title, description, platform } = Astro.props;
   </main>
   <Footer platform={platform} />
   <BottomNav platform={platform} currentPath={Astro.url.pathname} />
+
+  <!-- Toast Notification Container (shared with AdminLayout) -->
+  <div id="toast-container" class="fixed top-4 right-4 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+
+  <script is:inline>
+    if (!window.showToast) {
+      window.showToast = function(message, type) {
+        type = type || 'info';
+        var container = document.getElementById('toast-container');
+        if (!container) { console.error(message); return; }
+        var colors = {
+          success: { bg: 'rgb(5 179 77 / 0.95)', icon: '<polyline points="20 6 9 17 4 12"/>' },
+          error: { bg: 'rgb(220 38 38 / 0.95)', icon: '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>' },
+          info: { bg: 'rgb(242 185 28 / 0.95)', icon: '<line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/><circle cx="12" cy="12" r="10"/>' }
+        };
+        var c = colors[type] || colors.info;
+        var toast = document.createElement('div');
+        toast.className = 'pointer-events-auto rounded-lg shadow-lg px-4 py-3 flex items-center gap-3 text-sm font-medium text-white max-w-xs';
+        toast.style.background = c.bg;
+        toast.style.transition = 'opacity 0.3s, transform 0.3s';
+        toast.style.transform = 'translateX(100%)';
+        toast.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="shrink-0">' + c.icon + '</svg><span>' + message + '</span>';
+        container.appendChild(toast);
+        requestAnimationFrame(function() { toast.style.transform = 'translateX(0)'; });
+        setTimeout(function() {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateX(100%)';
+          setTimeout(function() { toast.remove(); }, 300);
+        }, 4000);
+      };
+    }
+  </script>
 </BaseLayout>

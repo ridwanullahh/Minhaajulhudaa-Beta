@@ -155,9 +155,9 @@ const typeBadge = (type: string) => {
       document.querySelectorAll('.btn-delete').forEach(btn => {
         btn.addEventListener('click', () => {
           const id = (btn as HTMLElement).dataset.id;
-          if (confirm('Delete this rule?')) {
+          showConfirm('Delete this rule?', function() {
             fetch('/api/admin/travels/content?collection=travels_pricing_rules&id=' + id, { method: 'DELETE' }).then(() => location.reload()).catch(() => {});
-          }
+          });
         });
       });
 

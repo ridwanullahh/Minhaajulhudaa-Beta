@@ -120,8 +120,8 @@ allApps.forEach((app: any) => { if (statusCounts[app.status as keyof typeof stat
             method: 'PATCH', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id, status }),
           });
-          if (res.ok) window.location.reload(); else alert('Failed to update');
-        } catch { alert('Network error'); }
+          if (res.ok) window.location.reload(); else showToast('Failed to update', 'error');
+        } catch { showToast('Network error', 'error'); }
       });
     });
 
@@ -138,7 +138,7 @@ allApps.forEach((app: any) => { if (statusCounts[app.status as keyof typeof stat
             modalContent!.innerHTML = '<pre class="text-sm overflow-x-auto" style="color: var(--color-foreground);">' + JSON.stringify(data, null, 2) + '</pre>';
             modal?.classList.remove('hidden');
           }
-        } catch { alert('Failed to load'); }
+        } catch { showToast('Failed to load', 'error'); }
       });
     });
     document.getElementById('close-modal')?.addEventListener('click', () => modal?.classList.add('hidden'));

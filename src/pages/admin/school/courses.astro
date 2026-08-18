@@ -102,8 +102,8 @@ const courses = coursesResult.data || [];
       body.isFree = !body.price || body.price === 0;
       try {
         const res = await fetch('/api/admin/school/courses', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        if (res.ok) window.location.reload(); else { const err = await res.json(); alert(err.error || 'Failed'); }
-      } catch { alert('Network error'); }
+        if (res.ok) window.location.reload(); else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }
+      } catch { showToast('Network error', 'error'); }
     });
 
     document.querySelectorAll('[data-delete-course]').forEach(btn => {
@@ -112,8 +112,8 @@ const courses = coursesResult.data || [];
         const id = btn.getAttribute('data-delete-course');
         try {
           const res = await fetch(`/api/admin/school/courses?id=${id}`, { method: 'DELETE' });
-          if (res.ok) window.location.reload(); else alert('Failed');
-        } catch { alert('Network error'); }
+          if (res.ok) window.location.reload(); else showToast('Failed', 'error');
+        } catch { showToast('Network error', 'error'); }
       });
     });
   </script>

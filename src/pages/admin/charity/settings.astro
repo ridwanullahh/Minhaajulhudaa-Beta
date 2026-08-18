@@ -107,8 +107,8 @@ const csrfToken = generateCSRFToken();
         }
         body.collection = 'charity_settings';
         const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        if (res.ok) { alert('Settings saved successfully'); } else { const err = await res.json(); alert(err.error || 'Failed'); }
-      } catch { alert('Network error'); }
+        if (res.ok) { showToast('Settings saved successfully', 'error'); } else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }
+      } catch { showToast('Network error', 'error'); }
     });
   </script>
 </AdminLayout>

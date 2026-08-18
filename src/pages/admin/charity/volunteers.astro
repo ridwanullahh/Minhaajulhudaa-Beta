@@ -92,8 +92,8 @@ const rejectedCount = allVolunteers.filter((v: any) => v.status === 'rejected').
         const id = btn.getAttribute('data-approve-vol');
         try {
           const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: 'approved' }) });
-          if (res.ok) window.location.reload(); else alert('Failed');
-        } catch { alert('Network error'); }
+          if (res.ok) window.location.reload(); else showToast('Failed', 'error');
+        } catch { showToast('Network error', 'error'); }
       });
     });
 
@@ -103,8 +103,8 @@ const rejectedCount = allVolunteers.filter((v: any) => v.status === 'rejected').
         const id = btn.getAttribute('data-reject-vol');
         try {
           const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: 'rejected' }) });
-          if (res.ok) window.location.reload(); else alert('Failed');
-        } catch { alert('Network error'); }
+          if (res.ok) window.location.reload(); else showToast('Failed', 'error');
+        } catch { showToast('Network error', 'error'); }
       });
     });
 
@@ -117,8 +117,8 @@ const rejectedCount = allVolunteers.filter((v: any) => v.status === 'rejected').
         if (role === null) return;
         try {
           const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ assignedRole: role }) });
-          if (res.ok) window.location.reload(); else alert('Failed');
-        } catch { alert('Network error'); }
+          if (res.ok) window.location.reload(); else showToast('Failed', 'error');
+        } catch { showToast('Network error', 'error'); }
       });
     });
 
@@ -127,7 +127,7 @@ const rejectedCount = allVolunteers.filter((v: any) => v.status === 'rejected').
       btn.addEventListener('click', async () => {
         if (!confirm('Delete this volunteer?')) return;
         const id = btn.getAttribute('data-delete-vol');
-        try { const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else alert('Failed'); } catch { alert('Network error'); }
+        try { const res = await fetch(`/api/admin/charity/volunteers?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
       });
     });
   </script>

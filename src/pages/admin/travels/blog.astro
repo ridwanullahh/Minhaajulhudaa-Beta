@@ -134,9 +134,9 @@ const statusBadge = (status: string) => {
       document.querySelectorAll('.btn-delete').forEach(btn => {
         btn.addEventListener('click', () => {
           const id = (btn as HTMLElement).dataset.id;
-          if (confirm('Delete this post?')) {
+          showConfirm('Delete this post?', function() {
             fetch('/api/admin/travels/blog?id=' + id, { method: 'DELETE' }).then(() => location.reload()).catch(() => {});
-          }
+          });
         });
       });
 

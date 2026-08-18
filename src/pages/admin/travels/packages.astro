@@ -183,9 +183,9 @@ const statusBadge = (status: string) => {
         btn.addEventListener('click', () => {
           const id = (btn as HTMLElement).dataset.id;
           const ep = (btn as HTMLElement).dataset.endpoint;
-          if (confirm('Delete this package?')) {
+          showConfirm('Delete this package?', function() {
             fetch(ep + '?id=' + id, { method: 'DELETE' }).then(() => location.reload()).catch(() => {});
-          }
+          });
         });
       });
 

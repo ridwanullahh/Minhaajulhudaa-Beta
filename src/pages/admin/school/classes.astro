@@ -103,8 +103,8 @@ const classes = result.data || [];
       body.active = true;
       try {
         const res = await fetch('/api/admin/school/content', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-collection': 'school_classes' }, body: JSON.stringify(body) });
-        if (res.ok) window.location.reload(); else { const err = await res.json(); alert(err.error || 'Failed'); }
-      } catch { alert('Network error'); }
+        if (res.ok) window.location.reload(); else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }
+      } catch { showToast('Network error', 'error'); }
     });
   </script>
 </AdminLayout>

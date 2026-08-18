@@ -152,7 +152,7 @@ const audios = audiosResult.data || [];
           form.duration.value = data.duration || '';
           form.description.value = data.description || '';
           modal.classList.remove('hidden');
-        } catch(e) { alert('Failed to load audio'); }
+        } catch(e) { showToast('Failed to load audio', 'error'); }
       });
     });
 
@@ -162,7 +162,7 @@ const audios = audiosResult.data || [];
         try {
           await fetch('/api/admin/masjid/audios?id=' + btn.dataset.id, { method: 'DELETE' });
           window.location.reload();
-        } catch(e) { alert('Failed to delete'); }
+        } catch(e) { showToast('Failed to delete', 'error'); }
       });
     });
 
@@ -176,8 +176,8 @@ const audios = audiosResult.data || [];
         const url = editMode ? '/api/admin/masjid/audios?id=' + data.id : '/api/admin/masjid/audios';
         const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
         const json = await res.json();
-        if (json.success) { window.location.reload(); } else { alert(json.error || 'Failed'); }
-      } catch (err) { alert('Request failed'); }
+        if (json.success) { window.location.reload(); } else { showToast(json.error || 'Failed', 'error'); }
+      } catch (err) { showToast('Request failed', 'error'); }
     });
   </script>
 </AdminLayout>

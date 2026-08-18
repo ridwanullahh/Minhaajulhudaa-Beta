@@ -59,7 +59,7 @@ import PlatformLayout from '../../../layouts/PlatformLayout.astro';
         renderCourses(data.courses);
         renderPayments(data.payments);
       } catch (err) {
-        alert('Error: ' + err.message);
+        showToast('Error: ' + err.message, 'error');
       }
     });
 
