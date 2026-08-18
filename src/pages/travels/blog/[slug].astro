@@ -2,6 +2,7 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatDate } from '../../../lib/utils';
+import { sanitizeHtml } from '../../../lib/sanitize';
 
 const { slug } = Astro.params;
 
@@ -47,7 +48,7 @@ if (!post) {
     )}
 
     <div class="prose max-w-none">
-      <Fragment set:html={post.content || ''} />
+      <Fragment set:html={sanitizeHtml(post.content || '')} />
     </div>
   </article>
 </PlatformLayout>
