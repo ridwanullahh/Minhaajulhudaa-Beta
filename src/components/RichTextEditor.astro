@@ -42,15 +42,17 @@ const {
 ---
 
 <div class="rte-wrapper" data-editor-id={id}>
-  {label && (
-    <div class="flex items-center justify-between mb-1">
+  <div class="flex items-center justify-between mb-1">
+    {label ? (
       <label class="block text-sm font-medium" for={id}>{label}{required && <span style="color: var(--color-error);"> *</span>}</label>
-      <div class="flex items-center gap-2">
-        <button type="button" class="rte-tab rte-tab-write text-xs px-2 py-1 rounded" data-target={id} style="background: var(--color-primary); color: white;">Write</button>
-        <button type="button" class="rte-tab rte-tab-preview text-xs px-2 py-1 rounded" data-target={id} style="background: var(--color-surface); color: var(--color-muted);">Preview</button>
-      </div>
+    ) : (
+      <span></span>
+    )}
+    <div class="flex items-center gap-2">
+      <button type="button" class="rte-tab rte-tab-write text-xs px-2 py-1 rounded" data-target={id} style="background: var(--color-primary); color: white;">Write</button>
+      <button type="button" class="rte-tab rte-tab-preview text-xs px-2 py-1 rounded" data-target={id} style="background: var(--color-surface); color: var(--color-muted);">Preview</button>
     </div>
-  )}
+  </div>
 
   <!-- Toolbar -->
   <div class="rte-toolbar flex flex-wrap items-center gap-1 p-2 rounded-t-lg border" style="border-color: var(--color-border); background: var(--color-surface);">
