@@ -2,6 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { generateCSRFToken } from '../../../lib/utils';
+import RichTextEditor from '../../../components/RichTextEditor.astro';
 
 const posts = await lightbase.query('school_blog_posts', {
   sort: 'publishedAt:desc',
@@ -49,7 +50,7 @@ const csrfToken = generateCSRFToken();
       </div>
       <div>
         <label class="block text-sm font-medium mb-1" for="post-content">Content</label>
-        <textarea id="post-content" name="content" class="input" rows="8"></textarea>
+        <RichTextEditor id="post-content" name="content" label="" rows={12} placeholder="Write your blog post content in Markdown..." />
       </div>
       <div class="grid md:grid-cols-3 gap-4">
         <div>

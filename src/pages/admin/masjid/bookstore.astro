@@ -1,6 +1,7 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
+import RichTextEditor from '../../../components/RichTextEditor.astro';
 
 const booksResult = await lightbase.query('masjid_books', { sort: 'title:asc', limit: 100 });
 const books = booksResult.data || [];
@@ -129,7 +130,7 @@ const books = booksResult.data || [];
           </div>
           <div>
             <label class="block text-sm font-medium mb-1">Description</label>
-            <textarea name="description" class="input" rows="3" placeholder="Brief description"></textarea>
+            <RichTextEditor name="description" id="book-description" label="" rows={5} placeholder="Book description in Markdown..." />
           </div>
           <div>
             <label class="block text-sm font-medium mb-1">Status</label>

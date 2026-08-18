@@ -1,6 +1,9 @@
 ---
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
+import { renderMarkdown } from '../../../lib/markdown';
+import ArticleMeta from '../../../components/ArticleMeta.astro';
+import { formatDate } from '../../../lib/utils';
 
 const { slug } = Astro.params;
 
@@ -30,48 +33,54 @@ try {
 } catch (err) {
   console.error('[school/news/[slug]] related query error:', err);
 }
+
+const renderedContent = renderMarkdown(post.content || '');
 ---
 
-<PlatformLayout title={`${post.title} - Minhaajulhudaa School`} platform="school">
-  <article class="container-app py-12 max-w-3xl">
+<PlatformLayout title={`${post.title} - Minhaajulhudaa School`} description={post.excerpt || post.content?.substring(0, 160)} platform="school">
+  <article class="container-app py-8 md:py-12 max-w-3xl">
     <a href="/school/news" class="text-sm font-medium mb-6 inline-flex items-center gap-1" style="color: var(--color-primary);">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Back to News
     </a>
 
-    <span class="badge badge-accent mb-4">{post.category}</span>
-    <h1 class="text-3xl md:text-4xl font-extrabold mb-4">{post.title}</h1>
+    <h1 class="text-3xl md:text-4xl font-extrabold mb-4 leading-tight">{post.title}</h1>
 
-    <div class="flex items-center gap-4 mb-8 text-sm" style="color: var(--color-muted);">
-      <span>{post.authorName}</span>
-      <span>{new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-      <span>{post.readingTimeMinutes} min read</span>
-    </div>
+    <ArticleMeta
+      title={post.title}
+      content={post.content}
+      authorName={post.authorName}
+      authorEmail={post.authorEmail}
+      publishedAt={post.publishedAt}
+      updatedAt={post.updatedAt}
+      category={post.category}
+      tags={post.tags}
+    />
 
     {post.featuredImageUrl && (
       <img src={post.featuredImageUrl} alt={post.title} class="w-full aspect-[16/9] object-cover rounded-2xl mb-8" />
     )}
 
-    <div class="prose prose-lg max-w-none">
-      {post.content.split('\n').map((para) => {
-        if (para.startsWith('## ')) {
-          return <h2 class="text-2xl font-bold mt-8 mb-4">{para.replace('## ', '')}</h2>;
-        }
-        if (para.startsWith('1. ') || para.startsWith('2. ') || para.startsWith('3. ') || para.startsWith('4. ') || para.startsWith('5. ')) {
-          return <p class="mb-2 leading-relaxed" style="color: var(--color-muted);">{para}</p>;
-        }
-        if (para.trim()) {
-          return <p class="mb-4 leading-relaxed" style="color: var(--color-muted);">{para}</p>;
-        }
-        return null;
-      })}
-    </div>
+    <div class="prose prose-lg max-w-none article-content" set:html={renderedContent} />
 
-    {post.tags && post.tags.length > 0 && (
-      <div class="flex flex-wrap gap-2 mt-8 pt-8 border-t" style="border-color: var(--color-border);">
-        {post.tags.map(tag => <span class="badge badge-primary">#{tag}</span>)}
+    <!-- Engagement Footer -->
+    <div class="mt-12 pt-8" style="border-top: 1px solid var(--color-border);">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="text-sm" style="color: var(--color-muted);">
+          Was this article helpful?
+        </div>
+        <div class="flex items-center gap-2">
+          <button class="help-btn" data-feedback="helpful" aria-label="Mark as helpful">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+            <span class="text-xs ml-1">Helpful</span>
+          </button>
+          <button class="help-btn" data-feedback="not-helpful" aria-label="Mark as not helpful">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>
+            <span class="text-xs ml-1">Not helpful</span>
+          </button>
+        </div>
       </div>
-    )}
+    </div>
   </article>
 
   {relatedData.length > 0 && (
@@ -84,11 +93,48 @@ try {
               {r.featuredImageUrl && <img src={r.featuredImageUrl} alt={r.title} class="w-full h-full object-cover" loading="lazy" />}
             </div>
             <div class="p-4">
-              <h3 class="font-semibold text-sm line-clamp-2">{r.title}</h3>
+              <span class="text-xs" style="color: var(--color-muted);">{r.category}</span>
+              <h3 class="font-semibold text-sm line-clamp-2 mt-1">{r.title}</h3>
+              <span class="text-xs mt-2 block" style="color: var(--color-muted);">{r.publishedAt ? formatDate(r.publishedAt) : ''}</span>
             </div>
           </a>
         ))}
       </div>
     </section>
   )}
+
+  <style is:global>
+    .article-content h1 { font-size: 2rem; font-weight: 700; margin: 1.5rem 0 1rem; color: var(--color-foreground); }
+    .article-content h2 { font-size: 1.5rem; font-weight: 700; margin: 1.5rem 0 0.75rem; color: var(--color-foreground); }
+    .article-content h3 { font-size: 1.25rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: var(--color-foreground); }
+    .article-content h4 { font-size: 1.125rem; font-weight: 600; margin: 1rem 0 0.5rem; color: var(--color-foreground); }
+    .article-content p { margin: 0.75rem 0; line-height: 1.8; color: var(--color-muted); }
+    .article-content ul, .article-content ol { margin: 0.75rem 0; padding-left: 1.5rem; }
+    .article-content ul { list-style: disc; }
+    .article-content ol { list-style: decimal; }
+    .article-content li { margin: 0.375rem 0; color: var(--color-muted); }
+    .article-content blockquote { border-left: 3px solid var(--color-primary); padding-left: 1rem; margin: 1rem 0; color: var(--color-muted); font-style: italic; }
+    .article-content code { background: var(--color-surface); padding: 0.125rem 0.375rem; border-radius: 3px; font-size: 0.875em; font-family: monospace; }
+    .article-content pre { background: var(--color-surface); padding: 0.75rem; border-radius: 6px; overflow-x: auto; margin: 0.75rem 0; }
+    .article-content pre code { background: none; padding: 0; }
+    .article-content table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .article-content th, .article-content td { border: 1px solid var(--color-border); padding: 0.5rem; text-align: left; }
+    .article-content th { background: var(--color-surface); font-weight: 600; }
+    .article-content hr { border: none; border-top: 1px solid var(--color-border); margin: 1.5rem 0; }
+    .article-content img { max-width: 100%; height: auto; border-radius: 6px; margin: 0.75rem 0; }
+    .article-content a { color: var(--color-primary); text-decoration: underline; }
+    .help-btn { display: inline-flex; align-items: center; padding: 0.375rem 0.75rem; border-radius: 6px; border: 1px solid var(--color-border); color: var(--color-muted); cursor: pointer; transition: all 0.15s; background: var(--color-bg); }
+    .help-btn:hover { background: rgb(5,179,77,0.1); color: var(--color-primary); border-color: var(--color-primary); }
+  </style>
+
+  <script is:inline>
+    document.querySelectorAll('.help-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var feedback = btn.dataset.feedback;
+        if (window.showToast) {
+          window.showToast(feedback === 'helpful' ? 'Jazakum Allahu Khairan for your feedback!' : 'Thank you for your feedback. We will improve.', 'success');
+        }
+      });
+    });
+  </script>
 </PlatformLayout>

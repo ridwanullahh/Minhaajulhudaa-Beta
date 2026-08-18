@@ -3,6 +3,7 @@ import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatCurrency } from '../../../lib/utils';
 import { sanitizeHtml } from '../../../lib/sanitize';
+import { renderMarkdown } from '../../../lib/markdown';
 
 const { slug } = Astro.params;
 
@@ -53,7 +54,7 @@ const inStock = stockQty === undefined || stockQty > 0;
 
         {product.description && (
           <div class="mb-6" style="color: var(--color-muted);">
-            <div set:html={sanitizeHtml(product.description)} />
+            <div set:html={renderMarkdown(product.description)} />
           </div>
         )}
 

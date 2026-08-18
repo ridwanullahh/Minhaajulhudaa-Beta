@@ -2,6 +2,7 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { sanitizeHtml } from '../../../lib/sanitize';
+import { renderMarkdown } from '../../../lib/markdown';
 
 const { slug } = Astro.params;
 
@@ -45,20 +46,20 @@ try {
         <h1 class="text-3xl md:text-4xl font-extrabold mb-6">{program.title}</h1>
 
         <div class="mb-8">
-          {program.description && <div set:html={sanitizeHtml(program.description)} />}
+          {program.description && <div set:html={renderMarkdown(program.description)} />}
         </div>
 
         {program.curriculum && (
           <div class="card p-6 mb-8">
             <h2 class="text-xl font-bold mb-4">Curriculum</h2>
-            <div set:html={sanitizeHtml(program.curriculum)} />
+            <div set:html={renderMarkdown(program.curriculum)} />
           </div>
         )}
 
         {program.outcomes && (
           <div class="card p-6 mb-8">
             <h2 class="text-xl font-bold mb-4">Learning Outcomes</h2>
-            <div set:html={sanitizeHtml(program.outcomes)} />
+            <div set:html={renderMarkdown(program.outcomes)} />
           </div>
         )}
       </div>
@@ -103,7 +104,7 @@ try {
         {program.requirements && (
           <div class="card p-6">
             <h3 class="font-bold mb-4">Requirements</h3>
-            <div set:html={sanitizeHtml(program.requirements)} />
+            <div set:html={renderMarkdown(program.requirements)} />
           </div>
         )}
 

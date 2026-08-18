@@ -1,6 +1,7 @@
 ---
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
+import { renderMarkdown } from '../../../lib/markdown';
 
 const { slug } = Astro.params;
 
@@ -84,9 +85,7 @@ try {
       {video.description && (
         <div class="mb-8">
           <h2 class="font-bold mb-3">About this video</h2>
-          <div class="text-sm leading-relaxed" style="color: var(--color-muted);">
-            {video.description.split('\n').map((para: string) => para.trim() ? <p class="mb-3">{para}</p> : null)}
-          </div>
+          <div class="text-sm leading-relaxed article-content" set:html={renderMarkdown(video.description || 'No description available.')} />
         </div>
       )}
 
