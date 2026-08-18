@@ -139,6 +139,22 @@ export function validateBody(body: Record<string, any>, schema: Schema): Validat
     }
   }
 
+  // Pass through any extra fields that aren't in the schema (for backward compat
+  // with frontend forms that send metadata like reference, status, currency, etc.)
+  // These are server-generated anyway, so we strip them to prevent client-side injection
+  // Only allow known safe extra fields
+  const safeExtraFields = ['campaignId', 'additionalTravelers', 'specialRequests', 'nationality'];
+  for (const field of safeExtraFields) {
+    if (body[field] !== undefined && cleaned[field] === undefined) {
+      const val = body[field];
+      if (typeof val === 'string' && val.length < 5000) {
+        cleaned[field] = sanitizeValue(val, true);
+      } else if (typeof val === 'number') {
+        cleaned[field] = val;
+      }
+    }
+  }
+
   if (errors.length > 0) {
     return {
       ok: false,

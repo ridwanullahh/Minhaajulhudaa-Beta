@@ -77,6 +77,8 @@ try {
             <input type="text" name="donorName" placeholder="Your name *" class="input" required />
             <input type="email" name="donorEmail" placeholder="Email *" class="input" required />
           </div>
+          <input type="hidden" name="category" value={campaign.category || 'sadaqah'} />
+          <input type="hidden" name="campaignId" value={campaign.id} />
           <button type="submit" class="btn btn-primary w-full">Donate Now</button>
         </form>
         <div id="form-message" class="hidden mt-3 p-3 rounded-lg text-sm"></div>
