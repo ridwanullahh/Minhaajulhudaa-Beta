@@ -2,6 +2,7 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatDate } from '../../../lib/utils';
+import { sanitizeHtml } from '../../../lib/sanitize';
 
 const { slug } = Astro.params;
 
@@ -69,7 +70,7 @@ try {
 
       <!-- Content -->
       <div class="prose max-w-none" style="color: var(--color-foreground); line-height: 1.8;">
-        <Fragment set:html={post.content || ''} />
+        <Fragment set:html={sanitizeHtml(post.content || '')} />
       </div>
 
       <!-- Tags -->

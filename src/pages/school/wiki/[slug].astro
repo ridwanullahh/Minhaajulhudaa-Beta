@@ -1,6 +1,7 @@
 ---
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
+import { sanitizeHtml } from '../../../lib/sanitize';
 
 const { slug } = Astro.params;
 
@@ -55,7 +56,7 @@ try {
 
       <div class="prose max-w-none" style="color: var(--color-text);">
         {article.content ? (
-          <div set:html={article.content} />
+          <div set:html={sanitizeHtml(article.content)} />
         ) : (
           <p style="color: var(--color-muted);">Article content coming soon, in shaa ALLAH.</p>
         )}

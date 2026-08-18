@@ -1,6 +1,7 @@
 ---
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
+import { sanitizeHtml } from '../../../lib/sanitize';
 
 const { slug } = Astro.params;
 
@@ -81,7 +82,7 @@ try {
           </div>
         )}
 
-        <Fragment set:html={course.content || ''} />
+        <Fragment set:html={sanitizeHtml(course.content || '')} />
       </div>
 
       <!-- Sidebar -->

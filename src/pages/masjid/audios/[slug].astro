@@ -1,6 +1,7 @@
 ---
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
+import { sanitizeHtml } from '../../../lib/sanitize';
 
 const { slug } = Astro.params;
 
@@ -86,7 +87,7 @@ try {
           <div class="card p-6">
             <h2 class="font-bold mb-3">Transcript</h2>
             <div class="text-sm leading-relaxed" style="color: var(--color-muted);">
-              <div set:html={audio.transcript} />
+              <div set:html={sanitizeHtml(audio.transcript)} />
             </div>
           </div>
         )}

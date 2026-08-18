@@ -1,6 +1,7 @@
 ---
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
+import { sanitizeHtml } from '../../../lib/sanitize';
 
 const { slug } = Astro.params;
 
@@ -43,7 +44,7 @@ if (!book) {
         {book.author && <p class="text-lg mb-6" style="color: var(--color-muted);">by {book.author}</p>}
 
         {book.description && (
-          <div class="mb-8" set:html={book.description} />
+          <div class="mb-8" set:html={sanitizeHtml(book.description)} />
         )}
 
         <dl class="space-y-3 text-sm mb-8">

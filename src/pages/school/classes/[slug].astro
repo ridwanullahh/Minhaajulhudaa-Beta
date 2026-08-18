@@ -1,6 +1,7 @@
 ---
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
+import { sanitizeHtml } from '../../../lib/sanitize';
 
 const { slug } = Astro.params;
 
@@ -48,14 +49,14 @@ try {
         {cls.description && (
           <div class="card p-6 mb-6">
             <h2 class="text-xl font-bold mb-4">About This Class</h2>
-            <div set:html={cls.description} />
+            <div set:html={sanitizeHtml(cls.description)} />
           </div>
         )}
 
         {cls.curriculum && (
           <div class="card p-6 mb-6">
             <h2 class="text-xl font-bold mb-4">Curriculum</h2>
-            <div set:html={cls.curriculum} />
+            <div set:html={sanitizeHtml(cls.curriculum)} />
           </div>
         )}
       </div>
