@@ -1,0 +1,24 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E9FBF1"/>
+      <stop offset="100%" style="stop-color:#d4f5e3"/>
+    </linearGradient>
+    <pattern id="quran" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="#05B34D" stroke-width="1.5" opacity="0.5">
+        <path d="M50 10 L70 30 L70 70 L50 90 L30 70 L30 30 Z"/>
+        <path d="M50 25 L62 37 L62 63 L50 75 L38 63 L38 37 Z"/>
+        <circle cx="50" cy="50" r="8" fill="#F2B91C" opacity="0.6"/>
+        <path d="M0 50 L25 25 M100 50 L75 25 M0 50 L25 75 M100 50 L75 75"/>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#quran)"/>
+  <g transform="translate(400,300)" opacity="0.9">
+    <circle r="80" fill="#05B34D" opacity="0.1"/>
+    <circle r="60" fill="none" stroke="#05B34D" stroke-width="2"/>
+    <path d="M0 -45 L13 -14 L47 -14 L19 7 L30 41 L0 20 L-30 41 L-19 7 L-47 -14 L-13 -14 Z" fill="#F2B91C" opacity="0.8"/>
+    <path d="M0 -30 L9 -9 L31 -9 L13 5 L20 27 L0 13 L-20 27 L-13 5 L-31 -9 L-9 -9 Z" fill="#05B34D"/>
+  </g>
+</svg>
