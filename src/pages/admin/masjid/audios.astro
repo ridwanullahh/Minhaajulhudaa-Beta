@@ -158,11 +158,11 @@ const audios = audiosResult.data || [];
 
     document.querySelectorAll('.btn-delete-audio').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this audio?')) return;
-        try {
-          await fetch('/api/admin/masjid/audios?id=' + btn.dataset.id, { method: 'DELETE' });
-          window.location.reload();
-        } catch(e) { showToast('Failed to delete', 'error'); }
+        showConfirm('Delete this audio?', async function() {        try {
+            await fetch('/api/admin/masjid/audios?id=' + btn.dataset.id, { method: 'DELETE' });
+            window.location.reload();
+          } catch(e) { showToast('Failed to delete', 'error'); }
+        });
       });
     });
 

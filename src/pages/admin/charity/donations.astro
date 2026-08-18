@@ -148,9 +148,9 @@ const totalAmount = allDonations.reduce((sum: number, d: any) => sum + (d.amount
 
     document.querySelectorAll('[data-delete-donation]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this donation record?')) return;
-        const id = btn.getAttribute('data-delete-donation');
-        try { const res = await fetch(`/api/admin/charity/donations?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this donation record?', async function() {        const id = btn.getAttribute('data-delete-donation');
+          try { const res = await fetch(`/api/admin/charity/donations?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        });
       });
     });
 

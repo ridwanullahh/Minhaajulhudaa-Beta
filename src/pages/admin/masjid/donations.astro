@@ -228,11 +228,11 @@ const totalAgg = await lightbase.aggregate('masjid_donations', {
 
     document.querySelectorAll('.btn-delete-campaign').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this campaign?')) return;
-        try {
-          await fetch('/api/admin/masjid/donations?id=' + btn.dataset.id, { method: 'DELETE' });
-          window.location.reload();
-        } catch(e) { showToast('Failed', 'error'); }
+        showConfirm('Delete this campaign?', async function() {        try {
+            await fetch('/api/admin/masjid/donations?id=' + btn.dataset.id, { method: 'DELETE' });
+            window.location.reload();
+          } catch(e) { showToast('Failed', 'error'); }
+        });
       });
     });
 

@@ -100,12 +100,12 @@ const students = result.data || [];
 
     document.querySelectorAll('[data-delete-student]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this student record?')) return;
-        const id = btn.getAttribute('data-delete-student');
-        try {
-          const res = await fetch(`/api/admin/school/students?id=${id}`, { method: 'DELETE' });
-          if (res.ok) window.location.reload(); else showToast('Failed to delete', 'error');
-        } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this student record?', async function() {        const id = btn.getAttribute('data-delete-student');
+          try {
+            const res = await fetch(`/api/admin/school/students?id=${id}`, { method: 'DELETE' });
+            if (res.ok) window.location.reload(); else showToast('Failed to delete', 'error');
+          } catch { showToast('Network error', 'error'); }
+        });
       });
     });
   </script>

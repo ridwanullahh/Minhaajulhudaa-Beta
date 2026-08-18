@@ -174,11 +174,11 @@ const streams = streamsResult.data || [];
 
     document.querySelectorAll('.btn-delete-stream').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this stream?')) return;
-        try {
-          await fetch('/api/admin/masjid/live-streams?id=' + btn.dataset.id, { method: 'DELETE' });
-          window.location.reload();
-        } catch(e) { showToast('Failed to delete', 'error'); }
+        showConfirm('Delete this stream?', async function() {        try {
+            await fetch('/api/admin/masjid/live-streams?id=' + btn.dataset.id, { method: 'DELETE' });
+            window.location.reload();
+          } catch(e) { showToast('Failed to delete', 'error'); }
+        });
       });
     });
 

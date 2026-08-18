@@ -156,9 +156,9 @@ const csrfToken = generateCSRFToken();
     // Delete
     document.querySelectorAll('[data-delete-product]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this product?')) return;
-        const id = btn.getAttribute('data-delete-product');
-        try { const res = await fetch(`/api/admin/charity/shop?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this product?', async function() {        const id = btn.getAttribute('data-delete-product');
+          try { const res = await fetch(`/api/admin/charity/shop?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        });
       });
     });
   </script>

@@ -108,12 +108,12 @@ const courses = coursesResult.data || [];
 
     document.querySelectorAll('[data-delete-course]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this course?')) return;
-        const id = btn.getAttribute('data-delete-course');
-        try {
-          const res = await fetch(`/api/admin/school/courses?id=${id}`, { method: 'DELETE' });
-          if (res.ok) window.location.reload(); else showToast('Failed', 'error');
-        } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this course?', async function() {        const id = btn.getAttribute('data-delete-course');
+          try {
+            const res = await fetch(`/api/admin/school/courses?id=${id}`, { method: 'DELETE' });
+            if (res.ok) window.location.reload(); else showToast('Failed', 'error');
+          } catch { showToast('Network error', 'error'); }
+        });
       });
     });
   </script>

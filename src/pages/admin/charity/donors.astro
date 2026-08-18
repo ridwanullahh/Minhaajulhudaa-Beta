@@ -164,9 +164,9 @@ const csrfToken = generateCSRFToken();
     // Delete
     document.querySelectorAll('[data-delete-donor]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this donor?')) return;
-        const id = btn.getAttribute('data-delete-donor');
-        try { const res = await fetch(`/api/admin/charity/donors?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this donor?', async function() {        const id = btn.getAttribute('data-delete-donor');
+          try { const res = await fetch(`/api/admin/charity/donors?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        });
       });
     });
   </script>

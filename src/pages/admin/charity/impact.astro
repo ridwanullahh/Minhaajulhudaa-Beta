@@ -177,9 +177,9 @@ const totalValue = allMetrics.reduce((sum: number, m: any) => sum + (m.value || 
     // Delete
     document.querySelectorAll('[data-delete-metric]').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this metric?')) return;
-        const id = btn.getAttribute('data-delete-metric');
-        try { const res = await fetch(`/api/admin/charity/impact?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        showConfirm('Delete this metric?', async function() {        const id = btn.getAttribute('data-delete-metric');
+          try { const res = await fetch(`/api/admin/charity/impact?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
+        });
       });
     });
   </script>

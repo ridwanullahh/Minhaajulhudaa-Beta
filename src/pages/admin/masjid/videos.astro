@@ -177,11 +177,11 @@ const videos = videosResult.data || [];
 
     document.querySelectorAll('.btn-delete-video').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this video?')) return;
-        try {
-          await fetch('/api/admin/masjid/videos?id=' + btn.dataset.id, { method: 'DELETE' });
-          window.location.reload();
-        } catch(e) { showToast('Failed to delete', 'error'); }
+        showConfirm('Delete this video?', async function() {        try {
+            await fetch('/api/admin/masjid/videos?id=' + btn.dataset.id, { method: 'DELETE' });
+            window.location.reload();
+          } catch(e) { showToast('Failed to delete', 'error'); }
+        });
       });
     });
 

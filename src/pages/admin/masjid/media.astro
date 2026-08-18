@@ -131,11 +131,11 @@ const albums = [...new Set(gallery.map(g => g.album).filter(Boolean))];
 
     document.querySelectorAll('.btn-delete-media').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Delete this media?')) return;
-        try {
-          await fetch('/api/admin/masjid/content?collection=masjid_gallery&id=' + btn.dataset.id, { method: 'DELETE' });
-          window.location.reload();
-        } catch(e) { showToast('Failed', 'error'); }
+        showConfirm('Delete this media?', async function() {        try {
+            await fetch('/api/admin/masjid/content?collection=masjid_gallery&id=' + btn.dataset.id, { method: 'DELETE' });
+            window.location.reload();
+          } catch(e) { showToast('Failed', 'error'); }
+        });
       });
     });
 
