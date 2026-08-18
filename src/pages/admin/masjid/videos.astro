@@ -171,7 +171,7 @@ const videos = videosResult.data || [];
           form.description.value = data.description || '';
           form.isPublished.checked = !!data.isPublished;
           modal.classList.remove('hidden');
-        } catch(e) { alert('Failed to load video'); }
+        } catch(e) { showToast('Failed to load video', 'error'); }
       });
     });
 
@@ -181,7 +181,7 @@ const videos = videosResult.data || [];
         try {
           await fetch('/api/admin/masjid/videos?id=' + btn.dataset.id, { method: 'DELETE' });
           window.location.reload();
-        } catch(e) { alert('Failed to delete'); }
+        } catch(e) { showToast('Failed to delete', 'error'); }
       });
     });
 
@@ -195,8 +195,8 @@ const videos = videosResult.data || [];
         const url = editMode ? '/api/admin/masjid/videos?id=' + data.id : '/api/admin/masjid/videos';
         const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
         const json = await res.json();
-        if (json.success) { window.location.reload(); } else { alert(json.error || 'Failed'); }
-      } catch (err) { alert('Request failed'); }
+        if (json.success) { window.location.reload(); } else { showToast(json.error || 'Failed', 'error'); }
+      } catch (err) { showToast('Request failed', 'error'); }
     });
   </script>
 </AdminLayout>

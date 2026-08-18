@@ -114,9 +114,9 @@ const allPages = pages.data || [];
       document.querySelectorAll('.btn-delete').forEach(btn => {
         btn.addEventListener('click', () => {
           const id = (btn as HTMLElement).dataset.id;
-          if (confirm('Delete this page?')) {
+          showConfirm('Delete this page?', function() {
             fetch('/api/admin/travels/content?id=' + id, { method: 'DELETE' }).then(() => location.reload()).catch(() => {});
-          }
+          });
         });
       });
 

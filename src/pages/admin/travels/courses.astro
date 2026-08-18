@@ -140,9 +140,9 @@ const statusBadge = (status: string) => {
       document.querySelectorAll('.btn-delete').forEach(btn => {
         btn.addEventListener('click', () => {
           const id = (btn as HTMLElement).dataset.id;
-          if (confirm('Delete this course?')) {
+          showConfirm('Delete this course?', function() {
             fetch('/api/admin/travels/courses?id=' + id, { method: 'DELETE' }).then(() => location.reload()).catch(() => {});
-          }
+          });
         });
       });
 

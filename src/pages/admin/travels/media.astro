@@ -99,9 +99,9 @@ const categories = [...new Set(allMedia.map((m: any) => m.category).filter(Boole
     document.querySelectorAll('.btn-delete').forEach(btn => {
       btn.addEventListener('click', () => {
         const id = (btn as HTMLElement).dataset.id;
-        if (confirm('Delete this media item?')) {
+        showConfirm('Delete this media item?', function() {
           fetch('/api/admin/travels/content?collection=travels_gallery&id=' + id, { method: 'DELETE' }).then(() => location.reload()).catch(() => {});
-        }
+        });
       });
     });
 

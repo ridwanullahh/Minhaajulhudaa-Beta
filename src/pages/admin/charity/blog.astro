@@ -159,8 +159,8 @@ const csrfToken = generateCSRFToken();
         const url = editId ? `/api/admin/charity/blog?id=${editId}` : '/api/admin/charity/blog';
         const method = editId ? 'PATCH' : 'POST';
         const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        if (res.ok) window.location.reload(); else { const err = await res.json(); alert(err.error || 'Failed'); }
-      } catch { alert('Network error'); }
+        if (res.ok) window.location.reload(); else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }
+      } catch { showToast('Network error', 'error'); }
     });
 
     // Delete
@@ -168,7 +168,7 @@ const csrfToken = generateCSRFToken();
       btn.addEventListener('click', async () => {
         if (!confirm('Delete this post?')) return;
         const id = btn.getAttribute('data-delete-post');
-        try { const res = await fetch(`/api/admin/charity/blog?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else alert('Failed'); } catch { alert('Network error'); }
+        try { const res = await fetch(`/api/admin/charity/blog?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
       });
     });
   </script>

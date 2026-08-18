@@ -143,8 +143,8 @@ const courseMap = new Map<string, string>((courses as any[]).map((c: any) => [c.
       });
       try {
         const res = await fetch('/api/admin/school/quizzes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        if (res.ok) window.location.reload(); else { const err = await res.json(); alert(err.error || 'Failed'); }
-      } catch { alert('Network error'); }
+        if (res.ok) window.location.reload(); else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }
+      } catch { showToast('Network error', 'error'); }
     });
 
     document.querySelectorAll('[data-delete-quiz]').forEach(btn => {
@@ -153,8 +153,8 @@ const courseMap = new Map<string, string>((courses as any[]).map((c: any) => [c.
         const id = btn.getAttribute('data-delete-quiz');
         try {
           const res = await fetch(`/api/admin/school/quizzes?id=${id}`, { method: 'DELETE' });
-          if (res.ok) window.location.reload(); else alert('Failed');
-        } catch { alert('Network error'); }
+          if (res.ok) window.location.reload(); else showToast('Failed', 'error');
+        } catch { showToast('Network error', 'error'); }
       });
     });
 
@@ -194,8 +194,8 @@ const courseMap = new Map<string, string>((courses as any[]).map((c: any) => [c.
       const id = (document.getElementById('ed-id') as HTMLInputElement).value;
       try {
         const res = await fetch(`/api/admin/school/quizzes?id=${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        if (res.ok) window.location.reload(); else { const err = await res.json(); alert(err.error || 'Failed'); }
-      } catch { alert('Network error'); }
+        if (res.ok) window.location.reload(); else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }
+      } catch { showToast('Network error', 'error'); }
     });
   </script>
 </AdminLayout>

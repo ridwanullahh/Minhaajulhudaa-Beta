@@ -56,8 +56,8 @@ const settings = (result.data || [{}])[0] || {};
       fd.forEach((v, k) => { body[k] = v as string; });
       try {
         const res = await fetch('/api/admin/school/content', { method: 'PUT', headers: { 'Content-Type': 'application/json', 'x-collection': 'school_settings' }, body: JSON.stringify(body) });
-        if (res.ok) alert('Settings saved.'); else { const err = await res.json(); alert(err.error || 'Failed'); }
-      } catch { alert('Network error'); }
+        if (res.ok) showToast('Settings saved.', 'error'); else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }
+      } catch { showToast('Network error', 'error'); }
     });
   </script>
 </AdminLayout>

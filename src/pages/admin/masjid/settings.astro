@@ -84,7 +84,7 @@ try {
         <h3 class="font-bold mb-4">Danger Zone</h3>
         <p class="text-sm mb-4" style="color: var(--color-muted);">These actions are irreversible.</p>
         <div class="space-y-2">
-          <button class="btn btn-ghost text-xs w-full" style="color: #DC2626; border-color: #DC2626;" onclick="if(confirm('Clear all announcements?')){fetch('/api/admin/masjid/content?collection=masjid_announcements', {method:'DELETE',headers:{'x-collection':'masjid_announcements'}}).then(()=>location.reload())}">Clear All Announcements</button>
+          <button class="btn btn-ghost text-xs w-full" style="color: #DC2626; border-color: #DC2626;" onclick="showConfirm('Clear all announcements?', function() {fetch('/api/admin/masjid/content?collection=masjid_announcements', {method:'DELETE',headers:{'x-collection':'masjid_announcements'}}).then(()=>location.reload())});">Clear All Announcements</button>
         </div>
       </div>
     </div>
@@ -102,8 +102,8 @@ try {
           body: JSON.stringify(data),
         });
         const json = await res.json();
-        if (json.success) { alert('Saved'); window.location.reload(); } else { alert(json.error || 'Failed'); }
-      } catch (err) { alert('Request failed'); }
+        if (json.success) { showToast('Saved', 'error'); window.location.reload(); } else { showToast(json.error || 'Failed', 'error'); }
+      } catch (err) { showToast('Request failed', 'error'); }
     });
 
     document.getElementById('social-form')?.addEventListener('submit', async (e) => {
@@ -119,8 +119,8 @@ try {
           body: JSON.stringify({ ...existingData, ...data }),
         });
         const json = await res.json();
-        if (json.success) { alert('Saved'); window.location.reload(); } else { alert(json.error || 'Failed'); }
-      } catch (err) { alert('Request failed'); }
+        if (json.success) { showToast('Saved', 'error'); window.location.reload(); } else { showToast(json.error || 'Failed', 'error'); }
+      } catch (err) { showToast('Request failed', 'error'); }
     });
   </script>
 </AdminLayout>

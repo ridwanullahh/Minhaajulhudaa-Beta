@@ -115,8 +115,8 @@ try {
           body: JSON.stringify(data),
         });
         const json = await res.json();
-        if (json.success) { alert('Saved'); window.location.reload(); } else { alert(json.error || 'Failed'); }
-      } catch (err) { alert('Request failed'); }
+        if (json.success) { showToast('Saved', 'error'); window.location.reload(); } else { showToast(json.error || 'Failed', 'error'); }
+      } catch (err) { showToast('Request failed', 'error'); }
     });
   </script>
 </AdminLayout>

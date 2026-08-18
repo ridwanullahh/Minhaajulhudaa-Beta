@@ -140,8 +140,8 @@ const csrfToken = generateCSRFToken();
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ collection: 'charity_beneficiaries', ...body }),
         });
-        if (res.ok) window.location.reload(); else alert('Failed');
-      } catch { alert('Network error'); }
+        if (res.ok) window.location.reload(); else showToast('Failed', 'error');
+      } catch { showToast('Network error', 'error'); }
     });
 
     document.querySelectorAll('[data-verify-ben]').forEach(btn => {
@@ -153,8 +153,8 @@ const csrfToken = generateCSRFToken();
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ collection: 'charity_beneficiaries', verificationStatus: 'verified' }),
           });
-          if (res.ok) window.location.reload(); else alert('Failed');
-        } catch { alert('Network error'); }
+          if (res.ok) window.location.reload(); else showToast('Failed', 'error');
+        } catch { showToast('Network error', 'error'); }
       });
     });
 
@@ -164,8 +164,8 @@ const csrfToken = generateCSRFToken();
         const id = btn.getAttribute('data-delete-ben');
         try {
           const res = await fetch(`/api/admin/charity/volunteers?id=${id}&collection=charity_beneficiaries`, { method: 'DELETE' });
-          if (res.ok) window.location.reload(); else alert('Failed');
-        } catch { alert('Network error'); }
+          if (res.ok) window.location.reload(); else showToast('Failed', 'error');
+        } catch { showToast('Network error', 'error'); }
       });
     });
   </script>

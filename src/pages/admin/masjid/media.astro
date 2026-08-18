@@ -135,7 +135,7 @@ const albums = [...new Set(gallery.map(g => g.album).filter(Boolean))];
         try {
           await fetch('/api/admin/masjid/content?collection=masjid_gallery&id=' + btn.dataset.id, { method: 'DELETE' });
           window.location.reload();
-        } catch(e) { alert('Failed'); }
+        } catch(e) { showToast('Failed', 'error'); }
       });
     });
 
@@ -150,8 +150,8 @@ const albums = [...new Set(gallery.map(g => g.album).filter(Boolean))];
           body: JSON.stringify(data),
         });
         const json = await res.json();
-        if (json.success) { window.location.reload(); } else { alert(json.error || 'Failed'); }
-      } catch (err) { alert('Request failed'); }
+        if (json.success) { window.location.reload(); } else { showToast(json.error || 'Failed', 'error'); }
+      } catch (err) { showToast('Request failed', 'error'); }
     });
   </script>
 </AdminLayout>

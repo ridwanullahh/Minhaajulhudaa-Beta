@@ -166,12 +166,12 @@ const totalValue = allMetrics.reduce((sum: number, m: any) => sum + (m.value || 
       try {
         if (editId) {
           const res = await fetch(`/api/admin/charity/impact?id=${editId}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-          if (res.ok) window.location.reload(); else alert('Failed');
+          if (res.ok) window.location.reload(); else showToast('Failed', 'error');
         } else {
           const res = await fetch('/api/admin/charity/impact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-          if (res.ok) window.location.reload(); else { const err = await res.json(); alert(err.error || 'Failed'); }
+          if (res.ok) window.location.reload(); else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }
         }
-      } catch { alert('Network error'); }
+      } catch { showToast('Network error', 'error'); }
     });
 
     // Delete
@@ -179,7 +179,7 @@ const totalValue = allMetrics.reduce((sum: number, m: any) => sum + (m.value || 
       btn.addEventListener('click', async () => {
         if (!confirm('Delete this metric?')) return;
         const id = btn.getAttribute('data-delete-metric');
-        try { const res = await fetch(`/api/admin/charity/impact?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else alert('Failed'); } catch { alert('Network error'); }
+        try { const res = await fetch(`/api/admin/charity/impact?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
       });
     });
   </script>
