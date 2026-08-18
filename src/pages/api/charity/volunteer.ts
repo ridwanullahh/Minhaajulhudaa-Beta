@@ -1,28 +1,30 @@
 import type { APIRoute } from 'astro';
 import { lightbase } from '../../../lib/lightbase';
+import { parseAndValidate, jsonResponse, errorResponse } from '../../../lib/validate';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const body = await request.json();
-    const required = ['name', 'email', 'phone'];
-    for (const field of required) {
-      if (!body[field]) {
-        return new Response(JSON.stringify({ error: `Missing required field: ${field}` }), {
-          status: 400, headers: { 'Content-Type': 'application/json' },
-        });
-      }
-    }
+    const result = await parseAndValidate(request, {
+      name: { type: 'string', required: true, maxLength: 200 },
+      email: { type: 'email', required: true, maxLength: 200 },
+      phone: { type: 'phone', required: true },
+      role: { type: 'string', required: false, maxLength: 100 },
+      skills: { type: 'array', required: false },
+      availability: { type: 'string', required: false, maxLength: 500 },
+      motivation: { type: 'string', required: false, maxLength: 2000 },
+    });
+
+    if (!result.ok) return result.response!;
+    const body = result.data!;
+
     body.status = 'pending';
-    body.joinedAt = body.joinedAt || new Date().toISOString();
+    body.joinedAt = new Date().toISOString();
     body.hoursLogged = 0;
     if (!body.skills) body.skills = [];
-    const result = await lightbase.insert('charity_volunteers', body);
-    return new Response(JSON.stringify({ success: true, document: result.document }), {
-      status: 201, headers: { 'Content-Type': 'application/json' },
-    });
-  } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), {
-      status: 500, headers: { 'Content-Type': 'application/json' },
-    });
+
+    const insertResult = await lightbase.insert('charity_volunteers', body);
+    return jsonResponse({ success: true, document: insertResult.document }, 201);
+  } catch (err: any) {
+    return errorResponse(err.message || 'Internal server error', 500);
   }
 };

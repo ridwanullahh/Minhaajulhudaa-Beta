@@ -1,35 +1,26 @@
 import type { APIRoute } from 'astro';
 import { lightbase } from '../../lib/lightbase';
 import { sendPlatformEmail, isConfigured as emailConfigured } from '../../lib/email';
+import { parseAndValidate, jsonResponse, errorResponse } from '../../lib/validate';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const body = await request.json();
+    const result = await parseAndValidate(request, {
+      platform: { type: 'string', required: true, enum: ['school', 'masjid', 'charity', 'travels'] },
+      name: { type: 'string', required: true, maxLength: 100 },
+      email: { type: 'email', required: true, maxLength: 200 },
+      phone: { type: 'phone', required: false, maxLength: 20 },
+      subject: { type: 'string', required: true, maxLength: 200 },
+      message: { type: 'string', required: true, maxLength: 5000 },
+    });
 
-    // Validate required fields
-    const required = ['platform', 'name', 'email', 'subject', 'message'];
-    for (const field of required) {
-      if (!body[field]) {
-        return new Response(JSON.stringify({ error: `Missing required field: ${field}` }), {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        });
-      }
-    }
-
-    // Validate platform
-    const validPlatforms = ['school', 'masjid', 'charity', 'travels'];
-    if (!validPlatforms.includes(body.platform)) {
-      return new Response(JSON.stringify({ error: 'Invalid platform' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
+    if (!result.ok) return result.response!;
+    const body = result.data!;
 
     body.status = 'new';
-    body.createdAt = body.createdAt || new Date().toISOString();
+    body.createdAt = new Date().toISOString();
 
-    const result = await lightbase.insert('contact_submissions', body);
+    const insertResult = await lightbase.insert('contact_submissions', body);
 
     // Send confirmation email to the user
     if (emailConfigured()) {
@@ -45,14 +36,8 @@ export const POST: APIRoute = async ({ request }) => {
       } catch { /* email failure non-critical */ }
     }
 
-    return new Response(JSON.stringify({ success: true, document: result.document }), {
-      status: 201,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return jsonResponse({ success: true, document: insertResult.document }, 201);
   } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return errorResponse(err.message || 'Internal server error', 500);
   }
 };
