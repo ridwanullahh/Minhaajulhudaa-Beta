@@ -78,11 +78,13 @@ export function getSessionCookieValue(request: Request): Session | null {
 
 export function createSessionCookie(session: Session): string {
   const value = serializeSession(session);
-  return `${SESSION_COOKIE_NAME}=${value}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${SESSION_MAX_AGE}`;
+  const isHttps = (import.meta.env.SITE_URL || process.env.SITE_URL || '').startsWith('https://');
+  return `${SESSION_COOKIE_NAME}=${value}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${SESSION_MAX_AGE}${isHttps ? '; Secure' : ''}`;
 }
 
 export function createLogoutCookie(): string {
-  return `${SESSION_COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0`;
+  const isHttps = (import.meta.env.SITE_URL || process.env.SITE_URL || '').startsWith('https://');
+  return `${SESSION_COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0${isHttps ? '; Secure' : ''}`;
 }
 
 export function parseCookies(cookieHeader: string): Record<string, string> {
@@ -164,13 +166,16 @@ function getAllEnvAdmins(): EnvAdmin[] {
 export async function authenticateAdmin(email: string, password: string, platform?: string): Promise<AdminUser | null> {
   // 1. Check env-based admins first
   const envAdmins = getAllEnvAdmins();
+  // Use constant-time comparison to prevent timing attacks
   const envAdmin = envAdmins.find(a =>
     a.email.toLowerCase() === email.toLowerCase() &&
-    a.password === password &&
     (a.role === 'super_admin' || !platform || a.platform === platform)
   );
 
   if (envAdmin) {
+    // Timing-safe password comparison
+    const isPasswordValid = safeEqual(aToBuf(envAdmin.password), aToBuf(password));
+    if (!isPasswordValid) return null;
     const platforms = envAdmin.role === 'super_admin'
       ? ['school', 'masjid', 'charity', 'travels']
       : [envAdmin.platform];
@@ -189,7 +194,7 @@ export async function authenticateAdmin(email: string, password: string, platfor
   try {
     const admin = await lightbase.findOne('platform_admins', { field: 'email', op: 'eq', value: email });
     if (!admin || !admin.isActive) return null;
-    // Simple password check for DB admins (bcrypt)
+    // bcrypt comparison is already timing-safe
     const bcrypt = await import('bcryptjs');
     const isValid = bcrypt.compareSync(password, admin.passwordHash);
     if (!isValid) return null;
@@ -205,6 +210,21 @@ export async function authenticateAdmin(email: string, password: string, platfor
   } catch {
     return null;
   }
+}
+
+// Convert string to Uint8Array for timing-safe comparison
+function aToBuf(s: string): Uint8Array {
+  return new TextEncoder().encode(s);
+}
+
+// Constant-time string comparison (length-safe)
+function safeEqual(a: Uint8Array, b: Uint8Array): boolean {
+  if (a.length !== b.length) {
+    // Still do a comparison to avoid leaking length info via timing
+    timingSafeEqual(a, a);
+    return false;
+  }
+  return timingSafeEqual(a, b);
 }
 
 export function requireAuth(session: Session | null): Session {

@@ -70,6 +70,26 @@ export const onRequest = defineMiddleware(async (context, next) => {
     response.headers.set('X-XSS-Protection', '1; mode=block');
     response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
     response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+    // Content Security Policy - restricts resource loading to prevent XSS, data injection, etc.
+    // 'unsafe-inline' needed for Astro's is:inline scripts and styles
+    const isDev = import.meta.env.DEV;
+    const csp = [
+      "default-src 'self'",
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' https://fonts.gstatic.com",
+      "img-src 'self' data: https:",
+      "media-src 'self' https:",
+      "connect-src 'self'",
+      "frame-ancestors 'self'",
+      "base-uri 'self'",
+      "form-action 'self'",
+    ].join('; ');
+    response.headers.set('Content-Security-Policy', csp);
+    // HSTS - enforce HTTPS in production (1 year, include subdomains, preload-ready)
+    if (!isDev) {
+      response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+    }
   }
 
   return response;
