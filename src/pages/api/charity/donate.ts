@@ -1,31 +1,25 @@
 import type { APIRoute } from 'astro';
 import { lightbase } from '../../../lib/lightbase';
+import { parseAndValidate, jsonResponse, errorResponse } from '../../../lib/validate';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const body = await request.json();
+    const result = await parseAndValidate(request, {
+      donorName: { type: 'string', required: true, maxLength: 200 },
+      donorEmail: { type: 'email', required: true, maxLength: 200 },
+      amount: { type: 'number', required: true, min: 100 },
+      category: { type: 'string', required: true },
+      campaignId: { type: 'string', required: false, maxLength: 100 },
+      method: { type: 'string', required: false, enum: ['card', 'bank_transfer', 'cash', 'mobile_money', 'ussd'] },
+      isAnonymous: { type: 'boolean', required: false },
+    });
 
-    const required = ['donorName', 'donorEmail', 'amount', 'category'];
-    for (const field of required) {
-      if (!body[field]) {
-        return new Response(JSON.stringify({ error: `Missing required field: ${field}` }), {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
-        });
-      }
-    }
+    if (!result.ok) return result.response!;
+    const body = result.data!;
 
-    const amount = parseFloat(body.amount);
-    if (isNaN(amount) || amount < 100) {
-      return new Response(JSON.stringify({ error: 'Amount must be at least ₦100' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
-
+    // Map campaign categories to donation categories
     const validCategories = ['zakaat', 'sadaqah', 'waqf', 'emergency', 'general'];
     if (!validCategories.includes(body.category)) {
-      // Map campaign categories to donation categories
       const categoryMap: Record<string, string> = {
         water: 'sadaqah', food: 'sadaqah', orphans: 'sadaqah', education: 'sadaqah',
         medical: 'emergency', shelter: 'emergency',
@@ -33,39 +27,32 @@ export const POST: APIRoute = async ({ request }) => {
       body.category = categoryMap[body.category] || 'general';
     }
 
-    if (!body.reference) {
-      body.reference = 'CHR-DON-' + Date.now().toString(36).toUpperCase();
-    }
+    body.reference = 'CHR-DON-' + Date.now().toString(36).toUpperCase();
     body.status = 'pending';
     body.currency = 'NGN';
     body.method = body.method || 'card';
     body.isAnonymous = body.isAnonymous || false;
-    body.donatedAt = body.donatedAt || new Date().toISOString();
-    body.amount = amount;
+    body.donatedAt = new Date().toISOString();
 
-    const result = await lightbase.insert('charity_donations', body);
+    const insertResult = await lightbase.insert('charity_donations', body);
 
     // Update campaign raised amount if campaignId provided
     if (body.campaignId) {
-      const campaign = await lightbase.getById('charity_campaigns', body.campaignId);
-      if (campaign.document) {
-        const newRaised = (campaign.document.raisedAmount || 0) + amount;
-        await lightbase.update('charity_campaigns', body.campaignId, { raisedAmount: newRaised });
-      }
+      try {
+        const campaign = await lightbase.getById('charity_campaigns', body.campaignId);
+        if (campaign.document) {
+          const newRaised = (campaign.document.raisedAmount || 0) + body.amount;
+          await lightbase.update('charity_campaigns', body.campaignId, { raisedAmount: newRaised });
+        }
+      } catch { /* campaign update non-critical */ }
     }
 
-    return new Response(JSON.stringify({
+    return jsonResponse({
       success: true,
       reference: body.reference,
-      document: result.document,
-    }), {
-      status: 201,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+      document: insertResult.document,
+    }, 201);
+  } catch (err: any) {
+    return errorResponse(err.message || 'Internal server error', 500);
   }
 };

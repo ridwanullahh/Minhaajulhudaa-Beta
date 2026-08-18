@@ -5,25 +5,22 @@
 import type { APIRoute } from 'astro';
 import { authenticateAdmin, createSession, createSessionCookie } from '../../../lib/auth';
 import { generateCSRFToken } from '../../../lib/utils';
+import { parseAndValidate, jsonResponse, errorResponse } from '../../../lib/validate';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const body = await request.json();
-    const { email, password, platform } = body;
+    const result = await parseAndValidate(request, {
+      email: { type: 'email', required: true, maxLength: 200 },
+      password: { type: 'string', required: true, maxLength: 200 },
+      platform: { type: 'string', required: false, enum: ['school', 'masjid', 'charity', 'travels'] },
+    });
 
-    if (!email || !password) {
-      return new Response(JSON.stringify({ error: 'Email and password are required' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
+    if (!result.ok) return result.response!;
+    const { email, password, platform } = result.data!;
 
     const admin = await authenticateAdmin(email, password, platform);
     if (!admin) {
-      return new Response(JSON.stringify({ error: 'Invalid email or password' }), {
-        status: 401,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return errorResponse('Invalid email or password', 401);
     }
 
     const session = createSession(admin);
@@ -41,9 +38,6 @@ export const POST: APIRoute = async ({ request }) => {
       }
     );
   } catch (error: any) {
-    return new Response(JSON.stringify({ error: error.message || 'Login failed' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return errorResponse(error.message || 'Login failed', 500);
   }
 };
