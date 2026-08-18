@@ -11,14 +11,16 @@ interface Props {
   title?: string;
   description?: string;
   platform?: string;
+  canonical?: string;
+  jsonLd?: Record<string, any>;
 }
 
-const { title, description, platform } = Astro.props;
+const { title, description, platform, canonical, jsonLd } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} platform={platform}>
+<BaseLayout title={title} description={description} platform={platform} canonical={canonical} jsonLd={jsonLd}>
   <Header platform={platform} currentPath={Astro.url.pathname} />
-  <main class="min-h-screen pb-20 lg:pb-0">
+  <main id="main-content" class="min-h-screen pb-20 lg:pb-0">
     <slot />
   </main>
   <Footer platform={platform} />

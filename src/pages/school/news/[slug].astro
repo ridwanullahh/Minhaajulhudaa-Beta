@@ -35,9 +35,31 @@ try {
 }
 
 const renderedContent = renderMarkdown(post.content || '');
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.excerpt || post.content?.substring(0, 160),
+  author: {
+    '@type': 'Person',
+    name: post.authorName || 'Minhaajulhudaa School',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Minhaajulhudaa',
+  },
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt || post.publishedAt,
+  image: post.featuredImageUrl ? [post.featuredImageUrl] : undefined,
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': Astro.url.href,
+  },
+};
 ---
 
-<PlatformLayout title={`${post.title} - Minhaajulhudaa School`} description={post.excerpt || post.content?.substring(0, 160)} platform="school">
+<PlatformLayout title={`${post.title} - Minhaajulhudaa School`} description={post.excerpt || post.content?.substring(0, 160)} platform="school" jsonLd={jsonLd}>
   <article class="container-app py-8 md:py-12 max-w-3xl">
     <a href="/school/news" class="text-sm font-medium mb-6 inline-flex items-center gap-1" style="color: var(--color-primary);">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
