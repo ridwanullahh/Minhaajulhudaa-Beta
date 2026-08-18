@@ -15,6 +15,16 @@ if (!post) {
   Astro.response.status = 404;
   return Astro.redirect('/404');
 }
+
+let relatedPosts: any[] = [];
+try {
+  const result = await lightbase.query('masjid_blog_posts', {
+    filter: { field: 'category', op: 'eq', value: post.category },
+    sort: 'publishedAt:desc',
+    limit: 4,
+  });
+  relatedPosts = (result.data || []).filter((p: any) => p.id !== post.id).slice(0, 3);
+} catch {}
 ---
 
 <PlatformLayout title={`${post.title} - Blog`} platform="masjid">

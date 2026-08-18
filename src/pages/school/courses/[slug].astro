@@ -16,6 +16,13 @@ if (!course) {
   Astro.response.status = 404;
   return Astro.redirect('/404');
 }
+
+let modulesResult: any[] = [];
+try {
+  modulesResult = await lightbase.findMany('school_lessons', { field: 'courseId', op: 'eq', value: course.id }, { sort: 'order:asc', limit: 50 });
+} catch (err) {
+  console.error('[school/courses/[slug]] lessons query error:', err);
+}
 ---
 
 <PlatformLayout title={`${course.title} - E-Courses`} description={course.excerpt} platform="school">

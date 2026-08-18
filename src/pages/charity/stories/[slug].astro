@@ -15,6 +15,18 @@ if (!story) {
   Astro.response.status = 404;
   return Astro.redirect('/404');
 }
+
+let related: any[] = [];
+try {
+  const relatedStories = await lightbase.query('charity_success_stories', {
+    filter: { field: 'status', op: 'eq', value: 'published' },
+    sort: 'publishedAt:desc',
+    limit: 5,
+  });
+  related = (relatedStories.data || []).filter(function(s: any) { return s.slug !== story.slug; }).slice(0, 3);
+} catch (err) {
+  console.error('[charity/stories/[slug]] related query error:', err);
+}
 ---
 
 <PlatformLayout title={`${story.title} - Success Stories - Minhaajulhudaa Charity`} platform="charity">

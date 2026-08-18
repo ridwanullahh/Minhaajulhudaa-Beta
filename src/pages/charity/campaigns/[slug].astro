@@ -15,6 +15,17 @@ if (!campaign) {
   Astro.response.status = 404;
   return Astro.redirect('/404');
 }
+
+let updates: any[] = [];
+try {
+  const updatesResult = await lightbase.query('charity_campaign_updates', {
+    filter: { field: 'campaignId', op: 'eq', value: campaign.id },
+    limit: 5,
+  });
+  updates = updatesResult.data || [];
+} catch (err) {
+  console.error('[charity/campaigns/[slug]] updates query error:', err);
+}
 ---
 
 <PlatformLayout title={`${campaign.title} - Minhaajulhudaa Charity`} platform="charity">
