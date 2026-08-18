@@ -2,28 +2,18 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('school_programs', { limit: 100 });
-    const programs = (result.data || []).filter((p: any) => p.slug);
-    return programs.map((p: any) => ({ params: { slug: p.slug }, props: { program: p } }));
-  } catch {
-    return [];
-  }
-}
+const { slug } = Astro.params;
 
-const { program } = Astro.props;
+let program: any = null;
+try {
+  program = await lightbase.findOne('school_programs', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[school/programs/[slug].astro] fetch error:', err);
+}
 
 if (!program) {
-  return Astro.redirect('/school/programs');
-}
-
-let filteredRelated: any[] = [];
-try {
-  const relatedResult = await lightbase.findMany('school_programs', { field: 'category', op: 'eq', value: program.category }, { limit: 3 });
-  filteredRelated = relatedResult.filter(function(p) { return p.slug !== program.slug; });
-} catch (err) {
-  console.error('[school/programs/[slug]] related query error:', err);
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
 }
 ---
 

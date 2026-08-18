@@ -29,3 +29,10 @@ pnpm-debug.log*
 
 # misc
 *.log
+
+# workspace infra (agent-managed, not part of repo)
+skills/
+download/
+upload/
+worklog.md
+scripts/local/

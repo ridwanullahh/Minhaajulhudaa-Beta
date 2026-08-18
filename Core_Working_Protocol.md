@@ -75,6 +75,58 @@ Bismillah Ar-Rahman Ar-Raheem. Ash-hadu an laa ilaaha illa-Llah wahdaHu lasharik
 - All code must be enterprise production grade - not novice quality.
 - Implement robust security guardrails to prevent hacking and cyber issues.
 - Battle-test every single feature to ensure it works fully.
+- **NO `console.log` left in production code** (use `console.error` for genuine errors only).
+- **NO `alert()`, `confirm()`, or `prompt()` browser dialogs.** All user feedback must use proper UI components (toasts, modals, inline messages).
+- **NO placeholder text** like "lorem ipsum", "coming soon", "TBD", "TODO" in user-facing content. If content is missing, show a proper empty state.
+- **NO hardcoded data** in components. All data must come from Lightbase DB or legitimate config files.
+- **NO `any` TypeScript types** without a justification comment. Use proper interfaces.
+
+## 7A. Astro SSR Routing Patterns (STRICT - CRITICAL)
+
+This project uses `output: 'server'` (SSR mode). The following rules are MANDATORY:
+
+### Forbidden Patterns
+- **NEVER use `getStaticPaths()` in dynamic routes (`[slug].astro`) without `export const prerender = true;`.** In SSR mode, `getStaticPaths()` is IGNORED at runtime, causing `Astro.props` to be empty and triggering fallback redirects to archive pages. This is the #1 bug class in this codebase.
+- **NEVER redirect to an archive page when a single document is not found.** Return a proper 404 status instead.
+- **NEVER use `Astro.props` to access dynamic route data in SSR mode.** Use `Astro.params` and fetch from the DB at request time.
+
+### Required Pattern for Dynamic Routes (`[slug].astro`)
+```astro
+---
+import PlatformLayout from '../../../layouts/PlatformLayout.astro';
+import { lightbase } from '../../../lib/lightbase';
+
+const { slug } = Astro.params;
+
+let doc: any = null;
+try {
+  doc = await lightbase.findOne('collection_name', {
+    field: 'slug', op: 'eq', value: slug
+  });
+} catch (err) {
+  console.error('[platform/route/[slug]] fetch error:', err);
+}
+
+if (!doc) {
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
+}
+
+// ... related queries, template
+---
+```
+
+### Verification
+- After every `[slug].astro` change, run `npm run build` and verify ZERO warnings of the form: `getStaticPaths() ignored in dynamic page`.
+- Battle-test by visiting a real single-post URL and confirming it renders the document, NOT the archive.
+
+## 7B. Shariah Compliance (STRICT)
+
+- **NO images of animate beings** (humans, animals with faces) in any stock images, illustrations, or media. This includes photographs of people, drawings of animals, etc.
+- Use Shariah-compliant alternatives: geometric patterns, calligraphy, nature (landscapes without people), architectural photography (without people), abstract designs, Islamic motifs.
+- Replace any existing non-compliant stock images with compliant alternatives.
+- When in doubt, use SVG illustrations or CSS-based designs rather than photographs.
+- Audio/video content must be Islamically appropriate (Quran recitation, lectures, nasheeds without music, etc.).
 
 ## 8. UI/UX Standards (STRICT)
 
@@ -157,34 +209,55 @@ Minhaajulhudaa is a multi-platform organization with 4 platforms, each at a dedi
 ## 13. Security Guardrails (STRICT)
 
 - All admin endpoints must require authentication.
-- All user input must be validated and sanitized.
-- Implement CSRF protection on forms.
-- Use HTTPS-only cookies for auth sessions.
-- Implement rate limiting on auth endpoints.
-- Never expose the Lightbase API key to the client side.
+- All user input must be validated and sanitized (use zod or manual schema validation).
+- Implement CSRF protection on forms (origin header validation + CSRF tokens).
+- Use HTTPS-only, SameSite=Lax/Strict cookies for auth sessions.
+- Implement rate limiting on auth endpoints (max 10 attempts/minute) and API endpoints (max 60/minute).
+- Never expose the Lightbase API key to the client side. All DB calls must go through server-side endpoints.
 - All admin actions must be audit-logged.
-- Implement proper RBAC (Role-Based Access Control).
+- Implement proper RBAC (Role-Based Access Control): super_admin, platform_admin, editor, author.
+- **Input validation**: All API endpoints MUST validate input with a schema. Reject invalid input with 400 status.
+- **SQL/NoSQL injection prevention**: Use parameterized queries (Lightbase filter API, never string concatenation).
+- **XSS prevention**: Never use `set:html` on untrusted user input without sanitization. Use DOMPurify or server-side sanitization.
+- **File upload security**: Validate MIME type, file size, extension. Scan for malicious content. Store outside web root.
+- **Security headers**: CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy.
+- **Secrets management**: NEVER commit API keys, passwords, or tokens to the repo. Use `.env` (gitignored).
+- **Dependency security**: Run `npm audit` regularly. Fix high/critical vulnerabilities.
+- **Error handling**: Never expose stack traces or internal errors to users in production. Log to server, show generic message to user.
+- **Session security**: Regenerate session ID on login, set reasonable expiry, implement logout properly.
 
 ## 14. Battle-Testing Protocol
 
 - Every feature must be tested end-to-end before marking complete.
 - Test all CRUD operations against real Lightbase DB.
-- Test all forms with valid and invalid inputs.
-- Test all payment/donation flows.
-- Test responsive behavior on mobile, tablet, desktop.
-- Test light/dark mode toggling.
+- Test all forms with valid and invalid inputs (boundary testing).
+- Test all payment/donation flows with test keys.
+- Test responsive behavior on mobile (375px), tablet (768px), desktop (1280px).
+- Test light/dark mode toggling on every page.
 - Verify no console errors in production build.
+- **Test single-post pages**: Visit `/platform/archive/known-slug` and confirm the single page renders (NOT the archive).
+- **Test 404 handling**: Visit `/platform/archive/nonexistent-slug` and confirm a 404 page renders (NOT the archive).
+- **Test form validation**: Submit forms with empty/invalid data and confirm proper error messages.
+- **Test auth flows**: Login, logout, session expiry, unauthorized access attempts.
+- Use the visual browser agent to verify pages render correctly.
 
 ## 15. Compliance Checklist (Before Every Commit)
 
 - [ ] Opening adhkar present at start of work
-- [ ] Build passes with zero errors
+- [ ] Build passes with zero errors AND zero `getStaticPaths() ignored` warnings
 - [ ] No dummies, mocks, or prototypes
+- [ ] No `alert()`, `confirm()`, `prompt()` browser dialogs
+- [ ] No `console.log` in production code
 - [ ] No emojis or emoji icons
+- [ ] No images of animate beings (Shariah compliance)
 - [ ] Brand colors used correctly
 - [ ] Light/dark mode supported
 - [ ] Mobile-first responsive design
 - [ ] Feature fully functional end-to-end
+- [ ] Dynamic routes use `Astro.params` (NOT `getStaticPaths` without prerender)
+- [ ] 404 handling returns 404 status (NOT redirect to archive)
+- [ ] Input validation on all API endpoints
+- [ ] No secrets committed to repo
 - [ ] Commit message starts AND ends with full adhkar
 - [ ] Pushed to `origin/main` and verified by commit hash
 - [ ] Closing adhkar present at end of work

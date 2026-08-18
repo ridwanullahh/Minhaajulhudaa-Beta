@@ -3,27 +3,18 @@ import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatCurrency } from '../../../lib/utils';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('school_courses', { limit: 100 });
-    const courses = (result.data || []).filter((c: any) => c.slug);
-    return courses.map((c: any) => ({ params: { slug: c.slug }, props: { course: c } }));
-  } catch {
-    return [];
-  }
-}
+const { slug } = Astro.params;
 
-const { course } = Astro.props;
+let course: any = null;
+try {
+  course = await lightbase.findOne('school_courses', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[school/courses/[slug].astro] fetch error:', err);
+}
 
 if (!course) {
-  return Astro.redirect('/school/courses');
-}
-
-let modulesResult: any[] = [];
-try {
-  modulesResult = await lightbase.findMany('school_lessons', { field: 'courseId', op: 'eq', value: course.id }, { sort: 'order:asc', limit: 50 });
-} catch (err) {
-  console.error('[school/courses/[slug]] lessons query error:', err);
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
 }
 ---
 

@@ -2,40 +2,18 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('school_wiki_articles', { limit: 200 });
-    const articles = result.data || [];
-    return articles
-      .filter(function(a) { return a.slug; })
-      .map(function(article) {
-        return {
-          params: { slug: article.slug },
-          props: { article },
-        };
-      });
-  } catch (err) {
-    console.error('[school/wiki/[slug]] getStaticPaths error:', err);
-    return [];
-  }
-}
+const { slug } = Astro.params;
 
-const { article } = Astro.props;
+let article: any = null;
+try {
+  article = await lightbase.findOne('school_wiki_articles', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[school/wiki/[slug].astro] fetch error:', err);
+}
 
 if (!article) {
-  return Astro.redirect('/school/wiki');
-}
-
-let related: any[] = [];
-try {
-  const relatedResult = await lightbase.query('school_wiki_articles', {
-    filter: { field: 'category', op: 'eq', value: article.category || '' },
-    sort: 'title:asc',
-    limit: 10,
-  });
-  related = (relatedResult.data || []).filter(function(a) { return a.slug !== article.slug; }).slice(0, 5);
-} catch (err) {
-  console.error('[school/wiki/[slug]] related query error:', err);
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
 }
 ---
 

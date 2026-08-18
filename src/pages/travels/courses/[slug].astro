@@ -2,30 +2,19 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-export async function getStaticPaths() {
-  try {
-    const result = await lightbase.query('travels_courses', {
-      filter: { field: 'status', op: 'eq', value: 'published' },
-      limit: 100,
-    });
-    return (result.data || []).filter(doc => doc.slug).map(doc => ({ params: { slug: doc.slug }, props: { course: doc } }));
-  } catch { return []; }
-}
+const { slug } = Astro.params;
 
-const { course } = Astro.props;
-if (!course) {
-  return Astro.redirect('/travels/courses');
-}
-
-let lessons: any[] = [];
+let course: any = null;
 try {
-  const lessonsResult = await lightbase.query('travels_lessons', {
-    filter: { field: 'courseId', op: 'eq', value: course.id },
-    sort: 'order:asc',
-    limit: 50,
-  });
-  lessons = lessonsResult.data || [];
-} catch {}
+  course = await lightbase.findOne('travels_courses', { field: 'slug', op: 'eq', value: slug });
+} catch (err) {
+  console.error('[travels/courses/[slug].astro] fetch error:', err);
+}
+
+if (!course) {
+  Astro.response.status = 404;
+  return Astro.redirect('/404');
+}
 ---
 
 <PlatformLayout title={`${course.title} - Travels Courses`} platform="travels">
