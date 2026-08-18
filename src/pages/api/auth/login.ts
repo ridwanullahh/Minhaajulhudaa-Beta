@@ -5,7 +5,8 @@
 import type { APIRoute } from 'astro';
 import { authenticateAdmin, createSession, createSessionCookie } from '../../../lib/auth';
 import { generateCSRFToken } from '../../../lib/utils';
-import { parseAndValidate, jsonResponse, errorResponse } from '../../../lib/validate';
+import { parseAndValidate, errorResponse } from '../../../lib/validate';
+import { logAction, getClientIP, getUserAgent } from '../../../lib/audit';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -26,6 +27,14 @@ export const POST: APIRoute = async ({ request }) => {
     const session = createSession(admin);
     const cookie = createSessionCookie(session);
     const csrfToken = generateCSRFToken();
+
+    // Log successful login
+    await logAction(session, {
+      action: 'login',
+      platform,
+      ipAddress: getClientIP(request),
+      userAgent: getUserAgent(request),
+    });
 
     return new Response(
       JSON.stringify({ success: true, user: { email: admin.email, firstName: admin.firstName, lastName: admin.lastName, role: admin.role, platforms: admin.platforms }, csrfToken }),
