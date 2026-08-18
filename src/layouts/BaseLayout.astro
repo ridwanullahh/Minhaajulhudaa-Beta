@@ -9,16 +9,22 @@ interface Props {
   description?: string;
   image?: string;
   platform?: string;
+  canonical?: string;
+  jsonLd?: Record<string, any>;
 }
 
 const {
   title = 'Minhaajulhudaa - Guiding to the Right Path',
   description = 'Minhaajulhudaa is a multi-platform Islamic organization serving the community through School, Masjid, Charity, and Travels services.',
-  image = '/og-image.png',
+  image = '/images/patterns/arabesque.svg',
   platform,
+  canonical,
+  jsonLd,
 } = Astro.props;
 
 const fullTitle = title.includes('Minhaajulhudaa') ? title : `${title} | Minhaajulhudaa`;
+const canonicalUrl = canonical || Astro.url.href;
+const ogImage = image.startsWith('http') ? image : new URL(image, Astro.site || Astro.url.origin).href;
 ---
 
 <!doctype html>
@@ -41,17 +47,21 @@ const fullTitle = title.includes('Minhaajulhudaa') ? title : `${title} | Minhaaj
     <!-- Meta -->
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Minhaajulhudaa" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -68,8 +78,33 @@ const fullTitle = title.includes('Minhaajulhudaa') ? title : `${title} | Minhaaj
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- JSON-LD Structured Data -->
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
   </head>
   <body>
+    <!-- Skip to content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <slot />
   </body>
 </html>
+
+<style is:global>
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px 16px;
+    z-index: 9999;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+</style>
