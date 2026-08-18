@@ -149,12 +149,28 @@ function getAllEnvAdmins(): EnvAdmin[] {
     const supers = superEnv.split(',').map(entry => {
       const parts = entry.trim().split(':');
       if (parts.length < 2) return null;
+      // Format: email:password:super_admin:firstName:lastName (role field optional, defaults to super_admin)
+      // Or: email:password:firstName:lastName (legacy format without role)
+      let firstName: string;
+      let lastName: string;
+      if (parts.length >= 5 && parts[2]?.trim() === 'super_admin') {
+        // New format: email:password:super_admin:firstName:lastName
+        firstName = parts[3]?.trim() || 'Super';
+        lastName = parts[4]?.trim() || 'Admin';
+      } else if (parts.length >= 4) {
+        // Legacy format: email:password:firstName:lastName
+        firstName = parts[2]?.trim() || 'Super';
+        lastName = parts[3]?.trim() || 'Admin';
+      } else {
+        firstName = 'Super';
+        lastName = 'Admin';
+      }
       return {
         email: parts[0].trim(),
         password: parts[1].trim(),
-        role: 'super_admin',
-        firstName: parts[2]?.trim() || 'Super',
-        lastName: parts[3]?.trim() || 'Admin',
+        role: 'super_admin' as const,
+        firstName,
+        lastName,
         platform: 'all',
       };
     }).filter((a): a is EnvAdmin => a !== null && a.email && a.password);
