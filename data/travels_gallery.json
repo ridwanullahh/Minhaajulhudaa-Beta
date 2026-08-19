@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Ka'bah - Makkah",
+    "description": "The Holy Ka'bah in Masjid al-Haram.",
+    "imageUrl": "/images/patterns/arabesque.svg",
+    "category": "holy-sites",
+    "destination": "Makkah",
+    "createdAt": "2026-07-20T04:42:04.462Z",
+    "id": "travels_gallery_0_mszlugca",
+    "slug": "kabah-makkah"
+  },
+  {
+    "title": "Masjid Nabawi - Madinah",
+    "description": "The Prophet's Mosque in Madinah.",
+    "imageUrl": "/images/patterns/arabesque.svg",
+    "category": "holy-sites",
+    "destination": "Madinah",
+    "createdAt": "2026-07-20T04:42:04.462Z",
+    "id": "travels_gallery_1_mszlugca",
+    "slug": "masjid-nabawi-madinah"
+  },
+  {
+    "title": "Istanbul Mosque",
+    "description": "Beautiful mosque in Istanbul during our Turkey tour.",
+    "imageUrl": "/images/patterns/arabesque.svg",
+    "category": "tours",
+    "destination": "Istanbul",
+    "createdAt": "2026-08-04T04:42:04.462Z",
+    "id": "travels_gallery_2_mszlugca",
+    "slug": "istanbul-mosque"
+  },
+  {
+    "title": "Group Photo - Umrah",
+    "description": "Our December 2025 Umrah group.",
+    "imageUrl": "/images/patterns/arabesque.svg",
+    "category": "groups",
+    "destination": "Makkah",
+    "createdAt": "2026-06-20T04:42:04.462Z",
+    "id": "travels_gallery_3_mszlugca",
+    "slug": "group-photo-umrah"
+  }
+]

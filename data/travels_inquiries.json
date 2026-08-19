@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Khadijah Mohammed",
+    "email": "khadijah.m@example.com",
+    "phone": "+2348051111111",
+    "subject": "Family Umrah inquiry",
+    "message": "I am interested in the Umrah Standard Package for a family of 4 (2 adults, 2 children). Can you provide a custom quote?",
+    "preferredDate": "2026-12-15",
+    "travelerCount": 4,
+    "status": "new",
+    "createdAt": "2026-08-18T04:42:04.462Z",
+    "id": "travels_inquiries_0_mszlugca",
+    "slug": "khadijah-mohammed"
+  },
+  {
+    "name": "Ahmed Ali",
+    "email": "ahmed.ali@example.com",
+    "phone": "+2348052222222",
+    "subject": "Hajj 2027 booking",
+    "message": "When does registration for Hajj 2027 open? I would like to book early.",
+    "preferredDate": "2027-06-15",
+    "travelerCount": 2,
+    "status": "new",
+    "createdAt": "2026-08-17T04:42:04.462Z",
+    "id": "travels_inquiries_1_mszlugca",
+    "slug": "ahmed-ali"
+  },
+  {
+    "name": "Fatima Bello",
+    "email": "fatima.b@example.com",
+    "phone": "+2348053333333",
+    "subject": "Turkey tour details",
+    "message": "What is included in the Turkey tour package? Is the visa included?",
+    "preferredDate": "2026-11-01",
+    "travelerCount": 1,
+    "status": "responded",
+    "createdAt": "2026-08-14T04:42:04.462Z",
+    "id": "travels_inquiries_2_mszlugca",
+    "slug": "fatima-bello"
+  }
+]

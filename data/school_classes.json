@@ -1,0 +1,247 @@
+[
+  {
+    "name": "Primary 1",
+    "level": "primary",
+    "grade": "P1",
+    "teacherId": "MHS-STAFF/004",
+    "teacherName": "Mrs. Aisha Abdullahi",
+    "room": "Room 101",
+    "capacity": 25,
+    "currentEnrollment": 22,
+    "subjects": [
+      "English",
+      "Mathematics",
+      "Basic Science",
+      "Islamic Studies",
+      "Arabic",
+      "Qur'an"
+    ],
+    "schedule": {
+      "days": [
+        "Mon-Fri"
+      ],
+      "time": "8:00 AM - 2:00 PM"
+    },
+    "description": "Foundation class for young learners.",
+    "active": true,
+    "id": "school_classes_0_mszlugc3",
+    "slug": "primary-1"
+  },
+  {
+    "name": "Primary 3",
+    "level": "primary",
+    "grade": "P3",
+    "teacherId": "MHS-STAFF/010",
+    "teacherName": "Ustadh Yahya Garba",
+    "room": "Room 103",
+    "capacity": 30,
+    "currentEnrollment": 28,
+    "subjects": [
+      "English",
+      "Mathematics",
+      "Basic Science",
+      "Islamic Studies",
+      "Arabic",
+      "Qur'an",
+      "Social Studies"
+    ],
+    "schedule": {
+      "days": [
+        "Mon-Fri"
+      ],
+      "time": "8:00 AM - 2:00 PM"
+    },
+    "description": "Lower primary class building on foundational skills.",
+    "active": true,
+    "id": "school_classes_1_mszlugc3",
+    "slug": "primary-3"
+  },
+  {
+    "name": "Primary 4",
+    "level": "primary",
+    "grade": "P4",
+    "teacherId": "MHS-STAFF/005",
+    "teacherName": "Mrs. Khadijah Suleiman",
+    "room": "Room 104",
+    "capacity": 30,
+    "currentEnrollment": 27,
+    "subjects": [
+      "English",
+      "Mathematics",
+      "Basic Science",
+      "Islamic Studies",
+      "Arabic",
+      "Qur'an",
+      "Social Studies",
+      "Computer Science"
+    ],
+    "schedule": {
+      "days": [
+        "Mon-Fri"
+      ],
+      "time": "8:00 AM - 2:30 PM"
+    },
+    "description": "Upper primary class preparing for junior secondary.",
+    "active": true,
+    "id": "school_classes_2_mszlugc3",
+    "slug": "primary-4"
+  },
+  {
+    "name": "JSS 1",
+    "level": "junior-secondary",
+    "grade": "J1",
+    "teacherId": "MHS-STAFF/003",
+    "teacherName": "Ustadh Muhammad Bashir",
+    "room": "Room 201",
+    "capacity": 35,
+    "currentEnrollment": 32,
+    "subjects": [
+      "English",
+      "Mathematics",
+      "Basic Science",
+      "Basic Technology",
+      "Islamic Studies",
+      "Arabic",
+      "Qur'an",
+      "Social Studies",
+      "Computer Science",
+      "Agricultural Science"
+    ],
+    "schedule": {
+      "days": [
+        "Mon-Fri"
+      ],
+      "time": "7:30 AM - 3:00 PM"
+    },
+    "description": "Entry into junior secondary education.",
+    "active": true,
+    "id": "school_classes_3_mszlugc3",
+    "slug": "jss-1"
+  },
+  {
+    "name": "JSS 2",
+    "level": "junior-secondary",
+    "grade": "J2",
+    "teacherId": "MHS-STAFF/006",
+    "teacherName": "Ustadh Ibrahim Musa",
+    "room": "Room 202",
+    "capacity": 35,
+    "currentEnrollment": 30,
+    "subjects": [
+      "English",
+      "Mathematics",
+      "Basic Science",
+      "Basic Technology",
+      "Islamic Studies",
+      "Arabic",
+      "Qur'an",
+      "Social Studies",
+      "Computer Science",
+      "Agricultural Science",
+      "French"
+    ],
+    "schedule": {
+      "days": [
+        "Mon-Fri"
+      ],
+      "time": "7:30 AM - 3:00 PM"
+    },
+    "description": "Continued junior secondary education.",
+    "active": true,
+    "id": "school_classes_4_mszlugc3",
+    "slug": "jss-2"
+  },
+  {
+    "name": "SSS 1 Science",
+    "level": "senior-secondary",
+    "grade": "S1",
+    "teacherId": "MHS-STAFF/003",
+    "teacherName": "Ustadh Muhammad Bashir",
+    "room": "Room 301",
+    "capacity": 30,
+    "currentEnrollment": 28,
+    "subjects": [
+      "English",
+      "Mathematics",
+      "Physics",
+      "Chemistry",
+      "Biology",
+      "Further Mathematics",
+      "Islamic Studies",
+      "Arabic",
+      "Computer Science"
+    ],
+    "schedule": {
+      "days": [
+        "Mon-Fri"
+      ],
+      "time": "7:30 AM - 3:30 PM"
+    },
+    "description": "Senior secondary science track.",
+    "active": true,
+    "id": "school_classes_5_mszlugc3",
+    "slug": "sss-1-science"
+  },
+  {
+    "name": "SSS 2 Science",
+    "level": "senior-secondary",
+    "grade": "S2",
+    "teacherId": "MHS-STAFF/006",
+    "teacherName": "Ustadh Ibrahim Musa",
+    "room": "Room 302",
+    "capacity": 30,
+    "currentEnrollment": 26,
+    "subjects": [
+      "English",
+      "Mathematics",
+      "Physics",
+      "Chemistry",
+      "Biology",
+      "Further Mathematics",
+      "Islamic Studies",
+      "Arabic",
+      "Computer Science"
+    ],
+    "schedule": {
+      "days": [
+        "Mon-Fri"
+      ],
+      "time": "7:30 AM - 3:30 PM"
+    },
+    "description": "Senior secondary science track, year 2.",
+    "active": true,
+    "id": "school_classes_6_mszlugc3",
+    "slug": "sss-2-science"
+  },
+  {
+    "name": "SSS 3 Science",
+    "level": "senior-secondary",
+    "grade": "S3",
+    "teacherId": "MHS-STAFF/009",
+    "teacherName": "Mrs. Maryam Disu",
+    "room": "Room 303",
+    "capacity": 30,
+    "currentEnrollment": 24,
+    "subjects": [
+      "English",
+      "Mathematics",
+      "Physics",
+      "Chemistry",
+      "Biology",
+      "Further Mathematics",
+      "Islamic Studies",
+      "Arabic",
+      "Computer Science"
+    ],
+    "schedule": {
+      "days": [
+        "Mon-Fri"
+      ],
+      "time": "7:30 AM - 3:30 PM"
+    },
+    "description": "Final year senior secondary, WAEC preparation.",
+    "active": true,
+    "id": "school_classes_7_mszlugc3",
+    "slug": "sss-3-science"
+  }
+]

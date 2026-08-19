@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Ramadan Taraweeh",
+    "description": "Community Taraweeh prayers during Ramadan.",
+    "imageUrl": "/images/patterns/architecture.svg",
+    "category": "events",
+    "eventDate": "2026-08-19",
+    "createdAt": "2026-08-04T04:42:04.461Z",
+    "id": "masjid_gallery_0_mszlugc6",
+    "slug": "ramadan-taraweeh"
+  },
+  {
+    "title": "Eid Celebration",
+    "description": "Eid prayer and community celebration.",
+    "imageUrl": "/images/patterns/architecture.svg",
+    "category": "events",
+    "eventDate": "2026-08-19",
+    "createdAt": "2026-07-20T04:42:04.461Z",
+    "id": "masjid_gallery_1_mszlugc6",
+    "slug": "eid-celebration"
+  },
+  {
+    "title": "Masjid Interior",
+    "description": "Beautiful interior of the main prayer hall.",
+    "imageUrl": "/images/patterns/architecture.svg",
+    "category": "facilities",
+    "eventDate": "2026-08-19",
+    "createdAt": "2026-06-20T04:42:04.461Z",
+    "id": "masjid_gallery_2_mszlugc6",
+    "slug": "masjid-interior"
+  },
+  {
+    "title": "Youth Halaqah",
+    "description": "Weekly youth Islamic studies class.",
+    "imageUrl": "/images/patterns/architecture.svg",
+    "category": "programs",
+    "eventDate": "2026-08-19",
+    "createdAt": "2026-08-12T04:42:04.461Z",
+    "id": "masjid_gallery_3_mszlugc6",
+    "slug": "youth-halaqah"
+  }
+]

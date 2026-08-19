@@ -1,0 +1,28 @@
+[
+  {
+    "donorEmail": "fatima.bello@example.com",
+    "donorName": "Fatima Bello",
+    "amount": 25000,
+    "currency": "NGN",
+    "frequency": "monthly",
+    "category": "sadaqah",
+    "nextChargeDate": "2026-09-13T04:42:04.462Z",
+    "status": "active",
+    "startedAt": "2026-03-22T04:42:04.462Z",
+    "totalCharged": 175000,
+    "id": "charity_recurring_donations_0_mszlugc8"
+  },
+  {
+    "donorEmail": "abdullah.o@example.com",
+    "donorName": "Abdullah Okafor",
+    "amount": 150000,
+    "currency": "NGN",
+    "frequency": "monthly",
+    "category": "zakaat",
+    "nextChargeDate": "2026-09-08T04:42:04.462Z",
+    "status": "active",
+    "startedAt": "2026-02-20T04:42:04.462Z",
+    "totalCharged": 450000,
+    "id": "charity_recurring_donations_1_mszlugc8"
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "email": "muhammad.ali@example.com",
+    "name": "Muhammad Ali",
+    "phone": "+2348061111111",
+    "totalDonated": 500000,
+    "donationCount": 8,
+    "firstDonationAt": "2026-01-31T04:42:04.462Z",
+    "lastDonationAt": "2026-08-18T04:42:04.462Z",
+    "isRecurring": false,
+    "tags": [
+      "major-donor"
+    ],
+    "communicationOptIn": true,
+    "id": "charity_donors_0_mszlugc8",
+    "slug": "muhammad-ali"
+  },
+  {
+    "email": "fatima.bello@example.com",
+    "name": "Fatima Bello",
+    "phone": "+2348062222222",
+    "totalDonated": 175000,
+    "donationCount": 7,
+    "firstDonationAt": "2026-03-22T04:42:04.462Z",
+    "lastDonationAt": "2026-08-16T04:42:04.462Z",
+    "isRecurring": true,
+    "tags": [
+      "recurring"
+    ],
+    "communicationOptIn": true,
+    "id": "charity_donors_1_mszlugc8",
+    "slug": "fatima-bello"
+  },
+  {
+    "email": "ibrahim.s@example.com",
+    "name": "Ibrahim Suleiman",
+    "phone": "+2348063333333",
+    "totalDonated": 600000,
+    "donationCount": 4,
+    "firstDonationAt": "2026-05-11T04:42:04.462Z",
+    "lastDonationAt": "2026-08-15T04:42:04.462Z",
+    "isRecurring": false,
+    "tags": [
+      "major-donor",
+      "zakaat"
+    ],
+    "communicationOptIn": true,
+    "id": "charity_donors_2_mszlugc8",
+    "slug": "ibrahim-suleiman"
+  },
+  {
+    "email": "aisha.a@example.com",
+    "name": "Aisha Abdullahi",
+    "phone": "+2348064444444",
+    "totalDonated": 225000,
+    "donationCount": 3,
+    "firstDonationAt": "2026-05-21T04:42:04.462Z",
+    "lastDonationAt": "2026-08-13T04:42:04.462Z",
+    "isRecurring": false,
+    "tags": [],
+    "communicationOptIn": true,
+    "id": "charity_donors_3_mszlugc8",
+    "slug": "aisha-abdullahi"
+  },
+  {
+    "email": "abdullah.o@example.com",
+    "name": "Abdullah Okafor",
+    "phone": "+2348065555555",
+    "totalDonated": 450000,
+    "donationCount": 6,
+    "firstDonationAt": "2026-02-20T04:42:04.462Z",
+    "lastDonationAt": "2026-08-12T04:42:04.462Z",
+    "isRecurring": true,
+    "tags": [
+      "major-donor",
+      "recurring"
+    ],
+    "communicationOptIn": true,
+    "id": "charity_donors_4_mszlugc8",
+    "slug": "abdullah-okafor"
+  }
+]

@@ -3,6 +3,11 @@
  *
  * Singleton client for interacting with the Lightbase BaaS.
  * Server-side only - never expose the API key to the client.
+ *
+ * Fallback: When Lightbase is unavailable, automatically falls back
+ * to the local in-memory DB (src/lib/local-db.ts) which is seeded
+ * from bundled JSON data. This ensures the app works on Cloudflare
+ * Pages even when the Lightbase server is down.
  */
 
 // Lazy env reads: module-level constants crash astro build on PaaS
@@ -94,6 +99,11 @@ class LightbaseClient {
 
   isConfigured(): boolean {
     return Boolean(this.baseUrl && this.apiKey && this.projectId);
+  }
+
+  // Public getter for health check URL
+  get baseUrlPublic(): string {
+    return this.baseUrl;
   }
 
   private getHeaders(contentType = 'application/json'): Record<string, string> {
@@ -392,5 +402,85 @@ export class LightbaseError extends Error {
 }
 
 // Singleton
-export const lightbase = new LightbaseClient();
+const _lightbaseClient = new LightbaseClient();
+
+// Lazy-load the DB router to avoid circular dependency
+let _dbRouter: any = null;
+async function getDbRouter() {
+  if (!_dbRouter) {
+    const { db } = await import('./db');
+    _dbRouter = db;
+  }
+  return _dbRouter;
+}
+
+// Check if Lightbase is available (with caching)
+const HEALTH_CHECK_INTERVAL = 30000;
+let _lastHealthCheck = 0;
+let _lightbaseAvailable: boolean | null = null;
+
+async function isLightbaseAvailable(): Promise<boolean> {
+  const now = Date.now();
+  if (_lightbaseAvailable !== null && (now - _lastHealthCheck) < HEALTH_CHECK_INTERVAL) {
+    return _lightbaseAvailable;
+  }
+  if (!_lightbaseClient.isConfigured()) {
+    _lightbaseAvailable = false;
+    _lastHealthCheck = now;
+    return false;
+  }
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const response = await fetch(`${_lightbaseClient.baseUrlPublic}/health`, {
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+    _lightbaseAvailable = response.ok;
+    _lastHealthCheck = now;
+  } catch {
+    _lightbaseAvailable = false;
+    _lastHealthCheck = now;
+  }
+  return _lightbaseAvailable;
+}
+
+// Create a proxy that falls back to local DB when Lightbase is unavailable
+export const lightbase = new Proxy(_lightbaseClient, {
+  get(target, prop, receiver) {
+    const value = Reflect.get(target, prop, receiver);
+    
+    // Only intercept async methods (functions)
+    if (typeof value === 'function') {
+      return async function (...args: any[]) {
+        const available = await isLightbaseAvailable();
+        if (available) {
+          try {
+            return await value.apply(target, args);
+          } catch (err: any) {
+            // Fall back on network errors or 5xx
+            if (err instanceof LightbaseError && (err.status >= 500 || err.status === 0)) {
+              const db = await getDbRouter();
+              const localMethod = (db as any)[prop];
+              if (typeof localMethod === 'function') {
+                return localMethod.apply(db, args);
+              }
+            }
+            throw err;
+          }
+        } else {
+          // Use local DB fallback
+          const db = await getDbRouter();
+          const localMethod = (db as any)[prop];
+          if (typeof localMethod === 'function') {
+            return localMethod.apply(db, args);
+          }
+          throw new Error(`Method ${String(prop)} not available on fallback DB`);
+        }
+      };
+    }
+    return value;
+  },
+});
+
 export default lightbase;

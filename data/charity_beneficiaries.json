@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Beneficiary 001",
+    "age": 35,
+    "gender": "female",
+    "familySize": 6,
+    "location": "Kano",
+    "category": "widow",
+    "needsAssessment": "Family of 6 needs food and education support for children. Husband passed away 2 years ago.",
+    "assistanceHistory": [
+      {
+        "type": "food",
+        "date": "2026-07-20T04:42:04.462Z",
+        "value": 25000
+      },
+      {
+        "type": "education",
+        "date": "2026-06-20T04:42:04.462Z",
+        "value": 50000
+      }
+    ],
+    "verificationStatus": "verified",
+    "registeredAt": "2026-05-21T04:42:04.462Z",
+    "id": "charity_beneficiaries_0_mszlugc8",
+    "slug": "beneficiary-001"
+  },
+  {
+    "name": "Beneficiary 002",
+    "age": 12,
+    "gender": "male",
+    "familySize": 3,
+    "location": "Lagos",
+    "category": "orphan",
+    "needsAssessment": "Orphaned child needs educational support and school supplies.",
+    "assistanceHistory": [
+      {
+        "type": "education",
+        "date": "2026-07-05T04:42:04.462Z",
+        "value": 50000
+      }
+    ],
+    "verificationStatus": "verified",
+    "registeredAt": "2026-06-20T04:42:04.462Z",
+    "id": "charity_beneficiaries_1_mszlugc8",
+    "slug": "beneficiary-002"
+  },
+  {
+    "name": "Beneficiary 003",
+    "age": 68,
+    "gender": "male",
+    "familySize": 2,
+    "location": "Kaduna",
+    "category": "elderly",
+    "needsAssessment": "Elderly man with medical needs including hypertension medication.",
+    "assistanceHistory": [
+      {
+        "type": "medical",
+        "date": "2026-08-04T04:42:04.462Z",
+        "value": 35000
+      }
+    ],
+    "verificationStatus": "verified",
+    "registeredAt": "2026-07-05T04:42:04.462Z",
+    "id": "charity_beneficiaries_2_mszlugc8",
+    "slug": "beneficiary-003"
+  },
+  {
+    "name": "Beneficiary 004",
+    "age": 28,
+    "gender": "female",
+    "familySize": 4,
+    "location": "Borno",
+    "category": "displaced",
+    "needsAssessment": "Displaced family needs shelter and basic supplies.",
+    "assistanceHistory": [
+      {
+        "type": "shelter",
+        "date": "2026-07-30T04:42:04.462Z",
+        "value": 150000
+      },
+      {
+        "type": "food",
+        "date": "2026-08-09T04:42:04.462Z",
+        "value": 25000
+      }
+    ],
+    "verificationStatus": "verified",
+    "registeredAt": "2026-07-20T04:42:04.462Z",
+    "id": "charity_beneficiaries_3_mszlugc8",
+    "slug": "beneficiary-004"
+  }
+]

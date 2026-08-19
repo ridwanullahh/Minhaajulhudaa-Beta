@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Imam Yusuf Olatunji",
+    "title": "Chief Imam",
+    "role": "imam",
+    "bio": "Imam Yusuf holds a degree in Islamic Studies and has served as the chief Imam of Minhaajulhudaa Masjid since its establishment in 2020. He specializes in Qur'an recitation, Tajweed, and Fiqh.",
+    "email": "imam.yusuf@minhaajulhudaa.com",
+    "phone": "+2348000000002",
+    "specializations": [
+      "Qur'an",
+      "Tajweed",
+      "Fiqh",
+      "Khutbah"
+    ],
+    "active": true,
+    "id": "masjid_imams_0_mszlugc7",
+    "slug": "chief-imam"
+  },
+  {
+    "name": "Ustadh Abdullah Okafor",
+    "title": "Assistant Imam",
+    "role": "assistant-imam",
+    "bio": "Ustadh Abdullah is the assistant Imam and leads the youth programs. He holds a degree in Arabic and Islamic Studies.",
+    "email": "ustadh.abdullah@minhaajulhudaa.com",
+    "phone": "+2348017777777",
+    "specializations": [
+      "Arabic",
+      "Youth Education",
+      "Seerah"
+    ],
+    "active": true,
+    "id": "masjid_imams_1_mszlugc7",
+    "slug": "assistant-imam"
+  },
+  {
+    "name": "Ustadh Ibrahim Musa",
+    "title": "Muadhin",
+    "role": "muadhin",
+    "bio": "Ustadh Ibrahim serves as the Muadhin, calling the Adhan for all five daily prayers with his beautiful voice.",
+    "phone": "+2348015555555",
+    "specializations": [
+      "Adhan",
+      "Qur'an Recitation"
+    ],
+    "active": true,
+    "id": "masjid_imams_2_mszlugc7",
+    "slug": "muadhin"
+  },
+  {
+    "name": "Mrs. Khadijah Suleiman",
+    "title": "Sisters' Coordinator",
+    "role": "teacher",
+    "bio": "Mrs. Khadijah coordinates the sisters' programs and leads the Tajweed workshops for women.",
+    "email": "khadijah.s@minhaajulhudaa.com",
+    "phone": "+2348014444444",
+    "specializations": [
+      "Tajweed",
+      "Women's Education",
+      "Arabic"
+    ],
+    "active": true,
+    "id": "masjid_imams_3_mszlugc7",
+    "slug": "sisters-coordinator"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "customerName": "Muhammad Ali",
+    "rating": 5,
+    "title": "Excellent Umrah Experience",
+    "content": "Minhaajulhudaa Travels made my Umrah journey smooth and spiritually fulfilling. The accommodation was excellent, the guide was knowledgeable, and every detail was taken care of. Highly recommended!",
+    "images": [],
+    "isVerified": true,
+    "status": "approved",
+    "submittedAt": "2026-02-20T04:42:04.462Z",
+    "id": "travels_reviews_0_mszlugc9",
+    "slug": "excellent-umrah-experience"
+  },
+  {
+    "customerName": "Ibrahim Suleiman",
+    "rating": 5,
+    "title": "Best Decision Ever",
+    "content": "My wife and I had an amazing Umrah experience with Minhaajulhudaa. The deluxe package was worth every penny - the hotel was steps away from the Haram. The staff were professional and caring.",
+    "images": [],
+    "isVerified": true,
+    "status": "approved",
+    "submittedAt": "2026-04-21T04:42:04.462Z",
+    "id": "travels_reviews_1_mszlugc9",
+    "slug": "best-decision-ever"
+  },
+  {
+    "customerName": "Garba Sani",
+    "rating": 5,
+    "title": "VIP Treatment Throughout",
+    "content": "This is my 5th trip with Minhaajulhudaa and they never disappoint. The VIP package was exceptional - private transport, luxury hotels, and the scholar guide was very knowledgeable. Thank you for making Hajj and Umrah so accessible.",
+    "images": [],
+    "isVerified": true,
+    "status": "approved",
+    "submittedAt": "2026-06-20T04:42:04.462Z",
+    "id": "travels_reviews_2_mszlugc9",
+    "slug": "vip-treatment-throughout"
+  },
+  {
+    "customerName": "Yusuf Bello",
+    "rating": 4,
+    "title": "Great Turkey Tour",
+    "content": "The Islamic heritage tour of Turkey was eye-opening. The hotels were good, the guide was excellent, and the itinerary was well-planned. Only suggestion would be to include more free time for personal exploration.",
+    "images": [],
+    "isVerified": true,
+    "status": "approved",
+    "submittedAt": "2026-07-20T04:42:04.462Z",
+    "id": "travels_reviews_3_mszlugc9",
+    "slug": "great-turkey-tour"
+  }
+]

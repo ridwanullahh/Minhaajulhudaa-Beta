@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "masjid-expansion-2026",
+    "title": "Masjid Expansion Project 2026",
+    "description": "Help us expand the sisters' section and add more facilities to accommodate our growing community. The expansion includes a larger sisters' prayer area, additional classrooms, and improved wudu facilities.",
+    "category": "construction",
+    "goalAmount": 25000000,
+    "raisedAmount": 15750000,
+    "currency": "NGN",
+    "imageUrl": "/images/patterns/arabesque.svg",
+    "deadline": "2026-12-31",
+    "isUrgent": true,
+    "status": "active",
+    "createdAt": "2026-06-20T04:42:04.461Z",
+    "id": "masjid_donation_campaigns_0_mszlugc6"
+  },
+  {
+    "slug": "monthly-operations",
+    "title": "Monthly Masjid Operations",
+    "description": "Support the day-to-day operations of the masjid including electricity, water, maintenance, and staff salaries.",
+    "category": "operational",
+    "goalAmount": 2000000,
+    "raisedAmount": 1340000,
+    "currency": "NGN",
+    "imageUrl": "/images/patterns/arabesque.svg",
+    "deadline": "2026-12-31",
+    "isUrgent": false,
+    "status": "active",
+    "createdAt": "2026-07-20T04:42:04.461Z",
+    "id": "masjid_donation_campaigns_1_mszlugc6"
+  },
+  {
+    "slug": "quran-learning-program",
+    "title": "Qur'an Learning Program",
+    "description": "Support our free Qur'an learning program for children and adults. Funds go towards teaching materials, student supplies, and teacher stipends.",
+    "category": "sadaqah",
+    "goalAmount": 5000000,
+    "raisedAmount": 2870000,
+    "currency": "NGN",
+    "imageUrl": "/images/patterns/arabesque.svg",
+    "deadline": "2026-12-31",
+    "isUrgent": false,
+    "status": "active",
+    "createdAt": "2026-07-05T04:42:04.461Z",
+    "id": "masjid_donation_campaigns_2_mszlugc6"
+  },
+  {
+    "slug": "ramadan-iftar-program",
+    "title": "Ramadan Iftar Program",
+    "description": "Provide daily Iftar meals for fasting Muslims during Ramadan. ₦2,500 provides an Iftar for one person.",
+    "category": "sadaqah",
+    "goalAmount": 3000000,
+    "raisedAmount": 2100000,
+    "currency": "NGN",
+    "imageUrl": "/images/patterns/arabesque.svg",
+    "deadline": "2026-09-30",
+    "isUrgent": true,
+    "status": "active",
+    "createdAt": "2026-07-30T04:42:04.461Z",
+    "id": "masjid_donation_campaigns_3_mszlugc6"
+  }
+]

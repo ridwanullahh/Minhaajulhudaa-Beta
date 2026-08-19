@@ -1,0 +1,48 @@
+[
+  {
+    "slug": "about",
+    "title": "About Minhaajulhudaa School",
+    "content": [
+      {
+        "type": "hero",
+        "title": "About Us",
+        "subtitle": "Nurturing minds with knowledge and faith"
+      },
+      {
+        "type": "text",
+        "body": "Minhaajulhudaa School was established in 2021 with a vision to provide quality education that combines academic excellence with authentic Islamic values. Our curriculum integrates the Nigerian national curriculum with comprehensive Islamic studies, Arabic language, and Qur'an memorization programs."
+      },
+      {
+        "type": "text",
+        "body": "We believe every child is unique and deserves an education that develops their intellectual, spiritual, physical, and social potential. Our dedicated teachers create a nurturing environment where students thrive academically and grow as conscientious Muslims."
+      }
+    ],
+    "seoTitle": "About Minhaajulhudaa School",
+    "seoDescription": "Learn about Minhaajulhudaa School - providing quality Islamic education since 2021.",
+    "status": "published",
+    "publishedAt": "2026-07-20T04:42:04.461Z",
+    "order": 1,
+    "id": "school_pages_0_mszlugc2"
+  },
+  {
+    "slug": "contact",
+    "title": "Contact Us",
+    "content": [
+      {
+        "type": "hero",
+        "title": "Get in Touch",
+        "subtitle": "We are here to help"
+      },
+      {
+        "type": "text",
+        "body": "Reach out to us for admissions, inquiries, or to schedule a visit to our campus."
+      }
+    ],
+    "seoTitle": "Contact Minhaajulhudaa School",
+    "seoDescription": "Contact information for Minhaajulhudaa School.",
+    "status": "published",
+    "publishedAt": "2026-07-20T04:42:04.461Z",
+    "order": 2,
+    "id": "school_pages_1_mszlugc2"
+  }
+]

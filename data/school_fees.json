@@ -1,0 +1,71 @@
+[
+  {
+    "name": "Primary School Tuition",
+    "classLevel": "primary",
+    "amount": 150000,
+    "currency": "NGN",
+    "frequency": "per-term",
+    "category": "tuition",
+    "description": "Tuition fee for primary school students per term.",
+    "active": true,
+    "id": "school_fees_0_mszlugc5",
+    "slug": "primary-school-tuition"
+  },
+  {
+    "name": "Junior Secondary Tuition",
+    "classLevel": "junior-secondary",
+    "amount": 180000,
+    "currency": "NGN",
+    "frequency": "per-term",
+    "category": "tuition",
+    "description": "Tuition fee for junior secondary students per term.",
+    "active": true,
+    "id": "school_fees_1_mszlugc5",
+    "slug": "junior-secondary-tuition"
+  },
+  {
+    "name": "Senior Secondary Tuition",
+    "classLevel": "senior-secondary",
+    "amount": 200000,
+    "currency": "NGN",
+    "frequency": "per-term",
+    "category": "tuition",
+    "description": "Tuition fee for senior secondary students per term.",
+    "active": true,
+    "id": "school_fees_2_mszlugc5",
+    "slug": "senior-secondary-tuition"
+  },
+  {
+    "name": "Registration Fee",
+    "amount": 20000,
+    "currency": "NGN",
+    "frequency": "one-time",
+    "category": "tuition",
+    "description": "One-time registration fee for new students.",
+    "active": true,
+    "id": "school_fees_3_mszlugc5",
+    "slug": "registration-fee"
+  },
+  {
+    "name": "Transportation",
+    "amount": 30000,
+    "currency": "NGN",
+    "frequency": "per-term",
+    "category": "transport",
+    "description": "Optional school bus service per term.",
+    "active": true,
+    "id": "school_fees_4_mszlugc5",
+    "slug": "transportation"
+  },
+  {
+    "name": "Sports Fee",
+    "amount": 5000,
+    "currency": "NGN",
+    "frequency": "per-term",
+    "category": "activities",
+    "description": "Sports and physical education fee per term.",
+    "active": true,
+    "id": "school_fees_5_mszlugc5",
+    "slug": "sports-fee"
+  }
+]

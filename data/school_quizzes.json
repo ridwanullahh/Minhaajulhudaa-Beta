@@ -1,0 +1,67 @@
+[
+  {
+    "courseId": "course-tajweed-001",
+    "lessonId": "lesson-tajweed-001",
+    "title": "Tajweed Basics Quiz",
+    "description": "Test your understanding of basic Tajweed concepts.",
+    "questions": [
+      {
+        "question": "What does Tajweed mean?",
+        "options": [
+          "Beautiful recitation",
+          "Rules of recitation",
+          "Memorization",
+          "Translation"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "How many articulation points (Makharij) are there?",
+        "options": [
+          "5",
+          "12",
+          "17",
+          "28"
+        ],
+        "correct": 2
+      }
+    ],
+    "timeLimitMinutes": 15,
+    "passingScore": 70,
+    "attempts": 45,
+    "id": "school_quizzes_0_mszlugc5",
+    "slug": "tajweed-basics-quiz"
+  },
+  {
+    "courseId": "course-arabic-001",
+    "title": "Arabic Alphabet Quiz",
+    "description": "Test your knowledge of the Arabic alphabet.",
+    "questions": [
+      {
+        "question": "How many letters are in the Arabic alphabet?",
+        "options": [
+          "26",
+          "28",
+          "30",
+          "32"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Which letter is pronounced from the throat?",
+        "options": [
+          "ب",
+          "ت",
+          "ع",
+          "م"
+        ],
+        "correct": 2
+      }
+    ],
+    "timeLimitMinutes": 10,
+    "passingScore": 70,
+    "attempts": 67,
+    "id": "school_quizzes_1_mszlugc5",
+    "slug": "arabic-alphabet-quiz"
+  }
+]

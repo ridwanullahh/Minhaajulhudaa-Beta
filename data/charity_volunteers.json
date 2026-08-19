@@ -1,0 +1,100 @@
+[
+  {
+    "name": "Daud Mohammed",
+    "email": "daud.m@example.com",
+    "phone": "+2348071111111",
+    "skills": [
+      "First Aid",
+      "Driving",
+      "Logistics"
+    ],
+    "availability": "weekends",
+    "preferredRole": "field-worker",
+    "location": "Lagos",
+    "bio": "Experienced humanitarian worker with 5 years of field experience.",
+    "status": "active",
+    "assignedRole": "Field Coordinator",
+    "hoursLogged": 120,
+    "joinedAt": "2026-05-21T04:42:04.462Z",
+    "id": "charity_volunteers_0_mszlugc8",
+    "slug": "daud-mohammed"
+  },
+  {
+    "name": "Maryam Aliyu",
+    "email": "maryam.a@example.com",
+    "phone": "+2348072222222",
+    "skills": [
+      "Teaching",
+      "Counseling",
+      "Social Media"
+    ],
+    "availability": "flexible",
+    "preferredRole": "educator",
+    "location": "Lagos",
+    "bio": "Teacher passionate about education access for all children.",
+    "status": "active",
+    "assignedRole": "Education Program Lead",
+    "hoursLogged": 85,
+    "joinedAt": "2026-06-20T04:42:04.462Z",
+    "id": "charity_volunteers_1_mszlugc8",
+    "slug": "maryam-aliyu"
+  },
+  {
+    "name": "Yusuf Bello",
+    "email": "yusuf.b@example.com",
+    "phone": "+2348073333333",
+    "skills": [
+      "Medical",
+      "First Aid",
+      "Nursing"
+    ],
+    "availability": "weekdays",
+    "preferredRole": "medical-worker",
+    "location": "Abuja",
+    "bio": "Registered nurse with emergency response experience.",
+    "status": "active",
+    "assignedRole": "Medical Volunteer",
+    "hoursLogged": 60,
+    "joinedAt": "2026-07-05T04:42:04.462Z",
+    "id": "charity_volunteers_2_mszlugc8",
+    "slug": "yusuf-bello"
+  },
+  {
+    "name": "Khadijah Musa",
+    "email": "khadijah.m@example.com",
+    "phone": "+2348074444444",
+    "skills": [
+      "Counseling",
+      "Social Work",
+      "Languages"
+    ],
+    "availability": "evenings",
+    "preferredRole": "counselor",
+    "location": "Lagos",
+    "bio": "Social worker with experience in trauma counseling.",
+    "status": "pending",
+    "joinedAt": "2026-08-12T04:42:04.462Z",
+    "id": "charity_volunteers_3_mszlugc8",
+    "slug": "khadijah-musa"
+  },
+  {
+    "name": "Ibrahim Okafor",
+    "email": "ibrahim.o@example.com",
+    "phone": "+2348075555555",
+    "skills": [
+      "Photography",
+      "Videography",
+      "Content Creation"
+    ],
+    "availability": "weekends",
+    "preferredRole": "media",
+    "location": "Lagos",
+    "bio": "Media professional wanting to document impact stories.",
+    "status": "active",
+    "assignedRole": "Media Volunteer",
+    "hoursLogged": 40,
+    "joinedAt": "2026-07-20T04:42:04.462Z",
+    "id": "charity_volunteers_4_mszlugc8",
+    "slug": "ibrahim-okafor"
+  }
+]

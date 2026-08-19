@@ -1,0 +1,115 @@
+[
+  {
+    "platform": "global",
+    "siteName": "Minhaajulhudaa",
+    "tagline": "Guiding to the Right Path",
+    "description": "A multi-platform Islamic organization serving the Ummah through education, worship, charity, and sacred journeys.",
+    "logoUrl": "https://minhaajulhudaa.com/favicon.svg",
+    "primaryColor": "#05B34D",
+    "accentColor": "#F2B91C",
+    "contactEmail": "info@minhaajulhudaa.com",
+    "contactPhone": "+2348000000000",
+    "address": "Minhaajulhudaa Complex, Lagos, Nigeria",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        3.3792,
+        6.5244
+      ]
+    },
+    "socialLinks": {
+      "twitter": "https://twitter.com/minhaajulhudaa",
+      "facebook": "https://facebook.com/minhaajulhudaa",
+      "instagram": "https://instagram.com/minhaajulhudaa",
+      "youtube": "https://youtube.com/@minhaajulhudaa"
+    },
+    "paymentConfig": {
+      "provider": "paystack",
+      "currency": "NGN"
+    },
+    "metadata": {
+      "established": "2020"
+    },
+    "id": "platform_settings_0_mszlugc1"
+  },
+  {
+    "platform": "school",
+    "siteName": "Minhaajulhudaa School",
+    "tagline": "Islamic Education Excellence",
+    "description": "Nurturing minds with knowledge and faith - combining academic excellence with Islamic values.",
+    "contactEmail": "school@minhaajulhudaa.com",
+    "contactPhone": "+2348000000001",
+    "address": "Minhaajulhudaa School Campus, Lagos",
+    "socialLinks": {},
+    "paymentConfig": {
+      "provider": "paystack",
+      "currency": "NGN"
+    },
+    "metadata": {
+      "established": "2021",
+      "levels": [
+        "Primary",
+        "Junior Secondary",
+        "Senior Secondary"
+      ]
+    },
+    "id": "platform_settings_1_mszlugc1"
+  },
+  {
+    "platform": "masjid",
+    "siteName": "Minhaajulhudaa Masjid",
+    "tagline": "Community & Worship",
+    "description": "A center for prayer, learning, and community - serving the Ummah with devotion.",
+    "contactEmail": "masjid@minhaajulhudaa.com",
+    "contactPhone": "+2348000000002",
+    "address": "Minhaajulhudaa Masjid, Lagos",
+    "socialLinks": {},
+    "paymentConfig": {
+      "provider": "paystack",
+      "currency": "NGN"
+    },
+    "metadata": {
+      "capacity": 2000,
+      "established": "2020"
+    },
+    "id": "platform_settings_2_mszlugc1"
+  },
+  {
+    "platform": "charity",
+    "siteName": "Minhaajulhudaa Charity Foundation",
+    "tagline": "Serving Humanity",
+    "description": "Bringing relief and hope to those in need - following the prophetic example of compassion.",
+    "contactEmail": "charity@minhaajulhudaa.com",
+    "contactPhone": "+2348000000003",
+    "address": "Minhaajulhudaa Charity Office, Lagos",
+    "socialLinks": {},
+    "paymentConfig": {
+      "provider": "paystack",
+      "currency": "NGN"
+    },
+    "metadata": {
+      "established": "2022",
+      "registrationNumber": "RC-2022-0001"
+    },
+    "id": "platform_settings_3_mszlugc1"
+  },
+  {
+    "platform": "travels",
+    "siteName": "Minhaajulhudaa Travels & Tours",
+    "tagline": "Hajj & Umrah Services",
+    "description": "Your trusted partner for sacred journeys - making Hajj and Umrah accessible and meaningful.",
+    "contactEmail": "travels@minhaajulhudaa.com",
+    "contactPhone": "+2348000000004",
+    "address": "Minhaajulhudaa Travels Office, Lagos",
+    "socialLinks": {},
+    "paymentConfig": {
+      "provider": "paystack",
+      "currency": "NGN"
+    },
+    "metadata": {
+      "established": "2023",
+      "licensed": true
+    },
+    "id": "platform_settings_4_mszlugc1"
+  }
+]

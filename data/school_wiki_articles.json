@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "admission-process-guide",
+    "title": "School Admission Process: A Complete Guide",
+    "content": "This guide walks you through the complete admission process at Minhaajulhudaa School, from application to enrollment.\n\n## Step 1: Application\nComplete the online admission form available on our website. You will need to provide student information, guardian details, and previous school records.\n\n## Step 2: Assessment\nAfter reviewing your application, we will invite the student for an assessment. The assessment evaluates academic readiness and Qur'an reading ability.\n\n## Step 3: Interview\nSelected students and their parents will be invited for an interview with the admission committee.\n\n## Step 4: Admission Decision\nDecisions are communicated within two weeks of the interview. Accepted students receive an admission letter with enrollment details.\n\n## Step 5: Enrollment\nComplete the enrollment by paying the required fees and submitting remaining documents.",
+    "category": "admissions",
+    "tags": [
+      "admission",
+      "guide",
+      "process"
+    ],
+    "author": "Admission Office",
+    "order": 1,
+    "views": 542,
+    "status": "published",
+    "updatedAt": "2026-08-14T04:42:04.461Z",
+    "id": "school_wiki_articles_0_mszlugc4"
+  },
+  {
+    "slug": "fee-structure-explained",
+    "title": "Understanding Our Fee Structure",
+    "content": "A detailed breakdown of school fees and payment options.\n\n## Tuition Fees\nTuition varies by level:\n- Primary: ₦150,000 per term\n- Junior Secondary: ₦180,000 per term\n- Senior Secondary: ₦200,000 per term\n\n## Additional Fees\n- Registration (one-time): ₦20,000\n- Uniform: ₦15,000 - ₦18,000\n- Books: ₦10,000 - ₦20,000\n- Sports: ₦5,000 per term\n- Transportation (optional): ₦30,000 per term\n\n## Payment Options\n- Full term payment\n- Installment plan (3 installments)\n- Sibling discount (10% for 2nd child, 15% for 3rd+)\n\n## Scholarships\nWe offer merit-based scholarships for outstanding students and need-based financial aid.",
+    "category": "finance",
+    "tags": [
+      "fees",
+      "payment",
+      "tuition"
+    ],
+    "author": "Finance Office",
+    "order": 2,
+    "views": 387,
+    "status": "published",
+    "updatedAt": "2026-08-09T04:42:04.461Z",
+    "id": "school_wiki_articles_1_mszlugc4"
+  },
+  {
+    "slug": "curriculum-overview",
+    "title": "Our Curriculum Overview",
+    "content": "Minhaajulhudaa School offers an integrated curriculum combining the Nigerian national curriculum with comprehensive Islamic studies.\n\n## Academic Subjects\nEnglish, Mathematics, Sciences, Social Studies, Computer Science, and Languages.\n\n## Islamic Studies\nQur'an (recitation and memorization), Tajweed, Arabic Language, Islamic History, Fiqh, and Akhlaq.\n\n## Extracurricular\nSports, Robotics, Debating, Arts, and Community Service.\n\n## Assessment\nContinuous assessment (40%) and termly examinations (60%).",
+    "category": "academics",
+    "tags": [
+      "curriculum",
+      "academics"
+    ],
+    "author": "Academic Office",
+    "order": 3,
+    "views": 298,
+    "status": "published",
+    "updatedAt": "2026-08-04T04:42:04.461Z",
+    "id": "school_wiki_articles_2_mszlugc4"
+  }
+]
