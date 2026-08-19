@@ -404,46 +404,40 @@ export class LightbaseError extends Error {
 // Singleton
 const _lightbaseClient = new LightbaseClient();
 
-// Lazy-load the DB router to avoid circular dependency
-let _dbRouter: any = null;
-async function getDbRouter() {
-  if (!_dbRouter) {
-    const { db } = await import('./db');
-    _dbRouter = db;
+// Lazy-load the local DB to avoid circular dependency
+let _localDb: any = null;
+async function getLocalDb() {
+  if (!_localDb) {
+    const { localDb, seedLocalDb, loadSeedData } = await import('./local-db');
+    // Seed the local DB on first access
+    const data = await loadSeedData();
+    await seedLocalDb(data);
+    _localDb = localDb;
   }
-  return _dbRouter;
+  return _localDb;
 }
 
-// Check if Lightbase is available (with caching)
-const HEALTH_CHECK_INTERVAL = 30000;
-let _lastHealthCheck = 0;
-let _lightbaseAvailable: boolean | null = null;
-
-async function isLightbaseAvailable(): Promise<boolean> {
-  const now = Date.now();
-  if (_lightbaseAvailable !== null && (now - _lastHealthCheck) < HEALTH_CHECK_INTERVAL) {
-    return _lightbaseAvailable;
-  }
-  if (!_lightbaseClient.isConfigured()) {
-    _lightbaseAvailable = false;
-    _lastHealthCheck = now;
-    return false;
-  }
+// On Cloudflare edge, always use local DB (no health check)
+// This avoids timeout issues with fetch to external servers
+function shouldUseLocalDbOnly(): boolean {
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);
-    const response = await fetch(`${_lightbaseClient.baseUrlPublic}/health`, {
-      signal: controller.signal,
-    });
-    clearTimeout(timeoutId);
-    _lightbaseAvailable = response.ok;
-    _lastHealthCheck = now;
-  } catch {
-    _lightbaseAvailable = false;
-    _lastHealthCheck = now;
+    if (typeof import.meta !== 'undefined' && (import.meta as any).env) {
+      if ((import.meta as any).env.DB_FALLBACK_ONLY === 'true') return true;
+    }
+  } catch {}
+  try {
+    if (typeof process !== 'undefined' && process.env) {
+      if (process.env.DB_FALLBACK_ONLY === 'true') return true;
+    }
+  } catch {}
+  // On Cloudflare Workers (no process.env), use local DB by default
+  if (typeof globalThis.process === 'undefined') {
+    return true;
   }
-  return _lightbaseAvailable;
+  return false;
 }
+
+const _useLocalOnly = shouldUseLocalDbOnly();
 
 // Create a proxy that falls back to local DB when Lightbase is unavailable
 export const lightbase = new Proxy(_lightbaseClient, {
@@ -453,29 +447,29 @@ export const lightbase = new Proxy(_lightbaseClient, {
     // Only intercept async methods (functions)
     if (typeof value === 'function') {
       return async function (...args: any[]) {
-        const available = await isLightbaseAvailable();
-        if (available) {
-          try {
-            return await value.apply(target, args);
-          } catch (err: any) {
-            // Fall back on network errors or 5xx
-            if (err instanceof LightbaseError && (err.status >= 500 || err.status === 0)) {
-              const db = await getDbRouter();
-              const localMethod = (db as any)[prop];
-              if (typeof localMethod === 'function') {
-                return localMethod.apply(db, args);
-              }
-            }
-            throw err;
-          }
-        } else {
-          // Use local DB fallback
-          const db = await getDbRouter();
+        // If using local DB only, skip Lightbase entirely
+        if (_useLocalOnly) {
+          const db = await getLocalDb();
           const localMethod = (db as any)[prop];
           if (typeof localMethod === 'function') {
             return localMethod.apply(db, args);
           }
-          throw new Error(`Method ${String(prop)} not available on fallback DB`);
+          throw new Error(`Method ${String(prop)} not available on local DB`);
+        }
+        
+        // Otherwise try Lightbase first, fall back on error
+        try {
+          return await value.apply(target, args);
+        } catch (err: any) {
+          // Fall back on network errors or 5xx
+          if (err instanceof LightbaseError && (err.status >= 500 || err.status === 0)) {
+            const db = await getLocalDb();
+            const localMethod = (db as any)[prop];
+            if (typeof localMethod === 'function') {
+              return localMethod.apply(db, args);
+            }
+          }
+          throw err;
         }
       };
     }

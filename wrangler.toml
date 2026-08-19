@@ -5,3 +5,5 @@ pages_build_output_dir = "dist"
 
 [vars]
 DB_FALLBACK_ENABLED = "true"
+DB_FALLBACK_ONLY = "true"
+SITE_URL = "https://minhaajulhudaa.pages.dev"
