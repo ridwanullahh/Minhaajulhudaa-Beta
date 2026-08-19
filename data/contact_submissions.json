@@ -1,0 +1,54 @@
+[
+  {
+    "platform": "school",
+    "name": "Fatima Bello",
+    "email": "fatima.bello@example.com",
+    "phone": "+2348031234567",
+    "subject": "Admission Inquiry for my son",
+    "message": "I would like to inquire about admission for my 7-year-old son into primary 2. What are the requirements?",
+    "status": "new",
+    "department": "admissions",
+    "createdAt": "2026-08-18T04:42:04.460Z",
+    "id": "contact_submissions_0_mszlugc2",
+    "slug": "fatima-bello"
+  },
+  {
+    "platform": "masjid",
+    "name": "Ahmed Tanko",
+    "email": "ahmed.tanko@example.com",
+    "phone": "+2348057654321",
+    "subject": "Jumuah prayer timing",
+    "message": "What time does the Jumuah prayer start?",
+    "status": "new",
+    "department": "general",
+    "createdAt": "2026-08-18T16:42:04.461Z",
+    "id": "contact_submissions_1_mszlugc2",
+    "slug": "ahmed-tanko"
+  },
+  {
+    "platform": "charity",
+    "name": "Khadijah Mohammed",
+    "email": "khadijah.m@example.com",
+    "phone": "+2348079876543",
+    "subject": "Volunteer opportunity",
+    "message": "I am interested in volunteering for the food distribution program. How can I sign up?",
+    "status": "new",
+    "department": "volunteers",
+    "createdAt": "2026-08-18T22:42:04.461Z",
+    "id": "contact_submissions_2_mszlugc2",
+    "slug": "khadijah-mohammed"
+  },
+  {
+    "platform": "travels",
+    "name": "Ibrahim Aliyu",
+    "email": "ibrahim.aliyu@example.com",
+    "phone": "+2348091234567",
+    "subject": "Umrah package inquiry",
+    "message": "I am interested in the December Umrah package for a family of 4. Can you provide details?",
+    "status": "new",
+    "department": "bookings",
+    "createdAt": "2026-08-19T01:42:04.461Z",
+    "id": "contact_submissions_3_mszlugc2",
+    "slug": "ibrahim-aliyu"
+  }
+]

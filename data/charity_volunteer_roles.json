@@ -1,0 +1,66 @@
+[
+  {
+    "title": "Field Distribution Worker",
+    "description": "Assist with the distribution of food, supplies, and materials to beneficiaries.",
+    "requirements": [
+      "Physical fitness",
+      "Valid ID",
+      "Reliability"
+    ],
+    "location": "Lagos",
+    "timeCommitment": "Weekends, 4-6 hours",
+    "slotsAvailable": 10,
+    "slotsFilled": 6,
+    "status": "open",
+    "id": "charity_volunteer_roles_0_mszlugc8",
+    "slug": "field-distribution-worker"
+  },
+  {
+    "title": "Education Program Assistant",
+    "description": "Support teaching and mentoring in our education programs for orphans and vulnerable children.",
+    "requirements": [
+      "Teaching experience",
+      "Patience with children",
+      "Background check"
+    ],
+    "location": "Lagos",
+    "timeCommitment": "Saturdays, 3 hours",
+    "slotsAvailable": 5,
+    "slotsFilled": 3,
+    "status": "open",
+    "id": "charity_volunteer_roles_1_mszlugc8",
+    "slug": "education-program-assistant"
+  },
+  {
+    "title": "Medical Volunteer",
+    "description": "Provide basic medical care during outreach programs and emergency response.",
+    "requirements": [
+      "Medical qualification",
+      "Current license",
+      "First aid certification"
+    ],
+    "location": "Various",
+    "timeCommitment": "As needed",
+    "slotsAvailable": 8,
+    "slotsFilled": 4,
+    "status": "open",
+    "id": "charity_volunteer_roles_2_mszlugc8",
+    "slug": "medical-volunteer"
+  },
+  {
+    "title": "Social Media Volunteer",
+    "description": "Create content for our social media platforms to raise awareness about our campaigns.",
+    "requirements": [
+      "Social media experience",
+      "Content creation skills",
+      "Creativity"
+    ],
+    "location": "Remote",
+    "timeCommitment": "Flexible, 5 hours/week",
+    "slotsAvailable": 3,
+    "slotsFilled": 2,
+    "status": "open",
+    "id": "charity_volunteer_roles_3_mszlugc8",
+    "slug": "social-media-volunteer"
+  }
+]

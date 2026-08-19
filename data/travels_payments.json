@@ -1,0 +1,57 @@
+[
+  {
+    "amount": 2500000,
+    "currency": "NGN",
+    "method": "bank_transfer",
+    "reference": "TRV-PAY-001",
+    "status": "successful",
+    "isInstallment": false,
+    "installmentNumber": 0,
+    "paidAt": "2026-08-15T04:42:04.462Z",
+    "id": "travels_payments_0_mszlugc9"
+  },
+  {
+    "amount": 4000000,
+    "currency": "NGN",
+    "method": "card",
+    "reference": "TRV-PAY-002",
+    "status": "successful",
+    "isInstallment": true,
+    "installmentNumber": 1,
+    "paidAt": "2026-08-13T04:42:04.462Z",
+    "id": "travels_payments_1_mszlugc9"
+  },
+  {
+    "amount": 3000000,
+    "currency": "NGN",
+    "method": "bank_transfer",
+    "reference": "TRV-PAY-003",
+    "status": "successful",
+    "isInstallment": true,
+    "installmentNumber": 1,
+    "paidAt": "2026-08-17T04:42:04.462Z",
+    "id": "travels_payments_2_mszlugc9"
+  },
+  {
+    "amount": 1800000,
+    "currency": "NGN",
+    "method": "card",
+    "reference": "TRV-PAY-004",
+    "status": "successful",
+    "isInstallment": false,
+    "installmentNumber": 0,
+    "paidAt": "2026-08-10T04:42:04.462Z",
+    "id": "travels_payments_3_mszlugc9"
+  },
+  {
+    "amount": 7500000,
+    "currency": "NGN",
+    "method": "bank_transfer",
+    "reference": "TRV-PAY-005",
+    "status": "successful",
+    "isInstallment": true,
+    "installmentNumber": 1,
+    "paidAt": "2026-08-17T04:42:04.462Z",
+    "id": "travels_payments_4_mszlugc9"
+  }
+]

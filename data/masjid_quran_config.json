@@ -1,0 +1,62 @@
+[
+  {
+    "defaultReciter": "mishary-rashid-alafasy",
+    "reciterName": "Mishary Rashid Alafasy",
+    "streamUrl": "https://api.quran.com/api/v4/recitations/1",
+    "apiSource": "https://api.quran.com",
+    "playlists": [
+      {
+        "name": "Juz Amma",
+        "reciter": "mishary-rashid-alafasy",
+        "surahs": [
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114
+        ]
+      },
+      {
+        "name": "Al-Kahf (Friday)",
+        "reciter": "mishary-rashid-alafasy",
+        "surahs": [
+          18
+        ]
+      }
+    ],
+    "active": true,
+    "id": "masjid_quran_config_0_mszlugc7"
+  }
+]

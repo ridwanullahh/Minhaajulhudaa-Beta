@@ -1,0 +1,31 @@
+[
+  {
+    "slug": "about",
+    "title": "About Minhaajulhudaa Travels & Tours",
+    "content": [
+      {
+        "type": "hero",
+        "title": "About Us",
+        "subtitle": "Your trusted partner for sacred journeys"
+      },
+      {
+        "type": "text",
+        "body": "Minhaajulhudaa Travels & Tours was established in 2023 to provide Muslims with seamless, spiritually fulfilling Hajj and Umrah experiences. We are a licensed travel agency specializing in Islamic tourism, with a commitment to making the sacred journeys accessible, affordable, and meaningful."
+      },
+      {
+        "type": "text",
+        "body": "Our team includes experienced Hajj and Umrah guides who have performed the pilgrimage multiple times. We handle every aspect of your journey - from visa processing and flight bookings to accommodation, transportation, and guided tours of the holy sites."
+      },
+      {
+        "type": "text",
+        "body": "We also offer local and international Islamic tours to historical sites, Islamic landmarks, and Muslim-friendly destinations. Our pre-travel education program ensures that every pilgrim is spiritually and practically prepared for their sacred journey."
+      }
+    ],
+    "seoTitle": "About Minhaajulhudaa Travels",
+    "seoDescription": "Licensed Hajj and Umrah travel agency.",
+    "status": "published",
+    "publishedAt": "2026-06-20T04:42:04.462Z",
+    "order": 1,
+    "id": "travels_pages_0_mszlugc9"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Science Fair 2026",
+    "description": "Highlights from our annual science fair showcasing student projects.",
+    "coverImageUrl": "/images/patterns/architecture.svg",
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800",
+        "caption": "Student presenting robotics project"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800",
+        "caption": "Chemistry experiment demonstration"
+      }
+    ],
+    "category": "events",
+    "eventDate": "2026-08-19",
+    "createdAt": "2026-07-29T04:42:04.461Z",
+    "id": "school_gallery_albums_0_mszlugc2",
+    "slug": "science-fair-2026"
+  },
+  {
+    "title": "Hifz Graduation",
+    "description": "Celebrating our Qur'an memorization graduates.",
+    "coverImageUrl": "/images/patterns/architecture.svg",
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800",
+        "caption": "Graduates with their certificates"
+      }
+    ],
+    "category": "achievements",
+    "eventDate": "2026-08-19",
+    "createdAt": "2026-08-05T04:42:04.461Z",
+    "id": "school_gallery_albums_1_mszlugc2",
+    "slug": "hifz-graduation"
+  },
+  {
+    "title": "Campus Life",
+    "description": "Everyday moments at Minhaajulhudaa School.",
+    "coverImageUrl": "/images/patterns/architecture.svg",
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800",
+        "caption": "Students in class"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800",
+        "caption": "Library study session"
+      }
+    ],
+    "category": "campus",
+    "eventDate": "2026-08-19",
+    "createdAt": "2026-08-09T04:42:04.461Z",
+    "id": "school_gallery_albums_2_mszlugc2",
+    "slug": "campus-life"
+  }
+]

@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Islamic Relief Nigeria",
+    "type": "ngo",
+    "logoUrl": "/images/patterns/lattice.svg",
+    "websiteUrl": "https://www.islamic-relief.org",
+    "description": "International humanitarian organization partnering on emergency response.",
+    "contributionValue": 5000000,
+    "partnershipStart": "2023-01-15",
+    "status": "active",
+    "id": "charity_partners_0_mszlugc9",
+    "slug": "islamic-relief-nigeria"
+  },
+  {
+    "name": "Lagos State Government",
+    "type": "government",
+    "websiteUrl": "https://lagosstate.gov.ng",
+    "description": "Government partner providing regulatory support and access to communities.",
+    "contributionValue": 0,
+    "partnershipStart": "2022-06-01",
+    "status": "active",
+    "id": "charity_partners_1_mszlugc9",
+    "slug": "lagos-state-government"
+  },
+  {
+    "name": "Dangote Foundation",
+    "type": "corporate",
+    "description": "Corporate partner supporting our food security programs.",
+    "contributionValue": 10000000,
+    "partnershipStart": "2023-03-01",
+    "status": "active",
+    "id": "charity_partners_2_mszlugc9",
+    "slug": "dangote-foundation"
+  },
+  {
+    "name": "Al-Noor Foundation",
+    "type": "ngo",
+    "description": "Partner for educational programs and orphan support.",
+    "contributionValue": 2000000,
+    "partnershipStart": "2024-01-01",
+    "status": "active",
+    "id": "charity_partners_3_mszlugc9",
+    "slug": "al-noor-foundation"
+  }
+]

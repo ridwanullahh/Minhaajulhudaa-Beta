@@ -1,0 +1,24 @@
+[
+  {
+    "title": "Live Jumu'ah Khutbah",
+    "description": "Live stream of the weekly Jumu'ah prayer and khutbah.",
+    "streamUrl": "https://www.youtube.com/live",
+    "embedUrl": "https://www.youtube.com/embed/live_stream?channel=UCxxxxxxx",
+    "isLive": false,
+    "scheduledAt": "2026-08-22T04:42:04.461Z",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800",
+    "id": "masjid_live_streams_0_mszlugc7",
+    "slug": "live-jumuah-khutbah"
+  },
+  {
+    "title": "Live Taraweeh",
+    "description": "Live stream of Taraweeh prayers during Ramadan.",
+    "streamUrl": "https://www.youtube.com/live",
+    "embedUrl": "https://www.youtube.com/embed/live_stream?channel=UCxxxxxxx",
+    "isLive": false,
+    "scheduledAt": "2026-09-08T04:42:04.461Z",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800",
+    "id": "masjid_live_streams_1_mszlugc7",
+    "slug": "live-taraweeh"
+  }
+]

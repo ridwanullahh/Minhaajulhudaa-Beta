@@ -1,0 +1,116 @@
+[
+  {
+    "packageId": "pkg-umrah-standard",
+    "day": 1,
+    "title": "Departure from Lagos",
+    "description": "Depart from Murtala Muhammed International Airport, Lagos. Arrive in Jeddah, transfer to Makkah hotel.",
+    "activities": [
+      "Airport check-in",
+      "Flight to Jeddah",
+      "Transfer to Makkah",
+      "Check-in and rest"
+    ],
+    "meals": [
+      "Dinner"
+    ],
+    "accommodation": "4-star Hotel, Makkah",
+    "id": "travels_itineraries_0_mszlugc9",
+    "slug": "departure-from-lagos"
+  },
+  {
+    "packageId": "pkg-umrah-standard",
+    "day": 2,
+    "title": "Performing Umrah",
+    "description": "Perform Umrah rituals with guidance from our experienced scholar.",
+    "activities": [
+      "Ihram preparation",
+      "Tawaf",
+      "Sa'i",
+      "Halq/Taqseer",
+      "Rest"
+    ],
+    "meals": [
+      "Breakfast",
+      "Dinner"
+    ],
+    "accommodation": "4-star Hotel, Makkah",
+    "id": "travels_itineraries_1_mszlugc9",
+    "slug": "performing-umrah"
+  },
+  {
+    "packageId": "pkg-umrah-standard",
+    "day": 3,
+    "title": "Makkah Ziyarah",
+    "description": "Guided tour of significant Islamic sites in Makkah.",
+    "activities": [
+      "Visit Jabal al-Nour",
+      "Visit Cave of Hira",
+      "Visit Arafat",
+      "Visit Muzdalifah",
+      "Visit Mina"
+    ],
+    "meals": [
+      "Breakfast",
+      "Dinner"
+    ],
+    "accommodation": "4-star Hotel, Makkah",
+    "id": "travels_itineraries_2_mszlugc9",
+    "slug": "makkah-ziyarah"
+  },
+  {
+    "packageId": "pkg-umrah-standard",
+    "day": 6,
+    "title": "Travel to Madinah",
+    "description": "Travel to Madinah and check into hotel near Masjid Nabawi.",
+    "activities": [
+      "Checkout from Makkah hotel",
+      "Travel to Madinah",
+      "Check-in to Madinah hotel",
+      "Visit Masjid Nabawi"
+    ],
+    "meals": [
+      "Breakfast",
+      "Dinner"
+    ],
+    "accommodation": "4-star Hotel, Madinah",
+    "id": "travels_itineraries_3_mszlugc9",
+    "slug": "travel-to-madinah"
+  },
+  {
+    "packageId": "pkg-umrah-standard",
+    "day": 7,
+    "title": "Madinah Ziyarah",
+    "description": "Guided tour of significant Islamic sites in Madinah.",
+    "activities": [
+      "Visit Masjid Quba",
+      "Visit Uhud",
+      "Visit Baqi Cemetery",
+      "Visit Masjid Qiblatain"
+    ],
+    "meals": [
+      "Breakfast",
+      "Dinner"
+    ],
+    "accommodation": "4-star Hotel, Madinah",
+    "id": "travels_itineraries_4_mszlugc9",
+    "slug": "madinah-ziyarah"
+  },
+  {
+    "packageId": "pkg-umrah-standard",
+    "day": 10,
+    "title": "Return to Lagos",
+    "description": "Final prayers at Masjid Nabawi, then travel to Jeddah for return flight.",
+    "activities": [
+      "Morning prayers",
+      "Checkout",
+      "Travel to Jeddah",
+      "Flight to Lagos"
+    ],
+    "meals": [
+      "Breakfast"
+    ],
+    "accommodation": "N/A",
+    "id": "travels_itineraries_5_mszlugc9",
+    "slug": "return-to-lagos"
+  }
+]

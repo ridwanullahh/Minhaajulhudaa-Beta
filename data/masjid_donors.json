@@ -1,0 +1,63 @@
+[
+  {
+    "email": "muhammad.ali@example.com",
+    "name": "Muhammad Ali",
+    "phone": "+2348062222222",
+    "totalDonated": 250000,
+    "donationCount": 5,
+    "firstDonationAt": "2026-02-20T04:42:04.461Z",
+    "lastDonationAt": "2026-08-17T04:42:04.461Z",
+    "isRecurring": false,
+    "tags": [
+      "regular"
+    ],
+    "id": "masjid_donors_0_mszlugc6",
+    "slug": "muhammad-ali"
+  },
+  {
+    "email": "fatima.i@example.com",
+    "name": "Fatima Ibrahim",
+    "phone": "+2348063333333",
+    "totalDonated": 125000,
+    "donationCount": 3,
+    "firstDonationAt": "2026-04-21T04:42:04.461Z",
+    "lastDonationAt": "2026-08-16T04:42:04.461Z",
+    "isRecurring": true,
+    "tags": [
+      "recurring",
+      "zakaat"
+    ],
+    "id": "masjid_donors_1_mszlugc6",
+    "slug": "fatima-ibrahim"
+  },
+  {
+    "email": "abdullah.o@example.com",
+    "name": "Abdullah Okafor",
+    "phone": "+2348064444444",
+    "totalDonated": 375000,
+    "donationCount": 8,
+    "firstDonationAt": "2026-01-31T04:42:04.461Z",
+    "lastDonationAt": "2026-08-14T04:42:04.461Z",
+    "isRecurring": true,
+    "tags": [
+      "major-donor",
+      "recurring"
+    ],
+    "id": "masjid_donors_2_mszlugc6",
+    "slug": "abdullah-okafor"
+  },
+  {
+    "email": "anonymous@example.com",
+    "name": "Anonymous",
+    "totalDonated": 150000,
+    "donationCount": 6,
+    "firstDonationAt": "2026-05-21T04:42:04.461Z",
+    "lastDonationAt": "2026-08-18T04:42:04.461Z",
+    "isRecurring": false,
+    "tags": [
+      "anonymous"
+    ],
+    "id": "masjid_donors_3_mszlugc6",
+    "slug": "anonymous"
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "title": "Jumu'ah Khutbah: Brotherhood in Islam",
+    "description": "Full video of the Jumu'ah khutbah on the importance of brotherhood.",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400",
+    "category": "khutbah",
+    "duration": 2400,
+    "date": "2026-08-19",
+    "views": 1234,
+    "status": "active",
+    "id": "masjid_videos_0_mszlugc6",
+    "slug": "jumuah-khutbah-brotherhood-in-islam"
+  },
+  {
+    "title": "Masjid Tour",
+    "description": "Virtual tour of the Minhaajulhudaa Masjid facilities.",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=400",
+    "category": "general",
+    "duration": 600,
+    "date": "2026-08-19",
+    "views": 567,
+    "status": "active",
+    "id": "masjid_videos_1_mszlugc6",
+    "slug": "masjid-tour"
+  },
+  {
+    "title": "Qur'an Recitation - Beautiful",
+    "description": "Beautiful recitation by Imam Yusuf during Taraweeh.",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400",
+    "category": "recitation",
+    "duration": 1800,
+    "date": "2026-08-19",
+    "views": 2103,
+    "status": "active",
+    "id": "masjid_videos_2_mszlugc6",
+    "slug": "quran-recitation-beautiful"
+  }
+]

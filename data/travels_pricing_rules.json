@@ -1,0 +1,49 @@
+[
+  {
+    "type": "early-bird",
+    "ruleName": "Early Bird Discount - 3 months ahead",
+    "discountPercent": 10,
+    "surchargePercent": 0,
+    "minGroupSize": 1,
+    "daysBeforeDeparture": 90,
+    "active": true,
+    "id": "travels_pricing_rules_0_mszlugca"
+  },
+  {
+    "type": "group-discount",
+    "ruleName": "Group of 5+ discount",
+    "discountPercent": 5,
+    "surchargePercent": 0,
+    "minGroupSize": 5,
+    "active": true,
+    "id": "travels_pricing_rules_1_mszlugca"
+  },
+  {
+    "type": "group-discount",
+    "ruleName": "Group of 10+ discount",
+    "discountPercent": 10,
+    "surchargePercent": 0,
+    "minGroupSize": 10,
+    "active": true,
+    "id": "travels_pricing_rules_2_mszlugca"
+  },
+  {
+    "type": "seasonal-surcharge",
+    "ruleName": "Ramadan surcharge",
+    "discountPercent": 0,
+    "surchargePercent": 20,
+    "startDate": "2026-02-01",
+    "endDate": "2026-03-31",
+    "active": true,
+    "id": "travels_pricing_rules_3_mszlugca"
+  },
+  {
+    "type": "last-minute",
+    "ruleName": "Last minute - 2 weeks before",
+    "discountPercent": 5,
+    "surchargePercent": 0,
+    "daysBeforeDeparture": 14,
+    "active": true,
+    "id": "travels_pricing_rules_4_mszlugca"
+  }
+]

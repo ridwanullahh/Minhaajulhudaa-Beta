@@ -1,0 +1,180 @@
+[
+  {
+    "bookingNumber": "MHS-TRV/2026/001",
+    "packageTitle": "Umrah Standard Package - December 2026",
+    "customerId": "customer-001",
+    "customerName": "Muhammad Ali",
+    "customerEmail": "muhammad.ali@example.com",
+    "customerPhone": "+2348031111111",
+    "travelers": [
+      {
+        "fullName": "Muhammad Ali",
+        "passportNumber": "A12345678",
+        "dateOfBirth": "1980-05-15",
+        "gender": "male",
+        "nationality": "Nigerian",
+        "relationship": "self"
+      }
+    ],
+    "travelerCount": 1,
+    "startDate": "2026-12-15",
+    "endDate": "2026-12-25",
+    "totalAmount": 2500000,
+    "paidAmount": 2500000,
+    "currency": "NGN",
+    "status": "confirmed",
+    "paymentStatus": "paid",
+    "specialRequests": "Vegetarian meals preferred",
+    "bookedAt": "2026-08-14T04:42:04.462Z",
+    "confirmedAt": "2026-08-15T04:42:04.462Z",
+    "id": "travels_bookings_0_mszlugc9"
+  },
+  {
+    "bookingNumber": "MHS-TRV/2026/002",
+    "packageTitle": "Umrah Deluxe Package - December 2026",
+    "customerId": "customer-001",
+    "customerName": "Ibrahim Suleiman",
+    "customerEmail": "ibrahim.s@example.com",
+    "customerPhone": "+2348032222222",
+    "travelers": [
+      {
+        "fullName": "Ibrahim Suleiman",
+        "passportNumber": "B23456789",
+        "dateOfBirth": "1975-08-20",
+        "gender": "male",
+        "nationality": "Nigerian",
+        "relationship": "self"
+      },
+      {
+        "fullName": "Fatima Suleiman",
+        "passportNumber": "B23456790",
+        "dateOfBirth": "1980-03-12",
+        "gender": "female",
+        "nationality": "Nigerian",
+        "relationship": "spouse"
+      }
+    ],
+    "travelerCount": 2,
+    "startDate": "2026-12-15",
+    "endDate": "2026-12-27",
+    "totalAmount": 8000000,
+    "paidAmount": 4000000,
+    "currency": "NGN",
+    "status": "confirmed",
+    "paymentStatus": "partial",
+    "bookedAt": "2026-08-12T04:42:04.462Z",
+    "confirmedAt": "2026-08-13T04:42:04.462Z",
+    "id": "travels_bookings_1_mszlugc9"
+  },
+  {
+    "bookingNumber": "MHS-TRV/2026/003",
+    "packageTitle": "Umrah Standard Package - December 2026",
+    "customerId": "customer-001",
+    "customerName": "Abdullah Okafor",
+    "customerEmail": "abdullah.o@example.com",
+    "customerPhone": "+2348033333333",
+    "travelers": [
+      {
+        "fullName": "Abdullah Okafor",
+        "passportNumber": "C34567890",
+        "dateOfBirth": "1985-11-05",
+        "gender": "male",
+        "nationality": "Nigerian",
+        "relationship": "self"
+      },
+      {
+        "fullName": "Aisha Okafor",
+        "passportNumber": "C34567891",
+        "dateOfBirth": "1990-07-18",
+        "gender": "female",
+        "nationality": "Nigerian",
+        "relationship": "spouse"
+      },
+      {
+        "fullName": "Ali Okafor",
+        "passportNumber": "C34567892",
+        "dateOfBirth": "2015-04-22",
+        "gender": "male",
+        "nationality": "Nigerian",
+        "relationship": "son"
+      }
+    ],
+    "travelerCount": 3,
+    "startDate": "2026-12-15",
+    "endDate": "2026-12-25",
+    "totalAmount": 7500000,
+    "paidAmount": 3000000,
+    "currency": "NGN",
+    "status": "pending",
+    "paymentStatus": "partial",
+    "specialRequests": "Family room needed",
+    "bookedAt": "2026-08-17T04:42:04.462Z",
+    "id": "travels_bookings_2_mszlugc9"
+  },
+  {
+    "bookingNumber": "MHS-TRV/2026/004",
+    "packageTitle": "Islamic Heritage Tour of Turkey",
+    "customerId": "customer-001",
+    "customerName": "Yusuf Bello",
+    "customerEmail": "yusuf.b@example.com",
+    "customerPhone": "+2348034444444",
+    "travelers": [
+      {
+        "fullName": "Yusuf Bello",
+        "passportNumber": "D45678901",
+        "dateOfBirth": "1978-12-10",
+        "gender": "male",
+        "nationality": "Nigerian",
+        "relationship": "self"
+      }
+    ],
+    "travelerCount": 1,
+    "startDate": "2026-11-01",
+    "endDate": "2026-11-07",
+    "totalAmount": 1800000,
+    "paidAmount": 1800000,
+    "currency": "NGN",
+    "status": "confirmed",
+    "paymentStatus": "paid",
+    "bookedAt": "2026-08-09T04:42:04.462Z",
+    "confirmedAt": "2026-08-10T04:42:04.462Z",
+    "id": "travels_bookings_3_mszlugc9"
+  },
+  {
+    "bookingNumber": "MHS-TRV/2026/005",
+    "packageTitle": "Umrah VIP Package - Private Journey",
+    "customerId": "customer-001",
+    "customerName": "Alhaji Garba Sani",
+    "customerEmail": "garba.s@example.com",
+    "customerPhone": "+2348035555555",
+    "travelers": [
+      {
+        "fullName": "Garba Sani",
+        "passportNumber": "E56789012",
+        "dateOfBirth": "1965-09-15",
+        "gender": "male",
+        "nationality": "Nigerian",
+        "relationship": "self"
+      },
+      {
+        "fullName": "Maryam Sani",
+        "passportNumber": "E56789013",
+        "dateOfBirth": "1970-01-20",
+        "gender": "female",
+        "nationality": "Nigerian",
+        "relationship": "spouse"
+      }
+    ],
+    "travelerCount": 2,
+    "startDate": "2026-12-10",
+    "endDate": "2026-12-24",
+    "totalAmount": 15000000,
+    "paidAmount": 7500000,
+    "currency": "NGN",
+    "status": "confirmed",
+    "paymentStatus": "partial",
+    "bookedAt": "2026-08-16T04:42:04.462Z",
+    "confirmedAt": "2026-08-17T04:42:04.462Z",
+    "id": "travels_bookings_4_mszlugc9"
+  }
+]

@@ -1,0 +1,97 @@
+[
+  {
+    "slug": "hifz-program",
+    "title": "Hifz (Qur'an Memorization) Program",
+    "category": "islamic-studies",
+    "description": "A structured program for memorizing the entire Qur'an with proper Tajweed, integrated with regular academic studies.",
+    "curriculum": "The program follows a progressive memorization schedule: 2-3 pages daily for beginners, increasing as proficiency grows. Daily revision (Muraja'ah) of previously memorized portions. Weekly assessment with the lead Hifz teacher. Monthly evaluation with external examiners. Annual certification upon completion.",
+    "duration": "3-5 years",
+    "requirements": [
+      "Age 7+",
+      "Basic Qur'an reading ability",
+      "Commitment from student and parents",
+      "Passing admission assessment"
+    ],
+    "outcomes": [
+      "Ijazah in Qur'an recitation",
+      "Certificate of Hifz completion",
+      "Strong foundation in Tajweed",
+      "Enhanced memory and discipline"
+    ],
+    "imageUrl": "/images/patterns/quran.svg",
+    "instructor": "Ustadh Yusuf Olatunji",
+    "fee": 50000,
+    "status": "open",
+    "id": "school_programs_0_mszlugc3"
+  },
+  {
+    "slug": "arabic-immersion",
+    "title": "Arabic Language Immersion",
+    "category": "islamic-studies",
+    "description": "An enhanced Arabic language program designed to achieve conversational fluency and Qur'anic comprehension.",
+    "curriculum": "Daily conversational Arabic sessions, Arabic-only zones, cultural activities, weekly Arabic storytelling, and integration with Islamic Studies. Uses modern communicative language teaching methods.",
+    "duration": "Ongoing (all levels)",
+    "requirements": [
+      "Enrolled student",
+      "Commitment to practice"
+    ],
+    "outcomes": [
+      "Conversational fluency",
+      "Qur'anic Arabic comprehension",
+      "Cultural understanding",
+      "Preparation for advanced Arabic studies"
+    ],
+    "imageUrl": "/images/patterns/quran.svg",
+    "instructor": "Mrs. Khadijah Suleiman",
+    "fee": 0,
+    "status": "open",
+    "id": "school_programs_1_mszlugc3"
+  },
+  {
+    "slug": "stem-robotics",
+    "title": "STEM & Robotics Program",
+    "category": "extracurricular",
+    "description": "Hands-on program exploring science, technology, engineering, and mathematics through robotics and coding.",
+    "curriculum": "Weekly sessions covering block-based coding, introduction to Python, robotics building and programming, participation in local and national robotics competitions.",
+    "duration": "1 academic year",
+    "requirements": [
+      "Age 10+",
+      "Basic computer literacy",
+      "Science aptitude"
+    ],
+    "outcomes": [
+      "Coding proficiency",
+      "Robotics building skills",
+      "Problem-solving abilities",
+      "Competition experience"
+    ],
+    "imageUrl": "/images/patterns/quran.svg",
+    "instructor": "Ustadh Muhammad Bashir",
+    "fee": 30000,
+    "status": "open",
+    "id": "school_programs_2_mszlugc3"
+  },
+  {
+    "slug": "sports-academy",
+    "title": "Sports Academy",
+    "category": "sports",
+    "description": "Comprehensive sports program developing physical fitness, teamwork, and competitive skills.",
+    "curriculum": "Football, basketball, athletics, swimming, and traditional sports. Training sessions three times weekly with certified coaches.",
+    "duration": "Ongoing",
+    "requirements": [
+      "Medical fitness clearance",
+      "Sports attire"
+    ],
+    "outcomes": [
+      "Physical fitness",
+      "Teamwork skills",
+      "Competitive experience",
+      "Sportsmanship"
+    ],
+    "imageUrl": "/images/patterns/quran.svg",
+    "instructor": "Coach Abdullah Hassan",
+    "fee": 20000,
+    "status": "open",
+    "id": "school_programs_3_mszlugc3"
+  }
+]

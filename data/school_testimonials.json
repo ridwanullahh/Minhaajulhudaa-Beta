@@ -1,0 +1,38 @@
+[
+  {
+    "authorName": "Dr. Muhammad Ali",
+    "authorRole": "Parent of Abdullah (Primary 3)",
+    "content": "Minhaajulhudaa School has been a blessing for our family. My son has not only excelled academically but has also developed a deep love for the Qur'an. The teachers are dedicated and genuinely care about each student's spiritual and academic growth.",
+    "rating": 5,
+    "status": "approved",
+    "createdAt": "2026-08-12T04:42:04.461Z",
+    "id": "school_testimonials_0_mszlugc5"
+  },
+  {
+    "authorName": "Mrs. Aisha Bello",
+    "authorRole": "Parent of Khadijah (JSS 1)",
+    "content": "The Arabic immersion program is exceptional. My daughter can now converse in Arabic and understands much of what she recites from the Qur'an. The school's holistic approach to education is truly commendable.",
+    "rating": 5,
+    "status": "approved",
+    "createdAt": "2026-08-05T04:42:04.461Z",
+    "id": "school_testimonials_1_mszlugc5"
+  },
+  {
+    "authorName": "Engineer Yusuf Garba",
+    "authorRole": "Parent of Maryam (SSS 2)",
+    "content": "As a parent, I appreciate the balance between academic rigor and Islamic values. Maryam scored 8 distinctions in her WAEC and credits the school's supportive environment. The science laboratories are well-equipped.",
+    "rating": 5,
+    "status": "approved",
+    "createdAt": "2026-07-29T04:42:04.461Z",
+    "id": "school_testimonials_2_mszlugc5"
+  },
+  {
+    "authorName": "Alhaji Ibrahim Musa",
+    "authorRole": "Parent of two alumni",
+    "content": "Both my children graduated from Minhaajulhudaa and are now studying at top universities. The foundation they received here - both academic and moral - has been invaluable. I highly recommend this school.",
+    "rating": 5,
+    "status": "approved",
+    "createdAt": "2026-07-20T04:42:04.461Z",
+    "id": "school_testimonials_3_mszlugc5"
+  }
+]

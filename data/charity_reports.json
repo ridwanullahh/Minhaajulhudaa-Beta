@@ -1,0 +1,46 @@
+[
+  {
+    "title": "Annual Impact Report 2025",
+    "type": "annual",
+    "period": "2025",
+    "summary": "Comprehensive review of achievements, financial summary, and impact metrics for 2025.",
+    "fileUrl": "https://minhaajulhudaa.com/files/report.pdf",
+    "data": {
+      "totalRaised": 45000000,
+      "totalDisbursed": 42300000,
+      "beneficiaries": 1250
+    },
+    "generatedAt": "2026-07-20T04:42:04.462Z",
+    "id": "charity_reports_0_mszlugc9",
+    "slug": "annual-impact-report-2025"
+  },
+  {
+    "title": "Q2 2026 Financial Report",
+    "type": "financial",
+    "period": "Q2 2026",
+    "summary": "Financial breakdown for the second quarter of 2026.",
+    "fileUrl": "https://minhaajulhudaa.com/files/report.pdf",
+    "data": {
+      "income": 15000000,
+      "expenses": 13200000,
+      "campaigns": 6
+    },
+    "generatedAt": "2026-08-09T04:42:04.462Z",
+    "id": "charity_reports_1_mszlugc9",
+    "slug": "q2-2026-financial-report"
+  },
+  {
+    "title": "Water Project Impact Report",
+    "type": "impact",
+    "period": "2025-2026",
+    "summary": "Detailed report on water well projects, beneficiaries, and outcomes.",
+    "fileUrl": "https://minhaajulhudaa.com/files/report.pdf",
+    "data": {
+      "wellsBuilt": 12,
+      "beneficiaries": 6000
+    },
+    "generatedAt": "2026-08-12T04:42:04.462Z",
+    "id": "charity_reports_2_mszlugc9",
+    "slug": "water-project-impact-report"
+  }
+]

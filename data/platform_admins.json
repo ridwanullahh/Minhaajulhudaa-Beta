@@ -1,0 +1,86 @@
+[
+  {
+    "email": "admin@minhaajulhudaa.com",
+    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "name": "Super Admin",
+    "role": "super_admin",
+    "platforms": [
+      "school",
+      "masjid",
+      "charity",
+      "travels"
+    ],
+    "phone": "+2348000000000",
+    "lastLoginAt": null,
+    "active": true,
+    "metadata": {
+      "title": "System Administrator"
+    },
+    "id": "platform_admins_0_mszlugby",
+    "slug": "super-admin"
+  },
+  {
+    "email": "school.admin@minhaajulhudaa.com",
+    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "name": "Ustadh Abdurrahman Adeyemi",
+    "role": "platform_admin",
+    "platforms": [
+      "school"
+    ],
+    "phone": "+2348000000001",
+    "active": true,
+    "metadata": {
+      "title": "School Principal"
+    },
+    "id": "platform_admins_1_mszlugbz",
+    "slug": "ustadh-abdurrahman-adeyemi"
+  },
+  {
+    "email": "masjid.admin@minhaajulhudaa.com",
+    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "name": "Imam Yusuf Olatunji",
+    "role": "platform_admin",
+    "platforms": [
+      "masjid"
+    ],
+    "phone": "+2348000000002",
+    "active": true,
+    "metadata": {
+      "title": "Masjid Administrator"
+    },
+    "id": "platform_admins_2_mszlugbz",
+    "slug": "imam-yusuf-olatunji"
+  },
+  {
+    "email": "charity.admin@minhaajulhudaa.com",
+    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "name": "Malik Ibrahim Suleiman",
+    "role": "platform_admin",
+    "platforms": [
+      "charity"
+    ],
+    "phone": "+2348000000003",
+    "active": true,
+    "metadata": {
+      "title": "Charity Director"
+    },
+    "id": "platform_admins_3_mszlugbz",
+    "slug": "malik-ibrahim-suleiman"
+  },
+  {
+    "email": "travels.admin@minhaajulhudaa.com",
+    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "name": "Ustadh Dawud Okafor",
+    "role": "platform_admin",
+    "platforms": [
+      "travels"
+    ],
+    "phone": "+2348000000004",
+    "active": true,
+    "metadata": {
+      "title": "Travels Manager"
+    },
+    "id": "platform_admins_4_mszlugbz",
+    "slug": "ustadh-dawud-okafor"
+  }
+]

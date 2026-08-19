@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "about",
+    "title": "About Minhaajulhudaa Charity Foundation",
+    "content": [
+      {
+        "type": "hero",
+        "title": "About Us",
+        "subtitle": "Serving humanity with compassion"
+      },
+      {
+        "type": "text",
+        "body": "Minhaajulhudaa Charity Foundation was established in 2022 to serve vulnerable communities across Nigeria. Inspired by the Islamic principles of compassion and social justice, we work to alleviate poverty, provide education, ensure access to clean water, and respond to emergencies."
+      },
+      {
+        "type": "text",
+        "body": "Our approach is holistic - we address immediate needs through emergency relief while investing in long-term solutions through education, skills training, and sustainable development projects. We believe in empowering communities rather than creating dependency."
+      },
+      {
+        "type": "text",
+        "body": "We are registered with the Corporate Affairs Commission (RC-2022-0001) and operate with full transparency. All our financial reports are publicly available, and we maintain strict accountability for every donation we receive."
+      }
+    ],
+    "seoTitle": "About Minhaajulhudaa Charity",
+    "seoDescription": "Learn about our mission to serve humanity with compassion.",
+    "status": "published",
+    "publishedAt": "2026-06-20T04:42:04.462Z",
+    "order": 1,
+    "id": "charity_pages_0_mszlugc7"
+  },
+  {
+    "slug": "how-to-help",
+    "title": "How to Help",
+    "content": [
+      {
+        "type": "hero",
+        "title": "How You Can Help",
+        "subtitle": "Together we can make a difference"
+      },
+      {
+        "type": "text",
+        "body": "There are many ways to support our mission of serving those in need. Whether through financial contributions, volunteering your time, or spreading awareness, every effort counts."
+      }
+    ],
+    "seoTitle": "How to Help - Minhaajulhudaa Charity",
+    "seoDescription": "Discover ways to support our charitable work.",
+    "status": "published",
+    "publishedAt": "2026-06-20T04:42:04.462Z",
+    "order": 2,
+    "id": "charity_pages_1_mszlugc7"
+  }
+]

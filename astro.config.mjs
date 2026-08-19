@@ -2,13 +2,17 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import node from '@astrojs/node';
+import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.SITE_URL || 'http://localhost:4321',
+  site: process.env.SITE_URL || 'https://minhaajulhudaa.pages.dev',
   output: 'server',
-  adapter: node({ mode: 'standalone' }),
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true,
+    },
+  }),
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],

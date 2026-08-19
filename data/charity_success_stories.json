@@ -1,0 +1,59 @@
+[
+  {
+    "slug": "aisha-tailoring-business",
+    "title": "Aisha's Journey to Financial Independence",
+    "summary": "How our skills training program helped a widow start a successful tailoring business.",
+    "content": "Aisha, a 32-year-old widow and mother of three, lost her husband in 2023. Without a source of income, she struggled to feed her family. When she joined our Women's Skills Training Program, she had never used a sewing machine.\n\nSix months later, Aisha graduated with tailoring skills and received a starter kit including a sewing machine, fabric, and basic tools. Today, she runs a successful tailoring business from her home, earning enough to support her family and send her children to school.\n\n\"I never imagined I could do this,\" Aisha says. \"The training gave me not just skills, but confidence. Now I can provide for my children without depending on anyone.\"\n\nAisha now mentors other women in her community and has even hired an assistant. Her story is a testament to the power of empowerment over charity.",
+    "beneficiaryName": "Aisha (name changed for privacy)",
+    "location": "Lagos, Nigeria",
+    "imageUrl": "/images/patterns/nature.svg",
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800"
+    ],
+    "metrics": {
+      "income_increase": "300%",
+      "children_in_school": 3,
+      "jobs_created": 1
+    },
+    "status": "published",
+    "publishedAt": "2026-08-04T04:42:04.462Z",
+    "id": "charity_success_stories_0_mszlugc8"
+  },
+  {
+    "slug": "borehole-transforms-village",
+    "title": "How a Borehole Transformed an Entire Village",
+    "summary": "A single water project brought health, education, and economic opportunities to 500 villagers.",
+    "content": "The village of Kofar Gabas in Northern Nigeria had no access to clean water. Women and children walked 5 kilometers daily to fetch water from a contaminated river. Waterborne diseases were rampant, and children missed school due to illness.\n\nWhen Minhaajulhudaa Charity Foundation built a borehole in the village, everything changed. Within three months:\n\n- Waterborne diseases dropped by 80%\n- School attendance increased by 45%\n- Women gained 3 hours daily previously spent fetching water\n- A community garden was started using the water supply\n\n\"We used to bury our children because of water diseases,\" says Malam Yusuf, the village head. \"Now, our children are healthy and in school. The borehole gave us life.\"\n\nThis project, funded by donors like you, cost ₦2.5 million but transformed 500 lives. We plan to build 10 more boreholes in similar communities this year.",
+    "beneficiaryName": "Village of Kofar Gabas",
+    "location": "Northern Nigeria",
+    "imageUrl": "/images/patterns/nature.svg",
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1541252260730-0412e8e2108e?w=800"
+    ],
+    "metrics": {
+      "beneficiaries": 500,
+      "disease_reduction": "80%",
+      "school_attendance_increase": "45%"
+    },
+    "status": "published",
+    "publishedAt": "2026-07-20T04:42:04.462Z",
+    "id": "charity_success_stories_1_mszlugc8"
+  },
+  {
+    "slug": "orphan-graduates-top-class",
+    "title": "Sponsored Orphan Graduates Top of His Class",
+    "summary": "Ahmed, sponsored through our education program, graduates with the highest scores in his school.",
+    "content": "Ahmed was 8 years old when he lost his father. His mother, a petty trader, could not afford his school fees. When Minhaajulhudaa Charity Foundation stepped in through the Orphans Education Support Program, Ahmed was given a second chance.\n\nFor three years, we sponsored Ahmed's education, providing school fees, uniforms, books, and daily meals. This year, Ahmed graduated from primary school with the highest scores in his entire school.\n\n\"I want to become a doctor so I can help people like my father,\" Ahmed says with a bright smile. \"Thank you for giving me the chance to dream.\"\n\nAhmed's story shows how education sponsorship can break the cycle of poverty and create future leaders. With your continued support, we can help more children like Ahmed reach their full potential.",
+    "beneficiaryName": "Ahmed (name changed for privacy)",
+    "location": "Lagos, Nigeria",
+    "imageUrl": "/images/patterns/nature.svg",
+    "metrics": {
+      "years_sponsored": 3,
+      "class_rank": 1,
+      "graduation_year": 2026
+    },
+    "status": "published",
+    "publishedAt": "2026-07-30T04:42:04.462Z",
+    "id": "charity_success_stories_2_mszlugc8"
+  }
+]

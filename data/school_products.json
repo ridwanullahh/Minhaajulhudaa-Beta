@@ -1,0 +1,148 @@
+[
+  {
+    "slug": "school-uniform-primary",
+    "name": "School Uniform - Primary",
+    "description": "Official school uniform set for primary students. Includes shirt, trousers/skirt, and blazer.",
+    "price": 15000,
+    "compareAtPrice": 18000,
+    "category": "uniforms",
+    "images": [
+      "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800"
+    ],
+    "stock": 50,
+    "sku": "UNI-PRI-001",
+    "variants": [
+      {
+        "name": "Size",
+        "options": [
+          "6",
+          "8",
+          "10",
+          "12",
+          "14"
+        ]
+      }
+    ],
+    "isDigital": false,
+    "status": "active",
+    "id": "school_products_0_mszlugc4"
+  },
+  {
+    "slug": "school-uniform-secondary",
+    "name": "School Uniform - Secondary",
+    "description": "Official school uniform set for secondary students. Includes shirt, trousers/skirt, and blazer.",
+    "price": 18000,
+    "category": "uniforms",
+    "images": [
+      "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800"
+    ],
+    "stock": 40,
+    "sku": "UNI-SEC-001",
+    "variants": [
+      {
+        "name": "Size",
+        "options": [
+          "S",
+          "M",
+          "L",
+          "XL"
+        ]
+      }
+    ],
+    "isDigital": false,
+    "status": "active",
+    "id": "school_products_1_mszlugc4"
+  },
+  {
+    "slug": "quran-textbook-grade1",
+    "name": "Qur'an Studies Textbook - Grade 1",
+    "description": "Comprehensive Qur'an studies textbook for Grade 1 students following the Minhaajulhudaa curriculum.",
+    "price": 3500,
+    "category": "books",
+    "images": [
+      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800"
+    ],
+    "stock": 100,
+    "sku": "BK-QUR-G1-001",
+    "isDigital": false,
+    "status": "active",
+    "id": "school_products_2_mszlugc4"
+  },
+  {
+    "slug": "arabic-textbook-beginners",
+    "name": "Arabic Language for Beginners",
+    "description": "Foundational Arabic language textbook with exercises and audio companion.",
+    "price": 4500,
+    "category": "books",
+    "images": [
+      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800"
+    ],
+    "stock": 75,
+    "sku": "BK-ARA-001",
+    "isDigital": false,
+    "status": "active",
+    "id": "school_products_3_mszlugc4"
+  },
+  {
+    "slug": "mathematics-workbook-jss",
+    "name": "Mathematics Workbook - JSS",
+    "description": "Practice workbook covering the complete JSS mathematics curriculum with 500+ problems.",
+    "price": 3000,
+    "category": "books",
+    "images": [
+      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800"
+    ],
+    "stock": 80,
+    "sku": "BK-MAT-JSS-001",
+    "isDigital": false,
+    "status": "active",
+    "id": "school_products_4_mszlugc4"
+  },
+  {
+    "slug": "school-bag-official",
+    "name": "Official School Bag",
+    "description": "Durable, branded school bag with multiple compartments and ergonomic design.",
+    "price": 8000,
+    "compareAtPrice": 10000,
+    "category": "supplies",
+    "images": [
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800"
+    ],
+    "stock": 60,
+    "sku": "SUP-BAG-001",
+    "isDigital": false,
+    "status": "active",
+    "id": "school_products_5_mszlugc4"
+  },
+  {
+    "slug": "sports-kit",
+    "name": "Sports Kit",
+    "description": "Complete sports kit including jersey, shorts, and socks with school branding.",
+    "price": 6000,
+    "category": "supplies",
+    "images": [
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+    ],
+    "stock": 45,
+    "sku": "SUP-SPT-001",
+    "isDigital": false,
+    "status": "active",
+    "id": "school_products_6_mszlugc4"
+  },
+  {
+    "slug": "digital-tajweed-guide",
+    "name": "Digital Tajweed Guide (PDF)",
+    "description": "Comprehensive digital guide to Tajweed rules with audio examples and practice exercises.",
+    "price": 2000,
+    "category": "digital",
+    "images": [
+      "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800"
+    ],
+    "stock": 999,
+    "sku": "DIG-TAJ-001",
+    "isDigital": true,
+    "downloadUrl": "https://minhaajulhudaa.com/files/tajweed-guide.pdf",
+    "status": "active",
+    "id": "school_products_7_mszlugc4"
+  }
+]

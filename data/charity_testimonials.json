@@ -1,0 +1,38 @@
+[
+  {
+    "authorName": "Dr. Muhammad Ali",
+    "authorRole": "Donor since 2022",
+    "content": "I have been donating to Minhaajulhudaa Charity for over two years. Their transparency and impact are remarkable. I visited one of their water projects and saw firsthand how donations are changing lives. I highly recommend supporting their work.",
+    "rating": 5,
+    "isDonor": true,
+    "isBeneficiary": false,
+    "isPartner": false,
+    "status": "approved",
+    "createdAt": "2026-08-14T04:42:04.462Z",
+    "id": "charity_testimonials_0_mszlugc8"
+  },
+  {
+    "authorName": "Malama Fatima",
+    "authorRole": "Beneficiary",
+    "content": "When my husband passed away, I did not know how to feed my children. Minhaajulhudaa Charity provided food, and later enrolled me in their skills training. Today I have my own business. May Allah reward them abundantly.",
+    "rating": 5,
+    "isDonor": false,
+    "isBeneficiary": true,
+    "isPartner": false,
+    "status": "approved",
+    "createdAt": "2026-08-09T04:42:04.462Z",
+    "id": "charity_testimonials_1_mszlugc8"
+  },
+  {
+    "authorName": "Alhaji Ibrahim Suleiman",
+    "authorRole": "Corporate Partner",
+    "content": "Our company has partnered with Minhaajulhudaa Charity for our CSR initiatives. Their professionalism and impact measurement are excellent. They provide detailed reports and are always accountable. A trustworthy organization.",
+    "rating": 5,
+    "isDonor": false,
+    "isBeneficiary": false,
+    "isPartner": true,
+    "status": "approved",
+    "createdAt": "2026-08-04T04:42:04.462Z",
+    "id": "charity_testimonials_2_mszlugc8"
+  }
+]

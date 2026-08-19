@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "about",
+    "title": "About Minhaajulhudaa Masjid",
+    "content": [
+      {
+        "type": "hero",
+        "title": "About Us",
+        "subtitle": "A center for prayer, learning, and community"
+      },
+      {
+        "type": "text",
+        "body": "Minhaajulhudaa Masjid was established in 2020 to serve the growing Muslim community in Lagos. Our masjid provides a spiritual home for daily prayers, Jumu'ah, Taraweeh during Ramadan, and a center for Islamic learning and community activities."
+      },
+      {
+        "type": "text",
+        "body": "With a capacity of 2,000 worshippers, our facility includes a main prayer hall, sisters' section, wudu areas, classrooms for Islamic education, a library, and administrative offices. We are committed to following the Qur'an and Sunnah in all our affairs."
+      }
+    ],
+    "seoTitle": "About Minhaajulhudaa Masjid",
+    "seoDescription": "Learn about Minhaajulhudaa Masjid - serving the community since 2020.",
+    "status": "published",
+    "publishedAt": "2026-07-20T04:42:04.461Z",
+    "order": 1,
+    "id": "masjid_pages_0_mszlugc5"
+  },
+  {
+    "slug": "contact",
+    "title": "Contact Us",
+    "content": [
+      {
+        "type": "hero",
+        "title": "Get in Touch",
+        "subtitle": "We are here for you"
+      }
+    ],
+    "seoTitle": "Contact Minhaajulhudaa Masjid",
+    "seoDescription": "Contact information for Minhaajulhudaa Masjid.",
+    "status": "published",
+    "publishedAt": "2026-07-20T04:42:04.461Z",
+    "order": 2,
+    "id": "masjid_pages_1_mszlugc5"
+  }
+]

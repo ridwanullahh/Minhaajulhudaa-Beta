@@ -1,0 +1,74 @@
+[
+  {
+    "courseId": "course-umrah-guide",
+    "title": "Introduction to Umrah",
+    "content": "What is Umrah and why is it important?",
+    "duration": 20,
+    "order": 1,
+    "resources": [],
+    "isPreview": true,
+    "id": "travels_lessons_0_mszlugca",
+    "slug": "introduction-to-umrah"
+  },
+  {
+    "courseId": "course-umrah-guide",
+    "title": "Spiritual Preparation",
+    "content": "How to prepare your heart and mind for Umrah.",
+    "duration": 25,
+    "order": 2,
+    "resources": [],
+    "id": "travels_lessons_1_mszlugca",
+    "slug": "spiritual-preparation"
+  },
+  {
+    "courseId": "course-umrah-guide",
+    "title": "Ihram: The Sacred State",
+    "content": "Understanding Ihram and how to enter it.",
+    "duration": 30,
+    "order": 3,
+    "resources": [],
+    "id": "travels_lessons_2_mszlugca",
+    "slug": "ihram-the-sacred-state"
+  },
+  {
+    "courseId": "course-umrah-guide",
+    "title": "Tawaf: Circling the Ka'bah",
+    "content": "How to perform Tawaf correctly.",
+    "duration": 35,
+    "order": 4,
+    "resources": [],
+    "id": "travels_lessons_3_mszlugca",
+    "slug": "tawaf-circling-the-kabah"
+  },
+  {
+    "courseId": "course-umrah-guide",
+    "title": "Sa'i: The Walk of Hajar",
+    "content": "Performing Sa'i between Safa and Marwah.",
+    "duration": 30,
+    "order": 5,
+    "resources": [],
+    "id": "travels_lessons_4_mszlugca",
+    "slug": "sai-the-walk-of-hajar"
+  },
+  {
+    "courseId": "course-hajj-rituals",
+    "title": "Introduction to Hajj",
+    "content": "Understanding the obligation of Hajj.",
+    "duration": 25,
+    "order": 1,
+    "resources": [],
+    "isPreview": true,
+    "id": "travels_lessons_5_mszlugca",
+    "slug": "introduction-to-hajj"
+  },
+  {
+    "courseId": "course-hajj-rituals",
+    "title": "Day of Tarwiyah (8th Dhul-Hijjah)",
+    "content": "The first day of Hajj - traveling to Mina.",
+    "duration": 30,
+    "order": 2,
+    "resources": [],
+    "id": "travels_lessons_6_mszlugca",
+    "slug": "day-of-tarwiyah-8th-dhul-hijjah"
+  }
+]

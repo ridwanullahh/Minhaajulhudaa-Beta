@@ -1,0 +1,162 @@
+[
+  {
+    "staffId": "MHS-STAFF/001",
+    "firstName": "Abdurrahman",
+    "lastName": "Adeyemi",
+    "role": "principal",
+    "subjects": [],
+    "qualifications": "B.Ed Educational Administration, M.Ed Islamic Education",
+    "email": "school.admin@minhaajulhudaa.com",
+    "phone": "+2348000000001",
+    "bio": "With over 20 years of experience in Islamic education, Ustadh Abdurrahman leads our school with wisdom and vision.",
+    "joinDate": "2021-01-15",
+    "status": "active",
+    "id": "school_staff_0_mszlugc3"
+  },
+  {
+    "staffId": "MHS-STAFF/002",
+    "firstName": "Yusuf",
+    "lastName": "Olatunji",
+    "role": "teacher",
+    "subjects": [
+      "Qur'an",
+      "Tajweed",
+      "Hifz"
+    ],
+    "qualifications": "B.A Islamic Studies, Ijazah in Qur'an recitation",
+    "email": "yusuf.olatunji@minhaajulhudaa.com",
+    "phone": "+2348011111111",
+    "bio": "Lead Hifz instructor with Ijazah in the 10 recitations of the Qur'an.",
+    "joinDate": "2021-02-01",
+    "status": "active",
+    "id": "school_staff_1_mszlugc3"
+  },
+  {
+    "staffId": "MHS-STAFF/003",
+    "firstName": "Muhammad",
+    "lastName": "Bashir",
+    "role": "teacher",
+    "subjects": [
+      "Mathematics",
+      "Physics",
+      "Robotics"
+    ],
+    "qualifications": "B.Sc Mathematics, M.Sc Physics Education",
+    "email": "muhammad.bashir@minhaajulhudaa.com",
+    "phone": "+2348012222222",
+    "bio": "STEM coordinator passionate about making science accessible to all students.",
+    "joinDate": "2021-03-10",
+    "status": "active",
+    "id": "school_staff_2_mszlugc3"
+  },
+  {
+    "staffId": "MHS-STAFF/004",
+    "firstName": "Aisha",
+    "lastName": "Abdullahi",
+    "role": "teacher",
+    "subjects": [
+      "English Language",
+      "Literature"
+    ],
+    "qualifications": "B.A English, PGDE",
+    "email": "aisha.abdullahi@minhaajulhudaa.com",
+    "phone": "+2348013333333",
+    "bio": "English and Literature teacher with a passion for developing young writers.",
+    "joinDate": "2021-09-01",
+    "status": "active",
+    "id": "school_staff_3_mszlugc3"
+  },
+  {
+    "staffId": "MHS-STAFF/005",
+    "firstName": "Khadijah",
+    "lastName": "Suleiman",
+    "role": "teacher",
+    "subjects": [
+      "Arabic Language",
+      "Islamic Studies"
+    ],
+    "qualifications": "B.A Arabic Language, Diploma in Shariah",
+    "email": "khadijah.suleiman@minhaajulhudaa.com",
+    "phone": "+2348014444444",
+    "bio": "Native Arabic speaker with expertise in teaching Arabic to non-native speakers.",
+    "joinDate": "2022-01-10",
+    "status": "active",
+    "id": "school_staff_4_mszlugc3"
+  },
+  {
+    "staffId": "MHS-STAFF/006",
+    "firstName": "Ibrahim",
+    "lastName": "Musa",
+    "role": "teacher",
+    "subjects": [
+      "Biology",
+      "Chemistry"
+    ],
+    "qualifications": "B.Sc Biology, M.Sc Chemistry",
+    "email": "ibrahim.musa@minhaajulhudaa.com",
+    "phone": "+2348015555555",
+    "bio": "Science teacher with research experience in environmental science.",
+    "joinDate": "2022-09-01",
+    "status": "active",
+    "id": "school_staff_5_mszlugc3"
+  },
+  {
+    "staffId": "MHS-STAFF/007",
+    "firstName": "Fatima",
+    "lastName": "Bello",
+    "role": "librarian",
+    "subjects": [],
+    "qualifications": "B.Library Science",
+    "email": "fatima.bello@minhaajulhudaa.com",
+    "phone": "+2348016666666",
+    "bio": "Our librarian curates a growing collection of over 5,000 titles.",
+    "joinDate": "2021-09-05",
+    "status": "active",
+    "id": "school_staff_6_mszlugc3"
+  },
+  {
+    "staffId": "MHS-STAFF/008",
+    "firstName": "Abdullah",
+    "lastName": "Okafor",
+    "role": "accountant",
+    "subjects": [],
+    "qualifications": "B.Sc Accounting, ACA",
+    "email": "abdullah.okafor@minhaajulhudaa.com",
+    "phone": "+2348017777777",
+    "bio": "Chartered accountant overseeing school finances and fee management.",
+    "joinDate": "2021-04-01",
+    "status": "active",
+    "id": "school_staff_7_mszlugc3"
+  },
+  {
+    "staffId": "MHS-STAFF/009",
+    "firstName": "Maryam",
+    "lastName": "Disu",
+    "role": "vice-principal",
+    "subjects": [],
+    "qualifications": "B.Ed, M.Ed Educational Management",
+    "email": "maryam.disu@minhaajulhudaa.com",
+    "phone": "+2348018888888",
+    "bio": "Vice Principal Academic, overseeing curriculum and academic standards.",
+    "joinDate": "2021-05-15",
+    "status": "active",
+    "id": "school_staff_8_mszlugc3"
+  },
+  {
+    "staffId": "MHS-STAFF/010",
+    "firstName": "Yahya",
+    "lastName": "Garba",
+    "role": "teacher",
+    "subjects": [
+      "Geography",
+      "Civic Education"
+    ],
+    "qualifications": "B.Sc Geography, PGDE",
+    "email": "yahya.garba@minhaajulhudaa.com",
+    "phone": "+2348019999999",
+    "bio": "Geography and civic education teacher with field research experience.",
+    "joinDate": "2023-01-10",
+    "status": "active",
+    "id": "school_staff_9_mszlugc3"
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "courseId": "course-tajweed-001",
+    "title": "Introduction to Tajweed",
+    "content": "What is Tajweed and why is it important? Understanding the obligation of reciting the Qur'an correctly.",
+    "duration": 25,
+    "order": 1,
+    "resources": [],
+    "isPreview": true,
+    "id": "school_lessons_0_mszlugc4",
+    "slug": "introduction-to-tajweed"
+  },
+  {
+    "courseId": "course-tajweed-001",
+    "title": "Articulation Points (Makharij) - Part 1",
+    "content": "Learn the articulation points of Arabic letters from the throat and tongue.",
+    "duration": 35,
+    "order": 2,
+    "resources": [
+      {
+        "type": "pdf",
+        "url": "#",
+        "title": "Makharij Chart"
+      }
+    ],
+    "id": "school_lessons_1_mszlugc4",
+    "slug": "articulation-points-makharij-part-1"
+  },
+  {
+    "courseId": "course-tajweed-001",
+    "title": "Articulation Points (Makharij) - Part 2",
+    "content": "Continue learning the articulation points of remaining letters.",
+    "duration": 32,
+    "order": 3,
+    "resources": [],
+    "id": "school_lessons_2_mszlugc4",
+    "slug": "articulation-points-makharij-part-2"
+  },
+  {
+    "courseId": "course-tajweed-001",
+    "title": "Characteristics of Letters (Sifat) - Part 1",
+    "content": "Understanding the permanent and temporary characteristics of Arabic letters.",
+    "duration": 40,
+    "order": 4,
+    "resources": [],
+    "id": "school_lessons_3_mszlugc4",
+    "slug": "characteristics-of-letters-sifat-part-1"
+  },
+  {
+    "courseId": "course-arabic-001",
+    "title": "The Arabic Alphabet",
+    "content": "Learn to recognize, pronounce, and write all 28 Arabic letters.",
+    "duration": 30,
+    "order": 1,
+    "resources": [],
+    "isPreview": true,
+    "id": "school_lessons_4_mszlugc4",
+    "slug": "the-arabic-alphabet"
+  },
+  {
+    "courseId": "course-arabic-001",
+    "title": "Vowel Marks (Harakat)",
+    "content": "Learn the Fatha, Kasra, Damma, and Sukun vowel marks.",
+    "duration": 25,
+    "order": 2,
+    "resources": [],
+    "id": "school_lessons_5_mszlugc4",
+    "slug": "vowel-marks-harakat"
+  },
+  {
+    "courseId": "course-arabic-001",
+    "title": "Joining Letters",
+    "content": "How letters join to form words in Arabic script.",
+    "duration": 35,
+    "order": 3,
+    "resources": [],
+    "id": "school_lessons_6_mszlugc4",
+    "slug": "joining-letters"
+  }
+]

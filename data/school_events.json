@@ -1,0 +1,66 @@
+[
+  {
+    "title": "Term 1 Resumption",
+    "description": "First day of the 2026/2027 academic year. Students should arrive by 7:30 AM for assembly.",
+    "category": "other",
+    "startDate": "2026-08-26T04:42:04.461Z",
+    "endDate": "2026-08-26T04:42:04.461Z",
+    "location": "School Assembly Hall",
+    "imageUrl": "/images/patterns/stars.svg",
+    "id": "school_events_0_mszlugc2",
+    "slug": "term-1-resumption"
+  },
+  {
+    "title": "Annual Qur'an Competition",
+    "description": "Inter-house Qur'an recitation competition. Categories include Tajweed, Memorization, and Tafsir.",
+    "category": "cultural",
+    "startDate": "2026-09-09T04:42:04.461Z",
+    "endDate": "2026-09-09T04:42:04.461Z",
+    "location": "School Auditorium",
+    "imageUrl": "/images/patterns/stars.svg",
+    "id": "school_events_1_mszlugc2",
+    "slug": "annual-quran-competition"
+  },
+  {
+    "title": "Mid-Term Parent-Teacher Conference",
+    "description": "Opportunity for parents to meet with teachers and discuss student progress.",
+    "category": "parent-teacher",
+    "startDate": "2026-10-03T04:42:04.461Z",
+    "endDate": "2026-10-03T04:42:04.461Z",
+    "location": "Various Classrooms",
+    "id": "school_events_2_mszlugc2",
+    "slug": "mid-term-parent-teacher-conference"
+  },
+  {
+    "title": "Sports Day",
+    "description": "Annual inter-house sports competition featuring athletics, football, and traditional games.",
+    "category": "sports",
+    "startDate": "2026-10-18T04:42:04.461Z",
+    "endDate": "2026-10-18T04:42:04.461Z",
+    "location": "School Sports Field",
+    "imageUrl": "/images/patterns/stars.svg",
+    "id": "school_events_3_mszlugc2",
+    "slug": "sports-day"
+  },
+  {
+    "title": "End of Term Examinations",
+    "description": "First term examinations across all subjects. Schedule will be shared two weeks prior.",
+    "category": "exam",
+    "startDate": "2026-11-02T04:42:04.461Z",
+    "endDate": "2026-11-09T04:42:04.461Z",
+    "location": "Examination Halls",
+    "id": "school_events_4_mszlugc2",
+    "slug": "end-of-term-examinations"
+  },
+  {
+    "title": "Cultural Day",
+    "description": "Celebration of Nigerian and Islamic cultures with food, music, and traditional attire.",
+    "category": "cultural",
+    "startDate": "2026-10-08T04:42:04.461Z",
+    "endDate": "2026-10-08T04:42:04.461Z",
+    "location": "School Grounds",
+    "imageUrl": "/images/patterns/stars.svg",
+    "id": "school_events_5_mszlugc2",
+    "slug": "cultural-day"
+  }
+]

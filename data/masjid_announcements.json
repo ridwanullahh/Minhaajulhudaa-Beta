@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Ramadan Timetable Available",
+    "message": "The Ramadan timetable for Taraweeh and Sahur is now available. Please pick up a copy at the masjid office or download from our website.",
+    "type": "info",
+    "active": true,
+    "startsAt": "2026-08-17T04:42:04.461Z",
+    "endsAt": "2026-09-18T04:42:04.461Z",
+    "createdAt": "2026-08-17T04:42:04.461Z",
+    "id": "masjid_announcements_0_mszlugc5",
+    "slug": "ramadan-timetable-available"
+  },
+  {
+    "title": "New Halaqah Series: Tafsir of Juz Amma",
+    "message": "Join us every Tuesday after Maghrib for a new halaqah series on the Tafsir of Juz Amma, led by Imam Yusuf Olatunji.",
+    "type": "success",
+    "active": true,
+    "startsAt": "2026-08-14T04:42:04.461Z",
+    "endsAt": "2026-10-18T04:42:04.461Z",
+    "createdAt": "2026-08-14T04:42:04.461Z",
+    "id": "masjid_announcements_1_mszlugc5",
+    "slug": "new-halaqah-series-tafsir-of-juz-amma"
+  },
+  {
+    "title": "Masjid Expansion Project",
+    "message": "Alhamdulillah, we are expanding the sisters' section to accommodate more worshippers. Please support this project with your donations.",
+    "type": "urgent",
+    "active": true,
+    "startsAt": "2026-08-09T04:42:04.461Z",
+    "endsAt": "2026-11-17T04:42:04.461Z",
+    "createdAt": "2026-08-09T04:42:04.461Z",
+    "id": "masjid_announcements_2_mszlugc5",
+    "slug": "masjid-expansion-project"
+  }
+]

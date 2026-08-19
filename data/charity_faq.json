@@ -1,0 +1,66 @@
+[
+  {
+    "question": "Is my donation tax-deductible?",
+    "answer": "Yes, Minhaajulhudaa Charity Foundation is a registered non-profit organization. All donations are tax-deductible. We provide official receipts for all donations.",
+    "category": "donations",
+    "order": 1,
+    "status": "active",
+    "id": "charity_faq_0_mszlugc9"
+  },
+  {
+    "question": "How can I be sure my donation reaches the intended beneficiaries?",
+    "answer": "We maintain full transparency. All our campaigns have progress tracking, and we publish quarterly reports showing how funds were used. Donors can also request specific reports for their contributions.",
+    "category": "donations",
+    "order": 2,
+    "status": "active",
+    "id": "charity_faq_1_mszlugc9"
+  },
+  {
+    "question": "Can I donate to a specific campaign?",
+    "answer": "Yes, you can choose to donate to any of our active campaigns. Simply select the campaign on our donations page and proceed with your contribution.",
+    "category": "donations",
+    "order": 3,
+    "status": "active",
+    "id": "charity_faq_2_mszlugc9"
+  },
+  {
+    "question": "What payment methods do you accept?",
+    "answer": "We accept bank transfers, card payments, and mobile money. For large donations, please contact us directly for personalized assistance.",
+    "category": "donations",
+    "order": 4,
+    "status": "active",
+    "id": "charity_faq_3_mszlugc9"
+  },
+  {
+    "question": "How can I become a volunteer?",
+    "answer": "Visit our How to Help page and fill out the volunteer registration form. Our team will review your application and contact you within 5 business days with available opportunities.",
+    "category": "volunteering",
+    "order": 1,
+    "status": "active",
+    "id": "charity_faq_4_mszlugc9"
+  },
+  {
+    "question": "What skills are you looking for in volunteers?",
+    "answer": "We welcome volunteers with various skills including teaching, medical, logistics, media, counseling, and more. Even if you do not have specialized skills, there are opportunities to help with distribution and events.",
+    "category": "volunteering",
+    "order": 2,
+    "status": "active",
+    "id": "charity_faq_5_mszlugc9"
+  },
+  {
+    "question": "Can I sponsor an orphan long-term?",
+    "answer": "Yes, we offer an orphan sponsorship program where you can sponsor a child's education for ₦50,000 per term. This covers school fees, uniforms, books, and daily meals. Contact us for more details.",
+    "category": "programs",
+    "order": 1,
+    "status": "active",
+    "id": "charity_faq_6_mszlugc9"
+  },
+  {
+    "question": "How do you verify beneficiaries?",
+    "answer": "We have a thorough verification process that includes community referrals, home visits, and documentation. Our team works with local leaders and social workers to ensure aid reaches those genuinely in need.",
+    "category": "programs",
+    "order": 2,
+    "status": "active",
+    "id": "charity_faq_7_mszlugc9"
+  }
+]
