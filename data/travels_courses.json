@@ -14,8 +14,8 @@
     "enrolledCount": 234,
     "rating": 4.9,
     "status": "published",
-    "publishedAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_courses_0_mszlugc9"
+    "publishedAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_courses_0_mt1w9vwk"
   },
   {
     "slug": "hajj-rituals-explained",
@@ -32,8 +32,8 @@
     "enrolledCount": 178,
     "rating": 5,
     "status": "published",
-    "publishedAt": "2026-07-05T04:42:04.462Z",
-    "id": "travels_courses_1_mszlugc9"
+    "publishedAt": "2026-07-06T19:09:32.985Z",
+    "id": "travels_courses_1_mt1w9vwk"
   },
   {
     "slug": "makkah-history-significance",
@@ -50,8 +50,8 @@
     "enrolledCount": 145,
     "rating": 4.8,
     "status": "published",
-    "publishedAt": "2026-07-30T04:42:04.462Z",
-    "id": "travels_courses_2_mszlugc9"
+    "publishedAt": "2026-07-31T19:09:32.985Z",
+    "id": "travels_courses_2_mt1w9vwk"
   },
   {
     "slug": "madinah-the-beloved-city",
@@ -68,7 +68,7 @@
     "enrolledCount": 132,
     "rating": 4.9,
     "status": "published",
-    "publishedAt": "2026-08-04T04:42:04.462Z",
-    "id": "travels_courses_3_mszlugc9"
+    "publishedAt": "2026-08-05T19:09:32.985Z",
+    "id": "travels_courses_3_mt1w9vwk"
   }
 ]

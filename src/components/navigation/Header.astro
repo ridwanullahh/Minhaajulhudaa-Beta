@@ -1,8 +1,23 @@
 ---
 /**
- * Header component - sticky top navigation with logo, nav, platform switcher, theme toggle
+ * Header component - sticky top navigation with logo, nav, platform switcher,
+ * theme toggle, language selector, and an improved mobile drawer.
+ *
+ * Improvements (10x better mobile):
+ * - Slide-in drawer from the right with backdrop blur overlay
+ * - Smooth animations (slide + fade)
+ * - Full-height drawer with scrollable nav
+ * - Active section highlighting with left border accent
+ * - Platform switcher grid at bottom of drawer
+ * - Language selector integrated in both desktop and mobile
+ * - Touch-friendly button sizes (min 44px)
+ * - Close button in drawer header
+ * - Close on Escape key
+ * - Close on link click
+ * - Prevent body scroll when drawer is open
  */
 import { PLATFORMS, NAV_ITEMS, BRAND } from '../../lib/constants';
+import LanguageSelector from '../LanguageSelector.astro';
 
 interface Props {
   platform?: string;
@@ -15,11 +30,14 @@ const platformConfig = platform ? PLATFORMS[platform as keyof typeof PLATFORMS] 
 const allPlatforms = Object.values(PLATFORMS);
 ---
 
-<header class="sticky top-0 z-50 backdrop-blur-lg border-b" style="background: color-mix(in srgb, var(--color-surface) 85%, transparent); border-color: var(--color-border);">
+<!-- Skip link for accessibility -->
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<header class="sticky top-0 z-50 backdrop-blur-lg border-b" style="background: color-mix(in srgb, var(--color-surface) 90%, transparent); border-color: var(--color-border);">
   <div class="container-app flex items-center justify-between h-16">
     <!-- Logo + Platform Name -->
     <div class="flex items-center gap-3">
-      <a href="/" class="flex items-center gap-2">
+      <a href="/" class="flex items-center gap-2" aria-label="Home">
         <svg width="32" height="32" viewBox="0 0 64 64" class="shrink-0">
           <rect width="64" height="64" rx="14" fill="var(--color-primary)"/>
           <path d="M32 12 L48 20 V36 C48 44 40 50 32 52 C24 50 16 44 16 36 V20 Z" fill="none" stroke="var(--color-accent)" stroke-width="2.5" stroke-linejoin="round"/>
@@ -33,26 +51,40 @@ const allPlatforms = Object.values(PLATFORMS);
     </div>
 
     <!-- Desktop Nav -->
-    <nav class="hidden lg:flex items-center gap-1">
+    <nav class="hidden lg:flex items-center gap-1" aria-label="Main navigation">
       {navItems.slice(0, 7).map((item) => (
         <a
           href={item.href}
-          class={`px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-[rgb(5,179,77,0.1)] ${currentPath === item.href ? 'text-[var(--color-primary)]' : ''}`}
+          class:list={[
+            'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+            currentPath === item.href
+              ? 'bg-[rgb(5,179,77,0.1)]'
+              : 'hover:bg-[rgb(5,179,77,0.08)]'
+          ]}
           style={currentPath === item.href ? 'color: var(--color-primary);' : ''}
+          aria-current={currentPath === item.href ? 'page' : undefined}
         >
           {item.label}
         </a>
       ))}
     </nav>
 
-    <!-- Right: Platform Switcher + Theme Toggle + Mobile Menu -->
-    <div class="flex items-center gap-2">
+    <!-- Right: Language + Platform Switcher + Theme Toggle + Mobile Menu -->
+    <div class="flex items-center gap-1.5">
+      <!-- Language Selector (desktop) -->
+      <div class="hidden md:block">
+        <LanguageSelector />
+      </div>
+
       <!-- Platform Switcher (desktop) -->
       <div class="relative hidden md:block" id="platform-switcher">
         <button
-          class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border"
+          class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border transition-colors hover:bg-[rgb(5,179,77,0.08)]"
           style="border-color: var(--color-border);"
           id="platform-switcher-btn"
+          aria-label="Switch platform"
+          aria-haspopup="true"
+          aria-expanded="false"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="3" width="7" height="7" rx="1"/>
@@ -63,29 +95,39 @@ const allPlatforms = Object.values(PLATFORMS);
           <span class="hidden lg:inline">Platforms</span>
         </button>
         <div
-          class="absolute right-0 top-full mt-2 w-56 card p-2 hidden"
+          class="absolute right-0 top-full mt-2 w-64 card p-2 hidden shadow-xl"
           id="platform-switcher-menu"
           style="z-index: 100;"
+          role="menu"
         >
           {allPlatforms.map((p) => (
             <a
               href={p.path}
-              class={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm hover:bg-[rgb(5,179,77,0.08)] transition-colors ${platform === p.slug ? 'bg-[rgb(5,179,77,0.1)]' : ''}`}
+              class:list={[
+                'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors hover:bg-[rgb(5,179,77,0.08)]',
+                platform === p.slug ? 'bg-[rgb(5,179,77,0.1)]' : ''
+              ]}
+              role="menuitem"
             >
-              <span class="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold" style={`background: ${p.accent === 'gold' ? 'rgb(242,185,28,0.15)' : 'rgb(5,179,77,0.1)'}; color: var(--color-primary);`}>
+              <span class="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold shrink-0" style={`background: ${p.accent === 'gold' ? 'rgb(242,185,28,0.15)' : 'rgb(5,179,77,0.1)'}; color: var(--color-primary);`}>
                 {p.name.charAt(0)}
               </span>
-              <div>
+              <div class="flex-1 min-w-0">
                 <div class="font-semibold">{p.name}</div>
-                <div class="text-xs" style="color: var(--color-muted);">{p.tagline}</div>
+                <div class="text-xs truncate" style="color: var(--color-muted);">{p.tagline}</div>
               </div>
+              {platform === p.slug && (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-primary);" class="shrink-0">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              )}
             </a>
           ))}
         </div>
       </div>
 
       <!-- Theme Toggle -->
-      <button id="theme-toggle" class="w-10 h-10 rounded-lg flex items-center justify-center border" style="border-color: var(--color-border);" aria-label="Toggle theme">
+      <button id="theme-toggle" class="w-10 h-10 rounded-lg flex items-center justify-center border transition-colors hover:bg-[rgb(5,179,77,0.08)]" style="border-color: var(--color-border);" aria-label="Toggle theme">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="theme-icon-light">
           <circle cx="12" cy="12" r="5"/>
           <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
@@ -95,40 +137,157 @@ const allPlatforms = Object.values(PLATFORMS);
         </svg>
       </button>
 
-      <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 rounded-lg flex items-center justify-center border" style="border-color: var(--color-border);" aria-label="Menu">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <!-- Mobile Menu Button (hamburger) -->
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden w-10 h-10 rounded-lg flex items-center justify-center border transition-colors hover:bg-[rgb(5,179,77,0.08)]"
+        style="border-color: var(--color-border);"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-drawer"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="menu-icon-open">
           <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="menu-icon-close" style="display:none;">
+          <path d="M18 6L6 18M6 6l12 12"/>
         </svg>
       </button>
     </div>
   </div>
-
-  <!-- Mobile Menu Drawer -->
-  <div id="mobile-menu" class="lg:hidden hidden border-t" style="border-color: var(--color-border); background: var(--color-surface);">
-    <nav class="container-app py-4 flex flex-col gap-1">
-      {navItems.map((item) => (
-        <a
-          href={item.href}
-          class={`px-4 py-3 rounded-lg text-sm font-medium ${currentPath === item.href ? 'bg-[rgb(5,179,77,0.1)]' : ''}`}
-          style={currentPath === item.href ? 'color: var(--color-primary);' : ''}
-        >
-          {item.label}
-        </a>
-      ))}
-      <div class="border-t mt-2 pt-3" style="border-color: var(--color-border);">
-        <div class="text-xs font-semibold uppercase tracking-wide mb-2" style="color: var(--color-muted);">Switch Platform</div>
-        <div class="grid grid-cols-2 gap-2">
-          {allPlatforms.map((p) => (
-            <a href={p.path} class={`px-3 py-2 rounded-lg text-sm font-medium border text-center ${platform === p.slug ? 'border-[var(--color-primary)] bg-[rgb(5,179,77,0.05)]' : ''}`} style="border-color: var(--color-border);">
-              {p.name}
-            </a>
-          ))}
-        </div>
-      </div>
-    </nav>
-  </div>
 </header>
+
+<!-- Mobile Drawer Overlay -->
+<div id="mobile-drawer-overlay" class="lg:hidden fixed inset-0 z-[60] hidden opacity-0 transition-opacity duration-300" style="background: rgb(0 0 0 / 0.5); backdrop-filter: blur(4px);"></div>
+
+<!-- Mobile Drawer (slide-in from right) -->
+<aside
+  id="mobile-drawer"
+  class="lg:hidden fixed top-0 right-0 bottom-0 z-[70] w-80 max-w-[85vw] hidden translate-x-full transition-transform duration-300 ease-out flex flex-col"
+  style="background: var(--color-bg); box-shadow: -4px 0 24px rgb(0 0 0 / 0.1);"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Navigation menu"
+>
+  <!-- Drawer Header -->
+  <div class="flex items-center justify-between p-4 border-b" style="border-color: var(--color-border);">
+    <div class="flex items-center gap-2">
+      <svg width="28" height="28" viewBox="0 0 64 64" class="shrink-0">
+        <rect width="64" height="64" rx="14" fill="var(--color-primary)"/>
+        <path d="M32 12 L48 20 V36 C48 44 40 50 32 52 C24 50 16 44 16 36 V20 Z" fill="none" stroke="var(--color-accent)" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M32 22 V42 M24 28 H40 M24 36 H40" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span class="font-bold text-sm" style="font-family: var(--font-heading);">
+        {platformConfig ? platformConfig.name : BRAND.name}
+      </span>
+    </div>
+    <button
+      id="mobile-drawer-close"
+      class="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-[rgb(5,179,77,0.08)] transition-colors"
+      aria-label="Close menu"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Drawer Nav (scrollable) -->
+  <nav class="flex-1 overflow-y-auto p-3" aria-label="Mobile navigation">
+    <div class="text-xs font-semibold uppercase tracking-wider px-3 py-2 mb-1" style="color: var(--color-muted);">Menu</div>
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class:list={[
+          'flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 mb-0.5',
+          currentPath === item.href
+            ? 'bg-[rgb(5,179,77,0.1)]'
+            : 'hover:bg-[rgb(5,179,77,0.06)]'
+        ]}
+        style={currentPath === item.href ? 'color: var(--color-primary); border-left: 3px solid var(--color-primary); padding-left: 12px;' : ''}
+        data-drawer-link
+      >
+        <span class="flex-1">{item.label}</span>
+        {currentPath === item.href && (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-primary);">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        )}
+      </a>
+    ))}
+
+    <!-- Language Selector (mobile) -->
+    <div class="border-t mt-4 pt-4" style="border-color: var(--color-border);">
+      <div class="text-xs font-semibold uppercase tracking-wider px-3 py-2 mb-1" style="color: var(--color-muted);">Language</div>
+      <div class="px-3">
+        <LanguageSelector />
+      </div>
+    </div>
+
+    <!-- Platform Switcher (mobile) -->
+    <div class="border-t mt-4 pt-4" style="border-color: var(--color-border);">
+      <div class="text-xs font-semibold uppercase tracking-wider px-3 py-2 mb-2" style="color: var(--color-muted);">Switch Platform</div>
+      <div class="grid grid-cols-2 gap-2">
+        {allPlatforms.map((p) => (
+          <a
+            href={p.path}
+            class:list={[
+              'flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium border transition-all',
+              platform === p.slug
+                ? 'border-[var(--color-primary)] bg-[rgb(5,179,77,0.05)]'
+                : 'hover:bg-[rgb(5,179,77,0.06)]'
+            ]}
+            style="border-color: var(--color-border);"
+            data-drawer-link
+          >
+            <span class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0" style={`background: ${p.accent === 'gold' ? 'rgb(242,185,28,0.15)' : 'rgb(5,179,77,0.1)'}; color: var(--color-primary);`}>
+              {p.name.charAt(0)}
+            </span>
+            <span class="truncate">{p.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+
+  <!-- Drawer Footer -->
+  <div class="p-4 border-t" style="border-color: var(--color-border);">
+    <a href="/" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl text-sm font-medium border transition-colors hover:bg-[rgb(5,179,77,0.08)]" style="border-color: var(--color-border);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      All Platforms
+    </a>
+  </div>
+</aside>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px 16px;
+    z-index: 9999;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+  #mobile-drawer.open {
+    transform: translateX(0);
+  }
+  #mobile-drawer-overlay.open {
+    opacity: 1;
+  }
+  body.drawer-open {
+    overflow: hidden;
+  }
+</style>
 
 <script is:inline>
   // Theme toggle
@@ -159,33 +318,81 @@ const allPlatforms = Object.values(PLATFORMS);
     });
   }
 
-  // Mobile menu
-  function setupMobileMenu() {
+  // Mobile drawer (improved slide-in)
+  function setupMobileDrawer() {
     const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
-    if (!btn || !menu) return;
-    btn.addEventListener('click', function() {
-      menu.classList.toggle('hidden');
+    const drawer = document.getElementById('mobile-drawer');
+    const overlay = document.getElementById('mobile-drawer-overlay');
+    const closeBtn = document.getElementById('mobile-drawer-close');
+    if (!btn || !drawer || !overlay || !closeBtn) return;
+
+    const menuIconOpen = btn.querySelector('.menu-icon-open');
+    const menuIconClose = btn.querySelector('.menu-icon-close');
+
+    function openDrawer() {
+      drawer.classList.remove('hidden');
+      overlay.classList.remove('hidden');
+      // Trigger reflow for animation
+      void drawer.offsetHeight;
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('drawer-open');
+      if (menuIconOpen) menuIconOpen.style.display = 'none';
+      if (menuIconClose) menuIconClose.style.display = 'block';
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('drawer-open');
+      if (menuIconOpen) menuIconOpen.style.display = 'block';
+      if (menuIconClose) menuIconClose.style.display = 'none';
+      // Hide after animation completes
+      setTimeout(function() {
+        drawer.classList.add('hidden');
+        overlay.classList.add('hidden');
+      }, 300);
+    }
+
+    btn.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) {
+        closeDrawer();
+      }
+    });
+
+    // Close on link click
+    drawer.querySelectorAll('[data-drawer-link]').forEach(function(link) {
+      link.addEventListener('click', closeDrawer);
     });
   }
 
-  // Platform switcher
+  // Platform switcher (desktop)
   function setupPlatformSwitcher() {
     const btn = document.getElementById('platform-switcher-btn');
     const menu = document.getElementById('platform-switcher-menu');
     if (!btn || !menu) return;
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
+      const isHidden = menu.classList.contains('hidden');
       menu.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
     document.addEventListener('click', function(e) {
       if (!menu.contains(e.target) && !btn.contains(e.target)) {
         menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
       }
     });
   }
 
   setupThemeToggle();
-  setupMobileMenu();
+  setupMobileDrawer();
   setupPlatformSwitcher();
 </script>

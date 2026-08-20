@@ -22,7 +22,7 @@
     "instructor": "Ustadh Yusuf Olatunji",
     "fee": 50000,
     "status": "open",
-    "id": "school_programs_0_mszlugc3"
+    "id": "school_programs_0_mt1w9vwe"
   },
   {
     "slug": "arabic-immersion",
@@ -45,7 +45,7 @@
     "instructor": "Mrs. Khadijah Suleiman",
     "fee": 0,
     "status": "open",
-    "id": "school_programs_1_mszlugc3"
+    "id": "school_programs_1_mt1w9vwe"
   },
   {
     "slug": "stem-robotics",
@@ -69,7 +69,7 @@
     "instructor": "Ustadh Muhammad Bashir",
     "fee": 30000,
     "status": "open",
-    "id": "school_programs_2_mszlugc3"
+    "id": "school_programs_2_mt1w9vwe"
   },
   {
     "slug": "sports-academy",
@@ -92,6 +92,6 @@
     "instructor": "Coach Abdullah Hassan",
     "fee": 20000,
     "status": "open",
-    "id": "school_programs_3_mszlugc3"
+    "id": "school_programs_3_mt1w9vwe"
   }
 ]

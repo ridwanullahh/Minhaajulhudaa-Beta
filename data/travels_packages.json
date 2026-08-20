@@ -41,8 +41,8 @@
     "endDate": "2026-12-25",
     "isFeatured": true,
     "status": "active",
-    "createdAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_packages_0_mszlugc9"
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_packages_0_mt1w9vwj"
   },
   {
     "slug": "umrah-deluxe-2026",
@@ -83,8 +83,8 @@
     "endDate": "2026-12-27",
     "isFeatured": true,
     "status": "active",
-    "createdAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_packages_1_mszlugc9"
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_packages_1_mt1w9vwj"
   },
   {
     "slug": "umrah-vip-2026",
@@ -123,8 +123,8 @@
     "endDate": "2026-12-24",
     "isFeatured": true,
     "status": "active",
-    "createdAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_packages_2_mszlugc9"
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_packages_2_mt1w9vwj"
   },
   {
     "slug": "hajj-standard-2027",
@@ -163,8 +163,8 @@
     "endDate": "2027-07-10",
     "isFeatured": true,
     "status": "active",
-    "createdAt": "2026-06-20T04:42:04.462Z",
-    "id": "travels_packages_3_mszlugc9"
+    "createdAt": "2026-06-21T19:09:32.985Z",
+    "id": "travels_packages_3_mt1w9vwj"
   },
   {
     "slug": "local-tour-historical-lagos",
@@ -198,8 +198,8 @@
     "endDate": "2026-09-20",
     "isFeatured": false,
     "status": "active",
-    "createdAt": "2026-07-30T04:42:04.462Z",
-    "id": "travels_packages_4_mszlugc9"
+    "createdAt": "2026-07-31T19:09:32.985Z",
+    "id": "travels_packages_4_mt1w9vwj"
   },
   {
     "slug": "international-tour-turkey",
@@ -237,7 +237,7 @@
     "endDate": "2026-11-07",
     "isFeatured": false,
     "status": "active",
-    "createdAt": "2026-08-04T04:42:04.462Z",
-    "id": "travels_packages_5_mszlugc9"
+    "createdAt": "2026-08-05T19:09:32.985Z",
+    "id": "travels_packages_5_mt1w9vwj"
   }
 ]

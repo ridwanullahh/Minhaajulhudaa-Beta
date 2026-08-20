@@ -5,10 +5,10 @@
     "type": "info",
     "audience": "all",
     "active": true,
-    "startsAt": "2026-08-16T04:42:04.461Z",
-    "endsAt": "2026-09-02T04:42:04.461Z",
-    "createdAt": "2026-08-16T04:42:04.461Z",
-    "id": "school_announcements_0_mszlugc2",
+    "startsAt": "2026-08-17T19:09:32.984Z",
+    "endsAt": "2026-09-03T19:09:32.984Z",
+    "createdAt": "2026-08-17T19:09:32.984Z",
+    "id": "school_announcements_0_mt1w9vwd",
     "slug": "school-resumes-for-term-1"
   },
   {
@@ -17,10 +17,10 @@
     "type": "info",
     "audience": "parents",
     "active": true,
-    "startsAt": "2026-08-18T04:42:04.461Z",
-    "endsAt": "2026-09-18T04:42:04.461Z",
-    "createdAt": "2026-08-18T04:42:04.461Z",
-    "id": "school_announcements_1_mszlugc2",
+    "startsAt": "2026-08-19T19:09:32.984Z",
+    "endsAt": "2026-09-19T19:09:32.984Z",
+    "createdAt": "2026-08-19T19:09:32.984Z",
+    "id": "school_announcements_1_mt1w9vwd",
     "slug": "parent-teacher-conference"
   },
   {
@@ -29,10 +29,10 @@
     "type": "success",
     "audience": "all",
     "active": true,
-    "startsAt": "2026-08-14T04:42:04.461Z",
-    "endsAt": "2026-08-26T04:42:04.461Z",
-    "createdAt": "2026-08-14T04:42:04.461Z",
-    "id": "school_announcements_2_mszlugc2",
+    "startsAt": "2026-08-15T19:09:32.984Z",
+    "endsAt": "2026-08-27T19:09:32.984Z",
+    "createdAt": "2026-08-15T19:09:32.984Z",
+    "id": "school_announcements_2_mt1w9vwd",
     "slug": "holiday-reminder"
   }
 ]

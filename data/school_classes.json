@@ -24,7 +24,7 @@
     },
     "description": "Foundation class for young learners.",
     "active": true,
-    "id": "school_classes_0_mszlugc3",
+    "id": "school_classes_0_mt1w9vwe",
     "slug": "primary-1"
   },
   {
@@ -53,7 +53,7 @@
     },
     "description": "Lower primary class building on foundational skills.",
     "active": true,
-    "id": "school_classes_1_mszlugc3",
+    "id": "school_classes_1_mt1w9vwe",
     "slug": "primary-3"
   },
   {
@@ -83,7 +83,7 @@
     },
     "description": "Upper primary class preparing for junior secondary.",
     "active": true,
-    "id": "school_classes_2_mszlugc3",
+    "id": "school_classes_2_mt1w9vwe",
     "slug": "primary-4"
   },
   {
@@ -115,7 +115,7 @@
     },
     "description": "Entry into junior secondary education.",
     "active": true,
-    "id": "school_classes_3_mszlugc3",
+    "id": "school_classes_3_mt1w9vwe",
     "slug": "jss-1"
   },
   {
@@ -148,7 +148,7 @@
     },
     "description": "Continued junior secondary education.",
     "active": true,
-    "id": "school_classes_4_mszlugc3",
+    "id": "school_classes_4_mt1w9vwe",
     "slug": "jss-2"
   },
   {
@@ -179,7 +179,7 @@
     },
     "description": "Senior secondary science track.",
     "active": true,
-    "id": "school_classes_5_mszlugc3",
+    "id": "school_classes_5_mt1w9vwe",
     "slug": "sss-1-science"
   },
   {
@@ -210,7 +210,7 @@
     },
     "description": "Senior secondary science track, year 2.",
     "active": true,
-    "id": "school_classes_6_mszlugc3",
+    "id": "school_classes_6_mt1w9vwe",
     "slug": "sss-2-science"
   },
   {
@@ -241,7 +241,7 @@
     },
     "description": "Final year senior secondary, WAEC preparation.",
     "active": true,
-    "id": "school_classes_7_mszlugc3",
+    "id": "school_classes_7_mt1w9vwe",
     "slug": "sss-3-science"
   }
 ]

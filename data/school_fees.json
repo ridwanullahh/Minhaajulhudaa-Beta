@@ -8,7 +8,7 @@
     "category": "tuition",
     "description": "Tuition fee for primary school students per term.",
     "active": true,
-    "id": "school_fees_0_mszlugc5",
+    "id": "school_fees_0_mt1w9vwf",
     "slug": "primary-school-tuition"
   },
   {
@@ -20,7 +20,7 @@
     "category": "tuition",
     "description": "Tuition fee for junior secondary students per term.",
     "active": true,
-    "id": "school_fees_1_mszlugc5",
+    "id": "school_fees_1_mt1w9vwf",
     "slug": "junior-secondary-tuition"
   },
   {
@@ -32,7 +32,7 @@
     "category": "tuition",
     "description": "Tuition fee for senior secondary students per term.",
     "active": true,
-    "id": "school_fees_2_mszlugc5",
+    "id": "school_fees_2_mt1w9vwf",
     "slug": "senior-secondary-tuition"
   },
   {
@@ -43,7 +43,7 @@
     "category": "tuition",
     "description": "One-time registration fee for new students.",
     "active": true,
-    "id": "school_fees_3_mszlugc5",
+    "id": "school_fees_3_mt1w9vwf",
     "slug": "registration-fee"
   },
   {
@@ -54,7 +54,7 @@
     "category": "transport",
     "description": "Optional school bus service per term.",
     "active": true,
-    "id": "school_fees_4_mszlugc5",
+    "id": "school_fees_4_mt1w9vwf",
     "slug": "transportation"
   },
   {
@@ -65,7 +65,7 @@
     "category": "activities",
     "description": "Sports and physical education fee per term.",
     "active": true,
-    "id": "school_fees_5_mszlugc5",
+    "id": "school_fees_5_mt1w9vwf",
     "slug": "sports-fee"
   }
 ]

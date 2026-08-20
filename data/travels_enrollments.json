@@ -3,7 +3,7 @@
     "courseId": "course-umrah-guide",
     "customerId": "customer-001",
     "customerName": "Muhammad Ali",
-    "enrolledAt": "2026-08-14T04:42:04.462Z",
+    "enrolledAt": "2026-08-15T19:09:32.985Z",
     "progress": 60,
     "completedLessons": [
       "l1",
@@ -11,13 +11,13 @@
       "l3"
     ],
     "status": "active",
-    "id": "travels_enrollments_0_mszlugca"
+    "id": "travels_enrollments_0_mt1w9vwk"
   },
   {
     "courseId": "course-hajj-rituals",
     "customerId": "customer-002",
     "customerName": "Ibrahim Suleiman",
-    "enrolledAt": "2026-08-09T04:42:04.462Z",
+    "enrolledAt": "2026-08-10T19:09:32.985Z",
     "progress": 100,
     "completedLessons": [
       "l1",
@@ -27,18 +27,18 @@
       "l5"
     ],
     "status": "completed",
-    "id": "travels_enrollments_1_mszlugca"
+    "id": "travels_enrollments_1_mt1w9vwk"
   },
   {
     "courseId": "course-makkah-history",
     "customerId": "customer-003",
     "customerName": "Abdullah Okafor",
-    "enrolledAt": "2026-08-17T04:42:04.462Z",
+    "enrolledAt": "2026-08-18T19:09:32.985Z",
     "progress": 20,
     "completedLessons": [
       "l1"
     ],
     "status": "active",
-    "id": "travels_enrollments_2_mszlugca"
+    "id": "travels_enrollments_2_mt1w9vwk"
   }
 ]

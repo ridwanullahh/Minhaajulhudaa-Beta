@@ -8,8 +8,8 @@
     "message": "I would like to inquire about admission for my 7-year-old son into primary 2. What are the requirements?",
     "status": "new",
     "department": "admissions",
-    "createdAt": "2026-08-18T04:42:04.460Z",
-    "id": "contact_submissions_0_mszlugc2",
+    "createdAt": "2026-08-19T19:09:32.984Z",
+    "id": "contact_submissions_0_mt1w9vwd",
     "slug": "fatima-bello"
   },
   {
@@ -21,8 +21,8 @@
     "message": "What time does the Jumuah prayer start?",
     "status": "new",
     "department": "general",
-    "createdAt": "2026-08-18T16:42:04.461Z",
-    "id": "contact_submissions_1_mszlugc2",
+    "createdAt": "2026-08-20T07:09:32.984Z",
+    "id": "contact_submissions_1_mt1w9vwd",
     "slug": "ahmed-tanko"
   },
   {
@@ -34,8 +34,8 @@
     "message": "I am interested in volunteering for the food distribution program. How can I sign up?",
     "status": "new",
     "department": "volunteers",
-    "createdAt": "2026-08-18T22:42:04.461Z",
-    "id": "contact_submissions_2_mszlugc2",
+    "createdAt": "2026-08-20T13:09:32.984Z",
+    "id": "contact_submissions_2_mt1w9vwd",
     "slug": "khadijah-mohammed"
   },
   {
@@ -47,8 +47,8 @@
     "message": "I am interested in the December Umrah package for a family of 4. Can you provide details?",
     "status": "new",
     "department": "bookings",
-    "createdAt": "2026-08-19T01:42:04.461Z",
-    "id": "contact_submissions_3_mszlugc2",
+    "createdAt": "2026-08-20T16:09:32.984Z",
+    "id": "contact_submissions_3_mt1w9vwd",
     "slug": "ibrahim-aliyu"
   }
 ]

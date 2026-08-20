@@ -420,21 +420,24 @@ async function getLocalDb() {
 // On Cloudflare edge, always use local DB (no health check)
 // This avoids timeout issues with fetch to external servers
 function shouldUseLocalDbOnly(): boolean {
+  // Check if DB_FALLBACK_ONLY is set via import.meta.env (build-time)
   try {
     if (typeof import.meta !== 'undefined' && (import.meta as any).env) {
-      if ((import.meta as any).env.DB_FALLBACK_ONLY === 'true') return true;
+      const val = (import.meta as any).env.DB_FALLBACK_ONLY;
+      if (val === 'true') return true;
+      if (val === 'false') return false;
     }
   } catch {}
+  // Check process.env (Node.js and Cloudflare with nodejs_compat)
   try {
     if (typeof process !== 'undefined' && process.env) {
-      if (process.env.DB_FALLBACK_ONLY === 'true') return true;
+      const val = process.env.DB_FALLBACK_ONLY;
+      if (val === 'true') return true;
+      if (val === 'false') return false;
     }
   } catch {}
-  // On Cloudflare Workers (no process.env), use local DB by default
-  if (typeof globalThis.process === 'undefined') {
-    return true;
-  }
-  return false;
+  // Default: use local DB only (safer for edge, avoids timeouts)
+  return true;
 }
 
 const _useLocalOnly = shouldUseLocalDbOnly();

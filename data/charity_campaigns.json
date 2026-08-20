@@ -18,9 +18,9 @@
     "isUrgent": true,
     "location": "Northern Nigeria",
     "status": "active",
-    "createdAt": "2026-07-05T04:42:04.462Z",
-    "updatedAt": "2026-08-17T04:42:04.462Z",
-    "id": "charity_campaigns_0_mszlugc7"
+    "createdAt": "2026-07-06T19:09:32.985Z",
+    "updatedAt": "2026-08-18T19:09:32.985Z",
+    "id": "charity_campaigns_0_mt1w9vwh"
   },
   {
     "slug": "feed-the-fasting",
@@ -40,9 +40,9 @@
     "isUrgent": true,
     "location": "Lagos and Abuja",
     "status": "active",
-    "createdAt": "2026-07-20T04:42:04.462Z",
-    "updatedAt": "2026-08-18T04:42:04.462Z",
-    "id": "charity_campaigns_1_mszlugc7"
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "updatedAt": "2026-08-19T19:09:32.985Z",
+    "id": "charity_campaigns_1_mt1w9vwh"
   },
   {
     "slug": "orphans-education-support",
@@ -62,9 +62,9 @@
     "isUrgent": false,
     "location": "Nationwide",
     "status": "active",
-    "createdAt": "2026-06-20T04:42:04.462Z",
-    "updatedAt": "2026-08-16T04:42:04.462Z",
-    "id": "charity_campaigns_2_mszlugc7"
+    "createdAt": "2026-06-21T19:09:32.985Z",
+    "updatedAt": "2026-08-17T19:09:32.985Z",
+    "id": "charity_campaigns_2_mt1w9vwh"
   },
   {
     "slug": "medical-aid-emergency",
@@ -81,9 +81,9 @@
     "isUrgent": true,
     "location": "Nationwide",
     "status": "active",
-    "createdAt": "2026-07-30T04:42:04.462Z",
-    "updatedAt": "2026-08-18T04:42:04.462Z",
-    "id": "charity_campaigns_3_mszlugc7"
+    "createdAt": "2026-07-31T19:09:32.985Z",
+    "updatedAt": "2026-08-19T19:09:32.985Z",
+    "id": "charity_campaigns_3_mt1w9vwh"
   },
   {
     "slug": "skills-training-women",
@@ -100,9 +100,9 @@
     "isUrgent": false,
     "location": "Lagos",
     "status": "active",
-    "createdAt": "2026-07-10T04:42:04.462Z",
-    "updatedAt": "2026-08-14T04:42:04.462Z",
-    "id": "charity_campaigns_4_mszlugc7"
+    "createdAt": "2026-07-11T19:09:32.985Z",
+    "updatedAt": "2026-08-15T19:09:32.985Z",
+    "id": "charity_campaigns_4_mt1w9vwh"
   },
   {
     "slug": "shelter-for-displaced",
@@ -119,8 +119,8 @@
     "isUrgent": true,
     "location": "Northern Nigeria",
     "status": "active",
-    "createdAt": "2026-07-25T04:42:04.462Z",
-    "updatedAt": "2026-08-17T04:42:04.462Z",
-    "id": "charity_campaigns_5_mszlugc7"
+    "createdAt": "2026-07-26T19:09:32.985Z",
+    "updatedAt": "2026-08-18T19:09:32.985Z",
+    "id": "charity_campaigns_5_mt1w9vwh"
   }
 ]

@@ -8,8 +8,8 @@
     "preferredDate": "2026-12-15",
     "travelerCount": 4,
     "status": "new",
-    "createdAt": "2026-08-18T04:42:04.462Z",
-    "id": "travels_inquiries_0_mszlugca",
+    "createdAt": "2026-08-19T19:09:32.985Z",
+    "id": "travels_inquiries_0_mt1w9vwk",
     "slug": "khadijah-mohammed"
   },
   {
@@ -21,8 +21,8 @@
     "preferredDate": "2027-06-15",
     "travelerCount": 2,
     "status": "new",
-    "createdAt": "2026-08-17T04:42:04.462Z",
-    "id": "travels_inquiries_1_mszlugca",
+    "createdAt": "2026-08-18T19:09:32.985Z",
+    "id": "travels_inquiries_1_mt1w9vwk",
     "slug": "ahmed-ali"
   },
   {
@@ -34,8 +34,8 @@
     "preferredDate": "2026-11-01",
     "travelerCount": 1,
     "status": "responded",
-    "createdAt": "2026-08-14T04:42:04.462Z",
-    "id": "travels_inquiries_2_mszlugca",
+    "createdAt": "2026-08-15T19:09:32.985Z",
+    "id": "travels_inquiries_2_mt1w9vwk",
     "slug": "fatima-bello"
   }
 ]

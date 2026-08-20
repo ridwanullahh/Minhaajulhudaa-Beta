@@ -14,8 +14,8 @@
     "address": "15 Adeola Odeku Street, Victoria Island, Lagos",
     "additionalInfo": "Hamzah is an active child who loves reading and puzzles.",
     "status": "pending",
-    "submittedAt": "2026-08-17T04:42:04.461Z",
-    "id": "school_admission_applications_0_mszlugc4"
+    "submittedAt": "2026-08-18T19:09:32.984Z",
+    "id": "school_admission_applications_0_mt1w9vwf"
   },
   {
     "applicationId": "MHS-APP/2026/002",
@@ -32,10 +32,10 @@
     "address": "8 Akin Adesola Street, Victoria Island, Lagos",
     "additionalInfo": "Aaminah has memorized Juz Amma and is eager to continue her Hifz journey.",
     "status": "reviewed",
-    "submittedAt": "2026-08-14T04:42:04.461Z",
-    "reviewedAt": "2026-08-18T04:42:04.461Z",
+    "submittedAt": "2026-08-15T19:09:32.984Z",
+    "reviewedAt": "2026-08-19T19:09:32.984Z",
     "reviewNotes": "Strong candidate. Recommended for admission assessment.",
-    "id": "school_admission_applications_1_mszlugc4"
+    "id": "school_admission_applications_1_mt1w9vwf"
   },
   {
     "applicationId": "MHS-APP/2026/003",
@@ -52,10 +52,10 @@
     "address": "23 Norman Williams Street, Ikoyi, Lagos",
     "additionalInfo": "Transferring from Al-Noor Academy. Mu'adh excels in mathematics.",
     "status": "accepted",
-    "submittedAt": "2026-08-09T04:42:04.461Z",
-    "reviewedAt": "2026-08-12T04:42:04.461Z",
+    "submittedAt": "2026-08-10T19:09:32.984Z",
+    "reviewedAt": "2026-08-13T19:09:32.984Z",
     "reviewNotes": "Excellent academic record. Admission approved.",
-    "id": "school_admission_applications_2_mszlugc4"
+    "id": "school_admission_applications_2_mt1w9vwf"
   },
   {
     "applicationId": "MHS-APP/2026/004",
@@ -72,7 +72,7 @@
     "address": "5 Cameron Road, Ikoyi, Lagos",
     "additionalInfo": "Looking for a school with strong Islamic values.",
     "status": "pending",
-    "submittedAt": "2026-08-18T04:42:04.461Z",
-    "id": "school_admission_applications_3_mszlugc4"
+    "submittedAt": "2026-08-19T19:09:32.984Z",
+    "id": "school_admission_applications_3_mt1w9vwf"
   }
 ]

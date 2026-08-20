@@ -5,8 +5,8 @@
     "imageUrl": "/images/patterns/arabesque.svg",
     "category": "holy-sites",
     "destination": "Makkah",
-    "createdAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_gallery_0_mszlugca",
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_gallery_0_mt1w9vwk",
     "slug": "kabah-makkah"
   },
   {
@@ -15,8 +15,8 @@
     "imageUrl": "/images/patterns/arabesque.svg",
     "category": "holy-sites",
     "destination": "Madinah",
-    "createdAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_gallery_1_mszlugca",
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_gallery_1_mt1w9vwk",
     "slug": "masjid-nabawi-madinah"
   },
   {
@@ -25,8 +25,8 @@
     "imageUrl": "/images/patterns/arabesque.svg",
     "category": "tours",
     "destination": "Istanbul",
-    "createdAt": "2026-08-04T04:42:04.462Z",
-    "id": "travels_gallery_2_mszlugca",
+    "createdAt": "2026-08-05T19:09:32.985Z",
+    "id": "travels_gallery_2_mt1w9vwk",
     "slug": "istanbul-mosque"
   },
   {
@@ -35,8 +35,8 @@
     "imageUrl": "/images/patterns/arabesque.svg",
     "category": "groups",
     "destination": "Makkah",
-    "createdAt": "2026-06-20T04:42:04.462Z",
-    "id": "travels_gallery_3_mszlugca",
+    "createdAt": "2026-06-21T19:09:32.985Z",
+    "id": "travels_gallery_3_mt1w9vwk",
     "slug": "group-photo-umrah"
   }
 ]

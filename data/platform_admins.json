@@ -1,7 +1,7 @@
 [
   {
     "email": "admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
     "name": "Super Admin",
     "role": "super_admin",
     "platforms": [
@@ -16,12 +16,12 @@
     "metadata": {
       "title": "System Administrator"
     },
-    "id": "platform_admins_0_mszlugby",
+    "id": "platform_admins_0_mt1w9vwa",
     "slug": "super-admin"
   },
   {
     "email": "school.admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
     "name": "Ustadh Abdurrahman Adeyemi",
     "role": "platform_admin",
     "platforms": [
@@ -32,12 +32,12 @@
     "metadata": {
       "title": "School Principal"
     },
-    "id": "platform_admins_1_mszlugbz",
+    "id": "platform_admins_1_mt1w9vwa",
     "slug": "ustadh-abdurrahman-adeyemi"
   },
   {
     "email": "masjid.admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
     "name": "Imam Yusuf Olatunji",
     "role": "platform_admin",
     "platforms": [
@@ -48,12 +48,12 @@
     "metadata": {
       "title": "Masjid Administrator"
     },
-    "id": "platform_admins_2_mszlugbz",
+    "id": "platform_admins_2_mt1w9vwa",
     "slug": "imam-yusuf-olatunji"
   },
   {
     "email": "charity.admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
     "name": "Malik Ibrahim Suleiman",
     "role": "platform_admin",
     "platforms": [
@@ -64,12 +64,12 @@
     "metadata": {
       "title": "Charity Director"
     },
-    "id": "platform_admins_3_mszlugbz",
+    "id": "platform_admins_3_mt1w9vwa",
     "slug": "malik-ibrahim-suleiman"
   },
   {
     "email": "travels.admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
     "name": "Ustadh Dawud Okafor",
     "role": "platform_admin",
     "platforms": [
@@ -80,7 +80,7 @@
     "metadata": {
       "title": "Travels Manager"
     },
-    "id": "platform_admins_4_mszlugbz",
+    "id": "platform_admins_4_mt1w9vwa",
     "slug": "ustadh-dawud-okafor"
   }
 ]

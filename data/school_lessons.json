@@ -7,7 +7,7 @@
     "order": 1,
     "resources": [],
     "isPreview": true,
-    "id": "school_lessons_0_mszlugc4",
+    "id": "school_lessons_0_mt1w9vwf",
     "slug": "introduction-to-tajweed"
   },
   {
@@ -23,7 +23,7 @@
         "title": "Makharij Chart"
       }
     ],
-    "id": "school_lessons_1_mszlugc4",
+    "id": "school_lessons_1_mt1w9vwf",
     "slug": "articulation-points-makharij-part-1"
   },
   {
@@ -33,7 +33,7 @@
     "duration": 32,
     "order": 3,
     "resources": [],
-    "id": "school_lessons_2_mszlugc4",
+    "id": "school_lessons_2_mt1w9vwf",
     "slug": "articulation-points-makharij-part-2"
   },
   {
@@ -43,7 +43,7 @@
     "duration": 40,
     "order": 4,
     "resources": [],
-    "id": "school_lessons_3_mszlugc4",
+    "id": "school_lessons_3_mt1w9vwf",
     "slug": "characteristics-of-letters-sifat-part-1"
   },
   {
@@ -54,7 +54,7 @@
     "order": 1,
     "resources": [],
     "isPreview": true,
-    "id": "school_lessons_4_mszlugc4",
+    "id": "school_lessons_4_mt1w9vwf",
     "slug": "the-arabic-alphabet"
   },
   {
@@ -64,7 +64,7 @@
     "duration": 25,
     "order": 2,
     "resources": [],
-    "id": "school_lessons_5_mszlugc4",
+    "id": "school_lessons_5_mt1w9vwf",
     "slug": "vowel-marks-harakat"
   },
   {
@@ -74,7 +74,7 @@
     "duration": 35,
     "order": 3,
     "resources": [],
-    "id": "school_lessons_6_mszlugc4",
+    "id": "school_lessons_6_mt1w9vwf",
     "slug": "joining-letters"
   }
 ]

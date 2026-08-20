@@ -25,9 +25,9 @@
     "status": "confirmed",
     "paymentStatus": "paid",
     "specialRequests": "Vegetarian meals preferred",
-    "bookedAt": "2026-08-14T04:42:04.462Z",
-    "confirmedAt": "2026-08-15T04:42:04.462Z",
-    "id": "travels_bookings_0_mszlugc9"
+    "bookedAt": "2026-08-15T19:09:32.985Z",
+    "confirmedAt": "2026-08-16T19:09:32.985Z",
+    "id": "travels_bookings_0_mt1w9vwj"
   },
   {
     "bookingNumber": "MHS-TRV/2026/002",
@@ -62,9 +62,9 @@
     "currency": "NGN",
     "status": "confirmed",
     "paymentStatus": "partial",
-    "bookedAt": "2026-08-12T04:42:04.462Z",
-    "confirmedAt": "2026-08-13T04:42:04.462Z",
-    "id": "travels_bookings_1_mszlugc9"
+    "bookedAt": "2026-08-13T19:09:32.985Z",
+    "confirmedAt": "2026-08-14T19:09:32.985Z",
+    "id": "travels_bookings_1_mt1w9vwj"
   },
   {
     "bookingNumber": "MHS-TRV/2026/003",
@@ -108,8 +108,8 @@
     "status": "pending",
     "paymentStatus": "partial",
     "specialRequests": "Family room needed",
-    "bookedAt": "2026-08-17T04:42:04.462Z",
-    "id": "travels_bookings_2_mszlugc9"
+    "bookedAt": "2026-08-18T19:09:32.985Z",
+    "id": "travels_bookings_2_mt1w9vwj"
   },
   {
     "bookingNumber": "MHS-TRV/2026/004",
@@ -136,9 +136,9 @@
     "currency": "NGN",
     "status": "confirmed",
     "paymentStatus": "paid",
-    "bookedAt": "2026-08-09T04:42:04.462Z",
-    "confirmedAt": "2026-08-10T04:42:04.462Z",
-    "id": "travels_bookings_3_mszlugc9"
+    "bookedAt": "2026-08-10T19:09:32.985Z",
+    "confirmedAt": "2026-08-11T19:09:32.985Z",
+    "id": "travels_bookings_3_mt1w9vwj"
   },
   {
     "bookingNumber": "MHS-TRV/2026/005",
@@ -173,8 +173,8 @@
     "currency": "NGN",
     "status": "confirmed",
     "paymentStatus": "partial",
-    "bookedAt": "2026-08-16T04:42:04.462Z",
-    "confirmedAt": "2026-08-17T04:42:04.462Z",
-    "id": "travels_bookings_4_mszlugc9"
+    "bookedAt": "2026-08-17T19:09:32.985Z",
+    "confirmedAt": "2026-08-18T19:09:32.985Z",
+    "id": "travels_bookings_4_mt1w9vwj"
   }
 ]
