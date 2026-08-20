@@ -30,7 +30,7 @@
     "metadata": {
       "established": "2020"
     },
-    "id": "platform_settings_0_mszlugc1"
+    "id": "platform_settings_0_mt1w9vwd"
   },
   {
     "platform": "school",
@@ -53,7 +53,7 @@
         "Senior Secondary"
       ]
     },
-    "id": "platform_settings_1_mszlugc1"
+    "id": "platform_settings_1_mt1w9vwd"
   },
   {
     "platform": "masjid",
@@ -72,7 +72,7 @@
       "capacity": 2000,
       "established": "2020"
     },
-    "id": "platform_settings_2_mszlugc1"
+    "id": "platform_settings_2_mt1w9vwd"
   },
   {
     "platform": "charity",
@@ -91,7 +91,7 @@
       "established": "2022",
       "registrationNumber": "RC-2022-0001"
     },
-    "id": "platform_settings_3_mszlugc1"
+    "id": "platform_settings_3_mt1w9vwd"
   },
   {
     "platform": "travels",
@@ -110,6 +110,6 @@
       "established": "2023",
       "licensed": true
     },
-    "id": "platform_settings_4_mszlugc1"
+    "id": "platform_settings_4_mt1w9vwd"
   }
 ]

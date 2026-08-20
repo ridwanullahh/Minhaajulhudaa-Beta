@@ -8,12 +8,12 @@
     "audioUrl": "https://archive.org/download/sample-audio/brotherhood-khutbah.mp3",
     "archiveOrgId": "brotherhood-khutbah-2026",
     "duration": 2400,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 124,
     "plays": 892,
     "status": "active",
-    "id": "masjid_audios_0_mszlugc6",
+    "id": "masjid_audios_0_mt1w9vwg",
     "slug": "khutbah-the-importance-of-brotherhood"
   },
   {
@@ -25,12 +25,12 @@
     "audioUrl": "https://archive.org/download/sample-audio/patience-lecture.mp3",
     "archiveOrgId": "patience-lecture-2026",
     "duration": 3600,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 98,
     "plays": 654,
     "status": "active",
-    "id": "masjid_audios_1_mszlugc6",
+    "id": "masjid_audios_1_mt1w9vwg",
     "slug": "lecture-patience-in-islam"
   },
   {
@@ -42,12 +42,12 @@
     "audioUrl": "https://archive.org/download/sample-audio/tafsir-fatihah.mp3",
     "archiveOrgId": "tafsir-fatihah-2026",
     "duration": 4200,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 156,
     "plays": 1102,
     "status": "active",
-    "id": "masjid_audios_2_mszlugc6",
+    "id": "masjid_audios_2_mt1w9vwg",
     "slug": "tafsir-surah-al-fatihah"
   },
   {
@@ -59,12 +59,12 @@
     "audioUrl": "https://archive.org/download/sample-audio/juz-amma.mp3",
     "archiveOrgId": "juz-amma-recitation",
     "duration": 5400,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 234,
     "plays": 1856,
     "status": "active",
-    "id": "masjid_audios_3_mszlugc6",
+    "id": "masjid_audios_3_mt1w9vwg",
     "slug": "recitation-juz-amma-beautiful-recitation"
   },
   {
@@ -76,12 +76,12 @@
     "audioUrl": "https://archive.org/download/sample-audio/gratitude-khutbah.mp3",
     "archiveOrgId": "gratitude-khutbah-2026",
     "duration": 2200,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 87,
     "plays": 543,
     "status": "active",
-    "id": "masjid_audios_4_mszlugc6",
+    "id": "masjid_audios_4_mt1w9vwg",
     "slug": "khutbah-gratitude-to-allah"
   },
   {
@@ -93,12 +93,12 @@
     "audioUrl": "https://archive.org/download/sample-audio/daily-adhkar.mp3",
     "archiveOrgId": "daily-adhkar-2026",
     "duration": 1800,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 312,
     "plays": 2104,
     "status": "active",
-    "id": "masjid_audios_5_mszlugc6",
+    "id": "masjid_audios_5_mt1w9vwg",
     "slug": "dua-collection-of-daily-adhkar"
   },
   {
@@ -110,12 +110,12 @@
     "audioUrl": "https://archive.org/download/sample-audio/abu-bakr-life.mp3",
     "archiveOrgId": "abu-bakr-life-2026",
     "duration": 4800,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 145,
     "plays": 876,
     "status": "active",
-    "id": "masjid_audios_6_mszlugc6",
+    "id": "masjid_audios_6_mt1w9vwg",
     "slug": "lecture-the-life-of-abu-bakr-ra"
   }
 ]

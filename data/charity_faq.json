@@ -5,7 +5,7 @@
     "category": "donations",
     "order": 1,
     "status": "active",
-    "id": "charity_faq_0_mszlugc9"
+    "id": "charity_faq_0_mt1w9vwj"
   },
   {
     "question": "How can I be sure my donation reaches the intended beneficiaries?",
@@ -13,7 +13,7 @@
     "category": "donations",
     "order": 2,
     "status": "active",
-    "id": "charity_faq_1_mszlugc9"
+    "id": "charity_faq_1_mt1w9vwj"
   },
   {
     "question": "Can I donate to a specific campaign?",
@@ -21,7 +21,7 @@
     "category": "donations",
     "order": 3,
     "status": "active",
-    "id": "charity_faq_2_mszlugc9"
+    "id": "charity_faq_2_mt1w9vwj"
   },
   {
     "question": "What payment methods do you accept?",
@@ -29,7 +29,7 @@
     "category": "donations",
     "order": 4,
     "status": "active",
-    "id": "charity_faq_3_mszlugc9"
+    "id": "charity_faq_3_mt1w9vwj"
   },
   {
     "question": "How can I become a volunteer?",
@@ -37,7 +37,7 @@
     "category": "volunteering",
     "order": 1,
     "status": "active",
-    "id": "charity_faq_4_mszlugc9"
+    "id": "charity_faq_4_mt1w9vwj"
   },
   {
     "question": "What skills are you looking for in volunteers?",
@@ -45,7 +45,7 @@
     "category": "volunteering",
     "order": 2,
     "status": "active",
-    "id": "charity_faq_5_mszlugc9"
+    "id": "charity_faq_5_mt1w9vwj"
   },
   {
     "question": "Can I sponsor an orphan long-term?",
@@ -53,7 +53,7 @@
     "category": "programs",
     "order": 1,
     "status": "active",
-    "id": "charity_faq_6_mszlugc9"
+    "id": "charity_faq_6_mt1w9vwj"
   },
   {
     "question": "How do you verify beneficiaries?",
@@ -61,6 +61,6 @@
     "category": "programs",
     "order": 2,
     "status": "active",
-    "id": "charity_faq_7_mszlugc9"
+    "id": "charity_faq_7_mt1w9vwj"
   }
 ]

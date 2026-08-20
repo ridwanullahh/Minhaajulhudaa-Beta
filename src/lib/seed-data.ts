@@ -14,18 +14,18 @@ export const seedData: Record<string, any[]> = {
     "assistanceHistory": [
       {
         "type": "food",
-        "date": "2026-07-20T04:42:04.462Z",
+        "date": "2026-07-21T19:09:32.985Z",
         "value": 25000
       },
       {
         "type": "education",
-        "date": "2026-06-20T04:42:04.462Z",
+        "date": "2026-06-21T19:09:32.985Z",
         "value": 50000
       }
     ],
     "verificationStatus": "verified",
-    "registeredAt": "2026-05-21T04:42:04.462Z",
-    "id": "charity_beneficiaries_0_mszlugc8",
+    "registeredAt": "2026-05-22T19:09:32.985Z",
+    "id": "charity_beneficiaries_0_mt1w9vwi",
     "slug": "beneficiary-001"
   },
   {
@@ -39,13 +39,13 @@ export const seedData: Record<string, any[]> = {
     "assistanceHistory": [
       {
         "type": "education",
-        "date": "2026-07-05T04:42:04.462Z",
+        "date": "2026-07-06T19:09:32.985Z",
         "value": 50000
       }
     ],
     "verificationStatus": "verified",
-    "registeredAt": "2026-06-20T04:42:04.462Z",
-    "id": "charity_beneficiaries_1_mszlugc8",
+    "registeredAt": "2026-06-21T19:09:32.985Z",
+    "id": "charity_beneficiaries_1_mt1w9vwi",
     "slug": "beneficiary-002"
   },
   {
@@ -59,13 +59,13 @@ export const seedData: Record<string, any[]> = {
     "assistanceHistory": [
       {
         "type": "medical",
-        "date": "2026-08-04T04:42:04.462Z",
+        "date": "2026-08-05T19:09:32.985Z",
         "value": 35000
       }
     ],
     "verificationStatus": "verified",
-    "registeredAt": "2026-07-05T04:42:04.462Z",
-    "id": "charity_beneficiaries_2_mszlugc8",
+    "registeredAt": "2026-07-06T19:09:32.985Z",
+    "id": "charity_beneficiaries_2_mt1w9vwi",
     "slug": "beneficiary-003"
   },
   {
@@ -79,18 +79,18 @@ export const seedData: Record<string, any[]> = {
     "assistanceHistory": [
       {
         "type": "shelter",
-        "date": "2026-07-30T04:42:04.462Z",
+        "date": "2026-07-31T19:09:32.985Z",
         "value": 150000
       },
       {
         "type": "food",
-        "date": "2026-08-09T04:42:04.462Z",
+        "date": "2026-08-10T19:09:32.985Z",
         "value": 25000
       }
     ],
     "verificationStatus": "verified",
-    "registeredAt": "2026-07-20T04:42:04.462Z",
-    "id": "charity_beneficiaries_3_mszlugc8",
+    "registeredAt": "2026-07-21T19:09:32.985Z",
+    "id": "charity_beneficiaries_3_mt1w9vwi",
     "slug": "beneficiary-004"
   }
 ],
@@ -109,9 +109,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Malik Ibrahim Suleiman",
     "status": "published",
-    "publishedAt": "2026-08-12T04:42:04.462Z",
+    "publishedAt": "2026-08-13T19:09:32.985Z",
     "views": 234,
-    "id": "charity_blog_posts_0_mszlugc8"
+    "id": "charity_blog_posts_0_mt1w9vwj"
   },
   {
     "slug": "volunteer-spotlight-daud",
@@ -126,9 +126,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Malik Ibrahim Suleiman",
     "status": "published",
-    "publishedAt": "2026-08-07T04:42:04.462Z",
+    "publishedAt": "2026-08-08T19:09:32.985Z",
     "views": 156,
-    "id": "charity_blog_posts_1_mszlugc8"
+    "id": "charity_blog_posts_1_mt1w9vwj"
   },
   {
     "slug": "annual-impact-report-2025",
@@ -144,9 +144,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Malik Ibrahim Suleiman",
     "status": "published",
-    "publishedAt": "2026-07-20T04:42:04.462Z",
+    "publishedAt": "2026-07-21T19:09:32.985Z",
     "views": 489,
-    "id": "charity_blog_posts_2_mszlugc8"
+    "id": "charity_blog_posts_2_mt1w9vwj"
   }
 ],
   "charity_campaigns": [
@@ -169,9 +169,9 @@ export const seedData: Record<string, any[]> = {
     "isUrgent": true,
     "location": "Northern Nigeria",
     "status": "active",
-    "createdAt": "2026-07-05T04:42:04.462Z",
-    "updatedAt": "2026-08-17T04:42:04.462Z",
-    "id": "charity_campaigns_0_mszlugc7"
+    "createdAt": "2026-07-06T19:09:32.985Z",
+    "updatedAt": "2026-08-18T19:09:32.985Z",
+    "id": "charity_campaigns_0_mt1w9vwh"
   },
   {
     "slug": "feed-the-fasting",
@@ -191,9 +191,9 @@ export const seedData: Record<string, any[]> = {
     "isUrgent": true,
     "location": "Lagos and Abuja",
     "status": "active",
-    "createdAt": "2026-07-20T04:42:04.462Z",
-    "updatedAt": "2026-08-18T04:42:04.462Z",
-    "id": "charity_campaigns_1_mszlugc7"
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "updatedAt": "2026-08-19T19:09:32.985Z",
+    "id": "charity_campaigns_1_mt1w9vwh"
   },
   {
     "slug": "orphans-education-support",
@@ -213,9 +213,9 @@ export const seedData: Record<string, any[]> = {
     "isUrgent": false,
     "location": "Nationwide",
     "status": "active",
-    "createdAt": "2026-06-20T04:42:04.462Z",
-    "updatedAt": "2026-08-16T04:42:04.462Z",
-    "id": "charity_campaigns_2_mszlugc7"
+    "createdAt": "2026-06-21T19:09:32.985Z",
+    "updatedAt": "2026-08-17T19:09:32.985Z",
+    "id": "charity_campaigns_2_mt1w9vwh"
   },
   {
     "slug": "medical-aid-emergency",
@@ -232,9 +232,9 @@ export const seedData: Record<string, any[]> = {
     "isUrgent": true,
     "location": "Nationwide",
     "status": "active",
-    "createdAt": "2026-07-30T04:42:04.462Z",
-    "updatedAt": "2026-08-18T04:42:04.462Z",
-    "id": "charity_campaigns_3_mszlugc7"
+    "createdAt": "2026-07-31T19:09:32.985Z",
+    "updatedAt": "2026-08-19T19:09:32.985Z",
+    "id": "charity_campaigns_3_mt1w9vwh"
   },
   {
     "slug": "skills-training-women",
@@ -251,9 +251,9 @@ export const seedData: Record<string, any[]> = {
     "isUrgent": false,
     "location": "Lagos",
     "status": "active",
-    "createdAt": "2026-07-10T04:42:04.462Z",
-    "updatedAt": "2026-08-14T04:42:04.462Z",
-    "id": "charity_campaigns_4_mszlugc7"
+    "createdAt": "2026-07-11T19:09:32.985Z",
+    "updatedAt": "2026-08-15T19:09:32.985Z",
+    "id": "charity_campaigns_4_mt1w9vwh"
   },
   {
     "slug": "shelter-for-displaced",
@@ -270,9 +270,9 @@ export const seedData: Record<string, any[]> = {
     "isUrgent": true,
     "location": "Northern Nigeria",
     "status": "active",
-    "createdAt": "2026-07-25T04:42:04.462Z",
-    "updatedAt": "2026-08-17T04:42:04.462Z",
-    "id": "charity_campaigns_5_mszlugc7"
+    "createdAt": "2026-07-26T19:09:32.985Z",
+    "updatedAt": "2026-08-18T19:09:32.985Z",
+    "id": "charity_campaigns_5_mt1w9vwh"
   }
 ],
   "charity_donations": [
@@ -289,8 +289,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isAnonymous": false,
     "message": "May Allah accept",
-    "donatedAt": "2026-08-18T04:42:04.462Z",
-    "id": "charity_donations_0_mszlugc8"
+    "donatedAt": "2026-08-19T19:09:32.985Z",
+    "id": "charity_donations_0_mt1w9vwi"
   },
   {
     "donorName": "Anonymous",
@@ -303,8 +303,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "CHR-DON-002",
     "status": "successful",
     "isAnonymous": true,
-    "donatedAt": "2026-08-17T04:42:04.462Z",
-    "id": "charity_donations_1_mszlugc8"
+    "donatedAt": "2026-08-18T19:09:32.985Z",
+    "id": "charity_donations_1_mt1w9vwi"
   },
   {
     "donorName": "Fatima Bello",
@@ -319,8 +319,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isAnonymous": false,
     "message": "Monthly contribution",
-    "donatedAt": "2026-08-16T04:42:04.462Z",
-    "id": "charity_donations_2_mszlugc8"
+    "donatedAt": "2026-08-17T19:09:32.985Z",
+    "id": "charity_donations_2_mt1w9vwi"
   },
   {
     "donorName": "Ibrahim Suleiman",
@@ -334,8 +334,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "CHR-DON-004",
     "status": "successful",
     "isAnonymous": false,
-    "donatedAt": "2026-08-15T04:42:04.462Z",
-    "id": "charity_donations_3_mszlugc8"
+    "donatedAt": "2026-08-16T19:09:32.985Z",
+    "id": "charity_donations_3_mt1w9vwi"
   },
   {
     "donorName": "Anonymous",
@@ -348,8 +348,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "CHR-DON-005",
     "status": "successful",
     "isAnonymous": true,
-    "donatedAt": "2026-08-14T04:42:04.462Z",
-    "id": "charity_donations_4_mszlugc8"
+    "donatedAt": "2026-08-15T19:09:32.985Z",
+    "id": "charity_donations_4_mt1w9vwi"
   },
   {
     "donorName": "Aisha Abdullahi",
@@ -364,8 +364,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isAnonymous": false,
     "message": "For the water project",
-    "donatedAt": "2026-08-13T04:42:04.462Z",
-    "id": "charity_donations_5_mszlugc8"
+    "donatedAt": "2026-08-14T19:09:32.985Z",
+    "id": "charity_donations_5_mt1w9vwi"
   },
   {
     "donorName": "Abdullah Okafor",
@@ -379,8 +379,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "CHR-DON-007",
     "status": "successful",
     "isAnonymous": false,
-    "donatedAt": "2026-08-12T04:42:04.462Z",
-    "id": "charity_donations_6_mszlugc8"
+    "donatedAt": "2026-08-13T19:09:32.985Z",
+    "id": "charity_donations_6_mt1w9vwi"
   },
   {
     "donorName": "Anonymous",
@@ -393,8 +393,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "CHR-DON-008",
     "status": "successful",
     "isAnonymous": true,
-    "donatedAt": "2026-08-11T04:42:04.462Z",
-    "id": "charity_donations_7_mszlugc8"
+    "donatedAt": "2026-08-12T19:09:32.985Z",
+    "id": "charity_donations_7_mt1w9vwi"
   }
 ],
   "charity_donors": [
@@ -404,14 +404,14 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348061111111",
     "totalDonated": 500000,
     "donationCount": 8,
-    "firstDonationAt": "2026-01-31T04:42:04.462Z",
-    "lastDonationAt": "2026-08-18T04:42:04.462Z",
+    "firstDonationAt": "2026-02-01T19:09:32.985Z",
+    "lastDonationAt": "2026-08-19T19:09:32.985Z",
     "isRecurring": false,
     "tags": [
       "major-donor"
     ],
     "communicationOptIn": true,
-    "id": "charity_donors_0_mszlugc8",
+    "id": "charity_donors_0_mt1w9vwi",
     "slug": "muhammad-ali"
   },
   {
@@ -420,14 +420,14 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348062222222",
     "totalDonated": 175000,
     "donationCount": 7,
-    "firstDonationAt": "2026-03-22T04:42:04.462Z",
-    "lastDonationAt": "2026-08-16T04:42:04.462Z",
+    "firstDonationAt": "2026-03-23T19:09:32.985Z",
+    "lastDonationAt": "2026-08-17T19:09:32.985Z",
     "isRecurring": true,
     "tags": [
       "recurring"
     ],
     "communicationOptIn": true,
-    "id": "charity_donors_1_mszlugc8",
+    "id": "charity_donors_1_mt1w9vwi",
     "slug": "fatima-bello"
   },
   {
@@ -436,15 +436,15 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348063333333",
     "totalDonated": 600000,
     "donationCount": 4,
-    "firstDonationAt": "2026-05-11T04:42:04.462Z",
-    "lastDonationAt": "2026-08-15T04:42:04.462Z",
+    "firstDonationAt": "2026-05-12T19:09:32.985Z",
+    "lastDonationAt": "2026-08-16T19:09:32.985Z",
     "isRecurring": false,
     "tags": [
       "major-donor",
       "zakaat"
     ],
     "communicationOptIn": true,
-    "id": "charity_donors_2_mszlugc8",
+    "id": "charity_donors_2_mt1w9vwi",
     "slug": "ibrahim-suleiman"
   },
   {
@@ -453,12 +453,12 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348064444444",
     "totalDonated": 225000,
     "donationCount": 3,
-    "firstDonationAt": "2026-05-21T04:42:04.462Z",
-    "lastDonationAt": "2026-08-13T04:42:04.462Z",
+    "firstDonationAt": "2026-05-22T19:09:32.985Z",
+    "lastDonationAt": "2026-08-14T19:09:32.985Z",
     "isRecurring": false,
     "tags": [],
     "communicationOptIn": true,
-    "id": "charity_donors_3_mszlugc8",
+    "id": "charity_donors_3_mt1w9vwi",
     "slug": "aisha-abdullahi"
   },
   {
@@ -467,15 +467,15 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348065555555",
     "totalDonated": 450000,
     "donationCount": 6,
-    "firstDonationAt": "2026-02-20T04:42:04.462Z",
-    "lastDonationAt": "2026-08-12T04:42:04.462Z",
+    "firstDonationAt": "2026-02-21T19:09:32.985Z",
+    "lastDonationAt": "2026-08-13T19:09:32.985Z",
     "isRecurring": true,
     "tags": [
       "major-donor",
       "recurring"
     ],
     "communicationOptIn": true,
-    "id": "charity_donors_4_mszlugc8",
+    "id": "charity_donors_4_mt1w9vwi",
     "slug": "abdullah-okafor"
   }
 ],
@@ -486,7 +486,7 @@ export const seedData: Record<string, any[]> = {
     "category": "donations",
     "order": 1,
     "status": "active",
-    "id": "charity_faq_0_mszlugc9"
+    "id": "charity_faq_0_mt1w9vwj"
   },
   {
     "question": "How can I be sure my donation reaches the intended beneficiaries?",
@@ -494,7 +494,7 @@ export const seedData: Record<string, any[]> = {
     "category": "donations",
     "order": 2,
     "status": "active",
-    "id": "charity_faq_1_mszlugc9"
+    "id": "charity_faq_1_mt1w9vwj"
   },
   {
     "question": "Can I donate to a specific campaign?",
@@ -502,7 +502,7 @@ export const seedData: Record<string, any[]> = {
     "category": "donations",
     "order": 3,
     "status": "active",
-    "id": "charity_faq_2_mszlugc9"
+    "id": "charity_faq_2_mt1w9vwj"
   },
   {
     "question": "What payment methods do you accept?",
@@ -510,7 +510,7 @@ export const seedData: Record<string, any[]> = {
     "category": "donations",
     "order": 4,
     "status": "active",
-    "id": "charity_faq_3_mszlugc9"
+    "id": "charity_faq_3_mt1w9vwj"
   },
   {
     "question": "How can I become a volunteer?",
@@ -518,7 +518,7 @@ export const seedData: Record<string, any[]> = {
     "category": "volunteering",
     "order": 1,
     "status": "active",
-    "id": "charity_faq_4_mszlugc9"
+    "id": "charity_faq_4_mt1w9vwj"
   },
   {
     "question": "What skills are you looking for in volunteers?",
@@ -526,7 +526,7 @@ export const seedData: Record<string, any[]> = {
     "category": "volunteering",
     "order": 2,
     "status": "active",
-    "id": "charity_faq_5_mszlugc9"
+    "id": "charity_faq_5_mt1w9vwj"
   },
   {
     "question": "Can I sponsor an orphan long-term?",
@@ -534,7 +534,7 @@ export const seedData: Record<string, any[]> = {
     "category": "programs",
     "order": 1,
     "status": "active",
-    "id": "charity_faq_6_mszlugc9"
+    "id": "charity_faq_6_mt1w9vwj"
   },
   {
     "question": "How do you verify beneficiaries?",
@@ -542,7 +542,7 @@ export const seedData: Record<string, any[]> = {
     "category": "programs",
     "order": 2,
     "status": "active",
-    "id": "charity_faq_7_mszlugc9"
+    "id": "charity_faq_7_mt1w9vwj"
   }
 ],
   "charity_impact_metrics": [
@@ -553,8 +553,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "families",
     "category": "general",
     "period": "2026",
-    "updatedAt": "2026-08-18T04:42:04.462Z",
-    "id": "charity_impact_metrics_0_mszlugc8"
+    "updatedAt": "2026-08-19T19:09:32.985Z",
+    "id": "charity_impact_metrics_0_mt1w9vwj"
   },
   {
     "metricKey": "meals_served",
@@ -563,8 +563,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "meals",
     "category": "food",
     "period": "2026",
-    "updatedAt": "2026-08-18T04:42:04.462Z",
-    "id": "charity_impact_metrics_1_mszlugc8"
+    "updatedAt": "2026-08-19T19:09:32.985Z",
+    "id": "charity_impact_metrics_1_mt1w9vwj"
   },
   {
     "metricKey": "water_wells_built",
@@ -573,8 +573,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "wells",
     "category": "water",
     "period": "2026",
-    "updatedAt": "2026-08-12T04:42:04.462Z",
-    "id": "charity_impact_metrics_2_mszlugc8"
+    "updatedAt": "2026-08-13T19:09:32.985Z",
+    "id": "charity_impact_metrics_2_mt1w9vwj"
   },
   {
     "metricKey": "orphans_sponsored",
@@ -583,8 +583,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "children",
     "category": "orphans",
     "period": "2026",
-    "updatedAt": "2026-08-16T04:42:04.462Z",
-    "id": "charity_impact_metrics_3_mszlugc8"
+    "updatedAt": "2026-08-17T19:09:32.985Z",
+    "id": "charity_impact_metrics_3_mt1w9vwj"
   },
   {
     "metricKey": "medical_cases",
@@ -593,8 +593,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "cases",
     "category": "medical",
     "period": "2026",
-    "updatedAt": "2026-08-14T04:42:04.462Z",
-    "id": "charity_impact_metrics_4_mszlugc8"
+    "updatedAt": "2026-08-15T19:09:32.985Z",
+    "id": "charity_impact_metrics_4_mt1w9vwj"
   },
   {
     "metricKey": "women_trained",
@@ -603,8 +603,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "women",
     "category": "education",
     "period": "2026",
-    "updatedAt": "2026-08-09T04:42:04.462Z",
-    "id": "charity_impact_metrics_5_mszlugc8"
+    "updatedAt": "2026-08-10T19:09:32.985Z",
+    "id": "charity_impact_metrics_5_mt1w9vwj"
   },
   {
     "metricKey": "shelters_provided",
@@ -613,8 +613,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "shelters",
     "category": "shelter",
     "period": "2026",
-    "updatedAt": "2026-08-17T04:42:04.462Z",
-    "id": "charity_impact_metrics_6_mszlugc8"
+    "updatedAt": "2026-08-18T19:09:32.985Z",
+    "id": "charity_impact_metrics_6_mt1w9vwj"
   },
   {
     "metricKey": "volunteers_active",
@@ -623,8 +623,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "volunteers",
     "category": "general",
     "period": "2026",
-    "updatedAt": "2026-08-18T04:42:04.462Z",
-    "id": "charity_impact_metrics_7_mszlugc8"
+    "updatedAt": "2026-08-19T19:09:32.985Z",
+    "id": "charity_impact_metrics_7_mt1w9vwj"
   }
 ],
   "charity_pages": [
@@ -653,9 +653,9 @@ export const seedData: Record<string, any[]> = {
     "seoTitle": "About Minhaajulhudaa Charity",
     "seoDescription": "Learn about our mission to serve humanity with compassion.",
     "status": "published",
-    "publishedAt": "2026-06-20T04:42:04.462Z",
+    "publishedAt": "2026-06-21T19:09:32.985Z",
     "order": 1,
-    "id": "charity_pages_0_mszlugc7"
+    "id": "charity_pages_0_mt1w9vwh"
   },
   {
     "slug": "how-to-help",
@@ -674,9 +674,9 @@ export const seedData: Record<string, any[]> = {
     "seoTitle": "How to Help - Minhaajulhudaa Charity",
     "seoDescription": "Discover ways to support our charitable work.",
     "status": "published",
-    "publishedAt": "2026-06-20T04:42:04.462Z",
+    "publishedAt": "2026-06-21T19:09:32.985Z",
     "order": 2,
-    "id": "charity_pages_1_mszlugc7"
+    "id": "charity_pages_1_mt1w9vwh"
   }
 ],
   "charity_partners": [
@@ -689,7 +689,7 @@ export const seedData: Record<string, any[]> = {
     "contributionValue": 5000000,
     "partnershipStart": "2023-01-15",
     "status": "active",
-    "id": "charity_partners_0_mszlugc9",
+    "id": "charity_partners_0_mt1w9vwj",
     "slug": "islamic-relief-nigeria"
   },
   {
@@ -700,7 +700,7 @@ export const seedData: Record<string, any[]> = {
     "contributionValue": 0,
     "partnershipStart": "2022-06-01",
     "status": "active",
-    "id": "charity_partners_1_mszlugc9",
+    "id": "charity_partners_1_mt1w9vwj",
     "slug": "lagos-state-government"
   },
   {
@@ -710,7 +710,7 @@ export const seedData: Record<string, any[]> = {
     "contributionValue": 10000000,
     "partnershipStart": "2023-03-01",
     "status": "active",
-    "id": "charity_partners_2_mszlugc9",
+    "id": "charity_partners_2_mt1w9vwj",
     "slug": "dangote-foundation"
   },
   {
@@ -720,7 +720,7 @@ export const seedData: Record<string, any[]> = {
     "contributionValue": 2000000,
     "partnershipStart": "2024-01-01",
     "status": "active",
-    "id": "charity_partners_3_mszlugc9",
+    "id": "charity_partners_3_mt1w9vwj",
     "slug": "al-noor-foundation"
   }
 ],
@@ -737,7 +737,7 @@ export const seedData: Record<string, any[]> = {
     "stock": 100,
     "sku": "CHR-TS-001",
     "status": "active",
-    "id": "charity_products_0_mszlugc9"
+    "id": "charity_products_0_mt1w9vwj"
   },
   {
     "slug": "charity-mug",
@@ -751,7 +751,7 @@ export const seedData: Record<string, any[]> = {
     "stock": 75,
     "sku": "CHR-MG-001",
     "status": "active",
-    "id": "charity_products_1_mszlugc9"
+    "id": "charity_products_1_mt1w9vwj"
   },
   {
     "slug": "charity-tote-bag",
@@ -765,7 +765,7 @@ export const seedData: Record<string, any[]> = {
     "stock": 50,
     "sku": "CHR-TB-001",
     "status": "active",
-    "id": "charity_products_2_mszlugc9"
+    "id": "charity_products_2_mt1w9vwj"
   }
 ],
   "charity_recurring_donations": [
@@ -776,11 +776,11 @@ export const seedData: Record<string, any[]> = {
     "currency": "NGN",
     "frequency": "monthly",
     "category": "sadaqah",
-    "nextChargeDate": "2026-09-13T04:42:04.462Z",
+    "nextChargeDate": "2026-09-14T19:09:32.985Z",
     "status": "active",
-    "startedAt": "2026-03-22T04:42:04.462Z",
+    "startedAt": "2026-03-23T19:09:32.985Z",
     "totalCharged": 175000,
-    "id": "charity_recurring_donations_0_mszlugc8"
+    "id": "charity_recurring_donations_0_mt1w9vwi"
   },
   {
     "donorEmail": "abdullah.o@example.com",
@@ -789,11 +789,11 @@ export const seedData: Record<string, any[]> = {
     "currency": "NGN",
     "frequency": "monthly",
     "category": "zakaat",
-    "nextChargeDate": "2026-09-08T04:42:04.462Z",
+    "nextChargeDate": "2026-09-09T19:09:32.985Z",
     "status": "active",
-    "startedAt": "2026-02-20T04:42:04.462Z",
+    "startedAt": "2026-02-21T19:09:32.985Z",
     "totalCharged": 450000,
-    "id": "charity_recurring_donations_1_mszlugc8"
+    "id": "charity_recurring_donations_1_mt1w9vwi"
   }
 ],
   "charity_reports": [
@@ -808,8 +808,8 @@ export const seedData: Record<string, any[]> = {
       "totalDisbursed": 42300000,
       "beneficiaries": 1250
     },
-    "generatedAt": "2026-07-20T04:42:04.462Z",
-    "id": "charity_reports_0_mszlugc9",
+    "generatedAt": "2026-07-21T19:09:32.985Z",
+    "id": "charity_reports_0_mt1w9vwj",
     "slug": "annual-impact-report-2025"
   },
   {
@@ -823,8 +823,8 @@ export const seedData: Record<string, any[]> = {
       "expenses": 13200000,
       "campaigns": 6
     },
-    "generatedAt": "2026-08-09T04:42:04.462Z",
-    "id": "charity_reports_1_mszlugc9",
+    "generatedAt": "2026-08-10T19:09:32.985Z",
+    "id": "charity_reports_1_mt1w9vwj",
     "slug": "q2-2026-financial-report"
   },
   {
@@ -837,8 +837,8 @@ export const seedData: Record<string, any[]> = {
       "wellsBuilt": 12,
       "beneficiaries": 6000
     },
-    "generatedAt": "2026-08-12T04:42:04.462Z",
-    "id": "charity_reports_2_mszlugc9",
+    "generatedAt": "2026-08-13T19:09:32.985Z",
+    "id": "charity_reports_2_mt1w9vwj",
     "slug": "water-project-impact-report"
   }
 ],
@@ -860,8 +860,8 @@ export const seedData: Record<string, any[]> = {
       "jobs_created": 1
     },
     "status": "published",
-    "publishedAt": "2026-08-04T04:42:04.462Z",
-    "id": "charity_success_stories_0_mszlugc8"
+    "publishedAt": "2026-08-05T19:09:32.985Z",
+    "id": "charity_success_stories_0_mt1w9vwj"
   },
   {
     "slug": "borehole-transforms-village",
@@ -880,8 +880,8 @@ export const seedData: Record<string, any[]> = {
       "school_attendance_increase": "45%"
     },
     "status": "published",
-    "publishedAt": "2026-07-20T04:42:04.462Z",
-    "id": "charity_success_stories_1_mszlugc8"
+    "publishedAt": "2026-07-21T19:09:32.985Z",
+    "id": "charity_success_stories_1_mt1w9vwj"
   },
   {
     "slug": "orphan-graduates-top-class",
@@ -897,8 +897,8 @@ export const seedData: Record<string, any[]> = {
       "graduation_year": 2026
     },
     "status": "published",
-    "publishedAt": "2026-07-30T04:42:04.462Z",
-    "id": "charity_success_stories_2_mszlugc8"
+    "publishedAt": "2026-07-31T19:09:32.985Z",
+    "id": "charity_success_stories_2_mt1w9vwj"
   }
 ],
   "charity_testimonials": [
@@ -911,8 +911,8 @@ export const seedData: Record<string, any[]> = {
     "isBeneficiary": false,
     "isPartner": false,
     "status": "approved",
-    "createdAt": "2026-08-14T04:42:04.462Z",
-    "id": "charity_testimonials_0_mszlugc8"
+    "createdAt": "2026-08-15T19:09:32.985Z",
+    "id": "charity_testimonials_0_mt1w9vwj"
   },
   {
     "authorName": "Malama Fatima",
@@ -923,8 +923,8 @@ export const seedData: Record<string, any[]> = {
     "isBeneficiary": true,
     "isPartner": false,
     "status": "approved",
-    "createdAt": "2026-08-09T04:42:04.462Z",
-    "id": "charity_testimonials_1_mszlugc8"
+    "createdAt": "2026-08-10T19:09:32.985Z",
+    "id": "charity_testimonials_1_mt1w9vwj"
   },
   {
     "authorName": "Alhaji Ibrahim Suleiman",
@@ -935,8 +935,8 @@ export const seedData: Record<string, any[]> = {
     "isBeneficiary": false,
     "isPartner": true,
     "status": "approved",
-    "createdAt": "2026-08-04T04:42:04.462Z",
-    "id": "charity_testimonials_2_mszlugc8"
+    "createdAt": "2026-08-05T19:09:32.985Z",
+    "id": "charity_testimonials_2_mt1w9vwj"
   }
 ],
   "charity_volunteer_roles": [
@@ -953,7 +953,7 @@ export const seedData: Record<string, any[]> = {
     "slotsAvailable": 10,
     "slotsFilled": 6,
     "status": "open",
-    "id": "charity_volunteer_roles_0_mszlugc8",
+    "id": "charity_volunteer_roles_0_mt1w9vwi",
     "slug": "field-distribution-worker"
   },
   {
@@ -969,7 +969,7 @@ export const seedData: Record<string, any[]> = {
     "slotsAvailable": 5,
     "slotsFilled": 3,
     "status": "open",
-    "id": "charity_volunteer_roles_1_mszlugc8",
+    "id": "charity_volunteer_roles_1_mt1w9vwi",
     "slug": "education-program-assistant"
   },
   {
@@ -985,7 +985,7 @@ export const seedData: Record<string, any[]> = {
     "slotsAvailable": 8,
     "slotsFilled": 4,
     "status": "open",
-    "id": "charity_volunteer_roles_2_mszlugc8",
+    "id": "charity_volunteer_roles_2_mt1w9vwi",
     "slug": "medical-volunteer"
   },
   {
@@ -1001,7 +1001,7 @@ export const seedData: Record<string, any[]> = {
     "slotsAvailable": 3,
     "slotsFilled": 2,
     "status": "open",
-    "id": "charity_volunteer_roles_3_mszlugc8",
+    "id": "charity_volunteer_roles_3_mt1w9vwi",
     "slug": "social-media-volunteer"
   }
 ],
@@ -1022,8 +1022,8 @@ export const seedData: Record<string, any[]> = {
     "status": "active",
     "assignedRole": "Field Coordinator",
     "hoursLogged": 120,
-    "joinedAt": "2026-05-21T04:42:04.462Z",
-    "id": "charity_volunteers_0_mszlugc8",
+    "joinedAt": "2026-05-22T19:09:32.985Z",
+    "id": "charity_volunteers_0_mt1w9vwi",
     "slug": "daud-mohammed"
   },
   {
@@ -1042,8 +1042,8 @@ export const seedData: Record<string, any[]> = {
     "status": "active",
     "assignedRole": "Education Program Lead",
     "hoursLogged": 85,
-    "joinedAt": "2026-06-20T04:42:04.462Z",
-    "id": "charity_volunteers_1_mszlugc8",
+    "joinedAt": "2026-06-21T19:09:32.985Z",
+    "id": "charity_volunteers_1_mt1w9vwi",
     "slug": "maryam-aliyu"
   },
   {
@@ -1062,8 +1062,8 @@ export const seedData: Record<string, any[]> = {
     "status": "active",
     "assignedRole": "Medical Volunteer",
     "hoursLogged": 60,
-    "joinedAt": "2026-07-05T04:42:04.462Z",
-    "id": "charity_volunteers_2_mszlugc8",
+    "joinedAt": "2026-07-06T19:09:32.985Z",
+    "id": "charity_volunteers_2_mt1w9vwi",
     "slug": "yusuf-bello"
   },
   {
@@ -1080,8 +1080,8 @@ export const seedData: Record<string, any[]> = {
     "location": "Lagos",
     "bio": "Social worker with experience in trauma counseling.",
     "status": "pending",
-    "joinedAt": "2026-08-12T04:42:04.462Z",
-    "id": "charity_volunteers_3_mszlugc8",
+    "joinedAt": "2026-08-13T19:09:32.985Z",
+    "id": "charity_volunteers_3_mt1w9vwi",
     "slug": "khadijah-musa"
   },
   {
@@ -1100,8 +1100,8 @@ export const seedData: Record<string, any[]> = {
     "status": "active",
     "assignedRole": "Media Volunteer",
     "hoursLogged": 40,
-    "joinedAt": "2026-07-20T04:42:04.462Z",
-    "id": "charity_volunteers_4_mszlugc8",
+    "joinedAt": "2026-07-21T19:09:32.985Z",
+    "id": "charity_volunteers_4_mt1w9vwi",
     "slug": "ibrahim-okafor"
   }
 ],
@@ -1115,8 +1115,8 @@ export const seedData: Record<string, any[]> = {
     "message": "I would like to inquire about admission for my 7-year-old son into primary 2. What are the requirements?",
     "status": "new",
     "department": "admissions",
-    "createdAt": "2026-08-18T04:42:04.460Z",
-    "id": "contact_submissions_0_mszlugc2",
+    "createdAt": "2026-08-19T19:09:32.984Z",
+    "id": "contact_submissions_0_mt1w9vwd",
     "slug": "fatima-bello"
   },
   {
@@ -1128,8 +1128,8 @@ export const seedData: Record<string, any[]> = {
     "message": "What time does the Jumuah prayer start?",
     "status": "new",
     "department": "general",
-    "createdAt": "2026-08-18T16:42:04.461Z",
-    "id": "contact_submissions_1_mszlugc2",
+    "createdAt": "2026-08-20T07:09:32.984Z",
+    "id": "contact_submissions_1_mt1w9vwd",
     "slug": "ahmed-tanko"
   },
   {
@@ -1141,8 +1141,8 @@ export const seedData: Record<string, any[]> = {
     "message": "I am interested in volunteering for the food distribution program. How can I sign up?",
     "status": "new",
     "department": "volunteers",
-    "createdAt": "2026-08-18T22:42:04.461Z",
-    "id": "contact_submissions_2_mszlugc2",
+    "createdAt": "2026-08-20T13:09:32.984Z",
+    "id": "contact_submissions_2_mt1w9vwd",
     "slug": "khadijah-mohammed"
   },
   {
@@ -1154,8 +1154,8 @@ export const seedData: Record<string, any[]> = {
     "message": "I am interested in the December Umrah package for a family of 4. Can you provide details?",
     "status": "new",
     "department": "bookings",
-    "createdAt": "2026-08-19T01:42:04.461Z",
-    "id": "contact_submissions_3_mszlugc2",
+    "createdAt": "2026-08-20T16:09:32.984Z",
+    "id": "contact_submissions_3_mt1w9vwd",
     "slug": "ibrahim-aliyu"
   }
 ],
@@ -1165,10 +1165,10 @@ export const seedData: Record<string, any[]> = {
     "message": "The Ramadan timetable for Taraweeh and Sahur is now available. Please pick up a copy at the masjid office or download from our website.",
     "type": "info",
     "active": true,
-    "startsAt": "2026-08-17T04:42:04.461Z",
-    "endsAt": "2026-09-18T04:42:04.461Z",
-    "createdAt": "2026-08-17T04:42:04.461Z",
-    "id": "masjid_announcements_0_mszlugc5",
+    "startsAt": "2026-08-18T19:09:32.985Z",
+    "endsAt": "2026-09-19T19:09:32.985Z",
+    "createdAt": "2026-08-18T19:09:32.985Z",
+    "id": "masjid_announcements_0_mt1w9vwg",
     "slug": "ramadan-timetable-available"
   },
   {
@@ -1176,10 +1176,10 @@ export const seedData: Record<string, any[]> = {
     "message": "Join us every Tuesday after Maghrib for a new halaqah series on the Tafsir of Juz Amma, led by Imam Yusuf Olatunji.",
     "type": "success",
     "active": true,
-    "startsAt": "2026-08-14T04:42:04.461Z",
-    "endsAt": "2026-10-18T04:42:04.461Z",
-    "createdAt": "2026-08-14T04:42:04.461Z",
-    "id": "masjid_announcements_1_mszlugc5",
+    "startsAt": "2026-08-15T19:09:32.985Z",
+    "endsAt": "2026-10-19T19:09:32.985Z",
+    "createdAt": "2026-08-15T19:09:32.985Z",
+    "id": "masjid_announcements_1_mt1w9vwg",
     "slug": "new-halaqah-series-tafsir-of-juz-amma"
   },
   {
@@ -1187,10 +1187,10 @@ export const seedData: Record<string, any[]> = {
     "message": "Alhamdulillah, we are expanding the sisters' section to accommodate more worshippers. Please support this project with your donations.",
     "type": "urgent",
     "active": true,
-    "startsAt": "2026-08-09T04:42:04.461Z",
-    "endsAt": "2026-11-17T04:42:04.461Z",
-    "createdAt": "2026-08-09T04:42:04.461Z",
-    "id": "masjid_announcements_2_mszlugc5",
+    "startsAt": "2026-08-10T19:09:32.985Z",
+    "endsAt": "2026-11-18T19:09:32.985Z",
+    "createdAt": "2026-08-10T19:09:32.985Z",
+    "id": "masjid_announcements_2_mt1w9vwg",
     "slug": "masjid-expansion-project"
   }
 ],
@@ -1204,12 +1204,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/brotherhood-khutbah.mp3",
     "archiveOrgId": "brotherhood-khutbah-2026",
     "duration": 2400,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 124,
     "plays": 892,
     "status": "active",
-    "id": "masjid_audios_0_mszlugc6",
+    "id": "masjid_audios_0_mt1w9vwg",
     "slug": "khutbah-the-importance-of-brotherhood"
   },
   {
@@ -1221,12 +1221,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/patience-lecture.mp3",
     "archiveOrgId": "patience-lecture-2026",
     "duration": 3600,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 98,
     "plays": 654,
     "status": "active",
-    "id": "masjid_audios_1_mszlugc6",
+    "id": "masjid_audios_1_mt1w9vwg",
     "slug": "lecture-patience-in-islam"
   },
   {
@@ -1238,12 +1238,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/tafsir-fatihah.mp3",
     "archiveOrgId": "tafsir-fatihah-2026",
     "duration": 4200,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 156,
     "plays": 1102,
     "status": "active",
-    "id": "masjid_audios_2_mszlugc6",
+    "id": "masjid_audios_2_mt1w9vwg",
     "slug": "tafsir-surah-al-fatihah"
   },
   {
@@ -1255,12 +1255,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/juz-amma.mp3",
     "archiveOrgId": "juz-amma-recitation",
     "duration": 5400,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 234,
     "plays": 1856,
     "status": "active",
-    "id": "masjid_audios_3_mszlugc6",
+    "id": "masjid_audios_3_mt1w9vwg",
     "slug": "recitation-juz-amma-beautiful-recitation"
   },
   {
@@ -1272,12 +1272,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/gratitude-khutbah.mp3",
     "archiveOrgId": "gratitude-khutbah-2026",
     "duration": 2200,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 87,
     "plays": 543,
     "status": "active",
-    "id": "masjid_audios_4_mszlugc6",
+    "id": "masjid_audios_4_mt1w9vwg",
     "slug": "khutbah-gratitude-to-allah"
   },
   {
@@ -1289,12 +1289,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/daily-adhkar.mp3",
     "archiveOrgId": "daily-adhkar-2026",
     "duration": 1800,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 312,
     "plays": 2104,
     "status": "active",
-    "id": "masjid_audios_5_mszlugc6",
+    "id": "masjid_audios_5_mt1w9vwg",
     "slug": "dua-collection-of-daily-adhkar"
   },
   {
@@ -1306,12 +1306,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/abu-bakr-life.mp3",
     "archiveOrgId": "abu-bakr-life-2026",
     "duration": 4800,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 145,
     "plays": 876,
     "status": "active",
-    "id": "masjid_audios_6_mszlugc6",
+    "id": "masjid_audios_6_mt1w9vwg",
     "slug": "lecture-the-life-of-abu-bakr-ra"
   }
 ],
@@ -1330,9 +1330,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Imam Yusuf Olatunji",
     "status": "published",
-    "publishedAt": "2026-08-14T04:42:04.461Z",
+    "publishedAt": "2026-08-15T19:09:32.985Z",
     "views": 342,
-    "id": "masjid_blog_posts_0_mszlugc6"
+    "id": "masjid_blog_posts_0_mt1w9vwh"
   },
   {
     "slug": "preparing-for-ramadan",
@@ -1348,9 +1348,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Imam Yusuf Olatunji",
     "status": "published",
-    "publishedAt": "2026-08-07T04:42:04.461Z",
+    "publishedAt": "2026-08-08T19:09:32.985Z",
     "views": 567,
-    "id": "masjid_blog_posts_1_mszlugc6"
+    "id": "masjid_blog_posts_1_mt1w9vwh"
   },
   {
     "slug": "understanding-zakat",
@@ -1366,9 +1366,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Ustadh Abdullah Okafor",
     "status": "published",
-    "publishedAt": "2026-07-30T04:42:04.461Z",
+    "publishedAt": "2026-07-31T19:09:32.985Z",
     "views": 423,
-    "id": "masjid_blog_posts_2_mszlugc6"
+    "id": "masjid_blog_posts_2_mt1w9vwh"
   }
 ],
   "masjid_books": [
@@ -1384,7 +1384,7 @@ export const seedData: Record<string, any[]> = {
     "pages": 700,
     "language": "English/Arabic",
     "available": true,
-    "id": "masjid_books_0_mszlugc6",
+    "id": "masjid_books_0_mt1w9vwh",
     "slug": "riyad-as-saliheen"
   },
   {
@@ -1399,7 +1399,7 @@ export const seedData: Record<string, any[]> = {
     "pages": 550,
     "language": "English/Arabic",
     "available": true,
-    "id": "masjid_books_1_mszlugc6",
+    "id": "masjid_books_1_mt1w9vwh",
     "slug": "bulugh-al-maram"
   },
   {
@@ -1414,7 +1414,7 @@ export const seedData: Record<string, any[]> = {
     "pages": 300,
     "language": "English",
     "available": true,
-    "id": "masjid_books_2_mszlugc6",
+    "id": "masjid_books_2_mt1w9vwh",
     "slug": "kitab-at-tawheed"
   },
   {
@@ -1429,7 +1429,7 @@ export const seedData: Record<string, any[]> = {
     "pages": 500,
     "language": "English",
     "available": true,
-    "id": "masjid_books_3_mszlugc6",
+    "id": "masjid_books_3_mt1w9vwh",
     "slug": "the-sealed-nectar"
   },
   {
@@ -1444,7 +1444,7 @@ export const seedData: Record<string, any[]> = {
     "pages": 180,
     "language": "English/Arabic",
     "available": true,
-    "id": "masjid_books_4_mszlugc6",
+    "id": "masjid_books_4_mt1w9vwh",
     "slug": "fortress-of-the-muslim"
   }
 ],
@@ -1461,8 +1461,8 @@ export const seedData: Record<string, any[]> = {
     "deadline": "2026-12-31",
     "isUrgent": true,
     "status": "active",
-    "createdAt": "2026-06-20T04:42:04.461Z",
-    "id": "masjid_donation_campaigns_0_mszlugc6"
+    "createdAt": "2026-06-21T19:09:32.985Z",
+    "id": "masjid_donation_campaigns_0_mt1w9vwh"
   },
   {
     "slug": "monthly-operations",
@@ -1476,8 +1476,8 @@ export const seedData: Record<string, any[]> = {
     "deadline": "2026-12-31",
     "isUrgent": false,
     "status": "active",
-    "createdAt": "2026-07-20T04:42:04.461Z",
-    "id": "masjid_donation_campaigns_1_mszlugc6"
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "id": "masjid_donation_campaigns_1_mt1w9vwh"
   },
   {
     "slug": "quran-learning-program",
@@ -1491,8 +1491,8 @@ export const seedData: Record<string, any[]> = {
     "deadline": "2026-12-31",
     "isUrgent": false,
     "status": "active",
-    "createdAt": "2026-07-05T04:42:04.461Z",
-    "id": "masjid_donation_campaigns_2_mszlugc6"
+    "createdAt": "2026-07-06T19:09:32.985Z",
+    "id": "masjid_donation_campaigns_2_mt1w9vwh"
   },
   {
     "slug": "ramadan-iftar-program",
@@ -1506,8 +1506,8 @@ export const seedData: Record<string, any[]> = {
     "deadline": "2026-09-30",
     "isUrgent": true,
     "status": "active",
-    "createdAt": "2026-07-30T04:42:04.461Z",
-    "id": "masjid_donation_campaigns_3_mszlugc6"
+    "createdAt": "2026-07-31T19:09:32.985Z",
+    "id": "masjid_donation_campaigns_3_mt1w9vwh"
   }
 ],
   "masjid_donations": [
@@ -1523,8 +1523,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "MAS-DON-001",
     "status": "successful",
     "isAnonymous": true,
-    "donatedAt": "2026-08-18T04:42:04.461Z",
-    "id": "masjid_donations_0_mszlugc6"
+    "donatedAt": "2026-08-19T19:09:32.985Z",
+    "id": "masjid_donations_0_mt1w9vwh"
   },
   {
     "donorName": "Muhammad Ali",
@@ -1539,8 +1539,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isAnonymous": false,
     "message": "May Allah accept",
-    "donatedAt": "2026-08-17T04:42:04.461Z",
-    "id": "masjid_donations_1_mszlugc6"
+    "donatedAt": "2026-08-18T19:09:32.985Z",
+    "id": "masjid_donations_1_mt1w9vwh"
   },
   {
     "donorName": "Fatima Ibrahim",
@@ -1554,8 +1554,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "MAS-DON-003",
     "status": "successful",
     "isAnonymous": false,
-    "donatedAt": "2026-08-16T04:42:04.461Z",
-    "id": "masjid_donations_2_mszlugc6"
+    "donatedAt": "2026-08-17T19:09:32.985Z",
+    "id": "masjid_donations_2_mt1w9vwh"
   },
   {
     "donorName": "Anonymous",
@@ -1568,8 +1568,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "MAS-DON-004",
     "status": "successful",
     "isAnonymous": true,
-    "donatedAt": "2026-08-15T04:42:04.461Z",
-    "id": "masjid_donations_3_mszlugc6"
+    "donatedAt": "2026-08-16T19:09:32.985Z",
+    "id": "masjid_donations_3_mt1w9vwh"
   },
   {
     "donorName": "Abdullah Okafor",
@@ -1584,8 +1584,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isAnonymous": false,
     "message": "For the expansion project",
-    "donatedAt": "2026-08-14T04:42:04.461Z",
-    "id": "masjid_donations_4_mszlugc6"
+    "donatedAt": "2026-08-15T19:09:32.985Z",
+    "id": "masjid_donations_4_mt1w9vwh"
   }
 ],
   "masjid_donors": [
@@ -1595,13 +1595,13 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348062222222",
     "totalDonated": 250000,
     "donationCount": 5,
-    "firstDonationAt": "2026-02-20T04:42:04.461Z",
-    "lastDonationAt": "2026-08-17T04:42:04.461Z",
+    "firstDonationAt": "2026-02-21T19:09:32.985Z",
+    "lastDonationAt": "2026-08-18T19:09:32.985Z",
     "isRecurring": false,
     "tags": [
       "regular"
     ],
-    "id": "masjid_donors_0_mszlugc6",
+    "id": "masjid_donors_0_mt1w9vwh",
     "slug": "muhammad-ali"
   },
   {
@@ -1610,14 +1610,14 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348063333333",
     "totalDonated": 125000,
     "donationCount": 3,
-    "firstDonationAt": "2026-04-21T04:42:04.461Z",
-    "lastDonationAt": "2026-08-16T04:42:04.461Z",
+    "firstDonationAt": "2026-04-22T19:09:32.985Z",
+    "lastDonationAt": "2026-08-17T19:09:32.985Z",
     "isRecurring": true,
     "tags": [
       "recurring",
       "zakaat"
     ],
-    "id": "masjid_donors_1_mszlugc6",
+    "id": "masjid_donors_1_mt1w9vwh",
     "slug": "fatima-ibrahim"
   },
   {
@@ -1626,14 +1626,14 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348064444444",
     "totalDonated": 375000,
     "donationCount": 8,
-    "firstDonationAt": "2026-01-31T04:42:04.461Z",
-    "lastDonationAt": "2026-08-14T04:42:04.461Z",
+    "firstDonationAt": "2026-02-01T19:09:32.985Z",
+    "lastDonationAt": "2026-08-15T19:09:32.985Z",
     "isRecurring": true,
     "tags": [
       "major-donor",
       "recurring"
     ],
-    "id": "masjid_donors_2_mszlugc6",
+    "id": "masjid_donors_2_mt1w9vwh",
     "slug": "abdullah-okafor"
   },
   {
@@ -1641,13 +1641,13 @@ export const seedData: Record<string, any[]> = {
     "name": "Anonymous",
     "totalDonated": 150000,
     "donationCount": 6,
-    "firstDonationAt": "2026-05-21T04:42:04.461Z",
-    "lastDonationAt": "2026-08-18T04:42:04.461Z",
+    "firstDonationAt": "2026-05-22T19:09:32.985Z",
+    "lastDonationAt": "2026-08-19T19:09:32.985Z",
     "isRecurring": false,
     "tags": [
       "anonymous"
     ],
-    "id": "masjid_donors_3_mszlugc6",
+    "id": "masjid_donors_3_mt1w9vwh",
     "slug": "anonymous"
   }
 ],
@@ -1656,75 +1656,75 @@ export const seedData: Record<string, any[]> = {
     "title": "Tafsir of Juz Amma - Weekly Halaqah",
     "description": "Weekly halaqah exploring the meanings and lessons from the short surahs of the Qur'an.",
     "category": "halaqah",
-    "startDate": "2026-08-21T04:42:04.461Z",
-    "endDate": "2026-08-21T04:42:04.461Z",
+    "startDate": "2026-08-22T19:09:32.985Z",
+    "endDate": "2026-08-22T19:09:32.985Z",
     "location": "Main Prayer Hall",
     "speaker": "Imam Yusuf Olatunji",
     "imageUrl": "/images/patterns/mosque.svg",
     "isRecurring": true,
     "recurrencePattern": "weekly-tuesday",
-    "id": "masjid_events_0_mszlugc5",
+    "id": "masjid_events_0_mt1w9vwg",
     "slug": "tafsir-of-juz-amma-weekly-halaqah"
   },
   {
     "title": "Jumu'ah Khutbah",
     "description": "Weekly Jumu'ah prayer and khutbah. The khutbah topic this week: \"The Importance of Brotherhood in Islam\".",
     "category": "khutbah",
-    "startDate": "2026-08-22T04:42:04.461Z",
-    "endDate": "2026-08-22T04:42:04.461Z",
+    "startDate": "2026-08-23T19:09:32.985Z",
+    "endDate": "2026-08-23T19:09:32.985Z",
     "location": "Main Prayer Hall",
     "speaker": "Imam Yusuf Olatunji",
     "isRecurring": true,
     "recurrencePattern": "weekly-friday",
-    "id": "masjid_events_1_mszlugc5",
+    "id": "masjid_events_1_mt1w9vwg",
     "slug": "jumuah-khutbah"
   },
   {
     "title": "Youth Islamic Studies Class",
     "description": "Interactive Islamic studies class for youth aged 12-18. Topics include Aqeedah, Fiqh, and Seerah.",
     "category": "youth",
-    "startDate": "2026-08-23T04:42:04.461Z",
-    "endDate": "2026-08-23T04:42:04.461Z",
+    "startDate": "2026-08-24T19:09:32.985Z",
+    "endDate": "2026-08-24T19:09:32.985Z",
     "location": "Classroom 1",
     "speaker": "Ustadh Abdullah Okafor",
     "isRecurring": true,
     "recurrencePattern": "weekly-saturday",
-    "id": "masjid_events_2_mszlugc5",
+    "id": "masjid_events_2_mt1w9vwg",
     "slug": "youth-islamic-studies-class"
   },
   {
     "title": " sisters' Tajweed Workshop",
     "description": "Special Tajweed workshop for sisters. Learn to recite the Qur'an with proper pronunciation.",
     "category": "special",
-    "startDate": "2026-08-26T04:42:04.461Z",
-    "endDate": "2026-08-26T04:42:04.461Z",
+    "startDate": "2026-08-27T19:09:32.985Z",
+    "endDate": "2026-08-27T19:09:32.985Z",
     "location": "Sisters' Section",
     "speaker": "Mrs. Khadijah Suleiman",
     "imageUrl": "/images/patterns/mosque.svg",
-    "id": "masjid_events_3_mszlugc5",
+    "id": "masjid_events_3_mt1w9vwg",
     "slug": "sisters-tajweed-workshop"
   },
   {
     "title": "Community Iftar (Monthly)",
     "description": "Monthly community Iftar bringing together brothers and sisters for breaking fast and spiritual reflections.",
     "category": "special",
-    "startDate": "2026-08-29T04:42:04.461Z",
-    "endDate": "2026-08-29T04:42:04.461Z",
+    "startDate": "2026-08-30T19:09:32.985Z",
+    "endDate": "2026-08-30T19:09:32.985Z",
     "location": "Masjid Courtyard",
     "imageUrl": "/images/patterns/mosque.svg",
-    "id": "masjid_events_4_mszlugc5",
+    "id": "masjid_events_4_mt1w9vwg",
     "slug": "community-iftar-monthly"
   },
   {
     "title": "Eid al-Fitr Prayer",
     "description": "Eid prayer and celebration. Takbeerat begin 15 minutes before prayer time.",
     "category": "eid",
-    "startDate": "2026-09-18T04:42:04.461Z",
-    "endDate": "2026-09-18T04:42:04.461Z",
+    "startDate": "2026-09-19T19:09:32.985Z",
+    "endDate": "2026-09-19T19:09:32.985Z",
     "location": "Main Prayer Hall",
     "speaker": "Imam Yusuf Olatunji",
     "imageUrl": "/images/patterns/mosque.svg",
-    "id": "masjid_events_5_mszlugc5",
+    "id": "masjid_events_5_mt1w9vwg",
     "slug": "eid-al-fitr-prayer"
   }
 ],
@@ -1734,9 +1734,9 @@ export const seedData: Record<string, any[]> = {
     "description": "Community Taraweeh prayers during Ramadan.",
     "imageUrl": "/images/patterns/architecture.svg",
     "category": "events",
-    "eventDate": "2026-08-19",
-    "createdAt": "2026-08-04T04:42:04.461Z",
-    "id": "masjid_gallery_0_mszlugc6",
+    "eventDate": "2026-08-20",
+    "createdAt": "2026-08-05T19:09:32.985Z",
+    "id": "masjid_gallery_0_mt1w9vwh",
     "slug": "ramadan-taraweeh"
   },
   {
@@ -1744,9 +1744,9 @@ export const seedData: Record<string, any[]> = {
     "description": "Eid prayer and community celebration.",
     "imageUrl": "/images/patterns/architecture.svg",
     "category": "events",
-    "eventDate": "2026-08-19",
-    "createdAt": "2026-07-20T04:42:04.461Z",
-    "id": "masjid_gallery_1_mszlugc6",
+    "eventDate": "2026-08-20",
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "id": "masjid_gallery_1_mt1w9vwh",
     "slug": "eid-celebration"
   },
   {
@@ -1754,9 +1754,9 @@ export const seedData: Record<string, any[]> = {
     "description": "Beautiful interior of the main prayer hall.",
     "imageUrl": "/images/patterns/architecture.svg",
     "category": "facilities",
-    "eventDate": "2026-08-19",
-    "createdAt": "2026-06-20T04:42:04.461Z",
-    "id": "masjid_gallery_2_mszlugc6",
+    "eventDate": "2026-08-20",
+    "createdAt": "2026-06-21T19:09:32.985Z",
+    "id": "masjid_gallery_2_mt1w9vwh",
     "slug": "masjid-interior"
   },
   {
@@ -1764,9 +1764,9 @@ export const seedData: Record<string, any[]> = {
     "description": "Weekly youth Islamic studies class.",
     "imageUrl": "/images/patterns/architecture.svg",
     "category": "programs",
-    "eventDate": "2026-08-19",
-    "createdAt": "2026-08-12T04:42:04.461Z",
-    "id": "masjid_gallery_3_mszlugc6",
+    "eventDate": "2026-08-20",
+    "createdAt": "2026-08-13T19:09:32.985Z",
+    "id": "masjid_gallery_3_mt1w9vwh",
     "slug": "youth-halaqah"
   }
 ],
@@ -1785,7 +1785,7 @@ export const seedData: Record<string, any[]> = {
       "Khutbah"
     ],
     "active": true,
-    "id": "masjid_imams_0_mszlugc7",
+    "id": "masjid_imams_0_mt1w9vwh",
     "slug": "chief-imam"
   },
   {
@@ -1801,7 +1801,7 @@ export const seedData: Record<string, any[]> = {
       "Seerah"
     ],
     "active": true,
-    "id": "masjid_imams_1_mszlugc7",
+    "id": "masjid_imams_1_mt1w9vwh",
     "slug": "assistant-imam"
   },
   {
@@ -1815,7 +1815,7 @@ export const seedData: Record<string, any[]> = {
       "Qur'an Recitation"
     ],
     "active": true,
-    "id": "masjid_imams_2_mszlugc7",
+    "id": "masjid_imams_2_mt1w9vwh",
     "slug": "muadhin"
   },
   {
@@ -1831,7 +1831,7 @@ export const seedData: Record<string, any[]> = {
       "Arabic"
     ],
     "active": true,
-    "id": "masjid_imams_3_mszlugc7",
+    "id": "masjid_imams_3_mt1w9vwh",
     "slug": "sisters-coordinator"
   }
 ],
@@ -1842,9 +1842,9 @@ export const seedData: Record<string, any[]> = {
     "streamUrl": "https://www.youtube.com/live",
     "embedUrl": "https://www.youtube.com/embed/live_stream?channel=UCxxxxxxx",
     "isLive": false,
-    "scheduledAt": "2026-08-22T04:42:04.461Z",
+    "scheduledAt": "2026-08-23T19:09:32.985Z",
     "thumbnailUrl": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800",
-    "id": "masjid_live_streams_0_mszlugc7",
+    "id": "masjid_live_streams_0_mt1w9vwh",
     "slug": "live-jumuah-khutbah"
   },
   {
@@ -1853,9 +1853,9 @@ export const seedData: Record<string, any[]> = {
     "streamUrl": "https://www.youtube.com/live",
     "embedUrl": "https://www.youtube.com/embed/live_stream?channel=UCxxxxxxx",
     "isLive": false,
-    "scheduledAt": "2026-09-08T04:42:04.461Z",
+    "scheduledAt": "2026-09-09T19:09:32.985Z",
     "thumbnailUrl": "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800",
-    "id": "masjid_live_streams_1_mszlugc7",
+    "id": "masjid_live_streams_1_mt1w9vwh",
     "slug": "live-taraweeh"
   }
 ],
@@ -1881,9 +1881,9 @@ export const seedData: Record<string, any[]> = {
     "seoTitle": "About Minhaajulhudaa Masjid",
     "seoDescription": "Learn about Minhaajulhudaa Masjid - serving the community since 2020.",
     "status": "published",
-    "publishedAt": "2026-07-20T04:42:04.461Z",
+    "publishedAt": "2026-07-21T19:09:32.985Z",
     "order": 1,
-    "id": "masjid_pages_0_mszlugc5"
+    "id": "masjid_pages_0_mt1w9vwg"
   },
   {
     "slug": "contact",
@@ -1898,14 +1898,14 @@ export const seedData: Record<string, any[]> = {
     "seoTitle": "Contact Minhaajulhudaa Masjid",
     "seoDescription": "Contact information for Minhaajulhudaa Masjid.",
     "status": "published",
-    "publishedAt": "2026-07-20T04:42:04.461Z",
+    "publishedAt": "2026-07-21T19:09:32.985Z",
     "order": 2,
-    "id": "masjid_pages_1_mszlugc5"
+    "id": "masjid_pages_1_mt1w9vwg"
   }
 ],
   "masjid_prayer_times": [
   {
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "fajrAdhan": "05:12",
     "fajrIqamah": "05:32",
     "sunrise": "06:32",
@@ -1919,384 +1919,265 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:22",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_0_mszlugc5"
-  },
-  {
-    "date": "2026-08-20",
-    "fajrAdhan": "05:13",
-    "fajrIqamah": "05:33",
-    "sunrise": "06:33",
-    "dhuhrAdhan": "12:43",
-    "dhuhrIqamah": "13:03",
-    "asrAdhan": "16:-2",
-    "asrIqamah": "16:18",
-    "maghribAdhan": "18:48",
-    "maghribIqamah": "18:53",
-    "ishaAdhan": "20:03",
-    "ishaIqamah": "20:23",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_1_mszlugc5"
+    "id": "masjid_prayer_times_0_mt1w9vwg"
   },
   {
     "date": "2026-08-21",
-    "fajrAdhan": "05:14",
-    "fajrIqamah": "05:34",
-    "sunrise": "06:34",
-    "dhuhrAdhan": "12:44",
-    "dhuhrIqamah": "13:04",
-    "asrAdhan": "16:-1",
-    "asrIqamah": "16:19",
-    "maghribAdhan": "18:49",
-    "maghribIqamah": "18:54",
-    "ishaAdhan": "20:04",
-    "ishaIqamah": "20:24",
+    "fajrAdhan": "05:13",
+    "fajrIqamah": "05:33",
+    "sunrise": "06:33",
+    "dhuhrAdhan": "12:43",
+    "dhuhrIqamah": "13:03",
+    "asrAdhan": "16:-2",
+    "asrIqamah": "16:18",
+    "maghribAdhan": "18:48",
+    "maghribIqamah": "18:53",
+    "ishaAdhan": "20:03",
+    "ishaIqamah": "20:23",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_2_mszlugc5"
+    "id": "masjid_prayer_times_1_mt1w9vwg"
   },
   {
     "date": "2026-08-22",
-    "fajrAdhan": "05:15",
-    "fajrIqamah": "05:35",
-    "sunrise": "06:35",
-    "dhuhrAdhan": "12:45",
-    "dhuhrIqamah": "13:05",
-    "asrAdhan": "16:00",
-    "asrIqamah": "16:20",
-    "maghribAdhan": "18:50",
-    "maghribIqamah": "18:55",
-    "ishaAdhan": "20:05",
-    "ishaIqamah": "20:25",
+    "fajrAdhan": "05:14",
+    "fajrIqamah": "05:34",
+    "sunrise": "06:34",
+    "dhuhrAdhan": "12:44",
+    "dhuhrIqamah": "13:04",
+    "asrAdhan": "16:-1",
+    "asrIqamah": "16:19",
+    "maghribAdhan": "18:49",
+    "maghribIqamah": "18:54",
+    "ishaAdhan": "20:04",
+    "ishaIqamah": "20:24",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_3_mszlugc5"
+    "id": "masjid_prayer_times_2_mt1w9vwg"
   },
   {
     "date": "2026-08-23",
-    "fajrAdhan": "05:16",
-    "fajrIqamah": "05:36",
-    "sunrise": "06:36",
-    "dhuhrAdhan": "12:46",
-    "dhuhrIqamah": "13:06",
-    "asrAdhan": "16:01",
-    "asrIqamah": "16:21",
-    "maghribAdhan": "18:51",
-    "maghribIqamah": "18:56",
-    "ishaAdhan": "20:06",
-    "ishaIqamah": "20:26",
+    "fajrAdhan": "05:15",
+    "fajrIqamah": "05:35",
+    "sunrise": "06:35",
+    "dhuhrAdhan": "12:45",
+    "dhuhrIqamah": "13:05",
+    "asrAdhan": "16:00",
+    "asrIqamah": "16:20",
+    "maghribAdhan": "18:50",
+    "maghribIqamah": "18:55",
+    "ishaAdhan": "20:05",
+    "ishaIqamah": "20:25",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_4_mszlugc5"
+    "id": "masjid_prayer_times_3_mt1w9vwg"
   },
   {
     "date": "2026-08-24",
-    "fajrAdhan": "05:17",
-    "fajrIqamah": "05:37",
-    "sunrise": "06:37",
-    "dhuhrAdhan": "12:47",
-    "dhuhrIqamah": "13:07",
-    "asrAdhan": "16:02",
-    "asrIqamah": "16:22",
-    "maghribAdhan": "18:52",
-    "maghribIqamah": "18:57",
-    "ishaAdhan": "20:07",
-    "ishaIqamah": "20:27",
+    "fajrAdhan": "05:16",
+    "fajrIqamah": "05:36",
+    "sunrise": "06:36",
+    "dhuhrAdhan": "12:46",
+    "dhuhrIqamah": "13:06",
+    "asrAdhan": "16:01",
+    "asrIqamah": "16:21",
+    "maghribAdhan": "18:51",
+    "maghribIqamah": "18:56",
+    "ishaAdhan": "20:06",
+    "ishaIqamah": "20:26",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_5_mszlugc5"
+    "id": "masjid_prayer_times_4_mt1w9vwg"
   },
   {
     "date": "2026-08-25",
-    "fajrAdhan": "05:18",
-    "fajrIqamah": "05:38",
-    "sunrise": "06:38",
-    "dhuhrAdhan": "12:48",
-    "dhuhrIqamah": "13:08",
-    "asrAdhan": "16:03",
-    "asrIqamah": "16:23",
-    "maghribAdhan": "18:53",
-    "maghribIqamah": "18:58",
-    "ishaAdhan": "20:08",
-    "ishaIqamah": "20:28",
+    "fajrAdhan": "05:17",
+    "fajrIqamah": "05:37",
+    "sunrise": "06:37",
+    "dhuhrAdhan": "12:47",
+    "dhuhrIqamah": "13:07",
+    "asrAdhan": "16:02",
+    "asrIqamah": "16:22",
+    "maghribAdhan": "18:52",
+    "maghribIqamah": "18:57",
+    "ishaAdhan": "20:07",
+    "ishaIqamah": "20:27",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_6_mszlugc5"
+    "id": "masjid_prayer_times_5_mt1w9vwg"
   },
   {
     "date": "2026-08-26",
-    "fajrAdhan": "05:12",
-    "fajrIqamah": "05:32",
-    "sunrise": "06:32",
-    "dhuhrAdhan": "12:42",
-    "dhuhrIqamah": "13:02",
-    "asrAdhan": "16:-3",
-    "asrIqamah": "16:17",
-    "maghribAdhan": "18:47",
-    "maghribIqamah": "18:52",
-    "ishaAdhan": "20:02",
-    "ishaIqamah": "20:22",
+    "fajrAdhan": "05:18",
+    "fajrIqamah": "05:38",
+    "sunrise": "06:38",
+    "dhuhrAdhan": "12:48",
+    "dhuhrIqamah": "13:08",
+    "asrAdhan": "16:03",
+    "asrIqamah": "16:23",
+    "maghribAdhan": "18:53",
+    "maghribIqamah": "18:58",
+    "ishaAdhan": "20:08",
+    "ishaIqamah": "20:28",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_7_mszlugc5"
+    "id": "masjid_prayer_times_6_mt1w9vwg"
   },
   {
     "date": "2026-08-27",
-    "fajrAdhan": "05:13",
-    "fajrIqamah": "05:33",
-    "sunrise": "06:33",
-    "dhuhrAdhan": "12:43",
-    "dhuhrIqamah": "13:03",
-    "asrAdhan": "16:-2",
-    "asrIqamah": "16:18",
-    "maghribAdhan": "18:48",
-    "maghribIqamah": "18:53",
-    "ishaAdhan": "20:03",
-    "ishaIqamah": "20:23",
+    "fajrAdhan": "05:12",
+    "fajrIqamah": "05:32",
+    "sunrise": "06:32",
+    "dhuhrAdhan": "12:42",
+    "dhuhrIqamah": "13:02",
+    "asrAdhan": "16:-3",
+    "asrIqamah": "16:17",
+    "maghribAdhan": "18:47",
+    "maghribIqamah": "18:52",
+    "ishaAdhan": "20:02",
+    "ishaIqamah": "20:22",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_8_mszlugc5"
+    "id": "masjid_prayer_times_7_mt1w9vwg"
   },
   {
     "date": "2026-08-28",
-    "fajrAdhan": "05:14",
-    "fajrIqamah": "05:34",
-    "sunrise": "06:34",
-    "dhuhrAdhan": "12:44",
-    "dhuhrIqamah": "13:04",
-    "asrAdhan": "16:-1",
-    "asrIqamah": "16:19",
-    "maghribAdhan": "18:49",
-    "maghribIqamah": "18:54",
-    "ishaAdhan": "20:04",
-    "ishaIqamah": "20:24",
+    "fajrAdhan": "05:13",
+    "fajrIqamah": "05:33",
+    "sunrise": "06:33",
+    "dhuhrAdhan": "12:43",
+    "dhuhrIqamah": "13:03",
+    "asrAdhan": "16:-2",
+    "asrIqamah": "16:18",
+    "maghribAdhan": "18:48",
+    "maghribIqamah": "18:53",
+    "ishaAdhan": "20:03",
+    "ishaIqamah": "20:23",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_9_mszlugc5"
+    "id": "masjid_prayer_times_8_mt1w9vwg"
   },
   {
     "date": "2026-08-29",
-    "fajrAdhan": "05:15",
-    "fajrIqamah": "05:35",
-    "sunrise": "06:35",
-    "dhuhrAdhan": "12:45",
-    "dhuhrIqamah": "13:05",
-    "asrAdhan": "16:00",
-    "asrIqamah": "16:20",
-    "maghribAdhan": "18:50",
-    "maghribIqamah": "18:55",
-    "ishaAdhan": "20:05",
-    "ishaIqamah": "20:25",
+    "fajrAdhan": "05:14",
+    "fajrIqamah": "05:34",
+    "sunrise": "06:34",
+    "dhuhrAdhan": "12:44",
+    "dhuhrIqamah": "13:04",
+    "asrAdhan": "16:-1",
+    "asrIqamah": "16:19",
+    "maghribAdhan": "18:49",
+    "maghribIqamah": "18:54",
+    "ishaAdhan": "20:04",
+    "ishaIqamah": "20:24",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_10_mszlugc5"
+    "id": "masjid_prayer_times_9_mt1w9vwg"
   },
   {
     "date": "2026-08-30",
-    "fajrAdhan": "05:16",
-    "fajrIqamah": "05:36",
-    "sunrise": "06:36",
-    "dhuhrAdhan": "12:46",
-    "dhuhrIqamah": "13:06",
-    "asrAdhan": "16:01",
-    "asrIqamah": "16:21",
-    "maghribAdhan": "18:51",
-    "maghribIqamah": "18:56",
-    "ishaAdhan": "20:06",
-    "ishaIqamah": "20:26",
+    "fajrAdhan": "05:15",
+    "fajrIqamah": "05:35",
+    "sunrise": "06:35",
+    "dhuhrAdhan": "12:45",
+    "dhuhrIqamah": "13:05",
+    "asrAdhan": "16:00",
+    "asrIqamah": "16:20",
+    "maghribAdhan": "18:50",
+    "maghribIqamah": "18:55",
+    "ishaAdhan": "20:05",
+    "ishaIqamah": "20:25",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_11_mszlugc5"
+    "id": "masjid_prayer_times_10_mt1w9vwg"
   },
   {
     "date": "2026-08-31",
-    "fajrAdhan": "05:17",
-    "fajrIqamah": "05:37",
-    "sunrise": "06:37",
-    "dhuhrAdhan": "12:47",
-    "dhuhrIqamah": "13:07",
-    "asrAdhan": "16:02",
-    "asrIqamah": "16:22",
-    "maghribAdhan": "18:52",
-    "maghribIqamah": "18:57",
-    "ishaAdhan": "20:07",
-    "ishaIqamah": "20:27",
+    "fajrAdhan": "05:16",
+    "fajrIqamah": "05:36",
+    "sunrise": "06:36",
+    "dhuhrAdhan": "12:46",
+    "dhuhrIqamah": "13:06",
+    "asrAdhan": "16:01",
+    "asrIqamah": "16:21",
+    "maghribAdhan": "18:51",
+    "maghribIqamah": "18:56",
+    "ishaAdhan": "20:06",
+    "ishaIqamah": "20:26",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_12_mszlugc5"
+    "id": "masjid_prayer_times_11_mt1w9vwg"
   },
   {
     "date": "2026-09-01",
-    "fajrAdhan": "05:18",
-    "fajrIqamah": "05:38",
-    "sunrise": "06:38",
-    "dhuhrAdhan": "12:48",
-    "dhuhrIqamah": "13:08",
-    "asrAdhan": "16:03",
-    "asrIqamah": "16:23",
-    "maghribAdhan": "18:53",
-    "maghribIqamah": "18:58",
-    "ishaAdhan": "20:08",
-    "ishaIqamah": "20:28",
+    "fajrAdhan": "05:17",
+    "fajrIqamah": "05:37",
+    "sunrise": "06:37",
+    "dhuhrAdhan": "12:47",
+    "dhuhrIqamah": "13:07",
+    "asrAdhan": "16:02",
+    "asrIqamah": "16:22",
+    "maghribAdhan": "18:52",
+    "maghribIqamah": "18:57",
+    "ishaAdhan": "20:07",
+    "ishaIqamah": "20:27",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_13_mszlugc5"
+    "id": "masjid_prayer_times_12_mt1w9vwg"
   },
   {
     "date": "2026-09-02",
-    "fajrAdhan": "05:12",
-    "fajrIqamah": "05:32",
-    "sunrise": "06:32",
-    "dhuhrAdhan": "12:42",
-    "dhuhrIqamah": "13:02",
-    "asrAdhan": "16:-3",
-    "asrIqamah": "16:17",
-    "maghribAdhan": "18:47",
-    "maghribIqamah": "18:52",
-    "ishaAdhan": "20:02",
-    "ishaIqamah": "20:22",
+    "fajrAdhan": "05:18",
+    "fajrIqamah": "05:38",
+    "sunrise": "06:38",
+    "dhuhrAdhan": "12:48",
+    "dhuhrIqamah": "13:08",
+    "asrAdhan": "16:03",
+    "asrIqamah": "16:23",
+    "maghribAdhan": "18:53",
+    "maghribIqamah": "18:58",
+    "ishaAdhan": "20:08",
+    "ishaIqamah": "20:28",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_14_mszlugc5"
+    "id": "masjid_prayer_times_13_mt1w9vwg"
   },
   {
     "date": "2026-09-03",
-    "fajrAdhan": "05:13",
-    "fajrIqamah": "05:33",
-    "sunrise": "06:33",
-    "dhuhrAdhan": "12:43",
-    "dhuhrIqamah": "13:03",
-    "asrAdhan": "16:-2",
-    "asrIqamah": "16:18",
-    "maghribAdhan": "18:48",
-    "maghribIqamah": "18:53",
-    "ishaAdhan": "20:03",
-    "ishaIqamah": "20:23",
+    "fajrAdhan": "05:12",
+    "fajrIqamah": "05:32",
+    "sunrise": "06:32",
+    "dhuhrAdhan": "12:42",
+    "dhuhrIqamah": "13:02",
+    "asrAdhan": "16:-3",
+    "asrIqamah": "16:17",
+    "maghribAdhan": "18:47",
+    "maghribIqamah": "18:52",
+    "ishaAdhan": "20:02",
+    "ishaIqamah": "20:22",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_15_mszlugc5"
+    "id": "masjid_prayer_times_14_mt1w9vwg"
   },
   {
     "date": "2026-09-04",
-    "fajrAdhan": "05:14",
-    "fajrIqamah": "05:34",
-    "sunrise": "06:34",
-    "dhuhrAdhan": "12:44",
-    "dhuhrIqamah": "13:04",
-    "asrAdhan": "16:-1",
-    "asrIqamah": "16:19",
-    "maghribAdhan": "18:49",
-    "maghribIqamah": "18:54",
-    "ishaAdhan": "20:04",
-    "ishaIqamah": "20:24",
+    "fajrAdhan": "05:13",
+    "fajrIqamah": "05:33",
+    "sunrise": "06:33",
+    "dhuhrAdhan": "12:43",
+    "dhuhrIqamah": "13:03",
+    "asrAdhan": "16:-2",
+    "asrIqamah": "16:18",
+    "maghribAdhan": "18:48",
+    "maghribIqamah": "18:53",
+    "ishaAdhan": "20:03",
+    "ishaIqamah": "20:23",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_16_mszlugc5"
+    "id": "masjid_prayer_times_15_mt1w9vwg"
   },
   {
     "date": "2026-09-05",
-    "fajrAdhan": "05:15",
-    "fajrIqamah": "05:35",
-    "sunrise": "06:35",
-    "dhuhrAdhan": "12:45",
-    "dhuhrIqamah": "13:05",
-    "asrAdhan": "16:00",
-    "asrIqamah": "16:20",
-    "maghribAdhan": "18:50",
-    "maghribIqamah": "18:55",
-    "ishaAdhan": "20:05",
-    "ishaIqamah": "20:25",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_17_mszlugc5"
-  },
-  {
-    "date": "2026-09-06",
-    "fajrAdhan": "05:16",
-    "fajrIqamah": "05:36",
-    "sunrise": "06:36",
-    "dhuhrAdhan": "12:46",
-    "dhuhrIqamah": "13:06",
-    "asrAdhan": "16:01",
-    "asrIqamah": "16:21",
-    "maghribAdhan": "18:51",
-    "maghribIqamah": "18:56",
-    "ishaAdhan": "20:06",
-    "ishaIqamah": "20:26",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_18_mszlugc5"
-  },
-  {
-    "date": "2026-09-07",
-    "fajrAdhan": "05:17",
-    "fajrIqamah": "05:37",
-    "sunrise": "06:37",
-    "dhuhrAdhan": "12:47",
-    "dhuhrIqamah": "13:07",
-    "asrAdhan": "16:02",
-    "asrIqamah": "16:22",
-    "maghribAdhan": "18:52",
-    "maghribIqamah": "18:57",
-    "ishaAdhan": "20:07",
-    "ishaIqamah": "20:27",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_19_mszlugc5"
-  },
-  {
-    "date": "2026-09-08",
-    "fajrAdhan": "05:18",
-    "fajrIqamah": "05:38",
-    "sunrise": "06:38",
-    "dhuhrAdhan": "12:48",
-    "dhuhrIqamah": "13:08",
-    "asrAdhan": "16:03",
-    "asrIqamah": "16:23",
-    "maghribAdhan": "18:53",
-    "maghribIqamah": "18:58",
-    "ishaAdhan": "20:08",
-    "ishaIqamah": "20:28",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_20_mszlugc5"
-  },
-  {
-    "date": "2026-09-09",
-    "fajrAdhan": "05:12",
-    "fajrIqamah": "05:32",
-    "sunrise": "06:32",
-    "dhuhrAdhan": "12:42",
-    "dhuhrIqamah": "13:02",
-    "asrAdhan": "16:-3",
-    "asrIqamah": "16:17",
-    "maghribAdhan": "18:47",
-    "maghribIqamah": "18:52",
-    "ishaAdhan": "20:02",
-    "ishaIqamah": "20:22",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_21_mszlugc5"
-  },
-  {
-    "date": "2026-09-10",
-    "fajrAdhan": "05:13",
-    "fajrIqamah": "05:33",
-    "sunrise": "06:33",
-    "dhuhrAdhan": "12:43",
-    "dhuhrIqamah": "13:03",
-    "asrAdhan": "16:-2",
-    "asrIqamah": "16:18",
-    "maghribAdhan": "18:48",
-    "maghribIqamah": "18:53",
-    "ishaAdhan": "20:03",
-    "ishaIqamah": "20:23",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_22_mszlugc5"
-  },
-  {
-    "date": "2026-09-11",
     "fajrAdhan": "05:14",
     "fajrIqamah": "05:34",
     "sunrise": "06:34",
@@ -2310,10 +2191,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:24",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_23_mszlugc5"
+    "id": "masjid_prayer_times_16_mt1w9vwg"
   },
   {
-    "date": "2026-09-12",
+    "date": "2026-09-06",
     "fajrAdhan": "05:15",
     "fajrIqamah": "05:35",
     "sunrise": "06:35",
@@ -2327,10 +2208,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:25",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_24_mszlugc5"
+    "id": "masjid_prayer_times_17_mt1w9vwg"
   },
   {
-    "date": "2026-09-13",
+    "date": "2026-09-07",
     "fajrAdhan": "05:16",
     "fajrIqamah": "05:36",
     "sunrise": "06:36",
@@ -2344,10 +2225,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:26",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_25_mszlugc5"
+    "id": "masjid_prayer_times_18_mt1w9vwg"
   },
   {
-    "date": "2026-09-14",
+    "date": "2026-09-08",
     "fajrAdhan": "05:17",
     "fajrIqamah": "05:37",
     "sunrise": "06:37",
@@ -2361,10 +2242,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:27",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_26_mszlugc5"
+    "id": "masjid_prayer_times_19_mt1w9vwg"
   },
   {
-    "date": "2026-09-15",
+    "date": "2026-09-09",
     "fajrAdhan": "05:18",
     "fajrIqamah": "05:38",
     "sunrise": "06:38",
@@ -2378,10 +2259,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:28",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_27_mszlugc5"
+    "id": "masjid_prayer_times_20_mt1w9vwg"
   },
   {
-    "date": "2026-09-16",
+    "date": "2026-09-10",
     "fajrAdhan": "05:12",
     "fajrIqamah": "05:32",
     "sunrise": "06:32",
@@ -2395,10 +2276,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:22",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_28_mszlugc5"
+    "id": "masjid_prayer_times_21_mt1w9vwg"
   },
   {
-    "date": "2026-09-17",
+    "date": "2026-09-11",
     "fajrAdhan": "05:13",
     "fajrIqamah": "05:33",
     "sunrise": "06:33",
@@ -2412,7 +2293,126 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:23",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_29_mszlugc5"
+    "id": "masjid_prayer_times_22_mt1w9vwg"
+  },
+  {
+    "date": "2026-09-12",
+    "fajrAdhan": "05:14",
+    "fajrIqamah": "05:34",
+    "sunrise": "06:34",
+    "dhuhrAdhan": "12:44",
+    "dhuhrIqamah": "13:04",
+    "asrAdhan": "16:-1",
+    "asrIqamah": "16:19",
+    "maghribAdhan": "18:49",
+    "maghribIqamah": "18:54",
+    "ishaAdhan": "20:04",
+    "ishaIqamah": "20:24",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_23_mt1w9vwg"
+  },
+  {
+    "date": "2026-09-13",
+    "fajrAdhan": "05:15",
+    "fajrIqamah": "05:35",
+    "sunrise": "06:35",
+    "dhuhrAdhan": "12:45",
+    "dhuhrIqamah": "13:05",
+    "asrAdhan": "16:00",
+    "asrIqamah": "16:20",
+    "maghribAdhan": "18:50",
+    "maghribIqamah": "18:55",
+    "ishaAdhan": "20:05",
+    "ishaIqamah": "20:25",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_24_mt1w9vwg"
+  },
+  {
+    "date": "2026-09-14",
+    "fajrAdhan": "05:16",
+    "fajrIqamah": "05:36",
+    "sunrise": "06:36",
+    "dhuhrAdhan": "12:46",
+    "dhuhrIqamah": "13:06",
+    "asrAdhan": "16:01",
+    "asrIqamah": "16:21",
+    "maghribAdhan": "18:51",
+    "maghribIqamah": "18:56",
+    "ishaAdhan": "20:06",
+    "ishaIqamah": "20:26",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_25_mt1w9vwg"
+  },
+  {
+    "date": "2026-09-15",
+    "fajrAdhan": "05:17",
+    "fajrIqamah": "05:37",
+    "sunrise": "06:37",
+    "dhuhrAdhan": "12:47",
+    "dhuhrIqamah": "13:07",
+    "asrAdhan": "16:02",
+    "asrIqamah": "16:22",
+    "maghribAdhan": "18:52",
+    "maghribIqamah": "18:57",
+    "ishaAdhan": "20:07",
+    "ishaIqamah": "20:27",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_26_mt1w9vwg"
+  },
+  {
+    "date": "2026-09-16",
+    "fajrAdhan": "05:18",
+    "fajrIqamah": "05:38",
+    "sunrise": "06:38",
+    "dhuhrAdhan": "12:48",
+    "dhuhrIqamah": "13:08",
+    "asrAdhan": "16:03",
+    "asrIqamah": "16:23",
+    "maghribAdhan": "18:53",
+    "maghribIqamah": "18:58",
+    "ishaAdhan": "20:08",
+    "ishaIqamah": "20:28",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_27_mt1w9vwg"
+  },
+  {
+    "date": "2026-09-17",
+    "fajrAdhan": "05:12",
+    "fajrIqamah": "05:32",
+    "sunrise": "06:32",
+    "dhuhrAdhan": "12:42",
+    "dhuhrIqamah": "13:02",
+    "asrAdhan": "16:-3",
+    "asrIqamah": "16:17",
+    "maghribAdhan": "18:47",
+    "maghribIqamah": "18:52",
+    "ishaAdhan": "20:02",
+    "ishaIqamah": "20:22",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_28_mt1w9vwg"
+  },
+  {
+    "date": "2026-09-18",
+    "fajrAdhan": "05:13",
+    "fajrIqamah": "05:33",
+    "sunrise": "06:33",
+    "dhuhrAdhan": "12:43",
+    "dhuhrIqamah": "13:03",
+    "asrAdhan": "16:-2",
+    "asrIqamah": "16:18",
+    "maghribAdhan": "18:48",
+    "maghribIqamah": "18:53",
+    "ishaAdhan": "20:03",
+    "ishaIqamah": "20:23",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_29_mt1w9vwg"
   }
 ],
   "masjid_quran_config": [
@@ -2474,7 +2474,7 @@ export const seedData: Record<string, any[]> = {
       }
     ],
     "active": true,
-    "id": "masjid_quran_config_0_mszlugc7"
+    "id": "masjid_quran_config_0_mt1w9vwh"
   }
 ],
   "masjid_videos": [
@@ -2485,10 +2485,10 @@ export const seedData: Record<string, any[]> = {
     "thumbnailUrl": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400",
     "category": "khutbah",
     "duration": 2400,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "views": 1234,
     "status": "active",
-    "id": "masjid_videos_0_mszlugc6",
+    "id": "masjid_videos_0_mt1w9vwg",
     "slug": "jumuah-khutbah-brotherhood-in-islam"
   },
   {
@@ -2498,10 +2498,10 @@ export const seedData: Record<string, any[]> = {
     "thumbnailUrl": "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=400",
     "category": "general",
     "duration": 600,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "views": 567,
     "status": "active",
-    "id": "masjid_videos_1_mszlugc6",
+    "id": "masjid_videos_1_mt1w9vwg",
     "slug": "masjid-tour"
   },
   {
@@ -2511,17 +2511,17 @@ export const seedData: Record<string, any[]> = {
     "thumbnailUrl": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400",
     "category": "recitation",
     "duration": 1800,
-    "date": "2026-08-19",
+    "date": "2026-08-20",
     "views": 2103,
     "status": "active",
-    "id": "masjid_videos_2_mszlugc6",
+    "id": "masjid_videos_2_mt1w9vwg",
     "slug": "quran-recitation-beautiful"
   }
 ],
   "platform_admins": [
   {
     "email": "admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
     "name": "Super Admin",
     "role": "super_admin",
     "platforms": [
@@ -2536,12 +2536,12 @@ export const seedData: Record<string, any[]> = {
     "metadata": {
       "title": "System Administrator"
     },
-    "id": "platform_admins_0_mszlugby",
+    "id": "platform_admins_0_mt1w9vwa",
     "slug": "super-admin"
   },
   {
     "email": "school.admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
     "name": "Ustadh Abdurrahman Adeyemi",
     "role": "platform_admin",
     "platforms": [
@@ -2552,12 +2552,12 @@ export const seedData: Record<string, any[]> = {
     "metadata": {
       "title": "School Principal"
     },
-    "id": "platform_admins_1_mszlugbz",
+    "id": "platform_admins_1_mt1w9vwa",
     "slug": "ustadh-abdurrahman-adeyemi"
   },
   {
     "email": "masjid.admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
     "name": "Imam Yusuf Olatunji",
     "role": "platform_admin",
     "platforms": [
@@ -2568,12 +2568,12 @@ export const seedData: Record<string, any[]> = {
     "metadata": {
       "title": "Masjid Administrator"
     },
-    "id": "platform_admins_2_mszlugbz",
+    "id": "platform_admins_2_mt1w9vwa",
     "slug": "imam-yusuf-olatunji"
   },
   {
     "email": "charity.admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
     "name": "Malik Ibrahim Suleiman",
     "role": "platform_admin",
     "platforms": [
@@ -2584,12 +2584,12 @@ export const seedData: Record<string, any[]> = {
     "metadata": {
       "title": "Charity Director"
     },
-    "id": "platform_admins_3_mszlugbz",
+    "id": "platform_admins_3_mt1w9vwa",
     "slug": "malik-ibrahim-suleiman"
   },
   {
     "email": "travels.admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$afiRXFQuoxtaHMANm.EZteAdntDrkTTJtjPhwJuqg.iHZU/chalei",
+    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
     "name": "Ustadh Dawud Okafor",
     "role": "platform_admin",
     "platforms": [
@@ -2600,7 +2600,7 @@ export const seedData: Record<string, any[]> = {
     "metadata": {
       "title": "Travels Manager"
     },
-    "id": "platform_admins_4_mszlugbz",
+    "id": "platform_admins_4_mt1w9vwa",
     "slug": "ustadh-dawud-okafor"
   }
 ],
@@ -2636,7 +2636,7 @@ export const seedData: Record<string, any[]> = {
     "metadata": {
       "established": "2020"
     },
-    "id": "platform_settings_0_mszlugc1"
+    "id": "platform_settings_0_mt1w9vwd"
   },
   {
     "platform": "school",
@@ -2659,7 +2659,7 @@ export const seedData: Record<string, any[]> = {
         "Senior Secondary"
       ]
     },
-    "id": "platform_settings_1_mszlugc1"
+    "id": "platform_settings_1_mt1w9vwd"
   },
   {
     "platform": "masjid",
@@ -2678,7 +2678,7 @@ export const seedData: Record<string, any[]> = {
       "capacity": 2000,
       "established": "2020"
     },
-    "id": "platform_settings_2_mszlugc1"
+    "id": "platform_settings_2_mt1w9vwd"
   },
   {
     "platform": "charity",
@@ -2697,7 +2697,7 @@ export const seedData: Record<string, any[]> = {
       "established": "2022",
       "registrationNumber": "RC-2022-0001"
     },
-    "id": "platform_settings_3_mszlugc1"
+    "id": "platform_settings_3_mt1w9vwd"
   },
   {
     "platform": "travels",
@@ -2716,7 +2716,7 @@ export const seedData: Record<string, any[]> = {
       "established": "2023",
       "licensed": true
     },
-    "id": "platform_settings_4_mszlugc1"
+    "id": "platform_settings_4_mt1w9vwd"
   }
 ],
   "school_admission_applications": [
@@ -2735,8 +2735,8 @@ export const seedData: Record<string, any[]> = {
     "address": "15 Adeola Odeku Street, Victoria Island, Lagos",
     "additionalInfo": "Hamzah is an active child who loves reading and puzzles.",
     "status": "pending",
-    "submittedAt": "2026-08-17T04:42:04.461Z",
-    "id": "school_admission_applications_0_mszlugc4"
+    "submittedAt": "2026-08-18T19:09:32.984Z",
+    "id": "school_admission_applications_0_mt1w9vwf"
   },
   {
     "applicationId": "MHS-APP/2026/002",
@@ -2753,10 +2753,10 @@ export const seedData: Record<string, any[]> = {
     "address": "8 Akin Adesola Street, Victoria Island, Lagos",
     "additionalInfo": "Aaminah has memorized Juz Amma and is eager to continue her Hifz journey.",
     "status": "reviewed",
-    "submittedAt": "2026-08-14T04:42:04.461Z",
-    "reviewedAt": "2026-08-18T04:42:04.461Z",
+    "submittedAt": "2026-08-15T19:09:32.984Z",
+    "reviewedAt": "2026-08-19T19:09:32.984Z",
     "reviewNotes": "Strong candidate. Recommended for admission assessment.",
-    "id": "school_admission_applications_1_mszlugc4"
+    "id": "school_admission_applications_1_mt1w9vwf"
   },
   {
     "applicationId": "MHS-APP/2026/003",
@@ -2773,10 +2773,10 @@ export const seedData: Record<string, any[]> = {
     "address": "23 Norman Williams Street, Ikoyi, Lagos",
     "additionalInfo": "Transferring from Al-Noor Academy. Mu'adh excels in mathematics.",
     "status": "accepted",
-    "submittedAt": "2026-08-09T04:42:04.461Z",
-    "reviewedAt": "2026-08-12T04:42:04.461Z",
+    "submittedAt": "2026-08-10T19:09:32.984Z",
+    "reviewedAt": "2026-08-13T19:09:32.984Z",
     "reviewNotes": "Excellent academic record. Admission approved.",
-    "id": "school_admission_applications_2_mszlugc4"
+    "id": "school_admission_applications_2_mt1w9vwf"
   },
   {
     "applicationId": "MHS-APP/2026/004",
@@ -2793,8 +2793,8 @@ export const seedData: Record<string, any[]> = {
     "address": "5 Cameron Road, Ikoyi, Lagos",
     "additionalInfo": "Looking for a school with strong Islamic values.",
     "status": "pending",
-    "submittedAt": "2026-08-18T04:42:04.461Z",
-    "id": "school_admission_applications_3_mszlugc4"
+    "submittedAt": "2026-08-19T19:09:32.984Z",
+    "id": "school_admission_applications_3_mt1w9vwf"
   }
 ],
   "school_announcements": [
@@ -2804,10 +2804,10 @@ export const seedData: Record<string, any[]> = {
     "type": "info",
     "audience": "all",
     "active": true,
-    "startsAt": "2026-08-16T04:42:04.461Z",
-    "endsAt": "2026-09-02T04:42:04.461Z",
-    "createdAt": "2026-08-16T04:42:04.461Z",
-    "id": "school_announcements_0_mszlugc2",
+    "startsAt": "2026-08-17T19:09:32.984Z",
+    "endsAt": "2026-09-03T19:09:32.984Z",
+    "createdAt": "2026-08-17T19:09:32.984Z",
+    "id": "school_announcements_0_mt1w9vwd",
     "slug": "school-resumes-for-term-1"
   },
   {
@@ -2816,10 +2816,10 @@ export const seedData: Record<string, any[]> = {
     "type": "info",
     "audience": "parents",
     "active": true,
-    "startsAt": "2026-08-18T04:42:04.461Z",
-    "endsAt": "2026-09-18T04:42:04.461Z",
-    "createdAt": "2026-08-18T04:42:04.461Z",
-    "id": "school_announcements_1_mszlugc2",
+    "startsAt": "2026-08-19T19:09:32.984Z",
+    "endsAt": "2026-09-19T19:09:32.984Z",
+    "createdAt": "2026-08-19T19:09:32.984Z",
+    "id": "school_announcements_1_mt1w9vwd",
     "slug": "parent-teacher-conference"
   },
   {
@@ -2828,10 +2828,10 @@ export const seedData: Record<string, any[]> = {
     "type": "success",
     "audience": "all",
     "active": true,
-    "startsAt": "2026-08-14T04:42:04.461Z",
-    "endsAt": "2026-08-26T04:42:04.461Z",
-    "createdAt": "2026-08-14T04:42:04.461Z",
-    "id": "school_announcements_2_mszlugc2",
+    "startsAt": "2026-08-15T19:09:32.984Z",
+    "endsAt": "2026-08-27T19:09:32.984Z",
+    "createdAt": "2026-08-15T19:09:32.984Z",
+    "id": "school_announcements_2_mt1w9vwd",
     "slug": "holiday-reminder"
   }
 ],
@@ -2850,10 +2850,10 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Ustadh Abdurrahman Adeyemi",
     "status": "published",
-    "publishedAt": "2026-08-12T04:42:04.461Z",
+    "publishedAt": "2026-08-13T19:09:32.984Z",
     "readingTimeMinutes": 3,
     "views": 245,
-    "id": "school_blog_posts_0_mszlugc2"
+    "id": "school_blog_posts_0_mt1w9vwd"
   },
   {
     "slug": "hifz-graduation-ceremony-2026",
@@ -2869,10 +2869,10 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Ustadh Abdurrahman Adeyemi",
     "status": "published",
-    "publishedAt": "2026-08-05T04:42:04.461Z",
+    "publishedAt": "2026-08-06T19:09:32.984Z",
     "readingTimeMinutes": 4,
     "views": 412,
-    "id": "school_blog_posts_1_mszlugc2"
+    "id": "school_blog_posts_1_mt1w9vwd"
   },
   {
     "slug": "science-fair-2026-highlights",
@@ -2888,10 +2888,10 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Ustadh Muhammad Bashir",
     "status": "published",
-    "publishedAt": "2026-07-29T04:42:04.461Z",
+    "publishedAt": "2026-07-30T19:09:32.984Z",
     "readingTimeMinutes": 3,
     "views": 187,
-    "id": "school_blog_posts_2_mszlugc2"
+    "id": "school_blog_posts_2_mt1w9vwd"
   },
   {
     "slug": "parent-teacher-conference-guide",
@@ -2907,10 +2907,10 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Mrs. Aisha Abdullahi",
     "status": "published",
-    "publishedAt": "2026-07-15T04:42:04.461Z",
+    "publishedAt": "2026-07-16T19:09:32.984Z",
     "readingTimeMinutes": 2,
     "views": 156,
-    "id": "school_blog_posts_3_mszlugc2"
+    "id": "school_blog_posts_3_mt1w9vwd"
   },
   {
     "slug": "arabic-language-immersion-program",
@@ -2926,10 +2926,10 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Ustadh Abdurrahman Adeyemi",
     "status": "published",
-    "publishedAt": "2026-07-08T04:42:04.461Z",
+    "publishedAt": "2026-07-09T19:09:32.984Z",
     "readingTimeMinutes": 3,
     "views": 203,
-    "id": "school_blog_posts_4_mszlugc2"
+    "id": "school_blog_posts_4_mt1w9vwd"
   }
 ],
   "school_classes": [
@@ -2958,7 +2958,7 @@ export const seedData: Record<string, any[]> = {
     },
     "description": "Foundation class for young learners.",
     "active": true,
-    "id": "school_classes_0_mszlugc3",
+    "id": "school_classes_0_mt1w9vwe",
     "slug": "primary-1"
   },
   {
@@ -2987,7 +2987,7 @@ export const seedData: Record<string, any[]> = {
     },
     "description": "Lower primary class building on foundational skills.",
     "active": true,
-    "id": "school_classes_1_mszlugc3",
+    "id": "school_classes_1_mt1w9vwe",
     "slug": "primary-3"
   },
   {
@@ -3017,7 +3017,7 @@ export const seedData: Record<string, any[]> = {
     },
     "description": "Upper primary class preparing for junior secondary.",
     "active": true,
-    "id": "school_classes_2_mszlugc3",
+    "id": "school_classes_2_mt1w9vwe",
     "slug": "primary-4"
   },
   {
@@ -3049,7 +3049,7 @@ export const seedData: Record<string, any[]> = {
     },
     "description": "Entry into junior secondary education.",
     "active": true,
-    "id": "school_classes_3_mszlugc3",
+    "id": "school_classes_3_mt1w9vwe",
     "slug": "jss-1"
   },
   {
@@ -3082,7 +3082,7 @@ export const seedData: Record<string, any[]> = {
     },
     "description": "Continued junior secondary education.",
     "active": true,
-    "id": "school_classes_4_mszlugc3",
+    "id": "school_classes_4_mt1w9vwe",
     "slug": "jss-2"
   },
   {
@@ -3113,7 +3113,7 @@ export const seedData: Record<string, any[]> = {
     },
     "description": "Senior secondary science track.",
     "active": true,
-    "id": "school_classes_5_mszlugc3",
+    "id": "school_classes_5_mt1w9vwe",
     "slug": "sss-1-science"
   },
   {
@@ -3144,7 +3144,7 @@ export const seedData: Record<string, any[]> = {
     },
     "description": "Senior secondary science track, year 2.",
     "active": true,
-    "id": "school_classes_6_mszlugc3",
+    "id": "school_classes_6_mt1w9vwe",
     "slug": "sss-2-science"
   },
   {
@@ -3175,7 +3175,7 @@ export const seedData: Record<string, any[]> = {
     },
     "description": "Final year senior secondary, WAEC preparation.",
     "active": true,
-    "id": "school_classes_7_mszlugc3",
+    "id": "school_classes_7_mt1w9vwe",
     "slug": "sss-3-science"
   }
 ],
@@ -3196,8 +3196,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 145,
     "rating": 4.9,
     "status": "published",
-    "publishedAt": "2026-07-20T04:42:04.461Z",
-    "id": "school_courses_0_mszlugc4"
+    "publishedAt": "2026-07-21T19:09:32.984Z",
+    "id": "school_courses_0_mt1w9vwf"
   },
   {
     "slug": "arabic-for-beginners",
@@ -3215,8 +3215,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 203,
     "rating": 4.8,
     "status": "published",
-    "publishedAt": "2026-07-05T04:42:04.461Z",
-    "id": "school_courses_1_mszlugc4"
+    "publishedAt": "2026-07-06T19:09:32.984Z",
+    "id": "school_courses_1_mt1w9vwf"
   },
   {
     "slug": "seerah-of-the-prophet",
@@ -3234,8 +3234,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 178,
     "rating": 5,
     "status": "published",
-    "publishedAt": "2026-06-20T04:42:04.461Z",
-    "id": "school_courses_2_mszlugc4"
+    "publishedAt": "2026-06-21T19:09:32.984Z",
+    "id": "school_courses_2_mt1w9vwf"
   },
   {
     "slug": "basic-mathematics-jss",
@@ -3253,8 +3253,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 92,
     "rating": 4.7,
     "status": "published",
-    "publishedAt": "2026-07-30T04:42:04.461Z",
-    "id": "school_courses_3_mszlugc4"
+    "publishedAt": "2026-07-31T19:09:32.984Z",
+    "id": "school_courses_3_mt1w9vwf"
   },
   {
     "slug": "introduction-to-coding",
@@ -3272,8 +3272,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 67,
     "rating": 4.6,
     "status": "published",
-    "publishedAt": "2026-08-04T04:42:04.461Z",
-    "id": "school_courses_4_mszlugc4"
+    "publishedAt": "2026-08-05T19:09:32.984Z",
+    "id": "school_courses_4_mt1w9vwf"
   }
 ],
   "school_events": [
@@ -3281,64 +3281,64 @@ export const seedData: Record<string, any[]> = {
     "title": "Term 1 Resumption",
     "description": "First day of the 2026/2027 academic year. Students should arrive by 7:30 AM for assembly.",
     "category": "other",
-    "startDate": "2026-08-26T04:42:04.461Z",
-    "endDate": "2026-08-26T04:42:04.461Z",
+    "startDate": "2026-08-27T19:09:32.984Z",
+    "endDate": "2026-08-27T19:09:32.984Z",
     "location": "School Assembly Hall",
     "imageUrl": "/images/patterns/stars.svg",
-    "id": "school_events_0_mszlugc2",
+    "id": "school_events_0_mt1w9vwe",
     "slug": "term-1-resumption"
   },
   {
     "title": "Annual Qur'an Competition",
     "description": "Inter-house Qur'an recitation competition. Categories include Tajweed, Memorization, and Tafsir.",
     "category": "cultural",
-    "startDate": "2026-09-09T04:42:04.461Z",
-    "endDate": "2026-09-09T04:42:04.461Z",
+    "startDate": "2026-09-10T19:09:32.984Z",
+    "endDate": "2026-09-10T19:09:32.984Z",
     "location": "School Auditorium",
     "imageUrl": "/images/patterns/stars.svg",
-    "id": "school_events_1_mszlugc2",
+    "id": "school_events_1_mt1w9vwe",
     "slug": "annual-quran-competition"
   },
   {
     "title": "Mid-Term Parent-Teacher Conference",
     "description": "Opportunity for parents to meet with teachers and discuss student progress.",
     "category": "parent-teacher",
-    "startDate": "2026-10-03T04:42:04.461Z",
-    "endDate": "2026-10-03T04:42:04.461Z",
+    "startDate": "2026-10-04T19:09:32.984Z",
+    "endDate": "2026-10-04T19:09:32.984Z",
     "location": "Various Classrooms",
-    "id": "school_events_2_mszlugc2",
+    "id": "school_events_2_mt1w9vwe",
     "slug": "mid-term-parent-teacher-conference"
   },
   {
     "title": "Sports Day",
     "description": "Annual inter-house sports competition featuring athletics, football, and traditional games.",
     "category": "sports",
-    "startDate": "2026-10-18T04:42:04.461Z",
-    "endDate": "2026-10-18T04:42:04.461Z",
+    "startDate": "2026-10-19T19:09:32.984Z",
+    "endDate": "2026-10-19T19:09:32.984Z",
     "location": "School Sports Field",
     "imageUrl": "/images/patterns/stars.svg",
-    "id": "school_events_3_mszlugc2",
+    "id": "school_events_3_mt1w9vwe",
     "slug": "sports-day"
   },
   {
     "title": "End of Term Examinations",
     "description": "First term examinations across all subjects. Schedule will be shared two weeks prior.",
     "category": "exam",
-    "startDate": "2026-11-02T04:42:04.461Z",
-    "endDate": "2026-11-09T04:42:04.461Z",
+    "startDate": "2026-11-03T19:09:32.984Z",
+    "endDate": "2026-11-10T19:09:32.984Z",
     "location": "Examination Halls",
-    "id": "school_events_4_mszlugc2",
+    "id": "school_events_4_mt1w9vwe",
     "slug": "end-of-term-examinations"
   },
   {
     "title": "Cultural Day",
     "description": "Celebration of Nigerian and Islamic cultures with food, music, and traditional attire.",
     "category": "cultural",
-    "startDate": "2026-10-08T04:42:04.461Z",
-    "endDate": "2026-10-08T04:42:04.461Z",
+    "startDate": "2026-10-09T19:09:32.984Z",
+    "endDate": "2026-10-09T19:09:32.984Z",
     "location": "School Grounds",
     "imageUrl": "/images/patterns/stars.svg",
-    "id": "school_events_5_mszlugc2",
+    "id": "school_events_5_mt1w9vwe",
     "slug": "cultural-day"
   }
 ],
@@ -3352,7 +3352,7 @@ export const seedData: Record<string, any[]> = {
     "category": "tuition",
     "description": "Tuition fee for primary school students per term.",
     "active": true,
-    "id": "school_fees_0_mszlugc5",
+    "id": "school_fees_0_mt1w9vwf",
     "slug": "primary-school-tuition"
   },
   {
@@ -3364,7 +3364,7 @@ export const seedData: Record<string, any[]> = {
     "category": "tuition",
     "description": "Tuition fee for junior secondary students per term.",
     "active": true,
-    "id": "school_fees_1_mszlugc5",
+    "id": "school_fees_1_mt1w9vwf",
     "slug": "junior-secondary-tuition"
   },
   {
@@ -3376,7 +3376,7 @@ export const seedData: Record<string, any[]> = {
     "category": "tuition",
     "description": "Tuition fee for senior secondary students per term.",
     "active": true,
-    "id": "school_fees_2_mszlugc5",
+    "id": "school_fees_2_mt1w9vwf",
     "slug": "senior-secondary-tuition"
   },
   {
@@ -3387,7 +3387,7 @@ export const seedData: Record<string, any[]> = {
     "category": "tuition",
     "description": "One-time registration fee for new students.",
     "active": true,
-    "id": "school_fees_3_mszlugc5",
+    "id": "school_fees_3_mt1w9vwf",
     "slug": "registration-fee"
   },
   {
@@ -3398,7 +3398,7 @@ export const seedData: Record<string, any[]> = {
     "category": "transport",
     "description": "Optional school bus service per term.",
     "active": true,
-    "id": "school_fees_4_mszlugc5",
+    "id": "school_fees_4_mt1w9vwf",
     "slug": "transportation"
   },
   {
@@ -3409,7 +3409,7 @@ export const seedData: Record<string, any[]> = {
     "category": "activities",
     "description": "Sports and physical education fee per term.",
     "active": true,
-    "id": "school_fees_5_mszlugc5",
+    "id": "school_fees_5_mt1w9vwf",
     "slug": "sports-fee"
   }
 ],
@@ -3429,9 +3429,9 @@ export const seedData: Record<string, any[]> = {
       }
     ],
     "category": "events",
-    "eventDate": "2026-08-19",
-    "createdAt": "2026-07-29T04:42:04.461Z",
-    "id": "school_gallery_albums_0_mszlugc2",
+    "eventDate": "2026-08-20",
+    "createdAt": "2026-07-30T19:09:32.984Z",
+    "id": "school_gallery_albums_0_mt1w9vwe",
     "slug": "science-fair-2026"
   },
   {
@@ -3445,9 +3445,9 @@ export const seedData: Record<string, any[]> = {
       }
     ],
     "category": "achievements",
-    "eventDate": "2026-08-19",
-    "createdAt": "2026-08-05T04:42:04.461Z",
-    "id": "school_gallery_albums_1_mszlugc2",
+    "eventDate": "2026-08-20",
+    "createdAt": "2026-08-06T19:09:32.984Z",
+    "id": "school_gallery_albums_1_mt1w9vwe",
     "slug": "hifz-graduation"
   },
   {
@@ -3465,9 +3465,9 @@ export const seedData: Record<string, any[]> = {
       }
     ],
     "category": "campus",
-    "eventDate": "2026-08-19",
-    "createdAt": "2026-08-09T04:42:04.461Z",
-    "id": "school_gallery_albums_2_mszlugc2",
+    "eventDate": "2026-08-20",
+    "createdAt": "2026-08-10T19:09:32.984Z",
+    "id": "school_gallery_albums_2_mt1w9vwe",
     "slug": "campus-life"
   }
 ],
@@ -3480,7 +3480,7 @@ export const seedData: Record<string, any[]> = {
     "order": 1,
     "resources": [],
     "isPreview": true,
-    "id": "school_lessons_0_mszlugc4",
+    "id": "school_lessons_0_mt1w9vwf",
     "slug": "introduction-to-tajweed"
   },
   {
@@ -3496,7 +3496,7 @@ export const seedData: Record<string, any[]> = {
         "title": "Makharij Chart"
       }
     ],
-    "id": "school_lessons_1_mszlugc4",
+    "id": "school_lessons_1_mt1w9vwf",
     "slug": "articulation-points-makharij-part-1"
   },
   {
@@ -3506,7 +3506,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 32,
     "order": 3,
     "resources": [],
-    "id": "school_lessons_2_mszlugc4",
+    "id": "school_lessons_2_mt1w9vwf",
     "slug": "articulation-points-makharij-part-2"
   },
   {
@@ -3516,7 +3516,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 40,
     "order": 4,
     "resources": [],
-    "id": "school_lessons_3_mszlugc4",
+    "id": "school_lessons_3_mt1w9vwf",
     "slug": "characteristics-of-letters-sifat-part-1"
   },
   {
@@ -3527,7 +3527,7 @@ export const seedData: Record<string, any[]> = {
     "order": 1,
     "resources": [],
     "isPreview": true,
-    "id": "school_lessons_4_mszlugc4",
+    "id": "school_lessons_4_mt1w9vwf",
     "slug": "the-arabic-alphabet"
   },
   {
@@ -3537,7 +3537,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 25,
     "order": 2,
     "resources": [],
-    "id": "school_lessons_5_mszlugc4",
+    "id": "school_lessons_5_mt1w9vwf",
     "slug": "vowel-marks-harakat"
   },
   {
@@ -3547,7 +3547,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 35,
     "order": 3,
     "resources": [],
-    "id": "school_lessons_6_mszlugc4",
+    "id": "school_lessons_6_mt1w9vwf",
     "slug": "joining-letters"
   }
 ],
@@ -3565,7 +3565,7 @@ export const seedData: Record<string, any[]> = {
     "publishYear": 2003,
     "isDigital": true,
     "available": true,
-    "id": "school_library_books_0_mszlugc4",
+    "id": "school_library_books_0_mt1w9vwf",
     "slug": "tafsir-ibn-kathir-abridged"
   },
   {
@@ -3581,7 +3581,7 @@ export const seedData: Record<string, any[]> = {
     "publishYear": 1999,
     "isDigital": true,
     "available": true,
-    "id": "school_library_books_1_mszlugc4",
+    "id": "school_library_books_1_mt1w9vwf",
     "slug": "riyad-as-saliheen"
   },
   {
@@ -3597,7 +3597,7 @@ export const seedData: Record<string, any[]> = {
     "publishYear": 2003,
     "isDigital": false,
     "available": true,
-    "id": "school_library_books_2_mszlugc4",
+    "id": "school_library_books_2_mt1w9vwf",
     "slug": "arabic-course-for-english-speaking-students"
   },
   {
@@ -3613,7 +3613,7 @@ export const seedData: Record<string, any[]> = {
     "publishYear": 2002,
     "isDigital": true,
     "available": true,
-    "id": "school_library_books_3_mszlugc4",
+    "id": "school_library_books_3_mt1w9vwf",
     "slug": "sealed-nectar-ar-raheeq-al-makhtum"
   },
   {
@@ -3629,7 +3629,7 @@ export const seedData: Record<string, any[]> = {
     "publishYear": 2024,
     "isDigital": false,
     "available": true,
-    "id": "school_library_books_4_mszlugc4",
+    "id": "school_library_books_4_mt1w9vwf",
     "slug": "foundation-mathematics-for-jss"
   },
   {
@@ -3645,7 +3645,7 @@ export const seedData: Record<string, any[]> = {
     "publishYear": 2024,
     "isDigital": false,
     "available": true,
-    "id": "school_library_books_5_mszlugc4",
+    "id": "school_library_books_5_mt1w9vwf",
     "slug": "innovative-science-for-senior-secondary"
   }
 ],
@@ -3671,9 +3671,9 @@ export const seedData: Record<string, any[]> = {
     "seoTitle": "About Minhaajulhudaa School",
     "seoDescription": "Learn about Minhaajulhudaa School - providing quality Islamic education since 2021.",
     "status": "published",
-    "publishedAt": "2026-07-20T04:42:04.461Z",
+    "publishedAt": "2026-07-21T19:09:32.984Z",
     "order": 1,
-    "id": "school_pages_0_mszlugc2"
+    "id": "school_pages_0_mt1w9vwd"
   },
   {
     "slug": "contact",
@@ -3692,9 +3692,9 @@ export const seedData: Record<string, any[]> = {
     "seoTitle": "Contact Minhaajulhudaa School",
     "seoDescription": "Contact information for Minhaajulhudaa School.",
     "status": "published",
-    "publishedAt": "2026-07-20T04:42:04.461Z",
+    "publishedAt": "2026-07-21T19:09:32.984Z",
     "order": 2,
-    "id": "school_pages_1_mszlugc2"
+    "id": "school_pages_1_mt1w9vwd"
   }
 ],
   "school_products": [
@@ -3724,7 +3724,7 @@ export const seedData: Record<string, any[]> = {
     ],
     "isDigital": false,
     "status": "active",
-    "id": "school_products_0_mszlugc4"
+    "id": "school_products_0_mt1w9vwf"
   },
   {
     "slug": "school-uniform-secondary",
@@ -3750,7 +3750,7 @@ export const seedData: Record<string, any[]> = {
     ],
     "isDigital": false,
     "status": "active",
-    "id": "school_products_1_mszlugc4"
+    "id": "school_products_1_mt1w9vwf"
   },
   {
     "slug": "quran-textbook-grade1",
@@ -3765,7 +3765,7 @@ export const seedData: Record<string, any[]> = {
     "sku": "BK-QUR-G1-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_2_mszlugc4"
+    "id": "school_products_2_mt1w9vwf"
   },
   {
     "slug": "arabic-textbook-beginners",
@@ -3780,7 +3780,7 @@ export const seedData: Record<string, any[]> = {
     "sku": "BK-ARA-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_3_mszlugc4"
+    "id": "school_products_3_mt1w9vwf"
   },
   {
     "slug": "mathematics-workbook-jss",
@@ -3795,7 +3795,7 @@ export const seedData: Record<string, any[]> = {
     "sku": "BK-MAT-JSS-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_4_mszlugc4"
+    "id": "school_products_4_mt1w9vwf"
   },
   {
     "slug": "school-bag-official",
@@ -3811,7 +3811,7 @@ export const seedData: Record<string, any[]> = {
     "sku": "SUP-BAG-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_5_mszlugc4"
+    "id": "school_products_5_mt1w9vwf"
   },
   {
     "slug": "sports-kit",
@@ -3826,7 +3826,7 @@ export const seedData: Record<string, any[]> = {
     "sku": "SUP-SPT-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_6_mszlugc4"
+    "id": "school_products_6_mt1w9vwf"
   },
   {
     "slug": "digital-tajweed-guide",
@@ -3842,7 +3842,7 @@ export const seedData: Record<string, any[]> = {
     "isDigital": true,
     "downloadUrl": "https://minhaajulhudaa.com/files/tajweed-guide.pdf",
     "status": "active",
-    "id": "school_products_7_mszlugc4"
+    "id": "school_products_7_mt1w9vwf"
   }
 ],
   "school_programs": [
@@ -3869,7 +3869,7 @@ export const seedData: Record<string, any[]> = {
     "instructor": "Ustadh Yusuf Olatunji",
     "fee": 50000,
     "status": "open",
-    "id": "school_programs_0_mszlugc3"
+    "id": "school_programs_0_mt1w9vwe"
   },
   {
     "slug": "arabic-immersion",
@@ -3892,7 +3892,7 @@ export const seedData: Record<string, any[]> = {
     "instructor": "Mrs. Khadijah Suleiman",
     "fee": 0,
     "status": "open",
-    "id": "school_programs_1_mszlugc3"
+    "id": "school_programs_1_mt1w9vwe"
   },
   {
     "slug": "stem-robotics",
@@ -3916,7 +3916,7 @@ export const seedData: Record<string, any[]> = {
     "instructor": "Ustadh Muhammad Bashir",
     "fee": 30000,
     "status": "open",
-    "id": "school_programs_2_mszlugc3"
+    "id": "school_programs_2_mt1w9vwe"
   },
   {
     "slug": "sports-academy",
@@ -3939,7 +3939,7 @@ export const seedData: Record<string, any[]> = {
     "instructor": "Coach Abdullah Hassan",
     "fee": 20000,
     "status": "open",
-    "id": "school_programs_3_mszlugc3"
+    "id": "school_programs_3_mt1w9vwe"
   }
 ],
   "school_quizzes": [
@@ -3973,7 +3973,7 @@ export const seedData: Record<string, any[]> = {
     "timeLimitMinutes": 15,
     "passingScore": 70,
     "attempts": 45,
-    "id": "school_quizzes_0_mszlugc5",
+    "id": "school_quizzes_0_mt1w9vwg",
     "slug": "tajweed-basics-quiz"
   },
   {
@@ -4005,7 +4005,7 @@ export const seedData: Record<string, any[]> = {
     "timeLimitMinutes": 10,
     "passingScore": 70,
     "attempts": 67,
-    "id": "school_quizzes_1_mszlugc5",
+    "id": "school_quizzes_1_mt1w9vwg",
     "slug": "arabic-alphabet-quiz"
   }
 ],
@@ -4022,7 +4022,7 @@ export const seedData: Record<string, any[]> = {
     "bio": "With over 20 years of experience in Islamic education, Ustadh Abdurrahman leads our school with wisdom and vision.",
     "joinDate": "2021-01-15",
     "status": "active",
-    "id": "school_staff_0_mszlugc3"
+    "id": "school_staff_0_mt1w9vwe"
   },
   {
     "staffId": "MHS-STAFF/002",
@@ -4040,7 +4040,7 @@ export const seedData: Record<string, any[]> = {
     "bio": "Lead Hifz instructor with Ijazah in the 10 recitations of the Qur'an.",
     "joinDate": "2021-02-01",
     "status": "active",
-    "id": "school_staff_1_mszlugc3"
+    "id": "school_staff_1_mt1w9vwe"
   },
   {
     "staffId": "MHS-STAFF/003",
@@ -4058,7 +4058,7 @@ export const seedData: Record<string, any[]> = {
     "bio": "STEM coordinator passionate about making science accessible to all students.",
     "joinDate": "2021-03-10",
     "status": "active",
-    "id": "school_staff_2_mszlugc3"
+    "id": "school_staff_2_mt1w9vwe"
   },
   {
     "staffId": "MHS-STAFF/004",
@@ -4075,7 +4075,7 @@ export const seedData: Record<string, any[]> = {
     "bio": "English and Literature teacher with a passion for developing young writers.",
     "joinDate": "2021-09-01",
     "status": "active",
-    "id": "school_staff_3_mszlugc3"
+    "id": "school_staff_3_mt1w9vwe"
   },
   {
     "staffId": "MHS-STAFF/005",
@@ -4092,7 +4092,7 @@ export const seedData: Record<string, any[]> = {
     "bio": "Native Arabic speaker with expertise in teaching Arabic to non-native speakers.",
     "joinDate": "2022-01-10",
     "status": "active",
-    "id": "school_staff_4_mszlugc3"
+    "id": "school_staff_4_mt1w9vwe"
   },
   {
     "staffId": "MHS-STAFF/006",
@@ -4109,7 +4109,7 @@ export const seedData: Record<string, any[]> = {
     "bio": "Science teacher with research experience in environmental science.",
     "joinDate": "2022-09-01",
     "status": "active",
-    "id": "school_staff_5_mszlugc3"
+    "id": "school_staff_5_mt1w9vwe"
   },
   {
     "staffId": "MHS-STAFF/007",
@@ -4123,7 +4123,7 @@ export const seedData: Record<string, any[]> = {
     "bio": "Our librarian curates a growing collection of over 5,000 titles.",
     "joinDate": "2021-09-05",
     "status": "active",
-    "id": "school_staff_6_mszlugc3"
+    "id": "school_staff_6_mt1w9vwe"
   },
   {
     "staffId": "MHS-STAFF/008",
@@ -4137,7 +4137,7 @@ export const seedData: Record<string, any[]> = {
     "bio": "Chartered accountant overseeing school finances and fee management.",
     "joinDate": "2021-04-01",
     "status": "active",
-    "id": "school_staff_7_mszlugc3"
+    "id": "school_staff_7_mt1w9vwe"
   },
   {
     "staffId": "MHS-STAFF/009",
@@ -4151,7 +4151,7 @@ export const seedData: Record<string, any[]> = {
     "bio": "Vice Principal Academic, overseeing curriculum and academic standards.",
     "joinDate": "2021-05-15",
     "status": "active",
-    "id": "school_staff_8_mszlugc3"
+    "id": "school_staff_8_mt1w9vwe"
   },
   {
     "staffId": "MHS-STAFF/010",
@@ -4168,7 +4168,7 @@ export const seedData: Record<string, any[]> = {
     "bio": "Geography and civic education teacher with field research experience.",
     "joinDate": "2023-01-10",
     "status": "active",
-    "id": "school_staff_9_mszlugc3"
+    "id": "school_staff_9_mt1w9vwe"
   }
 ],
   "school_students": [
@@ -4189,7 +4189,7 @@ export const seedData: Record<string, any[]> = {
     "address": "12 Allen Avenue, Ikeja, Lagos",
     "medicalInfo": {},
     "previousSchool": "Bright Beginnings",
-    "id": "school_students_0_mszlugc3"
+    "id": "school_students_0_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/002",
@@ -4212,7 +4212,7 @@ export const seedData: Record<string, any[]> = {
       ]
     },
     "previousSchool": "Greenwood Academy",
-    "id": "school_students_1_mszlugc3"
+    "id": "school_students_1_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/003",
@@ -4231,7 +4231,7 @@ export const seedData: Record<string, any[]> = {
     "address": "23 Bourdillon Road, Ikoyi, Lagos",
     "medicalInfo": {},
     "previousSchool": "Command Day Secondary School",
-    "id": "school_students_2_mszlugc3"
+    "id": "school_students_2_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/004",
@@ -4249,7 +4249,7 @@ export const seedData: Record<string, any[]> = {
     "guardianRelationship": "father",
     "address": "7A Gerrard Road, Ikoyi, Lagos",
     "medicalInfo": {},
-    "id": "school_students_3_mszlugc3"
+    "id": "school_students_3_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/005",
@@ -4270,7 +4270,7 @@ export const seedData: Record<string, any[]> = {
       "asthma": true
     },
     "previousSchool": "Federal Government College",
-    "id": "school_students_4_mszlugc3"
+    "id": "school_students_4_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/006",
@@ -4288,7 +4288,7 @@ export const seedData: Record<string, any[]> = {
     "guardianRelationship": "father",
     "address": "44 Alexander Road, Ikoyi, Lagos",
     "medicalInfo": {},
-    "id": "school_students_5_mszlugc3"
+    "id": "school_students_5_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/007",
@@ -4306,7 +4306,7 @@ export const seedData: Record<string, any[]> = {
     "guardianRelationship": "father",
     "address": "8 Milverton Road, Ikoyi, Lagos",
     "medicalInfo": {},
-    "id": "school_students_6_mszlugc3"
+    "id": "school_students_6_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/008",
@@ -4324,7 +4324,7 @@ export const seedData: Record<string, any[]> = {
     "guardianRelationship": "father",
     "address": "31 Thompson Avenue, Ikoyi, Lagos",
     "medicalInfo": {},
-    "id": "school_students_7_mszlugc3"
+    "id": "school_students_7_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/009",
@@ -4342,7 +4342,7 @@ export const seedData: Record<string, any[]> = {
     "guardianRelationship": "father",
     "address": "19 Bank Road, Ikoyi, Lagos",
     "medicalInfo": {},
-    "id": "school_students_8_mszlugc3"
+    "id": "school_students_8_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/010",
@@ -4360,7 +4360,7 @@ export const seedData: Record<string, any[]> = {
     "guardianRelationship": "father",
     "address": "2 Ruxton Road, Ikoyi, Lagos",
     "medicalInfo": {},
-    "id": "school_students_9_mszlugc3"
+    "id": "school_students_9_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/011",
@@ -4378,7 +4378,7 @@ export const seedData: Record<string, any[]> = {
     "guardianRelationship": "father",
     "address": "26 Glover Road, Ikoyi, Lagos",
     "medicalInfo": {},
-    "id": "school_students_10_mszlugc3"
+    "id": "school_students_10_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/012",
@@ -4396,7 +4396,7 @@ export const seedData: Record<string, any[]> = {
     "guardianRelationship": "father",
     "address": "5 Kakawa Street, Lagos Island",
     "medicalInfo": {},
-    "id": "school_students_11_mszlugc3"
+    "id": "school_students_11_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/013",
@@ -4414,7 +4414,7 @@ export const seedData: Record<string, any[]> = {
     "guardianRelationship": "father",
     "address": "11 Ikorodu Road, Lagos",
     "medicalInfo": {},
-    "id": "school_students_12_mszlugc3"
+    "id": "school_students_12_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/014",
@@ -4432,7 +4432,7 @@ export const seedData: Record<string, any[]> = {
     "guardianRelationship": "father",
     "address": "18 Agege Motor Road, Lagos",
     "medicalInfo": {},
-    "id": "school_students_13_mszlugc3"
+    "id": "school_students_13_mt1w9vwe"
   },
   {
     "studentId": "MHS/2026/015",
@@ -4450,7 +4450,7 @@ export const seedData: Record<string, any[]> = {
     "guardianRelationship": "father",
     "address": "7 Broad Street, Lagos Island",
     "medicalInfo": {},
-    "id": "school_students_14_mszlugc3"
+    "id": "school_students_14_mt1w9vwe"
   }
 ],
   "school_testimonials": [
@@ -4460,8 +4460,8 @@ export const seedData: Record<string, any[]> = {
     "content": "Minhaajulhudaa School has been a blessing for our family. My son has not only excelled academically but has also developed a deep love for the Qur'an. The teachers are dedicated and genuinely care about each student's spiritual and academic growth.",
     "rating": 5,
     "status": "approved",
-    "createdAt": "2026-08-12T04:42:04.461Z",
-    "id": "school_testimonials_0_mszlugc5"
+    "createdAt": "2026-08-13T19:09:32.984Z",
+    "id": "school_testimonials_0_mt1w9vwf"
   },
   {
     "authorName": "Mrs. Aisha Bello",
@@ -4469,8 +4469,8 @@ export const seedData: Record<string, any[]> = {
     "content": "The Arabic immersion program is exceptional. My daughter can now converse in Arabic and understands much of what she recites from the Qur'an. The school's holistic approach to education is truly commendable.",
     "rating": 5,
     "status": "approved",
-    "createdAt": "2026-08-05T04:42:04.461Z",
-    "id": "school_testimonials_1_mszlugc5"
+    "createdAt": "2026-08-06T19:09:32.984Z",
+    "id": "school_testimonials_1_mt1w9vwf"
   },
   {
     "authorName": "Engineer Yusuf Garba",
@@ -4478,8 +4478,8 @@ export const seedData: Record<string, any[]> = {
     "content": "As a parent, I appreciate the balance between academic rigor and Islamic values. Maryam scored 8 distinctions in her WAEC and credits the school's supportive environment. The science laboratories are well-equipped.",
     "rating": 5,
     "status": "approved",
-    "createdAt": "2026-07-29T04:42:04.461Z",
-    "id": "school_testimonials_2_mszlugc5"
+    "createdAt": "2026-07-30T19:09:32.984Z",
+    "id": "school_testimonials_2_mt1w9vwf"
   },
   {
     "authorName": "Alhaji Ibrahim Musa",
@@ -4487,8 +4487,8 @@ export const seedData: Record<string, any[]> = {
     "content": "Both my children graduated from Minhaajulhudaa and are now studying at top universities. The foundation they received here - both academic and moral - has been invaluable. I highly recommend this school.",
     "rating": 5,
     "status": "approved",
-    "createdAt": "2026-07-20T04:42:04.461Z",
-    "id": "school_testimonials_3_mszlugc5"
+    "createdAt": "2026-07-21T19:09:32.984Z",
+    "id": "school_testimonials_3_mt1w9vwf"
   }
 ],
   "school_wiki_articles": [
@@ -4506,8 +4506,8 @@ export const seedData: Record<string, any[]> = {
     "order": 1,
     "views": 542,
     "status": "published",
-    "updatedAt": "2026-08-14T04:42:04.461Z",
-    "id": "school_wiki_articles_0_mszlugc4"
+    "updatedAt": "2026-08-15T19:09:32.984Z",
+    "id": "school_wiki_articles_0_mt1w9vwf"
   },
   {
     "slug": "fee-structure-explained",
@@ -4523,8 +4523,8 @@ export const seedData: Record<string, any[]> = {
     "order": 2,
     "views": 387,
     "status": "published",
-    "updatedAt": "2026-08-09T04:42:04.461Z",
-    "id": "school_wiki_articles_1_mszlugc4"
+    "updatedAt": "2026-08-10T19:09:32.984Z",
+    "id": "school_wiki_articles_1_mt1w9vwf"
   },
   {
     "slug": "curriculum-overview",
@@ -4539,8 +4539,8 @@ export const seedData: Record<string, any[]> = {
     "order": 3,
     "views": 298,
     "status": "published",
-    "updatedAt": "2026-08-04T04:42:04.461Z",
-    "id": "school_wiki_articles_2_mszlugc4"
+    "updatedAt": "2026-08-05T19:09:32.984Z",
+    "id": "school_wiki_articles_2_mt1w9vwf"
   }
 ],
   "travels_blog_posts": [
@@ -4558,9 +4558,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Ustadh Dawud Okafor",
     "status": "published",
-    "publishedAt": "2026-08-12T04:42:04.462Z",
+    "publishedAt": "2026-08-13T19:09:32.985Z",
     "views": 423,
-    "id": "travels_blog_posts_0_mszlugc9"
+    "id": "travels_blog_posts_0_mt1w9vwk"
   },
   {
     "slug": "best-time-for-umrah",
@@ -4576,9 +4576,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Ustadh Dawud Okafor",
     "status": "published",
-    "publishedAt": "2026-08-05T04:42:04.462Z",
+    "publishedAt": "2026-08-06T19:09:32.985Z",
     "views": 287,
-    "id": "travels_blog_posts_1_mszlugc9"
+    "id": "travels_blog_posts_1_mt1w9vwk"
   },
   {
     "slug": "hajj-vs-umrah-understanding",
@@ -4594,9 +4594,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Ustadh Dawud Okafor",
     "status": "published",
-    "publishedAt": "2026-07-30T04:42:04.462Z",
+    "publishedAt": "2026-07-31T19:09:32.985Z",
     "views": 356,
-    "id": "travels_blog_posts_2_mszlugc9"
+    "id": "travels_blog_posts_2_mt1w9vwk"
   }
 ],
   "travels_bookings": [
@@ -4626,9 +4626,9 @@ export const seedData: Record<string, any[]> = {
     "status": "confirmed",
     "paymentStatus": "paid",
     "specialRequests": "Vegetarian meals preferred",
-    "bookedAt": "2026-08-14T04:42:04.462Z",
-    "confirmedAt": "2026-08-15T04:42:04.462Z",
-    "id": "travels_bookings_0_mszlugc9"
+    "bookedAt": "2026-08-15T19:09:32.985Z",
+    "confirmedAt": "2026-08-16T19:09:32.985Z",
+    "id": "travels_bookings_0_mt1w9vwj"
   },
   {
     "bookingNumber": "MHS-TRV/2026/002",
@@ -4663,9 +4663,9 @@ export const seedData: Record<string, any[]> = {
     "currency": "NGN",
     "status": "confirmed",
     "paymentStatus": "partial",
-    "bookedAt": "2026-08-12T04:42:04.462Z",
-    "confirmedAt": "2026-08-13T04:42:04.462Z",
-    "id": "travels_bookings_1_mszlugc9"
+    "bookedAt": "2026-08-13T19:09:32.985Z",
+    "confirmedAt": "2026-08-14T19:09:32.985Z",
+    "id": "travels_bookings_1_mt1w9vwj"
   },
   {
     "bookingNumber": "MHS-TRV/2026/003",
@@ -4709,8 +4709,8 @@ export const seedData: Record<string, any[]> = {
     "status": "pending",
     "paymentStatus": "partial",
     "specialRequests": "Family room needed",
-    "bookedAt": "2026-08-17T04:42:04.462Z",
-    "id": "travels_bookings_2_mszlugc9"
+    "bookedAt": "2026-08-18T19:09:32.985Z",
+    "id": "travels_bookings_2_mt1w9vwj"
   },
   {
     "bookingNumber": "MHS-TRV/2026/004",
@@ -4737,9 +4737,9 @@ export const seedData: Record<string, any[]> = {
     "currency": "NGN",
     "status": "confirmed",
     "paymentStatus": "paid",
-    "bookedAt": "2026-08-09T04:42:04.462Z",
-    "confirmedAt": "2026-08-10T04:42:04.462Z",
-    "id": "travels_bookings_3_mszlugc9"
+    "bookedAt": "2026-08-10T19:09:32.985Z",
+    "confirmedAt": "2026-08-11T19:09:32.985Z",
+    "id": "travels_bookings_3_mt1w9vwj"
   },
   {
     "bookingNumber": "MHS-TRV/2026/005",
@@ -4774,9 +4774,9 @@ export const seedData: Record<string, any[]> = {
     "currency": "NGN",
     "status": "confirmed",
     "paymentStatus": "partial",
-    "bookedAt": "2026-08-16T04:42:04.462Z",
-    "confirmedAt": "2026-08-17T04:42:04.462Z",
-    "id": "travels_bookings_4_mszlugc9"
+    "bookedAt": "2026-08-17T19:09:32.985Z",
+    "confirmedAt": "2026-08-18T19:09:32.985Z",
+    "id": "travels_bookings_4_mt1w9vwj"
   }
 ],
   "travels_courses": [
@@ -4795,8 +4795,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 234,
     "rating": 4.9,
     "status": "published",
-    "publishedAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_courses_0_mszlugc9"
+    "publishedAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_courses_0_mt1w9vwk"
   },
   {
     "slug": "hajj-rituals-explained",
@@ -4813,8 +4813,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 178,
     "rating": 5,
     "status": "published",
-    "publishedAt": "2026-07-05T04:42:04.462Z",
-    "id": "travels_courses_1_mszlugc9"
+    "publishedAt": "2026-07-06T19:09:32.985Z",
+    "id": "travels_courses_1_mt1w9vwk"
   },
   {
     "slug": "makkah-history-significance",
@@ -4831,8 +4831,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 145,
     "rating": 4.8,
     "status": "published",
-    "publishedAt": "2026-07-30T04:42:04.462Z",
-    "id": "travels_courses_2_mszlugc9"
+    "publishedAt": "2026-07-31T19:09:32.985Z",
+    "id": "travels_courses_2_mt1w9vwk"
   },
   {
     "slug": "madinah-the-beloved-city",
@@ -4849,8 +4849,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 132,
     "rating": 4.9,
     "status": "published",
-    "publishedAt": "2026-08-04T04:42:04.462Z",
-    "id": "travels_courses_3_mszlugc9"
+    "publishedAt": "2026-08-05T19:09:32.985Z",
+    "id": "travels_courses_3_mt1w9vwk"
   }
 ],
   "travels_customers": [
@@ -4866,13 +4866,13 @@ export const seedData: Record<string, any[]> = {
     "passportExpiry": "2028-05-14",
     "totalBookings": 2,
     "totalSpent": 4500000,
-    "firstBookingAt": "2026-02-20T04:42:04.462Z",
-    "lastBookingAt": "2026-08-14T04:42:04.462Z",
+    "firstBookingAt": "2026-02-21T19:09:32.985Z",
+    "lastBookingAt": "2026-08-15T19:09:32.985Z",
     "tags": [
       "repeat-customer"
     ],
     "notes": "Prefers standard packages",
-    "id": "travels_customers_0_mszlugc9",
+    "id": "travels_customers_0_mt1w9vwj",
     "slug": "muhammad-ali"
   },
   {
@@ -4887,14 +4887,14 @@ export const seedData: Record<string, any[]> = {
     "passportExpiry": "2027-08-19",
     "totalBookings": 3,
     "totalSpent": 12000000,
-    "firstBookingAt": "2025-08-19T04:42:04.462Z",
-    "lastBookingAt": "2026-08-12T04:42:04.462Z",
+    "firstBookingAt": "2025-08-20T19:09:32.985Z",
+    "lastBookingAt": "2026-08-13T19:09:32.985Z",
     "tags": [
       "vip",
       "repeat-customer"
     ],
     "notes": "Prefers deluxe packages",
-    "id": "travels_customers_1_mszlugc9",
+    "id": "travels_customers_1_mt1w9vwj",
     "slug": "ibrahim-suleiman"
   },
   {
@@ -4909,13 +4909,13 @@ export const seedData: Record<string, any[]> = {
     "passportExpiry": "2029-11-04",
     "totalBookings": 1,
     "totalSpent": 7500000,
-    "firstBookingAt": "2026-08-17T04:42:04.462Z",
-    "lastBookingAt": "2026-08-17T04:42:04.462Z",
+    "firstBookingAt": "2026-08-18T19:09:32.985Z",
+    "lastBookingAt": "2026-08-18T19:09:32.985Z",
     "tags": [
       "family-booking"
     ],
     "notes": "First-time customer with family",
-    "id": "travels_customers_2_mszlugc9",
+    "id": "travels_customers_2_mt1w9vwj",
     "slug": "abdullah-okafor"
   },
   {
@@ -4930,13 +4930,13 @@ export const seedData: Record<string, any[]> = {
     "passportExpiry": "2028-12-09",
     "totalBookings": 2,
     "totalSpent": 2500000,
-    "firstBookingAt": "2026-05-21T04:42:04.462Z",
-    "lastBookingAt": "2026-08-09T04:42:04.462Z",
+    "firstBookingAt": "2026-05-22T19:09:32.985Z",
+    "lastBookingAt": "2026-08-10T19:09:32.985Z",
     "tags": [
       "repeat-customer"
     ],
     "notes": "Interested in international tours",
-    "id": "travels_customers_3_mszlugc9",
+    "id": "travels_customers_3_mt1w9vwj",
     "slug": "yusuf-bello"
   },
   {
@@ -4951,14 +4951,14 @@ export const seedData: Record<string, any[]> = {
     "passportExpiry": "2027-09-14",
     "totalBookings": 5,
     "totalSpent": 35000000,
-    "firstBookingAt": "2025-04-06T04:42:04.462Z",
-    "lastBookingAt": "2026-08-16T04:42:04.462Z",
+    "firstBookingAt": "2025-04-07T19:09:32.985Z",
+    "lastBookingAt": "2026-08-17T19:09:32.985Z",
     "tags": [
       "vip",
       "frequent-traveler"
     ],
     "notes": "Always books VIP packages",
-    "id": "travels_customers_4_mszlugc9",
+    "id": "travels_customers_4_mt1w9vwj",
     "slug": "garba-sani"
   }
 ],
@@ -4967,7 +4967,7 @@ export const seedData: Record<string, any[]> = {
     "courseId": "course-umrah-guide",
     "customerId": "customer-001",
     "customerName": "Muhammad Ali",
-    "enrolledAt": "2026-08-14T04:42:04.462Z",
+    "enrolledAt": "2026-08-15T19:09:32.985Z",
     "progress": 60,
     "completedLessons": [
       "l1",
@@ -4975,13 +4975,13 @@ export const seedData: Record<string, any[]> = {
       "l3"
     ],
     "status": "active",
-    "id": "travels_enrollments_0_mszlugca"
+    "id": "travels_enrollments_0_mt1w9vwk"
   },
   {
     "courseId": "course-hajj-rituals",
     "customerId": "customer-002",
     "customerName": "Ibrahim Suleiman",
-    "enrolledAt": "2026-08-09T04:42:04.462Z",
+    "enrolledAt": "2026-08-10T19:09:32.985Z",
     "progress": 100,
     "completedLessons": [
       "l1",
@@ -4991,19 +4991,19 @@ export const seedData: Record<string, any[]> = {
       "l5"
     ],
     "status": "completed",
-    "id": "travels_enrollments_1_mszlugca"
+    "id": "travels_enrollments_1_mt1w9vwk"
   },
   {
     "courseId": "course-makkah-history",
     "customerId": "customer-003",
     "customerName": "Abdullah Okafor",
-    "enrolledAt": "2026-08-17T04:42:04.462Z",
+    "enrolledAt": "2026-08-18T19:09:32.985Z",
     "progress": 20,
     "completedLessons": [
       "l1"
     ],
     "status": "active",
-    "id": "travels_enrollments_2_mszlugca"
+    "id": "travels_enrollments_2_mt1w9vwk"
   }
 ],
   "travels_gallery": [
@@ -5013,8 +5013,8 @@ export const seedData: Record<string, any[]> = {
     "imageUrl": "/images/patterns/arabesque.svg",
     "category": "holy-sites",
     "destination": "Makkah",
-    "createdAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_gallery_0_mszlugca",
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_gallery_0_mt1w9vwk",
     "slug": "kabah-makkah"
   },
   {
@@ -5023,8 +5023,8 @@ export const seedData: Record<string, any[]> = {
     "imageUrl": "/images/patterns/arabesque.svg",
     "category": "holy-sites",
     "destination": "Madinah",
-    "createdAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_gallery_1_mszlugca",
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_gallery_1_mt1w9vwk",
     "slug": "masjid-nabawi-madinah"
   },
   {
@@ -5033,8 +5033,8 @@ export const seedData: Record<string, any[]> = {
     "imageUrl": "/images/patterns/arabesque.svg",
     "category": "tours",
     "destination": "Istanbul",
-    "createdAt": "2026-08-04T04:42:04.462Z",
-    "id": "travels_gallery_2_mszlugca",
+    "createdAt": "2026-08-05T19:09:32.985Z",
+    "id": "travels_gallery_2_mt1w9vwk",
     "slug": "istanbul-mosque"
   },
   {
@@ -5043,8 +5043,8 @@ export const seedData: Record<string, any[]> = {
     "imageUrl": "/images/patterns/arabesque.svg",
     "category": "groups",
     "destination": "Makkah",
-    "createdAt": "2026-06-20T04:42:04.462Z",
-    "id": "travels_gallery_3_mszlugca",
+    "createdAt": "2026-06-21T19:09:32.985Z",
+    "id": "travels_gallery_3_mt1w9vwk",
     "slug": "group-photo-umrah"
   }
 ],
@@ -5058,8 +5058,8 @@ export const seedData: Record<string, any[]> = {
     "preferredDate": "2026-12-15",
     "travelerCount": 4,
     "status": "new",
-    "createdAt": "2026-08-18T04:42:04.462Z",
-    "id": "travels_inquiries_0_mszlugca",
+    "createdAt": "2026-08-19T19:09:32.985Z",
+    "id": "travels_inquiries_0_mt1w9vwk",
     "slug": "khadijah-mohammed"
   },
   {
@@ -5071,8 +5071,8 @@ export const seedData: Record<string, any[]> = {
     "preferredDate": "2027-06-15",
     "travelerCount": 2,
     "status": "new",
-    "createdAt": "2026-08-17T04:42:04.462Z",
-    "id": "travels_inquiries_1_mszlugca",
+    "createdAt": "2026-08-18T19:09:32.985Z",
+    "id": "travels_inquiries_1_mt1w9vwk",
     "slug": "ahmed-ali"
   },
   {
@@ -5084,8 +5084,8 @@ export const seedData: Record<string, any[]> = {
     "preferredDate": "2026-11-01",
     "travelerCount": 1,
     "status": "responded",
-    "createdAt": "2026-08-14T04:42:04.462Z",
-    "id": "travels_inquiries_2_mszlugca",
+    "createdAt": "2026-08-15T19:09:32.985Z",
+    "id": "travels_inquiries_2_mt1w9vwk",
     "slug": "fatima-bello"
   }
 ],
@@ -5105,7 +5105,7 @@ export const seedData: Record<string, any[]> = {
       "Dinner"
     ],
     "accommodation": "4-star Hotel, Makkah",
-    "id": "travels_itineraries_0_mszlugc9",
+    "id": "travels_itineraries_0_mt1w9vwj",
     "slug": "departure-from-lagos"
   },
   {
@@ -5125,7 +5125,7 @@ export const seedData: Record<string, any[]> = {
       "Dinner"
     ],
     "accommodation": "4-star Hotel, Makkah",
-    "id": "travels_itineraries_1_mszlugc9",
+    "id": "travels_itineraries_1_mt1w9vwj",
     "slug": "performing-umrah"
   },
   {
@@ -5145,7 +5145,7 @@ export const seedData: Record<string, any[]> = {
       "Dinner"
     ],
     "accommodation": "4-star Hotel, Makkah",
-    "id": "travels_itineraries_2_mszlugc9",
+    "id": "travels_itineraries_2_mt1w9vwj",
     "slug": "makkah-ziyarah"
   },
   {
@@ -5164,7 +5164,7 @@ export const seedData: Record<string, any[]> = {
       "Dinner"
     ],
     "accommodation": "4-star Hotel, Madinah",
-    "id": "travels_itineraries_3_mszlugc9",
+    "id": "travels_itineraries_3_mt1w9vwj",
     "slug": "travel-to-madinah"
   },
   {
@@ -5183,7 +5183,7 @@ export const seedData: Record<string, any[]> = {
       "Dinner"
     ],
     "accommodation": "4-star Hotel, Madinah",
-    "id": "travels_itineraries_4_mszlugc9",
+    "id": "travels_itineraries_4_mt1w9vwj",
     "slug": "madinah-ziyarah"
   },
   {
@@ -5201,7 +5201,7 @@ export const seedData: Record<string, any[]> = {
       "Breakfast"
     ],
     "accommodation": "N/A",
-    "id": "travels_itineraries_5_mszlugc9",
+    "id": "travels_itineraries_5_mt1w9vwj",
     "slug": "return-to-lagos"
   }
 ],
@@ -5214,7 +5214,7 @@ export const seedData: Record<string, any[]> = {
     "order": 1,
     "resources": [],
     "isPreview": true,
-    "id": "travels_lessons_0_mszlugca",
+    "id": "travels_lessons_0_mt1w9vwk",
     "slug": "introduction-to-umrah"
   },
   {
@@ -5224,7 +5224,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 25,
     "order": 2,
     "resources": [],
-    "id": "travels_lessons_1_mszlugca",
+    "id": "travels_lessons_1_mt1w9vwk",
     "slug": "spiritual-preparation"
   },
   {
@@ -5234,7 +5234,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 30,
     "order": 3,
     "resources": [],
-    "id": "travels_lessons_2_mszlugca",
+    "id": "travels_lessons_2_mt1w9vwk",
     "slug": "ihram-the-sacred-state"
   },
   {
@@ -5244,7 +5244,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 35,
     "order": 4,
     "resources": [],
-    "id": "travels_lessons_3_mszlugca",
+    "id": "travels_lessons_3_mt1w9vwk",
     "slug": "tawaf-circling-the-kabah"
   },
   {
@@ -5254,7 +5254,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 30,
     "order": 5,
     "resources": [],
-    "id": "travels_lessons_4_mszlugca",
+    "id": "travels_lessons_4_mt1w9vwk",
     "slug": "sai-the-walk-of-hajar"
   },
   {
@@ -5265,7 +5265,7 @@ export const seedData: Record<string, any[]> = {
     "order": 1,
     "resources": [],
     "isPreview": true,
-    "id": "travels_lessons_5_mszlugca",
+    "id": "travels_lessons_5_mt1w9vwk",
     "slug": "introduction-to-hajj"
   },
   {
@@ -5275,7 +5275,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 30,
     "order": 2,
     "resources": [],
-    "id": "travels_lessons_6_mszlugca",
+    "id": "travels_lessons_6_mt1w9vwk",
     "slug": "day-of-tarwiyah-8th-dhul-hijjah"
   }
 ],
@@ -5322,8 +5322,8 @@ export const seedData: Record<string, any[]> = {
     "endDate": "2026-12-25",
     "isFeatured": true,
     "status": "active",
-    "createdAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_packages_0_mszlugc9"
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_packages_0_mt1w9vwj"
   },
   {
     "slug": "umrah-deluxe-2026",
@@ -5364,8 +5364,8 @@ export const seedData: Record<string, any[]> = {
     "endDate": "2026-12-27",
     "isFeatured": true,
     "status": "active",
-    "createdAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_packages_1_mszlugc9"
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_packages_1_mt1w9vwj"
   },
   {
     "slug": "umrah-vip-2026",
@@ -5404,8 +5404,8 @@ export const seedData: Record<string, any[]> = {
     "endDate": "2026-12-24",
     "isFeatured": true,
     "status": "active",
-    "createdAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_packages_2_mszlugc9"
+    "createdAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_packages_2_mt1w9vwj"
   },
   {
     "slug": "hajj-standard-2027",
@@ -5444,8 +5444,8 @@ export const seedData: Record<string, any[]> = {
     "endDate": "2027-07-10",
     "isFeatured": true,
     "status": "active",
-    "createdAt": "2026-06-20T04:42:04.462Z",
-    "id": "travels_packages_3_mszlugc9"
+    "createdAt": "2026-06-21T19:09:32.985Z",
+    "id": "travels_packages_3_mt1w9vwj"
   },
   {
     "slug": "local-tour-historical-lagos",
@@ -5479,8 +5479,8 @@ export const seedData: Record<string, any[]> = {
     "endDate": "2026-09-20",
     "isFeatured": false,
     "status": "active",
-    "createdAt": "2026-07-30T04:42:04.462Z",
-    "id": "travels_packages_4_mszlugc9"
+    "createdAt": "2026-07-31T19:09:32.985Z",
+    "id": "travels_packages_4_mt1w9vwj"
   },
   {
     "slug": "international-tour-turkey",
@@ -5518,8 +5518,8 @@ export const seedData: Record<string, any[]> = {
     "endDate": "2026-11-07",
     "isFeatured": false,
     "status": "active",
-    "createdAt": "2026-08-04T04:42:04.462Z",
-    "id": "travels_packages_5_mszlugc9"
+    "createdAt": "2026-08-05T19:09:32.985Z",
+    "id": "travels_packages_5_mt1w9vwj"
   }
 ],
   "travels_pages": [
@@ -5548,9 +5548,9 @@ export const seedData: Record<string, any[]> = {
     "seoTitle": "About Minhaajulhudaa Travels",
     "seoDescription": "Licensed Hajj and Umrah travel agency.",
     "status": "published",
-    "publishedAt": "2026-06-20T04:42:04.462Z",
+    "publishedAt": "2026-06-21T19:09:32.985Z",
     "order": 1,
-    "id": "travels_pages_0_mszlugc9"
+    "id": "travels_pages_0_mt1w9vwj"
   }
 ],
   "travels_payments": [
@@ -5562,8 +5562,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isInstallment": false,
     "installmentNumber": 0,
-    "paidAt": "2026-08-15T04:42:04.462Z",
-    "id": "travels_payments_0_mszlugc9"
+    "paidAt": "2026-08-16T19:09:32.985Z",
+    "id": "travels_payments_0_mt1w9vwk"
   },
   {
     "amount": 4000000,
@@ -5573,8 +5573,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isInstallment": true,
     "installmentNumber": 1,
-    "paidAt": "2026-08-13T04:42:04.462Z",
-    "id": "travels_payments_1_mszlugc9"
+    "paidAt": "2026-08-14T19:09:32.985Z",
+    "id": "travels_payments_1_mt1w9vwk"
   },
   {
     "amount": 3000000,
@@ -5584,8 +5584,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isInstallment": true,
     "installmentNumber": 1,
-    "paidAt": "2026-08-17T04:42:04.462Z",
-    "id": "travels_payments_2_mszlugc9"
+    "paidAt": "2026-08-18T19:09:32.985Z",
+    "id": "travels_payments_2_mt1w9vwk"
   },
   {
     "amount": 1800000,
@@ -5595,8 +5595,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isInstallment": false,
     "installmentNumber": 0,
-    "paidAt": "2026-08-10T04:42:04.462Z",
-    "id": "travels_payments_3_mszlugc9"
+    "paidAt": "2026-08-11T19:09:32.985Z",
+    "id": "travels_payments_3_mt1w9vwk"
   },
   {
     "amount": 7500000,
@@ -5606,8 +5606,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isInstallment": true,
     "installmentNumber": 1,
-    "paidAt": "2026-08-17T04:42:04.462Z",
-    "id": "travels_payments_4_mszlugc9"
+    "paidAt": "2026-08-18T19:09:32.985Z",
+    "id": "travels_payments_4_mt1w9vwk"
   }
 ],
   "travels_pricing_rules": [
@@ -5619,7 +5619,7 @@ export const seedData: Record<string, any[]> = {
     "minGroupSize": 1,
     "daysBeforeDeparture": 90,
     "active": true,
-    "id": "travels_pricing_rules_0_mszlugca"
+    "id": "travels_pricing_rules_0_mt1w9vwk"
   },
   {
     "type": "group-discount",
@@ -5628,7 +5628,7 @@ export const seedData: Record<string, any[]> = {
     "surchargePercent": 0,
     "minGroupSize": 5,
     "active": true,
-    "id": "travels_pricing_rules_1_mszlugca"
+    "id": "travels_pricing_rules_1_mt1w9vwk"
   },
   {
     "type": "group-discount",
@@ -5637,7 +5637,7 @@ export const seedData: Record<string, any[]> = {
     "surchargePercent": 0,
     "minGroupSize": 10,
     "active": true,
-    "id": "travels_pricing_rules_2_mszlugca"
+    "id": "travels_pricing_rules_2_mt1w9vwk"
   },
   {
     "type": "seasonal-surcharge",
@@ -5647,7 +5647,7 @@ export const seedData: Record<string, any[]> = {
     "startDate": "2026-02-01",
     "endDate": "2026-03-31",
     "active": true,
-    "id": "travels_pricing_rules_3_mszlugca"
+    "id": "travels_pricing_rules_3_mt1w9vwk"
   },
   {
     "type": "last-minute",
@@ -5656,7 +5656,7 @@ export const seedData: Record<string, any[]> = {
     "surchargePercent": 0,
     "daysBeforeDeparture": 14,
     "active": true,
-    "id": "travels_pricing_rules_4_mszlugca"
+    "id": "travels_pricing_rules_4_mt1w9vwk"
   }
 ],
   "travels_resources": [
@@ -5672,8 +5672,8 @@ export const seedData: Record<string, any[]> = {
     ],
     "author": "Minhaajulhudaa Travels Team",
     "status": "published",
-    "updatedAt": "2026-08-14T04:42:04.462Z",
-    "id": "travels_resources_0_mszlugc9"
+    "updatedAt": "2026-08-15T19:09:32.985Z",
+    "id": "travels_resources_0_mt1w9vwk"
   },
   {
     "slug": "packing-checklist-umrah",
@@ -5687,8 +5687,8 @@ export const seedData: Record<string, any[]> = {
     ],
     "author": "Minhaajulhudaa Travels Team",
     "status": "published",
-    "updatedAt": "2026-08-09T04:42:04.462Z",
-    "id": "travels_resources_1_mszlugc9"
+    "updatedAt": "2026-08-10T19:09:32.985Z",
+    "id": "travels_resources_1_mt1w9vwk"
   },
   {
     "slug": "umrah-rituals-guide",
@@ -5702,8 +5702,8 @@ export const seedData: Record<string, any[]> = {
     ],
     "author": "Ustadh Dawud Okafor",
     "status": "published",
-    "updatedAt": "2026-08-04T04:42:04.462Z",
-    "id": "travels_resources_2_mszlugc9"
+    "updatedAt": "2026-08-05T19:09:32.985Z",
+    "id": "travels_resources_2_mt1w9vwk"
   },
   {
     "slug": "health-tips-pilgrimage",
@@ -5717,8 +5717,8 @@ export const seedData: Record<string, any[]> = {
     ],
     "author": "Minhaajulhudaa Travels Team",
     "status": "published",
-    "updatedAt": "2026-08-11T04:42:04.462Z",
-    "id": "travels_resources_3_mszlugc9"
+    "updatedAt": "2026-08-12T19:09:32.985Z",
+    "id": "travels_resources_3_mt1w9vwk"
   }
 ],
   "travels_reviews": [
@@ -5730,8 +5730,8 @@ export const seedData: Record<string, any[]> = {
     "images": [],
     "isVerified": true,
     "status": "approved",
-    "submittedAt": "2026-02-20T04:42:04.462Z",
-    "id": "travels_reviews_0_mszlugc9",
+    "submittedAt": "2026-02-21T19:09:32.985Z",
+    "id": "travels_reviews_0_mt1w9vwk",
     "slug": "excellent-umrah-experience"
   },
   {
@@ -5742,8 +5742,8 @@ export const seedData: Record<string, any[]> = {
     "images": [],
     "isVerified": true,
     "status": "approved",
-    "submittedAt": "2026-04-21T04:42:04.462Z",
-    "id": "travels_reviews_1_mszlugc9",
+    "submittedAt": "2026-04-22T19:09:32.985Z",
+    "id": "travels_reviews_1_mt1w9vwk",
     "slug": "best-decision-ever"
   },
   {
@@ -5754,8 +5754,8 @@ export const seedData: Record<string, any[]> = {
     "images": [],
     "isVerified": true,
     "status": "approved",
-    "submittedAt": "2026-06-20T04:42:04.462Z",
-    "id": "travels_reviews_2_mszlugc9",
+    "submittedAt": "2026-06-21T19:09:32.985Z",
+    "id": "travels_reviews_2_mt1w9vwk",
     "slug": "vip-treatment-throughout"
   },
   {
@@ -5766,8 +5766,8 @@ export const seedData: Record<string, any[]> = {
     "images": [],
     "isVerified": true,
     "status": "approved",
-    "submittedAt": "2026-07-20T04:42:04.462Z",
-    "id": "travels_reviews_3_mszlugc9",
+    "submittedAt": "2026-07-21T19:09:32.985Z",
+    "id": "travels_reviews_3_mt1w9vwk",
     "slug": "great-turkey-tour"
   }
 ],

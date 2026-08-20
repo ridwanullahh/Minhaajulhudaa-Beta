@@ -25,7 +25,7 @@
     ],
     "isDigital": false,
     "status": "active",
-    "id": "school_products_0_mszlugc4"
+    "id": "school_products_0_mt1w9vwf"
   },
   {
     "slug": "school-uniform-secondary",
@@ -51,7 +51,7 @@
     ],
     "isDigital": false,
     "status": "active",
-    "id": "school_products_1_mszlugc4"
+    "id": "school_products_1_mt1w9vwf"
   },
   {
     "slug": "quran-textbook-grade1",
@@ -66,7 +66,7 @@
     "sku": "BK-QUR-G1-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_2_mszlugc4"
+    "id": "school_products_2_mt1w9vwf"
   },
   {
     "slug": "arabic-textbook-beginners",
@@ -81,7 +81,7 @@
     "sku": "BK-ARA-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_3_mszlugc4"
+    "id": "school_products_3_mt1w9vwf"
   },
   {
     "slug": "mathematics-workbook-jss",
@@ -96,7 +96,7 @@
     "sku": "BK-MAT-JSS-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_4_mszlugc4"
+    "id": "school_products_4_mt1w9vwf"
   },
   {
     "slug": "school-bag-official",
@@ -112,7 +112,7 @@
     "sku": "SUP-BAG-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_5_mszlugc4"
+    "id": "school_products_5_mt1w9vwf"
   },
   {
     "slug": "sports-kit",
@@ -127,7 +127,7 @@
     "sku": "SUP-SPT-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_6_mszlugc4"
+    "id": "school_products_6_mt1w9vwf"
   },
   {
     "slug": "digital-tajweed-guide",
@@ -143,6 +143,6 @@
     "isDigital": true,
     "downloadUrl": "https://minhaajulhudaa.com/files/tajweed-guide.pdf",
     "status": "active",
-    "id": "school_products_7_mszlugc4"
+    "id": "school_products_7_mt1w9vwf"
   }
 ]

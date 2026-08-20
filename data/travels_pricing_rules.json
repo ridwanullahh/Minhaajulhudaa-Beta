@@ -7,7 +7,7 @@
     "minGroupSize": 1,
     "daysBeforeDeparture": 90,
     "active": true,
-    "id": "travels_pricing_rules_0_mszlugca"
+    "id": "travels_pricing_rules_0_mt1w9vwk"
   },
   {
     "type": "group-discount",
@@ -16,7 +16,7 @@
     "surchargePercent": 0,
     "minGroupSize": 5,
     "active": true,
-    "id": "travels_pricing_rules_1_mszlugca"
+    "id": "travels_pricing_rules_1_mt1w9vwk"
   },
   {
     "type": "group-discount",
@@ -25,7 +25,7 @@
     "surchargePercent": 0,
     "minGroupSize": 10,
     "active": true,
-    "id": "travels_pricing_rules_2_mszlugca"
+    "id": "travels_pricing_rules_2_mt1w9vwk"
   },
   {
     "type": "seasonal-surcharge",
@@ -35,7 +35,7 @@
     "startDate": "2026-02-01",
     "endDate": "2026-03-31",
     "active": true,
-    "id": "travels_pricing_rules_3_mszlugca"
+    "id": "travels_pricing_rules_3_mt1w9vwk"
   },
   {
     "type": "last-minute",
@@ -44,6 +44,6 @@
     "surchargePercent": 0,
     "daysBeforeDeparture": 14,
     "active": true,
-    "id": "travels_pricing_rules_4_mszlugca"
+    "id": "travels_pricing_rules_4_mt1w9vwk"
   }
 ]

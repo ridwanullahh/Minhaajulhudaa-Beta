@@ -6,8 +6,8 @@
     "unit": "families",
     "category": "general",
     "period": "2026",
-    "updatedAt": "2026-08-18T04:42:04.462Z",
-    "id": "charity_impact_metrics_0_mszlugc8"
+    "updatedAt": "2026-08-19T19:09:32.985Z",
+    "id": "charity_impact_metrics_0_mt1w9vwj"
   },
   {
     "metricKey": "meals_served",
@@ -16,8 +16,8 @@
     "unit": "meals",
     "category": "food",
     "period": "2026",
-    "updatedAt": "2026-08-18T04:42:04.462Z",
-    "id": "charity_impact_metrics_1_mszlugc8"
+    "updatedAt": "2026-08-19T19:09:32.985Z",
+    "id": "charity_impact_metrics_1_mt1w9vwj"
   },
   {
     "metricKey": "water_wells_built",
@@ -26,8 +26,8 @@
     "unit": "wells",
     "category": "water",
     "period": "2026",
-    "updatedAt": "2026-08-12T04:42:04.462Z",
-    "id": "charity_impact_metrics_2_mszlugc8"
+    "updatedAt": "2026-08-13T19:09:32.985Z",
+    "id": "charity_impact_metrics_2_mt1w9vwj"
   },
   {
     "metricKey": "orphans_sponsored",
@@ -36,8 +36,8 @@
     "unit": "children",
     "category": "orphans",
     "period": "2026",
-    "updatedAt": "2026-08-16T04:42:04.462Z",
-    "id": "charity_impact_metrics_3_mszlugc8"
+    "updatedAt": "2026-08-17T19:09:32.985Z",
+    "id": "charity_impact_metrics_3_mt1w9vwj"
   },
   {
     "metricKey": "medical_cases",
@@ -46,8 +46,8 @@
     "unit": "cases",
     "category": "medical",
     "period": "2026",
-    "updatedAt": "2026-08-14T04:42:04.462Z",
-    "id": "charity_impact_metrics_4_mszlugc8"
+    "updatedAt": "2026-08-15T19:09:32.985Z",
+    "id": "charity_impact_metrics_4_mt1w9vwj"
   },
   {
     "metricKey": "women_trained",
@@ -56,8 +56,8 @@
     "unit": "women",
     "category": "education",
     "period": "2026",
-    "updatedAt": "2026-08-09T04:42:04.462Z",
-    "id": "charity_impact_metrics_5_mszlugc8"
+    "updatedAt": "2026-08-10T19:09:32.985Z",
+    "id": "charity_impact_metrics_5_mt1w9vwj"
   },
   {
     "metricKey": "shelters_provided",
@@ -66,8 +66,8 @@
     "unit": "shelters",
     "category": "shelter",
     "period": "2026",
-    "updatedAt": "2026-08-17T04:42:04.462Z",
-    "id": "charity_impact_metrics_6_mszlugc8"
+    "updatedAt": "2026-08-18T19:09:32.985Z",
+    "id": "charity_impact_metrics_6_mt1w9vwj"
   },
   {
     "metricKey": "volunteers_active",
@@ -76,7 +76,7 @@
     "unit": "volunteers",
     "category": "general",
     "period": "2026",
-    "updatedAt": "2026-08-18T04:42:04.462Z",
-    "id": "charity_impact_metrics_7_mszlugc8"
+    "updatedAt": "2026-08-19T19:09:32.985Z",
+    "id": "charity_impact_metrics_7_mt1w9vwj"
   }
 ]

@@ -15,8 +15,8 @@
     "enrolledCount": 145,
     "rating": 4.9,
     "status": "published",
-    "publishedAt": "2026-07-20T04:42:04.461Z",
-    "id": "school_courses_0_mszlugc4"
+    "publishedAt": "2026-07-21T19:09:32.984Z",
+    "id": "school_courses_0_mt1w9vwf"
   },
   {
     "slug": "arabic-for-beginners",
@@ -34,8 +34,8 @@
     "enrolledCount": 203,
     "rating": 4.8,
     "status": "published",
-    "publishedAt": "2026-07-05T04:42:04.461Z",
-    "id": "school_courses_1_mszlugc4"
+    "publishedAt": "2026-07-06T19:09:32.984Z",
+    "id": "school_courses_1_mt1w9vwf"
   },
   {
     "slug": "seerah-of-the-prophet",
@@ -53,8 +53,8 @@
     "enrolledCount": 178,
     "rating": 5,
     "status": "published",
-    "publishedAt": "2026-06-20T04:42:04.461Z",
-    "id": "school_courses_2_mszlugc4"
+    "publishedAt": "2026-06-21T19:09:32.984Z",
+    "id": "school_courses_2_mt1w9vwf"
   },
   {
     "slug": "basic-mathematics-jss",
@@ -72,8 +72,8 @@
     "enrolledCount": 92,
     "rating": 4.7,
     "status": "published",
-    "publishedAt": "2026-07-30T04:42:04.461Z",
-    "id": "school_courses_3_mszlugc4"
+    "publishedAt": "2026-07-31T19:09:32.984Z",
+    "id": "school_courses_3_mt1w9vwf"
   },
   {
     "slug": "introduction-to-coding",
@@ -91,7 +91,7 @@
     "enrolledCount": 67,
     "rating": 4.6,
     "status": "published",
-    "publishedAt": "2026-08-04T04:42:04.461Z",
-    "id": "school_courses_4_mszlugc4"
+    "publishedAt": "2026-08-05T19:09:32.984Z",
+    "id": "school_courses_4_mt1w9vwf"
   }
 ]

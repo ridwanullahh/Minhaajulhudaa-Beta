@@ -13,7 +13,7 @@
       "Khutbah"
     ],
     "active": true,
-    "id": "masjid_imams_0_mszlugc7",
+    "id": "masjid_imams_0_mt1w9vwh",
     "slug": "chief-imam"
   },
   {
@@ -29,7 +29,7 @@
       "Seerah"
     ],
     "active": true,
-    "id": "masjid_imams_1_mszlugc7",
+    "id": "masjid_imams_1_mt1w9vwh",
     "slug": "assistant-imam"
   },
   {
@@ -43,7 +43,7 @@
       "Qur'an Recitation"
     ],
     "active": true,
-    "id": "masjid_imams_2_mszlugc7",
+    "id": "masjid_imams_2_mt1w9vwh",
     "slug": "muadhin"
   },
   {
@@ -59,7 +59,7 @@
       "Arabic"
     ],
     "active": true,
-    "id": "masjid_imams_3_mszlugc7",
+    "id": "masjid_imams_3_mt1w9vwh",
     "slug": "sisters-coordinator"
   }
 ]

@@ -11,13 +11,13 @@
     "passportExpiry": "2028-05-14",
     "totalBookings": 2,
     "totalSpent": 4500000,
-    "firstBookingAt": "2026-02-20T04:42:04.462Z",
-    "lastBookingAt": "2026-08-14T04:42:04.462Z",
+    "firstBookingAt": "2026-02-21T19:09:32.985Z",
+    "lastBookingAt": "2026-08-15T19:09:32.985Z",
     "tags": [
       "repeat-customer"
     ],
     "notes": "Prefers standard packages",
-    "id": "travels_customers_0_mszlugc9",
+    "id": "travels_customers_0_mt1w9vwj",
     "slug": "muhammad-ali"
   },
   {
@@ -32,14 +32,14 @@
     "passportExpiry": "2027-08-19",
     "totalBookings": 3,
     "totalSpent": 12000000,
-    "firstBookingAt": "2025-08-19T04:42:04.462Z",
-    "lastBookingAt": "2026-08-12T04:42:04.462Z",
+    "firstBookingAt": "2025-08-20T19:09:32.985Z",
+    "lastBookingAt": "2026-08-13T19:09:32.985Z",
     "tags": [
       "vip",
       "repeat-customer"
     ],
     "notes": "Prefers deluxe packages",
-    "id": "travels_customers_1_mszlugc9",
+    "id": "travels_customers_1_mt1w9vwj",
     "slug": "ibrahim-suleiman"
   },
   {
@@ -54,13 +54,13 @@
     "passportExpiry": "2029-11-04",
     "totalBookings": 1,
     "totalSpent": 7500000,
-    "firstBookingAt": "2026-08-17T04:42:04.462Z",
-    "lastBookingAt": "2026-08-17T04:42:04.462Z",
+    "firstBookingAt": "2026-08-18T19:09:32.985Z",
+    "lastBookingAt": "2026-08-18T19:09:32.985Z",
     "tags": [
       "family-booking"
     ],
     "notes": "First-time customer with family",
-    "id": "travels_customers_2_mszlugc9",
+    "id": "travels_customers_2_mt1w9vwj",
     "slug": "abdullah-okafor"
   },
   {
@@ -75,13 +75,13 @@
     "passportExpiry": "2028-12-09",
     "totalBookings": 2,
     "totalSpent": 2500000,
-    "firstBookingAt": "2026-05-21T04:42:04.462Z",
-    "lastBookingAt": "2026-08-09T04:42:04.462Z",
+    "firstBookingAt": "2026-05-22T19:09:32.985Z",
+    "lastBookingAt": "2026-08-10T19:09:32.985Z",
     "tags": [
       "repeat-customer"
     ],
     "notes": "Interested in international tours",
-    "id": "travels_customers_3_mszlugc9",
+    "id": "travels_customers_3_mt1w9vwj",
     "slug": "yusuf-bello"
   },
   {
@@ -96,14 +96,14 @@
     "passportExpiry": "2027-09-14",
     "totalBookings": 5,
     "totalSpent": 35000000,
-    "firstBookingAt": "2025-04-06T04:42:04.462Z",
-    "lastBookingAt": "2026-08-16T04:42:04.462Z",
+    "firstBookingAt": "2025-04-07T19:09:32.985Z",
+    "lastBookingAt": "2026-08-17T19:09:32.985Z",
     "tags": [
       "vip",
       "frequent-traveler"
     ],
     "notes": "Always books VIP packages",
-    "id": "travels_customers_4_mszlugc9",
+    "id": "travels_customers_4_mt1w9vwj",
     "slug": "garba-sani"
   }
 ]
