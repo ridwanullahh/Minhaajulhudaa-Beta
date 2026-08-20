@@ -6,12 +6,15 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:pages": "astro build && node scripts/prepare-pages-deploy.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "db:create": "node scripts/create-collections.mjs",
     "db:seed": "node scripts/seed-data.mjs",
+    "db:seed:new": "node scripts/seed-new-lightbase.mjs",
     "db:verify": "node scripts/verify-seed.mjs",
-    "db:setup": "npm run db:create && npm run db:seed && npm run db:verify"
+    "db:setup": "npm run db:create && npm run db:seed && npm run db:verify",
+    "deploy": "npm run build:pages && wrangler pages deploy dist --project-name minhaajulhudaa --branch main"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.2.2",
