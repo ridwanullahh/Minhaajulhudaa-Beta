@@ -36,3 +36,4 @@ download/
 upload/
 worklog.md
 scripts/local/
+.wrangler/
