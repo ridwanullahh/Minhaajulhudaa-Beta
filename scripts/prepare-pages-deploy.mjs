@@ -5,8 +5,12 @@
 // 3. Patches wrangler.json for Pages config
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const DIST = '/home/z/my-project/dist';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const PROJECT_ROOT = path.resolve(__dirname, '..');
+const DIST = path.join(PROJECT_ROOT, 'dist');
 const SERVER = path.join(DIST, 'server');
 const CLIENT = path.join(DIST, 'client');
 
@@ -61,7 +65,7 @@ if (fs.existsSync(wranglerPath)) {
     name: config.name || 'minhaajulhudaa',
     compatibility_date: config.compatibility_date || '2024-09-23',
     compatibility_flags: config.compatibility_flags || ['nodejs_compat'],
-    pages_build_output_dir: '/home/z/my-project/dist',
+    pages_build_output_dir: DIST,
     vars: {
       DB_FALLBACK_ENABLED: 'true',
       DB_FALLBACK_ONLY: 'true', // Use local DB until Lightbase is fully seeded
