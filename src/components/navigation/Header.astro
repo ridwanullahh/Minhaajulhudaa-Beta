@@ -73,7 +73,7 @@ const allPlatforms = Object.values(PLATFORMS);
     <div class="flex items-center gap-1.5">
       <!-- Language Selector (desktop) -->
       <div class="hidden md:block">
-        <LanguageSelector />
+        <LanguageSelector variant="full" instanceId="desktop" />
       </div>
 
       <!-- Platform Switcher (desktop) -->
@@ -126,6 +126,11 @@ const allPlatforms = Object.values(PLATFORMS);
         </div>
       </div>
 
+      <!-- Language Selector (mobile - icon only) -->
+      <div class="md:hidden">
+        <LanguageSelector variant="icon" instanceId="mobile-header" />
+      </div>
+
       <!-- Theme Toggle -->
       <button id="theme-toggle" class="w-10 h-10 rounded-lg flex items-center justify-center border transition-colors hover:bg-[rgb(5,179,77,0.08)]" style="border-color: var(--color-border);" aria-label="Toggle theme">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="theme-icon-light">
@@ -163,7 +168,7 @@ const allPlatforms = Object.values(PLATFORMS);
 <!-- Mobile Drawer (slide-in from right) -->
 <aside
   id="mobile-drawer"
-  class="lg:hidden fixed top-0 right-0 bottom-0 z-[70] w-80 max-w-[85vw] hidden translate-x-full transition-transform duration-300 ease-out flex flex-col"
+  class="lg:hidden fixed top-0 right-0 bottom-0 z-[70] w-80 max-w-[85vw] hidden transition-transform duration-300 ease-out flex flex-col"
   style="background: var(--color-bg); box-shadow: -4px 0 24px rgb(0 0 0 / 0.1);"
   role="dialog"
   aria-modal="true"
@@ -216,11 +221,11 @@ const allPlatforms = Object.values(PLATFORMS);
       </a>
     ))}
 
-    <!-- Language Selector (mobile) -->
+    <!-- Language Selector (mobile drawer) -->
     <div class="border-t mt-4 pt-4" style="border-color: var(--color-border);">
       <div class="text-xs font-semibold uppercase tracking-wider px-3 py-2 mb-1" style="color: var(--color-muted);">Language</div>
       <div class="px-3">
-        <LanguageSelector />
+        <LanguageSelector variant="full" instanceId="mobile-drawer" />
       </div>
     </div>
 
@@ -262,7 +267,7 @@ const allPlatforms = Object.values(PLATFORMS);
   </div>
 </aside>
 
-<style>
+<style is:global>
   .skip-link {
     position: absolute;
     top: -40px;
@@ -278,8 +283,16 @@ const allPlatforms = Object.values(PLATFORMS);
   .skip-link:focus {
     top: 0;
   }
+  #mobile-drawer {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+  }
   #mobile-drawer.open {
-    transform: translateX(0);
+    transform: translateX(0) !important;
+  }
+  #mobile-drawer-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
   }
   #mobile-drawer-overlay.open {
     opacity: 1;
