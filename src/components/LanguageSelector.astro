@@ -5,37 +5,54 @@
  * A dropdown for selecting the interface language.
  * Uses the TranslationService to switch languages without page refresh.
  * Shows native language names and supports RTL languages.
+ *
+ * Props:
+ * - variant: "full" (icon + text) or "icon" (icon only, for mobile)
+ * - instanceId: unique ID suffix to avoid conflicts when multiple instances exist
  */
 
+interface Props {
+  variant?: 'full' | 'icon';
+  instanceId?: string;
+}
+
+const { variant = 'full', instanceId = 'main' } = Astro.props;
+
 const languages = [
-  { code: 'en', name: 'English', nativeName: 'English', flag: 'GB' },
-  { code: 'ar', name: 'Arabic', nativeName: 'العربية', flag: 'SA' },
-  { code: 'fr', name: 'French', nativeName: 'Français', flag: 'FR' },
-  { code: 'es', name: 'Spanish', nativeName: 'Español', flag: 'ES' },
-  { code: 'de', name: 'German', nativeName: 'Deutsch', flag: 'DE' },
-  { code: 'it', name: 'Italian', nativeName: 'Italiano', flag: 'IT' },
-  { code: 'pt', name: 'Portuguese', nativeName: 'Português', flag: 'PT' },
-  { code: 'ru', name: 'Russian', nativeName: 'Русский', flag: 'RU' },
-  { code: 'zh', name: 'Chinese', nativeName: '中文', flag: 'CN' },
-  { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: 'JP' },
-  { code: 'ko', name: 'Korean', nativeName: '한국어', flag: 'KR' },
-  { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', flag: 'IN' },
-  { code: 'ur', name: 'Urdu', nativeName: 'اردو', flag: 'PK' },
-  { code: 'tr', name: 'Turkish', nativeName: 'Türkçe', flag: 'TR' },
-  { code: 'fa', name: 'Persian', nativeName: 'فارسی', flag: 'IR' },
-  { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia', flag: 'ID' },
-  { code: 'ms', name: 'Malay', nativeName: 'Bahasa Melayu', flag: 'MY' },
-  { code: 'sw', name: 'Swahili', nativeName: 'Kiswahili', flag: 'KE' },
-  { code: 'ha', name: 'Hausa', nativeName: 'Hausa', flag: 'NG' },
-  { code: 'yo', name: 'Yoruba', nativeName: 'Yorùbá', flag: 'NG' },
+  { code: 'en', name: 'English', nativeName: 'English' },
+  { code: 'ar', name: 'Arabic', nativeName: 'العربية' },
+  { code: 'fr', name: 'French', nativeName: 'Français' },
+  { code: 'es', name: 'Spanish', nativeName: 'Español' },
+  { code: 'de', name: 'German', nativeName: 'Deutsch' },
+  { code: 'it', name: 'Italian', nativeName: 'Italiano' },
+  { code: 'pt', name: 'Portuguese', nativeName: 'Português' },
+  { code: 'ru', name: 'Russian', nativeName: 'Русский' },
+  { code: 'zh', name: 'Chinese', nativeName: '中文' },
+  { code: 'ja', name: 'Japanese', nativeName: '日本語' },
+  { code: 'ko', name: 'Korean', nativeName: '한국어' },
+  { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी' },
+  { code: 'ur', name: 'Urdu', nativeName: 'اردو' },
+  { code: 'tr', name: 'Turkish', nativeName: 'Türkçe' },
+  { code: 'fa', name: 'Persian', nativeName: 'فارسی' },
+  { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia' },
+  { code: 'ms', name: 'Malay', nativeName: 'Bahasa Melayu' },
+  { code: 'sw', name: 'Swahili', nativeName: 'Kiswahili' },
+  { code: 'ha', name: 'Hausa', nativeName: 'Hausa' },
+  { code: 'yo', name: 'Yoruba', nativeName: 'Yorùbá' },
 ];
+
+const btnId = `lang-btn-${instanceId}`;
+const dropdownId = `lang-dropdown-${instanceId}`;
 ---
 
-<div class="lang-selector relative" id="lang-selector">
+<div class="lang-selector relative" data-instance={instanceId}>
   <button
     type="button"
-    id="lang-selector-btn"
-    class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm font-medium transition-colors hover:bg-[rgb(5,179,77,0.1)]"
+    id={btnId}
+    class:list={[
+      'flex items-center gap-1.5 rounded-lg text-sm font-medium transition-colors hover:bg-[rgb(5,179,77,0.1)]',
+      variant === 'icon' ? 'p-2' : 'px-2 py-1.5'
+    ]}
     style="color: var(--color-foreground);"
     aria-label="Select Language"
     aria-haspopup="true"
@@ -46,17 +63,18 @@ const languages = [
       <line x1="2" y1="12" x2="22" y2="12"/>
       <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
     </svg>
-    <span class="hidden sm:inline lang-current-name">English</span>
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 lang-chevron">
+    {variant === 'full' && <span class="hidden sm:inline lang-current-name">English</span>}
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 lang-chevron-{instanceId}">
       <polyline points="6 9 12 15 18 9"/>
     </svg>
   </button>
 
   <div
-    id="lang-dropdown"
-    class="hidden absolute right-0 mt-2 w-56 max-h-80 overflow-y-auto rounded-xl shadow-xl border z-50"
+    id={dropdownId}
+    class="hidden absolute right-0 mt-2 w-56 max-h-80 overflow-y-auto rounded-xl shadow-xl border z-50 lang-dropdown"
     style="background: var(--color-bg); border-color: var(--color-border);"
     role="menu"
+    data-instance={instanceId}
   >
     <div class="p-2">
       <div class="text-xs font-semibold uppercase tracking-wider px-2 py-1 mb-1" style="color: var(--color-muted);">Select Language</div>
@@ -66,13 +84,14 @@ const languages = [
           class="lang-option w-full flex items-center gap-3 px-2 py-2 rounded-lg text-sm text-left transition-colors hover:bg-[rgb(5,179,77,0.08)]"
           data-lang={lang.code}
           data-name={lang.nativeName}
+          data-instance={instanceId}
           role="menuitem"
         >
           <span class="flex-1">
             <span class="block font-medium" style="color: var(--color-foreground);">{lang.nativeName}</span>
             <span class="block text-xs" style="color: var(--color-muted);">{lang.name}</span>
           </span>
-          <svg class="lang-check hidden shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-primary);">
+          <svg class="lang-check-{instanceId} hidden shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-primary);">
             <polyline points="20 6 9 17 4 12"/>
           </svg>
         </button>
@@ -81,26 +100,33 @@ const languages = [
   </div>
 </div>
 
-<script is:inline>
+<script is:inline define:vars={{ btnId, dropdownId, instanceId }}>
   (function() {
     function initLangSelector() {
-      const btn = document.getElementById('lang-selector-btn');
-      const dropdown = document.getElementById('lang-dropdown');
-      const currentNameEl = document.querySelector('.lang-current-name');
+      var btn = document.getElementById(btnId);
+      var dropdown = document.getElementById(dropdownId);
       if (!btn || !dropdown) return;
+      // Skip if already initialized
+      if (btn.getAttribute('data-initialized') === 'true') return;
+      btn.setAttribute('data-initialized', 'true');
 
       // Load saved language
-      const savedLang = localStorage.getItem('preferredLanguage') || 'en';
-      const savedLangData = document.querySelector(`[data-lang="${savedLang}"]`);
-      if (savedLangData && currentNameEl) {
-        currentNameEl.textContent = savedLangData.getAttribute('data-name');
-        savedLangData.querySelector('.lang-check')?.classList.remove('hidden');
+      var savedLang = localStorage.getItem('preferredLanguage') || 'en';
+      var savedLangData = dropdown.querySelector('[data-lang="' + savedLang + '"]');
+      if (savedLangData) {
+        var nameEl = btn.querySelector('.lang-current-name');
+        if (nameEl) nameEl.textContent = savedLangData.getAttribute('data-name');
+        savedLangData.querySelector('.lang-check-' + instanceId)?.classList.remove('hidden');
       }
 
       // Toggle dropdown
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
-        const isHidden = dropdown.classList.contains('hidden');
+        var isHidden = dropdown.classList.contains('hidden');
+        // Close all other dropdowns
+        document.querySelectorAll('.lang-dropdown').forEach(function(d) {
+          if (d !== dropdown) d.classList.add('hidden');
+        });
         dropdown.classList.toggle('hidden');
         btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
       });
@@ -114,29 +140,31 @@ const languages = [
       });
 
       // Language selection
-      document.querySelectorAll('.lang-option').forEach(function(option) {
+      dropdown.querySelectorAll('.lang-option').forEach(function(option) {
         option.addEventListener('click', async function() {
-          const lang = option.getAttribute('data-lang');
-          const name = option.getAttribute('data-name');
-          
-          // Update active state
-          document.querySelectorAll('.lang-check').forEach(function(c) { c.classList.add('hidden'); });
-          option.querySelector('.lang-check')?.classList.remove('hidden');
-          
-          if (currentNameEl) currentNameEl.textContent = name;
+          var lang = option.getAttribute('data-lang');
+          var name = option.getAttribute('data-name');
+
+          // Update active state in ALL dropdowns
+          document.querySelectorAll('.lang-check-' + instanceId).forEach(function(c) { c.classList.add('hidden'); });
+          option.querySelector('.lang-check-' + instanceId)?.classList.remove('hidden');
+
+          // Update all language name displays
+          document.querySelectorAll('.lang-current-name').forEach(function(el) {
+            el.textContent = name;
+          });
+
           dropdown.classList.add('hidden');
-          
+
           // Set language and translate
           localStorage.setItem('preferredLanguage', lang);
           document.documentElement.lang = lang;
-          const isRTL = ['ar', 'he', 'fa', 'ur'].includes(lang);
+          var isRTL = ['ar', 'he', 'fa', 'ur'].includes(lang);
           document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-          
+
           if (lang === 'en') {
-            // Restore original text
             restoreOriginalText();
           } else {
-            // Show loading indicator
             showTranslationLoader();
             try {
               await translatePage(lang);
@@ -147,25 +175,6 @@ const languages = [
           }
         });
       });
-
-      // Auto-translate on page load if language is set
-      const currentLang = localStorage.getItem('preferredLanguage') || 'en';
-      if (currentLang !== 'en') {
-        document.documentElement.lang = currentLang;
-        const isRTL = ['ar', 'he', 'fa', 'ur'].includes(currentLang);
-        document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-        
-        // Translate after page is fully loaded
-        if (document.readyState === 'complete') {
-          showTranslationLoader();
-          translatePage(currentLang).then(hideTranslationLoader).catch(hideTranslationLoader);
-        } else {
-          window.addEventListener('load', function() {
-            showTranslationLoader();
-            translatePage(currentLang).then(hideTranslationLoader).catch(hideTranslationLoader);
-          });
-        }
-      }
     }
 
     function showTranslationLoader() {
@@ -175,7 +184,6 @@ const languages = [
       loader.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgb(5 179 77 / 0.95);color:white;padding:8px 16px;border-radius:8px;font-size:14px;font-weight:500;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.15);';
       loader.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:6px;animation:spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>Translating...';
       document.body.appendChild(loader);
-      // Add spin animation if not exists
       if (!document.getElementById('i18n-spin-style')) {
         var style = document.createElement('style');
         style.id = 'i18n-spin-style';
@@ -194,7 +202,7 @@ const languages = [
         var original = el.getAttribute('data-original-text');
         if (original) {
           for (var node of el.childNodes) {
-            if (node.nodeType === 3) { // TEXT_NODE
+            if (node.nodeType === 3) {
               node.textContent = original;
               break;
             }
@@ -207,16 +215,14 @@ const languages = [
     async function translatePage(targetLang) {
       var texts = collectTexts();
       if (texts.length === 0) return;
-      
-      // Load cache
+
       var cacheKey = 'i18n_cache_' + targetLang + '_1';
       var cache = {};
       try {
         var cached = localStorage.getItem(cacheKey);
         if (cached) cache = JSON.parse(cached);
       } catch {}
-      
-      // Split into cached and uncached
+
       var uncached = [];
       var translations = {};
       for (var text of texts) {
@@ -226,8 +232,7 @@ const languages = [
           uncached.push(text);
         }
       }
-      
-      // Batch translate uncached
+
       if (uncached.length > 0) {
         var batchSize = 10;
         for (var i = 0; i < uncached.length; i += batchSize) {
@@ -249,20 +254,14 @@ const languages = [
               }
             }
           } catch {}
-          // Small delay between batches
           if (i + batchSize < uncached.length) {
             await new Promise(function(r) { setTimeout(r, 200); });
           }
         }
-        // Save cache
         try { localStorage.setItem(cacheKey, JSON.stringify(cache)); } catch {}
       }
-      
-      // Apply translations to DOM
+
       applyTranslations(translations);
-      
-      // Start observing for dynamic content
-      startObserving(targetLang, cache);
     }
 
     function collectTexts() {
@@ -311,32 +310,27 @@ const languages = [
       }
     }
 
-    var observer = null;
-    function startObserving(targetLang, cache) {
-      if (observer) observer.disconnect();
-      observer = new MutationObserver(function(mutations) {
-        for (var mutation of mutations) {
-          for (var node of mutation.addedNodes) {
-            if (node.nodeType === 3) { // TEXT_NODE
-              var text = node.textContent.trim();
-              if (text && text.length > 2 && cache[text]) {
-                var parent = node.parentElement;
-                if (parent && !parent.hasAttribute('data-original-text')) {
-                  parent.setAttribute('data-original-text', text);
-                }
-                node.textContent = cache[text].translation;
-              }
-            }
-          }
-        }
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-    }
-
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initLangSelector);
     } else {
       initLangSelector();
+    }
+
+    // Auto-translate on page load if language is set
+    var currentLang = localStorage.getItem('preferredLanguage') || 'en';
+    if (currentLang !== 'en') {
+      document.documentElement.lang = currentLang;
+      var isRTL = ['ar', 'he', 'fa', 'ur'].includes(currentLang);
+      document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+      if (document.readyState === 'complete') {
+        showTranslationLoader();
+        translatePage(currentLang).then(hideTranslationLoader).catch(hideTranslationLoader);
+      } else {
+        window.addEventListener('load', function() {
+          showTranslationLoader();
+          translatePage(currentLang).then(hideTranslationLoader).catch(hideTranslationLoader);
+        });
+      }
     }
   })();
 </script>
