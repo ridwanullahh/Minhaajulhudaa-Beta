@@ -1,71 +1,56 @@
 [
   {
-    "name": "Primary School Tuition",
-    "classLevel": "primary",
-    "amount": 150000,
-    "currency": "NGN",
+    "name": "Tamheedy Tuition",
+    "classId": "tamheedy",
+    "amount": 25000,
     "frequency": "per-term",
-    "category": "tuition",
-    "description": "Tuition fee for primary school students per term.",
-    "active": true,
-    "id": "school_fees_0_mt1w9vwf",
-    "slug": "primary-school-tuition"
+    "description": "Tuition for Tamheedy level",
+    "id": "school_fees_0_mt4mfnxt",
+    "slug": "tamheedy-tuition"
   },
   {
-    "name": "Junior Secondary Tuition",
-    "classLevel": "junior-secondary",
-    "amount": 180000,
-    "currency": "NGN",
+    "name": "Ibtidaiyah Tuition",
+    "classId": "ibtidaiyah-1",
+    "amount": 30000,
     "frequency": "per-term",
-    "category": "tuition",
-    "description": "Tuition fee for junior secondary students per term.",
-    "active": true,
-    "id": "school_fees_1_mt1w9vwf",
-    "slug": "junior-secondary-tuition"
+    "description": "Tuition for Ibtidaiyah level",
+    "id": "school_fees_1_mt4mfnxt",
+    "slug": "ibtidaiyah-tuition"
   },
   {
-    "name": "Senior Secondary Tuition",
-    "classLevel": "senior-secondary",
-    "amount": 200000,
-    "currency": "NGN",
+    "name": "Idadiyah Tuition",
+    "classId": "idadiyah-1",
+    "amount": 35000,
     "frequency": "per-term",
-    "category": "tuition",
-    "description": "Tuition fee for senior secondary students per term.",
-    "active": true,
-    "id": "school_fees_2_mt1w9vwf",
-    "slug": "senior-secondary-tuition"
+    "description": "Tuition for Idadiyah level",
+    "id": "school_fees_2_mt4mfnxt",
+    "slug": "idadiyah-tuition"
+  },
+  {
+    "name": "Thanawiyyah Tuition",
+    "classId": "thanawiyyah-1",
+    "amount": 40000,
+    "frequency": "per-term",
+    "description": "Tuition for Thanawiyyah level",
+    "id": "school_fees_3_mt4mfnxt",
+    "slug": "thanawiyyah-tuition"
+  },
+  {
+    "name": "Hifz Program Fee",
+    "classId": "hifz-program",
+    "amount": 15000,
+    "frequency": "per-term",
+    "description": "Additional fee for Hifz program",
+    "id": "school_fees_4_mt4mfnxt",
+    "slug": "hifz-program-fee"
   },
   {
     "name": "Registration Fee",
-    "amount": 20000,
-    "currency": "NGN",
-    "frequency": "one-time",
-    "category": "tuition",
-    "description": "One-time registration fee for new students.",
-    "active": true,
-    "id": "school_fees_3_mt1w9vwf",
-    "slug": "registration-fee"
-  },
-  {
-    "name": "Transportation",
-    "amount": 30000,
-    "currency": "NGN",
-    "frequency": "per-term",
-    "category": "transport",
-    "description": "Optional school bus service per term.",
-    "active": true,
-    "id": "school_fees_4_mt1w9vwf",
-    "slug": "transportation"
-  },
-  {
-    "name": "Sports Fee",
+    "classId": "all",
     "amount": 5000,
-    "currency": "NGN",
-    "frequency": "per-term",
-    "category": "activities",
-    "description": "Sports and physical education fee per term.",
-    "active": true,
-    "id": "school_fees_5_mt1w9vwf",
-    "slug": "sports-fee"
+    "frequency": "one-time",
+    "description": "One-time registration fee",
+    "id": "school_fees_5_mt4mfnxt",
+    "slug": "registration-fee"
   }
 ]

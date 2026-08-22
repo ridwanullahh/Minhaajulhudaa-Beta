@@ -33,7 +33,7 @@ const allPlatforms = Object.values(PLATFORMS);
 <!-- Skip link for accessibility -->
 <a href="#main-content" class="skip-link">Skip to content</a>
 
-<header class="sticky top-0 z-50 backdrop-blur-lg border-b" style="background: color-mix(in srgb, var(--color-surface) 90%, transparent); border-color: var(--color-border);">
+<header class="sticky top-0 z-50 backdrop-blur-lg border-b" style="background: color-mix(in srgb, #FFFFFF 92%, transparent); border-color: var(--color-border);">
   <div class="container-app flex items-center justify-between h-16">
     <!-- Logo + Platform Name -->
     <div class="flex items-center gap-3">
@@ -97,7 +97,7 @@ const allPlatforms = Object.values(PLATFORMS);
         <div
           class="absolute right-0 top-full mt-2 w-64 card p-2 hidden shadow-xl"
           id="platform-switcher-menu"
-          style="z-index: 100;"
+          style="z-index: 100; background: #FFFFFF;"
           role="menu"
         >
           {allPlatforms.map((p) => (
@@ -169,7 +169,7 @@ const allPlatforms = Object.values(PLATFORMS);
 <aside
   id="mobile-drawer"
   class="lg:hidden fixed top-0 right-0 bottom-0 z-[70] w-80 max-w-[85vw] hidden transition-transform duration-300 ease-out flex flex-col"
-  style="background: var(--color-bg); box-shadow: -4px 0 24px rgb(0 0 0 / 0.1);"
+  style="background: #FFFFFF; box-shadow: -4px 0 24px rgb(0 0 0 / 0.1);"
   role="dialog"
   aria-modal="true"
   aria-label="Navigation menu"

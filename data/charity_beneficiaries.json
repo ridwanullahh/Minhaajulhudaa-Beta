@@ -10,18 +10,18 @@
     "assistanceHistory": [
       {
         "type": "food",
-        "date": "2026-07-21T19:09:32.985Z",
+        "date": "2026-07-23T16:57:24.970Z",
         "value": 25000
       },
       {
         "type": "education",
-        "date": "2026-06-21T19:09:32.985Z",
+        "date": "2026-06-23T16:57:24.970Z",
         "value": 50000
       }
     ],
     "verificationStatus": "verified",
-    "registeredAt": "2026-05-22T19:09:32.985Z",
-    "id": "charity_beneficiaries_0_mt1w9vwi",
+    "registeredAt": "2026-05-24T16:57:24.970Z",
+    "id": "charity_beneficiaries_0_mt4mfnxv",
     "slug": "beneficiary-001"
   },
   {
@@ -35,13 +35,13 @@
     "assistanceHistory": [
       {
         "type": "education",
-        "date": "2026-07-06T19:09:32.985Z",
+        "date": "2026-07-08T16:57:24.970Z",
         "value": 50000
       }
     ],
     "verificationStatus": "verified",
-    "registeredAt": "2026-06-21T19:09:32.985Z",
-    "id": "charity_beneficiaries_1_mt1w9vwi",
+    "registeredAt": "2026-06-23T16:57:24.970Z",
+    "id": "charity_beneficiaries_1_mt4mfnxv",
     "slug": "beneficiary-002"
   },
   {
@@ -55,13 +55,13 @@
     "assistanceHistory": [
       {
         "type": "medical",
-        "date": "2026-08-05T19:09:32.985Z",
+        "date": "2026-08-07T16:57:24.970Z",
         "value": 35000
       }
     ],
     "verificationStatus": "verified",
-    "registeredAt": "2026-07-06T19:09:32.985Z",
-    "id": "charity_beneficiaries_2_mt1w9vwi",
+    "registeredAt": "2026-07-08T16:57:24.970Z",
+    "id": "charity_beneficiaries_2_mt4mfnxv",
     "slug": "beneficiary-003"
   },
   {
@@ -75,18 +75,18 @@
     "assistanceHistory": [
       {
         "type": "shelter",
-        "date": "2026-07-31T19:09:32.985Z",
+        "date": "2026-08-02T16:57:24.970Z",
         "value": 150000
       },
       {
         "type": "food",
-        "date": "2026-08-10T19:09:32.985Z",
+        "date": "2026-08-12T16:57:24.970Z",
         "value": 25000
       }
     ],
     "verificationStatus": "verified",
-    "registeredAt": "2026-07-21T19:09:32.985Z",
-    "id": "charity_beneficiaries_3_mt1w9vwi",
+    "registeredAt": "2026-07-23T16:57:24.970Z",
+    "id": "charity_beneficiaries_3_mt4mfnxv",
     "slug": "beneficiary-004"
   }
 ]

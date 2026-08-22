@@ -1,28 +1,28 @@
 [
   {
     "slug": "about",
-    "title": "About Minhaajulhudaa School",
+    "title": "About Minhaajulhudaa Islamic & Arabic School",
     "content": [
       {
         "type": "hero",
         "title": "About Us",
-        "subtitle": "Nurturing minds with knowledge and faith"
+        "subtitle": "Nurturing minds with Islamic knowledge and Arabic excellence"
       },
       {
         "type": "text",
-        "body": "Minhaajulhudaa School was established in 2021 with a vision to provide quality education that combines academic excellence with authentic Islamic values. Our curriculum integrates the Nigerian national curriculum with comprehensive Islamic studies, Arabic language, and Qur'an memorization programs."
+        "body": "Minhaajulhudaa Islamic & Arabic School was established in 1444 AH (2021 CE) with a vision to provide authentic Islamic education and Arabic language mastery. Our curriculum is purely Islamic and Arabic studies, covering from foundational Tahdheeb to advanced Thanawiyyah level. We do not offer secular education - our focus is entirely on producing scholars of the Qur'an, Hadith, Fiqh, and Arabic language."
       },
       {
         "type": "text",
-        "body": "We believe every child is unique and deserves an education that develops their intellectual, spiritual, physical, and social potential. Our dedicated teachers create a nurturing environment where students thrive academically and grow as conscientious Muslims."
+        "body": "Our school follows the traditional Madrasah system adapted for modern times, with structured progression from Tamheedy (Preparatory) through Ibtidaiyah (Elementary), Idadiyah (Intermediate), to Thanawiyyah (Secondary) levels. Each level builds upon the previous, ensuring a comprehensive understanding of Islamic sciences."
       }
     ],
-    "seoTitle": "About Minhaajulhudaa School",
-    "seoDescription": "Learn about Minhaajulhudaa School - providing quality Islamic education since 2021.",
+    "seoTitle": "About Minhaajulhudaa Islamic & Arabic School",
+    "seoDescription": "Authentic Islamic and Arabic education from Tamheedy to Thanawiyyah level.",
     "status": "published",
-    "publishedAt": "2026-07-21T19:09:32.984Z",
+    "publishedAt": "2026-07-23T16:57:24.970Z",
     "order": 1,
-    "id": "school_pages_0_mt1w9vwd"
+    "id": "school_pages_0_mt4mfnxq"
   },
   {
     "slug": "contact",
@@ -31,18 +31,18 @@
       {
         "type": "hero",
         "title": "Get in Touch",
-        "subtitle": "We are here to help"
+        "subtitle": "We are here to serve the Ummah"
       },
       {
         "type": "text",
-        "body": "Reach out to us for admissions, inquiries, or to schedule a visit to our campus."
+        "body": "Reach out to us for admissions, inquiries, or to schedule a visit to our school."
       }
     ],
-    "seoTitle": "Contact Minhaajulhudaa School",
+    "seoTitle": "Contact Minhaajulhudaa Islamic & Arabic School",
     "seoDescription": "Contact information for Minhaajulhudaa School.",
     "status": "published",
-    "publishedAt": "2026-07-21T19:09:32.984Z",
+    "publishedAt": "2026-07-23T16:57:24.970Z",
     "order": 2,
-    "id": "school_pages_1_mt1w9vwd"
+    "id": "school_pages_1_mt4mfnxq"
   }
 ]

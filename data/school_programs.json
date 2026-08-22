@@ -2,8 +2,8 @@
   {
     "slug": "hifz-program",
     "title": "Hifz (Qur'an Memorization) Program",
-    "category": "islamic-studies",
-    "description": "A structured program for memorizing the entire Qur'an with proper Tajweed, integrated with regular academic studies.",
+    "category": "quran",
+    "description": "A structured program for memorizing the entire Qur'an with proper Tajweed. Students progress through daily memorization targets, regular revision (Muraja'ah), and monthly assessments. The program is integrated with our regular Islamic studies curriculum.",
     "curriculum": "The program follows a progressive memorization schedule: 2-3 pages daily for beginners, increasing as proficiency grows. Daily revision (Muraja'ah) of previously memorized portions. Weekly assessment with the lead Hifz teacher. Monthly evaluation with external examiners. Annual certification upon completion.",
     "duration": "3-5 years",
     "requirements": [
@@ -22,76 +22,76 @@
     "instructor": "Ustadh Yusuf Olatunji",
     "fee": 50000,
     "status": "open",
-    "id": "school_programs_0_mt1w9vwe"
+    "id": "school_programs_0_mt4mfnxr"
   },
   {
     "slug": "arabic-immersion",
-    "title": "Arabic Language Immersion",
-    "category": "islamic-studies",
-    "description": "An enhanced Arabic language program designed to achieve conversational fluency and Qur'anic comprehension.",
-    "curriculum": "Daily conversational Arabic sessions, Arabic-only zones, cultural activities, weekly Arabic storytelling, and integration with Islamic Studies. Uses modern communicative language teaching methods.",
-    "duration": "Ongoing (all levels)",
+    "title": "Arabic Language Immersion Program",
+    "category": "arabic",
+    "description": "A comprehensive Arabic language program covering Nahwu (grammar), Sarf (morphology), Balaghah (rhetoric), and Adab (literature). Students develop fluency in reading, writing, and speaking classical Arabic.",
+    "curriculum": "Foundation: Arabic alphabet, basic reading and writing, simple sentences. Intermediate: Nahwu rules, Sarf patterns, reading short texts. Advanced: Classical Arabic literature, Tafsir texts, Hadith commentary, composition and debate.",
+    "duration": "6-9 years (across all levels)",
     "requirements": [
-      "Enrolled student",
-      "Commitment to practice"
+      "Age 5+",
+      "No prior Arabic knowledge required for entry level",
+      "Commitment to daily practice"
     ],
     "outcomes": [
-      "Conversational fluency",
-      "Qur'anic Arabic comprehension",
-      "Cultural understanding",
-      "Preparation for advanced Arabic studies"
+      "Fluency in classical Arabic",
+      "Ability to read Islamic texts independently",
+      "Certificate in Arabic Language",
+      "Preparation for advanced Islamic studies"
     ],
-    "imageUrl": "/images/patterns/quran.svg",
+    "imageUrl": "/images/patterns/books.svg",
     "instructor": "Mrs. Khadijah Suleiman",
-    "fee": 0,
+    "fee": 40000,
     "status": "open",
-    "id": "school_programs_1_mt1w9vwe"
+    "id": "school_programs_1_mt4mfnxr"
   },
   {
-    "slug": "stem-robotics",
-    "title": "STEM & Robotics Program",
-    "category": "extracurricular",
-    "description": "Hands-on program exploring science, technology, engineering, and mathematics through robotics and coding.",
-    "curriculum": "Weekly sessions covering block-based coding, introduction to Python, robotics building and programming, participation in local and national robotics competitions.",
-    "duration": "1 academic year",
+    "slug": "tajweed-program",
+    "title": "Tajweed and Qira'at Program",
+    "category": "quran",
+    "description": "Specialized program focusing on the science of Tajweed - the proper recitation of the Qur'an. Covers Makharij (articulation points), Sifat (characteristics of letters), and the rules of recitation.",
+    "curriculum": "Level 1: Makharij and basic Sifat. Level 2: Rules of Noon Sakinah, Tanween, and Meem Sakinah. Level 3: Rules of Madd and its categories. Level 4: Advanced Tajweed and introduction to Qira'at.",
+    "duration": "2-3 years",
     "requirements": [
-      "Age 10+",
-      "Basic computer literacy",
-      "Science aptitude"
+      "Age 6+",
+      "Basic Qur'an reading ability",
+      "Passing Tajweed assessment"
     ],
     "outcomes": [
-      "Coding proficiency",
-      "Robotics building skills",
-      "Problem-solving abilities",
-      "Competition experience"
+      "Mastery of Tajweed rules",
+      "Beautiful and correct Qur'an recitation",
+      "Preparation for Ijazah certification"
     ],
     "imageUrl": "/images/patterns/quran.svg",
-    "instructor": "Ustadh Muhammad Bashir",
+    "instructor": "Ustadh Yusuf Olatunji",
     "fee": 30000,
     "status": "open",
-    "id": "school_programs_2_mt1w9vwe"
+    "id": "school_programs_2_mt4mfnxr"
   },
   {
-    "slug": "sports-academy",
-    "title": "Sports Academy",
-    "category": "sports",
-    "description": "Comprehensive sports program developing physical fitness, teamwork, and competitive skills.",
-    "curriculum": "Football, basketball, athletics, swimming, and traditional sports. Training sessions three times weekly with certified coaches.",
-    "duration": "Ongoing",
+    "slug": "fiqh-studies",
+    "title": "Fiqh (Islamic Jurisprudence) Program",
+    "category": "islamic-studies",
+    "description": "Comprehensive study of Islamic jurisprudence covering the rulings of Taharah (purification), Salah (prayer), Zakah, Sawm (fasting), and Hajj, based on the primary sources of Qur'an and Sunnah.",
+    "curriculum": "Level 1: Taharah and Salah. Level 2: Zakah and Sawm. Level 3: Hajj and Umrah. Level 4: Mu'amalat (transactions) and family law. Based on the Maliki school with comparison to other schools.",
+    "duration": "4-6 years",
     "requirements": [
-      "Medical fitness clearance",
-      "Sports attire"
+      "Completion of Ibtidaiyah level",
+      "Basic Arabic reading ability",
+      "Understanding of basic Islamic concepts"
     ],
     "outcomes": [
-      "Physical fitness",
-      "Teamwork skills",
-      "Competitive experience",
-      "Sportsmanship"
+      "Comprehensive understanding of Islamic rulings",
+      "Ability to apply Fiqh in daily life",
+      "Certificate in Islamic Jurisprudence"
     ],
-    "imageUrl": "/images/patterns/quran.svg",
-    "instructor": "Coach Abdullah Hassan",
-    "fee": 20000,
+    "imageUrl": "/images/patterns/arabesque.svg",
+    "instructor": "Ustadh Abdurrahman Adeyemi",
+    "fee": 35000,
     "status": "open",
-    "id": "school_programs_3_mt1w9vwe"
+    "id": "school_programs_3_mt4mfnxr"
   }
 ]

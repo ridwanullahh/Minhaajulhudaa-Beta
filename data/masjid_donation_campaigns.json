@@ -11,8 +11,8 @@
     "deadline": "2026-12-31",
     "isUrgent": true,
     "status": "active",
-    "createdAt": "2026-06-21T19:09:32.985Z",
-    "id": "masjid_donation_campaigns_0_mt1w9vwh"
+    "createdAt": "2026-06-23T16:57:24.970Z",
+    "id": "masjid_donation_campaigns_0_mt4mfnxu"
   },
   {
     "slug": "monthly-operations",
@@ -26,8 +26,8 @@
     "deadline": "2026-12-31",
     "isUrgent": false,
     "status": "active",
-    "createdAt": "2026-07-21T19:09:32.985Z",
-    "id": "masjid_donation_campaigns_1_mt1w9vwh"
+    "createdAt": "2026-07-23T16:57:24.970Z",
+    "id": "masjid_donation_campaigns_1_mt4mfnxu"
   },
   {
     "slug": "quran-learning-program",
@@ -41,8 +41,8 @@
     "deadline": "2026-12-31",
     "isUrgent": false,
     "status": "active",
-    "createdAt": "2026-07-06T19:09:32.985Z",
-    "id": "masjid_donation_campaigns_2_mt1w9vwh"
+    "createdAt": "2026-07-08T16:57:24.970Z",
+    "id": "masjid_donation_campaigns_2_mt4mfnxu"
   },
   {
     "slug": "ramadan-iftar-program",
@@ -56,7 +56,7 @@
     "deadline": "2026-09-30",
     "isUrgent": true,
     "status": "active",
-    "createdAt": "2026-07-31T19:09:32.985Z",
-    "id": "masjid_donation_campaigns_3_mt1w9vwh"
+    "createdAt": "2026-08-02T16:57:24.970Z",
+    "id": "masjid_donation_campaigns_3_mt4mfnxu"
   }
 ]

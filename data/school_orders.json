@@ -1,0 +1,43 @@
+[
+  {
+    "orderNumber": "ORD-001",
+    "customerName": "Muhammad Ali",
+    "customerEmail": "muhammad.ali@example.com",
+    "customerPhone": "+2348031111111",
+    "items": [
+      {
+        "name": "Mushaf Tajweed Color-Coded",
+        "quantity": 1,
+        "price": 8500
+      }
+    ],
+    "total": 8500,
+    "status": "completed",
+    "paymentStatus": "paid",
+    "orderedAt": "2026-08-12T16:57:24.970Z",
+    "id": "school_orders_0_mt4mfnxt"
+  },
+  {
+    "orderNumber": "ORD-002",
+    "customerName": "Ibrahim Musa",
+    "customerEmail": "ibrahim.musa@example.com",
+    "customerPhone": "+2348032222222",
+    "items": [
+      {
+        "name": "Arabic Grammar Textbook",
+        "quantity": 1,
+        "price": 3500
+      },
+      {
+        "name": "Sarf Textbook",
+        "quantity": 1,
+        "price": 4000
+      }
+    ],
+    "total": 7500,
+    "status": "completed",
+    "paymentStatus": "paid",
+    "orderedAt": "2026-08-15T16:57:24.970Z",
+    "id": "school_orders_1_mt4mfnxt"
+  }
+]

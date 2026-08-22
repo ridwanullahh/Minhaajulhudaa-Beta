@@ -1,0 +1,18 @@
+[
+  {
+    "studentId": "MHS/1447/005",
+    "examId": 1,
+    "marks": 45,
+    "grade": "A",
+    "remarks": "Excellent performance in Tajweed.",
+    "id": "school_exam_results_0_mt4mfnxt"
+  },
+  {
+    "studentId": "MHS/1447/012",
+    "examId": 2,
+    "marks": 92,
+    "grade": "A+",
+    "remarks": "Outstanding understanding of Nahwu.",
+    "id": "school_exam_results_1_mt4mfnxt"
+  }
+]

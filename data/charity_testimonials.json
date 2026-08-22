@@ -8,8 +8,8 @@
     "isBeneficiary": false,
     "isPartner": false,
     "status": "approved",
-    "createdAt": "2026-08-15T19:09:32.985Z",
-    "id": "charity_testimonials_0_mt1w9vwj"
+    "createdAt": "2026-08-17T16:57:24.970Z",
+    "id": "charity_testimonials_0_mt4mfnxw"
   },
   {
     "authorName": "Malama Fatima",
@@ -20,8 +20,8 @@
     "isBeneficiary": true,
     "isPartner": false,
     "status": "approved",
-    "createdAt": "2026-08-10T19:09:32.985Z",
-    "id": "charity_testimonials_1_mt1w9vwj"
+    "createdAt": "2026-08-12T16:57:24.970Z",
+    "id": "charity_testimonials_1_mt4mfnxw"
   },
   {
     "authorName": "Alhaji Ibrahim Suleiman",
@@ -32,7 +32,7 @@
     "isBeneficiary": false,
     "isPartner": true,
     "status": "approved",
-    "createdAt": "2026-08-05T19:09:32.985Z",
-    "id": "charity_testimonials_2_mt1w9vwj"
+    "createdAt": "2026-08-07T16:57:24.970Z",
+    "id": "charity_testimonials_2_mt4mfnxw"
   }
 ]

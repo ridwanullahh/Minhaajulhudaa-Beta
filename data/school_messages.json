@@ -1,0 +1,22 @@
+[
+  {
+    "studentId": "MHS/1447/001",
+    "from": "teacher",
+    "fromName": "Mrs. Aisha Abdullahi",
+    "subject": "Abdullah's Progress",
+    "message": "Abdullah is doing well in his Qur'an reading. He has memorized Surah Al-Fatihah and Al-Ikhlas.",
+    "read": false,
+    "sentAt": "2026-08-19T16:57:24.970Z",
+    "id": "school_messages_0_mt4mfnxt"
+  },
+  {
+    "studentId": "MHS/1447/005",
+    "from": "admin",
+    "fromName": "Admin Office",
+    "subject": "Fee Payment Reminder",
+    "message": "This is a reminder that Term 1 fees are due by the end of this week.",
+    "read": false,
+    "sentAt": "2026-08-17T16:57:24.970Z",
+    "id": "school_messages_1_mt4mfnxt"
+  }
+]

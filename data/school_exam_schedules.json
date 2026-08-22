@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Mid-Term Tajweed Exam",
+    "classId": "ibtidaiyah-1",
+    "date": "2026-09-12T16:57:24.970Z",
+    "duration": "60 min",
+    "totalMarks": 50,
+    "description": "Practical and written exam on Tajweed rules.",
+    "id": "school_exam_schedules_0_mt4mfnxt",
+    "slug": "mid-term-tajweed-exam"
+  },
+  {
+    "title": "Nahwu Final Exam",
+    "classId": "idadiyah-1",
+    "date": "2026-10-21T16:57:24.970Z",
+    "duration": "90 min",
+    "totalMarks": 100,
+    "description": "Comprehensive Arabic grammar exam.",
+    "id": "school_exam_schedules_1_mt4mfnxt",
+    "slug": "nahwu-final-exam"
+  }
+]

@@ -1,38 +1,32 @@
 [
   {
-    "title": "School Resumes for Term 1",
-    "message": "All students are expected to resume for the first term on Monday, September 8, 2026. Assembly begins at 7:30 AM.",
-    "type": "info",
-    "audience": "all",
-    "active": true,
-    "startsAt": "2026-08-17T19:09:32.984Z",
-    "endsAt": "2026-09-03T19:09:32.984Z",
-    "createdAt": "2026-08-17T19:09:32.984Z",
-    "id": "school_announcements_0_mt1w9vwd",
-    "slug": "school-resumes-for-term-1"
+    "title": "1447 AH Academic Year Begins",
+    "content": "The new academic year 1447 AH begins on Monday, September 9, 2024. All students should arrive by 7:30 AM.",
+    "category": "academic",
+    "priority": "high",
+    "publishedAt": "2026-08-19T16:57:24.970Z",
+    "status": "active",
+    "id": "school_announcements_0_mt4mfnxr",
+    "slug": "1447-ah-academic-year-begins"
   },
   {
-    "title": "Parent-Teacher Conference",
-    "message": "The mid-term parent-teacher conference is scheduled for Saturday, October 15, 2026, from 9 AM to 2 PM. Please book your slot through the parent portal.",
-    "type": "info",
-    "audience": "parents",
-    "active": true,
-    "startsAt": "2026-08-19T19:09:32.984Z",
-    "endsAt": "2026-09-19T19:09:32.984Z",
-    "createdAt": "2026-08-19T19:09:32.984Z",
-    "id": "school_announcements_1_mt1w9vwd",
-    "slug": "parent-teacher-conference"
+    "title": "Hifz Graduation Ceremony",
+    "content": "Our annual Hifz graduation ceremony will be held on Saturday, October 12, 2024, at the school mosque. All parents are invited.",
+    "category": "event",
+    "priority": "high",
+    "publishedAt": "2026-08-15T16:57:24.970Z",
+    "status": "active",
+    "id": "school_announcements_1_mt4mfnxr",
+    "slug": "hifz-graduation-ceremony"
   },
   {
-    "title": "Holiday Reminder",
-    "message": "The school will be on Eid break from Friday to Tuesday. Classes resume on Wednesday. We wish all our families a blessed Eid.",
-    "type": "success",
-    "audience": "all",
-    "active": true,
-    "startsAt": "2026-08-15T19:09:32.984Z",
-    "endsAt": "2026-08-27T19:09:32.984Z",
-    "createdAt": "2026-08-15T19:09:32.984Z",
-    "id": "school_announcements_2_mt1w9vwd",
-    "slug": "holiday-reminder"
+    "title": "Parent-Teacher Meeting",
+    "content": "Scheduled for Friday, October 4, 2024, from 10:00 AM to 1:00 PM. Please confirm attendance.",
+    "category": "academic",
+    "priority": "medium",
+    "publishedAt": "2026-08-12T16:57:24.970Z",
+    "status": "active",
+    "id": "school_announcements_2_mt4mfnxr",
+    "slug": "parent-teacher-meeting"
   }
 ]
