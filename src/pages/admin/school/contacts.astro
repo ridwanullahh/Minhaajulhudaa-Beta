@@ -1,0 +1,161 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getContactSettings } from '../../../lib/contact-settings';
+
+const settings = await getContactSettings('school');
+---
+
+<AdminLayout title="Contact Settings" platform="school" section="settings">
+  <div class="fade-in max-w-2xl">
+    <h2 class="text-lg font-bold mb-1">Contact Information</h2>
+    <p class="text-sm mb-6" style="color: var(--color-muted);">Update your school's contact details. These appear in the footer, contact page, and other public areas.</p>
+
+    <form id="contact-settings-form" class="space-y-5">
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="phone">Phone Number</label>
+          <input id="phone" name="phone" class="input" value={settings.phone} placeholder="+234 800 000 0000" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="email">Email Address</label>
+          <input id="email" name="email" type="email" class="input" value={settings.email} placeholder="info@school.com" />
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="whatsapp">WhatsApp Number</label>
+          <input id="whatsapp" name="whatsapp" class="input" value={settings.whatsapp} placeholder="+234 800 000 0000" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="officeHours">Office Hours</label>
+          <input id="officeHours" name="officeHours" class="input" value={settings.officeHours} placeholder="Mon-Fri: 8AM-4PM" />
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium mb-1" for="address">Address</label>
+          <input id="address" name="address" class="input" value={settings.address} placeholder="123 Education Road" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1" for="city">City</label>
+          <input id="city" name="city" class="input" value={settings.city} placeholder="Lagos" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1" for="country">Country</label>
+        <input id="country" name="country" class="input" value={settings.country} placeholder="Nigeria" />
+      </div>
+
+      <div class="pt-4 border-t" style="border-color: var(--color-border);">
+        <h3 class="font-bold text-sm mb-3">Social Media</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-1" for="facebook">Facebook URL</label>
+            <input id="facebook" name="facebook" class="input" value={settings.facebook} placeholder="https://facebook.com/..." />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1" for="twitter">Twitter/X URL</label>
+            <input id="twitter" name="twitter" class="input" value={settings.twitter} placeholder="https://twitter.com/..." />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1" for="instagram">Instagram URL</label>
+            <input id="instagram" name="instagram" class="input" value={settings.instagram} placeholder="https://instagram.com/..." />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1" for="youtube">YouTube URL</label>
+            <input id="youtube" name="youtube" class="input" value={settings.youtube} placeholder="https://youtube.com/..." />
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t" style="border-color: var(--color-border);">
+        <h3 class="font-bold text-sm mb-3">Logo</h3>
+        <div class="flex items-center gap-4">
+          <div id="logo-preview" class="w-20 h-20 rounded-xl flex items-center justify-center border" style="border-color: var(--color-border); background: var(--color-surface);">
+            <svg width="40" height="40" viewBox="0 0 64 64">
+              <rect width="64" height="64" rx="14" fill="var(--color-primary)"/>
+              <path d="M32 12 L48 20 V36 C48 44 40 50 32 52 C24 50 16 44 16 36 V20 Z" fill="none" stroke="var(--color-accent)" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M32 22 V42 M24 28 H40 M24 36 H40" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="32" cy="32" r="3" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <div>
+            <input type="file" id="logo-upload" accept="image/*" class="hidden" />
+            <button type="button" id="logo-upload-btn" class="btn btn-outline text-sm">Upload Logo</button>
+            <p class="text-xs mt-1" style="color: var(--color-muted);">PNG or SVG, max 1MB</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-4">
+        <button type="submit" id="save-btn" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+
+    <div id="toast" class="hidden fixed bottom-6 right-6 px-4 py-3 rounded-lg text-sm font-medium text-white z-50" style="background: var(--color-primary);"></div>
+  </div>
+
+  <script is:inline>
+    var form = document.getElementById('contact-settings-form');
+    var saveBtn = document.getElementById('save-btn');
+    var toast = document.getElementById('toast');
+
+    function showToast(msg, type) {
+      toast.textContent = msg;
+      toast.style.background = type === 'error' ? '#DC2626' : 'var(--color-primary)';
+      toast.classList.remove('hidden');
+      setTimeout(function() { toast.classList.add('hidden'); }, 3000);
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      saveBtn.textContent = 'Saving...';
+      saveBtn.disabled = true;
+
+      var data = {};
+      ['phone','email','whatsapp','officeHours','address','city','country','facebook','twitter','instagram','youtube'].forEach(function(f) {
+        var el = document.getElementById(f);
+        if (el) data[f] = el.value;
+      });
+
+      try {
+        var res = await fetch('/api/admin/settings/contact?platform=school', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (res.ok) {
+          showToast('Settings saved successfully!', 'success');
+        } else {
+          var err = await res.json();
+          showToast(err.error || 'Failed to save', 'error');
+        }
+      } catch(err) {
+        showToast('Network error', 'error');
+      } finally {
+        saveBtn.textContent = 'Save Changes';
+        saveBtn.disabled = false;
+      }
+    });
+
+    // Logo upload
+    var uploadBtn = document.getElementById('logo-upload-btn');
+    var fileInput = document.getElementById('logo-upload');
+    var logoPreview = document.getElementById('logo-preview');
+    uploadBtn.addEventListener('click', function() { fileInput.click(); });
+    fileInput.addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      if (file.size > 1048576) { showToast('File too large (max 1MB)', 'error'); return; }
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        logoPreview.innerHTML = '<img src="' + ev.target.result + '" class="w-full h-full object-contain rounded-xl" />';
+      };
+      reader.readAsDataURL(file);
+      // TODO: Upload to server and save URL to settings
+    });
+  </script>
+</AdminLayout>

@@ -21,6 +21,7 @@ export interface ContactSettings {
   youtube: string;
   mapEmbedUrl: string;
   officeHours: string;
+  logoUrl: string;
 }
 
 const DEFAULT_SETTINGS: ContactSettings = {
@@ -36,6 +37,7 @@ const DEFAULT_SETTINGS: ContactSettings = {
   youtube: '',
   mapEmbedUrl: '',
   officeHours: 'Monday - Friday: 8:00 AM - 4:00 PM',
+  logoUrl: '',
 };
 
 // Cache for 5 minutes
