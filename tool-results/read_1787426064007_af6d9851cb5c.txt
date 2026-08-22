@@ -1,0 +1,459 @@
+     1→     1→---
+     2→     2→import PlatformLayout from '../../layouts/PlatformLayout.astro';
+     3→     3→import { lightbase } from '../../lib/lightbase';
+     4→     4→
+     5→     5→// Fetch real data from Lightbase
+     6→     6→const [blogResult, programsResult, classesResult, testimonialsResult, eventsResult] = await Promise.all([
+     7→     7→  lightbase.query('school_blog_posts', { filter: { field: 'status', op: 'eq', value: 'published' }, sort: 'publishedAt:desc', limit: 3 }),
+     8→     8→  lightbase.query('school_programs', { filter: { field: 'status', op: 'eq', value: 'open' }, limit: 4 }),
+     9→     9→  lightbase.query('school_classes', { filter: { field: 'active', op: 'eq', value: true }, limit: 4 }),
+    10→    10→  lightbase.query('school_testimonials', { filter: { field: 'status', op: 'eq', value: 'approved' }, limit: 3 }),
+    11→    11→  lightbase.query('school_events', { sort: 'startDate:asc', limit: 3 }),
+    12→    12→]);
+    13→    13→
+    14→    14→const blogPosts = blogResult.data || [];
+    15→    15→const programs = programsResult.data || [];
+    16→    16→const classes = classesResult.data || [];
+    17→    17→const testimonials = testimonialsResult.data || [];
+    18→    18→const events = eventsResult.data || [];
+    19→    19→
+    20→    20→// Stats - with explicit numeric values for counter animation
+    21→    21→const stats = [
+    22→    22→  { label: 'Active Students', value: '500', suffix: '+', icon: 'students' },
+    23→    23→  { label: 'Qualified Staff', value: '40', suffix: '+', icon: 'staff' },
+    24→    24→  { label: 'Years of Excellence', value: '15', suffix: '+', icon: 'years' },
+    25→    25→  { label: 'Awards Won', value: '25', suffix: '+', icon: 'awards' },
+    26→    26→];
+    27→    27→
+    28→    28→const statIcon: Record<string, string> = {
+    29→    29→  students: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    30→    30→  staff: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    31→    31→  years: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+    32→    32→  awards: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>',
+    33→    33→};
+    34→    34→
+    35→    35→const values = [
+    36→    36→  { title: 'Excellence', description: 'Striving for the highest standards in academics and character.', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' },
+    37→    37→  { title: 'Faith', description: 'Rooting every action in Islamic values and the love of Allah.', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 7v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V7l-8-5z"/></svg>' },
+    38→    38→  { title: 'Compassion', description: 'Nurturing empathy and care for all of Allah\'s creation.', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' },
+    39→    39→  { title: 'Innovation', description: 'Embracing modern learning while honoring tradition.', icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6"/><path d="M4.22 4.22l4.24 4.24m7.07 7.07l4.24 4.24"/><path d="M1 12h6m6 0h6"/><path d="M4.22 19.78l4.24-4.24m7.07-7.07l4.24-4.24"/></svg>' },
+    40→    40→];
+    41→    41→---
+    42→    42→
+    43→    43→<PlatformLayout title="Sharafatadeen Group of School - Excellence in Education" platform="school">
+    44→    44→  <!-- ============ Split-screen Hero ============ -->
+    45→    45→  <section class="relative overflow-hidden">
+    46→    46→    <!-- Decorative gradient background blobs -->
+    47→    47→    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    48→    48→      <div class="absolute -top-32 -right-32 w-[480px] h-[480px] rounded-full opacity-20 blur-3xl" style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
+    49→    49→      <div class="absolute top-40 -left-40 w-[420px] h-[420px] rounded-full opacity-15 blur-3xl" style="background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);"></div>
+    50→    50→    </div>
+    51→    51→
+    52→    52→    <div class="container-app relative z-10 py-12 md:py-20 lg:py-24">
+    53→    53→      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+    54→    54→        <!-- Left: Text content -->
+    55→    55→        <div class="fade-in">
+    56→    56→          <span class="badge badge-accent mb-5 inline-flex items-center gap-1.5">
+    57→    57→            <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background: var(--color-accent);"></span>
+    58→    58→            Admissions 2026/2027 Now Open
+    59→    59→          </span>
+    60→    60→          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6" style="font-family: var(--font-heading);">
+    61→    61→            Nurturing Minds with
+    62→    62→            <span class="text-gradient-green">Knowledge</span>
+    63→    63→            and
+    64→    64→            <span class="text-gradient-yellow">Faith</span>
+    65→    65→          </h1>
+    66→    66→          <p class="text-lg md:text-xl mb-8 leading-relaxed" style="color: var(--color-muted);">
+    67→    67→            Sharafatadeen Group of School combines academic excellence with authentic Islamic values, preparing students to be knowledgeable, God-conscious leaders of tomorrow.
+    68→    68→          </p>
+    69→    69→          <div class="flex flex-col sm:flex-row gap-3 mb-8">
+    70→    70→            <a href="/school/admission" class="btn btn-primary">
+    71→    71→              Apply for Admission
+    72→    72→              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    73→    73→            </a>
+    74→    74→            <a href="/school/programs" class="btn btn-secondary">
+    75→    75→              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg>
+    76→    76→              Explore Programs
+    77→    77→            </a>
+    78→    78→          </div>
+    79→    79→
+    80→    80→          <!-- Mini trust badges -->
+    81→    81→          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm" style="color: var(--color-muted);">
+    82→    82→            <span class="flex items-center gap-1.5">
+    83→    83→              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>
+    84→    84→              WAEC &amp; NECO Approved
+    85→    85→            </span>
+    86→    86→            <span class="flex items-center gap-1.5">
+    87→    87→              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>
+    88→    88→              Islamic Curriculum
+    89→    89→            </span>
+    90→    90→            <span class="flex items-center gap-1.5">
+    91→    91→              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>
+    92→    92→              Boarding &amp; Day
+    93→    93→            </span>
+    94→    94→          </div>
+    95→    95→        </div>
+    96→    96→
+    97→    97→        <!-- Right: Decorative visual card -->
+    98→    98→        <div class="relative fade-in" style="animation-delay: 0.1s;">
+    99→    99→          <div class="relative aspect-[4/5] md:aspect-[5/6] max-w-md mx-auto">
+   100→   100→            <!-- Main decorative card -->
+   101→   101→            <div class="absolute inset-0 rounded-[2rem] shadow-xl overflow-hidden" style="background: linear-gradient(135deg, var(--color-primary) 0%, #166534 50%, #14532D 100%);">
+   102→   102→              <!-- Islamic pattern overlay -->
+   103→   103→              <svg class="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
+   104→   104→                <pattern id="hero-islamic" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+   105→   105→                  <path d="M20 0 L40 20 L20 40 L0 20 Z" fill="none" stroke="#FFFFFF" stroke-width="0.5"/>
+   106→   106→                  <circle cx="20" cy="20" r="8" fill="none" stroke="#FFFFFF" stroke-width="0.5"/>
+   107→   107→                </pattern>
+   108→   108→                <rect width="200" height="200" fill="url(#hero-islamic)"/>
+   109→   109→              </svg>
+   110→   110→
+   111→   111→              <!-- Crescent -->
+   112→   112→              <div class="absolute top-8 right-8">
+   113→   113→                <svg width="80" height="80" viewBox="0 0 80 80">
+   114→   114→                  <path d="M55 18 a22 22 0 1 1 0 44 a17 17 0 1 0 0 -44 z" fill="#EAB308"/>
+   115→   115→                  <circle cx="62" cy="40" r="3" fill="#FEFCE8"/>
+   116→   116→                </svg>
+   117→   117→              </div>
+   118→   118→
+   119→   119→              <!-- Quote text -->
+   120→   120→              <div class="absolute inset-x-0 bottom-0 p-8 text-white">
+   121→   121→                <svg width="32" height="32" viewBox="0 0 24 24" fill="#EAB308" class="mb-3 opacity-80">
+   122→   122→                  <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.254.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
+   123→   123→                  <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.254.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+   124→   124→                </svg>
+   125→   125→                <p class="text-lg leading-relaxed mb-3 italic" style="font-family: var(--font-heading);">
+   126→   126→                  "The seeking of knowledge is obligatory upon every Muslim."
+   127→   127→                </p>
+   128→   128→                <p class="text-sm opacity-80">— Prophet Muhammad ﷺ (Ibn Majah)</p>
+   129→   129→              </div>
+   130→   130→            </div>
+   131→   131→
+   132→   132→            <!-- Floating stat card -->
+   133→   133→            <div class="absolute -left-4 md:-left-8 top-1/4 card p-4 shadow-lg backdrop-blur" style="background: color-mix(in srgb, var(--color-surface) 95%, transparent); border-color: var(--color-accent);">
+   134→   134→              <div class="flex items-center gap-2.5">
+   135→   135→                <div class="w-10 h-10 rounded-2xl flex items-center justify-center" style="background: rgb(234 179 8 / 0.18);">
+   136→   136→                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #854D0E;">
+   137→   137→                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+   138→   138→                  </svg>
+   139→   139→                </div>
+   140→   140→                <div>
+   141→   141→                  <div class="text-xl font-extrabold" style="color: var(--color-primary);">98%</div>
+   142→   142→                  <div class="text-[10px] uppercase tracking-wide" style="color: var(--color-muted);">Exam Pass Rate</div>
+   143→   143→                </div>
+   144→   144→              </div>
+   145→   145→            </div>
+   146→   146→
+   147→   147→            <!-- Floating accreditation card -->
+   148→   148→            <div class="absolute -right-2 md:-right-6 bottom-8 card p-3 shadow-lg backdrop-blur" style="background: color-mix(in srgb, var(--color-surface) 95%, transparent);">
+   149→   149→              <div class="flex items-center gap-2">
+   150→   150→                <div class="w-8 h-8 rounded-xl flex items-center justify-center" style="background: rgb(21 128 61 / 0.12);">
+   151→   151→                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-primary);"><polyline points="20 6 9 17 4 12"/></svg>
+   152→   152→                </div>
+   153→   153→                <span class="text-xs font-semibold">Govt. Approved</span>
+   154→   154→              </div>
+   155→   155→            </div>
+   156→   156→          </div>
+   157→   157→        </div>
+   158→   158→      </div>
+   159→   159→    </div>
+   160→   160→  </section>
+   161→   161→
+   162→   162→  <!-- ============ Stats Counter ============ -->
+   163→   163→  <section class="container-app -mt-4 md:-mt-6 relative z-10">
+   164→   164→    <div class="card p-6 md:p-8 shadow-lg" style="background: linear-gradient(135deg, var(--color-surface) 0%, rgb(234 179 8 / 0.05) 100%); border-color: var(--color-border);">
+   165→   165→      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
+   166→   166→        {stats.map((stat) => (
+   167→   167→          <div class="flex items-center gap-4 md:flex-col md:items-start md:text-left lg:flex-row lg:items-center lg:gap-4">
+   168→   168→            <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center shrink-0" style="background: linear-gradient(135deg, rgb(21 128 61 / 0.12) 0%, rgb(234 179 8 / 0.12) 100%); color: var(--color-primary);">
+   169→   169→              <Fragment set:html={statIcon[stat.icon]} />
+   170→   170→            </div>
+   171→   171→            <div class="flex flex-col">
+   172→   172→              <div class="text-3xl md:text-4xl font-extrabold leading-none mb-1" style="font-family: var(--font-heading); color: var(--color-primary);">
+   173→   173→                <span class="counter" data-target={stat.value}>0</span><span style="color: var(--color-accent);">{stat.suffix}</span>
+   174→   174→              </div>
+   175→   175→              <div class="text-xs md:text-sm font-medium" style="color: var(--color-muted);">{stat.label}</div>
+   176→   176→            </div>
+   177→   177→          </div>
+   178→   178→        ))}
+   179→   179→      </div>
+   180→   180→    </div>
+   181→   181→  </section>
+   182→   182→
+   183→   183→  <!-- ============ Mission & Vision (split) ============ -->
+   184→   184→  <section class="container-app section-pad">
+   185→   185→    <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+   186→   186→      <div class="card card-hover p-8 md:p-10 relative overflow-hidden">
+   187→   187→        <div class="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 blur-2xl" style="background: var(--color-primary);"></div>
+   188→   188→        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background: rgb(21 128 61 / 0.12);">
+   189→   189→          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);">
+   190→   190→            <circle cx="12" cy="12" r="10"/>
+   191→   191→            <circle cx="12" cy="12" r="6"/>
+   192→   192→            <circle cx="12" cy="12" r="2"/>
+   193→   193→          </svg>
+   194→   194→        </div>
+   195→   195→        <span class="badge badge-primary mb-3">Our Mission</span>
+   196→   196→        <h3 class="text-2xl font-bold mb-3" style="font-family: var(--font-heading);">What We Aim To Achieve</h3>
+   197→   197→        <p style="color: var(--color-muted); line-height: 1.7;">To provide quality education that integrates academic excellence with authentic Islamic values, developing students who are intellectually capable, spiritually grounded, and socially responsible.</p>
+   198→   198→      </div>
+   199→   199→      <div class="card card-hover p-8 md:p-10 relative overflow-hidden" style="background: linear-gradient(135deg, var(--color-surface) 0%, rgb(234 179 8 / 0.06) 100%); border-color: rgb(234 179 8 / 0.25);">
+   200→   200→        <div class="absolute top-0 right-0 w-32 h-32 rounded-full opacity-15 blur-2xl" style="background: var(--color-accent);"></div>
+   201→   201→        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background: rgb(234 179 8 / 0.18);">
+   202→   202→          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #854D0E;">
+   203→   203→            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+   204→   204→            <circle cx="12" cy="12" r="3"/>
+   205→   205→          </svg>
+   206→   206→        </div>
+   207→   207→        <span class="badge badge-accent mb-3">Our Vision</span>
+   208→   208→        <h3 class="text-2xl font-bold mb-3" style="font-family: var(--font-heading);">Where We Are Headed</h3>
+   209→   209→        <p style="color: var(--color-muted); line-height: 1.7;">To be a leading Islamic educational institution that nurtures a generation of knowledgeable, God-conscious leaders who positively impact their communities and the world.</p>
+   210→   210→      </div>
+   211→   211→    </div>
+   212→   212→  </section>
+   213→   213→
+   214→   214→  <!-- ============ Core Values ============ -->
+   215→   215→  <section class="container-app section-pad pt-0">
+   216→   216→    <div class="text-center mb-12">
+   217→   217→      <span class="badge badge-primary mb-3">Our Foundation</span>
+   218→   218→      <h2 class="text-3xl md:text-4xl font-bold mb-3" style="font-family: var(--font-heading);">Our Core Values</h2>
+   219→   219→      <p class="max-w-2xl mx-auto" style="color: var(--color-muted);">Principles that guide every lesson, every interaction, and every decision at Sharafatadeen.</p>
+   220→   220→    </div>
+   221→   221→    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+   222→   222→      {values.map((value) => (
+   223→   223→        <div class="card card-hover p-6 group">
+   224→   224→          <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 group-hover:rotate-3" style="background: linear-gradient(135deg, rgb(21 128 61 / 0.12) 0%, rgb(234 179 8 / 0.12) 100%); color: var(--color-primary);">
+   225→   225→            <Fragment set:html={value.icon} />
+   226→   226→          </div>
+   227→   227→          <h3 class="font-bold text-lg mb-2" style="font-family: var(--font-heading); color: var(--color-foreground);">{value.title}</h3>
+   228→   228→          <p class="text-sm" style="color: var(--color-muted); line-height: 1.6;">{value.description}</p>
+   229→   229→        </div>
+   230→   230→      ))}
+   231→   231→    </div>
+   232→   232→  </section>
+   233→   233→
+   234→   234→  <!-- ============ Programs ============ -->
+   235→   235→  {programs.length > 0 && (
+   236→   236→    <section class="container-app section-pad pt-0">
+   237→   237→      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+   238→   238→        <div>
+   239→   239→          <span class="badge badge-accent mb-3">Academic Offerings</span>
+   240→   240→          <h2 class="text-3xl md:text-4xl font-bold" style="font-family: var(--font-heading);">Our Programs</h2>
+   241→   241→        </div>
+   242→   242→        <a href="/school/programs" class="btn btn-ghost text-sm">
+   243→   243→          View All Programs
+   244→   244→          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+   245→   245→        </a>
+   246→   246→      </div>
+   247→   247→      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+   248→   248→        {programs.map((program) => (
+   249→   249→          <div class="card card-hover overflow-hidden group">
+   250→   250→            <div class="aspect-[16/9] flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, rgb(21 128 61 / 0.12) 0%, rgb(234 179 8 / 0.08) 100%);">
+   251→   251→              {program.imageUrl ? (
+   252→   252→                <img src={program.imageUrl} alt={program.title} class="w-full h-full object-cover transition-transform group-hover:scale-105" loading="lazy" />
+   253→   253→              ) : (
+   254→   254→                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-primary);">
+   255→   255→                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+   256→   256→                  <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+   257→   257→                </svg>
+   258→   258→              )}
+   259→   259→            </div>
+   260→   260→            <div class="p-6">
+   261→   261→              <div class="flex items-center justify-between mb-3">
+   262→   262→                <span class="badge badge-primary">{program.category.replace('-', ' ')}</span>
+   263→   263→                <span class="text-xs font-semibold" style="color: var(--color-muted);">{program.duration}</span>
+   264→   264→              </div>
+   265→   265→              <h3 class="text-lg font-bold mb-2" style="font-family: var(--font-heading);">{program.title}</h3>
+   266→   266→              <p class="text-sm mb-4" style="color: var(--color-muted); line-height: 1.6;">{program.shortDescription || program.description.substring(0, 120)}…</p>
+   267→   267→              <a href={`/school/programs/${program.slug}`} class="inline-flex items-center gap-1.5 text-sm font-semibold" style="color: var(--color-primary);">
+   268→   268→                Learn More
+   269→   269→                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+   270→   270→              </a>
+   271→   271→            </div>
+   272→   272→          </div>
+   273→   273→        ))}
+   274→   274→      </div>
+   275→   275→    </section>
+   276→   276→  )}
+   277→   277→
+   278→   278→  <!-- ============ Classes ============ -->
+   279→   279→  {classes.length > 0 && (
+   280→   280→    <section class="container-app section-pad pt-0">
+   281→   281→      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+   282→   282→        <div>
+   283→   283→          <span class="badge badge-primary mb-3">Classrooms</span>
+   284→   284→          <h2 class="text-3xl md:text-4xl font-bold" style="font-family: var(--font-heading);">Available Classes</h2>
+   285→   285→        </div>
+   286→   286→        <a href="/school/classes" class="btn btn-ghost text-sm">
+   287→   287→          View All Classes
+   288→   288→          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+   289→   289→        </a>
+   290→   290→      </div>
+   291→   291→      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+   292→   292→        {classes.map((cls) => (
+   293→   293→          <div class="card card-hover p-6 text-center">
+   294→   294→            <div class="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3" style="background: rgb(21 128 61 / 0.10);">
+   295→   295→              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);">
+   296→   296→                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+   297→   297→              </svg>
+   298→   298→            </div>
+   299→   299→            <div class="text-2xl font-extrabold mb-1" style="color: var(--color-primary); font-family: var(--font-heading);">{cls.name}</div>
+   300→   300→            <div class="text-xs mb-3 capitalize" style="color: var(--color-muted);">{cls.level.replace('-', ' ')}</div>
+   301→   301→            <div class="text-xs mb-1" style="color: var(--color-foreground);">Teacher: <span class="font-semibold">{cls.teacherName || 'TBD'}</span></div>
+   302→   302→            <div class="text-xs" style="color: var(--color-muted);">{cls.currentEnrollment}/{cls.capacity} enrolled</div>
+   303→   303→          </div>
+   304→   304→        ))}
+   305→   305→      </div>
+   306→   306→    </section>
+   307→   307→  )}
+   308→   308→
+   309→   309→  <!-- ============ Latest News ============ -->
+   310→   310→  {blogPosts.length > 0 && (
+   311→   311→    <section class="container-app section-pad pt-0">
+   312→   312→      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+   313→   313→        <div>
+   314→   314→          <span class="badge badge-accent mb-3">News &amp; Updates</span>
+   315→   315→          <h2 class="text-3xl md:text-4xl font-bold" style="font-family: var(--font-heading);">Latest News</h2>
+   316→   316→        </div>
+   317→   317→        <a href="/school/news" class="btn btn-ghost text-sm">
+   318→   318→          All News
+   319→   319→          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+   320→   320→        </a>
+   321→   321→      </div>
+   322→   322→      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+   323→   323→        {blogPosts.map((post) => (
+   324→   324→          <article class="card card-hover overflow-hidden group">
+   325→   325→            <div class="aspect-[16/9] overflow-hidden" style="background: linear-gradient(135deg, rgb(21 128 61 / 0.10) 0%, rgb(234 179 8 / 0.10) 100%);">
+   326→   326→              {post.featuredImageUrl && <img src={post.featuredImageUrl} alt={post.title} class="w-full h-full object-cover transition-transform group-hover:scale-105" loading="lazy" />}
+   327→   327→            </div>
+   328→   328→            <div class="p-6">
+   329→   329→              <span class="badge badge-accent mb-3">{post.category}</span>
+   330→   330→              <h3 class="font-bold mb-2 line-clamp-2" style="font-family: var(--font-heading);">{post.title}</h3>
+   331→   331→              <p class="text-sm mb-4 line-clamp-2" style="color: var(--color-muted);">{post.excerpt}</p>
+   332→   332→              <a href={`/school/news/${post.slug}`} class="inline-flex items-center gap-1.5 text-sm font-semibold" style="color: var(--color-primary);">
+   333→   333→                Read More
+   334→   334→                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+   335→   335→              </a>
+   336→   336→            </div>
+   337→   337→          </article>
+   338→   338→        ))}
+   339→   339→      </div>
+   340→   340→    </section>
+   341→   341→  )}
+   342→   342→
+   343→   343→  <!-- ============ Testimonials ============ -->
+   344→   344→  {testimonials.length > 0 && (
+   345→   345→    <section class="container-app section-pad pt-0">
+   346→   346→      <div class="text-center mb-12">
+   347→   347→        <span class="badge badge-primary mb-3">Parent Voices</span>
+   348→   348→        <h2 class="text-3xl md:text-4xl font-bold" style="font-family: var(--font-heading);">What Parents Say</h2>
+   349→   349→      </div>
+   350→   350→      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+   351→   351→        {testimonials.map((t) => (
+   352→   352→          <div class="card card-hover p-6 relative">
+   353→   353→            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="absolute top-4 right-4 opacity-10" style="color: var(--color-primary);">
+   354→   354→              <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.254.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
+   355→   355→              <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.254.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+   356→   356→            </svg>
+   357→   357→            <div class="flex gap-1 mb-4">
+   358→   358→              {Array.from({ length: t.rating }).map(() => (
+   359→   359→                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-accent);">
+   360→   360→                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+   361→   361→                </svg>
+   362→   362→              ))}
+   363→   363→            </div>
+   364→   364→            <p class="text-sm mb-5 relative z-10" style="color: var(--color-muted); line-height: 1.7;">"{t.content}"</p>
+   365→   365→            <div class="flex items-center gap-3 pt-4 border-t" style="border-color: var(--color-border);">
+   366→   366→              <div class="w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-sm" style="background: linear-gradient(135deg, var(--color-primary) 0%, #166534 100%); color: white;">
+   367→   367→                {t.authorName.charAt(0)}
+   368→   368→              </div>
+   369→   369→              <div>
+   370→   370→                <div class="font-semibold text-sm">{t.authorName}</div>
+   371→   371→                <div class="text-xs" style="color: var(--color-muted);">{t.authorRole}</div>
+   372→   372→              </div>
+   373→   373→            </div>
+   374→   374→          </div>
+   375→   375→        ))}
+   376→   376→      </div>
+   377→   377→    </section>
+   378→   378→  )}
+   379→   379→
+   380→   380→  <!-- ============ Distinct CTA Section ============ -->
+   381→   381→  <section class="container-app section-pad pt-0">
+   382→   382→    <div class="relative rounded-3xl overflow-hidden shadow-xl">
+   383→   383→      <!-- Background gradient + pattern -->
+   384→   384→      <div class="absolute inset-0" style="background: linear-gradient(135deg, var(--color-primary) 0%, #166534 60%, #14532D 100%);"></div>
+   385→   385→      <svg class="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+   386→   386→        <pattern id="cta-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+   387→   387→          <path d="M20 0 L40 20 L20 40 L0 20 Z" fill="none" stroke="#FFFFFF" stroke-width="0.7"/>
+   388→   388→          <circle cx="20" cy="20" r="8" fill="none" stroke="#FFFFFF" stroke-width="0.5"/>
+   389→   389→        </pattern>
+   390→   390→        <rect width="400" height="200" fill="url(#cta-pattern)"/>
+   391→   391→      </svg>
+   392→   392→      <!-- Yellow accent blob -->
+   393→   393→      <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full opacity-20 blur-3xl" style="background: var(--color-accent);"></div>
+   394→   394→
+   395→   395→      <div class="relative z-10 p-8 md:p-12 lg:p-16 text-center text-white">
+   396→   396→        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold mb-4" style="background: rgb(234 179 8 / 0.25); color: #FEF3C7;">
+   397→   397→          <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background: #EAB308;"></span>
+   398→   398→          Admissions Open 2026/2027
+   399→   399→        </span>
+   400→   400→        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 max-w-3xl mx-auto" style="font-family: var(--font-heading);">
+   401→   401→          Ready to Join the <span style="color: var(--color-accent);">Sharafatadeen</span> Family?
+   402→   402→        </h2>
+   403→   403→        <p class="mb-8 max-w-2xl mx-auto text-white/85 text-lg">Give your child the gift of quality education rooted in Islamic values. Admissions for the 2026/2027 academic year are now open.</p>
+   404→   404→        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+   405→   405→          <a href="/school/admission" class="btn text-white" style="background: linear-gradient(135deg, var(--color-accent) 0%, #CA8A04 100%); box-shadow: var(--shadow-yellow-glow); color: #1A2E1A;">
+   406→   406→            Apply Now
+   407→   407→            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+   408→   408→          </a>
+   409→   409→          <a href="/school/contact" class="btn text-white border-2 border-white/30 hover:bg-white/10" style="background: transparent;">
+   410→   410→            Contact Us
+   411→   411→          </a>
+   412→   412→        </div>
+   413→   413→      </div>
+   414→   414→    </div>
+   415→   415→  </section>
+   416→   416→</PlatformLayout>
+   417→   417→
+   418→   418→<script is:inline>
+   419→   419→  // Stats counter animation
+   420→   420→  (function() {
+   421→   421→    var counters = document.querySelectorAll('.counter');
+   422→   422→    if (!counters.length) return;
+   423→   423→
+   424→   424→    function animateCounter(el) {
+   425→   425→      var target = parseInt(el.getAttribute('data-target'), 10);
+   426→   426→      if (isNaN(target)) return;
+   427→   427→      var duration = 1500;
+   428→   428→      var startTime = null;
+   429→   429→      function step(ts) {
+   430→   430→        if (!startTime) startTime = ts;
+   431→   431→        var progress = Math.min((ts - startTime) / duration, 1);
+   432→   432→        // easeOutQuart
+   433→   433→        var eased = 1 - Math.pow(1 - progress, 4);
+   434→   434→        el.textContent = Math.floor(eased * target).toString();
+   435→   435→        if (progress < 1) {
+   436→   436→          requestAnimationFrame(step);
+   437→   437→        } else {
+   438→   438→          el.textContent = target.toString();
+   439→   439→        }
+   440→   440→      }
+   441→   441→      requestAnimationFrame(step);
+   442→   442→    }
+   443→   443→
+   444→   444→    if ('IntersectionObserver' in window) {
+   445→   445→      var observer = new IntersectionObserver(function(entries) {
+   446→   446→        entries.forEach(function(entry) {
+   447→   447→          if (entry.isIntersecting) {
+   448→   448→            animateCounter(entry.target);
+   449→   449→            observer.unobserve(entry.target);
+   450→   450→          }
+   451→   451→        });
+   452→   452→      }, { threshold: 0.4 });
+   453→   453→      counters.forEach(function(c) { observer.observe(c); });
+   454→   454→    } else {
+   455→   455→      counters.forEach(animateCounter);
+   456→   456→    }
+   457→   457→  })();
+   458→   458→</script>
+   459→   459→
