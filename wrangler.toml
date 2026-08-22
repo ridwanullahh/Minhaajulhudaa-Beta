@@ -2,8 +2,3 @@ name = "minhaajulhudaa"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "dist"
-
-[vars]
-DB_FALLBACK_ENABLED = "true"
-DB_FALLBACK_ONLY = "true"
-SITE_URL = "https://minhaajulhudaa.pages.dev"
