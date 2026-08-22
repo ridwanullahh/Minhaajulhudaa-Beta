@@ -14,18 +14,18 @@ export const seedData: Record<string, any[]> = {
     "assistanceHistory": [
       {
         "type": "food",
-        "date": "2026-07-21T19:09:32.985Z",
+        "date": "2026-07-23T16:57:24.970Z",
         "value": 25000
       },
       {
         "type": "education",
-        "date": "2026-06-21T19:09:32.985Z",
+        "date": "2026-06-23T16:57:24.970Z",
         "value": 50000
       }
     ],
     "verificationStatus": "verified",
-    "registeredAt": "2026-05-22T19:09:32.985Z",
-    "id": "charity_beneficiaries_0_mt1w9vwi",
+    "registeredAt": "2026-05-24T16:57:24.970Z",
+    "id": "charity_beneficiaries_0_mt4mfnxv",
     "slug": "beneficiary-001"
   },
   {
@@ -39,13 +39,13 @@ export const seedData: Record<string, any[]> = {
     "assistanceHistory": [
       {
         "type": "education",
-        "date": "2026-07-06T19:09:32.985Z",
+        "date": "2026-07-08T16:57:24.970Z",
         "value": 50000
       }
     ],
     "verificationStatus": "verified",
-    "registeredAt": "2026-06-21T19:09:32.985Z",
-    "id": "charity_beneficiaries_1_mt1w9vwi",
+    "registeredAt": "2026-06-23T16:57:24.970Z",
+    "id": "charity_beneficiaries_1_mt4mfnxv",
     "slug": "beneficiary-002"
   },
   {
@@ -59,13 +59,13 @@ export const seedData: Record<string, any[]> = {
     "assistanceHistory": [
       {
         "type": "medical",
-        "date": "2026-08-05T19:09:32.985Z",
+        "date": "2026-08-07T16:57:24.970Z",
         "value": 35000
       }
     ],
     "verificationStatus": "verified",
-    "registeredAt": "2026-07-06T19:09:32.985Z",
-    "id": "charity_beneficiaries_2_mt1w9vwi",
+    "registeredAt": "2026-07-08T16:57:24.970Z",
+    "id": "charity_beneficiaries_2_mt4mfnxv",
     "slug": "beneficiary-003"
   },
   {
@@ -79,18 +79,18 @@ export const seedData: Record<string, any[]> = {
     "assistanceHistory": [
       {
         "type": "shelter",
-        "date": "2026-07-31T19:09:32.985Z",
+        "date": "2026-08-02T16:57:24.970Z",
         "value": 150000
       },
       {
         "type": "food",
-        "date": "2026-08-10T19:09:32.985Z",
+        "date": "2026-08-12T16:57:24.970Z",
         "value": 25000
       }
     ],
     "verificationStatus": "verified",
-    "registeredAt": "2026-07-21T19:09:32.985Z",
-    "id": "charity_beneficiaries_3_mt1w9vwi",
+    "registeredAt": "2026-07-23T16:57:24.970Z",
+    "id": "charity_beneficiaries_3_mt4mfnxv",
     "slug": "beneficiary-004"
   }
 ],
@@ -109,9 +109,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Malik Ibrahim Suleiman",
     "status": "published",
-    "publishedAt": "2026-08-13T19:09:32.985Z",
+    "publishedAt": "2026-08-15T16:57:24.970Z",
     "views": 234,
-    "id": "charity_blog_posts_0_mt1w9vwj"
+    "id": "charity_blog_posts_0_mt4mfnxw"
   },
   {
     "slug": "volunteer-spotlight-daud",
@@ -126,9 +126,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Malik Ibrahim Suleiman",
     "status": "published",
-    "publishedAt": "2026-08-08T19:09:32.985Z",
+    "publishedAt": "2026-08-10T16:57:24.970Z",
     "views": 156,
-    "id": "charity_blog_posts_1_mt1w9vwj"
+    "id": "charity_blog_posts_1_mt4mfnxw"
   },
   {
     "slug": "annual-impact-report-2025",
@@ -144,9 +144,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Malik Ibrahim Suleiman",
     "status": "published",
-    "publishedAt": "2026-07-21T19:09:32.985Z",
+    "publishedAt": "2026-07-23T16:57:24.970Z",
     "views": 489,
-    "id": "charity_blog_posts_2_mt1w9vwj"
+    "id": "charity_blog_posts_2_mt4mfnxw"
   }
 ],
   "charity_campaigns": [
@@ -169,9 +169,9 @@ export const seedData: Record<string, any[]> = {
     "isUrgent": true,
     "location": "Northern Nigeria",
     "status": "active",
-    "createdAt": "2026-07-06T19:09:32.985Z",
-    "updatedAt": "2026-08-18T19:09:32.985Z",
-    "id": "charity_campaigns_0_mt1w9vwh"
+    "createdAt": "2026-07-08T16:57:24.970Z",
+    "updatedAt": "2026-08-20T16:57:24.970Z",
+    "id": "charity_campaigns_0_mt4mfnxv"
   },
   {
     "slug": "feed-the-fasting",
@@ -191,9 +191,9 @@ export const seedData: Record<string, any[]> = {
     "isUrgent": true,
     "location": "Lagos and Abuja",
     "status": "active",
-    "createdAt": "2026-07-21T19:09:32.985Z",
-    "updatedAt": "2026-08-19T19:09:32.985Z",
-    "id": "charity_campaigns_1_mt1w9vwh"
+    "createdAt": "2026-07-23T16:57:24.970Z",
+    "updatedAt": "2026-08-21T16:57:24.970Z",
+    "id": "charity_campaigns_1_mt4mfnxv"
   },
   {
     "slug": "orphans-education-support",
@@ -213,9 +213,9 @@ export const seedData: Record<string, any[]> = {
     "isUrgent": false,
     "location": "Nationwide",
     "status": "active",
-    "createdAt": "2026-06-21T19:09:32.985Z",
-    "updatedAt": "2026-08-17T19:09:32.985Z",
-    "id": "charity_campaigns_2_mt1w9vwh"
+    "createdAt": "2026-06-23T16:57:24.970Z",
+    "updatedAt": "2026-08-19T16:57:24.970Z",
+    "id": "charity_campaigns_2_mt4mfnxv"
   },
   {
     "slug": "medical-aid-emergency",
@@ -232,9 +232,9 @@ export const seedData: Record<string, any[]> = {
     "isUrgent": true,
     "location": "Nationwide",
     "status": "active",
-    "createdAt": "2026-07-31T19:09:32.985Z",
-    "updatedAt": "2026-08-19T19:09:32.985Z",
-    "id": "charity_campaigns_3_mt1w9vwh"
+    "createdAt": "2026-08-02T16:57:24.970Z",
+    "updatedAt": "2026-08-21T16:57:24.970Z",
+    "id": "charity_campaigns_3_mt4mfnxv"
   },
   {
     "slug": "skills-training-women",
@@ -251,9 +251,9 @@ export const seedData: Record<string, any[]> = {
     "isUrgent": false,
     "location": "Lagos",
     "status": "active",
-    "createdAt": "2026-07-11T19:09:32.985Z",
-    "updatedAt": "2026-08-15T19:09:32.985Z",
-    "id": "charity_campaigns_4_mt1w9vwh"
+    "createdAt": "2026-07-13T16:57:24.970Z",
+    "updatedAt": "2026-08-17T16:57:24.970Z",
+    "id": "charity_campaigns_4_mt4mfnxv"
   },
   {
     "slug": "shelter-for-displaced",
@@ -270,9 +270,9 @@ export const seedData: Record<string, any[]> = {
     "isUrgent": true,
     "location": "Northern Nigeria",
     "status": "active",
-    "createdAt": "2026-07-26T19:09:32.985Z",
-    "updatedAt": "2026-08-18T19:09:32.985Z",
-    "id": "charity_campaigns_5_mt1w9vwh"
+    "createdAt": "2026-07-28T16:57:24.970Z",
+    "updatedAt": "2026-08-20T16:57:24.970Z",
+    "id": "charity_campaigns_5_mt4mfnxv"
   }
 ],
   "charity_donations": [
@@ -289,8 +289,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isAnonymous": false,
     "message": "May Allah accept",
-    "donatedAt": "2026-08-19T19:09:32.985Z",
-    "id": "charity_donations_0_mt1w9vwi"
+    "donatedAt": "2026-08-21T16:57:24.970Z",
+    "id": "charity_donations_0_mt4mfnxv"
   },
   {
     "donorName": "Anonymous",
@@ -303,8 +303,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "CHR-DON-002",
     "status": "successful",
     "isAnonymous": true,
-    "donatedAt": "2026-08-18T19:09:32.985Z",
-    "id": "charity_donations_1_mt1w9vwi"
+    "donatedAt": "2026-08-20T16:57:24.970Z",
+    "id": "charity_donations_1_mt4mfnxv"
   },
   {
     "donorName": "Fatima Bello",
@@ -319,8 +319,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isAnonymous": false,
     "message": "Monthly contribution",
-    "donatedAt": "2026-08-17T19:09:32.985Z",
-    "id": "charity_donations_2_mt1w9vwi"
+    "donatedAt": "2026-08-19T16:57:24.970Z",
+    "id": "charity_donations_2_mt4mfnxv"
   },
   {
     "donorName": "Ibrahim Suleiman",
@@ -334,8 +334,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "CHR-DON-004",
     "status": "successful",
     "isAnonymous": false,
-    "donatedAt": "2026-08-16T19:09:32.985Z",
-    "id": "charity_donations_3_mt1w9vwi"
+    "donatedAt": "2026-08-18T16:57:24.970Z",
+    "id": "charity_donations_3_mt4mfnxv"
   },
   {
     "donorName": "Anonymous",
@@ -348,8 +348,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "CHR-DON-005",
     "status": "successful",
     "isAnonymous": true,
-    "donatedAt": "2026-08-15T19:09:32.985Z",
-    "id": "charity_donations_4_mt1w9vwi"
+    "donatedAt": "2026-08-17T16:57:24.970Z",
+    "id": "charity_donations_4_mt4mfnxv"
   },
   {
     "donorName": "Aisha Abdullahi",
@@ -364,8 +364,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isAnonymous": false,
     "message": "For the water project",
-    "donatedAt": "2026-08-14T19:09:32.985Z",
-    "id": "charity_donations_5_mt1w9vwi"
+    "donatedAt": "2026-08-16T16:57:24.970Z",
+    "id": "charity_donations_5_mt4mfnxv"
   },
   {
     "donorName": "Abdullah Okafor",
@@ -379,8 +379,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "CHR-DON-007",
     "status": "successful",
     "isAnonymous": false,
-    "donatedAt": "2026-08-13T19:09:32.985Z",
-    "id": "charity_donations_6_mt1w9vwi"
+    "donatedAt": "2026-08-15T16:57:24.970Z",
+    "id": "charity_donations_6_mt4mfnxv"
   },
   {
     "donorName": "Anonymous",
@@ -393,8 +393,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "CHR-DON-008",
     "status": "successful",
     "isAnonymous": true,
-    "donatedAt": "2026-08-12T19:09:32.985Z",
-    "id": "charity_donations_7_mt1w9vwi"
+    "donatedAt": "2026-08-14T16:57:24.970Z",
+    "id": "charity_donations_7_mt4mfnxv"
   }
 ],
   "charity_donors": [
@@ -404,14 +404,14 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348061111111",
     "totalDonated": 500000,
     "donationCount": 8,
-    "firstDonationAt": "2026-02-01T19:09:32.985Z",
-    "lastDonationAt": "2026-08-19T19:09:32.985Z",
+    "firstDonationAt": "2026-02-03T16:57:24.970Z",
+    "lastDonationAt": "2026-08-21T16:57:24.970Z",
     "isRecurring": false,
     "tags": [
       "major-donor"
     ],
     "communicationOptIn": true,
-    "id": "charity_donors_0_mt1w9vwi",
+    "id": "charity_donors_0_mt4mfnxv",
     "slug": "muhammad-ali"
   },
   {
@@ -420,14 +420,14 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348062222222",
     "totalDonated": 175000,
     "donationCount": 7,
-    "firstDonationAt": "2026-03-23T19:09:32.985Z",
-    "lastDonationAt": "2026-08-17T19:09:32.985Z",
+    "firstDonationAt": "2026-03-25T16:57:24.970Z",
+    "lastDonationAt": "2026-08-19T16:57:24.970Z",
     "isRecurring": true,
     "tags": [
       "recurring"
     ],
     "communicationOptIn": true,
-    "id": "charity_donors_1_mt1w9vwi",
+    "id": "charity_donors_1_mt4mfnxv",
     "slug": "fatima-bello"
   },
   {
@@ -436,15 +436,15 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348063333333",
     "totalDonated": 600000,
     "donationCount": 4,
-    "firstDonationAt": "2026-05-12T19:09:32.985Z",
-    "lastDonationAt": "2026-08-16T19:09:32.985Z",
+    "firstDonationAt": "2026-05-14T16:57:24.970Z",
+    "lastDonationAt": "2026-08-18T16:57:24.970Z",
     "isRecurring": false,
     "tags": [
       "major-donor",
       "zakaat"
     ],
     "communicationOptIn": true,
-    "id": "charity_donors_2_mt1w9vwi",
+    "id": "charity_donors_2_mt4mfnxv",
     "slug": "ibrahim-suleiman"
   },
   {
@@ -453,12 +453,12 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348064444444",
     "totalDonated": 225000,
     "donationCount": 3,
-    "firstDonationAt": "2026-05-22T19:09:32.985Z",
-    "lastDonationAt": "2026-08-14T19:09:32.985Z",
+    "firstDonationAt": "2026-05-24T16:57:24.970Z",
+    "lastDonationAt": "2026-08-16T16:57:24.970Z",
     "isRecurring": false,
     "tags": [],
     "communicationOptIn": true,
-    "id": "charity_donors_3_mt1w9vwi",
+    "id": "charity_donors_3_mt4mfnxv",
     "slug": "aisha-abdullahi"
   },
   {
@@ -467,15 +467,15 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348065555555",
     "totalDonated": 450000,
     "donationCount": 6,
-    "firstDonationAt": "2026-02-21T19:09:32.985Z",
-    "lastDonationAt": "2026-08-13T19:09:32.985Z",
+    "firstDonationAt": "2026-02-23T16:57:24.970Z",
+    "lastDonationAt": "2026-08-15T16:57:24.970Z",
     "isRecurring": true,
     "tags": [
       "major-donor",
       "recurring"
     ],
     "communicationOptIn": true,
-    "id": "charity_donors_4_mt1w9vwi",
+    "id": "charity_donors_4_mt4mfnxv",
     "slug": "abdullah-okafor"
   }
 ],
@@ -486,7 +486,7 @@ export const seedData: Record<string, any[]> = {
     "category": "donations",
     "order": 1,
     "status": "active",
-    "id": "charity_faq_0_mt1w9vwj"
+    "id": "charity_faq_0_mt4mfnxw"
   },
   {
     "question": "How can I be sure my donation reaches the intended beneficiaries?",
@@ -494,7 +494,7 @@ export const seedData: Record<string, any[]> = {
     "category": "donations",
     "order": 2,
     "status": "active",
-    "id": "charity_faq_1_mt1w9vwj"
+    "id": "charity_faq_1_mt4mfnxw"
   },
   {
     "question": "Can I donate to a specific campaign?",
@@ -502,7 +502,7 @@ export const seedData: Record<string, any[]> = {
     "category": "donations",
     "order": 3,
     "status": "active",
-    "id": "charity_faq_2_mt1w9vwj"
+    "id": "charity_faq_2_mt4mfnxw"
   },
   {
     "question": "What payment methods do you accept?",
@@ -510,7 +510,7 @@ export const seedData: Record<string, any[]> = {
     "category": "donations",
     "order": 4,
     "status": "active",
-    "id": "charity_faq_3_mt1w9vwj"
+    "id": "charity_faq_3_mt4mfnxw"
   },
   {
     "question": "How can I become a volunteer?",
@@ -518,7 +518,7 @@ export const seedData: Record<string, any[]> = {
     "category": "volunteering",
     "order": 1,
     "status": "active",
-    "id": "charity_faq_4_mt1w9vwj"
+    "id": "charity_faq_4_mt4mfnxw"
   },
   {
     "question": "What skills are you looking for in volunteers?",
@@ -526,7 +526,7 @@ export const seedData: Record<string, any[]> = {
     "category": "volunteering",
     "order": 2,
     "status": "active",
-    "id": "charity_faq_5_mt1w9vwj"
+    "id": "charity_faq_5_mt4mfnxw"
   },
   {
     "question": "Can I sponsor an orphan long-term?",
@@ -534,7 +534,7 @@ export const seedData: Record<string, any[]> = {
     "category": "programs",
     "order": 1,
     "status": "active",
-    "id": "charity_faq_6_mt1w9vwj"
+    "id": "charity_faq_6_mt4mfnxw"
   },
   {
     "question": "How do you verify beneficiaries?",
@@ -542,7 +542,7 @@ export const seedData: Record<string, any[]> = {
     "category": "programs",
     "order": 2,
     "status": "active",
-    "id": "charity_faq_7_mt1w9vwj"
+    "id": "charity_faq_7_mt4mfnxw"
   }
 ],
   "charity_impact_metrics": [
@@ -553,8 +553,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "families",
     "category": "general",
     "period": "2026",
-    "updatedAt": "2026-08-19T19:09:32.985Z",
-    "id": "charity_impact_metrics_0_mt1w9vwj"
+    "updatedAt": "2026-08-21T16:57:24.970Z",
+    "id": "charity_impact_metrics_0_mt4mfnxw"
   },
   {
     "metricKey": "meals_served",
@@ -563,8 +563,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "meals",
     "category": "food",
     "period": "2026",
-    "updatedAt": "2026-08-19T19:09:32.985Z",
-    "id": "charity_impact_metrics_1_mt1w9vwj"
+    "updatedAt": "2026-08-21T16:57:24.970Z",
+    "id": "charity_impact_metrics_1_mt4mfnxw"
   },
   {
     "metricKey": "water_wells_built",
@@ -573,8 +573,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "wells",
     "category": "water",
     "period": "2026",
-    "updatedAt": "2026-08-13T19:09:32.985Z",
-    "id": "charity_impact_metrics_2_mt1w9vwj"
+    "updatedAt": "2026-08-15T16:57:24.970Z",
+    "id": "charity_impact_metrics_2_mt4mfnxw"
   },
   {
     "metricKey": "orphans_sponsored",
@@ -583,8 +583,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "children",
     "category": "orphans",
     "period": "2026",
-    "updatedAt": "2026-08-17T19:09:32.985Z",
-    "id": "charity_impact_metrics_3_mt1w9vwj"
+    "updatedAt": "2026-08-19T16:57:24.970Z",
+    "id": "charity_impact_metrics_3_mt4mfnxw"
   },
   {
     "metricKey": "medical_cases",
@@ -593,8 +593,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "cases",
     "category": "medical",
     "period": "2026",
-    "updatedAt": "2026-08-15T19:09:32.985Z",
-    "id": "charity_impact_metrics_4_mt1w9vwj"
+    "updatedAt": "2026-08-17T16:57:24.970Z",
+    "id": "charity_impact_metrics_4_mt4mfnxw"
   },
   {
     "metricKey": "women_trained",
@@ -603,8 +603,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "women",
     "category": "education",
     "period": "2026",
-    "updatedAt": "2026-08-10T19:09:32.985Z",
-    "id": "charity_impact_metrics_5_mt1w9vwj"
+    "updatedAt": "2026-08-12T16:57:24.970Z",
+    "id": "charity_impact_metrics_5_mt4mfnxw"
   },
   {
     "metricKey": "shelters_provided",
@@ -613,8 +613,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "shelters",
     "category": "shelter",
     "period": "2026",
-    "updatedAt": "2026-08-18T19:09:32.985Z",
-    "id": "charity_impact_metrics_6_mt1w9vwj"
+    "updatedAt": "2026-08-20T16:57:24.970Z",
+    "id": "charity_impact_metrics_6_mt4mfnxw"
   },
   {
     "metricKey": "volunteers_active",
@@ -623,8 +623,8 @@ export const seedData: Record<string, any[]> = {
     "unit": "volunteers",
     "category": "general",
     "period": "2026",
-    "updatedAt": "2026-08-19T19:09:32.985Z",
-    "id": "charity_impact_metrics_7_mt1w9vwj"
+    "updatedAt": "2026-08-21T16:57:24.970Z",
+    "id": "charity_impact_metrics_7_mt4mfnxw"
   }
 ],
   "charity_pages": [
@@ -653,9 +653,9 @@ export const seedData: Record<string, any[]> = {
     "seoTitle": "About Minhaajulhudaa Charity",
     "seoDescription": "Learn about our mission to serve humanity with compassion.",
     "status": "published",
-    "publishedAt": "2026-06-21T19:09:32.985Z",
+    "publishedAt": "2026-06-23T16:57:24.970Z",
     "order": 1,
-    "id": "charity_pages_0_mt1w9vwh"
+    "id": "charity_pages_0_mt4mfnxv"
   },
   {
     "slug": "how-to-help",
@@ -674,9 +674,9 @@ export const seedData: Record<string, any[]> = {
     "seoTitle": "How to Help - Minhaajulhudaa Charity",
     "seoDescription": "Discover ways to support our charitable work.",
     "status": "published",
-    "publishedAt": "2026-06-21T19:09:32.985Z",
+    "publishedAt": "2026-06-23T16:57:24.970Z",
     "order": 2,
-    "id": "charity_pages_1_mt1w9vwh"
+    "id": "charity_pages_1_mt4mfnxv"
   }
 ],
   "charity_partners": [
@@ -689,7 +689,7 @@ export const seedData: Record<string, any[]> = {
     "contributionValue": 5000000,
     "partnershipStart": "2023-01-15",
     "status": "active",
-    "id": "charity_partners_0_mt1w9vwj",
+    "id": "charity_partners_0_mt4mfnxw",
     "slug": "islamic-relief-nigeria"
   },
   {
@@ -700,7 +700,7 @@ export const seedData: Record<string, any[]> = {
     "contributionValue": 0,
     "partnershipStart": "2022-06-01",
     "status": "active",
-    "id": "charity_partners_1_mt1w9vwj",
+    "id": "charity_partners_1_mt4mfnxx",
     "slug": "lagos-state-government"
   },
   {
@@ -710,7 +710,7 @@ export const seedData: Record<string, any[]> = {
     "contributionValue": 10000000,
     "partnershipStart": "2023-03-01",
     "status": "active",
-    "id": "charity_partners_2_mt1w9vwj",
+    "id": "charity_partners_2_mt4mfnxx",
     "slug": "dangote-foundation"
   },
   {
@@ -720,7 +720,7 @@ export const seedData: Record<string, any[]> = {
     "contributionValue": 2000000,
     "partnershipStart": "2024-01-01",
     "status": "active",
-    "id": "charity_partners_3_mt1w9vwj",
+    "id": "charity_partners_3_mt4mfnxx",
     "slug": "al-noor-foundation"
   }
 ],
@@ -737,7 +737,7 @@ export const seedData: Record<string, any[]> = {
     "stock": 100,
     "sku": "CHR-TS-001",
     "status": "active",
-    "id": "charity_products_0_mt1w9vwj"
+    "id": "charity_products_0_mt4mfnxx"
   },
   {
     "slug": "charity-mug",
@@ -751,7 +751,7 @@ export const seedData: Record<string, any[]> = {
     "stock": 75,
     "sku": "CHR-MG-001",
     "status": "active",
-    "id": "charity_products_1_mt1w9vwj"
+    "id": "charity_products_1_mt4mfnxx"
   },
   {
     "slug": "charity-tote-bag",
@@ -765,7 +765,7 @@ export const seedData: Record<string, any[]> = {
     "stock": 50,
     "sku": "CHR-TB-001",
     "status": "active",
-    "id": "charity_products_2_mt1w9vwj"
+    "id": "charity_products_2_mt4mfnxx"
   }
 ],
   "charity_recurring_donations": [
@@ -776,11 +776,11 @@ export const seedData: Record<string, any[]> = {
     "currency": "NGN",
     "frequency": "monthly",
     "category": "sadaqah",
-    "nextChargeDate": "2026-09-14T19:09:32.985Z",
+    "nextChargeDate": "2026-09-16T16:57:24.970Z",
     "status": "active",
-    "startedAt": "2026-03-23T19:09:32.985Z",
+    "startedAt": "2026-03-25T16:57:24.970Z",
     "totalCharged": 175000,
-    "id": "charity_recurring_donations_0_mt1w9vwi"
+    "id": "charity_recurring_donations_0_mt4mfnxv"
   },
   {
     "donorEmail": "abdullah.o@example.com",
@@ -789,11 +789,11 @@ export const seedData: Record<string, any[]> = {
     "currency": "NGN",
     "frequency": "monthly",
     "category": "zakaat",
-    "nextChargeDate": "2026-09-09T19:09:32.985Z",
+    "nextChargeDate": "2026-09-11T16:57:24.970Z",
     "status": "active",
-    "startedAt": "2026-02-21T19:09:32.985Z",
+    "startedAt": "2026-02-23T16:57:24.970Z",
     "totalCharged": 450000,
-    "id": "charity_recurring_donations_1_mt1w9vwi"
+    "id": "charity_recurring_donations_1_mt4mfnxv"
   }
 ],
   "charity_reports": [
@@ -808,8 +808,8 @@ export const seedData: Record<string, any[]> = {
       "totalDisbursed": 42300000,
       "beneficiaries": 1250
     },
-    "generatedAt": "2026-07-21T19:09:32.985Z",
-    "id": "charity_reports_0_mt1w9vwj",
+    "generatedAt": "2026-07-23T16:57:24.970Z",
+    "id": "charity_reports_0_mt4mfnxx",
     "slug": "annual-impact-report-2025"
   },
   {
@@ -823,8 +823,8 @@ export const seedData: Record<string, any[]> = {
       "expenses": 13200000,
       "campaigns": 6
     },
-    "generatedAt": "2026-08-10T19:09:32.985Z",
-    "id": "charity_reports_1_mt1w9vwj",
+    "generatedAt": "2026-08-12T16:57:24.970Z",
+    "id": "charity_reports_1_mt4mfnxx",
     "slug": "q2-2026-financial-report"
   },
   {
@@ -837,8 +837,8 @@ export const seedData: Record<string, any[]> = {
       "wellsBuilt": 12,
       "beneficiaries": 6000
     },
-    "generatedAt": "2026-08-13T19:09:32.985Z",
-    "id": "charity_reports_2_mt1w9vwj",
+    "generatedAt": "2026-08-15T16:57:24.970Z",
+    "id": "charity_reports_2_mt4mfnxx",
     "slug": "water-project-impact-report"
   }
 ],
@@ -860,8 +860,8 @@ export const seedData: Record<string, any[]> = {
       "jobs_created": 1
     },
     "status": "published",
-    "publishedAt": "2026-08-05T19:09:32.985Z",
-    "id": "charity_success_stories_0_mt1w9vwj"
+    "publishedAt": "2026-08-07T16:57:24.970Z",
+    "id": "charity_success_stories_0_mt4mfnxw"
   },
   {
     "slug": "borehole-transforms-village",
@@ -880,8 +880,8 @@ export const seedData: Record<string, any[]> = {
       "school_attendance_increase": "45%"
     },
     "status": "published",
-    "publishedAt": "2026-07-21T19:09:32.985Z",
-    "id": "charity_success_stories_1_mt1w9vwj"
+    "publishedAt": "2026-07-23T16:57:24.970Z",
+    "id": "charity_success_stories_1_mt4mfnxw"
   },
   {
     "slug": "orphan-graduates-top-class",
@@ -897,8 +897,8 @@ export const seedData: Record<string, any[]> = {
       "graduation_year": 2026
     },
     "status": "published",
-    "publishedAt": "2026-07-31T19:09:32.985Z",
-    "id": "charity_success_stories_2_mt1w9vwj"
+    "publishedAt": "2026-08-02T16:57:24.970Z",
+    "id": "charity_success_stories_2_mt4mfnxw"
   }
 ],
   "charity_testimonials": [
@@ -911,8 +911,8 @@ export const seedData: Record<string, any[]> = {
     "isBeneficiary": false,
     "isPartner": false,
     "status": "approved",
-    "createdAt": "2026-08-15T19:09:32.985Z",
-    "id": "charity_testimonials_0_mt1w9vwj"
+    "createdAt": "2026-08-17T16:57:24.970Z",
+    "id": "charity_testimonials_0_mt4mfnxw"
   },
   {
     "authorName": "Malama Fatima",
@@ -923,8 +923,8 @@ export const seedData: Record<string, any[]> = {
     "isBeneficiary": true,
     "isPartner": false,
     "status": "approved",
-    "createdAt": "2026-08-10T19:09:32.985Z",
-    "id": "charity_testimonials_1_mt1w9vwj"
+    "createdAt": "2026-08-12T16:57:24.970Z",
+    "id": "charity_testimonials_1_mt4mfnxw"
   },
   {
     "authorName": "Alhaji Ibrahim Suleiman",
@@ -935,8 +935,8 @@ export const seedData: Record<string, any[]> = {
     "isBeneficiary": false,
     "isPartner": true,
     "status": "approved",
-    "createdAt": "2026-08-05T19:09:32.985Z",
-    "id": "charity_testimonials_2_mt1w9vwj"
+    "createdAt": "2026-08-07T16:57:24.970Z",
+    "id": "charity_testimonials_2_mt4mfnxw"
   }
 ],
   "charity_volunteer_roles": [
@@ -953,7 +953,7 @@ export const seedData: Record<string, any[]> = {
     "slotsAvailable": 10,
     "slotsFilled": 6,
     "status": "open",
-    "id": "charity_volunteer_roles_0_mt1w9vwi",
+    "id": "charity_volunteer_roles_0_mt4mfnxv",
     "slug": "field-distribution-worker"
   },
   {
@@ -969,7 +969,7 @@ export const seedData: Record<string, any[]> = {
     "slotsAvailable": 5,
     "slotsFilled": 3,
     "status": "open",
-    "id": "charity_volunteer_roles_1_mt1w9vwi",
+    "id": "charity_volunteer_roles_1_mt4mfnxv",
     "slug": "education-program-assistant"
   },
   {
@@ -985,7 +985,7 @@ export const seedData: Record<string, any[]> = {
     "slotsAvailable": 8,
     "slotsFilled": 4,
     "status": "open",
-    "id": "charity_volunteer_roles_2_mt1w9vwi",
+    "id": "charity_volunteer_roles_2_mt4mfnxv",
     "slug": "medical-volunteer"
   },
   {
@@ -1001,7 +1001,7 @@ export const seedData: Record<string, any[]> = {
     "slotsAvailable": 3,
     "slotsFilled": 2,
     "status": "open",
-    "id": "charity_volunteer_roles_3_mt1w9vwi",
+    "id": "charity_volunteer_roles_3_mt4mfnxv",
     "slug": "social-media-volunteer"
   }
 ],
@@ -1022,8 +1022,8 @@ export const seedData: Record<string, any[]> = {
     "status": "active",
     "assignedRole": "Field Coordinator",
     "hoursLogged": 120,
-    "joinedAt": "2026-05-22T19:09:32.985Z",
-    "id": "charity_volunteers_0_mt1w9vwi",
+    "joinedAt": "2026-05-24T16:57:24.970Z",
+    "id": "charity_volunteers_0_mt4mfnxv",
     "slug": "daud-mohammed"
   },
   {
@@ -1042,8 +1042,8 @@ export const seedData: Record<string, any[]> = {
     "status": "active",
     "assignedRole": "Education Program Lead",
     "hoursLogged": 85,
-    "joinedAt": "2026-06-21T19:09:32.985Z",
-    "id": "charity_volunteers_1_mt1w9vwi",
+    "joinedAt": "2026-06-23T16:57:24.970Z",
+    "id": "charity_volunteers_1_mt4mfnxv",
     "slug": "maryam-aliyu"
   },
   {
@@ -1062,8 +1062,8 @@ export const seedData: Record<string, any[]> = {
     "status": "active",
     "assignedRole": "Medical Volunteer",
     "hoursLogged": 60,
-    "joinedAt": "2026-07-06T19:09:32.985Z",
-    "id": "charity_volunteers_2_mt1w9vwi",
+    "joinedAt": "2026-07-08T16:57:24.970Z",
+    "id": "charity_volunteers_2_mt4mfnxv",
     "slug": "yusuf-bello"
   },
   {
@@ -1080,8 +1080,8 @@ export const seedData: Record<string, any[]> = {
     "location": "Lagos",
     "bio": "Social worker with experience in trauma counseling.",
     "status": "pending",
-    "joinedAt": "2026-08-13T19:09:32.985Z",
-    "id": "charity_volunteers_3_mt1w9vwi",
+    "joinedAt": "2026-08-15T16:57:24.970Z",
+    "id": "charity_volunteers_3_mt4mfnxv",
     "slug": "khadijah-musa"
   },
   {
@@ -1100,8 +1100,8 @@ export const seedData: Record<string, any[]> = {
     "status": "active",
     "assignedRole": "Media Volunteer",
     "hoursLogged": 40,
-    "joinedAt": "2026-07-21T19:09:32.985Z",
-    "id": "charity_volunteers_4_mt1w9vwi",
+    "joinedAt": "2026-07-23T16:57:24.970Z",
+    "id": "charity_volunteers_4_mt4mfnxv",
     "slug": "ibrahim-okafor"
   }
 ],
@@ -1115,8 +1115,8 @@ export const seedData: Record<string, any[]> = {
     "message": "I would like to inquire about admission for my 7-year-old son into primary 2. What are the requirements?",
     "status": "new",
     "department": "admissions",
-    "createdAt": "2026-08-19T19:09:32.984Z",
-    "id": "contact_submissions_0_mt1w9vwd",
+    "createdAt": "2026-08-21T16:57:24.969Z",
+    "id": "contact_submissions_0_mt4mfnxq",
     "slug": "fatima-bello"
   },
   {
@@ -1128,8 +1128,8 @@ export const seedData: Record<string, any[]> = {
     "message": "What time does the Jumuah prayer start?",
     "status": "new",
     "department": "general",
-    "createdAt": "2026-08-20T07:09:32.984Z",
-    "id": "contact_submissions_1_mt1w9vwd",
+    "createdAt": "2026-08-22T04:57:24.969Z",
+    "id": "contact_submissions_1_mt4mfnxq",
     "slug": "ahmed-tanko"
   },
   {
@@ -1141,8 +1141,8 @@ export const seedData: Record<string, any[]> = {
     "message": "I am interested in volunteering for the food distribution program. How can I sign up?",
     "status": "new",
     "department": "volunteers",
-    "createdAt": "2026-08-20T13:09:32.984Z",
-    "id": "contact_submissions_2_mt1w9vwd",
+    "createdAt": "2026-08-22T10:57:24.970Z",
+    "id": "contact_submissions_2_mt4mfnxq",
     "slug": "khadijah-mohammed"
   },
   {
@@ -1154,8 +1154,8 @@ export const seedData: Record<string, any[]> = {
     "message": "I am interested in the December Umrah package for a family of 4. Can you provide details?",
     "status": "new",
     "department": "bookings",
-    "createdAt": "2026-08-20T16:09:32.984Z",
-    "id": "contact_submissions_3_mt1w9vwd",
+    "createdAt": "2026-08-22T13:57:24.970Z",
+    "id": "contact_submissions_3_mt4mfnxq",
     "slug": "ibrahim-aliyu"
   }
 ],
@@ -1165,10 +1165,10 @@ export const seedData: Record<string, any[]> = {
     "message": "The Ramadan timetable for Taraweeh and Sahur is now available. Please pick up a copy at the masjid office or download from our website.",
     "type": "info",
     "active": true,
-    "startsAt": "2026-08-18T19:09:32.985Z",
-    "endsAt": "2026-09-19T19:09:32.985Z",
-    "createdAt": "2026-08-18T19:09:32.985Z",
-    "id": "masjid_announcements_0_mt1w9vwg",
+    "startsAt": "2026-08-20T16:57:24.970Z",
+    "endsAt": "2026-09-21T16:57:24.970Z",
+    "createdAt": "2026-08-20T16:57:24.970Z",
+    "id": "masjid_announcements_0_mt4mfnxt",
     "slug": "ramadan-timetable-available"
   },
   {
@@ -1176,10 +1176,10 @@ export const seedData: Record<string, any[]> = {
     "message": "Join us every Tuesday after Maghrib for a new halaqah series on the Tafsir of Juz Amma, led by Imam Yusuf Olatunji.",
     "type": "success",
     "active": true,
-    "startsAt": "2026-08-15T19:09:32.985Z",
-    "endsAt": "2026-10-19T19:09:32.985Z",
-    "createdAt": "2026-08-15T19:09:32.985Z",
-    "id": "masjid_announcements_1_mt1w9vwg",
+    "startsAt": "2026-08-17T16:57:24.970Z",
+    "endsAt": "2026-10-21T16:57:24.970Z",
+    "createdAt": "2026-08-17T16:57:24.970Z",
+    "id": "masjid_announcements_1_mt4mfnxt",
     "slug": "new-halaqah-series-tafsir-of-juz-amma"
   },
   {
@@ -1187,10 +1187,10 @@ export const seedData: Record<string, any[]> = {
     "message": "Alhamdulillah, we are expanding the sisters' section to accommodate more worshippers. Please support this project with your donations.",
     "type": "urgent",
     "active": true,
-    "startsAt": "2026-08-10T19:09:32.985Z",
-    "endsAt": "2026-11-18T19:09:32.985Z",
-    "createdAt": "2026-08-10T19:09:32.985Z",
-    "id": "masjid_announcements_2_mt1w9vwg",
+    "startsAt": "2026-08-12T16:57:24.970Z",
+    "endsAt": "2026-11-20T16:57:24.970Z",
+    "createdAt": "2026-08-12T16:57:24.970Z",
+    "id": "masjid_announcements_2_mt4mfnxt",
     "slug": "masjid-expansion-project"
   }
 ],
@@ -1204,12 +1204,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/brotherhood-khutbah.mp3",
     "archiveOrgId": "brotherhood-khutbah-2026",
     "duration": 2400,
-    "date": "2026-08-20",
+    "date": "2026-08-22",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 124,
     "plays": 892,
     "status": "active",
-    "id": "masjid_audios_0_mt1w9vwg",
+    "id": "masjid_audios_0_mt4mfnxu",
     "slug": "khutbah-the-importance-of-brotherhood"
   },
   {
@@ -1221,12 +1221,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/patience-lecture.mp3",
     "archiveOrgId": "patience-lecture-2026",
     "duration": 3600,
-    "date": "2026-08-20",
+    "date": "2026-08-22",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 98,
     "plays": 654,
     "status": "active",
-    "id": "masjid_audios_1_mt1w9vwg",
+    "id": "masjid_audios_1_mt4mfnxu",
     "slug": "lecture-patience-in-islam"
   },
   {
@@ -1238,12 +1238,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/tafsir-fatihah.mp3",
     "archiveOrgId": "tafsir-fatihah-2026",
     "duration": 4200,
-    "date": "2026-08-20",
+    "date": "2026-08-22",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 156,
     "plays": 1102,
     "status": "active",
-    "id": "masjid_audios_2_mt1w9vwg",
+    "id": "masjid_audios_2_mt4mfnxu",
     "slug": "tafsir-surah-al-fatihah"
   },
   {
@@ -1255,12 +1255,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/juz-amma.mp3",
     "archiveOrgId": "juz-amma-recitation",
     "duration": 5400,
-    "date": "2026-08-20",
+    "date": "2026-08-22",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 234,
     "plays": 1856,
     "status": "active",
-    "id": "masjid_audios_3_mt1w9vwg",
+    "id": "masjid_audios_3_mt4mfnxu",
     "slug": "recitation-juz-amma-beautiful-recitation"
   },
   {
@@ -1272,12 +1272,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/gratitude-khutbah.mp3",
     "archiveOrgId": "gratitude-khutbah-2026",
     "duration": 2200,
-    "date": "2026-08-20",
+    "date": "2026-08-22",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 87,
     "plays": 543,
     "status": "active",
-    "id": "masjid_audios_4_mt1w9vwg",
+    "id": "masjid_audios_4_mt4mfnxu",
     "slug": "khutbah-gratitude-to-allah"
   },
   {
@@ -1289,12 +1289,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/daily-adhkar.mp3",
     "archiveOrgId": "daily-adhkar-2026",
     "duration": 1800,
-    "date": "2026-08-20",
+    "date": "2026-08-22",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 312,
     "plays": 2104,
     "status": "active",
-    "id": "masjid_audios_5_mt1w9vwg",
+    "id": "masjid_audios_5_mt4mfnxu",
     "slug": "dua-collection-of-daily-adhkar"
   },
   {
@@ -1306,12 +1306,12 @@ export const seedData: Record<string, any[]> = {
     "audioUrl": "https://archive.org/download/sample-audio/abu-bakr-life.mp3",
     "archiveOrgId": "abu-bakr-life-2026",
     "duration": 4800,
-    "date": "2026-08-20",
+    "date": "2026-08-22",
     "imageUrl": "/images/patterns/quran.svg",
     "downloads": 145,
     "plays": 876,
     "status": "active",
-    "id": "masjid_audios_6_mt1w9vwg",
+    "id": "masjid_audios_6_mt4mfnxu",
     "slug": "lecture-the-life-of-abu-bakr-ra"
   }
 ],
@@ -1330,9 +1330,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Imam Yusuf Olatunji",
     "status": "published",
-    "publishedAt": "2026-08-15T19:09:32.985Z",
+    "publishedAt": "2026-08-17T16:57:24.970Z",
     "views": 342,
-    "id": "masjid_blog_posts_0_mt1w9vwh"
+    "id": "masjid_blog_posts_0_mt4mfnxu"
   },
   {
     "slug": "preparing-for-ramadan",
@@ -1348,9 +1348,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Imam Yusuf Olatunji",
     "status": "published",
-    "publishedAt": "2026-08-08T19:09:32.985Z",
+    "publishedAt": "2026-08-10T16:57:24.970Z",
     "views": 567,
-    "id": "masjid_blog_posts_1_mt1w9vwh"
+    "id": "masjid_blog_posts_1_mt4mfnxu"
   },
   {
     "slug": "understanding-zakat",
@@ -1366,9 +1366,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Ustadh Abdullah Okafor",
     "status": "published",
-    "publishedAt": "2026-07-31T19:09:32.985Z",
+    "publishedAt": "2026-08-02T16:57:24.970Z",
     "views": 423,
-    "id": "masjid_blog_posts_2_mt1w9vwh"
+    "id": "masjid_blog_posts_2_mt4mfnxu"
   }
 ],
   "masjid_books": [
@@ -1384,7 +1384,7 @@ export const seedData: Record<string, any[]> = {
     "pages": 700,
     "language": "English/Arabic",
     "available": true,
-    "id": "masjid_books_0_mt1w9vwh",
+    "id": "masjid_books_0_mt4mfnxu",
     "slug": "riyad-as-saliheen"
   },
   {
@@ -1399,7 +1399,7 @@ export const seedData: Record<string, any[]> = {
     "pages": 550,
     "language": "English/Arabic",
     "available": true,
-    "id": "masjid_books_1_mt1w9vwh",
+    "id": "masjid_books_1_mt4mfnxu",
     "slug": "bulugh-al-maram"
   },
   {
@@ -1414,7 +1414,7 @@ export const seedData: Record<string, any[]> = {
     "pages": 300,
     "language": "English",
     "available": true,
-    "id": "masjid_books_2_mt1w9vwh",
+    "id": "masjid_books_2_mt4mfnxu",
     "slug": "kitab-at-tawheed"
   },
   {
@@ -1429,7 +1429,7 @@ export const seedData: Record<string, any[]> = {
     "pages": 500,
     "language": "English",
     "available": true,
-    "id": "masjid_books_3_mt1w9vwh",
+    "id": "masjid_books_3_mt4mfnxu",
     "slug": "the-sealed-nectar"
   },
   {
@@ -1444,7 +1444,7 @@ export const seedData: Record<string, any[]> = {
     "pages": 180,
     "language": "English/Arabic",
     "available": true,
-    "id": "masjid_books_4_mt1w9vwh",
+    "id": "masjid_books_4_mt4mfnxu",
     "slug": "fortress-of-the-muslim"
   }
 ],
@@ -1461,8 +1461,8 @@ export const seedData: Record<string, any[]> = {
     "deadline": "2026-12-31",
     "isUrgent": true,
     "status": "active",
-    "createdAt": "2026-06-21T19:09:32.985Z",
-    "id": "masjid_donation_campaigns_0_mt1w9vwh"
+    "createdAt": "2026-06-23T16:57:24.970Z",
+    "id": "masjid_donation_campaigns_0_mt4mfnxu"
   },
   {
     "slug": "monthly-operations",
@@ -1476,8 +1476,8 @@ export const seedData: Record<string, any[]> = {
     "deadline": "2026-12-31",
     "isUrgent": false,
     "status": "active",
-    "createdAt": "2026-07-21T19:09:32.985Z",
-    "id": "masjid_donation_campaigns_1_mt1w9vwh"
+    "createdAt": "2026-07-23T16:57:24.970Z",
+    "id": "masjid_donation_campaigns_1_mt4mfnxu"
   },
   {
     "slug": "quran-learning-program",
@@ -1491,8 +1491,8 @@ export const seedData: Record<string, any[]> = {
     "deadline": "2026-12-31",
     "isUrgent": false,
     "status": "active",
-    "createdAt": "2026-07-06T19:09:32.985Z",
-    "id": "masjid_donation_campaigns_2_mt1w9vwh"
+    "createdAt": "2026-07-08T16:57:24.970Z",
+    "id": "masjid_donation_campaigns_2_mt4mfnxu"
   },
   {
     "slug": "ramadan-iftar-program",
@@ -1506,8 +1506,8 @@ export const seedData: Record<string, any[]> = {
     "deadline": "2026-09-30",
     "isUrgent": true,
     "status": "active",
-    "createdAt": "2026-07-31T19:09:32.985Z",
-    "id": "masjid_donation_campaigns_3_mt1w9vwh"
+    "createdAt": "2026-08-02T16:57:24.970Z",
+    "id": "masjid_donation_campaigns_3_mt4mfnxu"
   }
 ],
   "masjid_donations": [
@@ -1523,8 +1523,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "MAS-DON-001",
     "status": "successful",
     "isAnonymous": true,
-    "donatedAt": "2026-08-19T19:09:32.985Z",
-    "id": "masjid_donations_0_mt1w9vwh"
+    "donatedAt": "2026-08-21T16:57:24.970Z",
+    "id": "masjid_donations_0_mt4mfnxu"
   },
   {
     "donorName": "Muhammad Ali",
@@ -1539,8 +1539,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isAnonymous": false,
     "message": "May Allah accept",
-    "donatedAt": "2026-08-18T19:09:32.985Z",
-    "id": "masjid_donations_1_mt1w9vwh"
+    "donatedAt": "2026-08-20T16:57:24.970Z",
+    "id": "masjid_donations_1_mt4mfnxu"
   },
   {
     "donorName": "Fatima Ibrahim",
@@ -1554,8 +1554,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "MAS-DON-003",
     "status": "successful",
     "isAnonymous": false,
-    "donatedAt": "2026-08-17T19:09:32.985Z",
-    "id": "masjid_donations_2_mt1w9vwh"
+    "donatedAt": "2026-08-19T16:57:24.970Z",
+    "id": "masjid_donations_2_mt4mfnxu"
   },
   {
     "donorName": "Anonymous",
@@ -1568,8 +1568,8 @@ export const seedData: Record<string, any[]> = {
     "reference": "MAS-DON-004",
     "status": "successful",
     "isAnonymous": true,
-    "donatedAt": "2026-08-16T19:09:32.985Z",
-    "id": "masjid_donations_3_mt1w9vwh"
+    "donatedAt": "2026-08-18T16:57:24.970Z",
+    "id": "masjid_donations_3_mt4mfnxu"
   },
   {
     "donorName": "Abdullah Okafor",
@@ -1584,8 +1584,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isAnonymous": false,
     "message": "For the expansion project",
-    "donatedAt": "2026-08-15T19:09:32.985Z",
-    "id": "masjid_donations_4_mt1w9vwh"
+    "donatedAt": "2026-08-17T16:57:24.970Z",
+    "id": "masjid_donations_4_mt4mfnxu"
   }
 ],
   "masjid_donors": [
@@ -1595,13 +1595,13 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348062222222",
     "totalDonated": 250000,
     "donationCount": 5,
-    "firstDonationAt": "2026-02-21T19:09:32.985Z",
-    "lastDonationAt": "2026-08-18T19:09:32.985Z",
+    "firstDonationAt": "2026-02-23T16:57:24.970Z",
+    "lastDonationAt": "2026-08-20T16:57:24.970Z",
     "isRecurring": false,
     "tags": [
       "regular"
     ],
-    "id": "masjid_donors_0_mt1w9vwh",
+    "id": "masjid_donors_0_mt4mfnxu",
     "slug": "muhammad-ali"
   },
   {
@@ -1610,14 +1610,14 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348063333333",
     "totalDonated": 125000,
     "donationCount": 3,
-    "firstDonationAt": "2026-04-22T19:09:32.985Z",
-    "lastDonationAt": "2026-08-17T19:09:32.985Z",
+    "firstDonationAt": "2026-04-24T16:57:24.970Z",
+    "lastDonationAt": "2026-08-19T16:57:24.970Z",
     "isRecurring": true,
     "tags": [
       "recurring",
       "zakaat"
     ],
-    "id": "masjid_donors_1_mt1w9vwh",
+    "id": "masjid_donors_1_mt4mfnxu",
     "slug": "fatima-ibrahim"
   },
   {
@@ -1626,14 +1626,14 @@ export const seedData: Record<string, any[]> = {
     "phone": "+2348064444444",
     "totalDonated": 375000,
     "donationCount": 8,
-    "firstDonationAt": "2026-02-01T19:09:32.985Z",
-    "lastDonationAt": "2026-08-15T19:09:32.985Z",
+    "firstDonationAt": "2026-02-03T16:57:24.970Z",
+    "lastDonationAt": "2026-08-17T16:57:24.970Z",
     "isRecurring": true,
     "tags": [
       "major-donor",
       "recurring"
     ],
-    "id": "masjid_donors_2_mt1w9vwh",
+    "id": "masjid_donors_2_mt4mfnxu",
     "slug": "abdullah-okafor"
   },
   {
@@ -1641,13 +1641,13 @@ export const seedData: Record<string, any[]> = {
     "name": "Anonymous",
     "totalDonated": 150000,
     "donationCount": 6,
-    "firstDonationAt": "2026-05-22T19:09:32.985Z",
-    "lastDonationAt": "2026-08-19T19:09:32.985Z",
+    "firstDonationAt": "2026-05-24T16:57:24.970Z",
+    "lastDonationAt": "2026-08-21T16:57:24.970Z",
     "isRecurring": false,
     "tags": [
       "anonymous"
     ],
-    "id": "masjid_donors_3_mt1w9vwh",
+    "id": "masjid_donors_3_mt4mfnxu",
     "slug": "anonymous"
   }
 ],
@@ -1656,75 +1656,75 @@ export const seedData: Record<string, any[]> = {
     "title": "Tafsir of Juz Amma - Weekly Halaqah",
     "description": "Weekly halaqah exploring the meanings and lessons from the short surahs of the Qur'an.",
     "category": "halaqah",
-    "startDate": "2026-08-22T19:09:32.985Z",
-    "endDate": "2026-08-22T19:09:32.985Z",
+    "startDate": "2026-08-24T16:57:24.970Z",
+    "endDate": "2026-08-24T16:57:24.970Z",
     "location": "Main Prayer Hall",
     "speaker": "Imam Yusuf Olatunji",
     "imageUrl": "/images/patterns/mosque.svg",
     "isRecurring": true,
     "recurrencePattern": "weekly-tuesday",
-    "id": "masjid_events_0_mt1w9vwg",
+    "id": "masjid_events_0_mt4mfnxu",
     "slug": "tafsir-of-juz-amma-weekly-halaqah"
   },
   {
     "title": "Jumu'ah Khutbah",
     "description": "Weekly Jumu'ah prayer and khutbah. The khutbah topic this week: \"The Importance of Brotherhood in Islam\".",
     "category": "khutbah",
-    "startDate": "2026-08-23T19:09:32.985Z",
-    "endDate": "2026-08-23T19:09:32.985Z",
+    "startDate": "2026-08-25T16:57:24.970Z",
+    "endDate": "2026-08-25T16:57:24.970Z",
     "location": "Main Prayer Hall",
     "speaker": "Imam Yusuf Olatunji",
     "isRecurring": true,
     "recurrencePattern": "weekly-friday",
-    "id": "masjid_events_1_mt1w9vwg",
+    "id": "masjid_events_1_mt4mfnxu",
     "slug": "jumuah-khutbah"
   },
   {
     "title": "Youth Islamic Studies Class",
     "description": "Interactive Islamic studies class for youth aged 12-18. Topics include Aqeedah, Fiqh, and Seerah.",
     "category": "youth",
-    "startDate": "2026-08-24T19:09:32.985Z",
-    "endDate": "2026-08-24T19:09:32.985Z",
+    "startDate": "2026-08-26T16:57:24.970Z",
+    "endDate": "2026-08-26T16:57:24.970Z",
     "location": "Classroom 1",
     "speaker": "Ustadh Abdullah Okafor",
     "isRecurring": true,
     "recurrencePattern": "weekly-saturday",
-    "id": "masjid_events_2_mt1w9vwg",
+    "id": "masjid_events_2_mt4mfnxu",
     "slug": "youth-islamic-studies-class"
   },
   {
     "title": " sisters' Tajweed Workshop",
     "description": "Special Tajweed workshop for sisters. Learn to recite the Qur'an with proper pronunciation.",
     "category": "special",
-    "startDate": "2026-08-27T19:09:32.985Z",
-    "endDate": "2026-08-27T19:09:32.985Z",
+    "startDate": "2026-08-29T16:57:24.970Z",
+    "endDate": "2026-08-29T16:57:24.970Z",
     "location": "Sisters' Section",
     "speaker": "Mrs. Khadijah Suleiman",
     "imageUrl": "/images/patterns/mosque.svg",
-    "id": "masjid_events_3_mt1w9vwg",
+    "id": "masjid_events_3_mt4mfnxu",
     "slug": "sisters-tajweed-workshop"
   },
   {
     "title": "Community Iftar (Monthly)",
     "description": "Monthly community Iftar bringing together brothers and sisters for breaking fast and spiritual reflections.",
     "category": "special",
-    "startDate": "2026-08-30T19:09:32.985Z",
-    "endDate": "2026-08-30T19:09:32.985Z",
+    "startDate": "2026-09-01T16:57:24.970Z",
+    "endDate": "2026-09-01T16:57:24.970Z",
     "location": "Masjid Courtyard",
     "imageUrl": "/images/patterns/mosque.svg",
-    "id": "masjid_events_4_mt1w9vwg",
+    "id": "masjid_events_4_mt4mfnxu",
     "slug": "community-iftar-monthly"
   },
   {
     "title": "Eid al-Fitr Prayer",
     "description": "Eid prayer and celebration. Takbeerat begin 15 minutes before prayer time.",
     "category": "eid",
-    "startDate": "2026-09-19T19:09:32.985Z",
-    "endDate": "2026-09-19T19:09:32.985Z",
+    "startDate": "2026-09-21T16:57:24.970Z",
+    "endDate": "2026-09-21T16:57:24.970Z",
     "location": "Main Prayer Hall",
     "speaker": "Imam Yusuf Olatunji",
     "imageUrl": "/images/patterns/mosque.svg",
-    "id": "masjid_events_5_mt1w9vwg",
+    "id": "masjid_events_5_mt4mfnxu",
     "slug": "eid-al-fitr-prayer"
   }
 ],
@@ -1734,9 +1734,9 @@ export const seedData: Record<string, any[]> = {
     "description": "Community Taraweeh prayers during Ramadan.",
     "imageUrl": "/images/patterns/architecture.svg",
     "category": "events",
-    "eventDate": "2026-08-20",
-    "createdAt": "2026-08-05T19:09:32.985Z",
-    "id": "masjid_gallery_0_mt1w9vwh",
+    "eventDate": "2026-08-22",
+    "createdAt": "2026-08-07T16:57:24.970Z",
+    "id": "masjid_gallery_0_mt4mfnxu",
     "slug": "ramadan-taraweeh"
   },
   {
@@ -1744,9 +1744,9 @@ export const seedData: Record<string, any[]> = {
     "description": "Eid prayer and community celebration.",
     "imageUrl": "/images/patterns/architecture.svg",
     "category": "events",
-    "eventDate": "2026-08-20",
-    "createdAt": "2026-07-21T19:09:32.985Z",
-    "id": "masjid_gallery_1_mt1w9vwh",
+    "eventDate": "2026-08-22",
+    "createdAt": "2026-07-23T16:57:24.970Z",
+    "id": "masjid_gallery_1_mt4mfnxu",
     "slug": "eid-celebration"
   },
   {
@@ -1754,9 +1754,9 @@ export const seedData: Record<string, any[]> = {
     "description": "Beautiful interior of the main prayer hall.",
     "imageUrl": "/images/patterns/architecture.svg",
     "category": "facilities",
-    "eventDate": "2026-08-20",
-    "createdAt": "2026-06-21T19:09:32.985Z",
-    "id": "masjid_gallery_2_mt1w9vwh",
+    "eventDate": "2026-08-22",
+    "createdAt": "2026-06-23T16:57:24.970Z",
+    "id": "masjid_gallery_2_mt4mfnxu",
     "slug": "masjid-interior"
   },
   {
@@ -1764,9 +1764,9 @@ export const seedData: Record<string, any[]> = {
     "description": "Weekly youth Islamic studies class.",
     "imageUrl": "/images/patterns/architecture.svg",
     "category": "programs",
-    "eventDate": "2026-08-20",
-    "createdAt": "2026-08-13T19:09:32.985Z",
-    "id": "masjid_gallery_3_mt1w9vwh",
+    "eventDate": "2026-08-22",
+    "createdAt": "2026-08-15T16:57:24.970Z",
+    "id": "masjid_gallery_3_mt4mfnxu",
     "slug": "youth-halaqah"
   }
 ],
@@ -1785,7 +1785,7 @@ export const seedData: Record<string, any[]> = {
       "Khutbah"
     ],
     "active": true,
-    "id": "masjid_imams_0_mt1w9vwh",
+    "id": "masjid_imams_0_mt4mfnxv",
     "slug": "chief-imam"
   },
   {
@@ -1801,7 +1801,7 @@ export const seedData: Record<string, any[]> = {
       "Seerah"
     ],
     "active": true,
-    "id": "masjid_imams_1_mt1w9vwh",
+    "id": "masjid_imams_1_mt4mfnxv",
     "slug": "assistant-imam"
   },
   {
@@ -1815,7 +1815,7 @@ export const seedData: Record<string, any[]> = {
       "Qur'an Recitation"
     ],
     "active": true,
-    "id": "masjid_imams_2_mt1w9vwh",
+    "id": "masjid_imams_2_mt4mfnxv",
     "slug": "muadhin"
   },
   {
@@ -1831,7 +1831,7 @@ export const seedData: Record<string, any[]> = {
       "Arabic"
     ],
     "active": true,
-    "id": "masjid_imams_3_mt1w9vwh",
+    "id": "masjid_imams_3_mt4mfnxv",
     "slug": "sisters-coordinator"
   }
 ],
@@ -1842,9 +1842,9 @@ export const seedData: Record<string, any[]> = {
     "streamUrl": "https://www.youtube.com/live",
     "embedUrl": "https://www.youtube.com/embed/live_stream?channel=UCxxxxxxx",
     "isLive": false,
-    "scheduledAt": "2026-08-23T19:09:32.985Z",
+    "scheduledAt": "2026-08-25T16:57:24.970Z",
     "thumbnailUrl": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800",
-    "id": "masjid_live_streams_0_mt1w9vwh",
+    "id": "masjid_live_streams_0_mt4mfnxv",
     "slug": "live-jumuah-khutbah"
   },
   {
@@ -1853,9 +1853,9 @@ export const seedData: Record<string, any[]> = {
     "streamUrl": "https://www.youtube.com/live",
     "embedUrl": "https://www.youtube.com/embed/live_stream?channel=UCxxxxxxx",
     "isLive": false,
-    "scheduledAt": "2026-09-09T19:09:32.985Z",
+    "scheduledAt": "2026-09-11T16:57:24.970Z",
     "thumbnailUrl": "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800",
-    "id": "masjid_live_streams_1_mt1w9vwh",
+    "id": "masjid_live_streams_1_mt4mfnxv",
     "slug": "live-taraweeh"
   }
 ],
@@ -1881,9 +1881,9 @@ export const seedData: Record<string, any[]> = {
     "seoTitle": "About Minhaajulhudaa Masjid",
     "seoDescription": "Learn about Minhaajulhudaa Masjid - serving the community since 2020.",
     "status": "published",
-    "publishedAt": "2026-07-21T19:09:32.985Z",
+    "publishedAt": "2026-07-23T16:57:24.970Z",
     "order": 1,
-    "id": "masjid_pages_0_mt1w9vwg"
+    "id": "masjid_pages_0_mt4mfnxt"
   },
   {
     "slug": "contact",
@@ -1898,14 +1898,14 @@ export const seedData: Record<string, any[]> = {
     "seoTitle": "Contact Minhaajulhudaa Masjid",
     "seoDescription": "Contact information for Minhaajulhudaa Masjid.",
     "status": "published",
-    "publishedAt": "2026-07-21T19:09:32.985Z",
+    "publishedAt": "2026-07-23T16:57:24.970Z",
     "order": 2,
-    "id": "masjid_pages_1_mt1w9vwg"
+    "id": "masjid_pages_1_mt4mfnxt"
   }
 ],
   "masjid_prayer_times": [
   {
-    "date": "2026-08-20",
+    "date": "2026-08-22",
     "fajrAdhan": "05:12",
     "fajrIqamah": "05:32",
     "sunrise": "06:32",
@@ -1919,367 +1919,248 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:22",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_0_mt1w9vwg"
-  },
-  {
-    "date": "2026-08-21",
-    "fajrAdhan": "05:13",
-    "fajrIqamah": "05:33",
-    "sunrise": "06:33",
-    "dhuhrAdhan": "12:43",
-    "dhuhrIqamah": "13:03",
-    "asrAdhan": "16:-2",
-    "asrIqamah": "16:18",
-    "maghribAdhan": "18:48",
-    "maghribIqamah": "18:53",
-    "ishaAdhan": "20:03",
-    "ishaIqamah": "20:23",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_1_mt1w9vwg"
-  },
-  {
-    "date": "2026-08-22",
-    "fajrAdhan": "05:14",
-    "fajrIqamah": "05:34",
-    "sunrise": "06:34",
-    "dhuhrAdhan": "12:44",
-    "dhuhrIqamah": "13:04",
-    "asrAdhan": "16:-1",
-    "asrIqamah": "16:19",
-    "maghribAdhan": "18:49",
-    "maghribIqamah": "18:54",
-    "ishaAdhan": "20:04",
-    "ishaIqamah": "20:24",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_2_mt1w9vwg"
+    "id": "masjid_prayer_times_0_mt4mfnxu"
   },
   {
     "date": "2026-08-23",
-    "fajrAdhan": "05:15",
-    "fajrIqamah": "05:35",
-    "sunrise": "06:35",
-    "dhuhrAdhan": "12:45",
-    "dhuhrIqamah": "13:05",
-    "asrAdhan": "16:00",
-    "asrIqamah": "16:20",
-    "maghribAdhan": "18:50",
-    "maghribIqamah": "18:55",
-    "ishaAdhan": "20:05",
-    "ishaIqamah": "20:25",
+    "fajrAdhan": "05:13",
+    "fajrIqamah": "05:33",
+    "sunrise": "06:33",
+    "dhuhrAdhan": "12:43",
+    "dhuhrIqamah": "13:03",
+    "asrAdhan": "16:-2",
+    "asrIqamah": "16:18",
+    "maghribAdhan": "18:48",
+    "maghribIqamah": "18:53",
+    "ishaAdhan": "20:03",
+    "ishaIqamah": "20:23",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_3_mt1w9vwg"
+    "id": "masjid_prayer_times_1_mt4mfnxu"
   },
   {
     "date": "2026-08-24",
-    "fajrAdhan": "05:16",
-    "fajrIqamah": "05:36",
-    "sunrise": "06:36",
-    "dhuhrAdhan": "12:46",
-    "dhuhrIqamah": "13:06",
-    "asrAdhan": "16:01",
-    "asrIqamah": "16:21",
-    "maghribAdhan": "18:51",
-    "maghribIqamah": "18:56",
-    "ishaAdhan": "20:06",
-    "ishaIqamah": "20:26",
+    "fajrAdhan": "05:14",
+    "fajrIqamah": "05:34",
+    "sunrise": "06:34",
+    "dhuhrAdhan": "12:44",
+    "dhuhrIqamah": "13:04",
+    "asrAdhan": "16:-1",
+    "asrIqamah": "16:19",
+    "maghribAdhan": "18:49",
+    "maghribIqamah": "18:54",
+    "ishaAdhan": "20:04",
+    "ishaIqamah": "20:24",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_4_mt1w9vwg"
+    "id": "masjid_prayer_times_2_mt4mfnxu"
   },
   {
     "date": "2026-08-25",
-    "fajrAdhan": "05:17",
-    "fajrIqamah": "05:37",
-    "sunrise": "06:37",
-    "dhuhrAdhan": "12:47",
-    "dhuhrIqamah": "13:07",
-    "asrAdhan": "16:02",
-    "asrIqamah": "16:22",
-    "maghribAdhan": "18:52",
-    "maghribIqamah": "18:57",
-    "ishaAdhan": "20:07",
-    "ishaIqamah": "20:27",
+    "fajrAdhan": "05:15",
+    "fajrIqamah": "05:35",
+    "sunrise": "06:35",
+    "dhuhrAdhan": "12:45",
+    "dhuhrIqamah": "13:05",
+    "asrAdhan": "16:00",
+    "asrIqamah": "16:20",
+    "maghribAdhan": "18:50",
+    "maghribIqamah": "18:55",
+    "ishaAdhan": "20:05",
+    "ishaIqamah": "20:25",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_5_mt1w9vwg"
+    "id": "masjid_prayer_times_3_mt4mfnxu"
   },
   {
     "date": "2026-08-26",
-    "fajrAdhan": "05:18",
-    "fajrIqamah": "05:38",
-    "sunrise": "06:38",
-    "dhuhrAdhan": "12:48",
-    "dhuhrIqamah": "13:08",
-    "asrAdhan": "16:03",
-    "asrIqamah": "16:23",
-    "maghribAdhan": "18:53",
-    "maghribIqamah": "18:58",
-    "ishaAdhan": "20:08",
-    "ishaIqamah": "20:28",
+    "fajrAdhan": "05:16",
+    "fajrIqamah": "05:36",
+    "sunrise": "06:36",
+    "dhuhrAdhan": "12:46",
+    "dhuhrIqamah": "13:06",
+    "asrAdhan": "16:01",
+    "asrIqamah": "16:21",
+    "maghribAdhan": "18:51",
+    "maghribIqamah": "18:56",
+    "ishaAdhan": "20:06",
+    "ishaIqamah": "20:26",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_6_mt1w9vwg"
+    "id": "masjid_prayer_times_4_mt4mfnxu"
   },
   {
     "date": "2026-08-27",
-    "fajrAdhan": "05:12",
-    "fajrIqamah": "05:32",
-    "sunrise": "06:32",
-    "dhuhrAdhan": "12:42",
-    "dhuhrIqamah": "13:02",
-    "asrAdhan": "16:-3",
-    "asrIqamah": "16:17",
-    "maghribAdhan": "18:47",
-    "maghribIqamah": "18:52",
-    "ishaAdhan": "20:02",
-    "ishaIqamah": "20:22",
+    "fajrAdhan": "05:17",
+    "fajrIqamah": "05:37",
+    "sunrise": "06:37",
+    "dhuhrAdhan": "12:47",
+    "dhuhrIqamah": "13:07",
+    "asrAdhan": "16:02",
+    "asrIqamah": "16:22",
+    "maghribAdhan": "18:52",
+    "maghribIqamah": "18:57",
+    "ishaAdhan": "20:07",
+    "ishaIqamah": "20:27",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_7_mt1w9vwg"
+    "id": "masjid_prayer_times_5_mt4mfnxu"
   },
   {
     "date": "2026-08-28",
-    "fajrAdhan": "05:13",
-    "fajrIqamah": "05:33",
-    "sunrise": "06:33",
-    "dhuhrAdhan": "12:43",
-    "dhuhrIqamah": "13:03",
-    "asrAdhan": "16:-2",
-    "asrIqamah": "16:18",
-    "maghribAdhan": "18:48",
-    "maghribIqamah": "18:53",
-    "ishaAdhan": "20:03",
-    "ishaIqamah": "20:23",
+    "fajrAdhan": "05:18",
+    "fajrIqamah": "05:38",
+    "sunrise": "06:38",
+    "dhuhrAdhan": "12:48",
+    "dhuhrIqamah": "13:08",
+    "asrAdhan": "16:03",
+    "asrIqamah": "16:23",
+    "maghribAdhan": "18:53",
+    "maghribIqamah": "18:58",
+    "ishaAdhan": "20:08",
+    "ishaIqamah": "20:28",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_8_mt1w9vwg"
+    "id": "masjid_prayer_times_6_mt4mfnxu"
   },
   {
     "date": "2026-08-29",
-    "fajrAdhan": "05:14",
-    "fajrIqamah": "05:34",
-    "sunrise": "06:34",
-    "dhuhrAdhan": "12:44",
-    "dhuhrIqamah": "13:04",
-    "asrAdhan": "16:-1",
-    "asrIqamah": "16:19",
-    "maghribAdhan": "18:49",
-    "maghribIqamah": "18:54",
-    "ishaAdhan": "20:04",
-    "ishaIqamah": "20:24",
+    "fajrAdhan": "05:12",
+    "fajrIqamah": "05:32",
+    "sunrise": "06:32",
+    "dhuhrAdhan": "12:42",
+    "dhuhrIqamah": "13:02",
+    "asrAdhan": "16:-3",
+    "asrIqamah": "16:17",
+    "maghribAdhan": "18:47",
+    "maghribIqamah": "18:52",
+    "ishaAdhan": "20:02",
+    "ishaIqamah": "20:22",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_9_mt1w9vwg"
+    "id": "masjid_prayer_times_7_mt4mfnxu"
   },
   {
     "date": "2026-08-30",
-    "fajrAdhan": "05:15",
-    "fajrIqamah": "05:35",
-    "sunrise": "06:35",
-    "dhuhrAdhan": "12:45",
-    "dhuhrIqamah": "13:05",
-    "asrAdhan": "16:00",
-    "asrIqamah": "16:20",
-    "maghribAdhan": "18:50",
-    "maghribIqamah": "18:55",
-    "ishaAdhan": "20:05",
-    "ishaIqamah": "20:25",
+    "fajrAdhan": "05:13",
+    "fajrIqamah": "05:33",
+    "sunrise": "06:33",
+    "dhuhrAdhan": "12:43",
+    "dhuhrIqamah": "13:03",
+    "asrAdhan": "16:-2",
+    "asrIqamah": "16:18",
+    "maghribAdhan": "18:48",
+    "maghribIqamah": "18:53",
+    "ishaAdhan": "20:03",
+    "ishaIqamah": "20:23",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_10_mt1w9vwg"
+    "id": "masjid_prayer_times_8_mt4mfnxu"
   },
   {
     "date": "2026-08-31",
-    "fajrAdhan": "05:16",
-    "fajrIqamah": "05:36",
-    "sunrise": "06:36",
-    "dhuhrAdhan": "12:46",
-    "dhuhrIqamah": "13:06",
-    "asrAdhan": "16:01",
-    "asrIqamah": "16:21",
-    "maghribAdhan": "18:51",
-    "maghribIqamah": "18:56",
-    "ishaAdhan": "20:06",
-    "ishaIqamah": "20:26",
+    "fajrAdhan": "05:14",
+    "fajrIqamah": "05:34",
+    "sunrise": "06:34",
+    "dhuhrAdhan": "12:44",
+    "dhuhrIqamah": "13:04",
+    "asrAdhan": "16:-1",
+    "asrIqamah": "16:19",
+    "maghribAdhan": "18:49",
+    "maghribIqamah": "18:54",
+    "ishaAdhan": "20:04",
+    "ishaIqamah": "20:24",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_11_mt1w9vwg"
+    "id": "masjid_prayer_times_9_mt4mfnxu"
   },
   {
     "date": "2026-09-01",
-    "fajrAdhan": "05:17",
-    "fajrIqamah": "05:37",
-    "sunrise": "06:37",
-    "dhuhrAdhan": "12:47",
-    "dhuhrIqamah": "13:07",
-    "asrAdhan": "16:02",
-    "asrIqamah": "16:22",
-    "maghribAdhan": "18:52",
-    "maghribIqamah": "18:57",
-    "ishaAdhan": "20:07",
-    "ishaIqamah": "20:27",
+    "fajrAdhan": "05:15",
+    "fajrIqamah": "05:35",
+    "sunrise": "06:35",
+    "dhuhrAdhan": "12:45",
+    "dhuhrIqamah": "13:05",
+    "asrAdhan": "16:00",
+    "asrIqamah": "16:20",
+    "maghribAdhan": "18:50",
+    "maghribIqamah": "18:55",
+    "ishaAdhan": "20:05",
+    "ishaIqamah": "20:25",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_12_mt1w9vwg"
+    "id": "masjid_prayer_times_10_mt4mfnxu"
   },
   {
     "date": "2026-09-02",
-    "fajrAdhan": "05:18",
-    "fajrIqamah": "05:38",
-    "sunrise": "06:38",
-    "dhuhrAdhan": "12:48",
-    "dhuhrIqamah": "13:08",
-    "asrAdhan": "16:03",
-    "asrIqamah": "16:23",
-    "maghribAdhan": "18:53",
-    "maghribIqamah": "18:58",
-    "ishaAdhan": "20:08",
-    "ishaIqamah": "20:28",
+    "fajrAdhan": "05:16",
+    "fajrIqamah": "05:36",
+    "sunrise": "06:36",
+    "dhuhrAdhan": "12:46",
+    "dhuhrIqamah": "13:06",
+    "asrAdhan": "16:01",
+    "asrIqamah": "16:21",
+    "maghribAdhan": "18:51",
+    "maghribIqamah": "18:56",
+    "ishaAdhan": "20:06",
+    "ishaIqamah": "20:26",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_13_mt1w9vwg"
+    "id": "masjid_prayer_times_11_mt4mfnxu"
   },
   {
     "date": "2026-09-03",
-    "fajrAdhan": "05:12",
-    "fajrIqamah": "05:32",
-    "sunrise": "06:32",
-    "dhuhrAdhan": "12:42",
-    "dhuhrIqamah": "13:02",
-    "asrAdhan": "16:-3",
-    "asrIqamah": "16:17",
-    "maghribAdhan": "18:47",
-    "maghribIqamah": "18:52",
-    "ishaAdhan": "20:02",
-    "ishaIqamah": "20:22",
+    "fajrAdhan": "05:17",
+    "fajrIqamah": "05:37",
+    "sunrise": "06:37",
+    "dhuhrAdhan": "12:47",
+    "dhuhrIqamah": "13:07",
+    "asrAdhan": "16:02",
+    "asrIqamah": "16:22",
+    "maghribAdhan": "18:52",
+    "maghribIqamah": "18:57",
+    "ishaAdhan": "20:07",
+    "ishaIqamah": "20:27",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_14_mt1w9vwg"
+    "id": "masjid_prayer_times_12_mt4mfnxu"
   },
   {
     "date": "2026-09-04",
-    "fajrAdhan": "05:13",
-    "fajrIqamah": "05:33",
-    "sunrise": "06:33",
-    "dhuhrAdhan": "12:43",
-    "dhuhrIqamah": "13:03",
-    "asrAdhan": "16:-2",
-    "asrIqamah": "16:18",
-    "maghribAdhan": "18:48",
-    "maghribIqamah": "18:53",
-    "ishaAdhan": "20:03",
-    "ishaIqamah": "20:23",
+    "fajrAdhan": "05:18",
+    "fajrIqamah": "05:38",
+    "sunrise": "06:38",
+    "dhuhrAdhan": "12:48",
+    "dhuhrIqamah": "13:08",
+    "asrAdhan": "16:03",
+    "asrIqamah": "16:23",
+    "maghribAdhan": "18:53",
+    "maghribIqamah": "18:58",
+    "ishaAdhan": "20:08",
+    "ishaIqamah": "20:28",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_15_mt1w9vwg"
+    "id": "masjid_prayer_times_13_mt4mfnxu"
   },
   {
     "date": "2026-09-05",
-    "fajrAdhan": "05:14",
-    "fajrIqamah": "05:34",
-    "sunrise": "06:34",
-    "dhuhrAdhan": "12:44",
-    "dhuhrIqamah": "13:04",
-    "asrAdhan": "16:-1",
-    "asrIqamah": "16:19",
-    "maghribAdhan": "18:49",
-    "maghribIqamah": "18:54",
-    "ishaAdhan": "20:04",
-    "ishaIqamah": "20:24",
+    "fajrAdhan": "05:12",
+    "fajrIqamah": "05:32",
+    "sunrise": "06:32",
+    "dhuhrAdhan": "12:42",
+    "dhuhrIqamah": "13:02",
+    "asrAdhan": "16:-3",
+    "asrIqamah": "16:17",
+    "maghribAdhan": "18:47",
+    "maghribIqamah": "18:52",
+    "ishaAdhan": "20:02",
+    "ishaIqamah": "20:22",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_16_mt1w9vwg"
+    "id": "masjid_prayer_times_14_mt4mfnxu"
   },
   {
     "date": "2026-09-06",
-    "fajrAdhan": "05:15",
-    "fajrIqamah": "05:35",
-    "sunrise": "06:35",
-    "dhuhrAdhan": "12:45",
-    "dhuhrIqamah": "13:05",
-    "asrAdhan": "16:00",
-    "asrIqamah": "16:20",
-    "maghribAdhan": "18:50",
-    "maghribIqamah": "18:55",
-    "ishaAdhan": "20:05",
-    "ishaIqamah": "20:25",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_17_mt1w9vwg"
-  },
-  {
-    "date": "2026-09-07",
-    "fajrAdhan": "05:16",
-    "fajrIqamah": "05:36",
-    "sunrise": "06:36",
-    "dhuhrAdhan": "12:46",
-    "dhuhrIqamah": "13:06",
-    "asrAdhan": "16:01",
-    "asrIqamah": "16:21",
-    "maghribAdhan": "18:51",
-    "maghribIqamah": "18:56",
-    "ishaAdhan": "20:06",
-    "ishaIqamah": "20:26",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_18_mt1w9vwg"
-  },
-  {
-    "date": "2026-09-08",
-    "fajrAdhan": "05:17",
-    "fajrIqamah": "05:37",
-    "sunrise": "06:37",
-    "dhuhrAdhan": "12:47",
-    "dhuhrIqamah": "13:07",
-    "asrAdhan": "16:02",
-    "asrIqamah": "16:22",
-    "maghribAdhan": "18:52",
-    "maghribIqamah": "18:57",
-    "ishaAdhan": "20:07",
-    "ishaIqamah": "20:27",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_19_mt1w9vwg"
-  },
-  {
-    "date": "2026-09-09",
-    "fajrAdhan": "05:18",
-    "fajrIqamah": "05:38",
-    "sunrise": "06:38",
-    "dhuhrAdhan": "12:48",
-    "dhuhrIqamah": "13:08",
-    "asrAdhan": "16:03",
-    "asrIqamah": "16:23",
-    "maghribAdhan": "18:53",
-    "maghribIqamah": "18:58",
-    "ishaAdhan": "20:08",
-    "ishaIqamah": "20:28",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_20_mt1w9vwg"
-  },
-  {
-    "date": "2026-09-10",
-    "fajrAdhan": "05:12",
-    "fajrIqamah": "05:32",
-    "sunrise": "06:32",
-    "dhuhrAdhan": "12:42",
-    "dhuhrIqamah": "13:02",
-    "asrAdhan": "16:-3",
-    "asrIqamah": "16:17",
-    "maghribAdhan": "18:47",
-    "maghribIqamah": "18:52",
-    "ishaAdhan": "20:02",
-    "ishaIqamah": "20:22",
-    "jumuahAdhan": "13:00",
-    "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_21_mt1w9vwg"
-  },
-  {
-    "date": "2026-09-11",
     "fajrAdhan": "05:13",
     "fajrIqamah": "05:33",
     "sunrise": "06:33",
@@ -2293,10 +2174,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:23",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_22_mt1w9vwg"
+    "id": "masjid_prayer_times_15_mt4mfnxu"
   },
   {
-    "date": "2026-09-12",
+    "date": "2026-09-07",
     "fajrAdhan": "05:14",
     "fajrIqamah": "05:34",
     "sunrise": "06:34",
@@ -2310,10 +2191,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:24",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_23_mt1w9vwg"
+    "id": "masjid_prayer_times_16_mt4mfnxu"
   },
   {
-    "date": "2026-09-13",
+    "date": "2026-09-08",
     "fajrAdhan": "05:15",
     "fajrIqamah": "05:35",
     "sunrise": "06:35",
@@ -2327,10 +2208,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:25",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_24_mt1w9vwg"
+    "id": "masjid_prayer_times_17_mt4mfnxu"
   },
   {
-    "date": "2026-09-14",
+    "date": "2026-09-09",
     "fajrAdhan": "05:16",
     "fajrIqamah": "05:36",
     "sunrise": "06:36",
@@ -2344,10 +2225,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:26",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_25_mt1w9vwg"
+    "id": "masjid_prayer_times_18_mt4mfnxu"
   },
   {
-    "date": "2026-09-15",
+    "date": "2026-09-10",
     "fajrAdhan": "05:17",
     "fajrIqamah": "05:37",
     "sunrise": "06:37",
@@ -2361,10 +2242,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:27",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_26_mt1w9vwg"
+    "id": "masjid_prayer_times_19_mt4mfnxu"
   },
   {
-    "date": "2026-09-16",
+    "date": "2026-09-11",
     "fajrAdhan": "05:18",
     "fajrIqamah": "05:38",
     "sunrise": "06:38",
@@ -2378,10 +2259,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:28",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_27_mt1w9vwg"
+    "id": "masjid_prayer_times_20_mt4mfnxu"
   },
   {
-    "date": "2026-09-17",
+    "date": "2026-09-12",
     "fajrAdhan": "05:12",
     "fajrIqamah": "05:32",
     "sunrise": "06:32",
@@ -2395,10 +2276,10 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:22",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_28_mt1w9vwg"
+    "id": "masjid_prayer_times_21_mt4mfnxu"
   },
   {
-    "date": "2026-09-18",
+    "date": "2026-09-13",
     "fajrAdhan": "05:13",
     "fajrIqamah": "05:33",
     "sunrise": "06:33",
@@ -2412,7 +2293,126 @@ export const seedData: Record<string, any[]> = {
     "ishaIqamah": "20:23",
     "jumuahAdhan": "13:00",
     "jumuahIqamah": "13:20",
-    "id": "masjid_prayer_times_29_mt1w9vwg"
+    "id": "masjid_prayer_times_22_mt4mfnxu"
+  },
+  {
+    "date": "2026-09-14",
+    "fajrAdhan": "05:14",
+    "fajrIqamah": "05:34",
+    "sunrise": "06:34",
+    "dhuhrAdhan": "12:44",
+    "dhuhrIqamah": "13:04",
+    "asrAdhan": "16:-1",
+    "asrIqamah": "16:19",
+    "maghribAdhan": "18:49",
+    "maghribIqamah": "18:54",
+    "ishaAdhan": "20:04",
+    "ishaIqamah": "20:24",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_23_mt4mfnxu"
+  },
+  {
+    "date": "2026-09-15",
+    "fajrAdhan": "05:15",
+    "fajrIqamah": "05:35",
+    "sunrise": "06:35",
+    "dhuhrAdhan": "12:45",
+    "dhuhrIqamah": "13:05",
+    "asrAdhan": "16:00",
+    "asrIqamah": "16:20",
+    "maghribAdhan": "18:50",
+    "maghribIqamah": "18:55",
+    "ishaAdhan": "20:05",
+    "ishaIqamah": "20:25",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_24_mt4mfnxu"
+  },
+  {
+    "date": "2026-09-16",
+    "fajrAdhan": "05:16",
+    "fajrIqamah": "05:36",
+    "sunrise": "06:36",
+    "dhuhrAdhan": "12:46",
+    "dhuhrIqamah": "13:06",
+    "asrAdhan": "16:01",
+    "asrIqamah": "16:21",
+    "maghribAdhan": "18:51",
+    "maghribIqamah": "18:56",
+    "ishaAdhan": "20:06",
+    "ishaIqamah": "20:26",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_25_mt4mfnxu"
+  },
+  {
+    "date": "2026-09-17",
+    "fajrAdhan": "05:17",
+    "fajrIqamah": "05:37",
+    "sunrise": "06:37",
+    "dhuhrAdhan": "12:47",
+    "dhuhrIqamah": "13:07",
+    "asrAdhan": "16:02",
+    "asrIqamah": "16:22",
+    "maghribAdhan": "18:52",
+    "maghribIqamah": "18:57",
+    "ishaAdhan": "20:07",
+    "ishaIqamah": "20:27",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_26_mt4mfnxu"
+  },
+  {
+    "date": "2026-09-18",
+    "fajrAdhan": "05:18",
+    "fajrIqamah": "05:38",
+    "sunrise": "06:38",
+    "dhuhrAdhan": "12:48",
+    "dhuhrIqamah": "13:08",
+    "asrAdhan": "16:03",
+    "asrIqamah": "16:23",
+    "maghribAdhan": "18:53",
+    "maghribIqamah": "18:58",
+    "ishaAdhan": "20:08",
+    "ishaIqamah": "20:28",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_27_mt4mfnxu"
+  },
+  {
+    "date": "2026-09-19",
+    "fajrAdhan": "05:12",
+    "fajrIqamah": "05:32",
+    "sunrise": "06:32",
+    "dhuhrAdhan": "12:42",
+    "dhuhrIqamah": "13:02",
+    "asrAdhan": "16:-3",
+    "asrIqamah": "16:17",
+    "maghribAdhan": "18:47",
+    "maghribIqamah": "18:52",
+    "ishaAdhan": "20:02",
+    "ishaIqamah": "20:22",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_28_mt4mfnxu"
+  },
+  {
+    "date": "2026-09-20",
+    "fajrAdhan": "05:13",
+    "fajrIqamah": "05:33",
+    "sunrise": "06:33",
+    "dhuhrAdhan": "12:43",
+    "dhuhrIqamah": "13:03",
+    "asrAdhan": "16:-2",
+    "asrIqamah": "16:18",
+    "maghribAdhan": "18:48",
+    "maghribIqamah": "18:53",
+    "ishaAdhan": "20:03",
+    "ishaIqamah": "20:23",
+    "jumuahAdhan": "13:00",
+    "jumuahIqamah": "13:20",
+    "id": "masjid_prayer_times_29_mt4mfnxu"
   }
 ],
   "masjid_quran_config": [
@@ -2474,7 +2474,7 @@ export const seedData: Record<string, any[]> = {
       }
     ],
     "active": true,
-    "id": "masjid_quran_config_0_mt1w9vwh"
+    "id": "masjid_quran_config_0_mt4mfnxv"
   }
 ],
   "masjid_videos": [
@@ -2485,10 +2485,10 @@ export const seedData: Record<string, any[]> = {
     "thumbnailUrl": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400",
     "category": "khutbah",
     "duration": 2400,
-    "date": "2026-08-20",
+    "date": "2026-08-22",
     "views": 1234,
     "status": "active",
-    "id": "masjid_videos_0_mt1w9vwg",
+    "id": "masjid_videos_0_mt4mfnxu",
     "slug": "jumuah-khutbah-brotherhood-in-islam"
   },
   {
@@ -2498,10 +2498,10 @@ export const seedData: Record<string, any[]> = {
     "thumbnailUrl": "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=400",
     "category": "general",
     "duration": 600,
-    "date": "2026-08-20",
+    "date": "2026-08-22",
     "views": 567,
     "status": "active",
-    "id": "masjid_videos_1_mt1w9vwg",
+    "id": "masjid_videos_1_mt4mfnxu",
     "slug": "masjid-tour"
   },
   {
@@ -2511,17 +2511,17 @@ export const seedData: Record<string, any[]> = {
     "thumbnailUrl": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400",
     "category": "recitation",
     "duration": 1800,
-    "date": "2026-08-20",
+    "date": "2026-08-22",
     "views": 2103,
     "status": "active",
-    "id": "masjid_videos_2_mt1w9vwg",
+    "id": "masjid_videos_2_mt4mfnxu",
     "slug": "quran-recitation-beautiful"
   }
 ],
   "platform_admins": [
   {
     "email": "admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
+    "passwordHash": "$2a$10$a4VEPZQPUFZA.QwcCjV/dOrF/AsftZknxmtlDeRtc2FnrIka/t1qS",
     "name": "Super Admin",
     "role": "super_admin",
     "platforms": [
@@ -2536,12 +2536,12 @@ export const seedData: Record<string, any[]> = {
     "metadata": {
       "title": "System Administrator"
     },
-    "id": "platform_admins_0_mt1w9vwa",
+    "id": "platform_admins_0_mt4mfnxn",
     "slug": "super-admin"
   },
   {
     "email": "school.admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
+    "passwordHash": "$2a$10$a4VEPZQPUFZA.QwcCjV/dOrF/AsftZknxmtlDeRtc2FnrIka/t1qS",
     "name": "Ustadh Abdurrahman Adeyemi",
     "role": "platform_admin",
     "platforms": [
@@ -2552,12 +2552,12 @@ export const seedData: Record<string, any[]> = {
     "metadata": {
       "title": "School Principal"
     },
-    "id": "platform_admins_1_mt1w9vwa",
+    "id": "platform_admins_1_mt4mfnxn",
     "slug": "ustadh-abdurrahman-adeyemi"
   },
   {
     "email": "masjid.admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
+    "passwordHash": "$2a$10$a4VEPZQPUFZA.QwcCjV/dOrF/AsftZknxmtlDeRtc2FnrIka/t1qS",
     "name": "Imam Yusuf Olatunji",
     "role": "platform_admin",
     "platforms": [
@@ -2568,12 +2568,12 @@ export const seedData: Record<string, any[]> = {
     "metadata": {
       "title": "Masjid Administrator"
     },
-    "id": "platform_admins_2_mt1w9vwa",
+    "id": "platform_admins_2_mt4mfnxn",
     "slug": "imam-yusuf-olatunji"
   },
   {
     "email": "charity.admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
+    "passwordHash": "$2a$10$a4VEPZQPUFZA.QwcCjV/dOrF/AsftZknxmtlDeRtc2FnrIka/t1qS",
     "name": "Malik Ibrahim Suleiman",
     "role": "platform_admin",
     "platforms": [
@@ -2584,12 +2584,12 @@ export const seedData: Record<string, any[]> = {
     "metadata": {
       "title": "Charity Director"
     },
-    "id": "platform_admins_3_mt1w9vwa",
+    "id": "platform_admins_3_mt4mfnxn",
     "slug": "malik-ibrahim-suleiman"
   },
   {
     "email": "travels.admin@minhaajulhudaa.com",
-    "passwordHash": "$2a$10$qJxQwaN4L3pwrRrdT.PVU.1F.plnSB8WtUDL6XqO6jkfC915zcFVi",
+    "passwordHash": "$2a$10$a4VEPZQPUFZA.QwcCjV/dOrF/AsftZknxmtlDeRtc2FnrIka/t1qS",
     "name": "Ustadh Dawud Okafor",
     "role": "platform_admin",
     "platforms": [
@@ -2600,7 +2600,7 @@ export const seedData: Record<string, any[]> = {
     "metadata": {
       "title": "Travels Manager"
     },
-    "id": "platform_admins_4_mt1w9vwa",
+    "id": "platform_admins_4_mt4mfnxn",
     "slug": "ustadh-dawud-okafor"
   }
 ],
@@ -2636,7 +2636,7 @@ export const seedData: Record<string, any[]> = {
     "metadata": {
       "established": "2020"
     },
-    "id": "platform_settings_0_mt1w9vwd"
+    "id": "platform_settings_0_mt4mfnxq"
   },
   {
     "platform": "school",
@@ -2659,7 +2659,7 @@ export const seedData: Record<string, any[]> = {
         "Senior Secondary"
       ]
     },
-    "id": "platform_settings_1_mt1w9vwd"
+    "id": "platform_settings_1_mt4mfnxq"
   },
   {
     "platform": "masjid",
@@ -2678,7 +2678,7 @@ export const seedData: Record<string, any[]> = {
       "capacity": 2000,
       "established": "2020"
     },
-    "id": "platform_settings_2_mt1w9vwd"
+    "id": "platform_settings_2_mt4mfnxq"
   },
   {
     "platform": "charity",
@@ -2697,7 +2697,7 @@ export const seedData: Record<string, any[]> = {
       "established": "2022",
       "registrationNumber": "RC-2022-0001"
     },
-    "id": "platform_settings_3_mt1w9vwd"
+    "id": "platform_settings_3_mt4mfnxq"
   },
   {
     "platform": "travels",
@@ -2716,964 +2716,1090 @@ export const seedData: Record<string, any[]> = {
       "established": "2023",
       "licensed": true
     },
-    "id": "platform_settings_4_mt1w9vwd"
+    "id": "platform_settings_4_mt4mfnxq"
   }
 ],
   "school_admission_applications": [
   {
-    "applicationId": "MHS-APP/2026/001",
-    "studentFirstName": "Hamzah",
-    "studentLastName": "Abdullah",
-    "studentDateOfBirth": "2019-04-12",
+    "applicationId": "MHS-APP/1447/001",
+    "studentFirstName": "Abdullah",
+    "studentLastName": "Muhammad",
+    "studentDateOfBirth": "2018-03-15",
     "studentGender": "male",
-    "appliedClass": "Primary 1",
-    "previousSchool": "Happy Tots Nursery",
-    "guardianName": "Abdullah Ibrahim",
-    "guardianPhone": "+2348051111111",
-    "guardianEmail": "abdullah.ibrahim@example.com",
-    "guardianOccupation": "Doctor",
-    "address": "15 Adeola Odeku Street, Victoria Island, Lagos",
-    "additionalInfo": "Hamzah is an active child who loves reading and puzzles.",
-    "status": "pending",
-    "submittedAt": "2026-08-18T19:09:32.984Z",
-    "id": "school_admission_applications_0_mt1w9vwf"
+    "appliedClass": "Tamheedy",
+    "guardianName": "Muhammad Ali",
+    "guardianPhone": "+2348031111111",
+    "guardianEmail": "muhammad.ali@example.com",
+    "address": "12 Allen Avenue, Ikeja, Lagos",
+    "status": "approved",
+    "submittedAt": "2026-06-23T16:57:24.970Z",
+    "id": "school_admission_applications_0_mt4mfnxt"
   },
   {
-    "applicationId": "MHS-APP/2026/002",
-    "studentFirstName": "Aaminah",
-    "studentLastName": "Yusuf",
-    "studentDateOfBirth": "2017-08-25",
+    "applicationId": "MHS-APP/1447/002",
+    "studentFirstName": "Aisha",
+    "studentLastName": "Ibrahim",
+    "studentDateOfBirth": "2017-07-22",
     "studentGender": "female",
-    "appliedClass": "Primary 3",
-    "previousSchool": "Greenfield Academy",
-    "guardianName": "Yusuf Bello",
-    "guardianPhone": "+2348052222222",
-    "guardianEmail": "yusuf.bello@example.com",
-    "guardianOccupation": "Engineer",
-    "address": "8 Akin Adesola Street, Victoria Island, Lagos",
-    "additionalInfo": "Aaminah has memorized Juz Amma and is eager to continue her Hifz journey.",
-    "status": "reviewed",
-    "submittedAt": "2026-08-15T19:09:32.984Z",
-    "reviewedAt": "2026-08-19T19:09:32.984Z",
-    "reviewNotes": "Strong candidate. Recommended for admission assessment.",
-    "id": "school_admission_applications_1_mt1w9vwf"
+    "appliedClass": "Ibtidaiyah 1",
+    "guardianName": "Ibrahim Musa",
+    "guardianPhone": "+2348032222222",
+    "guardianEmail": "ibrahim.musa@example.com",
+    "address": "5 Adeniyi Jones, Ikeja, Lagos",
+    "status": "approved",
+    "submittedAt": "2026-07-08T16:57:24.970Z",
+    "id": "school_admission_applications_1_mt4mfnxt"
   },
   {
-    "applicationId": "MHS-APP/2026/003",
-    "studentFirstName": "Mu'adh",
-    "studentLastName": "Suleiman",
-    "studentDateOfBirth": "2014-01-18",
+    "applicationId": "MHS-APP/1447/003",
+    "studentFirstName": "Yusuf",
+    "studentLastName": "Abdulrahman",
+    "studentDateOfBirth": "2015-11-08",
     "studentGender": "male",
-    "appliedClass": "JSS 1",
-    "previousSchool": "Al-Noor Academy",
-    "guardianName": "Suleiman Garba",
-    "guardianPhone": "+2348053333333",
-    "guardianEmail": "suleiman.garba@example.com",
-    "guardianOccupation": "Architect",
-    "address": "23 Norman Williams Street, Ikoyi, Lagos",
-    "additionalInfo": "Transferring from Al-Noor Academy. Mu'adh excels in mathematics.",
-    "status": "accepted",
-    "submittedAt": "2026-08-10T19:09:32.984Z",
-    "reviewedAt": "2026-08-13T19:09:32.984Z",
-    "reviewNotes": "Excellent academic record. Admission approved.",
-    "id": "school_admission_applications_2_mt1w9vwf"
+    "appliedClass": "Ibtidaiyah 3",
+    "guardianName": "Abdulrahman Suleiman",
+    "guardianPhone": "+2348033333333",
+    "guardianEmail": "abdulrahman.s@example.com",
+    "address": "23 Bourdillon Road, Ikoyi, Lagos",
+    "status": "pending",
+    "submittedAt": "2026-08-12T16:57:24.970Z",
+    "id": "school_admission_applications_2_mt4mfnxt"
   },
   {
-    "applicationId": "MHS-APP/2026/004",
-    "studentFirstName": "Sumayyah",
-    "studentLastName": "Adamu",
-    "studentDateOfBirth": "2013-11-30",
+    "applicationId": "MHS-APP/1447/004",
+    "studentFirstName": "Fatima",
+    "studentLastName": "Okafor",
+    "studentDateOfBirth": "2019-02-18",
     "studentGender": "female",
-    "appliedClass": "JSS 2",
-    "previousSchool": "Command Day School",
-    "guardianName": "Adamu Musa",
-    "guardianPhone": "+2348054444444",
-    "guardianEmail": "adamu.musa@example.com",
-    "guardianOccupation": "Civil Servant",
-    "address": "5 Cameron Road, Ikoyi, Lagos",
-    "additionalInfo": "Looking for a school with strong Islamic values.",
+    "appliedClass": "Tamheedy",
+    "guardianName": "Okafor Ismail",
+    "guardianPhone": "+2348045555555",
+    "guardianEmail": "okafor.ismail@example.com",
+    "address": "31 Thompson Avenue, Ikoyi, Lagos",
     "status": "pending",
-    "submittedAt": "2026-08-19T19:09:32.984Z",
-    "id": "school_admission_applications_3_mt1w9vwf"
+    "submittedAt": "2026-08-17T16:57:24.970Z",
+    "id": "school_admission_applications_3_mt4mfnxt"
   }
 ],
   "school_announcements": [
   {
-    "title": "School Resumes for Term 1",
-    "message": "All students are expected to resume for the first term on Monday, September 8, 2026. Assembly begins at 7:30 AM.",
-    "type": "info",
-    "audience": "all",
-    "active": true,
-    "startsAt": "2026-08-17T19:09:32.984Z",
-    "endsAt": "2026-09-03T19:09:32.984Z",
-    "createdAt": "2026-08-17T19:09:32.984Z",
-    "id": "school_announcements_0_mt1w9vwd",
-    "slug": "school-resumes-for-term-1"
+    "title": "1447 AH Academic Year Begins",
+    "content": "The new academic year 1447 AH begins on Monday, September 9, 2024. All students should arrive by 7:30 AM.",
+    "category": "academic",
+    "priority": "high",
+    "publishedAt": "2026-08-19T16:57:24.970Z",
+    "status": "active",
+    "id": "school_announcements_0_mt4mfnxr",
+    "slug": "1447-ah-academic-year-begins"
   },
   {
-    "title": "Parent-Teacher Conference",
-    "message": "The mid-term parent-teacher conference is scheduled for Saturday, October 15, 2026, from 9 AM to 2 PM. Please book your slot through the parent portal.",
-    "type": "info",
-    "audience": "parents",
-    "active": true,
-    "startsAt": "2026-08-19T19:09:32.984Z",
-    "endsAt": "2026-09-19T19:09:32.984Z",
-    "createdAt": "2026-08-19T19:09:32.984Z",
-    "id": "school_announcements_1_mt1w9vwd",
-    "slug": "parent-teacher-conference"
+    "title": "Hifz Graduation Ceremony",
+    "content": "Our annual Hifz graduation ceremony will be held on Saturday, October 12, 2024, at the school mosque. All parents are invited.",
+    "category": "event",
+    "priority": "high",
+    "publishedAt": "2026-08-15T16:57:24.970Z",
+    "status": "active",
+    "id": "school_announcements_1_mt4mfnxr",
+    "slug": "hifz-graduation-ceremony"
   },
   {
-    "title": "Holiday Reminder",
-    "message": "The school will be on Eid break from Friday to Tuesday. Classes resume on Wednesday. We wish all our families a blessed Eid.",
-    "type": "success",
-    "audience": "all",
-    "active": true,
-    "startsAt": "2026-08-15T19:09:32.984Z",
-    "endsAt": "2026-08-27T19:09:32.984Z",
-    "createdAt": "2026-08-15T19:09:32.984Z",
-    "id": "school_announcements_2_mt1w9vwd",
-    "slug": "holiday-reminder"
+    "title": "Parent-Teacher Meeting",
+    "content": "Scheduled for Friday, October 4, 2024, from 10:00 AM to 1:00 PM. Please confirm attendance.",
+    "category": "academic",
+    "priority": "medium",
+    "publishedAt": "2026-08-12T16:57:24.970Z",
+    "status": "active",
+    "id": "school_announcements_2_mt4mfnxr",
+    "slug": "parent-teacher-meeting"
+  }
+],
+  "school_assignments": [
+  {
+    "title": "Memorize Surah Al-Fatihah with Tajweed",
+    "courseId": "tajweed-rules-comprehensive",
+    "lessonId": 1,
+    "dueDate": "2026-08-29T16:57:24.970Z",
+    "description": "Memorize Surah Al-Fatihah and recite it with proper Tajweed rules.",
+    "id": "school_assignments_0_mt4mfnxt",
+    "slug": "memorize-surah-al-fatihah-with-tajweed"
+  },
+  {
+    "title": "Identify I'rab in 10 Sentences",
+    "courseId": "introduction-to-nahwu",
+    "lessonId": 3,
+    "dueDate": "2026-09-01T16:57:24.970Z",
+    "description": "Read the assigned Arabic sentences and identify the I'rab of each noun.",
+    "id": "school_assignments_1_mt4mfnxt",
+    "slug": "identify-irab-in-10-sentences"
   }
 ],
   "school_blog_posts": [
   {
-    "slug": "welcome-to-new-academic-year-2026",
-    "title": "Welcome to the 2026 Academic Year",
-    "excerpt": "As we begin a new academic year, we reflect on our achievements and set new goals for excellence.",
-    "content": "Bismillah. As we welcome students back for the 2026 academic year, we are filled with gratitude and excitement. Last year, our students achieved remarkable success in both academic and Islamic studies. 95% of our graduating class passed their WAEC examinations with distinctions, and 12 students completed their Hifz of the Qur'an.\n\nThis year, we are introducing new programs including advanced robotics, enhanced Arabic language immersion, and a dedicated Tajweed program. Our new science laboratory is fully equipped, and we have expanded our library with over 500 new titles.\n\nWe invite parents to join us for the orientation session on Saturday where we will share detailed plans for the year ahead. Together, we will continue to nurture the next generation of knowledgeable, God-conscious leaders.",
-    "featuredImageUrl": "/images/patterns/books.svg",
+    "slug": "welcome-to-new-academic-year-1447ah",
+    "title": "Welcome to the 1447 AH Academic Year",
+    "excerpt": "As we begin a new Hijri academic year, we reflect on our achievements in Islamic education and set new goals for excellence in Arabic and Qur'anic studies.",
+    "content": "Bismillah. As we welcome students back for the 1447 AH academic year, we are filled with gratitude to Allah. Last year, 15 students completed their Hifz of the entire Qur'an, and 20 students achieved mastery in Arabic grammar (Nahwu and Sarf).\n\nThis year, we are introducing an enhanced Tajweed program with certified Qaris, expanding our Hadith collection in the library, and adding advanced Fiqh studies for our Thanawiyyah students. Our new Tahfeez ul-Qur'an wing is fully operational.\n\nWe invite parents to join us for the orientation session where we will share detailed plans for the year ahead. Together, we will continue to nurture the next generation of Islamic scholars.",
+    "featuredImageUrl": "/images/patterns/quran.svg",
     "category": "announcements",
     "tags": [
       "academic-year",
       "welcome",
-      "2026"
+      "1447ah"
     ],
     "authorName": "Ustadh Abdurrahman Adeyemi",
     "status": "published",
-    "publishedAt": "2026-08-13T19:09:32.984Z",
+    "publishedAt": "2026-08-15T16:57:24.970Z",
     "readingTimeMinutes": 3,
     "views": 245,
-    "id": "school_blog_posts_0_mt1w9vwd"
+    "id": "school_blog_posts_0_mt4mfnxr"
   },
   {
-    "slug": "hifz-graduation-ceremony-2026",
-    "title": "12 Students Complete Qur'an Memorization",
-    "excerpt": "Our Hifz program celebrates another milestone as 12 students complete their memorization of the entire Qur'an.",
-    "content": "Alhamdulillah, we are proud to announce that 12 of our students have successfully completed the memorization of the entire Qur'an. This achievement represents years of dedication, early morning revisions, and unwavering commitment from both students and their teachers.\n\nThe graduation ceremony was held at the school auditorium, attended by parents, staff, and distinguished guests including renowned scholars. Each graduate received a certificate of completion and a special gift.\n\nOur Hifz program, led by Ustadh Yusuf Olatunji, follows a structured curriculum that allows students to memorize at their own pace while maintaining their regular academic studies. We enroll new students into the program every term.\n\nWe ask Allah to make these students among those who recite the Qur'an with understanding and act upon its teachings.",
-    "featuredImageUrl": "/images/patterns/books.svg",
+    "slug": "hifz-graduation-1447ah",
+    "title": "15 Students Complete Qur'an Memorization",
+    "excerpt": "Our Hifz program celebrates another milestone as 15 students complete their memorization of the entire Qur'an with Ijazah.",
+    "content": "Alhamdulillah, we are proud to announce that 15 of our students have successfully completed the memorization of the entire Qur'an with proper Tajweed. This achievement is the result of years of dedicated effort by both students and teachers.\n\nThe graduation ceremony was held in the school mosque, with parents, community members, and visiting scholars in attendance. Each graduate received an Ijazah certificate, linking them to the chain of Qur'an reciters going back to the Prophet (peace be upon him).\n\nWe ask Allah to make these students a source of benefit for the Ummah and to increase them in knowledge and piety.",
+    "featuredImageUrl": "/images/patterns/quran.svg",
     "category": "achievements",
     "tags": [
       "hifz",
-      "quran",
-      "graduation"
+      "graduation",
+      "quran"
     ],
-    "authorName": "Ustadh Abdurrahman Adeyemi",
+    "authorName": "Ustadh Yusuf Olatunji",
     "status": "published",
-    "publishedAt": "2026-08-06T19:09:32.984Z",
-    "readingTimeMinutes": 4,
-    "views": 412,
-    "id": "school_blog_posts_1_mt1w9vwd"
-  },
-  {
-    "slug": "science-fair-2026-highlights",
-    "title": "Annual Science Fair Showcases Student Innovation",
-    "excerpt": "Students from primary to senior secondary presented innovative projects at our annual science fair.",
-    "content": "Our annual science fair was a tremendous success, with over 60 projects presented by students across all levels. The projects ranged from simple experiments by primary students to complex engineering solutions by senior secondary students.\n\nNotable projects included a solar-powered water purification system, a mobile app for tracking salah times, and a hydroponic farming setup. The winning project, by our SS2 students, was an automated greenhouse monitoring system.\n\nThe science fair is part of our commitment to STEM education alongside Islamic studies. We believe that understanding Allah's creation through science deepens our faith and enables us to serve humanity better.",
-    "featuredImageUrl": "/images/patterns/books.svg",
-    "category": "events",
-    "tags": [
-      "science",
-      "stem",
-      "innovation"
-    ],
-    "authorName": "Ustadh Muhammad Bashir",
-    "status": "published",
-    "publishedAt": "2026-07-30T19:09:32.984Z",
-    "readingTimeMinutes": 3,
-    "views": 187,
-    "id": "school_blog_posts_2_mt1w9vwd"
-  },
-  {
-    "slug": "parent-teacher-conference-guide",
-    "title": "A Guide to Productive Parent-Teacher Conferences",
-    "excerpt": "Tips for parents to make the most of parent-teacher conferences and support their children's education.",
-    "content": "Parent-teacher conferences are valuable opportunities to discuss your child's progress and collaborate with teachers. Here are some tips to make these meetings productive:\n\n1. Prepare questions in advance about academic progress, behavior, and social development.\n2. Share information about your child's home life that may affect their school performance.\n3. Discuss both strengths and areas for improvement.\n4. Agree on specific action steps and follow up.\n5. Maintain open communication throughout the term.\n\nAt Minhaajulhudaa School, we value the partnership between parents and teachers. Together, we can provide the best educational experience for our students.",
-    "featuredImageUrl": "/images/patterns/books.svg",
-    "category": "parenting",
-    "tags": [
-      "parents",
-      "tips",
-      "partnership"
-    ],
-    "authorName": "Mrs. Aisha Abdullahi",
-    "status": "published",
-    "publishedAt": "2026-07-16T19:09:32.984Z",
+    "publishedAt": "2026-08-08T16:57:24.970Z",
     "readingTimeMinutes": 2,
-    "views": 156,
-    "id": "school_blog_posts_3_mt1w9vwd"
+    "views": 312,
+    "id": "school_blog_posts_1_mt4mfnxr"
   },
   {
-    "slug": "arabic-language-immersion-program",
-    "title": "New Arabic Language Immersion Program",
-    "excerpt": "We are launching an enhanced Arabic immersion program to help students achieve fluency.",
-    "content": "Arabic is the language of the Qur'an and a gateway to understanding Islamic texts. This term, we are launching an enhanced Arabic immersion program across all levels.\n\nThe program includes daily conversational Arabic sessions, Arabic-only zones in designated areas of the school, and cultural activities that bring the language to life. We have also partnered with native Arabic speakers to provide authentic learning experiences.\n\nOur goal is for every student to achieve conversational fluency by the time they graduate, enabling them to understand the Qur'an directly and engage with Arabic-speaking communities worldwide.",
+    "slug": "arabic-language-immersion-success",
+    "title": "Arabic Language Immersion: A Year of Progress",
+    "excerpt": "Our Arabic immersion program has shown remarkable results, with students achieving fluency in classical Arabic.",
+    "content": "This year, our Arabic Language Immersion program has achieved outstanding results. Students in the Idadiyah level can now read and understand classical Arabic texts, including works of Fiqh, Tafsir, and Hadith commentary.\n\nOur approach combines traditional grammar instruction (Nahwu and Sarf) with conversational practice, literature reading, and composition. Students participate in weekly Arabic-only discussion circles and monthly Arabic poetry competitions.\n\nWe attribute this success to our dedicated teachers, many of whom are graduates of Al-Azhar University and the Islamic University of Madinah.",
     "featuredImageUrl": "/images/patterns/books.svg",
-    "category": "programs",
+    "category": "academic",
     "tags": [
       "arabic",
       "language",
       "immersion"
     ],
+    "authorName": "Mrs. Khadijah Suleiman",
+    "status": "published",
+    "publishedAt": "2026-08-01T16:57:24.970Z",
+    "readingTimeMinutes": 4,
+    "views": 189,
+    "id": "school_blog_posts_2_mt4mfnxr"
+  },
+  {
+    "slug": "hadith-memorization-program-launch",
+    "title": "New Hadith Memorization Program Launched",
+    "excerpt": "We are excited to announce our new Hadith memorization program, focusing on the Forty Hadith of Imam Nawawi.",
+    "content": "Bismillah. We are pleased to announce the launch of our Hadith memorization program, beginning with the Forty Hadith of Imam Nawawi (Rahimahullah). This collection is considered essential for every Muslim student of knowledge.\n\nThe program is open to all Idadiyah and Thanawiyyah students. Each week, students will memorize one hadith with its chain of narrators, meaning, and key lessons. Monthly assessments will ensure proper retention.\n\nThis program complements our existing Qur'an memorization curriculum and helps students develop a comprehensive understanding of Islamic texts.",
+    "featuredImageUrl": "/images/patterns/books.svg",
+    "category": "programs",
+    "tags": [
+      "hadith",
+      "memorization",
+      "nawawi"
+    ],
     "authorName": "Ustadh Abdurrahman Adeyemi",
     "status": "published",
-    "publishedAt": "2026-07-09T19:09:32.984Z",
-    "readingTimeMinutes": 3,
-    "views": 203,
-    "id": "school_blog_posts_4_mt1w9vwd"
+    "publishedAt": "2026-07-25T16:57:24.970Z",
+    "readingTimeMinutes": 2,
+    "views": 156,
+    "id": "school_blog_posts_3_mt4mfnxr"
+  },
+  {
+    "slug": "understanding-tajweed-rules",
+    "title": "Understanding Tajweed: The Science of Qur'an Recitation",
+    "excerpt": "A comprehensive guide to the importance of Tajweed and how we teach it at our school.",
+    "content": "Tajweed is the science of reciting the Qur'an as it was revealed to the Prophet Muhammad (peace be upon him). The word Tajweed comes from the Arabic root j-w-d, meaning \"to make well\" or \"to improve.\"\n\nAt Minhaajulhudaa, we begin Tajweed instruction from the Tamheedy level, teaching children the correct pronunciation of Arabic letters (Makharij) and the basic rules of Noon Sakinah and Tanween.\n\nBy the Ibtidaiyah level, students learn the rules of Madd (elongation), Ghunnah (nasalization), and the categories of Tafkheem and Tarqeeq. In Idadiyah and Thanawiyyah, students study advanced Tajweed including the rules of Waqf (stopping) and the different Qira'at (recitations).\n\nOur Tajweed teachers hold Ijazah in the Hafs recitation, and we are working toward offering instruction in the other canonical recitations as well.",
+    "featuredImageUrl": "/images/patterns/quran.svg",
+    "category": "education",
+    "tags": [
+      "tajweed",
+      "quran",
+      "recitation"
+    ],
+    "authorName": "Ustadh Yusuf Olatunji",
+    "status": "published",
+    "publishedAt": "2026-07-18T16:57:24.970Z",
+    "readingTimeMinutes": 5,
+    "views": 278,
+    "id": "school_blog_posts_4_mt4mfnxr"
   }
 ],
   "school_classes": [
   {
-    "name": "Primary 1",
-    "level": "primary",
-    "grade": "P1",
+    "slug": "tamheedy",
+    "name": "Tamheedy (Preparatory)",
+    "level": "tamheedy",
+    "grade": "T",
     "teacherId": "MHS-STAFF/004",
     "teacherName": "Mrs. Aisha Abdullahi",
     "room": "Room 101",
     "capacity": 25,
     "currentEnrollment": 22,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Basic Science",
-      "Islamic Studies",
-      "Arabic",
-      "Qur'an"
+      "Qur'an Reading",
+      "Arabic Alphabet",
+      "Basic Tajweed",
+      "Islamic Etiquette (Adab)",
+      "Memorization (Short Surahs)"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "8:00 AM - 2:00 PM"
-    },
-    "description": "Foundation class for young learners.",
+    "schedule": "Mon-Fri, 8:00 AM - 1:00 PM",
+    "description": "The Tamheedy class is the foundational level for young learners aged 5-6. Students learn the Arabic alphabet, basic Qur'an reading, short Surahs from Juz Amma, and essential Islamic manners. This class prepares children for the structured Ibtidaiyah curriculum.",
     "active": true,
-    "id": "school_classes_0_mt1w9vwe",
-    "slug": "primary-1"
+    "id": "school_classes_0_mt4mfnxr"
   },
   {
-    "name": "Primary 3",
-    "level": "primary",
-    "grade": "P3",
+    "slug": "ibtidaiyah-1",
+    "name": "Ibtidaiyah 1 (Elementary 1)",
+    "level": "ibtidaiyah",
+    "grade": "I1",
+    "teacherId": "MHS-STAFF/005",
+    "teacherName": "Mrs. Khadijah Suleiman",
+    "room": "Room 102",
+    "capacity": 30,
+    "currentEnrollment": 28,
+    "subjects": [
+      "Qur'an Reading",
+      "Arabic Grammar (Nahwu)",
+      "Arabic Morphology (Sarf)",
+      "Tajweed Basics",
+      "Tahdheeb",
+      "Memorization (Juz Amma)"
+    ],
+    "schedule": "Mon-Fri, 8:00 AM - 2:00 PM",
+    "description": "Ibtidaiyah 1 is the first year of elementary Islamic education. Students begin structured Arabic grammar (Nahwu), morphology (Sarf), and Tajweed rules. They continue memorizing Juz Amma and learn Islamic etiquette (Tahdheeb).",
+    "active": true,
+    "id": "school_classes_1_mt4mfnxr"
+  },
+  {
+    "slug": "ibtidaiyah-2",
+    "name": "Ibtidaiyah 2 (Elementary 2)",
+    "level": "ibtidaiyah",
+    "grade": "I2",
     "teacherId": "MHS-STAFF/010",
     "teacherName": "Ustadh Yahya Garba",
     "room": "Room 103",
     "capacity": 30,
-    "currentEnrollment": 28,
+    "currentEnrollment": 25,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Basic Science",
-      "Islamic Studies",
-      "Arabic",
-      "Qur'an",
-      "Social Studies"
+      "Qur'an Reading",
+      "Arabic Grammar (Nahwu)",
+      "Arabic Morphology (Sarf)",
+      "Tajweed",
+      "Tahdheeb",
+      "Memorization",
+      "Hadith Studies"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "8:00 AM - 2:00 PM"
-    },
-    "description": "Lower primary class building on foundational skills.",
+    "schedule": "Mon-Fri, 8:00 AM - 2:00 PM",
+    "description": "Ibtidaiyah 2 builds on the foundation of Ibtidaiyah 1, with more advanced Arabic grammar, continued Qur'an memorization, and introduction to Hadith studies. Students begin reading short Hadith texts in Arabic.",
     "active": true,
-    "id": "school_classes_1_mt1w9vwe",
-    "slug": "primary-3"
+    "id": "school_classes_2_mt4mfnxr"
   },
   {
-    "name": "Primary 4",
-    "level": "primary",
-    "grade": "P4",
-    "teacherId": "MHS-STAFF/005",
-    "teacherName": "Mrs. Khadijah Suleiman",
+    "slug": "ibtidaiyah-3",
+    "name": "Ibtidaiyah 3 (Elementary 3)",
+    "level": "ibtidaiyah",
+    "grade": "I3",
+    "teacherId": "MHS-STAFF/002",
+    "teacherName": "Ustadh Yusuf Olatunji",
     "room": "Room 104",
     "capacity": 30,
-    "currentEnrollment": 27,
+    "currentEnrollment": 26,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Basic Science",
-      "Islamic Studies",
-      "Arabic",
-      "Qur'an",
-      "Social Studies",
-      "Computer Science"
+      "Qur'an Reading",
+      "Advanced Arabic Grammar",
+      "Arabic Morphology",
+      "Tajweed",
+      "Tahdheeb",
+      "Memorization",
+      "Hadith Studies",
+      "Seerah (Prophetic Biography)"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "8:00 AM - 2:30 PM"
-    },
-    "description": "Upper primary class preparing for junior secondary.",
+    "schedule": "Mon-Fri, 8:00 AM - 2:30 PM",
+    "description": "Ibtidaiyah 3 completes the elementary level. Students achieve fluency in reading Arabic, master basic Tajweed, and are introduced to the Seerah (biography of the Prophet Muhammad, peace be upon him). This class prepares students for the intermediate Idadiyah level.",
     "active": true,
-    "id": "school_classes_2_mt1w9vwe",
-    "slug": "primary-4"
+    "id": "school_classes_3_mt4mfnxr"
   },
   {
-    "name": "JSS 1",
-    "level": "junior-secondary",
-    "grade": "J1",
+    "slug": "idadiyah-1",
+    "name": "Idadiyah 1 (Intermediate 1)",
+    "level": "idadiyah",
+    "grade": "D1",
     "teacherId": "MHS-STAFF/003",
     "teacherName": "Ustadh Muhammad Bashir",
     "room": "Room 201",
     "capacity": 35,
-    "currentEnrollment": 32,
+    "currentEnrollment": 30,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Basic Science",
-      "Basic Technology",
-      "Islamic Studies",
-      "Arabic",
-      "Qur'an",
-      "Social Studies",
-      "Computer Science",
-      "Agricultural Science"
+      "Qur'an with Tajweed",
+      "Advanced Nahwu",
+      "Advanced Sarf",
+      "Balaghah (Rhetoric) Introduction",
+      "Tafsir Introduction",
+      "Fiqh (Taharah & Salah)",
+      "Hadith Studies"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "7:30 AM - 3:00 PM"
-    },
-    "description": "Entry into junior secondary education.",
+    "schedule": "Mon-Fri, 7:30 AM - 3:00 PM",
+    "description": "Idadiyah 1 begins the intermediate level. Students study advanced Arabic grammar and are introduced to Balaghah (rhetoric), Tafsir (Qur'an exegesis), and Fiqh (Islamic jurisprudence) covering Taharah (purification) and Salah (prayer).",
     "active": true,
-    "id": "school_classes_3_mt1w9vwe",
-    "slug": "jss-1"
+    "id": "school_classes_4_mt4mfnxr"
   },
   {
-    "name": "JSS 2",
-    "level": "junior-secondary",
-    "grade": "J2",
+    "slug": "idadiyah-2",
+    "name": "Idadiyah 2 (Intermediate 2)",
+    "level": "idadiyah",
+    "grade": "D2",
     "teacherId": "MHS-STAFF/006",
     "teacherName": "Ustadh Ibrahim Musa",
     "room": "Room 202",
     "capacity": 35,
-    "currentEnrollment": 30,
+    "currentEnrollment": 28,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Basic Science",
-      "Basic Technology",
-      "Islamic Studies",
-      "Arabic",
-      "Qur'an",
-      "Social Studies",
-      "Computer Science",
-      "Agricultural Science",
-      "French"
+      "Qur'an with Tajweed",
+      "Advanced Nahwu",
+      "Advanced Sarf",
+      "Balaghah",
+      "Tafsir",
+      "Fiqh (Zakah & Sawm)",
+      "Hadith Studies",
+      "Usul al-Fiqh Introduction"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "7:30 AM - 3:00 PM"
-    },
-    "description": "Continued junior secondary education.",
+    "schedule": "Mon-Fri, 7:30 AM - 3:00 PM",
+    "description": "Idadiyah 2 continues intermediate studies with more advanced Balaghah, Tafsir of selected Surahs, and Fiqh covering Zakah and Sawm (fasting). Students are introduced to Usul al-Fiqh (principles of Islamic jurisprudence).",
     "active": true,
-    "id": "school_classes_4_mt1w9vwe",
-    "slug": "jss-2"
+    "id": "school_classes_5_mt4mfnxr"
   },
   {
-    "name": "SSS 1 Science",
-    "level": "senior-secondary",
-    "grade": "S1",
+    "slug": "idadiyah-3",
+    "name": "Idadiyah 3 (Intermediate 3)",
+    "level": "idadiyah",
+    "grade": "D3",
+    "teacherId": "MHS-STAFF/009",
+    "teacherName": "Mrs. Maryam Disu",
+    "room": "Room 203",
+    "capacity": 35,
+    "currentEnrollment": 25,
+    "subjects": [
+      "Qur'an with Tajweed",
+      "Arabic Literature",
+      "Balaghah",
+      "Tafsir",
+      "Fiqh (Hajj & Umrah)",
+      "Hadith Studies",
+      "Usul al-Fiqh",
+      "Aqeedah (Islamic Creed)"
+    ],
+    "schedule": "Mon-Fri, 7:30 AM - 3:00 PM",
+    "description": "Idadiyah 3 completes the intermediate level. Students study Arabic literature, advanced Tafsir, Fiqh of Hajj and Umrah, and are introduced to Aqeedah (Islamic creed). This class prepares students for the advanced Thanawiyyah level.",
+    "active": true,
+    "id": "school_classes_6_mt4mfnxr"
+  },
+  {
+    "slug": "thanawiyyah-1",
+    "name": "Thanawiyyah 1 (Secondary 1)",
+    "level": "thanawiyyah",
+    "grade": "T1",
     "teacherId": "MHS-STAFF/003",
     "teacherName": "Ustadh Muhammad Bashir",
     "room": "Room 301",
     "capacity": 30,
-    "currentEnrollment": 28,
+    "currentEnrollment": 24,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Physics",
-      "Chemistry",
-      "Biology",
-      "Further Mathematics",
-      "Islamic Studies",
-      "Arabic",
-      "Computer Science"
+      "Advanced Tafsir",
+      "Advanced Fiqh",
+      "Usul al-Fiqh",
+      "Usul al-Hadith",
+      "Aqeedah",
+      "Arabic Literature",
+      "Mustalah al-Hadith",
+      "Comparative Religion"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "7:30 AM - 3:30 PM"
-    },
-    "description": "Senior secondary science track.",
+    "schedule": "Mon-Fri, 7:30 AM - 3:30 PM",
+    "description": "Thanawiyyah 1 begins the secondary level with advanced Islamic sciences. Students study Usul al-Fiqh (principles of jurisprudence), Usul al-Hadith (principles of Hadith), Mustalah al-Hadith (Hadith terminology), and comparative religion.",
     "active": true,
-    "id": "school_classes_5_mt1w9vwe",
-    "slug": "sss-1-science"
+    "id": "school_classes_7_mt4mfnxr"
   },
   {
-    "name": "SSS 2 Science",
-    "level": "senior-secondary",
-    "grade": "S2",
+    "slug": "thanawiyyah-2",
+    "name": "Thanawiyyah 2 (Secondary 2)",
+    "level": "thanawiyyah",
+    "grade": "T2",
     "teacherId": "MHS-STAFF/006",
     "teacherName": "Ustadh Ibrahim Musa",
     "room": "Room 302",
     "capacity": 30,
-    "currentEnrollment": 26,
+    "currentEnrollment": 22,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Physics",
-      "Chemistry",
-      "Biology",
-      "Further Mathematics",
-      "Islamic Studies",
-      "Arabic",
-      "Computer Science"
+      "Advanced Tafsir",
+      "Advanced Fiqh",
+      "Usul al-Fiqh",
+      "Ilm al-Kalam",
+      "Aqeedah",
+      "Arabic Literature",
+      "Siyaq al-Fiqh",
+      "Research Methods"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "7:30 AM - 3:30 PM"
-    },
-    "description": "Senior secondary science track, year 2.",
+    "schedule": "Mon-Fri, 7:30 AM - 3:30 PM",
+    "description": "Thanawiyyah 2 continues with advanced studies including Ilm al-Kalam (theology), Siyaq al-Fiqh (contextual jurisprudence), and research methods in Islamic sciences. Students begin preparing their graduation research.",
     "active": true,
-    "id": "school_classes_6_mt1w9vwe",
-    "slug": "sss-2-science"
+    "id": "school_classes_8_mt4mfnxr"
   },
   {
-    "name": "SSS 3 Science",
-    "level": "senior-secondary",
-    "grade": "S3",
+    "slug": "thanawiyyah-3",
+    "name": "Thanawiyyah 3 (Secondary 3 - Final Year)",
+    "level": "thanawiyyah",
+    "grade": "T3",
     "teacherId": "MHS-STAFF/009",
     "teacherName": "Mrs. Maryam Disu",
     "room": "Room 303",
     "capacity": 30,
-    "currentEnrollment": 24,
+    "currentEnrollment": 20,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Physics",
-      "Chemistry",
-      "Biology",
-      "Further Mathematics",
-      "Islamic Studies",
-      "Arabic",
-      "Computer Science"
+      "Advanced Tafsir",
+      "Advanced Fiqh",
+      "Ifta (Issuing Rulings)",
+      "Research Project",
+      "Comprehensive Review",
+      "Teaching Practice"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "7:30 AM - 3:30 PM"
-    },
-    "description": "Final year senior secondary, WAEC preparation.",
+    "schedule": "Mon-Fri, 7:30 AM - 3:30 PM",
+    "description": "Thanawiyyah 3 is the final year. Students study Ifta (the science of issuing Islamic rulings), complete a graduation research project, and participate in teaching practice. Upon completion, students receive the Shahadah Thanawiyyah (Secondary Certificate) qualifying them as Islamic educators.",
     "active": true,
-    "id": "school_classes_7_mt1w9vwe",
-    "slug": "sss-3-science"
+    "id": "school_classes_9_mt4mfnxr"
   }
 ],
   "school_courses": [
   {
-    "slug": "introduction-to-tajweed",
-    "title": "Introduction to Tajweed: The Art of Qur'an Recitation",
-    "description": "Learn the fundamental rules of Tajweed to recite the Qur'an correctly and beautifully. This course covers the articulation points of letters, characteristics of letters, and basic rules of recitation.",
-    "shortDescription": "Master the basics of Tajweed for beautiful Qur'an recitation.",
-    "category": "quran",
+    "slug": "introduction-to-nahwu",
+    "title": "Introduction to Nahwu (Arabic Grammar)",
+    "category": "arabic",
+    "description": "A foundational course in Arabic grammar covering the basic rules of sentence structure, noun cases (I'rab), and verb conjugation.",
+    "thumbnailUrl": "/images/patterns/books.svg",
+    "instructorName": "Mrs. Khadijah Suleiman",
+    "duration": "12 weeks",
     "level": "beginner",
-    "instructor": "Ustadh Yusuf Olatunji",
-    "instructorBio": "Holder of Ijazah in the 10 recitations of the Qur'an with over 15 years of teaching experience.",
-    "price": 0,
-    "duration": "8 weeks",
-    "thumbnailUrl": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800",
-    "lessonsCount": 12,
-    "enrolledCount": 145,
-    "rating": 4.9,
+    "price": 15000,
+    "isFree": false,
     "status": "published",
-    "publishedAt": "2026-07-21T19:09:32.984Z",
-    "id": "school_courses_0_mt1w9vwf"
+    "lessons": [],
+    "id": "school_courses_0_mt4mfnxr"
   },
   {
-    "slug": "arabic-for-beginners",
-    "title": "Arabic for Beginners: Reading and Writing",
-    "description": "Start your journey with the Arabic language. Learn to read, write, and pronounce Arabic letters and basic words. This course is perfect for absolute beginners.",
-    "shortDescription": "Learn to read and write Arabic from scratch.",
-    "category": "arabic",
-    "level": "beginner",
-    "instructor": "Mrs. Khadijah Suleiman",
-    "instructorBio": "Native Arabic speaker with expertise in teaching Arabic to non-native speakers.",
-    "price": 0,
-    "duration": "10 weeks",
-    "thumbnailUrl": "https://images.unsplash.com/photo-1453749024858-4bca89bd9edc?w=800",
-    "lessonsCount": 15,
-    "enrolledCount": 203,
-    "rating": 4.8,
+    "slug": "tajweed-rules-comprehensive",
+    "title": "Comprehensive Tajweed Rules",
+    "category": "quran",
+    "description": "A complete course on Tajweed covering all major rules including Makharij, Sifat, Noon Sakinah, Madd, and Waqf.",
+    "thumbnailUrl": "/images/patterns/quran.svg",
+    "instructorName": "Ustadh Yusuf Olatunji",
+    "duration": "16 weeks",
+    "level": "intermediate",
+    "price": 20000,
+    "isFree": false,
     "status": "published",
-    "publishedAt": "2026-07-06T19:09:32.984Z",
-    "id": "school_courses_1_mt1w9vwf"
+    "lessons": [],
+    "id": "school_courses_1_mt4mfnxr"
+  },
+  {
+    "slug": "fiqh-of-salah",
+    "title": "Fiqh of Salah (Prayer)",
+    "category": "islamic-studies",
+    "description": "Detailed study of the rulings of Salah including conditions, pillars, obligations, and nullifiers of prayer.",
+    "thumbnailUrl": "/images/patterns/arabesque.svg",
+    "instructorName": "Ustadh Abdurrahman Adeyemi",
+    "duration": "8 weeks",
+    "level": "beginner",
+    "price": 10000,
+    "isFree": false,
+    "status": "published",
+    "lessons": [],
+    "id": "school_courses_2_mt4mfnxr"
   },
   {
     "slug": "seerah-of-the-prophet",
     "title": "Seerah: Life of the Prophet Muhammad (PBUH)",
-    "description": "Explore the beautiful life of the Prophet Muhammad (peace be upon him) from birth to his final days. Learn lessons applicable to modern life.",
-    "shortDescription": "Journey through the life of the Beloved Prophet (PBUH).",
     "category": "islamic-studies",
+    "description": "A comprehensive study of the biography of the Prophet Muhammad (peace be upon him) from birth to passing.",
+    "thumbnailUrl": "/images/patterns/arabesque.svg",
+    "instructorName": "Ustadh Abdurrahman Adeyemi",
+    "duration": "20 weeks",
     "level": "intermediate",
-    "instructor": "Ustadh Abdurrahman Adeyemi",
-    "instructorBio": "Principal with M.Ed in Islamic Education and 20+ years of teaching experience.",
-    "price": 0,
-    "duration": "12 weeks",
-    "thumbnailUrl": "https://images.unsplash.com/photo-1591456983933-0d29460ee5b6?w=800",
-    "lessonsCount": 20,
-    "enrolledCount": 178,
-    "rating": 5,
+    "price": 25000,
+    "isFree": false,
     "status": "published",
-    "publishedAt": "2026-06-21T19:09:32.984Z",
-    "id": "school_courses_2_mt1w9vwf"
+    "lessons": [],
+    "id": "school_courses_3_mt4mfnxr"
   },
   {
-    "slug": "basic-mathematics-jss",
-    "title": "Basic Mathematics for JSS",
-    "description": "Comprehensive mathematics course covering the JSS curriculum including algebra, geometry, and statistics.",
-    "shortDescription": "Master JSS-level mathematics fundamentals.",
-    "category": "academic",
-    "level": "intermediate",
-    "instructor": "Ustadh Muhammad Bashir",
-    "instructorBio": "STEM coordinator with M.Sc in Physics Education.",
-    "price": 0,
-    "duration": "Ongoing",
-    "thumbnailUrl": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800",
-    "lessonsCount": 18,
-    "enrolledCount": 92,
-    "rating": 4.7,
+    "slug": "arabic-literature-classics",
+    "title": "Classical Arabic Literature",
+    "category": "arabic",
+    "description": "Study of classical Arabic poetry and prose, including pre-Islamic poetry, Quranic style, and golden age literature.",
+    "thumbnailUrl": "/images/patterns/books.svg",
+    "instructorName": "Mrs. Khadijah Suleiman",
+    "duration": "14 weeks",
+    "level": "advanced",
+    "price": 30000,
+    "isFree": false,
     "status": "published",
-    "publishedAt": "2026-07-31T19:09:32.984Z",
-    "id": "school_courses_3_mt1w9vwf"
+    "lessons": [],
+    "id": "school_courses_4_mt4mfnxr"
+  }
+],
+  "school_enrollments": [
+  {
+    "studentId": "MHS/1447/001",
+    "courseId": "introduction-to-nahwu",
+    "enrolledAt": "2026-07-23T16:57:24.970Z",
+    "progress": 30,
+    "status": "active",
+    "id": "school_enrollments_0_mt4mfnxt"
   },
   {
-    "slug": "introduction-to-coding",
-    "title": "Introduction to Coding with Scratch",
-    "description": "Learn programming fundamentals using Scratch. Create animations, games, and interactive stories while developing problem-solving skills.",
-    "shortDescription": "Start coding with fun, visual programming.",
-    "category": "technology",
-    "level": "beginner",
-    "instructor": "Ustadh Muhammad Bashir",
-    "instructorBio": "STEM coordinator passionate about making technology accessible.",
-    "price": 15000,
-    "duration": "6 weeks",
-    "thumbnailUrl": "https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=800",
-    "lessonsCount": 10,
-    "enrolledCount": 67,
-    "rating": 4.6,
-    "status": "published",
-    "publishedAt": "2026-08-05T19:09:32.984Z",
-    "id": "school_courses_4_mt1w9vwf"
+    "studentId": "MHS/1447/005",
+    "courseId": "tajweed-rules-comprehensive",
+    "enrolledAt": "2026-08-02T16:57:24.970Z",
+    "progress": 60,
+    "status": "active",
+    "id": "school_enrollments_1_mt4mfnxt"
+  },
+  {
+    "studentId": "MHS/1447/012",
+    "courseId": "fiqh-of-salah",
+    "enrolledAt": "2026-08-07T16:57:24.970Z",
+    "progress": 100,
+    "status": "completed",
+    "id": "school_enrollments_2_mt4mfnxt"
   }
 ],
   "school_events": [
   {
-    "title": "Term 1 Resumption",
-    "description": "First day of the 2026/2027 academic year. Students should arrive by 7:30 AM for assembly.",
-    "category": "other",
-    "startDate": "2026-08-27T19:09:32.984Z",
-    "endDate": "2026-08-27T19:09:32.984Z",
-    "location": "School Assembly Hall",
-    "imageUrl": "/images/patterns/stars.svg",
-    "id": "school_events_0_mt1w9vwe",
-    "slug": "term-1-resumption"
+    "slug": "hifz-graduation-1447",
+    "title": "Hifz Graduation Ceremony 1447 AH",
+    "description": "Celebrating the completion of Qur'an memorization by our students.",
+    "category": "ceremony",
+    "startDate": "2026-09-21T16:57:24.970Z",
+    "endDate": "2026-09-21T16:57:24.970Z",
+    "location": "School Mosque",
+    "speaker": "Ustadh Abdurrahman Adeyemi",
+    "schedule": "10:00 AM - 1:00 PM",
+    "id": "school_events_0_mt4mfnxs"
   },
   {
-    "title": "Annual Qur'an Competition",
-    "description": "Inter-house Qur'an recitation competition. Categories include Tajweed, Memorization, and Tafsir.",
-    "category": "cultural",
-    "startDate": "2026-09-10T19:09:32.984Z",
-    "endDate": "2026-09-10T19:09:32.984Z",
-    "location": "School Auditorium",
-    "imageUrl": "/images/patterns/stars.svg",
-    "id": "school_events_1_mt1w9vwe",
-    "slug": "annual-quran-competition"
+    "slug": "arabic-poetry-competition",
+    "title": "Annual Arabic Poetry Competition",
+    "description": "Students showcase their Arabic poetry recitation skills.",
+    "category": "competition",
+    "startDate": "2026-10-06T16:57:24.970Z",
+    "endDate": "2026-10-06T16:57:24.970Z",
+    "location": "School Hall",
+    "speaker": "Mrs. Khadijah Suleiman",
+    "schedule": "9:00 AM - 12:00 PM",
+    "id": "school_events_1_mt4mfnxs"
   },
   {
-    "title": "Mid-Term Parent-Teacher Conference",
-    "description": "Opportunity for parents to meet with teachers and discuss student progress.",
-    "category": "parent-teacher",
-    "startDate": "2026-10-04T19:09:32.984Z",
-    "endDate": "2026-10-04T19:09:32.984Z",
-    "location": "Various Classrooms",
-    "id": "school_events_2_mt1w9vwe",
-    "slug": "mid-term-parent-teacher-conference"
+    "slug": "parent-teacher-meeting",
+    "title": "Parent-Teacher Meeting",
+    "description": "Termly meeting to discuss student progress.",
+    "category": "meeting",
+    "startDate": "2026-09-05T16:57:24.970Z",
+    "endDate": "2026-09-05T16:57:24.970Z",
+    "location": "School Hall",
+    "speaker": "Ustadh Abdurrahman Adeyemi",
+    "schedule": "10:00 AM - 1:00 PM",
+    "id": "school_events_2_mt4mfnxs"
   },
   {
-    "title": "Sports Day",
-    "description": "Annual inter-house sports competition featuring athletics, football, and traditional games.",
-    "category": "sports",
-    "startDate": "2026-10-19T19:09:32.984Z",
-    "endDate": "2026-10-19T19:09:32.984Z",
-    "location": "School Sports Field",
-    "imageUrl": "/images/patterns/stars.svg",
-    "id": "school_events_3_mt1w9vwe",
-    "slug": "sports-day"
+    "slug": "quran-competition-annual",
+    "title": "Annual Qur'an Recitation Competition",
+    "description": "Inter-class Qur'an recitation competition with prizes.",
+    "category": "competition",
+    "startDate": "2026-10-21T16:57:24.970Z",
+    "endDate": "2026-10-21T16:57:24.970Z",
+    "location": "School Mosque",
+    "speaker": "Ustadh Yusuf Olatunji",
+    "schedule": "9:00 AM - 2:00 PM",
+    "id": "school_events_3_mt4mfnxs"
   },
   {
-    "title": "End of Term Examinations",
-    "description": "First term examinations across all subjects. Schedule will be shared two weeks prior.",
-    "category": "exam",
-    "startDate": "2026-11-03T19:09:32.984Z",
-    "endDate": "2026-11-10T19:09:32.984Z",
-    "location": "Examination Halls",
-    "id": "school_events_4_mt1w9vwe",
-    "slug": "end-of-term-examinations"
+    "slug": "hadith-memorization-contest",
+    "title": "Hadith Memorization Contest",
+    "description": "Students compete in memorizing the Forty Hadith of Imam Nawawi.",
+    "category": "competition",
+    "startDate": "2026-11-05T16:57:24.970Z",
+    "endDate": "2026-11-05T16:57:24.970Z",
+    "location": "School Hall",
+    "speaker": "Ustadh Abdurrahman Adeyemi",
+    "schedule": "10:00 AM - 12:00 PM",
+    "id": "school_events_4_mt4mfnxs"
   },
   {
-    "title": "Cultural Day",
-    "description": "Celebration of Nigerian and Islamic cultures with food, music, and traditional attire.",
-    "category": "cultural",
-    "startDate": "2026-10-09T19:09:32.984Z",
-    "endDate": "2026-10-09T19:09:32.984Z",
-    "location": "School Grounds",
-    "imageUrl": "/images/patterns/stars.svg",
-    "id": "school_events_5_mt1w9vwe",
-    "slug": "cultural-day"
+    "slug": "open-day-1447",
+    "title": "Open Day for Prospective Parents",
+    "description": "Tour our facilities and learn about our Islamic and Arabic studies programs.",
+    "category": "open-day",
+    "startDate": "2026-11-20T16:57:24.970Z",
+    "endDate": "2026-11-20T16:57:24.970Z",
+    "location": "School Campus",
+    "speaker": "Mrs. Maryam Disu",
+    "schedule": "10:00 AM - 3:00 PM",
+    "id": "school_events_5_mt4mfnxs"
+  }
+],
+  "school_exam_results": [
+  {
+    "studentId": "MHS/1447/005",
+    "examId": 1,
+    "marks": 45,
+    "grade": "A",
+    "remarks": "Excellent performance in Tajweed.",
+    "id": "school_exam_results_0_mt4mfnxt"
+  },
+  {
+    "studentId": "MHS/1447/012",
+    "examId": 2,
+    "marks": 92,
+    "grade": "A+",
+    "remarks": "Outstanding understanding of Nahwu.",
+    "id": "school_exam_results_1_mt4mfnxt"
+  }
+],
+  "school_exam_schedules": [
+  {
+    "title": "Mid-Term Tajweed Exam",
+    "classId": "ibtidaiyah-1",
+    "date": "2026-09-12T16:57:24.970Z",
+    "duration": "60 min",
+    "totalMarks": 50,
+    "description": "Practical and written exam on Tajweed rules.",
+    "id": "school_exam_schedules_0_mt4mfnxt",
+    "slug": "mid-term-tajweed-exam"
+  },
+  {
+    "title": "Nahwu Final Exam",
+    "classId": "idadiyah-1",
+    "date": "2026-10-21T16:57:24.970Z",
+    "duration": "90 min",
+    "totalMarks": 100,
+    "description": "Comprehensive Arabic grammar exam.",
+    "id": "school_exam_schedules_1_mt4mfnxt",
+    "slug": "nahwu-final-exam"
   }
 ],
   "school_fees": [
   {
-    "name": "Primary School Tuition",
-    "classLevel": "primary",
-    "amount": 150000,
-    "currency": "NGN",
+    "name": "Tamheedy Tuition",
+    "classId": "tamheedy",
+    "amount": 25000,
     "frequency": "per-term",
-    "category": "tuition",
-    "description": "Tuition fee for primary school students per term.",
-    "active": true,
-    "id": "school_fees_0_mt1w9vwf",
-    "slug": "primary-school-tuition"
+    "description": "Tuition for Tamheedy level",
+    "id": "school_fees_0_mt4mfnxt",
+    "slug": "tamheedy-tuition"
   },
   {
-    "name": "Junior Secondary Tuition",
-    "classLevel": "junior-secondary",
-    "amount": 180000,
-    "currency": "NGN",
+    "name": "Ibtidaiyah Tuition",
+    "classId": "ibtidaiyah-1",
+    "amount": 30000,
     "frequency": "per-term",
-    "category": "tuition",
-    "description": "Tuition fee for junior secondary students per term.",
-    "active": true,
-    "id": "school_fees_1_mt1w9vwf",
-    "slug": "junior-secondary-tuition"
+    "description": "Tuition for Ibtidaiyah level",
+    "id": "school_fees_1_mt4mfnxt",
+    "slug": "ibtidaiyah-tuition"
   },
   {
-    "name": "Senior Secondary Tuition",
-    "classLevel": "senior-secondary",
-    "amount": 200000,
-    "currency": "NGN",
+    "name": "Idadiyah Tuition",
+    "classId": "idadiyah-1",
+    "amount": 35000,
     "frequency": "per-term",
-    "category": "tuition",
-    "description": "Tuition fee for senior secondary students per term.",
-    "active": true,
-    "id": "school_fees_2_mt1w9vwf",
-    "slug": "senior-secondary-tuition"
+    "description": "Tuition for Idadiyah level",
+    "id": "school_fees_2_mt4mfnxt",
+    "slug": "idadiyah-tuition"
+  },
+  {
+    "name": "Thanawiyyah Tuition",
+    "classId": "thanawiyyah-1",
+    "amount": 40000,
+    "frequency": "per-term",
+    "description": "Tuition for Thanawiyyah level",
+    "id": "school_fees_3_mt4mfnxt",
+    "slug": "thanawiyyah-tuition"
+  },
+  {
+    "name": "Hifz Program Fee",
+    "classId": "hifz-program",
+    "amount": 15000,
+    "frequency": "per-term",
+    "description": "Additional fee for Hifz program",
+    "id": "school_fees_4_mt4mfnxt",
+    "slug": "hifz-program-fee"
   },
   {
     "name": "Registration Fee",
-    "amount": 20000,
-    "currency": "NGN",
-    "frequency": "one-time",
-    "category": "tuition",
-    "description": "One-time registration fee for new students.",
-    "active": true,
-    "id": "school_fees_3_mt1w9vwf",
-    "slug": "registration-fee"
-  },
-  {
-    "name": "Transportation",
-    "amount": 30000,
-    "currency": "NGN",
-    "frequency": "per-term",
-    "category": "transport",
-    "description": "Optional school bus service per term.",
-    "active": true,
-    "id": "school_fees_4_mt1w9vwf",
-    "slug": "transportation"
-  },
-  {
-    "name": "Sports Fee",
+    "classId": "all",
     "amount": 5000,
-    "currency": "NGN",
-    "frequency": "per-term",
-    "category": "activities",
-    "description": "Sports and physical education fee per term.",
-    "active": true,
-    "id": "school_fees_5_mt1w9vwf",
-    "slug": "sports-fee"
+    "frequency": "one-time",
+    "description": "One-time registration fee",
+    "id": "school_fees_5_mt4mfnxt",
+    "slug": "registration-fee"
   }
 ],
   "school_gallery_albums": [
   {
-    "title": "Science Fair 2026",
-    "description": "Highlights from our annual science fair showcasing student projects.",
-    "coverImageUrl": "/images/patterns/architecture.svg",
-    "images": [
-      {
-        "url": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800",
-        "caption": "Student presenting robotics project"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800",
-        "caption": "Chemistry experiment demonstration"
-      }
-    ],
-    "category": "events",
-    "eventDate": "2026-08-20",
-    "createdAt": "2026-07-30T19:09:32.984Z",
-    "id": "school_gallery_albums_0_mt1w9vwe",
-    "slug": "science-fair-2026"
-  },
-  {
-    "title": "Hifz Graduation",
+    "title": "Hifz Graduation 1447 AH",
     "description": "Celebrating our Qur'an memorization graduates.",
-    "coverImageUrl": "/images/patterns/architecture.svg",
+    "coverImageUrl": "/images/patterns/quran.svg",
     "images": [
       {
-        "url": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800",
-        "caption": "Graduates with their certificates"
+        "url": "/images/patterns/quran.svg",
+        "caption": "Graduates receiving their Ijazah certificates"
       }
     ],
     "category": "achievements",
-    "eventDate": "2026-08-20",
-    "createdAt": "2026-08-06T19:09:32.984Z",
-    "id": "school_gallery_albums_1_mt1w9vwe",
-    "slug": "hifz-graduation"
+    "eventDate": "2026-08-22",
+    "createdAt": "2026-08-08T16:57:24.970Z",
+    "id": "school_gallery_albums_0_mt4mfnxs",
+    "slug": "hifz-graduation-1447-ah"
   },
   {
-    "title": "Campus Life",
-    "description": "Everyday moments at Minhaajulhudaa School.",
-    "coverImageUrl": "/images/patterns/architecture.svg",
+    "title": "Qur'an Recitation Competition",
+    "description": "Annual Qur'an recitation competition highlights.",
+    "coverImageUrl": "/images/patterns/quran.svg",
     "images": [
       {
-        "url": "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800",
-        "caption": "Students in class"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800",
-        "caption": "Library study session"
+        "url": "/images/patterns/quran.svg",
+        "caption": "Students reciting with Tajweed"
       }
     ],
-    "category": "campus",
-    "eventDate": "2026-08-20",
-    "createdAt": "2026-08-10T19:09:32.984Z",
-    "id": "school_gallery_albums_2_mt1w9vwe",
-    "slug": "campus-life"
+    "category": "events",
+    "eventDate": "2026-08-22",
+    "createdAt": "2026-08-01T16:57:24.970Z",
+    "id": "school_gallery_albums_1_mt4mfnxs",
+    "slug": "quran-recitation-competition"
+  },
+  {
+    "title": "Arabic Calligraphy Exhibition",
+    "description": "Student Arabic calligraphy works.",
+    "coverImageUrl": "/images/patterns/arabesque.svg",
+    "images": [
+      {
+        "url": "/images/patterns/arabesque.svg",
+        "caption": "Beautiful calligraphy by students"
+      }
+    ],
+    "category": "academic",
+    "eventDate": "2026-08-22",
+    "createdAt": "2026-07-23T16:57:24.970Z",
+    "id": "school_gallery_albums_2_mt4mfnxs",
+    "slug": "arabic-calligraphy-exhibition"
+  }
+],
+  "school_invoices": [
+  {
+    "invoiceNumber": "INV-1447-001",
+    "studentId": "MHS/1447/001",
+    "studentName": "Abdullah Muhammad",
+    "amount": 30000,
+    "status": "paid",
+    "dueDate": "2026-07-23T16:57:24.970Z",
+    "paidDate": "2026-07-28T16:57:24.970Z",
+    "description": "Term 1 Tuition + Registration",
+    "id": "school_invoices_0_mt4mfnxt"
+  },
+  {
+    "invoiceNumber": "INV-1447-002",
+    "studentId": "MHS/1447/005",
+    "studentName": "Maryam Sani",
+    "amount": 35000,
+    "status": "paid",
+    "dueDate": "2026-07-23T16:57:24.970Z",
+    "paidDate": "2026-07-25T16:57:24.970Z",
+    "description": "Term 1 Tuition",
+    "id": "school_invoices_1_mt4mfnxt"
+  },
+  {
+    "invoiceNumber": "INV-1447-003",
+    "studentId": "MHS/1447/012",
+    "studentName": "Aliyu Garba",
+    "amount": 55000,
+    "status": "pending",
+    "dueDate": "2026-08-29T16:57:24.970Z",
+    "description": "Term 1 Tuition + Hifz Program",
+    "id": "school_invoices_2_mt4mfnxt"
   }
 ],
   "school_lessons": [
   {
-    "courseId": "course-tajweed-001",
-    "title": "Introduction to Tajweed",
-    "content": "What is Tajweed and why is it important? Understanding the obligation of reciting the Qur'an correctly.",
-    "duration": 25,
+    "title": "Introduction to Arabic Alphabet",
+    "courseId": "introduction-to-nahwu",
+    "duration": "45 min",
+    "type": "video",
     "order": 1,
-    "resources": [],
-    "isPreview": true,
-    "id": "school_lessons_0_mt1w9vwf",
-    "slug": "introduction-to-tajweed"
+    "isFree": true,
+    "id": "school_lessons_0_mt4mfnxs",
+    "slug": "introduction-to-arabic-alphabet"
   },
   {
-    "courseId": "course-tajweed-001",
-    "title": "Articulation Points (Makharij) - Part 1",
-    "content": "Learn the articulation points of Arabic letters from the throat and tongue.",
-    "duration": 35,
+    "title": "Types of Words in Arabic (Ism, Fi'l, Harf)",
+    "courseId": "introduction-to-nahwu",
+    "duration": "60 min",
+    "type": "video",
     "order": 2,
-    "resources": [
-      {
-        "type": "pdf",
-        "url": "#",
-        "title": "Makharij Chart"
-      }
-    ],
-    "id": "school_lessons_1_mt1w9vwf",
-    "slug": "articulation-points-makharij-part-1"
+    "isFree": false,
+    "id": "school_lessons_1_mt4mfnxs",
+    "slug": "types-of-words-in-arabic-ism-fil-harf"
   },
   {
-    "courseId": "course-tajweed-001",
-    "title": "Articulation Points (Makharij) - Part 2",
-    "content": "Continue learning the articulation points of remaining letters.",
-    "duration": 32,
+    "title": "I'rab (Noun Cases)",
+    "courseId": "introduction-to-nahwu",
+    "duration": "50 min",
+    "type": "video",
     "order": 3,
-    "resources": [],
-    "id": "school_lessons_2_mt1w9vwf",
-    "slug": "articulation-points-makharij-part-2"
+    "isFree": false,
+    "id": "school_lessons_2_mt4mfnxs",
+    "slug": "irab-noun-cases"
   },
   {
-    "courseId": "course-tajweed-001",
-    "title": "Characteristics of Letters (Sifat) - Part 1",
-    "content": "Understanding the permanent and temporary characteristics of Arabic letters.",
-    "duration": 40,
-    "order": 4,
-    "resources": [],
-    "id": "school_lessons_3_mt1w9vwf",
-    "slug": "characteristics-of-letters-sifat-part-1"
-  },
-  {
-    "courseId": "course-arabic-001",
-    "title": "The Arabic Alphabet",
-    "content": "Learn to recognize, pronounce, and write all 28 Arabic letters.",
-    "duration": 30,
+    "title": "Makharij (Articulation Points)",
+    "courseId": "tajweed-rules-comprehensive",
+    "duration": "40 min",
+    "type": "video",
     "order": 1,
-    "resources": [],
-    "isPreview": true,
-    "id": "school_lessons_4_mt1w9vwf",
-    "slug": "the-arabic-alphabet"
+    "isFree": true,
+    "id": "school_lessons_3_mt4mfnxs",
+    "slug": "makharij-articulation-points"
   },
   {
-    "courseId": "course-arabic-001",
-    "title": "Vowel Marks (Harakat)",
-    "content": "Learn the Fatha, Kasra, Damma, and Sukun vowel marks.",
-    "duration": 25,
+    "title": "Sifat (Characteristics of Letters)",
+    "courseId": "tajweed-rules-comprehensive",
+    "duration": "55 min",
+    "type": "video",
     "order": 2,
-    "resources": [],
-    "id": "school_lessons_5_mt1w9vwf",
-    "slug": "vowel-marks-harakat"
+    "isFree": false,
+    "id": "school_lessons_4_mt4mfnxs",
+    "slug": "sifat-characteristics-of-letters"
   },
   {
-    "courseId": "course-arabic-001",
-    "title": "Joining Letters",
-    "content": "How letters join to form words in Arabic script.",
-    "duration": 35,
+    "title": "Rules of Noon Sakinah",
+    "courseId": "tajweed-rules-comprehensive",
+    "duration": "45 min",
+    "type": "video",
     "order": 3,
-    "resources": [],
-    "id": "school_lessons_6_mt1w9vwf",
-    "slug": "joining-letters"
+    "isFree": false,
+    "id": "school_lessons_5_mt4mfnxs",
+    "slug": "rules-of-noon-sakinah"
+  },
+  {
+    "title": "Conditions of Salah",
+    "courseId": "fiqh-of-salah",
+    "duration": "40 min",
+    "type": "video",
+    "order": 1,
+    "isFree": true,
+    "id": "school_lessons_6_mt4mfnxs",
+    "slug": "conditions-of-salah"
+  },
+  {
+    "title": "Pillars of Salah",
+    "courseId": "fiqh-of-salah",
+    "duration": "50 min",
+    "type": "video",
+    "order": 2,
+    "isFree": false,
+    "id": "school_lessons_7_mt4mfnxs",
+    "slug": "pillars-of-salah"
   }
 ],
   "school_library_books": [
   {
+    "slug": "tafsir-ibn-kathir",
     "title": "Tafsir Ibn Kathir (Abridged)",
-    "author": "Ibn Kathir",
-    "isbn": "978-1591440208",
-    "category": "quran",
-    "description": "A comprehensive tafsir of the Qur'an, abridged for accessibility.",
+    "author": "Imam Ibn Kathir",
+    "isbn": "978-1590040050",
+    "category": "tafsir",
+    "description": "One of the most renowned Tafsir of the Qur'an, abridged for students.",
     "coverImageUrl": "/images/patterns/books.svg",
     "pages": 800,
-    "language": "English",
+    "language": "Arabic/English",
     "publisher": "Darussalam",
     "publishYear": 2003,
-    "isDigital": true,
+    "isDigital": false,
     "available": true,
-    "id": "school_library_books_0_mt1w9vwf",
-    "slug": "tafsir-ibn-kathir-abridged"
+    "id": "school_library_books_0_mt4mfnxr"
   },
   {
-    "title": "Riyad as-Saliheen",
-    "author": "Imam Nawawi",
-    "isbn": "978-1591440475",
+    "slug": "sahih-al-bukhari",
+    "title": "Sahih al-Bukhari",
+    "author": "Imam al-Bukhari",
+    "isbn": "978-9960-717-31-5",
     "category": "hadith",
-    "description": "Collection of hadiths on ethics, manners, and worship.",
+    "description": "The most authentic book after the Qur'an. Collection of Hadith of the Prophet (PBUH).",
     "coverImageUrl": "/images/patterns/books.svg",
-    "pages": 700,
-    "language": "English",
-    "publisher": "Darussalam",
+    "pages": 1200,
+    "language": "Arabic",
+    "publisher": "Dar al-Kotob al-Ilmiyah",
     "publishYear": 1999,
-    "isDigital": true,
+    "isDigital": false,
     "available": true,
-    "id": "school_library_books_1_mt1w9vwf",
-    "slug": "riyad-as-saliheen"
+    "id": "school_library_books_1_mt4mfnxr"
   },
   {
-    "title": "Arabic Course for English-Speaking Students",
-    "author": "Dr. V. Abdur Rahim",
-    "isbn": "978-1872531519",
+    "slug": "sahih-muslim",
+    "title": "Sahih Muslim",
+    "author": "Imam Muslim",
+    "isbn": "978-9960-717-32-2",
+    "category": "hadith",
+    "description": "The second most authentic Hadith collection.",
+    "coverImageUrl": "/images/patterns/books.svg",
+    "pages": 1100,
+    "language": "Arabic",
+    "publisher": "Dar al-Kotob al-Ilmiyah",
+    "publishYear": 1999,
+    "isDigital": false,
+    "available": true,
+    "id": "school_library_books_2_mt4mfnxr"
+  },
+  {
+    "slug": "al-arabiyyah-bayna-yadayk",
+    "title": "Al-Arabiyyah Bayna Yadayk",
+    "author": "Dr. Muhammad Ali",
+    "isbn": "978-9960-9801-1-4",
     "category": "arabic",
-    "description": "Three-volume Arabic language course widely used in Islamic universities.",
+    "description": "Popular Arabic language learning series for non-native speakers.",
     "coverImageUrl": "/images/patterns/books.svg",
-    "pages": 450,
-    "language": "English/Arabic",
-    "publisher": "UK Islamic Academy",
-    "publishYear": 2003,
+    "pages": 300,
+    "language": "Arabic",
+    "publisher": "Arabic for All",
+    "publishYear": 2008,
     "isDigital": false,
     "available": true,
-    "id": "school_library_books_2_mt1w9vwf",
-    "slug": "arabic-course-for-english-speaking-students"
+    "id": "school_library_books_3_mt4mfnxr"
   },
   {
-    "title": "Sealed Nectar (Ar-Raheeq Al-Makhtum)",
-    "author": "Safiur-Rahman Mubarakpuri",
-    "isbn": "978-1591440710",
-    "category": "seerah",
-    "description": "Award-winning biography of the Prophet Muhammad (PBUH).",
-    "coverImageUrl": "/images/patterns/books.svg",
-    "pages": 500,
-    "language": "English",
-    "publisher": "Darussalam",
-    "publishYear": 2002,
-    "isDigital": true,
-    "available": true,
-    "id": "school_library_books_3_mt1w9vwf",
-    "slug": "sealed-nectar-ar-raheeq-al-makhtum"
-  },
-  {
-    "title": "Foundation Mathematics for JSS",
-    "author": "M. A. Adeyemi",
-    "isbn": "978-9781234567",
-    "category": "academic",
-    "description": "Comprehensive mathematics textbook aligned with the JSS curriculum.",
-    "coverImageUrl": "/images/patterns/books.svg",
-    "pages": 320,
-    "language": "English",
-    "publisher": "Minhaajulhudaa Press",
-    "publishYear": 2024,
-    "isDigital": false,
-    "available": true,
-    "id": "school_library_books_4_mt1w9vwf",
-    "slug": "foundation-mathematics-for-jss"
-  },
-  {
-    "title": "Innovative Science for Senior Secondary",
-    "author": "Dr. A. B. Mohammed",
-    "isbn": "978-9782345678",
-    "category": "academic",
-    "description": "Integrated science textbook covering physics, chemistry, and biology.",
+    "slug": "nahwu-al-wadih",
+    "title": "Al-Nahwu al-Wadih",
+    "author": "Ali al-Jarim & Mustafa Amin",
+    "isbn": "978-977-09-0001-1",
+    "category": "arabic",
+    "description": "Classic Arabic grammar textbook used in Islamic schools worldwide.",
     "coverImageUrl": "/images/patterns/books.svg",
     "pages": 400,
-    "language": "English",
-    "publisher": "Minhaajulhudaa Press",
-    "publishYear": 2024,
+    "language": "Arabic",
+    "publisher": "Dar al-Maarif",
+    "publishYear": 2005,
     "isDigital": false,
     "available": true,
-    "id": "school_library_books_5_mt1w9vwf",
-    "slug": "innovative-science-for-senior-secondary"
+    "id": "school_library_books_4_mt4mfnxr"
+  },
+  {
+    "slug": "fiqh-us-sunnah",
+    "title": "Fiqh us-Sunnah",
+    "author": "Sayyid Sabiq",
+    "isbn": "978-09159577-0-3",
+    "category": "fiqh",
+    "description": "Comprehensive guide to Islamic jurisprudence based on Qur'an and Sunnah.",
+    "coverImageUrl": "/images/patterns/books.svg",
+    "pages": 500,
+    "language": "Arabic/English",
+    "publisher": "American Trust Publications",
+    "publishYear": 1993,
+    "isDigital": false,
+    "available": true,
+    "id": "school_library_books_5_mt4mfnxr"
+  }
+],
+  "school_messages": [
+  {
+    "studentId": "MHS/1447/001",
+    "from": "teacher",
+    "fromName": "Mrs. Aisha Abdullahi",
+    "subject": "Abdullah's Progress",
+    "message": "Abdullah is doing well in his Qur'an reading. He has memorized Surah Al-Fatihah and Al-Ikhlas.",
+    "read": false,
+    "sentAt": "2026-08-19T16:57:24.970Z",
+    "id": "school_messages_0_mt4mfnxt"
+  },
+  {
+    "studentId": "MHS/1447/005",
+    "from": "admin",
+    "fromName": "Admin Office",
+    "subject": "Fee Payment Reminder",
+    "message": "This is a reminder that Term 1 fees are due by the end of this week.",
+    "read": false,
+    "sentAt": "2026-08-17T16:57:24.970Z",
+    "id": "school_messages_1_mt4mfnxt"
+  }
+],
+  "school_orders": [
+  {
+    "orderNumber": "ORD-001",
+    "customerName": "Muhammad Ali",
+    "customerEmail": "muhammad.ali@example.com",
+    "customerPhone": "+2348031111111",
+    "items": [
+      {
+        "name": "Mushaf Tajweed Color-Coded",
+        "quantity": 1,
+        "price": 8500
+      }
+    ],
+    "total": 8500,
+    "status": "completed",
+    "paymentStatus": "paid",
+    "orderedAt": "2026-08-12T16:57:24.970Z",
+    "id": "school_orders_0_mt4mfnxt"
+  },
+  {
+    "orderNumber": "ORD-002",
+    "customerName": "Ibrahim Musa",
+    "customerEmail": "ibrahim.musa@example.com",
+    "customerPhone": "+2348032222222",
+    "items": [
+      {
+        "name": "Arabic Grammar Textbook",
+        "quantity": 1,
+        "price": 3500
+      },
+      {
+        "name": "Sarf Textbook",
+        "quantity": 1,
+        "price": 4000
+      }
+    ],
+    "total": 7500,
+    "status": "completed",
+    "paymentStatus": "paid",
+    "orderedAt": "2026-08-15T16:57:24.970Z",
+    "id": "school_orders_1_mt4mfnxt"
   }
 ],
   "school_pages": [
   {
     "slug": "about",
-    "title": "About Minhaajulhudaa School",
+    "title": "About Minhaajulhudaa Islamic & Arabic School",
     "content": [
       {
         "type": "hero",
         "title": "About Us",
-        "subtitle": "Nurturing minds with knowledge and faith"
+        "subtitle": "Nurturing minds with Islamic knowledge and Arabic excellence"
       },
       {
         "type": "text",
-        "body": "Minhaajulhudaa School was established in 2021 with a vision to provide quality education that combines academic excellence with authentic Islamic values. Our curriculum integrates the Nigerian national curriculum with comprehensive Islamic studies, Arabic language, and Qur'an memorization programs."
+        "body": "Minhaajulhudaa Islamic & Arabic School was established in 1444 AH (2021 CE) with a vision to provide authentic Islamic education and Arabic language mastery. Our curriculum is purely Islamic and Arabic studies, covering from foundational Tahdheeb to advanced Thanawiyyah level. We do not offer secular education - our focus is entirely on producing scholars of the Qur'an, Hadith, Fiqh, and Arabic language."
       },
       {
         "type": "text",
-        "body": "We believe every child is unique and deserves an education that develops their intellectual, spiritual, physical, and social potential. Our dedicated teachers create a nurturing environment where students thrive academically and grow as conscientious Muslims."
+        "body": "Our school follows the traditional Madrasah system adapted for modern times, with structured progression from Tamheedy (Preparatory) through Ibtidaiyah (Elementary), Idadiyah (Intermediate), to Thanawiyyah (Secondary) levels. Each level builds upon the previous, ensuring a comprehensive understanding of Islamic sciences."
       }
     ],
-    "seoTitle": "About Minhaajulhudaa School",
-    "seoDescription": "Learn about Minhaajulhudaa School - providing quality Islamic education since 2021.",
+    "seoTitle": "About Minhaajulhudaa Islamic & Arabic School",
+    "seoDescription": "Authentic Islamic and Arabic education from Tamheedy to Thanawiyyah level.",
     "status": "published",
-    "publishedAt": "2026-07-21T19:09:32.984Z",
+    "publishedAt": "2026-07-23T16:57:24.970Z",
     "order": 1,
-    "id": "school_pages_0_mt1w9vwd"
+    "id": "school_pages_0_mt4mfnxq"
   },
   {
     "slug": "contact",
@@ -3682,175 +3808,147 @@ export const seedData: Record<string, any[]> = {
       {
         "type": "hero",
         "title": "Get in Touch",
-        "subtitle": "We are here to help"
+        "subtitle": "We are here to serve the Ummah"
       },
       {
         "type": "text",
-        "body": "Reach out to us for admissions, inquiries, or to schedule a visit to our campus."
+        "body": "Reach out to us for admissions, inquiries, or to schedule a visit to our school."
       }
     ],
-    "seoTitle": "Contact Minhaajulhudaa School",
+    "seoTitle": "Contact Minhaajulhudaa Islamic & Arabic School",
     "seoDescription": "Contact information for Minhaajulhudaa School.",
     "status": "published",
-    "publishedAt": "2026-07-21T19:09:32.984Z",
+    "publishedAt": "2026-07-23T16:57:24.970Z",
     "order": 2,
-    "id": "school_pages_1_mt1w9vwd"
+    "id": "school_pages_1_mt4mfnxq"
+  }
+],
+  "school_payments": [
+  {
+    "invoiceId": "INV-1447-001",
+    "studentId": "MHS/1447/001",
+    "amount": 30000,
+    "method": "bank_transfer",
+    "reference": "TRF-001",
+    "status": "confirmed",
+    "paidAt": "2026-07-28T16:57:24.970Z",
+    "id": "school_payments_0_mt4mfnxt"
+  },
+  {
+    "invoiceId": "INV-1447-002",
+    "studentId": "MHS/1447/005",
+    "amount": 35000,
+    "method": "cash",
+    "reference": "CASH-001",
+    "status": "confirmed",
+    "paidAt": "2026-07-25T16:57:24.970Z",
+    "id": "school_payments_1_mt4mfnxt"
   }
 ],
   "school_products": [
   {
-    "slug": "school-uniform-primary",
-    "name": "School Uniform - Primary",
-    "description": "Official school uniform set for primary students. Includes shirt, trousers/skirt, and blazer.",
-    "price": 15000,
-    "compareAtPrice": 18000,
-    "category": "uniforms",
-    "images": [
-      "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800"
-    ],
+    "slug": "mushaf-tajweed-color-coded",
+    "name": "Color-Coded Tajweed Mushaf",
+    "description": "Complete Qur'an with color-coded Tajweed rules for easy learning.",
+    "price": 8500,
+    "category": "quran",
     "stock": 50,
-    "sku": "UNI-PRI-001",
-    "variants": [
-      {
-        "name": "Size",
-        "options": [
-          "6",
-          "8",
-          "10",
-          "12",
-          "14"
-        ]
-      }
-    ],
+    "sku": "MSHF-TJW-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_0_mt1w9vwf"
+    "id": "school_products_0_mt4mfnxr"
   },
   {
-    "slug": "school-uniform-secondary",
-    "name": "School Uniform - Secondary",
-    "description": "Official school uniform set for secondary students. Includes shirt, trousers/skirt, and blazer.",
-    "price": 18000,
-    "category": "uniforms",
-    "images": [
-      "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800"
-    ],
-    "stock": 40,
-    "sku": "UNI-SEC-001",
-    "variants": [
-      {
-        "name": "Size",
-        "options": [
-          "S",
-          "M",
-          "L",
-          "XL"
-        ]
-      }
-    ],
-    "isDigital": false,
-    "status": "active",
-    "id": "school_products_1_mt1w9vwf"
-  },
-  {
-    "slug": "quran-textbook-grade1",
-    "name": "Qur'an Studies Textbook - Grade 1",
-    "description": "Comprehensive Qur'an studies textbook for Grade 1 students following the Minhaajulhudaa curriculum.",
+    "slug": "arabic-grammar-textbook-1",
+    "name": "Arabic Grammar Textbook (Nahwu) - Level 1",
+    "description": "Comprehensive textbook covering basic Arabic grammar rules for Ibtidaiyah students.",
     "price": 3500,
-    "category": "books",
-    "images": [
-      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800"
-    ],
+    "category": "textbooks",
     "stock": 100,
-    "sku": "BK-QUR-G1-001",
+    "sku": "TXT-NHW-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_2_mt1w9vwf"
+    "id": "school_products_1_mt4mfnxr"
   },
   {
-    "slug": "arabic-textbook-beginners",
-    "name": "Arabic Language for Beginners",
-    "description": "Foundational Arabic language textbook with exercises and audio companion.",
-    "price": 4500,
-    "category": "books",
-    "images": [
-      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800"
-    ],
-    "stock": 75,
-    "sku": "BK-ARA-001",
-    "isDigital": false,
-    "status": "active",
-    "id": "school_products_3_mt1w9vwf"
-  },
-  {
-    "slug": "mathematics-workbook-jss",
-    "name": "Mathematics Workbook - JSS",
-    "description": "Practice workbook covering the complete JSS mathematics curriculum with 500+ problems.",
-    "price": 3000,
-    "category": "books",
-    "images": [
-      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800"
-    ],
+    "slug": "sarf-textbook",
+    "name": "Arabic Morphology (Sarf) Textbook",
+    "description": "Complete guide to Arabic word formation and morphology patterns.",
+    "price": 4000,
+    "category": "textbooks",
     "stock": 80,
-    "sku": "BK-MAT-JSS-001",
+    "sku": "TXT-SRF-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_4_mt1w9vwf"
+    "id": "school_products_2_mt4mfnxr"
   },
   {
-    "slug": "school-bag-official",
-    "name": "Official School Bag",
-    "description": "Durable, branded school bag with multiple compartments and ergonomic design.",
-    "price": 8000,
-    "compareAtPrice": 10000,
-    "category": "supplies",
-    "images": [
-      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800"
-    ],
+    "slug": "tajweed-rules-handbook",
+    "name": "Tajweed Rules Handbook",
+    "description": "A compact reference guide to all Tajweed rules with examples.",
+    "price": 2000,
+    "category": "reference",
+    "stock": 150,
+    "sku": "REF-TJW-001",
+    "isDigital": false,
+    "status": "active",
+    "id": "school_products_3_mt4mfnxr"
+  },
+  {
+    "slug": "hadith-forty-nawawi",
+    "name": "Forty Hadith of Imam Nawawi - Commentary",
+    "description": "Arabic text with comprehensive commentary and explanation.",
+    "price": 5000,
+    "category": "hadith",
     "stock": 60,
-    "sku": "SUP-BAG-001",
+    "sku": "BK-HDTH-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_5_mt1w9vwf"
+    "id": "school_products_4_mt4mfnxr"
   },
   {
-    "slug": "sports-kit",
-    "name": "Sports Kit",
-    "description": "Complete sports kit including jersey, shorts, and socks with school branding.",
+    "slug": "fiqh-maliki-textbook",
+    "name": "Fiqh al-Ibadat (Maliki School)",
+    "description": "Comprehensive textbook on Islamic rulings of worship according to the Maliki school.",
     "price": 6000,
-    "category": "supplies",
-    "images": [
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
-    ],
-    "stock": 45,
-    "sku": "SUP-SPT-001",
+    "category": "fiqh",
+    "stock": 70,
+    "sku": "TXT-FQH-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_6_mt1w9vwf"
+    "id": "school_products_5_mt4mfnxr"
   },
   {
     "slug": "digital-tajweed-guide",
-    "name": "Digital Tajweed Guide (PDF)",
-    "description": "Comprehensive digital guide to Tajweed rules with audio examples and practice exercises.",
-    "price": 2000,
+    "name": "Digital Tajweed Guide",
+    "description": "Interactive digital guide with audio examples of Tajweed rules.",
+    "price": 1500,
     "category": "digital",
-    "images": [
-      "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800"
-    ],
     "stock": 999,
-    "sku": "DIG-TAJ-001",
+    "sku": "DGT-TJW-001",
     "isDigital": true,
-    "downloadUrl": "https://minhaajulhudaa.com/files/tajweed-guide.pdf",
     "status": "active",
-    "id": "school_products_7_mt1w9vwf"
+    "id": "school_products_6_mt4mfnxr"
+  },
+  {
+    "slug": "arabic-flashcards",
+    "name": "Arabic Alphabet Flashcards",
+    "description": "Set of 28 flashcards with Arabic letters, pronunciation, and example words.",
+    "price": 1500,
+    "category": "learning-aids",
+    "stock": 200,
+    "sku": "AID-ABC-001",
+    "isDigital": false,
+    "status": "active",
+    "id": "school_products_7_mt4mfnxr"
   }
 ],
   "school_programs": [
   {
     "slug": "hifz-program",
     "title": "Hifz (Qur'an Memorization) Program",
-    "category": "islamic-studies",
-    "description": "A structured program for memorizing the entire Qur'an with proper Tajweed, integrated with regular academic studies.",
+    "category": "quran",
+    "description": "A structured program for memorizing the entire Qur'an with proper Tajweed. Students progress through daily memorization targets, regular revision (Muraja'ah), and monthly assessments. The program is integrated with our regular Islamic studies curriculum.",
     "curriculum": "The program follows a progressive memorization schedule: 2-3 pages daily for beginners, increasing as proficiency grows. Daily revision (Muraja'ah) of previously memorized portions. Weekly assessment with the lead Hifz teacher. Monthly evaluation with external examiners. Annual certification upon completion.",
     "duration": "3-5 years",
     "requirements": [
@@ -3869,144 +3967,117 @@ export const seedData: Record<string, any[]> = {
     "instructor": "Ustadh Yusuf Olatunji",
     "fee": 50000,
     "status": "open",
-    "id": "school_programs_0_mt1w9vwe"
+    "id": "school_programs_0_mt4mfnxr"
   },
   {
     "slug": "arabic-immersion",
-    "title": "Arabic Language Immersion",
-    "category": "islamic-studies",
-    "description": "An enhanced Arabic language program designed to achieve conversational fluency and Qur'anic comprehension.",
-    "curriculum": "Daily conversational Arabic sessions, Arabic-only zones, cultural activities, weekly Arabic storytelling, and integration with Islamic Studies. Uses modern communicative language teaching methods.",
-    "duration": "Ongoing (all levels)",
+    "title": "Arabic Language Immersion Program",
+    "category": "arabic",
+    "description": "A comprehensive Arabic language program covering Nahwu (grammar), Sarf (morphology), Balaghah (rhetoric), and Adab (literature). Students develop fluency in reading, writing, and speaking classical Arabic.",
+    "curriculum": "Foundation: Arabic alphabet, basic reading and writing, simple sentences. Intermediate: Nahwu rules, Sarf patterns, reading short texts. Advanced: Classical Arabic literature, Tafsir texts, Hadith commentary, composition and debate.",
+    "duration": "6-9 years (across all levels)",
     "requirements": [
-      "Enrolled student",
-      "Commitment to practice"
+      "Age 5+",
+      "No prior Arabic knowledge required for entry level",
+      "Commitment to daily practice"
     ],
     "outcomes": [
-      "Conversational fluency",
-      "Qur'anic Arabic comprehension",
-      "Cultural understanding",
-      "Preparation for advanced Arabic studies"
+      "Fluency in classical Arabic",
+      "Ability to read Islamic texts independently",
+      "Certificate in Arabic Language",
+      "Preparation for advanced Islamic studies"
     ],
-    "imageUrl": "/images/patterns/quran.svg",
+    "imageUrl": "/images/patterns/books.svg",
     "instructor": "Mrs. Khadijah Suleiman",
-    "fee": 0,
+    "fee": 40000,
     "status": "open",
-    "id": "school_programs_1_mt1w9vwe"
+    "id": "school_programs_1_mt4mfnxr"
   },
   {
-    "slug": "stem-robotics",
-    "title": "STEM & Robotics Program",
-    "category": "extracurricular",
-    "description": "Hands-on program exploring science, technology, engineering, and mathematics through robotics and coding.",
-    "curriculum": "Weekly sessions covering block-based coding, introduction to Python, robotics building and programming, participation in local and national robotics competitions.",
-    "duration": "1 academic year",
+    "slug": "tajweed-program",
+    "title": "Tajweed and Qira'at Program",
+    "category": "quran",
+    "description": "Specialized program focusing on the science of Tajweed - the proper recitation of the Qur'an. Covers Makharij (articulation points), Sifat (characteristics of letters), and the rules of recitation.",
+    "curriculum": "Level 1: Makharij and basic Sifat. Level 2: Rules of Noon Sakinah, Tanween, and Meem Sakinah. Level 3: Rules of Madd and its categories. Level 4: Advanced Tajweed and introduction to Qira'at.",
+    "duration": "2-3 years",
     "requirements": [
-      "Age 10+",
-      "Basic computer literacy",
-      "Science aptitude"
+      "Age 6+",
+      "Basic Qur'an reading ability",
+      "Passing Tajweed assessment"
     ],
     "outcomes": [
-      "Coding proficiency",
-      "Robotics building skills",
-      "Problem-solving abilities",
-      "Competition experience"
+      "Mastery of Tajweed rules",
+      "Beautiful and correct Qur'an recitation",
+      "Preparation for Ijazah certification"
     ],
     "imageUrl": "/images/patterns/quran.svg",
-    "instructor": "Ustadh Muhammad Bashir",
+    "instructor": "Ustadh Yusuf Olatunji",
     "fee": 30000,
     "status": "open",
-    "id": "school_programs_2_mt1w9vwe"
+    "id": "school_programs_2_mt4mfnxr"
   },
   {
-    "slug": "sports-academy",
-    "title": "Sports Academy",
-    "category": "sports",
-    "description": "Comprehensive sports program developing physical fitness, teamwork, and competitive skills.",
-    "curriculum": "Football, basketball, athletics, swimming, and traditional sports. Training sessions three times weekly with certified coaches.",
-    "duration": "Ongoing",
+    "slug": "fiqh-studies",
+    "title": "Fiqh (Islamic Jurisprudence) Program",
+    "category": "islamic-studies",
+    "description": "Comprehensive study of Islamic jurisprudence covering the rulings of Taharah (purification), Salah (prayer), Zakah, Sawm (fasting), and Hajj, based on the primary sources of Qur'an and Sunnah.",
+    "curriculum": "Level 1: Taharah and Salah. Level 2: Zakah and Sawm. Level 3: Hajj and Umrah. Level 4: Mu'amalat (transactions) and family law. Based on the Maliki school with comparison to other schools.",
+    "duration": "4-6 years",
     "requirements": [
-      "Medical fitness clearance",
-      "Sports attire"
+      "Completion of Ibtidaiyah level",
+      "Basic Arabic reading ability",
+      "Understanding of basic Islamic concepts"
     ],
     "outcomes": [
-      "Physical fitness",
-      "Teamwork skills",
-      "Competitive experience",
-      "Sportsmanship"
+      "Comprehensive understanding of Islamic rulings",
+      "Ability to apply Fiqh in daily life",
+      "Certificate in Islamic Jurisprudence"
     ],
-    "imageUrl": "/images/patterns/quran.svg",
-    "instructor": "Coach Abdullah Hassan",
-    "fee": 20000,
+    "imageUrl": "/images/patterns/arabesque.svg",
+    "instructor": "Ustadh Abdurrahman Adeyemi",
+    "fee": 35000,
     "status": "open",
-    "id": "school_programs_3_mt1w9vwe"
+    "id": "school_programs_3_mt4mfnxr"
   }
 ],
   "school_quizzes": [
   {
-    "courseId": "course-tajweed-001",
-    "lessonId": "lesson-tajweed-001",
-    "title": "Tajweed Basics Quiz",
-    "description": "Test your understanding of basic Tajweed concepts.",
-    "questions": [
-      {
-        "question": "What does Tajweed mean?",
-        "options": [
-          "Beautiful recitation",
-          "Rules of recitation",
-          "Memorization",
-          "Translation"
-        ],
-        "correct": 1
-      },
-      {
-        "question": "How many articulation points (Makharij) are there?",
-        "options": [
-          "5",
-          "12",
-          "17",
-          "28"
-        ],
-        "correct": 2
-      }
-    ],
-    "timeLimitMinutes": 15,
-    "passingScore": 70,
-    "attempts": 45,
-    "id": "school_quizzes_0_mt1w9vwg",
-    "slug": "tajweed-basics-quiz"
-  },
-  {
-    "courseId": "course-arabic-001",
     "title": "Arabic Alphabet Quiz",
-    "description": "Test your knowledge of the Arabic alphabet.",
+    "courseId": "introduction-to-nahwu",
+    "lessonId": 1,
     "questions": [
       {
         "question": "How many letters are in the Arabic alphabet?",
         "options": [
           "26",
           "28",
-          "30",
-          "32"
+          "29",
+          "30"
         ],
-        "correct": 1
-      },
-      {
-        "question": "Which letter is pronounced from the throat?",
-        "options": [
-          "ب",
-          "ت",
-          "ع",
-          "م"
-        ],
-        "correct": 2
+        "correctAnswer": 1
       }
     ],
-    "timeLimitMinutes": 10,
-    "passingScore": 70,
-    "attempts": 67,
-    "id": "school_quizzes_1_mt1w9vwg",
+    "id": "school_quizzes_0_mt4mfnxs",
     "slug": "arabic-alphabet-quiz"
+  },
+  {
+    "title": "Tajweed Basics Quiz",
+    "courseId": "tajweed-rules-comprehensive",
+    "lessonId": 1,
+    "questions": [
+      {
+        "question": "What does Tajweed mean?",
+        "options": [
+          "To recite quickly",
+          "To recite properly",
+          "To memorize",
+          "To translate"
+        ],
+        "correctAnswer": 1
+      }
+    ],
+    "id": "school_quizzes_1_mt4mfnxs",
+    "slug": "tajweed-basics-quiz"
   }
 ],
   "school_staff": [
@@ -4016,13 +4087,13 @@ export const seedData: Record<string, any[]> = {
     "lastName": "Adeyemi",
     "role": "principal",
     "subjects": [],
-    "qualifications": "B.Ed Educational Administration, M.Ed Islamic Education",
-    "email": "school.admin@minhaajulhudaa.com",
+    "qualifications": "B.Ed Islamic Education, M.Ed Educational Administration, Ijazah in Qur'an recitation",
+    "email": "school.admin@minhaajulhudaa.org",
     "phone": "+2348000000001",
     "bio": "With over 20 years of experience in Islamic education, Ustadh Abdurrahman leads our school with wisdom and vision.",
     "joinDate": "2021-01-15",
     "status": "active",
-    "id": "school_staff_0_mt1w9vwe"
+    "id": "school_staff_0_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/002",
@@ -4034,13 +4105,13 @@ export const seedData: Record<string, any[]> = {
       "Tajweed",
       "Hifz"
     ],
-    "qualifications": "B.A Islamic Studies, Ijazah in Qur'an recitation",
-    "email": "yusuf.olatunji@minhaajulhudaa.com",
+    "qualifications": "B.A Islamic Studies, Ijazah in the 10 recitations of the Qur'an",
+    "email": "yusuf.olatunji@minhaajulhudaa.org",
     "phone": "+2348011111111",
-    "bio": "Lead Hifz instructor with Ijazah in the 10 recitations of the Qur'an.",
+    "bio": "Lead Hifz instructor with Ijazah in the canonical recitations of the Qur'an.",
     "joinDate": "2021-02-01",
     "status": "active",
-    "id": "school_staff_1_mt1w9vwe"
+    "id": "school_staff_1_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/003",
@@ -4048,17 +4119,17 @@ export const seedData: Record<string, any[]> = {
     "lastName": "Bashir",
     "role": "teacher",
     "subjects": [
-      "Mathematics",
-      "Physics",
-      "Robotics"
+      "Fiqh",
+      "Usul al-Fiqh",
+      "Aqeedah"
     ],
-    "qualifications": "B.Sc Mathematics, M.Sc Physics Education",
-    "email": "muhammad.bashir@minhaajulhudaa.com",
+    "qualifications": "B.A Islamic Law, M.A Usul al-Fiqh (Al-Azhar University)",
+    "email": "muhammad.bashir@minhaajulhudaa.org",
     "phone": "+2348012222222",
-    "bio": "STEM coordinator passionate about making science accessible to all students.",
+    "bio": "Fiqh and Usul al-Fiqh specialist, Al-Azhar graduate.",
     "joinDate": "2021-03-10",
     "status": "active",
-    "id": "school_staff_2_mt1w9vwe"
+    "id": "school_staff_2_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/004",
@@ -4066,16 +4137,16 @@ export const seedData: Record<string, any[]> = {
     "lastName": "Abdullahi",
     "role": "teacher",
     "subjects": [
-      "English Language",
-      "Literature"
+      "Tahdheeb",
+      "Qur'an Reading"
     ],
-    "qualifications": "B.A English, PGDE",
-    "email": "aisha.abdullahi@minhaajulhudaa.com",
+    "qualifications": "B.Ed Islamic Education, Diploma in Child Psychology",
+    "email": "aisha.abdullahi@minhaajulhudaa.org",
     "phone": "+2348013333333",
-    "bio": "English and Literature teacher with a passion for developing young writers.",
+    "bio": "Specialist in early Islamic education for young children.",
     "joinDate": "2021-09-01",
     "status": "active",
-    "id": "school_staff_3_mt1w9vwe"
+    "id": "school_staff_3_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/005",
@@ -4084,15 +4155,17 @@ export const seedData: Record<string, any[]> = {
     "role": "teacher",
     "subjects": [
       "Arabic Language",
-      "Islamic Studies"
+      "Nahwu",
+      "Sarf",
+      "Balaghah"
     ],
-    "qualifications": "B.A Arabic Language, Diploma in Shariah",
-    "email": "khadijah.suleiman@minhaajulhudaa.com",
+    "qualifications": "B.A Arabic Language, M.A Arabic Literature (Islamic University of Madinah)",
+    "email": "khadijah.suleiman@minhaajulhudaa.org",
     "phone": "+2348014444444",
     "bio": "Native Arabic speaker with expertise in teaching Arabic to non-native speakers.",
     "joinDate": "2022-01-10",
     "status": "active",
-    "id": "school_staff_4_mt1w9vwe"
+    "id": "school_staff_4_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/006",
@@ -4100,16 +4173,17 @@ export const seedData: Record<string, any[]> = {
     "lastName": "Musa",
     "role": "teacher",
     "subjects": [
-      "Biology",
-      "Chemistry"
+      "Hadith",
+      "Mustalah al-Hadith",
+      "Tafsir"
     ],
-    "qualifications": "B.Sc Biology, M.Sc Chemistry",
-    "email": "ibrahim.musa@minhaajulhudaa.com",
+    "qualifications": "B.A Hadith Sciences, M.A Tafsir (Islamic University of Madinah)",
+    "email": "ibrahim.musa@minhaajulhudaa.org",
     "phone": "+2348015555555",
-    "bio": "Science teacher with research experience in environmental science.",
+    "bio": "Hadith and Tafsir specialist with extensive knowledge of classical commentaries.",
     "joinDate": "2022-09-01",
     "status": "active",
-    "id": "school_staff_5_mt1w9vwe"
+    "id": "school_staff_5_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/007",
@@ -4117,13 +4191,13 @@ export const seedData: Record<string, any[]> = {
     "lastName": "Bello",
     "role": "librarian",
     "subjects": [],
-    "qualifications": "B.Library Science",
-    "email": "fatima.bello@minhaajulhudaa.com",
+    "qualifications": "B.Library Science, Diploma in Arabic Manuscripts",
+    "email": "fatima.bello@minhaajulhudaa.org",
     "phone": "+2348016666666",
-    "bio": "Our librarian curates a growing collection of over 5,000 titles.",
+    "bio": "Our librarian curates a growing collection of over 3,000 Islamic texts.",
     "joinDate": "2021-09-05",
     "status": "active",
-    "id": "school_staff_6_mt1w9vwe"
+    "id": "school_staff_6_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/008",
@@ -4132,12 +4206,12 @@ export const seedData: Record<string, any[]> = {
     "role": "accountant",
     "subjects": [],
     "qualifications": "B.Sc Accounting, ACA",
-    "email": "abdullah.okafor@minhaajulhudaa.com",
+    "email": "abdullah.okafor@minhaajulhudaa.org",
     "phone": "+2348017777777",
     "bio": "Chartered accountant overseeing school finances and fee management.",
     "joinDate": "2021-04-01",
     "status": "active",
-    "id": "school_staff_7_mt1w9vwe"
+    "id": "school_staff_7_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/009",
@@ -4145,13 +4219,13 @@ export const seedData: Record<string, any[]> = {
     "lastName": "Disu",
     "role": "vice-principal",
     "subjects": [],
-    "qualifications": "B.Ed, M.Ed Educational Management",
-    "email": "maryam.disu@minhaajulhudaa.com",
+    "qualifications": "B.Ed Islamic Studies, M.Ed Educational Management",
+    "email": "maryam.disu@minhaajulhudaa.org",
     "phone": "+2348018888888",
     "bio": "Vice Principal Academic, overseeing curriculum and academic standards.",
     "joinDate": "2021-05-15",
     "status": "active",
-    "id": "school_staff_8_mt1w9vwe"
+    "id": "school_staff_8_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/010",
@@ -4159,88 +4233,79 @@ export const seedData: Record<string, any[]> = {
     "lastName": "Garba",
     "role": "teacher",
     "subjects": [
-      "Geography",
-      "Civic Education"
+      "Seerah",
+      "Tahdheeb",
+      "Islamic History"
     ],
-    "qualifications": "B.Sc Geography, PGDE",
-    "email": "yahya.garba@minhaajulhudaa.com",
+    "qualifications": "B.A Islamic History, PGDE",
+    "email": "yahya.garba@minhaajulhudaa.org",
     "phone": "+2348019999999",
-    "bio": "Geography and civic education teacher with field research experience.",
+    "bio": "Seerah and Islamic history teacher with a passion for bringing the Prophet's life to students.",
     "joinDate": "2023-01-10",
     "status": "active",
-    "id": "school_staff_9_mt1w9vwe"
+    "id": "school_staff_9_mt4mfnxs"
   }
 ],
   "school_students": [
   {
-    "studentId": "MHS/2026/001",
+    "studentId": "MHS/1447/001",
     "firstName": "Abdullah",
     "lastName": "Muhammad",
-    "dateOfBirth": "2015-03-15",
+    "dateOfBirth": "2018-03-15",
     "gender": "male",
-    "classId": "cls-primary-3",
-    "className": "Primary 3",
-    "enrollmentDate": "2022-09-05",
+    "classId": "tamheedy",
+    "className": "Tamheedy",
+    "enrollmentDate": "2024-09-05",
     "status": "active",
     "guardianName": "Muhammad Ali",
     "guardianPhone": "+2348031111111",
     "guardianEmail": "muhammad.ali@example.com",
     "guardianRelationship": "father",
     "address": "12 Allen Avenue, Ikeja, Lagos",
-    "medicalInfo": {},
-    "previousSchool": "Bright Beginnings",
-    "id": "school_students_0_mt1w9vwe"
+    "id": "school_students_0_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/002",
+    "studentId": "MHS/1447/002",
     "firstName": "Aisha",
     "lastName": "Ibrahim",
-    "dateOfBirth": "2014-07-22",
+    "dateOfBirth": "2017-07-22",
     "gender": "female",
-    "classId": "cls-primary-4",
-    "className": "Primary 4",
-    "enrollmentDate": "2021-09-06",
+    "classId": "ibtidaiyah-1",
+    "className": "Ibtidaiyah 1",
+    "enrollmentDate": "2023-09-06",
     "status": "active",
     "guardianName": "Ibrahim Musa",
     "guardianPhone": "+2348032222222",
     "guardianEmail": "ibrahim.musa@example.com",
     "guardianRelationship": "father",
     "address": "5 Adeniyi Jones, Ikeja, Lagos",
-    "medicalInfo": {
-      "allergies": [
-        "peanuts"
-      ]
-    },
-    "previousSchool": "Greenwood Academy",
-    "id": "school_students_1_mt1w9vwe"
+    "id": "school_students_1_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/003",
+    "studentId": "MHS/1447/003",
     "firstName": "Yusuf",
     "lastName": "Abdulrahman",
-    "dateOfBirth": "2012-11-08",
+    "dateOfBirth": "2015-11-08",
     "gender": "male",
-    "classId": "cls-jss-2",
-    "className": "JSS 2",
-    "enrollmentDate": "2020-09-07",
+    "classId": "ibtidaiyah-3",
+    "className": "Ibtidaiyah 3",
+    "enrollmentDate": "2022-09-07",
     "status": "active",
     "guardianName": "Abdulrahman Suleiman",
     "guardianPhone": "+2348033333333",
     "guardianEmail": "abdulrahman.s@example.com",
     "guardianRelationship": "father",
     "address": "23 Bourdillon Road, Ikoyi, Lagos",
-    "medicalInfo": {},
-    "previousSchool": "Command Day Secondary School",
-    "id": "school_students_2_mt1w9vwe"
+    "id": "school_students_2_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/004",
+    "studentId": "MHS/1447/004",
     "firstName": "Khadijah",
     "lastName": "Olatunji",
-    "dateOfBirth": "2013-01-30",
+    "dateOfBirth": "2016-01-30",
     "gender": "female",
-    "classId": "cls-jss-1",
-    "className": "JSS 1",
+    "classId": "ibtidaiyah-2",
+    "className": "Ibtidaiyah 2",
     "enrollmentDate": "2023-09-04",
     "status": "active",
     "guardianName": "Olatunji Bello",
@@ -4248,56 +4313,50 @@ export const seedData: Record<string, any[]> = {
     "guardianEmail": "olatunji.bello@example.com",
     "guardianRelationship": "father",
     "address": "7A Gerrard Road, Ikoyi, Lagos",
-    "medicalInfo": {},
-    "id": "school_students_3_mt1w9vwe"
+    "id": "school_students_3_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/005",
+    "studentId": "MHS/1447/005",
     "firstName": "Maryam",
     "lastName": "Sani",
-    "dateOfBirth": "2010-05-14",
+    "dateOfBirth": "2013-05-14",
     "gender": "female",
-    "classId": "cls-sss-2",
-    "className": "SSS 2 Science",
-    "enrollmentDate": "2019-09-09",
+    "classId": "idadiyah-2",
+    "className": "Idadiyah 2",
+    "enrollmentDate": "2021-09-09",
     "status": "active",
     "guardianName": "Sani Garba",
     "guardianPhone": "+2348035555555",
     "guardianEmail": "sani.garba@example.com",
     "guardianRelationship": "father",
     "address": "15 Cameroun Road, Ikoyi, Lagos",
-    "medicalInfo": {
-      "asthma": true
-    },
-    "previousSchool": "Federal Government College",
-    "id": "school_students_4_mt1w9vwe"
+    "id": "school_students_4_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/006",
+    "studentId": "MHS/1447/006",
     "firstName": "Ibrahim",
     "lastName": "Bashir",
-    "dateOfBirth": "2011-09-03",
+    "dateOfBirth": "2014-09-03",
     "gender": "male",
-    "classId": "cls-sss-1",
-    "className": "SSS 1 Science",
-    "enrollmentDate": "2020-09-07",
+    "classId": "idadiyah-1",
+    "className": "Idadiyah 1",
+    "enrollmentDate": "2022-09-07",
     "status": "active",
     "guardianName": "Bashir Abdullahi",
     "guardianPhone": "+2348036666666",
     "guardianEmail": "bashir.a@example.com",
     "guardianRelationship": "father",
     "address": "44 Alexander Road, Ikoyi, Lagos",
-    "medicalInfo": {},
-    "id": "school_students_5_mt1w9vwe"
+    "id": "school_students_5_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/007",
+    "studentId": "MHS/1447/007",
     "firstName": "Fatima",
     "lastName": "Adeyemi",
-    "dateOfBirth": "2016-02-18",
+    "dateOfBirth": "2019-02-18",
     "gender": "female",
-    "classId": "cls-primary-1",
-    "className": "Primary 1",
+    "classId": "tamheedy",
+    "className": "Tamheedy",
     "enrollmentDate": "2024-09-02",
     "status": "active",
     "guardianName": "Adeyemi Kazeem",
@@ -4305,17 +4364,16 @@ export const seedData: Record<string, any[]> = {
     "guardianEmail": "adeyemi.k@example.com",
     "guardianRelationship": "father",
     "address": "8 Milverton Road, Ikoyi, Lagos",
-    "medicalInfo": {},
-    "id": "school_students_6_mt1w9vwe"
+    "id": "school_students_6_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/008",
+    "studentId": "MHS/1447/008",
     "firstName": "Dawud",
     "lastName": "Okafor",
-    "dateOfBirth": "2013-06-25",
+    "dateOfBirth": "2016-06-25",
     "gender": "male",
-    "classId": "cls-jss-1",
-    "className": "JSS 1",
+    "classId": "ibtidaiyah-2",
+    "className": "Ibtidaiyah 2",
     "enrollmentDate": "2023-09-04",
     "status": "active",
     "guardianName": "Okafor Musa",
@@ -4323,107 +4381,101 @@ export const seedData: Record<string, any[]> = {
     "guardianEmail": "okafor.musa@example.com",
     "guardianRelationship": "father",
     "address": "31 Thompson Avenue, Ikoyi, Lagos",
-    "medicalInfo": {},
-    "id": "school_students_7_mt1w9vwe"
+    "id": "school_students_7_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/009",
+    "studentId": "MHS/1447/009",
     "firstName": "Zainab",
     "lastName": "Tanko",
-    "dateOfBirth": "2011-12-11",
+    "dateOfBirth": "2014-12-11",
     "gender": "female",
-    "classId": "cls-sss-1",
-    "className": "SSS 1 Arts",
-    "enrollmentDate": "2020-09-07",
+    "classId": "idadiyah-1",
+    "className": "Idadiyah 1",
+    "enrollmentDate": "2022-09-07",
     "status": "active",
     "guardianName": "Tanko Yusuf",
     "guardianPhone": "+2348039999999",
     "guardianEmail": "tanko.yusuf@example.com",
     "guardianRelationship": "father",
     "address": "19 Bank Road, Ikoyi, Lagos",
-    "medicalInfo": {},
-    "id": "school_students_8_mt1w9vwe"
+    "id": "school_students_8_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/010",
+    "studentId": "MHS/1447/010",
     "firstName": "Umar",
     "lastName": "Disu",
-    "dateOfBirth": "2014-08-07",
+    "dateOfBirth": "2017-08-07",
     "gender": "male",
-    "classId": "cls-primary-4",
-    "className": "Primary 4",
-    "enrollmentDate": "2021-09-06",
+    "classId": "ibtidaiyah-1",
+    "className": "Ibtidaiyah 1",
+    "enrollmentDate": "2023-09-06",
     "status": "active",
     "guardianName": "Disu Ibrahim",
     "guardianPhone": "+2348041111111",
     "guardianEmail": "disu.i@example.com",
     "guardianRelationship": "father",
     "address": "2 Ruxton Road, Ikoyi, Lagos",
-    "medicalInfo": {},
-    "id": "school_students_9_mt1w9vwe"
+    "id": "school_students_9_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/011",
+    "studentId": "MHS/1447/011",
     "firstName": "Hafsa",
     "lastName": "Bello",
-    "dateOfBirth": "2012-04-19",
+    "dateOfBirth": "2015-04-19",
     "gender": "female",
-    "classId": "cls-jss-2",
-    "className": "JSS 2",
-    "enrollmentDate": "2020-09-07",
+    "classId": "ibtidaiyah-3",
+    "className": "Ibtidaiyah 3",
+    "enrollmentDate": "2022-09-07",
     "status": "active",
     "guardianName": "Bello Muhammad",
     "guardianPhone": "+2348042222222",
     "guardianEmail": "bello.m@example.com",
     "guardianRelationship": "father",
     "address": "26 Glover Road, Ikoyi, Lagos",
-    "medicalInfo": {},
-    "id": "school_students_10_mt1w9vwe"
+    "id": "school_students_10_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/012",
+    "studentId": "MHS/1447/012",
     "firstName": "Aliyu",
     "lastName": "Garba",
-    "dateOfBirth": "2009-10-02",
+    "dateOfBirth": "2012-10-02",
     "gender": "male",
-    "classId": "cls-sss-3",
-    "className": "SSS 3 Science",
-    "enrollmentDate": "2018-09-10",
+    "classId": "thanawiyyah-1",
+    "className": "Thanawiyyah 1",
+    "enrollmentDate": "2020-09-10",
     "status": "active",
     "guardianName": "Garba Sani",
     "guardianPhone": "+2348043333333",
     "guardianEmail": "garba.sani@example.com",
     "guardianRelationship": "father",
     "address": "5 Kakawa Street, Lagos Island",
-    "medicalInfo": {},
-    "id": "school_students_11_mt1w9vwe"
+    "id": "school_students_11_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/013",
+    "studentId": "MHS/1447/013",
     "firstName": "Safiya",
     "lastName": "Mohammed",
-    "dateOfBirth": "2015-11-23",
+    "dateOfBirth": "2018-11-23",
     "gender": "female",
-    "classId": "cls-primary-3",
-    "className": "Primary 3",
-    "enrollmentDate": "2022-09-05",
+    "classId": "tamheedy",
+    "className": "Tamheedy",
+    "enrollmentDate": "2024-09-05",
     "status": "active",
     "guardianName": "Mohammed Abubakar",
     "guardianPhone": "+2348044444444",
     "guardianEmail": "mohammed.a@example.com",
     "guardianRelationship": "father",
     "address": "11 Ikorodu Road, Lagos",
-    "medicalInfo": {},
-    "id": "school_students_12_mt1w9vwe"
+    "id": "school_students_12_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/014",
+    "studentId": "MHS/1447/014",
     "firstName": "Bilal",
     "lastName": "Sulaiman",
-    "dateOfBirth": "2013-03-30",
+    "dateOfBirth": "2016-03-30",
     "gender": "male",
-    "classId": "cls-jss-1",
-    "className": "JSS 1",
+    "classId": "ibtidaiyah-2",
+    "className": "Ibtidaiyah 2",
     "enrollmentDate": "2023-09-04",
     "status": "active",
     "guardianName": "Sulaiman Adamu",
@@ -4431,116 +4483,90 @@ export const seedData: Record<string, any[]> = {
     "guardianEmail": "sulaiman.a@example.com",
     "guardianRelationship": "father",
     "address": "18 Agege Motor Road, Lagos",
-    "medicalInfo": {},
-    "id": "school_students_13_mt1w9vwe"
+    "id": "school_students_13_mt4mfnxs"
   },
   {
-    "studentId": "MHS/2026/015",
+    "studentId": "MHS/1447/015",
     "firstName": "Ruqayyah",
     "lastName": "Musa",
-    "dateOfBirth": "2010-07-15",
+    "dateOfBirth": "2013-07-15",
     "gender": "female",
-    "classId": "cls-sss-2",
-    "className": "SSS 2 Arts",
-    "enrollmentDate": "2019-09-09",
+    "classId": "idadiyah-2",
+    "className": "Idadiyah 2",
+    "enrollmentDate": "2021-09-09",
     "status": "active",
     "guardianName": "Musa Abdullahi",
     "guardianPhone": "+2348046666666",
     "guardianEmail": "musa.a@example.com",
     "guardianRelationship": "father",
     "address": "7 Broad Street, Lagos Island",
-    "medicalInfo": {},
-    "id": "school_students_14_mt1w9vwe"
+    "id": "school_students_14_mt4mfnxs"
   }
 ],
   "school_testimonials": [
   {
-    "authorName": "Dr. Muhammad Ali",
-    "authorRole": "Parent of Abdullah (Primary 3)",
-    "content": "Minhaajulhudaa School has been a blessing for our family. My son has not only excelled academically but has also developed a deep love for the Qur'an. The teachers are dedicated and genuinely care about each student's spiritual and academic growth.",
+    "authorName": "Alhaji Muhammad Ali",
+    "role": "Parent",
+    "content": "My son completed his Hifz at Minhaajulhudaa. The teachers are dedicated and the environment is perfect for Islamic learning.",
     "rating": 5,
     "status": "approved",
-    "createdAt": "2026-08-13T19:09:32.984Z",
-    "id": "school_testimonials_0_mt1w9vwf"
+    "id": "school_testimonials_0_mt4mfnxs"
   },
   {
-    "authorName": "Mrs. Aisha Bello",
-    "authorRole": "Parent of Khadijah (JSS 1)",
-    "content": "The Arabic immersion program is exceptional. My daughter can now converse in Arabic and understands much of what she recites from the Qur'an. The school's holistic approach to education is truly commendable.",
+    "authorName": "Mrs. Fatima Ibrahim",
+    "role": "Parent",
+    "content": "My daughter can now read and understand Arabic texts independently. The Arabic immersion program is excellent.",
     "rating": 5,
     "status": "approved",
-    "createdAt": "2026-08-06T19:09:32.984Z",
-    "id": "school_testimonials_1_mt1w9vwf"
+    "id": "school_testimonials_1_mt4mfnxs"
   },
   {
-    "authorName": "Engineer Yusuf Garba",
-    "authorRole": "Parent of Maryam (SSS 2)",
-    "content": "As a parent, I appreciate the balance between academic rigor and Islamic values. Maryam scored 8 distinctions in her WAEC and credits the school's supportive environment. The science laboratories are well-equipped.",
+    "authorName": "Ustadh Abdullah Olatunji",
+    "role": "Community Scholar",
+    "content": "The graduates of Minhaajulhudaa are well-prepared for advanced Islamic studies. The curriculum is thorough and authentic.",
     "rating": 5,
     "status": "approved",
-    "createdAt": "2026-07-30T19:09:32.984Z",
-    "id": "school_testimonials_2_mt1w9vwf"
+    "id": "school_testimonials_2_mt4mfnxs"
   },
   {
-    "authorName": "Alhaji Ibrahim Musa",
-    "authorRole": "Parent of two alumni",
-    "content": "Both my children graduated from Minhaajulhudaa and are now studying at top universities. The foundation they received here - both academic and moral - has been invaluable. I highly recommend this school.",
+    "authorName": "Mrs. Khadijah Bello",
+    "role": "Parent",
+    "content": "The Tahdheeb (Islamic etiquette) program has transformed my children's behavior at home. May Allah reward the teachers.",
     "rating": 5,
     "status": "approved",
-    "createdAt": "2026-07-21T19:09:32.984Z",
-    "id": "school_testimonials_3_mt1w9vwf"
+    "id": "school_testimonials_3_mt4mfnxs"
   }
 ],
   "school_wiki_articles": [
   {
-    "slug": "admission-process-guide",
-    "title": "School Admission Process: A Complete Guide",
-    "content": "This guide walks you through the complete admission process at Minhaajulhudaa School, from application to enrollment.\n\n## Step 1: Application\nComplete the online admission form available on our website. You will need to provide student information, guardian details, and previous school records.\n\n## Step 2: Assessment\nAfter reviewing your application, we will invite the student for an assessment. The assessment evaluates academic readiness and Qur'an reading ability.\n\n## Step 3: Interview\nSelected students and their parents will be invited for an interview with the admission committee.\n\n## Step 4: Admission Decision\nDecisions are communicated within two weeks of the interview. Accepted students receive an admission letter with enrollment details.\n\n## Step 5: Enrollment\nComplete the enrollment by paying the required fees and submitting remaining documents.",
-    "category": "admissions",
-    "tags": [
-      "admission",
-      "guide",
-      "process"
-    ],
-    "author": "Admission Office",
-    "order": 1,
-    "views": 542,
+    "slug": "curriculum-overview",
+    "title": "Curriculum Overview",
+    "category": "academic",
+    "content": "Minhaajulhudaa Islamic & Arabic School offers a purely Islamic and Arabic studies curriculum, covering from Tamheedy (Preparatory) to Thanawiyyah (Secondary) level. Our curriculum includes:\n\n## Qur'an Studies\n- Reading with Tajweed\n- Memorization (Hifz)\n- Tafsir (Exegesis)\n\n## Arabic Language\n- Nahwu (Grammar)\n- Sarf (Morphology)\n- Balaghah (Rhetoric)\n- Literature\n\n## Islamic Sciences\n- Fiqh (Jurisprudence)\n- Aqeedah (Creed)\n- Hadith Studies\n- Seerah (Prophetic Biography)\n- Usul al-Fiqh\n\n## Levels\n1. Tamheedy (Preparatory)\n2. Ibtidaiyah 1-3 (Elementary)\n3. Idadiyah 1-3 (Intermediate)\n4. Thanawiyyah 1-3 (Secondary)",
+    "excerpt": "Overview of our Islamic and Arabic studies curriculum from Tamheedy to Thanawiyyah.",
     "status": "published",
-    "updatedAt": "2026-08-15T19:09:32.984Z",
-    "id": "school_wiki_articles_0_mt1w9vwf"
+    "updatedAt": "2026-08-15T16:57:24.970Z",
+    "id": "school_wiki_articles_0_mt4mfnxr"
+  },
+  {
+    "slug": "admission-process-guide",
+    "title": "Admission Process Guide",
+    "category": "admissions",
+    "content": "## Admission Process\n\n1. **Application**: Complete the admission form online or at the school office.\n2. **Assessment**: Prospective students undergo an age-appropriate assessment.\n3. **Interview**: Parents and students meet with the admission committee.\n4. **Decision**: Admission decisions are communicated within 2 weeks.\n5. **Registration**: Complete registration and fee payment.\n\n## Required Documents\n- Birth certificate\n- Previous school records (if applicable)\n- Passport photographs\n- Medical information\n\n## Age Requirements\n- Tamheedy: 5-6 years\n- Ibtidaiyah 1: 6-7 years\n- Transfer students: Assessment-based placement",
+    "excerpt": "Step-by-step guide to the admission process at Minhaajulhudaa School.",
+    "status": "published",
+    "updatedAt": "2026-08-08T16:57:24.970Z",
+    "id": "school_wiki_articles_1_mt4mfnxr"
   },
   {
     "slug": "fee-structure-explained",
-    "title": "Understanding Our Fee Structure",
-    "content": "A detailed breakdown of school fees and payment options.\n\n## Tuition Fees\nTuition varies by level:\n- Primary: ₦150,000 per term\n- Junior Secondary: ₦180,000 per term\n- Senior Secondary: ₦200,000 per term\n\n## Additional Fees\n- Registration (one-time): ₦20,000\n- Uniform: ₦15,000 - ₦18,000\n- Books: ₦10,000 - ₦20,000\n- Sports: ₦5,000 per term\n- Transportation (optional): ₦30,000 per term\n\n## Payment Options\n- Full term payment\n- Installment plan (3 installments)\n- Sibling discount (10% for 2nd child, 15% for 3rd+)\n\n## Scholarships\nWe offer merit-based scholarships for outstanding students and need-based financial aid.",
-    "category": "finance",
-    "tags": [
-      "fees",
-      "payment",
-      "tuition"
-    ],
-    "author": "Finance Office",
-    "order": 2,
-    "views": 387,
+    "title": "Fee Structure Explained",
+    "category": "fees",
+    "content": "## Fee Structure (1447 AH / 2026 CE)\n\n### Tuition Fees (Per Term)\n- Tamheedy: 25,000 NGN\n- Ibtidaiyah: 30,000 NGN\n- Idadiyah: 35,000 NGN\n- Thanawiyyah: 40,000 NGN\n\n### Additional Fees\n- Registration (one-time): 5,000 NGN\n- Books and materials: 10,000-15,000 NGN\n- Hifz program (optional): 15,000 NGN\n\n### Payment Schedule\n- Term 1: September\n- Term 2: January\n- Term 3: April\n\n### Discounts\n- Sibling discount: 10% for second child, 15% for third\n- Hifz students: 20% discount on regular tuition",
+    "excerpt": "Complete breakdown of tuition and other fees for all levels.",
     "status": "published",
-    "updatedAt": "2026-08-10T19:09:32.984Z",
-    "id": "school_wiki_articles_1_mt1w9vwf"
-  },
-  {
-    "slug": "curriculum-overview",
-    "title": "Our Curriculum Overview",
-    "content": "Minhaajulhudaa School offers an integrated curriculum combining the Nigerian national curriculum with comprehensive Islamic studies.\n\n## Academic Subjects\nEnglish, Mathematics, Sciences, Social Studies, Computer Science, and Languages.\n\n## Islamic Studies\nQur'an (recitation and memorization), Tajweed, Arabic Language, Islamic History, Fiqh, and Akhlaq.\n\n## Extracurricular\nSports, Robotics, Debating, Arts, and Community Service.\n\n## Assessment\nContinuous assessment (40%) and termly examinations (60%).",
-    "category": "academics",
-    "tags": [
-      "curriculum",
-      "academics"
-    ],
-    "author": "Academic Office",
-    "order": 3,
-    "views": 298,
-    "status": "published",
-    "updatedAt": "2026-08-05T19:09:32.984Z",
-    "id": "school_wiki_articles_2_mt1w9vwf"
+    "updatedAt": "2026-08-01T16:57:24.970Z",
+    "id": "school_wiki_articles_2_mt4mfnxr"
   }
 ],
   "travels_blog_posts": [
@@ -4558,9 +4584,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Ustadh Dawud Okafor",
     "status": "published",
-    "publishedAt": "2026-08-13T19:09:32.985Z",
+    "publishedAt": "2026-08-15T16:57:24.971Z",
     "views": 423,
-    "id": "travels_blog_posts_0_mt1w9vwk"
+    "id": "travels_blog_posts_0_mt4mfnxx"
   },
   {
     "slug": "best-time-for-umrah",
@@ -4576,9 +4602,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Ustadh Dawud Okafor",
     "status": "published",
-    "publishedAt": "2026-08-06T19:09:32.985Z",
+    "publishedAt": "2026-08-08T16:57:24.971Z",
     "views": 287,
-    "id": "travels_blog_posts_1_mt1w9vwk"
+    "id": "travels_blog_posts_1_mt4mfnxx"
   },
   {
     "slug": "hajj-vs-umrah-understanding",
@@ -4594,9 +4620,9 @@ export const seedData: Record<string, any[]> = {
     ],
     "authorName": "Ustadh Dawud Okafor",
     "status": "published",
-    "publishedAt": "2026-07-31T19:09:32.985Z",
+    "publishedAt": "2026-08-02T16:57:24.971Z",
     "views": 356,
-    "id": "travels_blog_posts_2_mt1w9vwk"
+    "id": "travels_blog_posts_2_mt4mfnxx"
   }
 ],
   "travels_bookings": [
@@ -4626,9 +4652,9 @@ export const seedData: Record<string, any[]> = {
     "status": "confirmed",
     "paymentStatus": "paid",
     "specialRequests": "Vegetarian meals preferred",
-    "bookedAt": "2026-08-15T19:09:32.985Z",
-    "confirmedAt": "2026-08-16T19:09:32.985Z",
-    "id": "travels_bookings_0_mt1w9vwj"
+    "bookedAt": "2026-08-17T16:57:24.971Z",
+    "confirmedAt": "2026-08-18T16:57:24.971Z",
+    "id": "travels_bookings_0_mt4mfnxx"
   },
   {
     "bookingNumber": "MHS-TRV/2026/002",
@@ -4663,9 +4689,9 @@ export const seedData: Record<string, any[]> = {
     "currency": "NGN",
     "status": "confirmed",
     "paymentStatus": "partial",
-    "bookedAt": "2026-08-13T19:09:32.985Z",
-    "confirmedAt": "2026-08-14T19:09:32.985Z",
-    "id": "travels_bookings_1_mt1w9vwj"
+    "bookedAt": "2026-08-15T16:57:24.971Z",
+    "confirmedAt": "2026-08-16T16:57:24.971Z",
+    "id": "travels_bookings_1_mt4mfnxx"
   },
   {
     "bookingNumber": "MHS-TRV/2026/003",
@@ -4709,8 +4735,8 @@ export const seedData: Record<string, any[]> = {
     "status": "pending",
     "paymentStatus": "partial",
     "specialRequests": "Family room needed",
-    "bookedAt": "2026-08-18T19:09:32.985Z",
-    "id": "travels_bookings_2_mt1w9vwj"
+    "bookedAt": "2026-08-20T16:57:24.971Z",
+    "id": "travels_bookings_2_mt4mfnxx"
   },
   {
     "bookingNumber": "MHS-TRV/2026/004",
@@ -4737,9 +4763,9 @@ export const seedData: Record<string, any[]> = {
     "currency": "NGN",
     "status": "confirmed",
     "paymentStatus": "paid",
-    "bookedAt": "2026-08-10T19:09:32.985Z",
-    "confirmedAt": "2026-08-11T19:09:32.985Z",
-    "id": "travels_bookings_3_mt1w9vwj"
+    "bookedAt": "2026-08-12T16:57:24.971Z",
+    "confirmedAt": "2026-08-13T16:57:24.971Z",
+    "id": "travels_bookings_3_mt4mfnxx"
   },
   {
     "bookingNumber": "MHS-TRV/2026/005",
@@ -4774,9 +4800,9 @@ export const seedData: Record<string, any[]> = {
     "currency": "NGN",
     "status": "confirmed",
     "paymentStatus": "partial",
-    "bookedAt": "2026-08-17T19:09:32.985Z",
-    "confirmedAt": "2026-08-18T19:09:32.985Z",
-    "id": "travels_bookings_4_mt1w9vwj"
+    "bookedAt": "2026-08-19T16:57:24.971Z",
+    "confirmedAt": "2026-08-20T16:57:24.971Z",
+    "id": "travels_bookings_4_mt4mfnxx"
   }
 ],
   "travels_courses": [
@@ -4795,8 +4821,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 234,
     "rating": 4.9,
     "status": "published",
-    "publishedAt": "2026-07-21T19:09:32.985Z",
-    "id": "travels_courses_0_mt1w9vwk"
+    "publishedAt": "2026-07-23T16:57:24.971Z",
+    "id": "travels_courses_0_mt4mfnxy"
   },
   {
     "slug": "hajj-rituals-explained",
@@ -4813,8 +4839,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 178,
     "rating": 5,
     "status": "published",
-    "publishedAt": "2026-07-06T19:09:32.985Z",
-    "id": "travels_courses_1_mt1w9vwk"
+    "publishedAt": "2026-07-08T16:57:24.971Z",
+    "id": "travels_courses_1_mt4mfnxy"
   },
   {
     "slug": "makkah-history-significance",
@@ -4831,8 +4857,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 145,
     "rating": 4.8,
     "status": "published",
-    "publishedAt": "2026-07-31T19:09:32.985Z",
-    "id": "travels_courses_2_mt1w9vwk"
+    "publishedAt": "2026-08-02T16:57:24.971Z",
+    "id": "travels_courses_2_mt4mfnxy"
   },
   {
     "slug": "madinah-the-beloved-city",
@@ -4849,8 +4875,8 @@ export const seedData: Record<string, any[]> = {
     "enrolledCount": 132,
     "rating": 4.9,
     "status": "published",
-    "publishedAt": "2026-08-05T19:09:32.985Z",
-    "id": "travels_courses_3_mt1w9vwk"
+    "publishedAt": "2026-08-07T16:57:24.971Z",
+    "id": "travels_courses_3_mt4mfnxy"
   }
 ],
   "travels_customers": [
@@ -4866,13 +4892,13 @@ export const seedData: Record<string, any[]> = {
     "passportExpiry": "2028-05-14",
     "totalBookings": 2,
     "totalSpent": 4500000,
-    "firstBookingAt": "2026-02-21T19:09:32.985Z",
-    "lastBookingAt": "2026-08-15T19:09:32.985Z",
+    "firstBookingAt": "2026-02-23T16:57:24.971Z",
+    "lastBookingAt": "2026-08-17T16:57:24.971Z",
     "tags": [
       "repeat-customer"
     ],
     "notes": "Prefers standard packages",
-    "id": "travels_customers_0_mt1w9vwj",
+    "id": "travels_customers_0_mt4mfnxx",
     "slug": "muhammad-ali"
   },
   {
@@ -4887,14 +4913,14 @@ export const seedData: Record<string, any[]> = {
     "passportExpiry": "2027-08-19",
     "totalBookings": 3,
     "totalSpent": 12000000,
-    "firstBookingAt": "2025-08-20T19:09:32.985Z",
-    "lastBookingAt": "2026-08-13T19:09:32.985Z",
+    "firstBookingAt": "2025-08-22T16:57:24.971Z",
+    "lastBookingAt": "2026-08-15T16:57:24.971Z",
     "tags": [
       "vip",
       "repeat-customer"
     ],
     "notes": "Prefers deluxe packages",
-    "id": "travels_customers_1_mt1w9vwj",
+    "id": "travels_customers_1_mt4mfnxx",
     "slug": "ibrahim-suleiman"
   },
   {
@@ -4909,13 +4935,13 @@ export const seedData: Record<string, any[]> = {
     "passportExpiry": "2029-11-04",
     "totalBookings": 1,
     "totalSpent": 7500000,
-    "firstBookingAt": "2026-08-18T19:09:32.985Z",
-    "lastBookingAt": "2026-08-18T19:09:32.985Z",
+    "firstBookingAt": "2026-08-20T16:57:24.971Z",
+    "lastBookingAt": "2026-08-20T16:57:24.971Z",
     "tags": [
       "family-booking"
     ],
     "notes": "First-time customer with family",
-    "id": "travels_customers_2_mt1w9vwj",
+    "id": "travels_customers_2_mt4mfnxx",
     "slug": "abdullah-okafor"
   },
   {
@@ -4930,13 +4956,13 @@ export const seedData: Record<string, any[]> = {
     "passportExpiry": "2028-12-09",
     "totalBookings": 2,
     "totalSpent": 2500000,
-    "firstBookingAt": "2026-05-22T19:09:32.985Z",
-    "lastBookingAt": "2026-08-10T19:09:32.985Z",
+    "firstBookingAt": "2026-05-24T16:57:24.971Z",
+    "lastBookingAt": "2026-08-12T16:57:24.971Z",
     "tags": [
       "repeat-customer"
     ],
     "notes": "Interested in international tours",
-    "id": "travels_customers_3_mt1w9vwj",
+    "id": "travels_customers_3_mt4mfnxx",
     "slug": "yusuf-bello"
   },
   {
@@ -4951,14 +4977,14 @@ export const seedData: Record<string, any[]> = {
     "passportExpiry": "2027-09-14",
     "totalBookings": 5,
     "totalSpent": 35000000,
-    "firstBookingAt": "2025-04-07T19:09:32.985Z",
-    "lastBookingAt": "2026-08-17T19:09:32.985Z",
+    "firstBookingAt": "2025-04-09T16:57:24.971Z",
+    "lastBookingAt": "2026-08-19T16:57:24.971Z",
     "tags": [
       "vip",
       "frequent-traveler"
     ],
     "notes": "Always books VIP packages",
-    "id": "travels_customers_4_mt1w9vwj",
+    "id": "travels_customers_4_mt4mfnxx",
     "slug": "garba-sani"
   }
 ],
@@ -4967,7 +4993,7 @@ export const seedData: Record<string, any[]> = {
     "courseId": "course-umrah-guide",
     "customerId": "customer-001",
     "customerName": "Muhammad Ali",
-    "enrolledAt": "2026-08-15T19:09:32.985Z",
+    "enrolledAt": "2026-08-17T16:57:24.971Z",
     "progress": 60,
     "completedLessons": [
       "l1",
@@ -4975,13 +5001,13 @@ export const seedData: Record<string, any[]> = {
       "l3"
     ],
     "status": "active",
-    "id": "travels_enrollments_0_mt1w9vwk"
+    "id": "travels_enrollments_0_mt4mfnxy"
   },
   {
     "courseId": "course-hajj-rituals",
     "customerId": "customer-002",
     "customerName": "Ibrahim Suleiman",
-    "enrolledAt": "2026-08-10T19:09:32.985Z",
+    "enrolledAt": "2026-08-12T16:57:24.971Z",
     "progress": 100,
     "completedLessons": [
       "l1",
@@ -4991,19 +5017,19 @@ export const seedData: Record<string, any[]> = {
       "l5"
     ],
     "status": "completed",
-    "id": "travels_enrollments_1_mt1w9vwk"
+    "id": "travels_enrollments_1_mt4mfnxy"
   },
   {
     "courseId": "course-makkah-history",
     "customerId": "customer-003",
     "customerName": "Abdullah Okafor",
-    "enrolledAt": "2026-08-18T19:09:32.985Z",
+    "enrolledAt": "2026-08-20T16:57:24.971Z",
     "progress": 20,
     "completedLessons": [
       "l1"
     ],
     "status": "active",
-    "id": "travels_enrollments_2_mt1w9vwk"
+    "id": "travels_enrollments_2_mt4mfnxy"
   }
 ],
   "travels_gallery": [
@@ -5013,8 +5039,8 @@ export const seedData: Record<string, any[]> = {
     "imageUrl": "/images/patterns/arabesque.svg",
     "category": "holy-sites",
     "destination": "Makkah",
-    "createdAt": "2026-07-21T19:09:32.985Z",
-    "id": "travels_gallery_0_mt1w9vwk",
+    "createdAt": "2026-07-23T16:57:24.971Z",
+    "id": "travels_gallery_0_mt4mfnxy",
     "slug": "kabah-makkah"
   },
   {
@@ -5023,8 +5049,8 @@ export const seedData: Record<string, any[]> = {
     "imageUrl": "/images/patterns/arabesque.svg",
     "category": "holy-sites",
     "destination": "Madinah",
-    "createdAt": "2026-07-21T19:09:32.985Z",
-    "id": "travels_gallery_1_mt1w9vwk",
+    "createdAt": "2026-07-23T16:57:24.971Z",
+    "id": "travels_gallery_1_mt4mfnxy",
     "slug": "masjid-nabawi-madinah"
   },
   {
@@ -5033,8 +5059,8 @@ export const seedData: Record<string, any[]> = {
     "imageUrl": "/images/patterns/arabesque.svg",
     "category": "tours",
     "destination": "Istanbul",
-    "createdAt": "2026-08-05T19:09:32.985Z",
-    "id": "travels_gallery_2_mt1w9vwk",
+    "createdAt": "2026-08-07T16:57:24.971Z",
+    "id": "travels_gallery_2_mt4mfnxy",
     "slug": "istanbul-mosque"
   },
   {
@@ -5043,8 +5069,8 @@ export const seedData: Record<string, any[]> = {
     "imageUrl": "/images/patterns/arabesque.svg",
     "category": "groups",
     "destination": "Makkah",
-    "createdAt": "2026-06-21T19:09:32.985Z",
-    "id": "travels_gallery_3_mt1w9vwk",
+    "createdAt": "2026-06-23T16:57:24.971Z",
+    "id": "travels_gallery_3_mt4mfnxy",
     "slug": "group-photo-umrah"
   }
 ],
@@ -5058,8 +5084,8 @@ export const seedData: Record<string, any[]> = {
     "preferredDate": "2026-12-15",
     "travelerCount": 4,
     "status": "new",
-    "createdAt": "2026-08-19T19:09:32.985Z",
-    "id": "travels_inquiries_0_mt1w9vwk",
+    "createdAt": "2026-08-21T16:57:24.971Z",
+    "id": "travels_inquiries_0_mt4mfnxy",
     "slug": "khadijah-mohammed"
   },
   {
@@ -5071,8 +5097,8 @@ export const seedData: Record<string, any[]> = {
     "preferredDate": "2027-06-15",
     "travelerCount": 2,
     "status": "new",
-    "createdAt": "2026-08-18T19:09:32.985Z",
-    "id": "travels_inquiries_1_mt1w9vwk",
+    "createdAt": "2026-08-20T16:57:24.971Z",
+    "id": "travels_inquiries_1_mt4mfnxy",
     "slug": "ahmed-ali"
   },
   {
@@ -5084,8 +5110,8 @@ export const seedData: Record<string, any[]> = {
     "preferredDate": "2026-11-01",
     "travelerCount": 1,
     "status": "responded",
-    "createdAt": "2026-08-15T19:09:32.985Z",
-    "id": "travels_inquiries_2_mt1w9vwk",
+    "createdAt": "2026-08-17T16:57:24.971Z",
+    "id": "travels_inquiries_2_mt4mfnxy",
     "slug": "fatima-bello"
   }
 ],
@@ -5105,7 +5131,7 @@ export const seedData: Record<string, any[]> = {
       "Dinner"
     ],
     "accommodation": "4-star Hotel, Makkah",
-    "id": "travels_itineraries_0_mt1w9vwj",
+    "id": "travels_itineraries_0_mt4mfnxx",
     "slug": "departure-from-lagos"
   },
   {
@@ -5125,7 +5151,7 @@ export const seedData: Record<string, any[]> = {
       "Dinner"
     ],
     "accommodation": "4-star Hotel, Makkah",
-    "id": "travels_itineraries_1_mt1w9vwj",
+    "id": "travels_itineraries_1_mt4mfnxx",
     "slug": "performing-umrah"
   },
   {
@@ -5145,7 +5171,7 @@ export const seedData: Record<string, any[]> = {
       "Dinner"
     ],
     "accommodation": "4-star Hotel, Makkah",
-    "id": "travels_itineraries_2_mt1w9vwj",
+    "id": "travels_itineraries_2_mt4mfnxx",
     "slug": "makkah-ziyarah"
   },
   {
@@ -5164,7 +5190,7 @@ export const seedData: Record<string, any[]> = {
       "Dinner"
     ],
     "accommodation": "4-star Hotel, Madinah",
-    "id": "travels_itineraries_3_mt1w9vwj",
+    "id": "travels_itineraries_3_mt4mfnxx",
     "slug": "travel-to-madinah"
   },
   {
@@ -5183,7 +5209,7 @@ export const seedData: Record<string, any[]> = {
       "Dinner"
     ],
     "accommodation": "4-star Hotel, Madinah",
-    "id": "travels_itineraries_4_mt1w9vwj",
+    "id": "travels_itineraries_4_mt4mfnxx",
     "slug": "madinah-ziyarah"
   },
   {
@@ -5201,7 +5227,7 @@ export const seedData: Record<string, any[]> = {
       "Breakfast"
     ],
     "accommodation": "N/A",
-    "id": "travels_itineraries_5_mt1w9vwj",
+    "id": "travels_itineraries_5_mt4mfnxx",
     "slug": "return-to-lagos"
   }
 ],
@@ -5214,7 +5240,7 @@ export const seedData: Record<string, any[]> = {
     "order": 1,
     "resources": [],
     "isPreview": true,
-    "id": "travels_lessons_0_mt1w9vwk",
+    "id": "travels_lessons_0_mt4mfnxy",
     "slug": "introduction-to-umrah"
   },
   {
@@ -5224,7 +5250,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 25,
     "order": 2,
     "resources": [],
-    "id": "travels_lessons_1_mt1w9vwk",
+    "id": "travels_lessons_1_mt4mfnxy",
     "slug": "spiritual-preparation"
   },
   {
@@ -5234,7 +5260,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 30,
     "order": 3,
     "resources": [],
-    "id": "travels_lessons_2_mt1w9vwk",
+    "id": "travels_lessons_2_mt4mfnxy",
     "slug": "ihram-the-sacred-state"
   },
   {
@@ -5244,7 +5270,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 35,
     "order": 4,
     "resources": [],
-    "id": "travels_lessons_3_mt1w9vwk",
+    "id": "travels_lessons_3_mt4mfnxy",
     "slug": "tawaf-circling-the-kabah"
   },
   {
@@ -5254,7 +5280,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 30,
     "order": 5,
     "resources": [],
-    "id": "travels_lessons_4_mt1w9vwk",
+    "id": "travels_lessons_4_mt4mfnxy",
     "slug": "sai-the-walk-of-hajar"
   },
   {
@@ -5265,7 +5291,7 @@ export const seedData: Record<string, any[]> = {
     "order": 1,
     "resources": [],
     "isPreview": true,
-    "id": "travels_lessons_5_mt1w9vwk",
+    "id": "travels_lessons_5_mt4mfnxy",
     "slug": "introduction-to-hajj"
   },
   {
@@ -5275,7 +5301,7 @@ export const seedData: Record<string, any[]> = {
     "duration": 30,
     "order": 2,
     "resources": [],
-    "id": "travels_lessons_6_mt1w9vwk",
+    "id": "travels_lessons_6_mt4mfnxy",
     "slug": "day-of-tarwiyah-8th-dhul-hijjah"
   }
 ],
@@ -5322,8 +5348,8 @@ export const seedData: Record<string, any[]> = {
     "endDate": "2026-12-25",
     "isFeatured": true,
     "status": "active",
-    "createdAt": "2026-07-21T19:09:32.985Z",
-    "id": "travels_packages_0_mt1w9vwj"
+    "createdAt": "2026-07-23T16:57:24.971Z",
+    "id": "travels_packages_0_mt4mfnxx"
   },
   {
     "slug": "umrah-deluxe-2026",
@@ -5364,8 +5390,8 @@ export const seedData: Record<string, any[]> = {
     "endDate": "2026-12-27",
     "isFeatured": true,
     "status": "active",
-    "createdAt": "2026-07-21T19:09:32.985Z",
-    "id": "travels_packages_1_mt1w9vwj"
+    "createdAt": "2026-07-23T16:57:24.971Z",
+    "id": "travels_packages_1_mt4mfnxx"
   },
   {
     "slug": "umrah-vip-2026",
@@ -5404,8 +5430,8 @@ export const seedData: Record<string, any[]> = {
     "endDate": "2026-12-24",
     "isFeatured": true,
     "status": "active",
-    "createdAt": "2026-07-21T19:09:32.985Z",
-    "id": "travels_packages_2_mt1w9vwj"
+    "createdAt": "2026-07-23T16:57:24.971Z",
+    "id": "travels_packages_2_mt4mfnxx"
   },
   {
     "slug": "hajj-standard-2027",
@@ -5444,8 +5470,8 @@ export const seedData: Record<string, any[]> = {
     "endDate": "2027-07-10",
     "isFeatured": true,
     "status": "active",
-    "createdAt": "2026-06-21T19:09:32.985Z",
-    "id": "travels_packages_3_mt1w9vwj"
+    "createdAt": "2026-06-23T16:57:24.971Z",
+    "id": "travels_packages_3_mt4mfnxx"
   },
   {
     "slug": "local-tour-historical-lagos",
@@ -5479,8 +5505,8 @@ export const seedData: Record<string, any[]> = {
     "endDate": "2026-09-20",
     "isFeatured": false,
     "status": "active",
-    "createdAt": "2026-07-31T19:09:32.985Z",
-    "id": "travels_packages_4_mt1w9vwj"
+    "createdAt": "2026-08-02T16:57:24.971Z",
+    "id": "travels_packages_4_mt4mfnxx"
   },
   {
     "slug": "international-tour-turkey",
@@ -5518,8 +5544,8 @@ export const seedData: Record<string, any[]> = {
     "endDate": "2026-11-07",
     "isFeatured": false,
     "status": "active",
-    "createdAt": "2026-08-05T19:09:32.985Z",
-    "id": "travels_packages_5_mt1w9vwj"
+    "createdAt": "2026-08-07T16:57:24.971Z",
+    "id": "travels_packages_5_mt4mfnxx"
   }
 ],
   "travels_pages": [
@@ -5548,9 +5574,9 @@ export const seedData: Record<string, any[]> = {
     "seoTitle": "About Minhaajulhudaa Travels",
     "seoDescription": "Licensed Hajj and Umrah travel agency.",
     "status": "published",
-    "publishedAt": "2026-06-21T19:09:32.985Z",
+    "publishedAt": "2026-06-23T16:57:24.971Z",
     "order": 1,
-    "id": "travels_pages_0_mt1w9vwj"
+    "id": "travels_pages_0_mt4mfnxx"
   }
 ],
   "travels_payments": [
@@ -5562,8 +5588,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isInstallment": false,
     "installmentNumber": 0,
-    "paidAt": "2026-08-16T19:09:32.985Z",
-    "id": "travels_payments_0_mt1w9vwk"
+    "paidAt": "2026-08-18T16:57:24.971Z",
+    "id": "travels_payments_0_mt4mfnxx"
   },
   {
     "amount": 4000000,
@@ -5573,8 +5599,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isInstallment": true,
     "installmentNumber": 1,
-    "paidAt": "2026-08-14T19:09:32.985Z",
-    "id": "travels_payments_1_mt1w9vwk"
+    "paidAt": "2026-08-16T16:57:24.971Z",
+    "id": "travels_payments_1_mt4mfnxx"
   },
   {
     "amount": 3000000,
@@ -5584,8 +5610,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isInstallment": true,
     "installmentNumber": 1,
-    "paidAt": "2026-08-18T19:09:32.985Z",
-    "id": "travels_payments_2_mt1w9vwk"
+    "paidAt": "2026-08-20T16:57:24.971Z",
+    "id": "travels_payments_2_mt4mfnxx"
   },
   {
     "amount": 1800000,
@@ -5595,8 +5621,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isInstallment": false,
     "installmentNumber": 0,
-    "paidAt": "2026-08-11T19:09:32.985Z",
-    "id": "travels_payments_3_mt1w9vwk"
+    "paidAt": "2026-08-13T16:57:24.971Z",
+    "id": "travels_payments_3_mt4mfnxx"
   },
   {
     "amount": 7500000,
@@ -5606,8 +5632,8 @@ export const seedData: Record<string, any[]> = {
     "status": "successful",
     "isInstallment": true,
     "installmentNumber": 1,
-    "paidAt": "2026-08-18T19:09:32.985Z",
-    "id": "travels_payments_4_mt1w9vwk"
+    "paidAt": "2026-08-20T16:57:24.971Z",
+    "id": "travels_payments_4_mt4mfnxx"
   }
 ],
   "travels_pricing_rules": [
@@ -5619,7 +5645,7 @@ export const seedData: Record<string, any[]> = {
     "minGroupSize": 1,
     "daysBeforeDeparture": 90,
     "active": true,
-    "id": "travels_pricing_rules_0_mt1w9vwk"
+    "id": "travels_pricing_rules_0_mt4mfnxy"
   },
   {
     "type": "group-discount",
@@ -5628,7 +5654,7 @@ export const seedData: Record<string, any[]> = {
     "surchargePercent": 0,
     "minGroupSize": 5,
     "active": true,
-    "id": "travels_pricing_rules_1_mt1w9vwk"
+    "id": "travels_pricing_rules_1_mt4mfnxy"
   },
   {
     "type": "group-discount",
@@ -5637,7 +5663,7 @@ export const seedData: Record<string, any[]> = {
     "surchargePercent": 0,
     "minGroupSize": 10,
     "active": true,
-    "id": "travels_pricing_rules_2_mt1w9vwk"
+    "id": "travels_pricing_rules_2_mt4mfnxy"
   },
   {
     "type": "seasonal-surcharge",
@@ -5647,7 +5673,7 @@ export const seedData: Record<string, any[]> = {
     "startDate": "2026-02-01",
     "endDate": "2026-03-31",
     "active": true,
-    "id": "travels_pricing_rules_3_mt1w9vwk"
+    "id": "travels_pricing_rules_3_mt4mfnxy"
   },
   {
     "type": "last-minute",
@@ -5656,7 +5682,7 @@ export const seedData: Record<string, any[]> = {
     "surchargePercent": 0,
     "daysBeforeDeparture": 14,
     "active": true,
-    "id": "travels_pricing_rules_4_mt1w9vwk"
+    "id": "travels_pricing_rules_4_mt4mfnxy"
   }
 ],
   "travels_resources": [
@@ -5672,8 +5698,8 @@ export const seedData: Record<string, any[]> = {
     ],
     "author": "Minhaajulhudaa Travels Team",
     "status": "published",
-    "updatedAt": "2026-08-15T19:09:32.985Z",
-    "id": "travels_resources_0_mt1w9vwk"
+    "updatedAt": "2026-08-17T16:57:24.971Z",
+    "id": "travels_resources_0_mt4mfnxx"
   },
   {
     "slug": "packing-checklist-umrah",
@@ -5687,8 +5713,8 @@ export const seedData: Record<string, any[]> = {
     ],
     "author": "Minhaajulhudaa Travels Team",
     "status": "published",
-    "updatedAt": "2026-08-10T19:09:32.985Z",
-    "id": "travels_resources_1_mt1w9vwk"
+    "updatedAt": "2026-08-12T16:57:24.971Z",
+    "id": "travels_resources_1_mt4mfnxx"
   },
   {
     "slug": "umrah-rituals-guide",
@@ -5702,8 +5728,8 @@ export const seedData: Record<string, any[]> = {
     ],
     "author": "Ustadh Dawud Okafor",
     "status": "published",
-    "updatedAt": "2026-08-05T19:09:32.985Z",
-    "id": "travels_resources_2_mt1w9vwk"
+    "updatedAt": "2026-08-07T16:57:24.971Z",
+    "id": "travels_resources_2_mt4mfnxx"
   },
   {
     "slug": "health-tips-pilgrimage",
@@ -5717,8 +5743,8 @@ export const seedData: Record<string, any[]> = {
     ],
     "author": "Minhaajulhudaa Travels Team",
     "status": "published",
-    "updatedAt": "2026-08-12T19:09:32.985Z",
-    "id": "travels_resources_3_mt1w9vwk"
+    "updatedAt": "2026-08-14T16:57:24.971Z",
+    "id": "travels_resources_3_mt4mfnxx"
   }
 ],
   "travels_reviews": [
@@ -5730,8 +5756,8 @@ export const seedData: Record<string, any[]> = {
     "images": [],
     "isVerified": true,
     "status": "approved",
-    "submittedAt": "2026-02-21T19:09:32.985Z",
-    "id": "travels_reviews_0_mt1w9vwk",
+    "submittedAt": "2026-02-23T16:57:24.971Z",
+    "id": "travels_reviews_0_mt4mfnxx",
     "slug": "excellent-umrah-experience"
   },
   {
@@ -5742,8 +5768,8 @@ export const seedData: Record<string, any[]> = {
     "images": [],
     "isVerified": true,
     "status": "approved",
-    "submittedAt": "2026-04-22T19:09:32.985Z",
-    "id": "travels_reviews_1_mt1w9vwk",
+    "submittedAt": "2026-04-24T16:57:24.971Z",
+    "id": "travels_reviews_1_mt4mfnxx",
     "slug": "best-decision-ever"
   },
   {
@@ -5754,8 +5780,8 @@ export const seedData: Record<string, any[]> = {
     "images": [],
     "isVerified": true,
     "status": "approved",
-    "submittedAt": "2026-06-21T19:09:32.985Z",
-    "id": "travels_reviews_2_mt1w9vwk",
+    "submittedAt": "2026-06-23T16:57:24.971Z",
+    "id": "travels_reviews_2_mt4mfnxx",
     "slug": "vip-treatment-throughout"
   },
   {
@@ -5766,8 +5792,8 @@ export const seedData: Record<string, any[]> = {
     "images": [],
     "isVerified": true,
     "status": "approved",
-    "submittedAt": "2026-07-21T19:09:32.985Z",
-    "id": "travels_reviews_3_mt1w9vwk",
+    "submittedAt": "2026-07-23T16:57:24.971Z",
+    "id": "travels_reviews_3_mt4mfnxx",
     "slug": "great-turkey-tour"
   }
 ],

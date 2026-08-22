@@ -1,148 +1,98 @@
 [
   {
-    "slug": "school-uniform-primary",
-    "name": "School Uniform - Primary",
-    "description": "Official school uniform set for primary students. Includes shirt, trousers/skirt, and blazer.",
-    "price": 15000,
-    "compareAtPrice": 18000,
-    "category": "uniforms",
-    "images": [
-      "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800"
-    ],
+    "slug": "mushaf-tajweed-color-coded",
+    "name": "Color-Coded Tajweed Mushaf",
+    "description": "Complete Qur'an with color-coded Tajweed rules for easy learning.",
+    "price": 8500,
+    "category": "quran",
     "stock": 50,
-    "sku": "UNI-PRI-001",
-    "variants": [
-      {
-        "name": "Size",
-        "options": [
-          "6",
-          "8",
-          "10",
-          "12",
-          "14"
-        ]
-      }
-    ],
+    "sku": "MSHF-TJW-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_0_mt1w9vwf"
+    "id": "school_products_0_mt4mfnxr"
   },
   {
-    "slug": "school-uniform-secondary",
-    "name": "School Uniform - Secondary",
-    "description": "Official school uniform set for secondary students. Includes shirt, trousers/skirt, and blazer.",
-    "price": 18000,
-    "category": "uniforms",
-    "images": [
-      "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800"
-    ],
-    "stock": 40,
-    "sku": "UNI-SEC-001",
-    "variants": [
-      {
-        "name": "Size",
-        "options": [
-          "S",
-          "M",
-          "L",
-          "XL"
-        ]
-      }
-    ],
-    "isDigital": false,
-    "status": "active",
-    "id": "school_products_1_mt1w9vwf"
-  },
-  {
-    "slug": "quran-textbook-grade1",
-    "name": "Qur'an Studies Textbook - Grade 1",
-    "description": "Comprehensive Qur'an studies textbook for Grade 1 students following the Minhaajulhudaa curriculum.",
+    "slug": "arabic-grammar-textbook-1",
+    "name": "Arabic Grammar Textbook (Nahwu) - Level 1",
+    "description": "Comprehensive textbook covering basic Arabic grammar rules for Ibtidaiyah students.",
     "price": 3500,
-    "category": "books",
-    "images": [
-      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800"
-    ],
+    "category": "textbooks",
     "stock": 100,
-    "sku": "BK-QUR-G1-001",
+    "sku": "TXT-NHW-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_2_mt1w9vwf"
+    "id": "school_products_1_mt4mfnxr"
   },
   {
-    "slug": "arabic-textbook-beginners",
-    "name": "Arabic Language for Beginners",
-    "description": "Foundational Arabic language textbook with exercises and audio companion.",
-    "price": 4500,
-    "category": "books",
-    "images": [
-      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800"
-    ],
-    "stock": 75,
-    "sku": "BK-ARA-001",
-    "isDigital": false,
-    "status": "active",
-    "id": "school_products_3_mt1w9vwf"
-  },
-  {
-    "slug": "mathematics-workbook-jss",
-    "name": "Mathematics Workbook - JSS",
-    "description": "Practice workbook covering the complete JSS mathematics curriculum with 500+ problems.",
-    "price": 3000,
-    "category": "books",
-    "images": [
-      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800"
-    ],
+    "slug": "sarf-textbook",
+    "name": "Arabic Morphology (Sarf) Textbook",
+    "description": "Complete guide to Arabic word formation and morphology patterns.",
+    "price": 4000,
+    "category": "textbooks",
     "stock": 80,
-    "sku": "BK-MAT-JSS-001",
+    "sku": "TXT-SRF-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_4_mt1w9vwf"
+    "id": "school_products_2_mt4mfnxr"
   },
   {
-    "slug": "school-bag-official",
-    "name": "Official School Bag",
-    "description": "Durable, branded school bag with multiple compartments and ergonomic design.",
-    "price": 8000,
-    "compareAtPrice": 10000,
-    "category": "supplies",
-    "images": [
-      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800"
-    ],
+    "slug": "tajweed-rules-handbook",
+    "name": "Tajweed Rules Handbook",
+    "description": "A compact reference guide to all Tajweed rules with examples.",
+    "price": 2000,
+    "category": "reference",
+    "stock": 150,
+    "sku": "REF-TJW-001",
+    "isDigital": false,
+    "status": "active",
+    "id": "school_products_3_mt4mfnxr"
+  },
+  {
+    "slug": "hadith-forty-nawawi",
+    "name": "Forty Hadith of Imam Nawawi - Commentary",
+    "description": "Arabic text with comprehensive commentary and explanation.",
+    "price": 5000,
+    "category": "hadith",
     "stock": 60,
-    "sku": "SUP-BAG-001",
+    "sku": "BK-HDTH-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_5_mt1w9vwf"
+    "id": "school_products_4_mt4mfnxr"
   },
   {
-    "slug": "sports-kit",
-    "name": "Sports Kit",
-    "description": "Complete sports kit including jersey, shorts, and socks with school branding.",
+    "slug": "fiqh-maliki-textbook",
+    "name": "Fiqh al-Ibadat (Maliki School)",
+    "description": "Comprehensive textbook on Islamic rulings of worship according to the Maliki school.",
     "price": 6000,
-    "category": "supplies",
-    "images": [
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
-    ],
-    "stock": 45,
-    "sku": "SUP-SPT-001",
+    "category": "fiqh",
+    "stock": 70,
+    "sku": "TXT-FQH-001",
     "isDigital": false,
     "status": "active",
-    "id": "school_products_6_mt1w9vwf"
+    "id": "school_products_5_mt4mfnxr"
   },
   {
     "slug": "digital-tajweed-guide",
-    "name": "Digital Tajweed Guide (PDF)",
-    "description": "Comprehensive digital guide to Tajweed rules with audio examples and practice exercises.",
-    "price": 2000,
+    "name": "Digital Tajweed Guide",
+    "description": "Interactive digital guide with audio examples of Tajweed rules.",
+    "price": 1500,
     "category": "digital",
-    "images": [
-      "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800"
-    ],
     "stock": 999,
-    "sku": "DIG-TAJ-001",
+    "sku": "DGT-TJW-001",
     "isDigital": true,
-    "downloadUrl": "https://minhaajulhudaa.com/files/tajweed-guide.pdf",
     "status": "active",
-    "id": "school_products_7_mt1w9vwf"
+    "id": "school_products_6_mt4mfnxr"
+  },
+  {
+    "slug": "arabic-flashcards",
+    "name": "Arabic Alphabet Flashcards",
+    "description": "Set of 28 flashcards with Arabic letters, pronunciation, and example words.",
+    "price": 1500,
+    "category": "learning-aids",
+    "stock": 200,
+    "sku": "AID-ABC-001",
+    "isDigital": false,
+    "status": "active",
+    "id": "school_products_7_mt4mfnxr"
   }
 ]

@@ -1,80 +1,82 @@
 [
   {
-    "courseId": "course-tajweed-001",
-    "title": "Introduction to Tajweed",
-    "content": "What is Tajweed and why is it important? Understanding the obligation of reciting the Qur'an correctly.",
-    "duration": 25,
+    "title": "Introduction to Arabic Alphabet",
+    "courseId": "introduction-to-nahwu",
+    "duration": "45 min",
+    "type": "video",
     "order": 1,
-    "resources": [],
-    "isPreview": true,
-    "id": "school_lessons_0_mt1w9vwf",
-    "slug": "introduction-to-tajweed"
+    "isFree": true,
+    "id": "school_lessons_0_mt4mfnxs",
+    "slug": "introduction-to-arabic-alphabet"
   },
   {
-    "courseId": "course-tajweed-001",
-    "title": "Articulation Points (Makharij) - Part 1",
-    "content": "Learn the articulation points of Arabic letters from the throat and tongue.",
-    "duration": 35,
+    "title": "Types of Words in Arabic (Ism, Fi'l, Harf)",
+    "courseId": "introduction-to-nahwu",
+    "duration": "60 min",
+    "type": "video",
     "order": 2,
-    "resources": [
-      {
-        "type": "pdf",
-        "url": "#",
-        "title": "Makharij Chart"
-      }
-    ],
-    "id": "school_lessons_1_mt1w9vwf",
-    "slug": "articulation-points-makharij-part-1"
+    "isFree": false,
+    "id": "school_lessons_1_mt4mfnxs",
+    "slug": "types-of-words-in-arabic-ism-fil-harf"
   },
   {
-    "courseId": "course-tajweed-001",
-    "title": "Articulation Points (Makharij) - Part 2",
-    "content": "Continue learning the articulation points of remaining letters.",
-    "duration": 32,
+    "title": "I'rab (Noun Cases)",
+    "courseId": "introduction-to-nahwu",
+    "duration": "50 min",
+    "type": "video",
     "order": 3,
-    "resources": [],
-    "id": "school_lessons_2_mt1w9vwf",
-    "slug": "articulation-points-makharij-part-2"
+    "isFree": false,
+    "id": "school_lessons_2_mt4mfnxs",
+    "slug": "irab-noun-cases"
   },
   {
-    "courseId": "course-tajweed-001",
-    "title": "Characteristics of Letters (Sifat) - Part 1",
-    "content": "Understanding the permanent and temporary characteristics of Arabic letters.",
-    "duration": 40,
-    "order": 4,
-    "resources": [],
-    "id": "school_lessons_3_mt1w9vwf",
-    "slug": "characteristics-of-letters-sifat-part-1"
-  },
-  {
-    "courseId": "course-arabic-001",
-    "title": "The Arabic Alphabet",
-    "content": "Learn to recognize, pronounce, and write all 28 Arabic letters.",
-    "duration": 30,
+    "title": "Makharij (Articulation Points)",
+    "courseId": "tajweed-rules-comprehensive",
+    "duration": "40 min",
+    "type": "video",
     "order": 1,
-    "resources": [],
-    "isPreview": true,
-    "id": "school_lessons_4_mt1w9vwf",
-    "slug": "the-arabic-alphabet"
+    "isFree": true,
+    "id": "school_lessons_3_mt4mfnxs",
+    "slug": "makharij-articulation-points"
   },
   {
-    "courseId": "course-arabic-001",
-    "title": "Vowel Marks (Harakat)",
-    "content": "Learn the Fatha, Kasra, Damma, and Sukun vowel marks.",
-    "duration": 25,
+    "title": "Sifat (Characteristics of Letters)",
+    "courseId": "tajweed-rules-comprehensive",
+    "duration": "55 min",
+    "type": "video",
     "order": 2,
-    "resources": [],
-    "id": "school_lessons_5_mt1w9vwf",
-    "slug": "vowel-marks-harakat"
+    "isFree": false,
+    "id": "school_lessons_4_mt4mfnxs",
+    "slug": "sifat-characteristics-of-letters"
   },
   {
-    "courseId": "course-arabic-001",
-    "title": "Joining Letters",
-    "content": "How letters join to form words in Arabic script.",
-    "duration": 35,
+    "title": "Rules of Noon Sakinah",
+    "courseId": "tajweed-rules-comprehensive",
+    "duration": "45 min",
+    "type": "video",
     "order": 3,
-    "resources": [],
-    "id": "school_lessons_6_mt1w9vwf",
-    "slug": "joining-letters"
+    "isFree": false,
+    "id": "school_lessons_5_mt4mfnxs",
+    "slug": "rules-of-noon-sakinah"
+  },
+  {
+    "title": "Conditions of Salah",
+    "courseId": "fiqh-of-salah",
+    "duration": "40 min",
+    "type": "video",
+    "order": 1,
+    "isFree": true,
+    "id": "school_lessons_6_mt4mfnxs",
+    "slug": "conditions-of-salah"
+  },
+  {
+    "title": "Pillars of Salah",
+    "courseId": "fiqh-of-salah",
+    "duration": "50 min",
+    "type": "video",
+    "order": 2,
+    "isFree": false,
+    "id": "school_lessons_7_mt4mfnxs",
+    "slug": "pillars-of-salah"
   }
 ]

@@ -4,10 +4,10 @@
     "message": "The Ramadan timetable for Taraweeh and Sahur is now available. Please pick up a copy at the masjid office or download from our website.",
     "type": "info",
     "active": true,
-    "startsAt": "2026-08-18T19:09:32.985Z",
-    "endsAt": "2026-09-19T19:09:32.985Z",
-    "createdAt": "2026-08-18T19:09:32.985Z",
-    "id": "masjid_announcements_0_mt1w9vwg",
+    "startsAt": "2026-08-20T16:57:24.970Z",
+    "endsAt": "2026-09-21T16:57:24.970Z",
+    "createdAt": "2026-08-20T16:57:24.970Z",
+    "id": "masjid_announcements_0_mt4mfnxt",
     "slug": "ramadan-timetable-available"
   },
   {
@@ -15,10 +15,10 @@
     "message": "Join us every Tuesday after Maghrib for a new halaqah series on the Tafsir of Juz Amma, led by Imam Yusuf Olatunji.",
     "type": "success",
     "active": true,
-    "startsAt": "2026-08-15T19:09:32.985Z",
-    "endsAt": "2026-10-19T19:09:32.985Z",
-    "createdAt": "2026-08-15T19:09:32.985Z",
-    "id": "masjid_announcements_1_mt1w9vwg",
+    "startsAt": "2026-08-17T16:57:24.970Z",
+    "endsAt": "2026-10-21T16:57:24.970Z",
+    "createdAt": "2026-08-17T16:57:24.970Z",
+    "id": "masjid_announcements_1_mt4mfnxt",
     "slug": "new-halaqah-series-tafsir-of-juz-amma"
   },
   {
@@ -26,10 +26,10 @@
     "message": "Alhamdulillah, we are expanding the sisters' section to accommodate more worshippers. Please support this project with your donations.",
     "type": "urgent",
     "active": true,
-    "startsAt": "2026-08-10T19:09:32.985Z",
-    "endsAt": "2026-11-18T19:09:32.985Z",
-    "createdAt": "2026-08-10T19:09:32.985Z",
-    "id": "masjid_announcements_2_mt1w9vwg",
+    "startsAt": "2026-08-12T16:57:24.970Z",
+    "endsAt": "2026-11-20T16:57:24.970Z",
+    "createdAt": "2026-08-12T16:57:24.970Z",
+    "id": "masjid_announcements_2_mt4mfnxt",
     "slug": "masjid-expansion-project"
   }
 ]

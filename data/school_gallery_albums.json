@@ -1,58 +1,50 @@
 [
   {
-    "title": "Science Fair 2026",
-    "description": "Highlights from our annual science fair showcasing student projects.",
-    "coverImageUrl": "/images/patterns/architecture.svg",
-    "images": [
-      {
-        "url": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800",
-        "caption": "Student presenting robotics project"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800",
-        "caption": "Chemistry experiment demonstration"
-      }
-    ],
-    "category": "events",
-    "eventDate": "2026-08-20",
-    "createdAt": "2026-07-30T19:09:32.984Z",
-    "id": "school_gallery_albums_0_mt1w9vwe",
-    "slug": "science-fair-2026"
-  },
-  {
-    "title": "Hifz Graduation",
+    "title": "Hifz Graduation 1447 AH",
     "description": "Celebrating our Qur'an memorization graduates.",
-    "coverImageUrl": "/images/patterns/architecture.svg",
+    "coverImageUrl": "/images/patterns/quran.svg",
     "images": [
       {
-        "url": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800",
-        "caption": "Graduates with their certificates"
+        "url": "/images/patterns/quran.svg",
+        "caption": "Graduates receiving their Ijazah certificates"
       }
     ],
     "category": "achievements",
-    "eventDate": "2026-08-20",
-    "createdAt": "2026-08-06T19:09:32.984Z",
-    "id": "school_gallery_albums_1_mt1w9vwe",
-    "slug": "hifz-graduation"
+    "eventDate": "2026-08-22",
+    "createdAt": "2026-08-08T16:57:24.970Z",
+    "id": "school_gallery_albums_0_mt4mfnxs",
+    "slug": "hifz-graduation-1447-ah"
   },
   {
-    "title": "Campus Life",
-    "description": "Everyday moments at Minhaajulhudaa School.",
-    "coverImageUrl": "/images/patterns/architecture.svg",
+    "title": "Qur'an Recitation Competition",
+    "description": "Annual Qur'an recitation competition highlights.",
+    "coverImageUrl": "/images/patterns/quran.svg",
     "images": [
       {
-        "url": "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800",
-        "caption": "Students in class"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800",
-        "caption": "Library study session"
+        "url": "/images/patterns/quran.svg",
+        "caption": "Students reciting with Tajweed"
       }
     ],
-    "category": "campus",
-    "eventDate": "2026-08-20",
-    "createdAt": "2026-08-10T19:09:32.984Z",
-    "id": "school_gallery_albums_2_mt1w9vwe",
-    "slug": "campus-life"
+    "category": "events",
+    "eventDate": "2026-08-22",
+    "createdAt": "2026-08-01T16:57:24.970Z",
+    "id": "school_gallery_albums_1_mt4mfnxs",
+    "slug": "quran-recitation-competition"
+  },
+  {
+    "title": "Arabic Calligraphy Exhibition",
+    "description": "Student Arabic calligraphy works.",
+    "coverImageUrl": "/images/patterns/arabesque.svg",
+    "images": [
+      {
+        "url": "/images/patterns/arabesque.svg",
+        "caption": "Beautiful calligraphy by students"
+      }
+    ],
+    "category": "academic",
+    "eventDate": "2026-08-22",
+    "createdAt": "2026-07-23T16:57:24.970Z",
+    "id": "school_gallery_albums_2_mt4mfnxs",
+    "slug": "arabic-calligraphy-exhibition"
   }
 ]

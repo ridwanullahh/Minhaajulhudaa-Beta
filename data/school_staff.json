@@ -5,13 +5,13 @@
     "lastName": "Adeyemi",
     "role": "principal",
     "subjects": [],
-    "qualifications": "B.Ed Educational Administration, M.Ed Islamic Education",
-    "email": "school.admin@minhaajulhudaa.com",
+    "qualifications": "B.Ed Islamic Education, M.Ed Educational Administration, Ijazah in Qur'an recitation",
+    "email": "school.admin@minhaajulhudaa.org",
     "phone": "+2348000000001",
     "bio": "With over 20 years of experience in Islamic education, Ustadh Abdurrahman leads our school with wisdom and vision.",
     "joinDate": "2021-01-15",
     "status": "active",
-    "id": "school_staff_0_mt1w9vwe"
+    "id": "school_staff_0_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/002",
@@ -23,13 +23,13 @@
       "Tajweed",
       "Hifz"
     ],
-    "qualifications": "B.A Islamic Studies, Ijazah in Qur'an recitation",
-    "email": "yusuf.olatunji@minhaajulhudaa.com",
+    "qualifications": "B.A Islamic Studies, Ijazah in the 10 recitations of the Qur'an",
+    "email": "yusuf.olatunji@minhaajulhudaa.org",
     "phone": "+2348011111111",
-    "bio": "Lead Hifz instructor with Ijazah in the 10 recitations of the Qur'an.",
+    "bio": "Lead Hifz instructor with Ijazah in the canonical recitations of the Qur'an.",
     "joinDate": "2021-02-01",
     "status": "active",
-    "id": "school_staff_1_mt1w9vwe"
+    "id": "school_staff_1_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/003",
@@ -37,17 +37,17 @@
     "lastName": "Bashir",
     "role": "teacher",
     "subjects": [
-      "Mathematics",
-      "Physics",
-      "Robotics"
+      "Fiqh",
+      "Usul al-Fiqh",
+      "Aqeedah"
     ],
-    "qualifications": "B.Sc Mathematics, M.Sc Physics Education",
-    "email": "muhammad.bashir@minhaajulhudaa.com",
+    "qualifications": "B.A Islamic Law, M.A Usul al-Fiqh (Al-Azhar University)",
+    "email": "muhammad.bashir@minhaajulhudaa.org",
     "phone": "+2348012222222",
-    "bio": "STEM coordinator passionate about making science accessible to all students.",
+    "bio": "Fiqh and Usul al-Fiqh specialist, Al-Azhar graduate.",
     "joinDate": "2021-03-10",
     "status": "active",
-    "id": "school_staff_2_mt1w9vwe"
+    "id": "school_staff_2_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/004",
@@ -55,16 +55,16 @@
     "lastName": "Abdullahi",
     "role": "teacher",
     "subjects": [
-      "English Language",
-      "Literature"
+      "Tahdheeb",
+      "Qur'an Reading"
     ],
-    "qualifications": "B.A English, PGDE",
-    "email": "aisha.abdullahi@minhaajulhudaa.com",
+    "qualifications": "B.Ed Islamic Education, Diploma in Child Psychology",
+    "email": "aisha.abdullahi@minhaajulhudaa.org",
     "phone": "+2348013333333",
-    "bio": "English and Literature teacher with a passion for developing young writers.",
+    "bio": "Specialist in early Islamic education for young children.",
     "joinDate": "2021-09-01",
     "status": "active",
-    "id": "school_staff_3_mt1w9vwe"
+    "id": "school_staff_3_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/005",
@@ -73,15 +73,17 @@
     "role": "teacher",
     "subjects": [
       "Arabic Language",
-      "Islamic Studies"
+      "Nahwu",
+      "Sarf",
+      "Balaghah"
     ],
-    "qualifications": "B.A Arabic Language, Diploma in Shariah",
-    "email": "khadijah.suleiman@minhaajulhudaa.com",
+    "qualifications": "B.A Arabic Language, M.A Arabic Literature (Islamic University of Madinah)",
+    "email": "khadijah.suleiman@minhaajulhudaa.org",
     "phone": "+2348014444444",
     "bio": "Native Arabic speaker with expertise in teaching Arabic to non-native speakers.",
     "joinDate": "2022-01-10",
     "status": "active",
-    "id": "school_staff_4_mt1w9vwe"
+    "id": "school_staff_4_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/006",
@@ -89,16 +91,17 @@
     "lastName": "Musa",
     "role": "teacher",
     "subjects": [
-      "Biology",
-      "Chemistry"
+      "Hadith",
+      "Mustalah al-Hadith",
+      "Tafsir"
     ],
-    "qualifications": "B.Sc Biology, M.Sc Chemistry",
-    "email": "ibrahim.musa@minhaajulhudaa.com",
+    "qualifications": "B.A Hadith Sciences, M.A Tafsir (Islamic University of Madinah)",
+    "email": "ibrahim.musa@minhaajulhudaa.org",
     "phone": "+2348015555555",
-    "bio": "Science teacher with research experience in environmental science.",
+    "bio": "Hadith and Tafsir specialist with extensive knowledge of classical commentaries.",
     "joinDate": "2022-09-01",
     "status": "active",
-    "id": "school_staff_5_mt1w9vwe"
+    "id": "school_staff_5_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/007",
@@ -106,13 +109,13 @@
     "lastName": "Bello",
     "role": "librarian",
     "subjects": [],
-    "qualifications": "B.Library Science",
-    "email": "fatima.bello@minhaajulhudaa.com",
+    "qualifications": "B.Library Science, Diploma in Arabic Manuscripts",
+    "email": "fatima.bello@minhaajulhudaa.org",
     "phone": "+2348016666666",
-    "bio": "Our librarian curates a growing collection of over 5,000 titles.",
+    "bio": "Our librarian curates a growing collection of over 3,000 Islamic texts.",
     "joinDate": "2021-09-05",
     "status": "active",
-    "id": "school_staff_6_mt1w9vwe"
+    "id": "school_staff_6_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/008",
@@ -121,12 +124,12 @@
     "role": "accountant",
     "subjects": [],
     "qualifications": "B.Sc Accounting, ACA",
-    "email": "abdullah.okafor@minhaajulhudaa.com",
+    "email": "abdullah.okafor@minhaajulhudaa.org",
     "phone": "+2348017777777",
     "bio": "Chartered accountant overseeing school finances and fee management.",
     "joinDate": "2021-04-01",
     "status": "active",
-    "id": "school_staff_7_mt1w9vwe"
+    "id": "school_staff_7_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/009",
@@ -134,13 +137,13 @@
     "lastName": "Disu",
     "role": "vice-principal",
     "subjects": [],
-    "qualifications": "B.Ed, M.Ed Educational Management",
-    "email": "maryam.disu@minhaajulhudaa.com",
+    "qualifications": "B.Ed Islamic Studies, M.Ed Educational Management",
+    "email": "maryam.disu@minhaajulhudaa.org",
     "phone": "+2348018888888",
     "bio": "Vice Principal Academic, overseeing curriculum and academic standards.",
     "joinDate": "2021-05-15",
     "status": "active",
-    "id": "school_staff_8_mt1w9vwe"
+    "id": "school_staff_8_mt4mfnxs"
   },
   {
     "staffId": "MHS-STAFF/010",
@@ -148,15 +151,16 @@
     "lastName": "Garba",
     "role": "teacher",
     "subjects": [
-      "Geography",
-      "Civic Education"
+      "Seerah",
+      "Tahdheeb",
+      "Islamic History"
     ],
-    "qualifications": "B.Sc Geography, PGDE",
-    "email": "yahya.garba@minhaajulhudaa.com",
+    "qualifications": "B.A Islamic History, PGDE",
+    "email": "yahya.garba@minhaajulhudaa.org",
     "phone": "+2348019999999",
-    "bio": "Geography and civic education teacher with field research experience.",
+    "bio": "Seerah and Islamic history teacher with a passion for bringing the Prophet's life to students.",
     "joinDate": "2023-01-10",
     "status": "active",
-    "id": "school_staff_9_mt1w9vwe"
+    "id": "school_staff_9_mt4mfnxs"
   }
 ]

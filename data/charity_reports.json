@@ -10,8 +10,8 @@
       "totalDisbursed": 42300000,
       "beneficiaries": 1250
     },
-    "generatedAt": "2026-07-21T19:09:32.985Z",
-    "id": "charity_reports_0_mt1w9vwj",
+    "generatedAt": "2026-07-23T16:57:24.970Z",
+    "id": "charity_reports_0_mt4mfnxx",
     "slug": "annual-impact-report-2025"
   },
   {
@@ -25,8 +25,8 @@
       "expenses": 13200000,
       "campaigns": 6
     },
-    "generatedAt": "2026-08-10T19:09:32.985Z",
-    "id": "charity_reports_1_mt1w9vwj",
+    "generatedAt": "2026-08-12T16:57:24.970Z",
+    "id": "charity_reports_1_mt4mfnxx",
     "slug": "q2-2026-financial-report"
   },
   {
@@ -39,8 +39,8 @@
       "wellsBuilt": 12,
       "beneficiaries": 6000
     },
-    "generatedAt": "2026-08-13T19:09:32.985Z",
-    "id": "charity_reports_2_mt1w9vwj",
+    "generatedAt": "2026-08-15T16:57:24.970Z",
+    "id": "charity_reports_2_mt4mfnxx",
     "slug": "water-project-impact-report"
   }
 ]

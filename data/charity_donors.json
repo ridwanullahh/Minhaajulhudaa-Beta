@@ -5,14 +5,14 @@
     "phone": "+2348061111111",
     "totalDonated": 500000,
     "donationCount": 8,
-    "firstDonationAt": "2026-02-01T19:09:32.985Z",
-    "lastDonationAt": "2026-08-19T19:09:32.985Z",
+    "firstDonationAt": "2026-02-03T16:57:24.970Z",
+    "lastDonationAt": "2026-08-21T16:57:24.970Z",
     "isRecurring": false,
     "tags": [
       "major-donor"
     ],
     "communicationOptIn": true,
-    "id": "charity_donors_0_mt1w9vwi",
+    "id": "charity_donors_0_mt4mfnxv",
     "slug": "muhammad-ali"
   },
   {
@@ -21,14 +21,14 @@
     "phone": "+2348062222222",
     "totalDonated": 175000,
     "donationCount": 7,
-    "firstDonationAt": "2026-03-23T19:09:32.985Z",
-    "lastDonationAt": "2026-08-17T19:09:32.985Z",
+    "firstDonationAt": "2026-03-25T16:57:24.970Z",
+    "lastDonationAt": "2026-08-19T16:57:24.970Z",
     "isRecurring": true,
     "tags": [
       "recurring"
     ],
     "communicationOptIn": true,
-    "id": "charity_donors_1_mt1w9vwi",
+    "id": "charity_donors_1_mt4mfnxv",
     "slug": "fatima-bello"
   },
   {
@@ -37,15 +37,15 @@
     "phone": "+2348063333333",
     "totalDonated": 600000,
     "donationCount": 4,
-    "firstDonationAt": "2026-05-12T19:09:32.985Z",
-    "lastDonationAt": "2026-08-16T19:09:32.985Z",
+    "firstDonationAt": "2026-05-14T16:57:24.970Z",
+    "lastDonationAt": "2026-08-18T16:57:24.970Z",
     "isRecurring": false,
     "tags": [
       "major-donor",
       "zakaat"
     ],
     "communicationOptIn": true,
-    "id": "charity_donors_2_mt1w9vwi",
+    "id": "charity_donors_2_mt4mfnxv",
     "slug": "ibrahim-suleiman"
   },
   {
@@ -54,12 +54,12 @@
     "phone": "+2348064444444",
     "totalDonated": 225000,
     "donationCount": 3,
-    "firstDonationAt": "2026-05-22T19:09:32.985Z",
-    "lastDonationAt": "2026-08-14T19:09:32.985Z",
+    "firstDonationAt": "2026-05-24T16:57:24.970Z",
+    "lastDonationAt": "2026-08-16T16:57:24.970Z",
     "isRecurring": false,
     "tags": [],
     "communicationOptIn": true,
-    "id": "charity_donors_3_mt1w9vwi",
+    "id": "charity_donors_3_mt4mfnxv",
     "slug": "aisha-abdullahi"
   },
   {
@@ -68,15 +68,15 @@
     "phone": "+2348065555555",
     "totalDonated": 450000,
     "donationCount": 6,
-    "firstDonationAt": "2026-02-21T19:09:32.985Z",
-    "lastDonationAt": "2026-08-13T19:09:32.985Z",
+    "firstDonationAt": "2026-02-23T16:57:24.970Z",
+    "lastDonationAt": "2026-08-15T16:57:24.970Z",
     "isRecurring": true,
     "tags": [
       "major-donor",
       "recurring"
     ],
     "communicationOptIn": true,
-    "id": "charity_donors_4_mt1w9vwi",
+    "id": "charity_donors_4_mt4mfnxv",
     "slug": "abdullah-okafor"
   }
 ]

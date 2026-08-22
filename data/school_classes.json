@@ -1,247 +1,243 @@
 [
   {
-    "name": "Primary 1",
-    "level": "primary",
-    "grade": "P1",
+    "slug": "tamheedy",
+    "name": "Tamheedy (Preparatory)",
+    "level": "tamheedy",
+    "grade": "T",
     "teacherId": "MHS-STAFF/004",
     "teacherName": "Mrs. Aisha Abdullahi",
     "room": "Room 101",
     "capacity": 25,
     "currentEnrollment": 22,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Basic Science",
-      "Islamic Studies",
-      "Arabic",
-      "Qur'an"
+      "Qur'an Reading",
+      "Arabic Alphabet",
+      "Basic Tajweed",
+      "Islamic Etiquette (Adab)",
+      "Memorization (Short Surahs)"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "8:00 AM - 2:00 PM"
-    },
-    "description": "Foundation class for young learners.",
+    "schedule": "Mon-Fri, 8:00 AM - 1:00 PM",
+    "description": "The Tamheedy class is the foundational level for young learners aged 5-6. Students learn the Arabic alphabet, basic Qur'an reading, short Surahs from Juz Amma, and essential Islamic manners. This class prepares children for the structured Ibtidaiyah curriculum.",
     "active": true,
-    "id": "school_classes_0_mt1w9vwe",
-    "slug": "primary-1"
+    "id": "school_classes_0_mt4mfnxr"
   },
   {
-    "name": "Primary 3",
-    "level": "primary",
-    "grade": "P3",
+    "slug": "ibtidaiyah-1",
+    "name": "Ibtidaiyah 1 (Elementary 1)",
+    "level": "ibtidaiyah",
+    "grade": "I1",
+    "teacherId": "MHS-STAFF/005",
+    "teacherName": "Mrs. Khadijah Suleiman",
+    "room": "Room 102",
+    "capacity": 30,
+    "currentEnrollment": 28,
+    "subjects": [
+      "Qur'an Reading",
+      "Arabic Grammar (Nahwu)",
+      "Arabic Morphology (Sarf)",
+      "Tajweed Basics",
+      "Tahdheeb",
+      "Memorization (Juz Amma)"
+    ],
+    "schedule": "Mon-Fri, 8:00 AM - 2:00 PM",
+    "description": "Ibtidaiyah 1 is the first year of elementary Islamic education. Students begin structured Arabic grammar (Nahwu), morphology (Sarf), and Tajweed rules. They continue memorizing Juz Amma and learn Islamic etiquette (Tahdheeb).",
+    "active": true,
+    "id": "school_classes_1_mt4mfnxr"
+  },
+  {
+    "slug": "ibtidaiyah-2",
+    "name": "Ibtidaiyah 2 (Elementary 2)",
+    "level": "ibtidaiyah",
+    "grade": "I2",
     "teacherId": "MHS-STAFF/010",
     "teacherName": "Ustadh Yahya Garba",
     "room": "Room 103",
     "capacity": 30,
-    "currentEnrollment": 28,
+    "currentEnrollment": 25,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Basic Science",
-      "Islamic Studies",
-      "Arabic",
-      "Qur'an",
-      "Social Studies"
+      "Qur'an Reading",
+      "Arabic Grammar (Nahwu)",
+      "Arabic Morphology (Sarf)",
+      "Tajweed",
+      "Tahdheeb",
+      "Memorization",
+      "Hadith Studies"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "8:00 AM - 2:00 PM"
-    },
-    "description": "Lower primary class building on foundational skills.",
+    "schedule": "Mon-Fri, 8:00 AM - 2:00 PM",
+    "description": "Ibtidaiyah 2 builds on the foundation of Ibtidaiyah 1, with more advanced Arabic grammar, continued Qur'an memorization, and introduction to Hadith studies. Students begin reading short Hadith texts in Arabic.",
     "active": true,
-    "id": "school_classes_1_mt1w9vwe",
-    "slug": "primary-3"
+    "id": "school_classes_2_mt4mfnxr"
   },
   {
-    "name": "Primary 4",
-    "level": "primary",
-    "grade": "P4",
-    "teacherId": "MHS-STAFF/005",
-    "teacherName": "Mrs. Khadijah Suleiman",
+    "slug": "ibtidaiyah-3",
+    "name": "Ibtidaiyah 3 (Elementary 3)",
+    "level": "ibtidaiyah",
+    "grade": "I3",
+    "teacherId": "MHS-STAFF/002",
+    "teacherName": "Ustadh Yusuf Olatunji",
     "room": "Room 104",
     "capacity": 30,
-    "currentEnrollment": 27,
+    "currentEnrollment": 26,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Basic Science",
-      "Islamic Studies",
-      "Arabic",
-      "Qur'an",
-      "Social Studies",
-      "Computer Science"
+      "Qur'an Reading",
+      "Advanced Arabic Grammar",
+      "Arabic Morphology",
+      "Tajweed",
+      "Tahdheeb",
+      "Memorization",
+      "Hadith Studies",
+      "Seerah (Prophetic Biography)"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "8:00 AM - 2:30 PM"
-    },
-    "description": "Upper primary class preparing for junior secondary.",
+    "schedule": "Mon-Fri, 8:00 AM - 2:30 PM",
+    "description": "Ibtidaiyah 3 completes the elementary level. Students achieve fluency in reading Arabic, master basic Tajweed, and are introduced to the Seerah (biography of the Prophet Muhammad, peace be upon him). This class prepares students for the intermediate Idadiyah level.",
     "active": true,
-    "id": "school_classes_2_mt1w9vwe",
-    "slug": "primary-4"
+    "id": "school_classes_3_mt4mfnxr"
   },
   {
-    "name": "JSS 1",
-    "level": "junior-secondary",
-    "grade": "J1",
+    "slug": "idadiyah-1",
+    "name": "Idadiyah 1 (Intermediate 1)",
+    "level": "idadiyah",
+    "grade": "D1",
     "teacherId": "MHS-STAFF/003",
     "teacherName": "Ustadh Muhammad Bashir",
     "room": "Room 201",
     "capacity": 35,
-    "currentEnrollment": 32,
+    "currentEnrollment": 30,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Basic Science",
-      "Basic Technology",
-      "Islamic Studies",
-      "Arabic",
-      "Qur'an",
-      "Social Studies",
-      "Computer Science",
-      "Agricultural Science"
+      "Qur'an with Tajweed",
+      "Advanced Nahwu",
+      "Advanced Sarf",
+      "Balaghah (Rhetoric) Introduction",
+      "Tafsir Introduction",
+      "Fiqh (Taharah & Salah)",
+      "Hadith Studies"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "7:30 AM - 3:00 PM"
-    },
-    "description": "Entry into junior secondary education.",
+    "schedule": "Mon-Fri, 7:30 AM - 3:00 PM",
+    "description": "Idadiyah 1 begins the intermediate level. Students study advanced Arabic grammar and are introduced to Balaghah (rhetoric), Tafsir (Qur'an exegesis), and Fiqh (Islamic jurisprudence) covering Taharah (purification) and Salah (prayer).",
     "active": true,
-    "id": "school_classes_3_mt1w9vwe",
-    "slug": "jss-1"
+    "id": "school_classes_4_mt4mfnxr"
   },
   {
-    "name": "JSS 2",
-    "level": "junior-secondary",
-    "grade": "J2",
+    "slug": "idadiyah-2",
+    "name": "Idadiyah 2 (Intermediate 2)",
+    "level": "idadiyah",
+    "grade": "D2",
     "teacherId": "MHS-STAFF/006",
     "teacherName": "Ustadh Ibrahim Musa",
     "room": "Room 202",
     "capacity": 35,
-    "currentEnrollment": 30,
+    "currentEnrollment": 28,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Basic Science",
-      "Basic Technology",
-      "Islamic Studies",
-      "Arabic",
-      "Qur'an",
-      "Social Studies",
-      "Computer Science",
-      "Agricultural Science",
-      "French"
+      "Qur'an with Tajweed",
+      "Advanced Nahwu",
+      "Advanced Sarf",
+      "Balaghah",
+      "Tafsir",
+      "Fiqh (Zakah & Sawm)",
+      "Hadith Studies",
+      "Usul al-Fiqh Introduction"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "7:30 AM - 3:00 PM"
-    },
-    "description": "Continued junior secondary education.",
+    "schedule": "Mon-Fri, 7:30 AM - 3:00 PM",
+    "description": "Idadiyah 2 continues intermediate studies with more advanced Balaghah, Tafsir of selected Surahs, and Fiqh covering Zakah and Sawm (fasting). Students are introduced to Usul al-Fiqh (principles of Islamic jurisprudence).",
     "active": true,
-    "id": "school_classes_4_mt1w9vwe",
-    "slug": "jss-2"
+    "id": "school_classes_5_mt4mfnxr"
   },
   {
-    "name": "SSS 1 Science",
-    "level": "senior-secondary",
-    "grade": "S1",
+    "slug": "idadiyah-3",
+    "name": "Idadiyah 3 (Intermediate 3)",
+    "level": "idadiyah",
+    "grade": "D3",
+    "teacherId": "MHS-STAFF/009",
+    "teacherName": "Mrs. Maryam Disu",
+    "room": "Room 203",
+    "capacity": 35,
+    "currentEnrollment": 25,
+    "subjects": [
+      "Qur'an with Tajweed",
+      "Arabic Literature",
+      "Balaghah",
+      "Tafsir",
+      "Fiqh (Hajj & Umrah)",
+      "Hadith Studies",
+      "Usul al-Fiqh",
+      "Aqeedah (Islamic Creed)"
+    ],
+    "schedule": "Mon-Fri, 7:30 AM - 3:00 PM",
+    "description": "Idadiyah 3 completes the intermediate level. Students study Arabic literature, advanced Tafsir, Fiqh of Hajj and Umrah, and are introduced to Aqeedah (Islamic creed). This class prepares students for the advanced Thanawiyyah level.",
+    "active": true,
+    "id": "school_classes_6_mt4mfnxr"
+  },
+  {
+    "slug": "thanawiyyah-1",
+    "name": "Thanawiyyah 1 (Secondary 1)",
+    "level": "thanawiyyah",
+    "grade": "T1",
     "teacherId": "MHS-STAFF/003",
     "teacherName": "Ustadh Muhammad Bashir",
     "room": "Room 301",
     "capacity": 30,
-    "currentEnrollment": 28,
+    "currentEnrollment": 24,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Physics",
-      "Chemistry",
-      "Biology",
-      "Further Mathematics",
-      "Islamic Studies",
-      "Arabic",
-      "Computer Science"
+      "Advanced Tafsir",
+      "Advanced Fiqh",
+      "Usul al-Fiqh",
+      "Usul al-Hadith",
+      "Aqeedah",
+      "Arabic Literature",
+      "Mustalah al-Hadith",
+      "Comparative Religion"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "7:30 AM - 3:30 PM"
-    },
-    "description": "Senior secondary science track.",
+    "schedule": "Mon-Fri, 7:30 AM - 3:30 PM",
+    "description": "Thanawiyyah 1 begins the secondary level with advanced Islamic sciences. Students study Usul al-Fiqh (principles of jurisprudence), Usul al-Hadith (principles of Hadith), Mustalah al-Hadith (Hadith terminology), and comparative religion.",
     "active": true,
-    "id": "school_classes_5_mt1w9vwe",
-    "slug": "sss-1-science"
+    "id": "school_classes_7_mt4mfnxr"
   },
   {
-    "name": "SSS 2 Science",
-    "level": "senior-secondary",
-    "grade": "S2",
+    "slug": "thanawiyyah-2",
+    "name": "Thanawiyyah 2 (Secondary 2)",
+    "level": "thanawiyyah",
+    "grade": "T2",
     "teacherId": "MHS-STAFF/006",
     "teacherName": "Ustadh Ibrahim Musa",
     "room": "Room 302",
     "capacity": 30,
-    "currentEnrollment": 26,
+    "currentEnrollment": 22,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Physics",
-      "Chemistry",
-      "Biology",
-      "Further Mathematics",
-      "Islamic Studies",
-      "Arabic",
-      "Computer Science"
+      "Advanced Tafsir",
+      "Advanced Fiqh",
+      "Usul al-Fiqh",
+      "Ilm al-Kalam",
+      "Aqeedah",
+      "Arabic Literature",
+      "Siyaq al-Fiqh",
+      "Research Methods"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "7:30 AM - 3:30 PM"
-    },
-    "description": "Senior secondary science track, year 2.",
+    "schedule": "Mon-Fri, 7:30 AM - 3:30 PM",
+    "description": "Thanawiyyah 2 continues with advanced studies including Ilm al-Kalam (theology), Siyaq al-Fiqh (contextual jurisprudence), and research methods in Islamic sciences. Students begin preparing their graduation research.",
     "active": true,
-    "id": "school_classes_6_mt1w9vwe",
-    "slug": "sss-2-science"
+    "id": "school_classes_8_mt4mfnxr"
   },
   {
-    "name": "SSS 3 Science",
-    "level": "senior-secondary",
-    "grade": "S3",
+    "slug": "thanawiyyah-3",
+    "name": "Thanawiyyah 3 (Secondary 3 - Final Year)",
+    "level": "thanawiyyah",
+    "grade": "T3",
     "teacherId": "MHS-STAFF/009",
     "teacherName": "Mrs. Maryam Disu",
     "room": "Room 303",
     "capacity": 30,
-    "currentEnrollment": 24,
+    "currentEnrollment": 20,
     "subjects": [
-      "English",
-      "Mathematics",
-      "Physics",
-      "Chemistry",
-      "Biology",
-      "Further Mathematics",
-      "Islamic Studies",
-      "Arabic",
-      "Computer Science"
+      "Advanced Tafsir",
+      "Advanced Fiqh",
+      "Ifta (Issuing Rulings)",
+      "Research Project",
+      "Comprehensive Review",
+      "Teaching Practice"
     ],
-    "schedule": {
-      "days": [
-        "Mon-Fri"
-      ],
-      "time": "7:30 AM - 3:30 PM"
-    },
-    "description": "Final year senior secondary, WAEC preparation.",
+    "schedule": "Mon-Fri, 7:30 AM - 3:30 PM",
+    "description": "Thanawiyyah 3 is the final year. Students study Ifta (the science of issuing Islamic rulings), complete a graduation research project, and participate in teaching practice. Upon completion, students receive the Shahadah Thanawiyyah (Secondary Certificate) qualifying them as Islamic educators.",
     "active": true,
-    "id": "school_classes_7_mt1w9vwe",
-    "slug": "sss-3-science"
+    "id": "school_classes_9_mt4mfnxr"
   }
 ]

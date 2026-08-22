@@ -6,11 +6,11 @@
     "currency": "NGN",
     "frequency": "monthly",
     "category": "sadaqah",
-    "nextChargeDate": "2026-09-14T19:09:32.985Z",
+    "nextChargeDate": "2026-09-16T16:57:24.970Z",
     "status": "active",
-    "startedAt": "2026-03-23T19:09:32.985Z",
+    "startedAt": "2026-03-25T16:57:24.970Z",
     "totalCharged": 175000,
-    "id": "charity_recurring_donations_0_mt1w9vwi"
+    "id": "charity_recurring_donations_0_mt4mfnxv"
   },
   {
     "donorEmail": "abdullah.o@example.com",
@@ -19,10 +19,10 @@
     "currency": "NGN",
     "frequency": "monthly",
     "category": "zakaat",
-    "nextChargeDate": "2026-09-09T19:09:32.985Z",
+    "nextChargeDate": "2026-09-11T16:57:24.970Z",
     "status": "active",
-    "startedAt": "2026-02-21T19:09:32.985Z",
+    "startedAt": "2026-02-23T16:57:24.970Z",
     "totalCharged": 450000,
-    "id": "charity_recurring_donations_1_mt1w9vwi"
+    "id": "charity_recurring_donations_1_mt4mfnxv"
   }
 ]
