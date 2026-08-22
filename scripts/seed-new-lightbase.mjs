@@ -19,7 +19,7 @@ const BASE_URL = process.env.LIGHTBASE_BASE_URL || 'https://lightbase.pages.dev'
 const API_KEY = process.env.LIGHTBASE_API_KEY;
 const PROJECT_ID = process.env.LIGHTBASE_PROJECT_ID || 'minhaajulhuda-beta';
 const MAX_RETRIES = 3;
-const INITIAL_TIMEOUT = 120000; // 120s timeout (GitHub backend is slow)
+const INITIAL_TIMEOUT = 30000; // 30s timeout (R2 backend is fast)
 
 const allSchemas = [...sharedSchemas, ...schoolSchemas, ...masjidSchemas, ...charitySchemas, ...travelsSchemas];
 const allSeedData = { ...sharedSeedData, ...schoolSeedData, ...masjidSeedData, ...charitySeedData, ...travelsSeedData };
