@@ -159,14 +159,47 @@ const values = [
         <h2 class="text-2xl md:text-3xl font-bold">Available Classes</h2>
         <a href="/school/classes" class="text-sm font-medium" style="color: var(--color-primary);">View All</a>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {classes.map((cls) => (
-          <div class="card card-hover p-6">
-            <div class="text-2xl font-extrabold mb-1" style="color: var(--color-primary);">{cls.name}</div>
-            <div class="text-xs mb-3" style="color: var(--color-muted);">Level: {cls.level.replace('-', ' ')}</div>
-            <div class="text-sm mb-2">Teacher: <span class="font-medium">{cls.teacherName || 'TBD'}</span></div>
-            <div class="text-xs" style="color: var(--color-muted);">{cls.currentEnrollment}/{cls.capacity} enrolled</div>
-          </div>
+          <a href={`/school/classes/${cls.slug || cls.id}`} class="card card-hover p-6 block">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="text-lg font-bold">{cls.name}</h3>
+                <span class="badge badge-accent mt-1">{cls.level ? cls.level.replace(/-/g, ' ') : 'N/A'}</span>
+              </div>
+              <span class="badge badge-primary">Active</span>
+            </div>
+            <dl class="space-y-3 text-sm mb-4">
+              {cls.teacherName && (
+                <div class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-muted);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <span style="color: var(--color-muted);">Teacher:</span>
+                  <span class="font-medium">{cls.teacherName}</span>
+                </div>
+              )}
+              {cls.schedule && (
+                <div class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-muted);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span style="color: var(--color-muted);">Schedule:</span>
+                  <span class="font-medium">{cls.schedule}</span>
+                </div>
+              )}
+              {cls.room && (
+                <div class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-muted);"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg>
+                  <span style="color: var(--color-muted);">Room:</span>
+                  <span class="font-medium">{cls.room}</span>
+                </div>
+              )}
+            </dl>
+            <div class="flex items-center justify-between text-xs" style="color: var(--color-muted);">
+              <span>Enrollment</span>
+              <span>{cls.currentEnrollment || 0}/{cls.capacity || 30}</span>
+            </div>
+            <div class="w-full h-2 rounded-full mt-2" style="background: var(--color-border);">
+              <div class="h-2 rounded-full" style={`width: ${Math.min(100, ((cls.currentEnrollment || 0) / (cls.capacity || 30)) * 100)}%; background: var(--color-primary);`}></div>
+            </div>
+          </a>
         ))}
       </div>
     </section>
