@@ -48,6 +48,7 @@ try {
                 </div>
               </div>
               <div class="flex items-center gap-2">
+                <button class="reply-btn btn btn-ghost text-xs" data-id={msg.id} data-email={msg.email} data-name={msg.name} data-subject={msg.subject} style="padding: 4px 8px; color: var(--color-primary);">Reply</button>
                 <button class="mark-read-btn btn btn-ghost text-xs" data-id={msg.id} data-action="read" style="padding: 4px 8px;">Mark Read</button>
                 <button class="delete-msg-btn btn btn-ghost text-xs" data-id={msg.id} data-action="delete" style="padding: 4px 8px; color: #DC2626;">Delete</button>
               </div>
@@ -61,6 +62,34 @@ try {
           </div>
         ))
       )}
+    </div>
+  </div>
+
+  <!-- Reply Modal -->
+  <div id="reply-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background: rgb(0 0 0 / 0.5);">
+    <div class="w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden" style="background: #FFFFFF; border: 1px solid var(--color-border);">
+      <div class="p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-base" style="color: #181F25;">Reply to Message</h3>
+          <button id="reply-close" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[rgb(0,0,0,0.05)]"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        </div>
+        <div id="reply-info" class="mb-4 p-3 rounded-lg text-sm" style="background: var(--color-background);">
+          <div><strong>To:</strong> <span id="reply-to"></span></div>
+          <div><strong>Subject:</strong> <span id="reply-subject"></span></div>
+        </div>
+        <form id="reply-form" class="space-y-3">
+          <input type="hidden" id="reply-msg-id" />
+          <input type="hidden" id="reply-email" />
+          <div>
+            <label class="block text-sm font-medium mb-1">Reply Message</label>
+            <textarea id="reply-message" class="input" rows="6" required placeholder="Type your reply..."></textarea>
+          </div>
+          <div class="flex gap-2">
+            <button type="submit" id="reply-send-btn" class="btn btn-primary flex-1">Send Reply</button>
+            <button type="button" id="reply-cancel-btn" class="btn btn-ghost">Cancel</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -97,5 +126,57 @@ try {
     });
 
     document.getElementById('refresh-btn')?.addEventListener('click', function() { location.reload(); });
+
+    // Reply feature
+    var replyModal = document.getElementById('reply-modal');
+    document.querySelectorAll('.reply-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var email = btn.dataset.email;
+        var name = btn.dataset.name;
+        var subject = btn.dataset.subject;
+        var id = btn.dataset.id;
+        document.getElementById('reply-msg-id').value = id;
+        document.getElementById('reply-email').value = email;
+        document.getElementById('reply-to').textContent = name + ' <' + email + '>';
+        document.getElementById('reply-subject').textContent = 'Re: ' + subject;
+        document.getElementById('reply-message').value = '';
+        replyModal.classList.remove('hidden');
+      });
+    });
+
+    document.getElementById('reply-close')?.addEventListener('click', function() { replyModal.classList.add('hidden'); });
+    document.getElementById('reply-cancel-btn')?.addEventListener('click', function() { replyModal.classList.add('hidden'); });
+
+    document.getElementById('reply-form')?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var sendBtn = document.getElementById('reply-send-btn');
+      sendBtn.textContent = 'Sending...'; sendBtn.disabled = true;
+      var id = document.getElementById('reply-msg-id').value;
+      var email = document.getElementById('reply-email').value;
+      var message = document.getElementById('reply-message').value;
+      try {
+        var res = await fetch('/api/admin/settings/contact?action=reply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: id, email: email, message: message })
+        });
+        var data = await res.json();
+        if (res.ok) {
+          showToast('Reply sent successfully!', 'success');
+          replyModal.classList.add('hidden');
+          // Update status to replied
+          var card = document.querySelector('[data-id="' + id + '"]');
+          if (card) {
+            var badge = card.querySelector('.badge');
+            if (badge) { badge.textContent = 'Replied'; badge.className = 'badge badge-primary text-xs'; }
+          }
+        } else {
+          showToast(data.error || 'Failed to send reply', 'error');
+        }
+      } catch(err) {
+        showToast('Network error', 'error');
+      }
+      sendBtn.textContent = 'Send Reply'; sendBtn.disabled = false;
+    });
   </script>
 </AdminLayout>

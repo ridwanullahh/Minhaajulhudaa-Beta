@@ -1,176 +1,39 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
-import { generateCSRFToken } from '../../../lib/utils';
-import RichTextEditor from '../../../components/RichTextEditor.astro';
-
-const posts = await lightbase.query('charity_blog_posts', { sort: 'publishedAt:desc', limit: 50 });
-const allPosts = posts.data || [];
-const csrfToken = generateCSRFToken();
+const result = await lightbase.query('charity_blog_posts', { sort: 'publishedAt:desc', limit: 100 });
+const allItems = result.data || [];
 ---
-
 <AdminLayout title="Blog Management" platform="charity" section="blog">
-  <div class="flex items-center justify-between mb-6 fade-in">
+  <div class="mb-6 fade-in"><h2 class="text-lg font-bold">Blog Posts</h2><p class="text-sm" style="color: var(--color-muted);">{allItems.length} total</p></div>
+  <div class="grid lg:grid-cols-2 gap-6">
     <div>
-      <h2 class="text-lg font-bold">Blog Posts</h2>
-      <p class="text-sm" style="color: var(--color-muted);">{allPosts.length} total posts</p>
+      <div class="flex items-center justify-between mb-3"><h3 class="font-bold text-sm">All Posts</h3><button id="new-btn" class="btn btn-primary text-sm">New</button></div>
+      <div class="card overflow-hidden"><div class="max-h-[600px] overflow-y-auto"><table class="w-full text-sm">
+        <thead class="sticky top-0" style="background: var(--color-background);"><tr class="text-left" style="color: var(--color-muted);"><th class="p-3 font-medium">Title</th><th class="p-3 font-medium text-right">Actions</th></tr></thead>
+        <tbody>{allItems.map((item) => (<tr data-item={JSON.stringify(item)} style="border-top: 1px solid var(--color-border);"><td class="p-3 font-medium">{item.title}</td><td class="p-3 text-right"><div class="flex items-center justify-end gap-1">
+          <button class="edit-btn p-1.5 rounded-lg hover:bg-[rgb(5,179,77,0.1)]" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+          <button class="del-btn p-1.5 rounded-lg hover:bg-[rgb(220,38,38,0.1)]" data-id={item.id} data-title={item.title} title="Delete"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #DC2626;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+        </div></td></tr>))}</tbody></table></div>{allItems.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No items yet.</div>}</div>
     </div>
-    <button id="toggle-form-btn" class="btn btn-primary">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      New Post
-    </button>
+    <div id="edit-panel" class="card p-6"><h3 id="form-title" class="font-bold mb-4">Create New Post</h3><form id="cms-form" class="space-y-4">
+      <input type="hidden" id="f-id" />
+      <div><label class="block text-sm font-medium mb-1">Title</label><input id="f-title" class="input" required /></div>
+      <div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium mb-1">Slug</label><input id="f-slug" class="input" /></div><div><label class="block text-sm font-medium mb-1">Category</label><input id="f-category" class="input" /></div></div>
+      <div><label class="block text-sm font-medium mb-1">Excerpt</label><textarea id="f-excerpt" class="input" rows="2"></textarea></div>
+      <div><label class="block text-sm font-medium mb-1">Content (Markdown)</label><textarea id="f-content" class="input" rows="8" placeholder="# Heading&#10;Write content in Markdown..."></textarea></div>
+      <div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium mb-1">Author</label><input id="f-author" class="input" /></div><div><label class="block text-sm font-medium mb-1">Status</label><select id="f-status" class="input"><option value="draft">Draft</option><option value="published">Published</option></select></div></div>
+      <div><label class="block text-sm font-medium mb-1">Featured Image URL</label><input id="f-image" class="input" /></div>
+      <div><label class="block text-sm font-medium mb-1">Tags (comma-separated)</label><input id="f-tags" class="input" /></div>
+      <div class="flex gap-2 pt-2"><button type="submit" id="save-btn" class="btn btn-primary flex-1">Save</button><button type="button" id="cancel-btn" class="btn btn-ghost">Clear</button></div>
+    </form></div>
   </div>
-
-  <!-- Create Form -->
-  <div id="create-form" class="hidden card p-6 mb-6">
-    <h3 id="form-title" class="font-bold mb-4">Create New Post</h3>
-    <form id="blog-form" class="space-y-4">
-      <input type="hidden" name="csrfToken" value={csrfToken} />
-      <input type="hidden" name="editId" id="edit-id" value="" />
-      <div class="grid md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-medium mb-1" for="post-title">Title</label>
-          <input id="post-title" name="title" class="input" required />
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1" for="post-category">Category</label>
-          <input id="post-category" name="category" class="input" placeholder="e.g. Impact, Islamic Giving" />
-        </div>
-      </div>
-      <div>
-        <label class="block text-sm font-medium mb-1" for="post-slug">Slug</label>
-        <input id="post-slug" name="slug" class="input" placeholder="auto-generated-from-title" />
-      </div>
-      <div>
-        <label class="block text-sm font-medium mb-1" for="post-excerpt">Excerpt</label>
-        <textarea id="post-excerpt" name="excerpt" class="input" rows="2"></textarea>
-      </div>
-      <div>
-        <label class="block text-sm font-medium mb-1" for="post-content">Content</label>
-        <RichTextEditor id="post-content" name="content" label="" rows={12} placeholder="Write your blog post content in Markdown..." />
-      </div>
-      <div class="grid md:grid-cols-3 gap-4">
-        <div>
-          <label class="block text-sm font-medium mb-1" for="post-author">Author</label>
-          <input id="post-author" name="authorName" class="input" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1" for="post-image">Featured Image URL</label>
-          <input id="post-image" name="featuredImageUrl" class="input" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1" for="post-status">Status</label>
-          <select id="post-status" name="status" class="input">
-            <option value="draft">Draft</option>
-            <option value="published">Published</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <label class="block text-sm font-medium mb-1" for="post-tags">Tags (comma-separated)</label>
-        <input id="post-tags" name="tags" class="input" placeholder="e.g. zakaat, water, education" />
-      </div>
-      <div class="flex gap-3">
-        <button type="submit" class="btn btn-primary">Save Post</button>
-        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Posts Table -->
-  <div class="card overflow-hidden">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
-          <th class="p-4 font-medium">Title</th>
-          <th class="p-4 font-medium hidden md:table-cell">Category</th>
-          <th class="p-4 font-medium hidden sm:table-cell">Author</th>
-          <th class="p-4 font-medium hidden lg:table-cell">Date</th>
-          <th class="p-4 font-medium text-right">Status</th>
-          <th class="p-4 font-medium text-right">Actions</th>
-        </tr></thead>
-        <tbody>
-          {allPosts.map((post) => (
-            <tr style="border-top: 1px solid var(--color-border);">
-              <td class="p-4 font-medium">{post.title}</td>
-              <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{post.category || '-'}</span></td>
-              <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{post.authorName || '-'}</td>
-              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : '-'}</td>
-              <td class="p-4 text-right"><span class={post.status === 'published' ? 'badge badge-primary' : 'badge badge-accent'}>{post.status}</span></td>
-              <td class="p-4 text-right">
-                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-post={post.id} data-title={post.title} data-category={post.category || ''} data-author={post.authorName || ''} data-slug={post.slug || ''} data-excerpt={post.excerpt || ''} data-content={post.content || ''} data-image={post.featuredImageUrl || ''} data-status={post.status || 'draft'} data-tags={(post.tags || []).join(', ')}>Edit</button>
-                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-post={post.id}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-    {allPosts.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No blog posts yet. Create your first post above.</div>}
-  </div>
-
   <script is:inline>
-    const toggleBtn = document.getElementById('toggle-form-btn');
-    const cancelBtn = document.getElementById('cancel-form-btn');
-    const createForm = document.getElementById('create-form');
-    const formTitle = document.getElementById('form-title');
-    toggleBtn?.addEventListener('click', () => { createForm?.classList.toggle('hidden'); formTitle!.textContent = 'Create New Post'; });
-    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id')).value = ''; (document.getElementById('blog-form')).reset(); });
-
-    // Auto-slug
-    const titleInput = document.getElementById('post-title');
-    const slugInput = document.getElementById('post-slug');
-    titleInput?.addEventListener('input', () => {
-      slugInput.value = titleInput.value.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
-    });
-
-    // Edit
-    document.querySelectorAll('[data-edit-post]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        createForm?.classList.remove('hidden');
-        formTitle!.textContent = 'Edit Post';
-        (document.getElementById('edit-id')).value = btn.getAttribute('data-edit-post') || '';
-        (document.getElementById('post-title')).value = btn.getAttribute('data-title') || '';
-        (document.getElementById('post-category')).value = btn.getAttribute('data-category') || '';
-        (document.getElementById('post-author')).value = btn.getAttribute('data-author') || '';
-        (document.getElementById('post-slug')).value = btn.getAttribute('data-slug') || '';
-        (document.getElementById('post-excerpt')).value = btn.getAttribute('data-excerpt') || '';
-        (document.getElementById('post-content')).value = btn.getAttribute('data-content') || '';
-        (document.getElementById('post-image')).value = btn.getAttribute('data-image') || '';
-        (document.getElementById('post-status')).value = btn.getAttribute('data-status') || 'draft';
-        (document.getElementById('post-tags')).value = btn.getAttribute('data-tags') || '';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    });
-
-    // Submit
-    document.getElementById('blog-form')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const fd = new FormData(e.target);
-      const body = {};
-      fd.forEach((v, k) => {
-        if (k === 'csrfToken' || k === 'editId') return;
-        if (k === 'tags') { body[k] = (v).split(',').map(t => t.trim()).filter(Boolean); }
-        else { body[k] = v; }
-      });
-      body.readingTimeMinutes = String(Math.max(1, Math.ceil((body.content || '').split(/\s+/).length / 200)));
-      if (!body.publishedAt && body.status === 'published') body.publishedAt = new Date().toISOString();
-      const editId = (document.getElementById('edit-id')).value;
-      try {
-        const url = editId ? `/api/admin/charity/blog?id=${editId}` : '/api/admin/charity/blog';
-        const method = editId ? 'PATCH' : 'POST';
-        const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        if (res.ok) window.location.reload(); else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }
-      } catch { showToast('Network error', 'error'); }
-    });
-
-    // Delete
-    document.querySelectorAll('[data-delete-post]').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        showConfirm('Delete this post?', async function() {        const id = btn.getAttribute('data-delete-post');
-          try { const res = await fetch(`/api/admin/charity/blog?id=${id}`, { method: 'DELETE' }); if (res.ok) window.location.reload(); else showToast('Failed', 'error'); } catch { showToast('Network error', 'error'); }
-        });
-      });
-    });
+    (function(){var f=document.getElementById('cms-form'),p=document.getElementById('edit-panel'),t=document.getElementById('form-title'),s=document.getElementById('save-btn');
+    document.getElementById('new-btn').addEventListener('click',function(){f.reset();document.getElementById('f-id').value='';t.textContent='Create New Post';s.textContent='Create';p.scrollIntoView({behavior:'smooth'});});
+    document.querySelectorAll('.edit-btn').forEach(function(b){b.addEventListener('click',function(){var d=JSON.parse(b.closest('tr').dataset.item);document.getElementById('f-id').value=d.id||'';document.getElementById('f-title').value=d.title||'';document.getElementById('f-slug').value=d.slug||'';document.getElementById('f-category').value=d.category||'';document.getElementById('f-excerpt').value=d.excerpt||'';document.getElementById('f-content').value=d.content||'';document.getElementById('f-author').value=d.authorName||'';document.getElementById('f-status').value=d.status||'draft';document.getElementById('f-image').value=d.featuredImageUrl||'';document.getElementById('f-tags').value=(d.tags||[]).join(', ');t.textContent='Edit: '+d.title;s.textContent='Update';p.scrollIntoView({behavior:'smooth'});});});
+    document.querySelectorAll('.del-btn').forEach(function(b){b.addEventListener('click',function(){var id=b.dataset.id,title=b.dataset.title;if(window.showConfirm){showConfirm('Delete "'+title+'"?',function(){fetch('/api/admin/charity/blog?id='+id,{method:'DELETE'}).then(function(r){return r.json();}).then(function(d){if(d.success||d.deleted){showToast('Deleted!','success');b.closest('tr').remove();}else{showToast('Failed','error');}});},'Delete');}});});
+    f.addEventListener('submit',async function(e){e.preventDefault();s.textContent='Saving...';s.disabled=true;var tagsStr=document.getElementById('f-tags').value;var tags=tagsStr?tagsStr.split(',').map(function(t){return t.trim();}).filter(Boolean):[];var b={title:document.getElementById('f-title').value,slug:document.getElementById('f-slug').value||document.getElementById('f-title').value.toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-'),category:document.getElementById('f-category').value,excerpt:document.getElementById('f-excerpt').value,content:document.getElementById('f-content').value,authorName:document.getElementById('f-author').value,status:document.getElementById('f-status').value,featuredImageUrl:document.getElementById('f-image').value,tags:tags};var id=document.getElementById('f-id').value;var m=id?'PATCH':'POST';var u='/api/admin/charity/blog'+(id?'?id='+id:'');try{var r=await fetch(u,{method:m,headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});var d=await r.json();if(r.ok){showToast(id?'Updated!':'Created!','success');setTimeout(function(){location.reload();},1000);}else{showToast(d.error||'Failed','error');}}catch{showToast('Network error','error');}s.textContent=id?'Update':'Create';s.disabled=false;});
+    document.getElementById('cancel-btn').addEventListener('click',function(){f.reset();document.getElementById('f-id').value='';t.textContent='Create New Post';s.textContent='Create';});})();
   </script>
 </AdminLayout>
