@@ -127,7 +127,7 @@ const csrfToken = generateCSRFToken();
       e.preventDefault();
       const fd = new FormData(e.target);
       const body = {};
-      fd.forEach((v, k) => { body[k] = v as string; });
+      fd.forEach((v, k) => { body[k] = v; });
       body.readingTimeMinutes = String(Math.max(1, Math.ceil((body.content || '').split(/\s+/).length / 200)));
       if (!body.publishedAt) body.publishedAt = new Date().toISOString();
 

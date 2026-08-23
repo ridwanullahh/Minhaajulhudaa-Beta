@@ -99,7 +99,7 @@ const courses = coursesResult.data || [];
       e.preventDefault();
       const fd = new FormData(e.target);
       const body = {};
-      fd.forEach((v, k) => { body[k] = k === 'price' ? parseFloat(v as string) || 0 : v; });
+      fd.forEach((v, k) => { body[k] = k === 'price' ? parseFloat(v) || 0 : v; });
       body.isFree = !body.price || body.price === 0;
       try {
         const res = await fetch('/api/admin/school/courses', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
