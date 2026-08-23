@@ -34,7 +34,7 @@ const results = examResults.data || [];
             <th class="p-4 font-medium text-right">Status</th>
           </tr></thead>
           <tbody>
-            {schedules.map((s: any) => (
+            {schedules.map((s) => (
               <tr style="border-top: 1px solid var(--color-border);">
                 <td class="p-4 font-medium">{s.title}</td>
                 <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{s.className || '-'}</td>
@@ -63,7 +63,7 @@ const results = examResults.data || [];
             <th class="p-4 font-medium text-right">Grade</th>
           </tr></thead>
           <tbody>
-            {results.map((r: any) => (
+            {results.map((r) => (
               <tr style="border-top: 1px solid var(--color-border);">
                 <td class="p-4 font-medium">{r.studentName || '-'}</td>
                 <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{r.examTitle || '-'}</td>
@@ -79,7 +79,7 @@ const results = examResults.data || [];
     </div>
   </div>
 
-  <script>
+  <script is:inline>
     document.querySelectorAll('.exam-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.exam-tab').forEach(t => { t.style.borderColor = 'transparent'; t.style.color = 'var(--color-muted)'; });

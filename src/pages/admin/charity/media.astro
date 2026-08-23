@@ -39,9 +39,9 @@ import AdminLayout from '../../../layouts/AdminLayout.astro';
     <p class="text-sm" style="color: var(--color-muted);">Upload your first media file using the button above.</p>
   </div>
 
-  <script>
+  <script is:inline>
     const browseBtn = document.getElementById('browse-btn');
-    const fileInput = document.getElementById('file-input') as HTMLInputElement;
+    const fileInput = document.getElementById('file-input');
     browseBtn?.addEventListener('click', () => fileInput.click());
 
     fileInput?.addEventListener('change', async () => {

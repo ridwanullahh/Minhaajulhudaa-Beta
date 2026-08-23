@@ -41,7 +41,7 @@ const media = result.data || [];
   <!-- Media Grid -->
   {media.length > 0 ? (
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-      {media.map((m: any) => (
+      {media.map((m) => (
         <div class="card overflow-hidden group relative">
           <div class="aspect-square bg-[rgb(5,179,77,0.05)]">
             {m.fileType?.startsWith('image') && m.url ? (
@@ -66,13 +66,13 @@ const media = result.data || [];
     </div>
   )}
 
-  <script>
+  <script is:inline>
     const uploadBtn = document.getElementById('upload-btn');
     const uploadArea = document.getElementById('upload-area');
     const cancelUploadBtn = document.getElementById('cancel-upload-btn');
     const dropZone = document.getElementById('drop-zone');
-    const fileInput = document.getElementById('file-input') as HTMLInputElement;
-    const submitBtn = document.querySelector('#upload-form button[type=submit]') as HTMLButtonElement;
+    const fileInput = document.getElementById('file-input');
+    const submitBtn = document.querySelector('#upload-form button[type=submit]');
 
     uploadBtn?.addEventListener('click', () => uploadArea?.classList.toggle('hidden'));
     cancelUploadBtn?.addEventListener('click', () => uploadArea?.classList.add('hidden'));

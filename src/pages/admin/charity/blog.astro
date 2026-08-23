@@ -90,7 +90,7 @@ const csrfToken = generateCSRFToken();
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {allPosts.map((post: any) => (
+          {allPosts.map((post) => (
             <tr style="border-top: 1px solid var(--color-border);">
               <td class="p-4 font-medium">{post.title}</td>
               <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{post.category || '-'}</span></td>
@@ -109,17 +109,17 @@ const csrfToken = generateCSRFToken();
     {allPosts.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No blog posts yet. Create your first post above.</div>}
   </div>
 
-  <script>
+  <script is:inline>
     const toggleBtn = document.getElementById('toggle-form-btn');
     const cancelBtn = document.getElementById('cancel-form-btn');
     const createForm = document.getElementById('create-form');
     const formTitle = document.getElementById('form-title');
     toggleBtn?.addEventListener('click', () => { createForm?.classList.toggle('hidden'); formTitle!.textContent = 'Create New Post'; });
-    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id') as HTMLInputElement).value = ''; (document.getElementById('blog-form') as HTMLFormElement).reset(); });
+    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id')).value = ''; (document.getElementById('blog-form')).reset(); });
 
     // Auto-slug
-    const titleInput = document.getElementById('post-title') as HTMLInputElement;
-    const slugInput = document.getElementById('post-slug') as HTMLInputElement;
+    const titleInput = document.getElementById('post-title');
+    const slugInput = document.getElementById('post-slug');
     titleInput?.addEventListener('input', () => {
       slugInput.value = titleInput.value.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
     });
@@ -129,16 +129,16 @@ const csrfToken = generateCSRFToken();
       btn.addEventListener('click', () => {
         createForm?.classList.remove('hidden');
         formTitle!.textContent = 'Edit Post';
-        (document.getElementById('edit-id') as HTMLInputElement).value = btn.getAttribute('data-edit-post') || '';
-        (document.getElementById('post-title') as HTMLInputElement).value = btn.getAttribute('data-title') || '';
-        (document.getElementById('post-category') as HTMLInputElement).value = btn.getAttribute('data-category') || '';
-        (document.getElementById('post-author') as HTMLInputElement).value = btn.getAttribute('data-author') || '';
-        (document.getElementById('post-slug') as HTMLInputElement).value = btn.getAttribute('data-slug') || '';
-        (document.getElementById('post-excerpt') as HTMLTextAreaElement).value = btn.getAttribute('data-excerpt') || '';
-        (document.getElementById('post-content') as HTMLTextAreaElement).value = btn.getAttribute('data-content') || '';
-        (document.getElementById('post-image') as HTMLInputElement).value = btn.getAttribute('data-image') || '';
-        (document.getElementById('post-status') as HTMLSelectElement).value = btn.getAttribute('data-status') || 'draft';
-        (document.getElementById('post-tags') as HTMLInputElement).value = btn.getAttribute('data-tags') || '';
+        (document.getElementById('edit-id')).value = btn.getAttribute('data-edit-post') || '';
+        (document.getElementById('post-title')).value = btn.getAttribute('data-title') || '';
+        (document.getElementById('post-category')).value = btn.getAttribute('data-category') || '';
+        (document.getElementById('post-author')).value = btn.getAttribute('data-author') || '';
+        (document.getElementById('post-slug')).value = btn.getAttribute('data-slug') || '';
+        (document.getElementById('post-excerpt')).value = btn.getAttribute('data-excerpt') || '';
+        (document.getElementById('post-content')).value = btn.getAttribute('data-content') || '';
+        (document.getElementById('post-image')).value = btn.getAttribute('data-image') || '';
+        (document.getElementById('post-status')).value = btn.getAttribute('data-status') || 'draft';
+        (document.getElementById('post-tags')).value = btn.getAttribute('data-tags') || '';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
@@ -146,8 +146,8 @@ const csrfToken = generateCSRFToken();
     // Submit
     document.getElementById('blog-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const fd = new FormData(e.target);
+      const body = {};
       fd.forEach((v, k) => {
         if (k === 'csrfToken' || k === 'editId') return;
         if (k === 'tags') { body[k] = (v as string).split(',').map(t => t.trim()).filter(Boolean); }
@@ -155,7 +155,7 @@ const csrfToken = generateCSRFToken();
       });
       body.readingTimeMinutes = String(Math.max(1, Math.ceil((body.content || '').split(/\s+/).length / 200)));
       if (!body.publishedAt && body.status === 'published') body.publishedAt = new Date().toISOString();
-      const editId = (document.getElementById('edit-id') as HTMLInputElement).value;
+      const editId = (document.getElementById('edit-id')).value;
       try {
         const url = editId ? `/api/admin/charity/blog?id=${editId}` : '/api/admin/charity/blog';
         const method = editId ? 'PATCH' : 'POST';

@@ -95,7 +95,7 @@ const csrfToken = generateCSRFToken();
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {allDonors.map((d: any) => (
+          {allDonors.map((d) => (
             <tr style="border-top: 1px solid var(--color-border);">
               <td class="p-4">
                 <div class="font-medium">{d.name}</div>
@@ -118,29 +118,29 @@ const csrfToken = generateCSRFToken();
     {allDonors.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No donors yet. Add your first donor above.</div>}
   </div>
 
-  <script>
+  <script is:inline>
     const toggleBtn = document.getElementById('toggle-form-btn');
     const cancelBtn = document.getElementById('cancel-form-btn');
     const createForm = document.getElementById('create-form');
     const formTitle = document.getElementById('form-title');
     toggleBtn?.addEventListener('click', () => { createForm?.classList.toggle('hidden'); formTitle!.textContent = 'Create New Donor'; });
-    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id') as HTMLInputElement).value = ''; (document.getElementById('donor-form') as HTMLFormElement).reset(); });
+    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id')).value = ''; (document.getElementById('donor-form')).reset(); });
 
     // Edit
     document.querySelectorAll('[data-edit-donor]').forEach(btn => {
       btn.addEventListener('click', () => {
         createForm?.classList.remove('hidden');
         formTitle!.textContent = 'Edit Donor';
-        (document.getElementById('edit-id') as HTMLInputElement).value = btn.getAttribute('data-edit-donor') || '';
-        (document.getElementById('d-name') as HTMLInputElement).value = btn.getAttribute('data-name') || '';
-        (document.getElementById('d-email') as HTMLInputElement).value = btn.getAttribute('data-email') || '';
-        (document.getElementById('d-phone') as HTMLInputElement).value = btn.getAttribute('data-phone') || '';
-        (document.getElementById('d-type') as HTMLSelectElement).value = btn.getAttribute('data-type') || 'individual';
-        (document.getElementById('d-address') as HTMLInputElement).value = btn.getAttribute('data-address') || '';
-        (document.getElementById('d-total') as HTMLInputElement).value = btn.getAttribute('data-total') || '0';
-        (document.getElementById('d-count') as HTMLInputElement).value = btn.getAttribute('data-count') || '0';
-        (document.getElementById('d-status') as HTMLSelectElement).value = btn.getAttribute('data-status') || 'active';
-        (document.getElementById('d-notes') as HTMLTextAreaElement).value = btn.getAttribute('data-notes') || '';
+        (document.getElementById('edit-id')).value = btn.getAttribute('data-edit-donor') || '';
+        (document.getElementById('d-name')).value = btn.getAttribute('data-name') || '';
+        (document.getElementById('d-email')).value = btn.getAttribute('data-email') || '';
+        (document.getElementById('d-phone')).value = btn.getAttribute('data-phone') || '';
+        (document.getElementById('d-type')).value = btn.getAttribute('data-type') || 'individual';
+        (document.getElementById('d-address')).value = btn.getAttribute('data-address') || '';
+        (document.getElementById('d-total')).value = btn.getAttribute('data-total') || '0';
+        (document.getElementById('d-count')).value = btn.getAttribute('data-count') || '0';
+        (document.getElementById('d-status')).value = btn.getAttribute('data-status') || 'active';
+        (document.getElementById('d-notes')).value = btn.getAttribute('data-notes') || '';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
@@ -148,11 +148,11 @@ const csrfToken = generateCSRFToken();
     // Submit
     document.getElementById('donor-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const fd = new FormData(e.target);
+      const body = {};
       fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'totalDonated' || k === 'donationCount' ? Number(v) : v; });
       body.slug = body.name.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
-      const editId = (document.getElementById('edit-id') as HTMLInputElement).value;
+      const editId = (document.getElementById('edit-id')).value;
       try {
         const url = editId ? `/api/admin/charity/donors?id=${editId}` : '/api/admin/charity/donors';
         const method = editId ? 'PATCH' : 'POST';

@@ -4,9 +4,9 @@ import { lightbase } from '../../../lib/lightbase';
 
 const volunteers = await lightbase.query('charity_volunteers', { sort: 'createdAt:desc', limit: 100 });
 const allVolunteers = volunteers.data || [];
-const pendingCount = allVolunteers.filter((v: any) => v.status === 'pending').length;
-const approvedCount = allVolunteers.filter((v: any) => v.status === 'approved').length;
-const rejectedCount = allVolunteers.filter((v: any) => v.status === 'rejected').length;
+const pendingCount = allVolunteers.filter((v) => v.status === 'pending').length;
+const approvedCount = allVolunteers.filter((v) => v.status === 'approved').length;
+const rejectedCount = allVolunteers.filter((v) => v.status === 'rejected').length;
 ---
 
 <AdminLayout title="Volunteers" platform="charity" section="volunteers">
@@ -47,7 +47,7 @@ const rejectedCount = allVolunteers.filter((v: any) => v.status === 'rejected').
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {allVolunteers.map((v: any) => (
+          {allVolunteers.map((v) => (
             <tr style="border-top: 1px solid var(--color-border);">
               <td class="p-4">
                 <div class="font-medium">{v.firstName} {v.lastName}</div>
@@ -57,7 +57,7 @@ const rejectedCount = allVolunteers.filter((v: any) => v.status === 'rejected').
               <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{v.phone || '-'}</td>
               <td class="p-4 hidden lg:table-cell">
                 <div class="flex flex-wrap gap-1">
-                  {(v.skills || []).slice(0, 2).map((s: string) => <span class="badge text-xs">{s}</span>)}
+                  {(v.skills || []).slice(0, 2).map((s) => <span class="badge text-xs">{s}</span>)}
                   {(v.skills || []).length > 2 && <span class="text-xs" style="color: var(--color-muted);">+{v.skills.length - 2}</span>}
                 </div>
               </td>
@@ -85,7 +85,7 @@ const rejectedCount = allVolunteers.filter((v: any) => v.status === 'rejected').
     {allVolunteers.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No volunteer applications yet.</div>}
   </div>
 
-  <script>
+  <script is:inline>
     // Approve
     document.querySelectorAll('[data-approve-vol]').forEach(btn => {
       btn.addEventListener('click', async () => {

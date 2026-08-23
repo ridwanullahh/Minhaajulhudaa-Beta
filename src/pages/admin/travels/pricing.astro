@@ -6,7 +6,7 @@ import { formatCurrency } from '../../../lib/utils';
 const rules = await lightbase.query('travels_pricing_rules', { sort: 'priority:desc', limit: 100 }).catch(() => ({ data: [] }));
 const allRules = rules.data || [];
 
-const typeBadge = (type: string) => {
+const typeBadge = (type) => {
   switch (type) {
     case 'early_bird': return 'badge badge-primary';
     case 'group_discount': return 'badge badge-accent';
@@ -42,7 +42,7 @@ const typeBadge = (type: string) => {
           <th class="text-right p-4 font-medium">Actions</th>
         </tr></thead>
         <tbody>
-          {allRules.length > 0 ? allRules.map((rule: any) => (
+          {allRules.length > 0 ? allRules.map((rule) => (
             <tr style="border-bottom: 1px solid var(--color-border);">
               <td class="p-4">
                 <div class="font-medium">{rule.name || '-'}</div>
@@ -122,30 +122,30 @@ const typeBadge = (type: string) => {
     </div>
   </div>
 
-  <script>
+  <script is:inline>
     (function() {
       const fields = ['name','type','appliesTo','adjustmentValue','adjustmentType','startDate','endDate','priority','isActive'];
       const modal = document.getElementById('modal');
-      const form = document.getElementById('modal-form') as HTMLFormElement;
+      const form = document.getElementById('modal-form');
       const title = document.getElementById('modal-title');
 
-      function openModal(isEdit: boolean, data?: any) {
+      function openModal(isEdit, data?: any) {
         title!.textContent = isEdit ? 'Edit Pricing Rule' : 'New Pricing Rule';
         fields.forEach(f => {
-          const el = document.getElementById('form-' + f) as HTMLInputElement;
+          const el = document.getElementById('form-' + f);
           if (el) {
             if (f === 'isActive') el.checked = data?.[f] !== false;
             else el.value = data?.[f] ?? (f === 'appliesTo' ? 'all' : f === 'priority' ? '0' : '');
           }
         });
-        (document.getElementById('form-id') as HTMLInputElement).value = data?.id || '';
+        (document.getElementById('form-id')).value = data?.id || '';
         modal!.classList.remove('hidden');
       }
 
       document.getElementById('btn-new-rule')!.addEventListener('click', () => openModal(false));
       document.querySelectorAll('.btn-edit').forEach(btn => {
         btn.addEventListener('click', () => {
-          const id = (btn as HTMLElement).dataset.id;
+          const id = (btn).dataset.id;
           fetch('/api/admin/travels/packages?id=' + id).catch(() => {});
           // Pricing rules use generic content API
           fetch('/api/admin/travels/content?collection=travels_pricing_rules&id=' + id).then(r => r.json()).then(data => openModal(true, data.document || data)).catch(() => {});
@@ -154,7 +154,7 @@ const typeBadge = (type: string) => {
 
       document.querySelectorAll('.btn-delete').forEach(btn => {
         btn.addEventListener('click', () => {
-          const id = (btn as HTMLElement).dataset.id;
+          const id = (btn).dataset.id;
           showConfirm('Delete this rule?', function() {
             fetch('/api/admin/travels/content?collection=travels_pricing_rules&id=' + id, { method: 'DELETE' }).then(() => location.reload()).catch(() => {});
           });
@@ -167,10 +167,10 @@ const typeBadge = (type: string) => {
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const id = (document.getElementById('form-id') as HTMLInputElement).value;
-        const body: any = {};
+        const id = (document.getElementById('form-id')).value;
+        const body = {};
         fields.forEach(f => {
-          const el = document.getElementById('form-' + f) as HTMLInputElement;
+          const el = document.getElementById('form-' + f);
           if (el) {
             if (f === 'isActive') body[f] = el.checked;
             else if (f === 'adjustmentValue' || f === 'priority') body[f] = parseFloat(el.value) || 0;

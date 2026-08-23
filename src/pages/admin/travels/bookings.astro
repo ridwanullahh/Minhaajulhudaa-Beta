@@ -28,7 +28,7 @@ const pipeline = [
   { status: 'cancelled', label: 'Cancelled', count: counts[3], color: 'var(--color-muted)' },
 ];
 
-const statusBadge = (status: string) => {
+const statusBadge = (status) => {
   switch (status) {
     case 'confirmed': return 'badge badge-primary';
     case 'completed': return 'badge badge-primary';
@@ -38,7 +38,7 @@ const statusBadge = (status: string) => {
   }
 };
 
-const paymentBadge = (status: string) => {
+const paymentBadge = (status) => {
   switch (status) {
     case 'paid': return 'badge badge-primary';
     case 'partial': return 'badge badge-accent';
@@ -79,7 +79,7 @@ const paymentBadge = (status: string) => {
           <th class="text-right p-4 font-medium">Actions</th>
         </tr></thead>
         <tbody>
-          {bookings.length > 0 ? bookings.map((b: any) => (
+          {bookings.length > 0 ? bookings.map((b) => (
             <tr style="border-bottom: 1px solid var(--color-border);">
               <td class="p-4">
                 <div class="font-medium">{b.bookingNumber || b.id?.slice(0,8)}</div>
@@ -110,8 +110,8 @@ const paymentBadge = (status: string) => {
     </div>
   </div>
 
-  <script>
-    function updateBookingStatus(el: HTMLSelectElement) {
+  <script is:inline>
+    function updateBookingStatus(el) {
       const id = el.dataset.bookingId;
       const ep = el.dataset.endpoint;
       const status = el.value;

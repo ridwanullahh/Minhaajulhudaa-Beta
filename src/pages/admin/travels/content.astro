@@ -29,7 +29,7 @@ const allPages = pages.data || [];
           <th class="text-right p-4 font-medium">Actions</th>
         </tr></thead>
         <tbody>
-          {allPages.length > 0 ? allPages.map((p: any) => (
+          {allPages.length > 0 ? allPages.map((p) => (
             <tr style="border-bottom: 1px solid var(--color-border);">
               <td class="p-4 font-medium">{p.title || '-'}</td>
               <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{p.slug || '-'}</td>
@@ -89,31 +89,31 @@ const allPages = pages.data || [];
     </div>
   </div>
 
-  <script>
+  <script is:inline>
     (function() {
       const fields = ['title','slug','pageType','status','content'];
       const modal = document.getElementById('modal');
-      const form = document.getElementById('modal-form') as HTMLFormElement;
+      const form = document.getElementById('modal-form');
       const title = document.getElementById('modal-title');
 
-      function openModal(isEdit: boolean, data?: any) {
+      function openModal(isEdit, data?: any) {
         title!.textContent = isEdit ? 'Edit Page' : 'New Page';
-        fields.forEach(f => { (document.getElementById('form-' + f) as HTMLInputElement).value = data?.[f] || ''; });
-        (document.getElementById('form-id') as HTMLInputElement).value = data?.id || '';
+        fields.forEach(f => { (document.getElementById('form-' + f)).value = data?.[f] || ''; });
+        (document.getElementById('form-id')).value = data?.id || '';
         modal!.classList.remove('hidden');
       }
 
       document.getElementById('btn-new-page')!.addEventListener('click', () => openModal(false));
       document.querySelectorAll('.btn-edit').forEach(btn => {
         btn.addEventListener('click', () => {
-          const id = (btn as HTMLElement).dataset.id;
+          const id = (btn).dataset.id;
           fetch('/api/admin/travels/content?id=' + id).then(r => r.json()).then(data => openModal(true, data.document || data)).catch(() => {});
         });
       });
 
       document.querySelectorAll('.btn-delete').forEach(btn => {
         btn.addEventListener('click', () => {
-          const id = (btn as HTMLElement).dataset.id;
+          const id = (btn).dataset.id;
           showConfirm('Delete this page?', function() {
             fetch('/api/admin/travels/content?id=' + id, { method: 'DELETE' }).then(() => location.reload()).catch(() => {});
           });
@@ -126,9 +126,9 @@ const allPages = pages.data || [];
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const id = (document.getElementById('form-id') as HTMLInputElement).value;
-        const body: any = {};
-        fields.forEach(f => { body[f] = (document.getElementById('form-' + f) as HTMLInputElement).value; });
+        const id = (document.getElementById('form-id')).value;
+        const body = {};
+        fields.forEach(f => { body[f] = (document.getElementById('form-' + f)).value; });
         const ep = id ? '/api/admin/travels/content?id=' + id : '/api/admin/travels/content';
         const method = id ? 'PATCH' : 'POST';
         fetch(ep, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(() => location.reload()).catch(() => {});

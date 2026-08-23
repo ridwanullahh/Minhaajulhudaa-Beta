@@ -7,7 +7,7 @@ const donations = await lightbase.query('charity_donations', { sort: 'createdAt:
 const allDonations = donations.data || [];
 const csrfToken = generateCSRFToken();
 
-const totalAmount = allDonations.reduce((sum: number, d: any) => sum + (d.amount || 0), 0);
+const totalAmount = allDonations.reduce((sum, d) => sum + (d.amount || 0), 0);
 ---
 
 <AdminLayout title="Donations" platform="charity" section="donations">
@@ -103,7 +103,7 @@ const totalAmount = allDonations.reduce((sum: number, d: any) => sum + (d.amount
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {allDonations.map((d: any) => (
+          {allDonations.map((d) => (
             <tr style="border-top: 1px solid var(--color-border);">
               <td class="p-4">
                 <div class="font-medium">{d.donorName || 'Anonymous'}</div>
@@ -126,7 +126,7 @@ const totalAmount = allDonations.reduce((sum: number, d: any) => sum + (d.amount
     {allDonations.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No donations recorded yet.</div>}
   </div>
 
-  <script>
+  <script is:inline>
     const toggleLog = document.getElementById('toggle-log-btn');
     const cancelLog = document.getElementById('cancel-log-btn');
     const logForm = document.getElementById('log-form');
@@ -135,8 +135,8 @@ const totalAmount = allDonations.reduce((sum: number, d: any) => sum + (d.amount
 
     document.getElementById('donation-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const fd = new FormData(e.target);
+      const body = {};
       fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'amount' ? Number(v) : v; });
       body.status = 'completed';
       body.source = 'manual';

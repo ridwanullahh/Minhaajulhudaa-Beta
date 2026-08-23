@@ -21,7 +21,7 @@ const [avgAgg, totalCount] = await Promise.all([
   lightbase.count('travels_reviews', { field: 'status', op: 'eq', value: 'pending' }).catch(() => 0),
 ]);
 
-const statusBadge = (status: string) => {
+const statusBadge = (status) => {
   switch (status) {
     case 'approved': return 'badge badge-primary';
     case 'pending': return 'badge badge-accent';
@@ -64,7 +64,7 @@ const statusBadge = (status: string) => {
   </div>
 
   <div class="space-y-4">
-    {reviews.length > 0 ? reviews.map((r: any) => (
+    {reviews.length > 0 ? reviews.map((r) => (
       <div class="card p-6">
         <div class="flex items-start justify-between mb-3">
           <div class="flex items-center gap-3">
@@ -123,8 +123,8 @@ const statusBadge = (status: string) => {
     </div>
   </div>
 
-  <script>
-    function moderateReview(btn: HTMLButtonElement) {
+  <script is:inline>
+    function moderateReview(btn) {
       const id = btn.dataset.id;
       const action = btn.dataset.action;
       const status = action === 'approve' ? 'approved' : 'rejected';
@@ -137,9 +137,9 @@ const statusBadge = (status: string) => {
       });
     }
 
-    (window as any).openResponseModal = function(btn: HTMLElement) {
-      (document.getElementById('r-id') as HTMLInputElement).value = btn.dataset.id || '';
-      (document.getElementById('r-response') as HTMLTextAreaElement).value = '';
+    (window as any).openResponseModal = function(btn) {
+      (document.getElementById('r-id')).value = btn.dataset.id || '';
+      (document.getElementById('r-response')).value = '';
       document.getElementById('response-modal')!.classList.remove('hidden');
     };
 
@@ -147,8 +147,8 @@ const statusBadge = (status: string) => {
 
     document.getElementById('response-form')!.addEventListener('submit', (e) => {
       e.preventDefault();
-      const id = (document.getElementById('r-id') as HTMLInputElement).value;
-      const adminResponse = (document.getElementById('r-response') as HTMLTextAreaElement).value;
+      const id = (document.getElementById('r-id')).value;
+      const adminResponse = (document.getElementById('r-response')).value;
       fetch('/api/admin/travels/reviews?id=' + id, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },

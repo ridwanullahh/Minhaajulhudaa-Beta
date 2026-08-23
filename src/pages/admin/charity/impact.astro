@@ -7,8 +7,8 @@ const metrics = await lightbase.query('charity_impact_metrics', { sort: 'value:d
 const allMetrics = metrics.data || [];
 const csrfToken = generateCSRFToken();
 
-const categories = [...new Set(allMetrics.map((m: any) => m.category).filter(Boolean))];
-const totalValue = allMetrics.reduce((sum: number, m: any) => sum + (m.value || 0), 0);
+const categories = [...new Set(allMetrics.map((m) => m.category).filter(Boolean))];
+const totalValue = allMetrics.reduce((sum, m) => sum + (m.value || 0), 0);
 ---
 
 <AdminLayout title="Impact Metrics" platform="charity" section="impact">
@@ -65,7 +65,7 @@ const totalValue = allMetrics.reduce((sum: number, m: any) => sum + (m.value || 
         <div>
           <label class="block text-sm font-medium mb-1" for="m-category">Category</label>
           <select id="m-category" name="category" class="input">
-            {categories.map((c: string) => <option value={c}>{c}</option>)}
+            {categories.map((c) => <option value={c}>{c}</option>)}
             <option value="General">General</option>
             <option value="Food">Food</option>
             <option value="Water">Water</option>
@@ -87,8 +87,8 @@ const totalValue = allMetrics.reduce((sum: number, m: any) => sum + (m.value || 
     <div class="card p-6 mb-6">
       <h3 class="font-bold mb-4">Impact Overview</h3>
       <div class="flex flex-col gap-3">
-        {allMetrics.slice(0, 8).map((m: any) => {
-          const maxVal = Math.max(...allMetrics.map((x: any) => x.value || 0), 1);
+        {allMetrics.slice(0, 8).map((m) => {
+          const maxVal = Math.max(...allMetrics.map((x) => x.value || 0), 1);
           const pct = Math.round(((m.value || 0) / maxVal) * 100);
           return (
             <div>
@@ -118,7 +118,7 @@ const totalValue = allMetrics.reduce((sum: number, m: any) => sum + (m.value || 
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {allMetrics.map((m: any) => (
+          {allMetrics.map((m) => (
             <tr style="border-top: 1px solid var(--color-border);">
               <td class="p-4 font-medium">{m.metricLabel}</td>
               <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{m.metricKey}</td>
@@ -136,21 +136,21 @@ const totalValue = allMetrics.reduce((sum: number, m: any) => sum + (m.value || 
     {allMetrics.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No impact metrics tracked yet.</div>}
   </div>
 
-  <script>
+  <script is:inline>
     const toggleBtn = document.getElementById('toggle-metric-btn');
     const cancelBtn = document.getElementById('cancel-metric-btn');
     const form = document.getElementById('metric-form');
     toggleBtn?.addEventListener('click', () => form?.classList.toggle('hidden'));
-    cancelBtn?.addEventListener('click', () => { form?.classList.add('hidden'); (document.getElementById('impact-form') as HTMLFormElement).reset(); });
+    cancelBtn?.addEventListener('click', () => { form?.classList.add('hidden'); (document.getElementById('impact-form')).reset(); });
 
     // Edit
     document.querySelectorAll('[data-edit-metric]').forEach(btn => {
       btn.addEventListener('click', () => {
         form?.classList.remove('hidden');
-        (document.getElementById('m-label') as HTMLInputElement).value = btn.getAttribute('data-label') || '';
-        (document.getElementById('m-key') as HTMLInputElement).value = btn.getAttribute('data-key') || '';
-        (document.getElementById('m-value') as HTMLInputElement).value = btn.getAttribute('data-value') || '';
-        (document.getElementById('m-category') as HTMLSelectElement).value = btn.getAttribute('data-cat') || 'General';
+        (document.getElementById('m-label')).value = btn.getAttribute('data-label') || '';
+        (document.getElementById('m-key')).value = btn.getAttribute('data-key') || '';
+        (document.getElementById('m-value')).value = btn.getAttribute('data-value') || '';
+        (document.getElementById('m-category')).value = btn.getAttribute('data-cat') || 'General';
         form?.setAttribute('data-edit-id', btn.getAttribute('data-edit-metric') || '');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
@@ -159,8 +159,8 @@ const totalValue = allMetrics.reduce((sum: number, m: any) => sum + (m.value || 
     // Submit
     document.getElementById('impact-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const fd = new FormData(e.target);
+      const body = {};
       fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'value' ? Number(v) : v; });
       const editId = form?.getAttribute('data-edit-id');
       try {

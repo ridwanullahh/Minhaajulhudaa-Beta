@@ -105,7 +105,7 @@ const csrfToken = generateCSRFToken();
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {allStories.map((s: any) => (
+          {allStories.map((s) => (
             <tr style="border-top: 1px solid var(--color-border);">
               <td class="p-4">
                 <div class="font-medium">{s.title}</div>
@@ -127,30 +127,30 @@ const csrfToken = generateCSRFToken();
     {allStories.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No success stories yet. Add your first story above.</div>}
   </div>
 
-  <script>
+  <script is:inline>
     const toggleBtn = document.getElementById('toggle-form-btn');
     const cancelBtn = document.getElementById('cancel-form-btn');
     const createForm = document.getElementById('create-form');
     const formTitle = document.getElementById('form-title');
     toggleBtn?.addEventListener('click', () => { createForm?.classList.toggle('hidden'); formTitle!.textContent = 'Create New Story'; });
-    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id') as HTMLInputElement).value = ''; (document.getElementById('story-form') as HTMLFormElement).reset(); });
+    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id')).value = ''; (document.getElementById('story-form')).reset(); });
 
     // Edit
     document.querySelectorAll('[data-edit-story]').forEach(btn => {
       btn.addEventListener('click', () => {
         createForm?.classList.remove('hidden');
         formTitle!.textContent = 'Edit Story';
-        (document.getElementById('edit-id') as HTMLInputElement).value = btn.getAttribute('data-edit-story') || '';
-        (document.getElementById('s-title') as HTMLInputElement).value = btn.getAttribute('data-title') || '';
-        (document.getElementById('s-category') as HTMLSelectElement).value = btn.getAttribute('data-category') || 'zakaat';
-        (document.getElementById('s-summary') as HTMLTextAreaElement).value = btn.getAttribute('data-summary') || '';
-        (document.getElementById('s-content') as HTMLTextAreaElement).value = btn.getAttribute('data-content') || '';
-        (document.getElementById('s-image') as HTMLInputElement).value = btn.getAttribute('data-image') || '';
-        (document.getElementById('s-location') as HTMLInputElement).value = btn.getAttribute('data-location') || '';
-        (document.getElementById('s-beneficiary') as HTMLInputElement).value = btn.getAttribute('data-beneficiary') || '';
-        (document.getElementById('s-testimonial') as HTMLTextAreaElement).value = btn.getAttribute('data-testimonial') || '';
-        (document.getElementById('s-impact') as HTMLTextAreaElement).value = btn.getAttribute('data-impact') || '';
-        (document.getElementById('s-status') as HTMLSelectElement).value = btn.getAttribute('data-status') || 'draft';
+        (document.getElementById('edit-id')).value = btn.getAttribute('data-edit-story') || '';
+        (document.getElementById('s-title')).value = btn.getAttribute('data-title') || '';
+        (document.getElementById('s-category')).value = btn.getAttribute('data-category') || 'zakaat';
+        (document.getElementById('s-summary')).value = btn.getAttribute('data-summary') || '';
+        (document.getElementById('s-content')).value = btn.getAttribute('data-content') || '';
+        (document.getElementById('s-image')).value = btn.getAttribute('data-image') || '';
+        (document.getElementById('s-location')).value = btn.getAttribute('data-location') || '';
+        (document.getElementById('s-beneficiary')).value = btn.getAttribute('data-beneficiary') || '';
+        (document.getElementById('s-testimonial')).value = btn.getAttribute('data-testimonial') || '';
+        (document.getElementById('s-impact')).value = btn.getAttribute('data-impact') || '';
+        (document.getElementById('s-status')).value = btn.getAttribute('data-status') || 'draft';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
@@ -158,12 +158,12 @@ const csrfToken = generateCSRFToken();
     // Submit
     document.getElementById('story-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const fd = new FormData(e.target);
+      const body = {};
       fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = v; });
       body.slug = body.title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
       if (body.impactMetrics) { try { body.impactMetrics = JSON.parse(body.impactMetrics); } catch { delete body.impactMetrics; } }
-      const editId = (document.getElementById('edit-id') as HTMLInputElement).value;
+      const editId = (document.getElementById('edit-id')).value;
       try {
         const url = editId ? `/api/admin/charity/success-stories?id=${editId}` : '/api/admin/charity/success-stories';
         const method = editId ? 'PATCH' : 'POST';
