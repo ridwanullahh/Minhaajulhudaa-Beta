@@ -1,94 +1,37 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
-
-const result = await lightbase.query('school_staff', {
-  sort: 'lastName:asc',
-  limit: 100,
-});
-const staff = result.data || [];
+const result = await lightbase.query('school_staff', { sort: 'firstName', limit: 100 });
+const allItems = result.data || [];
 ---
-
 <AdminLayout title="Staff Management" platform="school" section="staff">
-  <div class="flex items-center justify-between mb-6 fade-in">
+  <div class="mb-6 fade-in"><h2 class="text-lg font-bold">Staff</h2><p class="text-sm" style="color: var(--color-muted);">{allItems.length} total</p></div>
+  <div class="grid lg:grid-cols-2 gap-6">
     <div>
-      <h2 class="text-lg font-bold">Staff</h2>
-      <p class="text-sm" style="color: var(--color-muted);">{staff.length} total staff members</p>
+      <div class="flex items-center justify-between mb-3"><h3 class="font-bold text-sm">All Staff</h3><button id="new-btn" class="btn btn-primary text-sm">New</button></div>
+      <div class="card overflow-hidden"><div class="max-h-[600px] overflow-y-auto"><table class="w-full text-sm">
+        <thead class="sticky top-0" style="background: var(--color-background);"><tr class="text-left" style="color: var(--color-muted);"><th class="p-3 font-medium">Name</th><th class="p-3 font-medium text-right">Actions</th></tr></thead>
+        <tbody>{allItems.map((item) => (<tr data-item={JSON.stringify(item)} style="border-top: 1px solid var(--color-border);"><td class="p-3 font-medium">{item.firstName} {item.lastName}</td><td class="p-3 text-right"><div class="flex items-center justify-end gap-1">
+          <button class="edit-btn p-1.5 rounded-lg hover:bg-[rgb(5,179,77,0.1)]" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+          <button class="del-btn p-1.5 rounded-lg hover:bg-[rgb(220,38,38,0.1)]" data-id={item.id} data-title={item.firstName} title="Delete"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #DC2626;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+        </div></td></tr>))}</tbody></table></div>{allItems.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No items yet.</div>}</div>
     </div>
-    <button id="toggle-form-btn" class="btn btn-primary">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      Add Staff
-    </button>
+    <div id="edit-panel" class="card p-6"><h3 id="form-title" class="font-bold mb-4">Create New Staff</h3><form id="cms-form" class="space-y-4">
+      <input type="hidden" id="f-id" />
+      <div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium mb-1">First Name</label><input id="f-firstName" class="input" required /></div><div><label class="block text-sm font-medium mb-1">Last Name</label><input id="f-lastName" class="input" /></div></div>
+      <div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium mb-1">Role</label><select id="f-role" class="input"><option value="teacher">Teacher</option><option value="principal">Principal</option><option value="vice-principal">Vice Principal</option><option value="librarian">Librarian</option><option value="accountant">Accountant</option></select></div><div><label class="block text-sm font-medium mb-1">Staff ID</label><input id="f-staffId" class="input" /></div></div>
+      <div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium mb-1">Email</label><input id="f-email" class="input" /></div><div><label class="block text-sm font-medium mb-1">Phone</label><input id="f-phone" class="input" /></div></div>
+      <div><label class="block text-sm font-medium mb-1">Qualifications</label><input id="f-qualifications" class="input" /></div>
+      <div><label class="block text-sm font-medium mb-1">Bio</label><textarea id="f-bio" class="input" rows="3"></textarea></div>
+      <div class="flex gap-2 pt-2"><button type="submit" id="save-btn" class="btn btn-primary flex-1">Save</button><button type="button" id="cancel-btn" class="btn btn-ghost">Clear</button></div>
+    </form></div>
   </div>
-
-  <!-- Create Form -->
-  <div id="create-form" class="hidden card p-6 mb-6">
-    <h3 class="font-bold mb-4">Add New Staff Member</h3>
-    <form id="staff-form" class="space-y-4">
-      <div class="grid md:grid-cols-3 gap-4">
-        <div><label class="block text-sm font-medium mb-1" for="st-first">First Name</label><input id="st-first" name="firstName" class="input" required /></div>
-        <div><label class="block text-sm font-medium mb-1" for="st-last">Last Name</label><input id="st-last" name="lastName" class="input" required /></div>
-        <div><label class="block text-sm font-medium mb-1" for="st-role">Role</label><input id="st-role" name="role" class="input" placeholder="e.g. Teacher, Admin" /></div>
-      </div>
-      <div class="grid md:grid-cols-3 gap-4">
-        <div><label class="block text-sm font-medium mb-1" for="st-subject">Subject</label><input id="st-subject" name="subject" class="input" /></div>
-        <div><label class="block text-sm font-medium mb-1" for="st-email">Email</label><input id="st-email" name="email" class="input" type="email" /></div>
-        <div><label class="block text-sm font-medium mb-1" for="st-phone">Phone</label><input id="st-phone" name="phone" class="input" /></div>
-      </div>
-      <div><label class="block text-sm font-medium mb-1" for="st-bio">Bio</label><textarea id="st-bio" name="bio" class="input" rows="3"></textarea></div>
-      <div class="flex gap-3">
-        <button type="submit" class="btn btn-primary">Add Staff</button>
-        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Staff Table -->
-  <div class="card overflow-hidden">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
-          <th class="p-4 font-medium">Name</th>
-          <th class="p-4 font-medium hidden md:table-cell">Role</th>
-          <th class="p-4 font-medium hidden sm:table-cell">Subject</th>
-          <th class="p-4 font-medium hidden lg:table-cell">Email</th>
-          <th class="p-4 font-medium text-right">Actions</th>
-        </tr></thead>
-        <tbody>
-          {staff.map((s) => (
-            <tr style="border-top: 1px solid var(--color-border);">
-              <td class="p-4 font-medium">{s.firstName} {s.lastName}</td>
-              <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{s.role || '-'}</td>
-              <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{s.subject || '-'}</td>
-              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{s.email || '-'}</td>
-              <td class="p-4 text-right">
-                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-staff={s.id}>Edit</button>
-                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-staff={s.id}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-    {staff.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No staff members yet.</div>}
-  </div>
-
   <script is:inline>
-    const toggleBtn = document.getElementById('toggle-form-btn');
-    const cancelBtn = document.getElementById('cancel-form-btn');
-    const createForm = document.getElementById('create-form');
-    toggleBtn?.addEventListener('click', () => createForm?.classList.toggle('hidden'));
-    cancelBtn?.addEventListener('click', () => createForm?.classList.add('hidden'));
-
-    document.getElementById('staff-form')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const fd = new FormData(e.target);
-      const body = {};
-      fd.forEach((v, k) => { body[k] = v; });
-      try {
-        const res = await fetch('/api/admin/school/content', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-collection': 'school_staff' }, body: JSON.stringify(body) });
-        if (res.ok) window.location.reload(); else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }
-      } catch { showToast('Network error', 'error'); }
-    });
+    (function(){var f=document.getElementById('cms-form'),p=document.getElementById('edit-panel'),t=document.getElementById('form-title'),s=document.getElementById('save-btn');
+    document.getElementById('new-btn').addEventListener('click',function(){f.reset();document.getElementById('f-id').value='';t.textContent='Create New Staff';s.textContent='Create';p.scrollIntoView({behavior:'smooth'});});
+    document.querySelectorAll('.edit-btn').forEach(function(b){b.addEventListener('click',function(){var d=JSON.parse(b.closest('tr').dataset.item);document.getElementById('f-id').value=d.id||'';document.getElementById('f-firstName').value=d.firstName||'';document.getElementById('f-lastName').value=d.lastName||'';document.getElementById('f-role').value=d.role||'teacher';document.getElementById('f-staffId').value=d.staffId||'';document.getElementById('f-email').value=d.email||'';document.getElementById('f-phone').value=d.phone||'';document.getElementById('f-qualifications').value=d.qualifications||'';document.getElementById('f-bio').value=d.bio||'';t.textContent='Edit: '+d.firstName;s.textContent='Update';p.scrollIntoView({behavior:'smooth'});});});
+    document.querySelectorAll('.del-btn').forEach(function(b){b.addEventListener('click',function(){var id=b.dataset.id,title=b.dataset.title;if(window.showConfirm){showConfirm('Delete "'+title+'"?',function(){fetch('/api/admin/school/staff?id='+id,{method:'DELETE'}).then(function(r){return r.json();}).then(function(d){if(d.success||d.deleted){showToast('Deleted!','success');b.closest('tr').remove();}else{showToast('Failed','error');}});},'Delete');}});});
+    f.addEventListener('submit',async function(e){e.preventDefault();s.textContent='Saving...';s.disabled=true;var b={firstName:document.getElementById('f-firstName').value,lastName:document.getElementById('f-lastName').value,role:document.getElementById('f-role').value,staffId:document.getElementById('f-staffId').value,email:document.getElementById('f-email').value,phone:document.getElementById('f-phone').value,qualifications:document.getElementById('f-qualifications').value,bio:document.getElementById('f-bio').value,status:'active'};var id=document.getElementById('f-id').value;var m=id?'PATCH':'POST';var u='/api/admin/school/staff'+(id?'?id='+id:'');try{var r=await fetch(u,{method:m,headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});var d=await r.json();if(r.ok){showToast(id?'Updated!':'Created!','success');setTimeout(function(){location.reload();},1000);}else{showToast(d.error||'Failed','error');}}catch{showToast('Network error','error');}s.textContent=id?'Update':'Create';s.disabled=false;});
+    document.getElementById('cancel-btn').addEventListener('click',function(){f.reset();document.getElementById('f-id').value='';t.textContent='Create New Staff';s.textContent='Create';});})();
   </script>
 </AdminLayout>

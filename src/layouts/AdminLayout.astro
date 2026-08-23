@@ -241,15 +241,15 @@ sidebarItems.push(
 
   <!-- Confirm Dialog Modal -->
   <div id="confirm-dialog" class="fixed inset-0 z-[100] hidden items-center justify-center" style="background: rgb(0 0 0 / 0.5); backdrop-filter: blur(4px);">
-    <div class="rounded-2xl shadow-2xl max-w-sm w-full mx-4 overflow-hidden" style="background: var(--color-bg); border: 1px solid var(--color-border);">
+    <div class="rounded-2xl shadow-2xl max-w-sm w-full mx-4 overflow-hidden" style="background: #FFFFFF; border: 1px solid var(--color-border);">
       <div class="p-6">
         <div class="flex items-start gap-3 mb-4">
           <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style="background: rgb(242 185 28 / 0.15);">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-accent);"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
           <div class="flex-1">
-            <h3 id="confirm-title" class="font-bold text-base mb-1">Confirm</h3>
-            <p id="confirm-message" class="text-sm" style="color: var(--color-muted);"></p>
+            <h3 id="confirm-title" class="font-bold text-base mb-1" style="color: #181F25;">Confirm</h3>
+            <p id="confirm-message" class="text-sm" style="color: #6B7280;"></p>
           </div>
         </div>
       </div>
@@ -259,6 +259,17 @@ sidebarItems.push(
       </div>
     </div>
   </div>
+  <style is:global>
+    [data-theme="dark"] #confirm-dialog > div {
+      background: #181F25 !important;
+    }
+    [data-theme="dark"] #confirm-dialog h3 {
+      color: #F3F4F6 !important;
+    }
+    [data-theme="dark"] #confirm-dialog p {
+      color: #9CA3AF !important;
+    }
+  </style>
 
   <script is:inline>
     // === Toast Notification System ===
