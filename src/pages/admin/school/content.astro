@@ -1,6 +1,7 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
+import RichTextEditor from '../../../components/RichTextEditor.astro';
 
 const [pages, announcements, events] = await Promise.all([
   lightbase.query('school_pages', { sort: 'title:asc', limit: 50 }),
@@ -30,14 +31,35 @@ const allEvents = events.data || [];
 
   <!-- Pages Tab -->
   <div id="tab-pages" class="content-panel">
+    <div class="flex justify-end mb-3">
+      <button id="new-page-btn" class="btn btn-primary text-sm">New Page</button>
+    </div>
+    <div id="page-form" class="hidden card p-6 mb-4">
+      <h3 class="font-bold mb-4" id="page-form-title">Create New Page</h3>
+      <form id="page-form-el" class="space-y-4">
+        <input type="hidden" id="pg-id" name="id" />
+        <div class="grid md:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-medium mb-1">Title</label><input id="pg-title" name="title" class="input" required /></div>
+          <div><label class="block text-sm font-medium mb-1">Slug</label><input id="pg-slug" name="slug" class="input" /></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-medium mb-1">Status</label><select id="pg-status" name="status" class="input"><option value="published">Published</option><option value="draft">Draft</option></select></div>
+          <div><label class="block text-sm font-medium mb-1">Order</label><input id="pg-order" name="order" type="number" class="input" value="1" /></div>
+        </div>
+        <div><label class="block text-sm font-medium mb-1">SEO Title</label><input id="pg-seo-title" name="seoTitle" class="input" /></div>
+        <div><label class="block text-sm font-medium mb-1">SEO Description</label><input id="pg-seo-desc" name="seoDescription" class="input" /></div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Content (Markdown supported)</label>
+          <textarea id="pg-content" name="content" class="input" rows="10" placeholder="Write page content in Markdown..."></textarea>
+        </div>
+        <div class="flex gap-2"><button type="submit" class="btn btn-primary" id="pg-save-btn">Save Page</button><button type="button" class="btn btn-ghost" id="pg-cancel-btn">Cancel</button></div>
+      </form>
+    </div>
     <div class="card overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
-            <th class="p-4 font-medium">Title</th>
-            <th class="p-4 font-medium hidden md:table-cell">Slug</th>
-            <th class="p-4 font-medium hidden sm:table-cell">Status</th>
-            <th class="p-4 font-medium text-right">Actions</th>
+            <th class="p-4 font-medium">Title</th><th class="p-4 font-medium hidden md:table-cell">Slug</th><th class="p-4 font-medium hidden sm:table-cell">Status</th><th class="p-4 font-medium text-right">Actions</th>
           </tr></thead>
           <tbody>
             {allPages.map((pg) => (
@@ -45,11 +67,10 @@ const allEvents = events.data || [];
                 <td class="p-4 font-medium">{pg.title}</td>
                 <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{pg.slug}</td>
                 <td class="p-4 hidden sm:table-cell"><span class={pg.status === 'published' ? 'badge badge-primary' : 'badge badge-accent'}>{pg.status}</span></td>
-                <td class="p-4 text-right">
-                  <div class="flex items-center justify-end gap-2">
-                    <a href={`/api/admin/school/content?id=${pg.id}`} class="text-xs font-medium" style="color: var(--color-primary);">Edit</a>
-                  </div>
-                </td>
+                <td class="p-4 text-right"><div class="flex items-center justify-end gap-2">
+                  <button class="text-xs font-medium" style="color: var(--color-primary);" data-edit-page={JSON.stringify(pg)}>Edit</button>
+                  <button class="text-xs font-medium" style="color: #DC2626;" data-delete-page={pg.id}>Delete</button>
+                </div></td>
               </tr>
             ))}
           </tbody>
@@ -61,24 +82,36 @@ const allEvents = events.data || [];
 
   <!-- Announcements Tab -->
   <div id="tab-announcements" class="content-panel hidden">
+    <div class="flex justify-end mb-3"><button id="new-ann-btn" class="btn btn-primary text-sm">New Announcement</button></div>
+    <div id="ann-form" class="hidden card p-6 mb-4">
+      <h3 class="font-bold mb-4" id="ann-form-title">Create Announcement</h3>
+      <form id="ann-form-el" class="space-y-4">
+        <input type="hidden" id="ann-id" name="id" />
+        <div><label class="block text-sm font-medium mb-1">Title</label><input id="ann-title" name="title" class="input" required /></div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-medium mb-1">Type</label><select id="ann-type" name="type" class="input"><option value="academic">Academic</option><option value="event">Event</option><option value="urgent">Urgent</option><option value="general">General</option></select></div>
+          <div><label class="block text-sm font-medium mb-1">Priority</label><select id="ann-priority" name="priority" class="input"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div>
+        </div>
+        <div><label class="block text-sm font-medium mb-1">Content</label><textarea id="ann-content" name="content" class="input" rows="4"></textarea></div>
+        <div class="flex gap-2"><button type="submit" class="btn btn-primary" id="ann-save-btn">Save</button><button type="button" class="btn btn-ghost" id="ann-cancel-btn">Cancel</button></div>
+      </form>
+    </div>
     <div class="card overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
-            <th class="p-4 font-medium">Title</th>
-            <th class="p-4 font-medium hidden md:table-cell">Type</th>
-            <th class="p-4 font-medium hidden sm:table-cell">Date</th>
-            <th class="p-4 font-medium text-right">Actions</th>
+            <th class="p-4 font-medium">Title</th><th class="p-4 font-medium hidden md:table-cell">Type</th><th class="p-4 font-medium hidden sm:table-cell">Date</th><th class="p-4 font-medium text-right">Actions</th>
           </tr></thead>
           <tbody>
             {allAnnouncements.map((ann) => (
               <tr style="border-top: 1px solid var(--color-border);">
                 <td class="p-4 font-medium">{ann.title}</td>
-                <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{ann.type || '-'}</td>
+                <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{ann.type || ann.category || '-'}</td>
                 <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{ann.createdAt ? new Date(ann.createdAt).toLocaleDateString() : '-'}</td>
-                <td class="p-4 text-right">
-                  <button class="text-xs font-medium" style="color: var(--color-primary);" data-delete-announcement={ann.id}>Delete</button>
-                </td>
+                <td class="p-4 text-right"><div class="flex items-center justify-end gap-2">
+                  <button class="text-xs font-medium" style="color: var(--color-primary);" data-edit-ann={JSON.stringify(ann)}>Edit</button>
+                  <button class="text-xs font-medium" style="color: #DC2626;" data-delete-ann={ann.id}>Delete</button>
+                </div></td>
               </tr>
             ))}
           </tbody>
@@ -90,14 +123,29 @@ const allEvents = events.data || [];
 
   <!-- Events Tab -->
   <div id="tab-events" class="content-panel hidden">
+    <div class="flex justify-end mb-3"><button id="new-ev-btn" class="btn btn-primary text-sm">New Event</button></div>
+    <div id="ev-form" class="hidden card p-6 mb-4">
+      <h3 class="font-bold mb-4" id="ev-form-title">Create Event</h3>
+      <form id="ev-form-el" class="space-y-4">
+        <input type="hidden" id="ev-id" name="id" />
+        <div><label class="block text-sm font-medium mb-1">Title</label><input id="ev-title" name="title" class="input" required /></div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-medium mb-1">Category</label><select id="ev-category" name="category" class="input"><option value="ceremony">Ceremony</option><option value="competition">Competition</option><option value="meeting">Meeting</option><option value="open-day">Open Day</option><option value="academic">Academic</option></select></div>
+          <div><label class="block text-sm font-medium mb-1">Location</label><input id="ev-location" name="location" class="input" /></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-medium mb-1">Start Date</label><input id="ev-start" name="startDate" type="date" class="input" /></div>
+          <div><label class="block text-sm font-medium mb-1">Speaker</label><input id="ev-speaker" name="speaker" class="input" /></div>
+        </div>
+        <div><label class="block text-sm font-medium mb-1">Description</label><textarea id="ev-desc" name="description" class="input" rows="4"></textarea></div>
+        <div class="flex gap-2"><button type="submit" class="btn btn-primary" id="ev-save-btn">Save</button><button type="button" class="btn btn-ghost" id="ev-cancel-btn">Cancel</button></div>
+      </form>
+    </div>
     <div class="card overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
-            <th class="p-4 font-medium">Title</th>
-            <th class="p-4 font-medium hidden md:table-cell">Category</th>
-            <th class="p-4 font-medium hidden sm:table-cell">Date</th>
-            <th class="p-4 font-medium text-right">Actions</th>
+            <th class="p-4 font-medium">Title</th><th class="p-4 font-medium hidden md:table-cell">Category</th><th class="p-4 font-medium hidden sm:table-cell">Date</th><th class="p-4 font-medium text-right">Actions</th>
           </tr></thead>
           <tbody>
             {allEvents.map((ev) => (
@@ -105,9 +153,10 @@ const allEvents = events.data || [];
                 <td class="p-4 font-medium">{ev.title}</td>
                 <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{ev.category || '-'}</span></td>
                 <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{ev.startDate ? new Date(ev.startDate).toLocaleDateString() : '-'}</td>
-                <td class="p-4 text-right">
-                  <button class="text-xs font-medium" style="color: var(--color-primary);" data-delete-event={ev.id}>Delete</button>
-                </td>
+                <td class="p-4 text-right"><div class="flex items-center justify-end gap-2">
+                  <button class="text-xs font-medium" style="color: var(--color-primary);" data-edit-ev={JSON.stringify(ev)}>Edit</button>
+                  <button class="text-xs font-medium" style="color: #DC2626;" data-delete-ev={ev.id}>Delete</button>
+                </div></td>
               </tr>
             ))}
           </tbody>
@@ -117,13 +166,205 @@ const allEvents = events.data || [];
     </div>
   </div>
 
+  <div id="toast" class="hidden fixed bottom-6 right-6 px-4 py-3 rounded-lg text-sm font-medium text-white z-50" style="background: var(--color-primary);"></div>
+
   <script is:inline>
-    document.querySelectorAll('.content-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.content-tab').forEach(t => { t.style.borderColor = 'transparent'; t.style.color = 'var(--color-muted)'; });
+    function showToast(msg, type) {
+      var t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.background = type === 'error' ? '#DC2626' : 'var(--color-primary)';
+      t.classList.remove('hidden');
+      setTimeout(function() { t.classList.add('hidden'); }, 3000);
+    }
+
+    // Tab switching
+    document.querySelectorAll('.content-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.content-tab').forEach(function(t) { t.style.borderColor = 'transparent'; t.style.color = 'var(--color-muted)'; });
         tab.style.borderColor = 'var(--color-primary)'; tab.style.color = 'var(--color-primary)';
-        document.querySelectorAll('.content-panel').forEach(p => p.classList.add('hidden'));
-        document.getElementById('tab-' + tab.dataset.tab)?.classList.remove('hidden');
+        document.querySelectorAll('.content-panel').forEach(function(p) { p.classList.add('hidden'); });
+        var panel = document.getElementById('tab-' + tab.dataset.tab);
+        if (panel) panel.classList.remove('hidden');
+      });
+    });
+
+    // === PAGES CRUD ===
+    var pageForm = document.getElementById('page-form');
+    document.getElementById('new-page-btn')?.addEventListener('click', function() {
+      pageForm.classList.remove('hidden');
+      document.getElementById('page-form-title').textContent = 'Create New Page';
+      document.getElementById('page-form-el').reset();
+      document.getElementById('pg-id').value = '';
+    });
+    document.getElementById('pg-cancel-btn')?.addEventListener('click', function() { pageForm.classList.add('hidden'); });
+
+    document.getElementById('page-form-el')?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('pg-save-btn');
+      btn.textContent = 'Saving...'; btn.disabled = true;
+      var body = {
+        title: document.getElementById('pg-title').value,
+        slug: document.getElementById('pg-slug').value || document.getElementById('pg-title').value.toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-'),
+        status: document.getElementById('pg-status').value,
+        order: parseInt(document.getElementById('pg-order').value) || 1,
+        seoTitle: document.getElementById('pg-seo-title').value,
+        seoDescription: document.getElementById('pg-seo-desc').value,
+        content: document.getElementById('pg-content').value,
+      };
+      var id = document.getElementById('pg-id').value;
+      try {
+        var method = id ? 'PATCH' : 'POST';
+        var url = '/api/admin/school/content' + (id ? '?id=' + id + '&type=pages' : '?type=pages');
+        var res = await fetch(url, { method: method, headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
+        if (res.ok) { showToast('Page saved!'); setTimeout(function(){location.reload();}, 1000); }
+        else { var err = await res.json(); showToast(err.error || 'Failed', 'error'); }
+      } catch { showToast('Network error', 'error'); }
+      btn.textContent = 'Save Page'; btn.disabled = false;
+    });
+
+    document.querySelectorAll('[data-edit-page]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var data = JSON.parse(btn.dataset.editPage);
+        pageForm.classList.remove('hidden');
+        document.getElementById('page-form-title').textContent = 'Edit: ' + data.title;
+        document.getElementById('pg-id').value = data.id || '';
+        document.getElementById('pg-title').value = data.title || '';
+        document.getElementById('pg-slug').value = data.slug || '';
+        document.getElementById('pg-status').value = data.status || 'published';
+        document.getElementById('pg-order').value = data.order || 1;
+        document.getElementById('pg-seo-title').value = data.seoTitle || '';
+        document.getElementById('pg-seo-desc').value = data.seoDescription || '';
+        document.getElementById('pg-content').value = typeof data.content === 'string' ? data.content : JSON.stringify(data.content || []);
+      });
+    });
+
+    document.querySelectorAll('[data-delete-page]').forEach(function(btn) {
+      btn.addEventListener('click', async function() {
+        if (!confirm('Delete this page?')) return;
+        var id = btn.dataset.deletePage;
+        try {
+          var res = await fetch('/api/admin/school/content?id=' + id + '&type=pages', { method: 'DELETE' });
+          if (res.ok) { showToast('Deleted!'); btn.closest('tr').remove(); }
+        } catch { showToast('Error', 'error'); }
+      });
+    });
+
+    // === ANNOUNCEMENTS CRUD ===
+    var annForm = document.getElementById('ann-form');
+    document.getElementById('new-ann-btn')?.addEventListener('click', function() {
+      annForm.classList.remove('hidden');
+      document.getElementById('ann-form-title').textContent = 'Create Announcement';
+      document.getElementById('ann-form-el').reset();
+      document.getElementById('ann-id').value = '';
+    });
+    document.getElementById('ann-cancel-btn')?.addEventListener('click', function() { annForm.classList.add('hidden'); });
+
+    document.getElementById('ann-form-el')?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('ann-save-btn');
+      btn.textContent = 'Saving...'; btn.disabled = true;
+      var body = {
+        title: document.getElementById('ann-title').value,
+        type: document.getElementById('ann-type').value,
+        category: document.getElementById('ann-type').value,
+        priority: document.getElementById('ann-priority').value,
+        content: document.getElementById('ann-content').value,
+        status: 'active',
+        publishedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
+      };
+      var id = document.getElementById('ann-id').value;
+      try {
+        var method = id ? 'PATCH' : 'POST';
+        var url = '/api/admin/school/content' + (id ? '?id=' + id + '&type=announcements' : '?type=announcements');
+        var res = await fetch(url, { method: method, headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
+        if (res.ok) { showToast('Announcement saved!'); setTimeout(function(){location.reload();}, 1000); }
+        else { var err = await res.json(); showToast(err.error || 'Failed', 'error'); }
+      } catch { showToast('Network error', 'error'); }
+      btn.textContent = 'Save'; btn.disabled = false;
+    });
+
+    document.querySelectorAll('[data-edit-ann]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var data = JSON.parse(btn.dataset.editAnn);
+        annForm.classList.remove('hidden');
+        document.getElementById('ann-form-title').textContent = 'Edit: ' + data.title;
+        document.getElementById('ann-id').value = data.id || '';
+        document.getElementById('ann-title').value = data.title || '';
+        document.getElementById('ann-type').value = data.type || data.category || 'academic';
+        document.getElementById('ann-priority').value = data.priority || 'medium';
+        document.getElementById('ann-content').value = data.content || '';
+      });
+    });
+
+    document.querySelectorAll('[data-delete-ann]').forEach(function(btn) {
+      btn.addEventListener('click', async function() {
+        if (!confirm('Delete this announcement?')) return;
+        var id = btn.dataset.deleteAnn;
+        try {
+          var res = await fetch('/api/admin/school/content?id=' + id + '&type=announcements', { method: 'DELETE' });
+          if (res.ok) { showToast('Deleted!'); btn.closest('tr').remove(); }
+        } catch { showToast('Error', 'error'); }
+      });
+    });
+
+    // === EVENTS CRUD ===
+    var evForm = document.getElementById('ev-form');
+    document.getElementById('new-ev-btn')?.addEventListener('click', function() {
+      evForm.classList.remove('hidden');
+      document.getElementById('ev-form-title').textContent = 'Create Event';
+      document.getElementById('ev-form-el').reset();
+      document.getElementById('ev-id').value = '';
+    });
+    document.getElementById('ev-cancel-btn')?.addEventListener('click', function() { evForm.classList.add('hidden'); });
+
+    document.getElementById('ev-form-el')?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('ev-save-btn');
+      btn.textContent = 'Saving...'; btn.disabled = true;
+      var body = {
+        title: document.getElementById('ev-title').value,
+        category: document.getElementById('ev-category').value,
+        location: document.getElementById('ev-location').value,
+        startDate: document.getElementById('ev-start').value ? new Date(document.getElementById('ev-start').value).toISOString() : new Date().toISOString(),
+        speaker: document.getElementById('ev-speaker').value,
+        description: document.getElementById('ev-desc').value,
+        status: 'active',
+      };
+      var id = document.getElementById('ev-id').value;
+      try {
+        var method = id ? 'PATCH' : 'POST';
+        var url = '/api/admin/school/content' + (id ? '?id=' + id + '&type=events' : '?type=events');
+        var res = await fetch(url, { method: method, headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
+        if (res.ok) { showToast('Event saved!'); setTimeout(function(){location.reload();}, 1000); }
+        else { var err = await res.json(); showToast(err.error || 'Failed', 'error'); }
+      } catch { showToast('Network error', 'error'); }
+      btn.textContent = 'Save'; btn.disabled = false;
+    });
+
+    document.querySelectorAll('[data-edit-ev]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var data = JSON.parse(btn.dataset.editEv);
+        evForm.classList.remove('hidden');
+        document.getElementById('ev-form-title').textContent = 'Edit: ' + data.title;
+        document.getElementById('ev-id').value = data.id || '';
+        document.getElementById('ev-title').value = data.title || '';
+        document.getElementById('ev-category').value = data.category || 'ceremony';
+        document.getElementById('ev-location').value = data.location || '';
+        document.getElementById('ev-start').value = data.startDate ? data.startDate.split('T')[0] : '';
+        document.getElementById('ev-speaker').value = data.speaker || '';
+        document.getElementById('ev-desc').value = data.description || '';
+      });
+    });
+
+    document.querySelectorAll('[data-delete-ev]').forEach(function(btn) {
+      btn.addEventListener('click', async function() {
+        if (!confirm('Delete this event?')) return;
+        var id = btn.dataset.deleteEv;
+        try {
+          var res = await fetch('/api/admin/school/content?id=' + id + '&type=events', { method: 'DELETE' });
+          if (res.ok) { showToast('Deleted!'); btn.closest('tr').remove(); }
+        } catch { showToast('Error', 'error'); }
       });
     });
   </script>
