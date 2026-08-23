@@ -1,121 +1,36 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
-import { formatCurrency } from '../../../lib/utils';
-import RichTextEditor from '../../../components/RichTextEditor.astro';
-
-const [coursesResult, lessonsCount] = await Promise.all([
-  lightbase.query('school_courses', { sort: 'title:asc', limit: 100 }),
-  lightbase.count('school_lessons'),
-]);
-const courses = coursesResult.data || [];
+const result = await lightbase.query('school_courses', { sort: 'title', limit: 100 });
+const allItems = result.data || [];
 ---
-
-<AdminLayout title="LMS Course Management" platform="school" section="courses">
-  <div class="flex items-center justify-between mb-6 fade-in">
+<AdminLayout title="Course Management" platform="school" section="courses">
+  <div class="mb-6 fade-in"><h2 class="text-lg font-bold">Courses</h2><p class="text-sm" style="color: var(--color-muted);">{allItems.length} total</p></div>
+  <div class="grid lg:grid-cols-2 gap-6">
     <div>
-      <h2 class="text-lg font-bold">Courses</h2>
-      <p class="text-sm" style="color: var(--color-muted);">{courses.length} courses, {lessonsCount} lessons</p>
+      <div class="flex items-center justify-between mb-3"><h3 class="font-bold text-sm">All Courses</h3><button id="new-btn" class="btn btn-primary text-sm">New</button></div>
+      <div class="card overflow-hidden"><div class="max-h-[600px] overflow-y-auto"><table class="w-full text-sm">
+        <thead class="sticky top-0" style="background: var(--color-background);"><tr class="text-left" style="color: var(--color-muted);"><th class="p-3 font-medium">Title</th><th class="p-3 font-medium text-right">Actions</th></tr></thead>
+        <tbody>{allItems.map((item) => (<tr data-item={JSON.stringify(item)} style="border-top: 1px solid var(--color-border);"><td class="p-3 font-medium">{item.title}</td><td class="p-3 text-right"><div class="flex items-center justify-end gap-1">
+          <button class="edit-btn p-1.5 rounded-lg hover:bg-[rgb(5,179,77,0.1)]" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+          <button class="del-btn p-1.5 rounded-lg hover:bg-[rgb(220,38,38,0.1)]" data-id={item.id} data-title={item.title} title="Delete"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #DC2626;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+        </div></td></tr>))}</tbody></table></div>{allItems.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No items yet.</div>}</div>
     </div>
-    <button id="toggle-form-btn" class="btn btn-primary">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      Add Course
-    </button>
+    <div id="edit-panel" class="card p-6"><h3 id="form-title" class="font-bold mb-4">Create New Course</h3><form id="cms-form" class="space-y-4">
+      <input type="hidden" id="f-id" />
+      <div><label class="block text-sm font-medium mb-1">Title</label><input id="f-title" class="input" required /></div>
+      <div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium mb-1">Category</label><input id="f-category" class="input" /></div><div><label class="block text-sm font-medium mb-1">Level</label><select id="f-level" class="input"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select></div></div>
+      <div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium mb-1">Duration</label><input id="f-duration" class="input" /></div><div><label class="block text-sm font-medium mb-1">Instructor</label><input id="f-instructor" class="input" /></div></div>
+      <div><label class="block text-sm font-medium mb-1">Description</label><textarea id="f-description" class="input" rows="4"></textarea></div>
+      <div class="flex gap-2 pt-2"><button type="submit" id="save-btn" class="btn btn-primary flex-1">Save</button><button type="button" id="cancel-btn" class="btn btn-ghost">Clear</button></div>
+    </form></div>
   </div>
-
-  <!-- Create Form -->
-  <div id="create-form" class="hidden card p-6 mb-6">
-    <h3 class="font-bold mb-4">Add New Course</h3>
-    <form id="course-form" class="space-y-4">
-      <div class="grid md:grid-cols-2 gap-4">
-        <div><label class="block text-sm font-medium mb-1" for="cr-title">Title</label><input id="cr-title" name="title" class="input" required /></div>
-        <div><label class="block text-sm font-medium mb-1" for="cr-slug">Slug</label><input id="cr-slug" name="slug" class="input" /></div>
-      </div>
-      <div class="grid md:grid-cols-3 gap-4">
-        <div><label class="block text-sm font-medium mb-1" for="cr-category">Category</label><input id="cr-category" name="category" class="input" /></div>
-        <div><label class="block text-sm font-medium mb-1" for="cr-instructor">Instructor</label><input id="cr-instructor" name="instructorName" class="input" /></div>
-        <div><label class="block text-sm font-medium mb-1" for="cr-duration">Duration</label><input id="cr-duration" name="duration" class="input" /></div>
-      </div>
-      <div class="grid md:grid-cols-2 gap-4">
-        <div><label class="block text-sm font-medium mb-1" for="cr-price">Price (0 for free)</label><input id="cr-price" name="price" class="input" type="number" value="0" /></div>
-        <div><label class="block text-sm font-medium mb-1" for="cr-status">Status</label>
-          <select id="cr-status" name="status" class="input"><option value="draft">Draft</option><option value="published">Published</option></select></div>
-      </div>
-      <div><label class="block text-sm font-medium mb-1" for="cr-excerpt">Excerpt</label><textarea id="cr-excerpt" name="excerpt" class="input" rows="2"></textarea></div>
-      <div><label class="block text-sm font-medium mb-1" for="cr-desc">Description</label><RichTextEditor id="cr-desc" name="description" label="" rows={6} placeholder="Course description in Markdown..." /></div>
-      <div class="flex gap-3">
-        <button type="submit" class="btn btn-primary">Create Course</button>
-        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Courses Table -->
-  <div class="card overflow-hidden">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
-          <th class="p-4 font-medium">Title</th>
-          <th class="p-4 font-medium hidden md:table-cell">Category</th>
-          <th class="p-4 font-medium hidden sm:table-cell">Instructor</th>
-          <th class="p-4 font-medium hidden lg:table-cell">Price</th>
-          <th class="p-4 font-medium text-right">Status</th>
-          <th class="p-4 font-medium text-right">Actions</th>
-        </tr></thead>
-        <tbody>
-          {courses.map((c) => (
-            <tr style="border-top: 1px solid var(--color-border);">
-              <td class="p-4 font-medium">{c.title}</td>
-              <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{c.category || '-'}</span></td>
-              <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{c.instructorName || '-'}</td>
-              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{c.isFree ? 'Free' : (c.price ? formatCurrency(c.price) : '-')}</td>
-              <td class="p-4 text-right"><span class={c.status === 'published' ? 'badge badge-primary' : 'badge badge-accent'}>{c.status}</span></td>
-              <td class="p-4 text-right">
-                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-course={c.id}>Edit</button>
-                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-course={c.id}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-    {courses.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No courses created yet.</div>}
-  </div>
-
   <script is:inline>
-    const toggleBtn = document.getElementById('toggle-form-btn');
-    const cancelBtn = document.getElementById('cancel-form-btn');
-    const createForm = document.getElementById('create-form');
-    toggleBtn?.addEventListener('click', () => createForm?.classList.toggle('hidden'));
-    cancelBtn?.addEventListener('click', () => createForm?.classList.add('hidden'));
-
-    const titleInput = document.getElementById('cr-title');
-    const slugInput = document.getElementById('cr-slug');
-    titleInput?.addEventListener('input', () => {
-      slugInput.value = titleInput.value.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
-    });
-
-    document.getElementById('course-form')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const fd = new FormData(e.target);
-      const body = {};
-      fd.forEach((v, k) => { body[k] = k === 'price' ? parseFloat(v) || 0 : v; });
-      body.isFree = !body.price || body.price === 0;
-      try {
-        const res = await fetch('/api/admin/school/courses', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        if (res.ok) window.location.reload(); else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }
-      } catch { showToast('Network error', 'error'); }
-    });
-
-    document.querySelectorAll('[data-delete-course]').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        showConfirm('Delete this course?', async function() {        const id = btn.getAttribute('data-delete-course');
-          try {
-            const res = await fetch(`/api/admin/school/courses?id=${id}`, { method: 'DELETE' });
-            if (res.ok) window.location.reload(); else showToast('Failed', 'error');
-          } catch { showToast('Network error', 'error'); }
-        });
-      });
-    });
+    (function(){var f=document.getElementById('cms-form'),p=document.getElementById('edit-panel'),t=document.getElementById('form-title'),s=document.getElementById('save-btn');
+    document.getElementById('new-btn').addEventListener('click',function(){f.reset();document.getElementById('f-id').value='';t.textContent='Create New Course';s.textContent='Create';p.scrollIntoView({behavior:'smooth'});});
+    document.querySelectorAll('.edit-btn').forEach(function(b){b.addEventListener('click',function(){var d=JSON.parse(b.closest('tr').dataset.item);document.getElementById('f-id').value=d.id||'';document.getElementById('f-title').value=d.title||'';document.getElementById('f-category').value=d.category||'';document.getElementById('f-level').value=d.level||'beginner';document.getElementById('f-duration').value=d.duration||'';document.getElementById('f-instructor').value=d.instructorName||'';document.getElementById('f-description').value=d.description||'';t.textContent='Edit: '+d.title;s.textContent='Update';p.scrollIntoView({behavior:'smooth'});});});
+    document.querySelectorAll('.del-btn').forEach(function(b){b.addEventListener('click',function(){var id=b.dataset.id,title=b.dataset.title;if(window.showConfirm){showConfirm('Delete "'+title+'"?',function(){fetch('/api/admin/school/courses?id='+id,{method:'DELETE'}).then(function(r){return r.json();}).then(function(d){if(d.success||d.deleted){showToast('Deleted!','success');b.closest('tr').remove();}else{showToast('Failed','error');}});},'Delete');}});});
+    f.addEventListener('submit',async function(e){e.preventDefault();s.textContent='Saving...';s.disabled=true;var b={title:document.getElementById('f-title').value,category:document.getElementById('f-category').value,level:document.getElementById('f-level').value,duration:document.getElementById('f-duration').value,instructorName:document.getElementById('f-instructor').value,description:document.getElementById('f-description').value,status:'published'};var id=document.getElementById('f-id').value;var m=id?'PATCH':'POST';var u='/api/admin/school/courses'+(id?'?id='+id:'');try{var r=await fetch(u,{method:m,headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});var d=await r.json();if(r.ok){showToast(id?'Updated!':'Created!','success');setTimeout(function(){location.reload();},1000);}else{showToast(d.error||'Failed','error');}}catch{showToast('Network error','error');}s.textContent=id?'Update':'Create';s.disabled=false;});
+    document.getElementById('cancel-btn').addEventListener('click',function(){f.reset();document.getElementById('f-id').value='';t.textContent='Create New Course';s.textContent='Create';});})();
   </script>
 </AdminLayout>

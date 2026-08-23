@@ -1,112 +1,37 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
-
-const result = await lightbase.query('school_students', {
-  sort: 'lastName:asc',
-  limit: 100,
-});
-const students = result.data || [];
+const result = await lightbase.query('school_students', { sort: 'firstName', limit: 100 });
+const allItems = result.data || [];
 ---
-
 <AdminLayout title="Student Records" platform="school" section="students">
-  <div class="flex items-center justify-between mb-6 fade-in">
+  <div class="mb-6 fade-in"><h2 class="text-lg font-bold">Students</h2><p class="text-sm" style="color: var(--color-muted);">{allItems.length} total</p></div>
+  <div class="grid lg:grid-cols-2 gap-6">
     <div>
-      <h2 class="text-lg font-bold">Students</h2>
-      <p class="text-sm" style="color: var(--color-muted);">{students.length} total students</p>
+      <div class="flex items-center justify-between mb-3"><h3 class="font-bold text-sm">All Students</h3><button id="new-btn" class="btn btn-primary text-sm">New</button></div>
+      <div class="card overflow-hidden"><div class="max-h-[600px] overflow-y-auto"><table class="w-full text-sm">
+        <thead class="sticky top-0" style="background: var(--color-background);"><tr class="text-left" style="color: var(--color-muted);"><th class="p-3 font-medium">Name</th><th class="p-3 font-medium text-right">Actions</th></tr></thead>
+        <tbody>{allItems.map((item) => (<tr data-item={JSON.stringify(item)} style="border-top: 1px solid var(--color-border);"><td class="p-3 font-medium">{item.firstName} {item.lastName}</td><td class="p-3 text-right"><div class="flex items-center justify-end gap-1">
+          <button class="edit-btn p-1.5 rounded-lg hover:bg-[rgb(5,179,77,0.1)]" title="Edit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+          <button class="del-btn p-1.5 rounded-lg hover:bg-[rgb(220,38,38,0.1)]" data-id={item.id} data-title={item.firstName} title="Delete"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #DC2626;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+        </div></td></tr>))}</tbody></table></div>{allItems.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No items yet.</div>}</div>
     </div>
-    <button id="toggle-form-btn" class="btn btn-primary">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      Add Student
-    </button>
+    <div id="edit-panel" class="card p-6"><h3 id="form-title" class="font-bold mb-4">Create New Student</h3><form id="cms-form" class="space-y-4">
+      <input type="hidden" id="f-id" />
+      <div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium mb-1">First Name</label><input id="f-firstName" class="input" required /></div><div><label class="block text-sm font-medium mb-1">Last Name</label><input id="f-lastName" class="input" /></div></div>
+      <div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium mb-1">Student ID</label><input id="f-studentId" class="input" /></div><div><label class="block text-sm font-medium mb-1">Gender</label><select id="f-gender" class="input"><option value="male">Male</option><option value="female">Female</option></select></div></div>
+      <div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium mb-1">Date of Birth</label><input id="f-dob" type="date" class="input" /></div><div><label class="block text-sm font-medium mb-1">Class</label><input id="f-className" class="input" /></div></div>
+      <div class="grid grid-cols-2 gap-3"><div><label class="block text-sm font-medium mb-1">Guardian Name</label><input id="f-guardianName" class="input" /></div><div><label class="block text-sm font-medium mb-1">Guardian Phone</label><input id="f-guardianPhone" class="input" /></div></div>
+      <div><label class="block text-sm font-medium mb-1">Guardian Email</label><input id="f-guardianEmail" class="input" /></div>
+      <div class="flex gap-2 pt-2"><button type="submit" id="save-btn" class="btn btn-primary flex-1">Save</button><button type="button" id="cancel-btn" class="btn btn-ghost">Clear</button></div>
+    </form></div>
   </div>
-
-  <!-- Create Form -->
-  <div id="create-form" class="hidden card p-6 mb-6">
-    <h3 class="font-bold mb-4">Add New Student</h3>
-    <form id="student-form" class="space-y-4">
-      <div class="grid md:grid-cols-3 gap-4">
-        <div><label class="block text-sm font-medium mb-1" for="s-first">First Name</label><input id="s-first" name="firstName" class="input" required /></div>
-        <div><label class="block text-sm font-medium mb-1" for="s-last">Last Name</label><input id="s-last" name="lastName" class="input" required /></div>
-        <div><label class="block text-sm font-medium mb-1" for="s-class">Class</label><input id="s-class" name="className" class="input" /></div>
-      </div>
-      <div class="grid md:grid-cols-3 gap-4">
-        <div><label class="block text-sm font-medium mb-1" for="s-gender">Gender</label>
-          <select id="s-gender" name="gender" class="input"><option value="male">Male</option><option value="female">Female</option></select></div>
-        <div><label class="block text-sm font-medium mb-1" for="s-guardian">Guardian Name</label><input id="s-guardian" name="guardianName" class="input" /></div>
-        <div><label class="block text-sm font-medium mb-1" for="s-phone">Guardian Phone</label><input id="s-phone" name="guardianPhone" class="input" /></div>
-      </div>
-      <div class="grid md:grid-cols-2 gap-4">
-        <div><label class="block text-sm font-medium mb-1" for="s-email">Guardian Email</label><input id="s-email" name="guardianEmail" class="input" type="email" /></div>
-        <div><label class="block text-sm font-medium mb-1" for="s-enrollment">Enrollment Status</label>
-          <select id="s-enrollment" name="enrollmentStatus" class="input"><option value="active">Active</option><option value="inactive">Inactive</option><option value="graduated">Graduated</option></select></div>
-      </div>
-      <div class="flex gap-3">
-        <button type="submit" class="btn btn-primary">Add Student</button>
-        <button type="button" id="cancel-form-btn" class="btn btn-ghost">Cancel</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Students Table -->
-  <div class="card overflow-hidden">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead><tr class="text-left" style="background: var(--color-background); color: var(--color-muted);">
-          <th class="p-4 font-medium">Name</th>
-          <th class="p-4 font-medium hidden md:table-cell">Class</th>
-          <th class="p-4 font-medium hidden sm:table-cell">Gender</th>
-          <th class="p-4 font-medium hidden lg:table-cell">Guardian</th>
-          <th class="p-4 font-medium text-right">Status</th>
-          <th class="p-4 font-medium text-right">Actions</th>
-        </tr></thead>
-        <tbody>
-          {students.map((s) => (
-            <tr style="border-top: 1px solid var(--color-border);">
-              <td class="p-4 font-medium">{s.firstName} {s.lastName}</td>
-              <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{s.className || '-'}</td>
-              <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{s.gender || '-'}</td>
-              <td class="p-4 hidden lg:table-cell" style="color: var(--color-muted);">{s.guardianName || '-'}</td>
-              <td class="p-4 text-right"><span class={s.enrollmentStatus === 'active' ? 'badge badge-primary' : 'badge'}>{s.enrollmentStatus || '-'}</span></td>
-              <td class="p-4 text-right">
-                <button class="text-xs font-medium mr-3" style="color: var(--color-primary);" data-edit-student={s.id}>Edit</button>
-                <button class="text-xs font-medium" style="color: #DC2626;" data-delete-student={s.id}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-    {students.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No students registered yet.</div>}
-  </div>
-
   <script is:inline>
-    const toggleBtn = document.getElementById('toggle-form-btn');
-    const cancelBtn = document.getElementById('cancel-form-btn');
-    const createForm = document.getElementById('create-form');
-    toggleBtn?.addEventListener('click', () => createForm?.classList.toggle('hidden'));
-    cancelBtn?.addEventListener('click', () => createForm?.classList.add('hidden'));
-
-    document.getElementById('student-form')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const fd = new FormData(e.target);
-      const body = {};
-      fd.forEach((v, k) => { body[k] = v; });
-      try {
-        const res = await fetch('/api/admin/school/students', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        if (res.ok) window.location.reload(); else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }
-      } catch { showToast('Network error', 'error'); }
-    });
-
-    document.querySelectorAll('[data-delete-student]').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        showConfirm('Delete this student record?', async function() {        const id = btn.getAttribute('data-delete-student');
-          try {
-            const res = await fetch(`/api/admin/school/students?id=${id}`, { method: 'DELETE' });
-            if (res.ok) window.location.reload(); else showToast('Failed to delete', 'error');
-          } catch { showToast('Network error', 'error'); }
-        });
-      });
-    });
+    (function(){var f=document.getElementById('cms-form'),p=document.getElementById('edit-panel'),t=document.getElementById('form-title'),s=document.getElementById('save-btn');
+    document.getElementById('new-btn').addEventListener('click',function(){f.reset();document.getElementById('f-id').value='';t.textContent='Create New Student';s.textContent='Create';p.scrollIntoView({behavior:'smooth'});});
+    document.querySelectorAll('.edit-btn').forEach(function(b){b.addEventListener('click',function(){var d=JSON.parse(b.closest('tr').dataset.item);document.getElementById('f-id').value=d.id||'';document.getElementById('f-firstName').value=d.firstName||'';document.getElementById('f-lastName').value=d.lastName||'';document.getElementById('f-studentId').value=d.studentId||'';document.getElementById('f-gender').value=d.gender||'male';document.getElementById('f-dob').value=(d.dateOfBirth||'').split('T')[0];document.getElementById('f-className').value=d.className||'';document.getElementById('f-guardianName').value=d.guardianName||'';document.getElementById('f-guardianPhone').value=d.guardianPhone||'';document.getElementById('f-guardianEmail').value=d.guardianEmail||'';t.textContent='Edit: '+d.firstName;s.textContent='Update';p.scrollIntoView({behavior:'smooth'});});});
+    document.querySelectorAll('.del-btn').forEach(function(b){b.addEventListener('click',function(){var id=b.dataset.id,title=b.dataset.title;if(window.showConfirm){showConfirm('Delete "'+title+'"?',function(){fetch('/api/admin/school/students?id='+id,{method:'DELETE'}).then(function(r){return r.json();}).then(function(d){if(d.success||d.deleted){showToast('Deleted!','success');b.closest('tr').remove();}else{showToast('Failed','error');}});},'Delete');}});});
+    f.addEventListener('submit',async function(e){e.preventDefault();s.textContent='Saving...';s.disabled=true;var b={firstName:document.getElementById('f-firstName').value,lastName:document.getElementById('f-lastName').value,studentId:document.getElementById('f-studentId').value,gender:document.getElementById('f-gender').value,dateOfBirth:document.getElementById('f-dob').value,className:document.getElementById('f-className').value,guardianName:document.getElementById('f-guardianName').value,guardianPhone:document.getElementById('f-guardianPhone').value,guardianEmail:document.getElementById('f-guardianEmail').value,status:'active'};var id=document.getElementById('f-id').value;var m=id?'PATCH':'POST';var u='/api/admin/school/students'+(id?'?id='+id:'');try{var r=await fetch(u,{method:m,headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});var d=await r.json();if(r.ok){showToast(id?'Updated!':'Created!','success');setTimeout(function(){location.reload();},1000);}else{showToast(d.error||'Failed','error');}}catch{showToast('Network error','error');}s.textContent=id?'Update':'Create';s.disabled=false;});
+    document.getElementById('cancel-btn').addEventListener('click',function(){f.reset();document.getElementById('f-id').value='';t.textContent='Create New Student';s.textContent='Create';});})();
   </script>
 </AdminLayout>
