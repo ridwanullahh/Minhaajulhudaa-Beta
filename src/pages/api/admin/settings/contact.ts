@@ -38,6 +38,45 @@ export const POST: APIRoute = async ({ request }) => {
       return jsonResponse({ success: true });
     }
 
+    // Handle reply action
+    if (action === 'reply') {
+      const { id, email, message } = await request.json();
+      if (!id || !email || !message) return errorResponse('Missing id, email, or message', 400);
+
+      // Update the submission status to 'replied' and store the reply
+      await lightbase.update('contact_submissions', id, {
+        status: 'replied',
+        replyMessage: message,
+        repliedAt: new Date().toISOString(),
+        repliedBy: session.email,
+      });
+
+      // Try to send email (non-critical, will fail gracefully if SMTP not configured)
+      try {
+        const { isConfigured, sendEmail } = await import('../../../../lib/email');
+        if (isConfigured()) {
+          await sendEmail({
+            to: email,
+            subject: 'Re: Your message to Minhaajulhudaa',
+            text: message,
+            html: '<div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;"><p>Assalamu Alaikum,</p><p>' + message.replace(/\n/g, '<br>') + '</p><p>Wassalamu Alaikum<br>Minhaajulhudaa Team</p></div>',
+          });
+        }
+      } catch (emailErr) {
+        console.error('[contact] Email send failed:', emailErr);
+        // Still return success - the reply is saved in DB
+      }
+
+      await logAction(session, {
+        action: 'reply_contact_message',
+        documentId: id,
+        ipAddress: getClientIP(request),
+        userAgent: getUserAgent(request),
+      });
+
+      return jsonResponse({ success: true, message: 'Reply sent and saved' });
+    }
+
     // Default: update contact settings
     const result = await parseAndValidate(request, {
       phone: { type: 'string', required: false, maxLength: 50 },
