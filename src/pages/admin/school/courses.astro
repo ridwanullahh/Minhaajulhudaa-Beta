@@ -63,7 +63,7 @@ const courses = coursesResult.data || [];
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {courses.map((c: any) => (
+          {courses.map((c) => (
             <tr style="border-top: 1px solid var(--color-border);">
               <td class="p-4 font-medium">{c.title}</td>
               <td class="p-4 hidden md:table-cell"><span class="badge badge-accent">{c.category || '-'}</span></td>
@@ -82,23 +82,23 @@ const courses = coursesResult.data || [];
     {courses.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No courses created yet.</div>}
   </div>
 
-  <script>
+  <script is:inline>
     const toggleBtn = document.getElementById('toggle-form-btn');
     const cancelBtn = document.getElementById('cancel-form-btn');
     const createForm = document.getElementById('create-form');
     toggleBtn?.addEventListener('click', () => createForm?.classList.toggle('hidden'));
     cancelBtn?.addEventListener('click', () => createForm?.classList.add('hidden'));
 
-    const titleInput = document.getElementById('cr-title') as HTMLInputElement;
-    const slugInput = document.getElementById('cr-slug') as HTMLInputElement;
+    const titleInput = document.getElementById('cr-title');
+    const slugInput = document.getElementById('cr-slug');
     titleInput?.addEventListener('input', () => {
       slugInput.value = titleInput.value.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
     });
 
     document.getElementById('course-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const fd = new FormData(e.target);
+      const body = {};
       fd.forEach((v, k) => { body[k] = k === 'price' ? parseFloat(v as string) || 0 : v; });
       body.isFree = !body.price || body.price === 0;
       try {

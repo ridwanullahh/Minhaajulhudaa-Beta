@@ -3,7 +3,7 @@ import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { generateCSRFToken } from '../../../lib/utils';
 
-let settings: any = {};
+let settings = {};
 try {
   const result = await lightbase.query('charity_settings', { limit: 1 });
   const docs = result.data || [];
@@ -91,13 +91,13 @@ const csrfToken = generateCSRFToken();
     <button type="submit" class="btn btn-primary">Save Settings</button>
   </form>
 
-  <script>
+  <script is:inline>
     document.getElementById('settings-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const fd = new FormData(e.target);
+      const body = {};
       fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = v; });
-      const settingsId = (document.querySelector('[name=settingsId]') as HTMLInputElement).value;
+      const settingsId = (document.querySelector('[name=settingsId]')).value;
       try {
         let url = '/api/admin/charity/content';
         let method = 'POST';

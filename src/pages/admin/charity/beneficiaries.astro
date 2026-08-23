@@ -5,8 +5,8 @@ import { generateCSRFToken } from '../../../lib/utils';
 
 const beneficiaries = await lightbase.query('charity_beneficiaries', { sort: 'createdAt:desc', limit: 100 });
 const allBeneficiaries = beneficiaries.data || [];
-const verifiedCount = allBeneficiaries.filter((b: any) => b.verificationStatus === 'verified').length;
-const pendingCount = allBeneficiaries.filter((b: any) => b.verificationStatus === 'pending').length;
+const verifiedCount = allBeneficiaries.filter((b) => b.verificationStatus === 'verified').length;
+const pendingCount = allBeneficiaries.filter((b) => b.verificationStatus === 'pending').length;
 const csrfToken = generateCSRFToken();
 ---
 
@@ -95,7 +95,7 @@ const csrfToken = generateCSRFToken();
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {allBeneficiaries.map((b: any) => (
+          {allBeneficiaries.map((b) => (
             <tr style="border-top: 1px solid var(--color-border);">
               <td class="p-4">
                 <div class="font-medium">{b.fullName}</div>
@@ -121,7 +121,7 @@ const csrfToken = generateCSRFToken();
     {allBeneficiaries.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No beneficiaries registered yet.</div>}
   </div>
 
-  <script>
+  <script is:inline>
     const toggleAdd = document.getElementById('toggle-add-btn');
     const cancelAdd = document.getElementById('cancel-add-btn');
     const addForm = document.getElementById('add-form');
@@ -130,8 +130,8 @@ const csrfToken = generateCSRFToken();
 
     document.getElementById('beneficiary-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, string> = {};
+      const fd = new FormData(e.target);
+      const body = {};
       fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = v as string; });
       body.verificationStatus = 'pending';
       try {

@@ -35,7 +35,7 @@ const customers = customersResult.data || [];
           <th class="text-right p-4 font-medium">Actions</th>
         </tr></thead>
         <tbody>
-          {customers.length > 0 ? customers.map((c: any) => (
+          {customers.length > 0 ? customers.map((c) => (
             <tr style="border-bottom: 1px solid var(--color-border);">
               <td class="p-4">
                 <div class="flex items-center gap-3">
@@ -91,28 +91,28 @@ const customers = customersResult.data || [];
     </div>
   </div>
 
-  <script>
+  <script is:inline>
     (function() {
       const modal = document.getElementById('modal');
-      const form = document.getElementById('modal-form') as HTMLFormElement;
+      const form = document.getElementById('modal-form');
       const title = document.getElementById('modal-title');
       const fields = ['name','email','phone','nationality','notes'];
 
       document.getElementById('btn-new-customer')!.addEventListener('click', () => {
         title!.textContent = 'Add Customer';
-        fields.forEach(f => { (document.getElementById('form-' + f) as HTMLInputElement).value = ''; });
-        (document.getElementById('form-id') as HTMLInputElement).value = '';
+        fields.forEach(f => { (document.getElementById('form-' + f)).value = ''; });
+        (document.getElementById('form-id')).value = '';
         modal!.classList.remove('hidden');
       });
 
       document.querySelectorAll('.btn-edit').forEach(btn => {
         btn.addEventListener('click', () => {
-          const id = (btn as HTMLElement).dataset.id;
+          const id = (btn).dataset.id;
           title!.textContent = 'Edit Customer';
           fetch('/api/admin/travels/customers?id=' + id).then(r => r.json()).then(data => {
             const c = data.document || data;
-            fields.forEach(f => { (document.getElementById('form-' + f) as HTMLInputElement).value = c[f] || ''; });
-            (document.getElementById('form-id') as HTMLInputElement).value = c.id || '';
+            fields.forEach(f => { (document.getElementById('form-' + f)).value = c[f] || ''; });
+            (document.getElementById('form-id')).value = c.id || '';
             modal!.classList.remove('hidden');
           }).catch(() => {});
         });
@@ -124,9 +124,9 @@ const customers = customersResult.data || [];
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const id = (document.getElementById('form-id') as HTMLInputElement).value;
-        const body: any = {};
-        fields.forEach(f => { body[f] = (document.getElementById('form-' + f) as HTMLInputElement).value; });
+        const id = (document.getElementById('form-id')).value;
+        const body = {};
+        fields.forEach(f => { body[f] = (document.getElementById('form-' + f)).value; });
         const ep = id ? '/api/admin/travels/customers?id=' + id : '/api/admin/travels/customers';
         const method = id ? 'PATCH' : 'POST';
         fetch(ep, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(() => location.reload()).catch(() => {});

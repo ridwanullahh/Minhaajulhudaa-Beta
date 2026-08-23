@@ -9,7 +9,7 @@ const allResult = await lightbase.query('school_admission_applications', {
 const allApps = allResult.data || [];
 
 const statusCounts = { pending: 0, reviewed: 0, accepted: 0, rejected: 0 };
-allApps.forEach((app: any) => { if (statusCounts[app.status as keyof typeof statusCounts] !== undefined) statusCounts[app.status as keyof typeof statusCounts]++; });
+allApps.forEach((app) => { if (statusCounts[app.status as keyof typeof statusCounts] !== undefined) statusCounts[app.status as keyof typeof statusCounts]++; });
 ---
 
 <AdminLayout title="Admission Management" platform="school" section="admissions">
@@ -60,7 +60,7 @@ allApps.forEach((app: any) => { if (statusCounts[app.status as keyof typeof stat
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {allApps.map((app: any) => (
+          {allApps.map((app) => (
             <tr class="adm-row" data-status={app.status} style="border-top: 1px solid var(--color-border);">
               <td class="p-4 font-medium">{app.studentFirstName} {app.studentLastName}</td>
               <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{app.applicationId || app.id}</td>
@@ -99,13 +99,13 @@ allApps.forEach((app: any) => { if (statusCounts[app.status as keyof typeof stat
     </div>
   </div>
 
-  <script>
+  <script is:inline>
     // Filter
     document.querySelectorAll('.adm-filter').forEach(btn => {
       btn.addEventListener('click', () => {
         const status = btn.dataset.status;
         document.querySelectorAll('.adm-row').forEach(row => {
-          (row as HTMLElement).style.display = (status === 'all' || row.dataset.status === status) ? '' : 'none';
+          (row).style.display = (status === 'all' || row.dataset.status === status) ? '' : 'none';
         });
       });
     });
@@ -114,7 +114,7 @@ allApps.forEach((app: any) => { if (statusCounts[app.status as keyof typeof stat
     document.querySelectorAll('[data-update-status]').forEach(select => {
       select.addEventListener('change', async () => {
         const id = select.dataset.updateStatus;
-        const status = (select as HTMLSelectElement).value;
+        const status = (select).value;
         try {
           const res = await fetch('/api/admin/school/admissions', {
             method: 'PATCH', headers: { 'Content-Type': 'application/json' },

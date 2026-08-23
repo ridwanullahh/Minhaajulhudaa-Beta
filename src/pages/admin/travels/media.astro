@@ -5,7 +5,7 @@ import { lightbase } from '../../../lib/lightbase';
 const galleryResult = await lightbase.query('travels_gallery', { sort: '_created_at:desc', limit: 100 }).catch(() => ({ data: [] }));
 const allMedia = galleryResult.data || [];
 
-const categories = [...new Set(allMedia.map((m: any) => m.category).filter(Boolean))];
+const categories = [...new Set(allMedia.map((m) => m.category).filter(Boolean))];
 ---
 
 <AdminLayout title="Media" platform="travels" section="media">
@@ -23,14 +23,14 @@ const categories = [...new Set(allMedia.map((m: any) => m.category).filter(Boole
   {categories.length > 0 && (
     <div class="flex flex-wrap gap-2 mb-6">
       <a href="/admin/travels/media" class:list={['btn text-xs', 'btn-primary']}>All</a>
-      {categories.map((cat: string) => (
+      {categories.map((cat) => (
         <a href={`/admin/travels/media?category=${cat}`} class="btn btn-ghost text-xs">{cat}</a>
       ))}
     </div>
   )}
 
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    {allMedia.length > 0 ? allMedia.map((m: any) => (
+    {allMedia.length > 0 ? allMedia.map((m) => (
       <div class="card overflow-hidden group relative">
         <div class="aspect-square relative">
           {m.imageUrl ? <img src={m.imageUrl} alt={m.title || ''} class="w-full h-full object-cover" loading="lazy" /> : (
@@ -89,7 +89,7 @@ const categories = [...new Set(allMedia.map((m: any) => m.category).filter(Boole
     </div>
   </div>
 
-  <script>
+  <script is:inline>
     const modal = document.getElementById('modal');
     document.getElementById('btn-new-media')!.addEventListener('click', () => modal!.classList.remove('hidden'));
     document.getElementById('modal-close')!.addEventListener('click', () => modal!.classList.add('hidden'));
@@ -98,7 +98,7 @@ const categories = [...new Set(allMedia.map((m: any) => m.category).filter(Boole
 
     document.querySelectorAll('.btn-delete').forEach(btn => {
       btn.addEventListener('click', () => {
-        const id = (btn as HTMLElement).dataset.id;
+        const id = (btn).dataset.id;
         showConfirm('Delete this media item?', function() {
           fetch('/api/admin/travels/content?collection=travels_gallery&id=' + id, { method: 'DELETE' }).then(() => location.reload()).catch(() => {});
         });
@@ -108,10 +108,10 @@ const categories = [...new Set(allMedia.map((m: any) => m.category).filter(Boole
     document.getElementById('modal-form')!.addEventListener('submit', (e) => {
       e.preventDefault();
       const body = {
-        title: (document.getElementById('form-title') as HTMLInputElement).value,
-        imageUrl: (document.getElementById('form-imageUrl') as HTMLInputElement).value,
-        category: (document.getElementById('form-category') as HTMLSelectElement).value,
-        alt: (document.getElementById('form-alt') as HTMLInputElement).value,
+        title: (document.getElementById('form-title')).value,
+        imageUrl: (document.getElementById('form-imageUrl')).value,
+        category: (document.getElementById('form-category')).value,
+        alt: (document.getElementById('form-alt')).value,
       };
       fetch('/api/admin/travels/content?collection=travels_gallery', {
         method: 'POST',

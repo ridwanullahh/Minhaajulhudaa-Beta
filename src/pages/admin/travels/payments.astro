@@ -18,7 +18,7 @@ const [totalPaid, pendingPayments] = await Promise.all([
   lightbase.count('travels_payments', { field: 'status', op: 'eq', value: 'pending' }).catch(() => 0),
 ]);
 
-const statusBadge = (status: string) => {
+const statusBadge = (status) => {
   switch (status) {
     case 'completed': return 'badge badge-primary';
     case 'pending': return 'badge badge-accent';
@@ -69,7 +69,7 @@ const statusBadge = (status: string) => {
           <th class="text-center p-4 font-medium">Status</th>
         </tr></thead>
         <tbody>
-          {payments.length > 0 ? payments.map((p: any) => (
+          {payments.length > 0 ? payments.map((p) => (
             <tr style="border-bottom: 1px solid var(--color-border);">
               <td class="p-4 font-medium">{p.reference || p.id?.slice(0,8)}</td>
               <td class="p-4 hidden sm:table-cell" style="color: var(--color-muted);">{p.bookingNumber || p.bookingId?.slice(0,8) || '-'}</td>
@@ -124,7 +124,7 @@ const statusBadge = (status: string) => {
     </div>
   </div>
 
-  <script>
+  <script is:inline>
     const modal = document.getElementById('modal');
     document.getElementById('btn-new-payment')!.addEventListener('click', () => modal!.classList.remove('hidden'));
     document.getElementById('modal-close')!.addEventListener('click', () => modal!.classList.add('hidden'));
@@ -133,11 +133,11 @@ const statusBadge = (status: string) => {
     document.getElementById('payment-form')!.addEventListener('submit', (e) => {
       e.preventDefault();
       const body = {
-        bookingId: (document.getElementById('f-bookingId') as HTMLInputElement).value,
-        amount: parseFloat((document.getElementById('f-amount') as HTMLInputElement).value) || 0,
-        method: (document.getElementById('f-method') as HTMLSelectElement).value,
-        paymentType: (document.getElementById('f-paymentType') as HTMLSelectElement).value,
-        reference: (document.getElementById('f-reference') as HTMLInputElement).value,
+        bookingId: (document.getElementById('f-bookingId')).value,
+        amount: parseFloat((document.getElementById('f-amount')).value) || 0,
+        method: (document.getElementById('f-method')).value,
+        paymentType: (document.getElementById('f-paymentType')).value,
+        reference: (document.getElementById('f-reference')).value,
         status: 'completed',
         paidAt: new Date().toISOString(),
       };

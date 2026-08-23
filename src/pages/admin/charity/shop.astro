@@ -88,7 +88,7 @@ const csrfToken = generateCSRFToken();
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {allProducts.map((p: any) => (
+          {allProducts.map((p) => (
             <tr style="border-top: 1px solid var(--color-border);">
               <td class="p-4">
                 <div class="font-medium">{p.title}</div>
@@ -112,27 +112,27 @@ const csrfToken = generateCSRFToken();
     {allProducts.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No products yet. Add your first product above.</div>}
   </div>
 
-  <script>
+  <script is:inline>
     const toggleBtn = document.getElementById('toggle-form-btn');
     const cancelBtn = document.getElementById('cancel-form-btn');
     const createForm = document.getElementById('create-form');
     const formTitle = document.getElementById('form-title');
     toggleBtn?.addEventListener('click', () => { createForm?.classList.toggle('hidden'); formTitle!.textContent = 'Create New Product'; });
-    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id') as HTMLInputElement).value = ''; (document.getElementById('product-form') as HTMLFormElement).reset(); });
+    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id')).value = ''; (document.getElementById('product-form')).reset(); });
 
     // Edit
     document.querySelectorAll('[data-edit-product]').forEach(btn => {
       btn.addEventListener('click', () => {
         createForm?.classList.remove('hidden');
         formTitle!.textContent = 'Edit Product';
-        (document.getElementById('edit-id') as HTMLInputElement).value = btn.getAttribute('data-edit-product') || '';
-        (document.getElementById('p-title') as HTMLInputElement).value = btn.getAttribute('data-title') || '';
-        (document.getElementById('p-category') as HTMLSelectElement).value = btn.getAttribute('data-category') || 'merchandise';
-        (document.getElementById('p-desc') as HTMLTextAreaElement).value = btn.getAttribute('data-desc') || '';
-        (document.getElementById('p-price') as HTMLInputElement).value = btn.getAttribute('data-price') || '0';
-        (document.getElementById('p-stock') as HTMLInputElement).value = btn.getAttribute('data-stock') || '0';
-        (document.getElementById('p-image') as HTMLInputElement).value = btn.getAttribute('data-image') || '';
-        (document.getElementById('p-status') as HTMLSelectElement).value = btn.getAttribute('data-status') || 'active';
+        (document.getElementById('edit-id')).value = btn.getAttribute('data-edit-product') || '';
+        (document.getElementById('p-title')).value = btn.getAttribute('data-title') || '';
+        (document.getElementById('p-category')).value = btn.getAttribute('data-category') || 'merchandise';
+        (document.getElementById('p-desc')).value = btn.getAttribute('data-desc') || '';
+        (document.getElementById('p-price')).value = btn.getAttribute('data-price') || '0';
+        (document.getElementById('p-stock')).value = btn.getAttribute('data-stock') || '0';
+        (document.getElementById('p-image')).value = btn.getAttribute('data-image') || '';
+        (document.getElementById('p-status')).value = btn.getAttribute('data-status') || 'active';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
@@ -140,11 +140,11 @@ const csrfToken = generateCSRFToken();
     // Submit
     document.getElementById('product-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const fd = new FormData(e.target);
+      const body = {};
       fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'price' || k === 'stockQuantity' ? Number(v) : v; });
       body.slug = body.title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
-      const editId = (document.getElementById('edit-id') as HTMLInputElement).value;
+      const editId = (document.getElementById('edit-id')).value;
       try {
         const url = editId ? `/api/admin/charity/shop?id=${editId}` : '/api/admin/charity/shop';
         const method = editId ? 'PATCH' : 'POST';

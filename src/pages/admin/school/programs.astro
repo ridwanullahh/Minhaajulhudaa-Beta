@@ -57,7 +57,7 @@ const programs = result.data || [];
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {programs.map((p: any) => (
+          {programs.map((p) => (
             <tr style="border-top: 1px solid var(--color-border);">
               <td class="p-4 font-medium">{p.title}</td>
               <td class="p-4 hidden md:table-cell"><span class="badge badge-primary">{p.category ? p.category.replace(/-/g, ' ') : '-'}</span></td>
@@ -75,23 +75,23 @@ const programs = result.data || [];
     {programs.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No programs created yet.</div>}
   </div>
 
-  <script>
+  <script is:inline>
     const toggleBtn = document.getElementById('toggle-form-btn');
     const cancelBtn = document.getElementById('cancel-form-btn');
     const createForm = document.getElementById('create-form');
     toggleBtn?.addEventListener('click', () => createForm?.classList.toggle('hidden'));
     cancelBtn?.addEventListener('click', () => createForm?.classList.add('hidden'));
 
-    const titleInput = document.getElementById('p-title') as HTMLInputElement;
-    const slugInput = document.getElementById('p-slug') as HTMLInputElement;
+    const titleInput = document.getElementById('p-title');
+    const slugInput = document.getElementById('p-slug');
     titleInput?.addEventListener('input', () => {
       slugInput.value = titleInput.value.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
     });
 
     document.getElementById('program-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const fd = new FormData(e.target);
+      const body = {};
       fd.forEach((v, k) => { body[k] = v; });
       try {
         const res = await fetch('/api/admin/school/content', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-collection': 'school_programs' }, body: JSON.stringify(body) });

@@ -134,7 +134,7 @@ const courseMap = new Map<string, string>((courses as any[]).map((c: any) => [c.
     document.getElementById('quiz-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const body = {};
       fd.forEach((v, k) => {
         if (k === 'isPublished') { body[k] = (v as string) === 'on'; return; }
         if (k === 'timeLimit' || k === 'passingScore') { body[k] = parseFloat(v as string) || 0; return; }
@@ -183,7 +183,7 @@ const courseMap = new Map<string, string>((courses as any[]).map((c: any) => [c.
     document.getElementById('edit-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const body = {};
       fd.forEach((v, k) => {
         if (k === 'isPublished') { body[k] = (v as string) === 'on'; return; }
         if (k === 'timeLimit' || k === 'passingScore') { body[k] = parseFloat(v as string) || 0; return; }

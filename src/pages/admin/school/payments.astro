@@ -30,7 +30,7 @@ const revenueAgg = await lightbase.aggregate('school_payments', {
       <div class="text-xs" style="color: var(--color-muted);">Invoices</div>
     </div>
     <div class="card p-4">
-      <div class="text-2xl font-extrabold" style="color: var(--color-accent);">{allInvoices.filter((i: any) => i.status === 'unpaid' || i.status === 'pending').length}</div>
+      <div class="text-2xl font-extrabold" style="color: var(--color-accent);">{allInvoices.filter((i) => i.status === 'unpaid' || i.status === 'pending').length}</div>
       <div class="text-xs" style="color: var(--color-muted);">Outstanding</div>
     </div>
   </div>
@@ -52,7 +52,7 @@ const revenueAgg = await lightbase.aggregate('school_payments', {
             <th class="p-4 font-medium text-right">Status</th>
           </tr></thead>
           <tbody>
-            {allPayments.map((p: any) => (
+            {allPayments.map((p) => (
               <tr style="border-top: 1px solid var(--color-border);">
                 <td class="p-4 font-medium">{p.reference || p.id}</td>
                 <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{p.studentName || '-'}</td>
@@ -80,7 +80,7 @@ const revenueAgg = await lightbase.aggregate('school_payments', {
             <th class="p-4 font-medium text-right">Status</th>
           </tr></thead>
           <tbody>
-            {allInvoices.map((inv: any) => (
+            {allInvoices.map((inv) => (
               <tr style="border-top: 1px solid var(--color-border);">
                 <td class="p-4 font-medium">{inv.invoiceNumber || inv.id}</td>
                 <td class="p-4 hidden md:table-cell" style="color: var(--color-muted);">{inv.studentName || '-'}</td>
@@ -96,7 +96,7 @@ const revenueAgg = await lightbase.aggregate('school_payments', {
     </div>
   </div>
 
-  <script>
+  <script is:inline>
     document.querySelectorAll('.pay-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.pay-tab').forEach(t => { t.style.borderColor = 'transparent'; t.style.color = 'var(--color-muted)'; });

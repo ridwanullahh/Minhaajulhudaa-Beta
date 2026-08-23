@@ -58,7 +58,7 @@ const csrfToken = generateCSRFToken();
         <div class="flex items-end gap-2 pb-1">
           <label class="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" name="isUrgent" class="w-4 h-4 rounded" style="accent-color: var(--color-primary);" />
-            <span class="text-sm font-medium">Mark as Urgent</span>
+            <span class="text-sm font-medium">Mark</span>
           </label>
         </div>
       </div>
@@ -105,7 +105,7 @@ const csrfToken = generateCSRFToken();
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {allCampaigns.map((c: any) => {
+          {allCampaigns.map((c) => {
             const pct = c.goalAmount ? Math.round(((c.raisedAmount || 0) / c.goalAmount) * 100) : 0;
             return (
               <tr style="border-top: 1px solid var(--color-border);">
@@ -138,29 +138,29 @@ const csrfToken = generateCSRFToken();
     {allCampaigns.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No campaigns yet. Create your first campaign above.</div>}
   </div>
 
-  <script>
+  <script is:inline>
     const toggleBtn = document.getElementById('toggle-form-btn');
     const cancelBtn = document.getElementById('cancel-form-btn');
     const createForm = document.getElementById('create-form');
     const formTitle = document.getElementById('form-title');
     toggleBtn?.addEventListener('click', () => { createForm?.classList.toggle('hidden'); formTitle!.textContent = 'Create New Campaign'; });
-    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id') as HTMLInputElement).value = ''; (document.getElementById('campaign-form') as HTMLFormElement).reset(); });
+    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id')).value = ''; (document.getElementById('campaign-form')).reset(); });
 
     // Edit
     document.querySelectorAll('[data-edit-campaign]').forEach(btn => {
       btn.addEventListener('click', () => {
         createForm?.classList.remove('hidden');
         formTitle!.textContent = 'Edit Campaign';
-        (document.getElementById('edit-id') as HTMLInputElement).value = btn.getAttribute('data-edit-campaign') || '';
-        (document.getElementById('c-title') as HTMLInputElement).value = btn.getAttribute('data-title') || '';
-        (document.getElementById('c-category') as HTMLSelectElement).value = btn.getAttribute('data-category') || 'zakaat';
-        (document.getElementById('c-goal') as HTMLInputElement).value = btn.getAttribute('data-goal') || '';
-        (document.getElementById('c-deadline') as HTMLInputElement).value = btn.getAttribute('data-deadline') || '';
-        (document.getElementById('c-short') as HTMLTextAreaElement).value = btn.getAttribute('data-short') || '';
-        (document.getElementById('c-desc') as HTMLTextAreaElement).value = btn.getAttribute('data-desc') || '';
-        (document.getElementById('c-image') as HTMLInputElement).value = btn.getAttribute('data-image') || '';
-        (document.getElementById('c-status') as HTMLSelectElement).value = btn.getAttribute('data-status') || 'active';
-        const urgentCheckbox = document.querySelector('[name=isUrgent]') as HTMLInputElement;
+        (document.getElementById('edit-id')).value = btn.getAttribute('data-edit-campaign') || '';
+        (document.getElementById('c-title')).value = btn.getAttribute('data-title') || '';
+        (document.getElementById('c-category')).value = btn.getAttribute('data-category') || 'zakaat';
+        (document.getElementById('c-goal')).value = btn.getAttribute('data-goal') || '';
+        (document.getElementById('c-deadline')).value = btn.getAttribute('data-deadline') || '';
+        (document.getElementById('c-short')).value = btn.getAttribute('data-short') || '';
+        (document.getElementById('c-desc')).value = btn.getAttribute('data-desc') || '';
+        (document.getElementById('c-image')).value = btn.getAttribute('data-image') || '';
+        (document.getElementById('c-status')).value = btn.getAttribute('data-status') || 'active';
+        const urgentCheckbox = document.querySelector('[name=isUrgent]');
         if (urgentCheckbox) urgentCheckbox.checked = btn.getAttribute('data-urgent') === 'true';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
@@ -169,11 +169,11 @@ const csrfToken = generateCSRFToken();
     // Submit
     document.getElementById('campaign-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const fd = new FormData(e.target);
+      const body = {};
       fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'isUrgent' ? (v as string === 'on') : (k === 'goalAmount' ? Number(v) : v); });
       body.slug = body.title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
-      const editId = (document.getElementById('edit-id') as HTMLInputElement).value;
+      const editId = (document.getElementById('edit-id')).value;
       try {
         const url = editId ? `/api/admin/charity/campaigns?id=${editId}` : '/api/admin/charity/campaigns';
         const method = editId ? 'PATCH' : 'POST';

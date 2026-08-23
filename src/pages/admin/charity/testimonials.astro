@@ -95,7 +95,7 @@ const csrfToken = generateCSRFToken();
           <th class="p-4 font-medium text-right">Actions</th>
         </tr></thead>
         <tbody>
-          {allTestimonials.map((t: any) => {
+          {allTestimonials.map((t) => {
             const stars = Array.from({ length: 5 }, (_, i) => {
               const filled = i < (t.rating || 0);
               return `<svg width="14" height="14" viewBox="0 0 24 24" fill="${filled ? 'var(--color-primary)' : 'none'}" stroke="${filled ? 'var(--color-primary)' : 'var(--color-muted)'}" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
@@ -123,28 +123,28 @@ const csrfToken = generateCSRFToken();
     {allTestimonials.length === 0 && <div class="p-8 text-center text-sm" style="color: var(--color-muted);">No testimonials yet. Add your first testimonial above.</div>}
   </div>
 
-  <script>
+  <script is:inline>
     const toggleBtn = document.getElementById('toggle-form-btn');
     const cancelBtn = document.getElementById('cancel-form-btn');
     const createForm = document.getElementById('create-form');
     const formTitle = document.getElementById('form-title');
     toggleBtn?.addEventListener('click', () => { createForm?.classList.toggle('hidden'); formTitle!.textContent = 'Create New Testimonial'; });
-    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id') as HTMLInputElement).value = ''; (document.getElementById('testimonial-form') as HTMLFormElement).reset(); });
+    cancelBtn?.addEventListener('click', () => { createForm?.classList.add('hidden'); (document.getElementById('edit-id')).value = ''; (document.getElementById('testimonial-form')).reset(); });
 
     // Edit
     document.querySelectorAll('[data-edit-testimonial]').forEach(btn => {
       btn.addEventListener('click', () => {
         createForm?.classList.remove('hidden');
         formTitle!.textContent = 'Edit Testimonial';
-        (document.getElementById('edit-id') as HTMLInputElement).value = btn.getAttribute('data-edit-testimonial') || '';
-        (document.getElementById('t-name') as HTMLInputElement).value = btn.getAttribute('data-name') || '';
-        (document.getElementById('t-title') as HTMLInputElement).value = btn.getAttribute('data-title') || '';
-        (document.getElementById('t-content') as HTMLTextAreaElement).value = btn.getAttribute('data-content') || '';
-        (document.getElementById('t-rating') as HTMLSelectElement).value = btn.getAttribute('data-rating') || '5';
-        (document.getElementById('t-photo') as HTMLInputElement).value = btn.getAttribute('data-photo') || '';
-        (document.getElementById('t-status') as HTMLSelectElement).value = btn.getAttribute('data-status') || 'draft';
-        (document.getElementById('t-platform') as HTMLInputElement).value = btn.getAttribute('data-platform') || '';
-        const featuredCheckbox = document.querySelector('[name=isFeatured]') as HTMLInputElement;
+        (document.getElementById('edit-id')).value = btn.getAttribute('data-edit-testimonial') || '';
+        (document.getElementById('t-name')).value = btn.getAttribute('data-name') || '';
+        (document.getElementById('t-title')).value = btn.getAttribute('data-title') || '';
+        (document.getElementById('t-content')).value = btn.getAttribute('data-content') || '';
+        (document.getElementById('t-rating')).value = btn.getAttribute('data-rating') || '5';
+        (document.getElementById('t-photo')).value = btn.getAttribute('data-photo') || '';
+        (document.getElementById('t-status')).value = btn.getAttribute('data-status') || 'draft';
+        (document.getElementById('t-platform')).value = btn.getAttribute('data-platform') || '';
+        const featuredCheckbox = document.querySelector('[name=isFeatured]');
         if (featuredCheckbox) featuredCheckbox.checked = btn.getAttribute('data-featured') === 'true';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
@@ -153,11 +153,11 @@ const csrfToken = generateCSRFToken();
     // Submit
     document.getElementById('testimonial-form')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(e.target as HTMLFormElement);
-      const body: Record<string, any> = {};
+      const fd = new FormData(e.target);
+      const body = {};
       fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'rating' ? Number(v) : k === 'isFeatured' ? (v as string === 'on') : v; });
       body.slug = body.name.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
-      const editId = (document.getElementById('edit-id') as HTMLInputElement).value;
+      const editId = (document.getElementById('edit-id')).value;
       try {
         const url = editId ? `/api/admin/charity/testimonials?id=${editId}` : '/api/admin/charity/testimonials';
         const method = editId ? 'PATCH' : 'POST';

@@ -55,14 +55,14 @@ const settings = settingsResult || {};
     </div>
   </div>
 
-  <script>
-    function saveSettings(prefix: string, key: string) {
-      const form = document.getElementById(prefix + '-form') as HTMLFormElement;
+  <script is:inline>
+    function saveSettings(prefix, key) {
+      const form = document.getElementById(prefix + '-form');
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const body: any = { key };
+        const body = { key };
         form.querySelectorAll('input, select, textarea').forEach((el) => {
-          const input = el as HTMLInputElement;
+          const input = el;
           if (input.type === 'checkbox') body[input.id.replace(prefix + '-', '')] = input.checked;
           else if (input.type === 'number') body[input.id.replace(prefix + '-', '')] = parseFloat(input.value) || 0;
           else body[input.id.replace(prefix + '-', '')] = input.value;
@@ -72,7 +72,7 @@ const settings = settingsResult || {};
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
         }).then(r => r.json()).then(() => {
-          const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+          const btn = form.querySelector('button[type=submit]');
           btn.textContent = 'Saved!';
           setTimeout(() => { btn.textContent = 'Save Changes'; }, 2000);
         }).catch(() => {});

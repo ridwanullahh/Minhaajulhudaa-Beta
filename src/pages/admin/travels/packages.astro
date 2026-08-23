@@ -5,7 +5,7 @@ import { lightbase } from '../../../lib/lightbase';
 const packages = await lightbase.query('travels_packages', { sort: 'isFeatured:desc,_created_at:desc', limit: 100 }).catch(() => ({ data: [] }));
 const allPackages = packages.data || [];
 
-const statusBadge = (status: string) => {
+const statusBadge = (status) => {
   switch (status) {
     case 'active': return 'badge badge-primary';
     case 'draft': return 'badge';
@@ -44,7 +44,7 @@ const statusBadge = (status: string) => {
           <th class="text-right p-4 font-medium">Actions</th>
         </tr></thead>
         <tbody>
-          {allPackages.length > 0 ? allPackages.map((pkg: any) => (
+          {allPackages.length > 0 ? allPackages.map((pkg) => (
             <tr style="border-bottom: 1px solid var(--color-border);">
               <td class="p-4">
                 <div class="font-medium">{pkg.title || '-'}</div>
@@ -146,18 +146,18 @@ const statusBadge = (status: string) => {
     </div>
   </div>
 
-  <script>
+  <script is:inline>
     (function() {
       const fields = ['title','type','category','tier','basePrice','destination','duration','startDate','availableSlots','status','imageUrl','shortDescription','description','inclusions','exclusions'];
       const modal = document.getElementById('modal');
-      const form = document.getElementById('modal-form') as HTMLFormElement;
+      const form = document.getElementById('modal-form');
       const title = document.getElementById('modal-title');
       let endpoint = '';
 
-      function openModal(isEdit: boolean, data?: any) {
+      function openModal(isEdit, data?: any) {
         title!.textContent = isEdit ? 'Edit Package' : 'New Package';
         fields.forEach(f => {
-          const el = document.getElementById('form-' + f) as HTMLInputElement;
+          const el = document.getElementById('form-' + f);
           if (el) {
             if (f === 'inclusions' || f === 'exclusions') {
               el.value = Array.isArray(data?.[f]) ? data[f].join(', ') : (data?.[f] || '');
@@ -166,23 +166,23 @@ const statusBadge = (status: string) => {
             }
           }
         });
-        (document.getElementById('form-id') as HTMLInputElement).value = data?.id || '';
+        (document.getElementById('form-id')).value = data?.id || '';
         modal!.classList.remove('hidden');
       }
 
       document.getElementById('btn-new-package')!.addEventListener('click', () => openModal(false));
       document.querySelectorAll('.btn-edit').forEach(btn => {
         btn.addEventListener('click', () => {
-          const id = (btn as HTMLElement).dataset.id;
-          endpoint = (btn as HTMLElement).dataset.endpoint!;
+          const id = (btn).dataset.id;
+          endpoint = (btn).dataset.endpoint!;
           fetch(endpoint + '?id=' + id).then(r => r.json()).then(data => openModal(true, data.document || data)).catch(() => {});
         });
       });
 
       document.querySelectorAll('.btn-delete').forEach(btn => {
         btn.addEventListener('click', () => {
-          const id = (btn as HTMLElement).dataset.id;
-          const ep = (btn as HTMLElement).dataset.endpoint;
+          const id = (btn).dataset.id;
+          const ep = (btn).dataset.endpoint;
           showConfirm('Delete this package?', function() {
             fetch(ep + '?id=' + id, { method: 'DELETE' }).then(() => location.reload()).catch(() => {});
           });
@@ -195,10 +195,10 @@ const statusBadge = (status: string) => {
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const id = (document.getElementById('form-id') as HTMLInputElement).value;
-        const body: any = {};
+        const id = (document.getElementById('form-id')).value;
+        const body = {};
         fields.forEach(f => {
-          const el = document.getElementById('form-' + f) as HTMLInputElement;
+          const el = document.getElementById('form-' + f);
           if (el) {
             if (f === 'basePrice' || f === 'availableSlots') body[f] = parseFloat(el.value) || 0;
             else if (f === 'inclusions' || f === 'exclusions') body[f] = el.value.split(',').map(s => s.trim()).filter(Boolean);
