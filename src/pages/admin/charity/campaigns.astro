@@ -171,7 +171,7 @@ const csrfToken = generateCSRFToken();
       e.preventDefault();
       const fd = new FormData(e.target);
       const body = {};
-      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'isUrgent' ? (v as string === 'on') : (k === 'goalAmount' ? Number(v) : v); });
+      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = k === 'isUrgent' ? (v === 'on') : (k === 'goalAmount' ? Number(v) : v); });
       body.slug = body.title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_]+/g, '-').replace(/^-+|-+$/g, '');
       const editId = (document.getElementById('edit-id')).value;
       try {

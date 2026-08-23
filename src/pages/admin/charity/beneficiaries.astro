@@ -132,7 +132,7 @@ const csrfToken = generateCSRFToken();
       e.preventDefault();
       const fd = new FormData(e.target);
       const body = {};
-      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = v as string; });
+      fd.forEach((v, k) => { if (k !== 'csrfToken') body[k] = v; });
       body.verificationStatus = 'pending';
       try {
         const res = await fetch('/api/admin/charity/volunteers', {

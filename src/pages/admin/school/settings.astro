@@ -53,7 +53,7 @@ const settings = (result.data || [{}])[0] || {};
       e.preventDefault();
       const fd = new FormData(e.target);
       const body = {};
-      fd.forEach((v, k) => { body[k] = v as string; });
+      fd.forEach((v, k) => { body[k] = v; });
       try {
         const res = await fetch('/api/admin/school/content', { method: 'PUT', headers: { 'Content-Type': 'application/json', 'x-collection': 'school_settings' }, body: JSON.stringify(body) });
         if (res.ok) showToast('Settings saved.', 'error'); else { const err = await res.json(); showToast(err.error || 'Failed', 'error'); }

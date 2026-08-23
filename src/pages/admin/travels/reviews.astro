@@ -137,7 +137,7 @@ const statusBadge = (status) => {
       });
     }
 
-    (window as any).openResponseModal = function(btn) {
+    (window).openResponseModal = function(btn) {
       (document.getElementById('r-id')).value = btn.dataset.id || '';
       (document.getElementById('r-response')).value = '';
       document.getElementById('response-modal')!.classList.remove('hidden');

@@ -150,8 +150,8 @@ const csrfToken = generateCSRFToken();
       const body = {};
       fd.forEach((v, k) => {
         if (k === 'csrfToken' || k === 'editId') return;
-        if (k === 'tags') { body[k] = (v as string).split(',').map(t => t.trim()).filter(Boolean); }
-        else { body[k] = v as string; }
+        if (k === 'tags') { body[k] = (v).split(',').map(t => t.trim()).filter(Boolean); }
+        else { body[k] = v; }
       });
       body.readingTimeMinutes = String(Math.max(1, Math.ceil((body.content || '').split(/\s+/).length / 200)));
       if (!body.publishedAt && body.status === 'published') body.publishedAt = new Date().toISOString();
