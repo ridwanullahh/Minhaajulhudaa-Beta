@@ -61,9 +61,8 @@ const pagesConfig = {
   compatibility_flags: config.compatibility_flags || ['nodejs_compat'],
   pages_build_output_dir: config.pages_build_output_dir || '/home/z/my-project/dist',
   vars: {
-    DB_FALLBACK_ENABLED: 'true',
-    DB_FALLBACK_ONLY: 'true',
-    SITE_URL: 'https://minhaajulhudaa.pages.dev',
+    DB_FALLBACK_ENABLED: 'false',
+    DB_FALLBACK_ONLY: 'false',
   },
   jsx_factory: config.jsx_factory,
   jsx_fragment: config.jsx_fragment,
