@@ -27,6 +27,8 @@ const canonicalUrl = canonical || Astro.url.href;
 const ogImage = image.startsWith('http') ? image : new URL(image, Astro.site || Astro.url.origin).href;
 ---
 
+import PageLoader from '../components/PageLoader.astro';
+
 <!doctype html>
 <html lang="en" data-theme="light">
   <head>
@@ -85,6 +87,7 @@ const ogImage = image.startsWith('http') ? image : new URL(image, Astro.site || 
     )}
   </head>
   <body>
+  <PageLoader />
     <!-- Skip to content for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <slot />

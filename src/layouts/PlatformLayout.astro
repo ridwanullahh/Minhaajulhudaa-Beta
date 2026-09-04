@@ -18,6 +18,7 @@ interface Props {
 const { title, description, platform, canonical, jsonLd } = Astro.props;
 ---
 
+
 <BaseLayout title={title} description={description} platform={platform} canonical={canonical} jsonLd={jsonLd}>
   <Header platform={platform} currentPath={Astro.url.pathname} />
   <main id="main-content" class="min-h-screen pb-20 lg:pb-0">
