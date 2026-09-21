@@ -3,6 +3,7 @@
  * BaseLayout - HTML shell with theme system, fonts, and meta tags
  */
 import '../styles/global.css';
+import PageLoader from '../components/PageLoader.astro';
 
 interface Props {
   title?: string;
@@ -26,8 +27,6 @@ const fullTitle = title.includes('Minhaajulhudaa') ? title : `${title} | Minhaaj
 const canonicalUrl = canonical || Astro.url.href;
 const ogImage = image.startsWith('http') ? image : new URL(image, Astro.site || Astro.url.origin).href;
 ---
-
-import PageLoader from '../components/PageLoader.astro';
 
 <!doctype html>
 <html lang="en" data-theme="light">
