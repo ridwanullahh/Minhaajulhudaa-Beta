@@ -269,6 +269,69 @@ class LightbaseClient {
     });
   }
 
+  // ─── BismiLLAH (2026-09-27, THE RENDER 500 ROOT FIX) ─────────────────────
+  // Live production (the CF Pages host) answered 500 on /masjid, /school,
+  // /charity and /travels because every SSR page awaits Lightbase reads at
+  // render time with no error handling: one unconfigured/failed query
+  // rejected the whole Promise.all and Astro surfaced a bare 500. Reads
+  // that merely DISPLAY data must fail-soft: an empty result never
+  // justifies a dead page. (Mutating/API routes keep the throwing client.)
+
+  /** Fail-soft query: returns an empty result set on any failure. */
+  async safeQuery<T = LightbaseDocument>(
+    collection: string,
+    params: QueryParams = {}
+  ): Promise<QueryResult<T>> {
+    try {
+      return await this.query<T>(collection, params);
+    } catch (err: any) {
+      console.warn(`[lightbase] safeQuery(${collection}) failed: ${err?.message}`);
+      return { data: [] as T[], total: 0 };
+    }
+  }
+
+  /** Fail-soft findOne: returns null on any failure. */
+  async safeFindOne<T = LightbaseDocument>(
+    collection: string,
+    filter: any
+  ): Promise<T | null> {
+    try {
+      return await this.findOne<T>(collection, filter);
+    } catch (err: any) {
+      console.warn(`[lightbase] safeFindOne(${collection}) failed: ${err?.message}`);
+      return null;
+    }
+  }
+
+  /** Fail-soft findMany: returns [] on any failure. */
+  async safeFindMany<T = LightbaseDocument>(
+    collection: string,
+    filter: any,
+    options: { sort?: string; limit?: number } = {}
+  ): Promise<T[]> {
+    try {
+      return await this.findMany<T>(collection, filter, options);
+    } catch (err: any) {
+      console.warn(`[lightbase] safeFindMany(${collection}) failed: ${err?.message}`);
+      return [] as T[];
+    }
+  }
+
+  /** Fail-soft list: returns an empty result set on any failure. */
+  async safeList<T = LightbaseDocument>(
+    collection: string,
+    limit = 25,
+    offset = 0,
+    sort?: string
+  ): Promise<QueryResult<T>> {
+    try {
+      return await this.list<T>(collection, limit, offset, sort);
+    } catch (err: any) {
+      console.warn(`[lightbase] safeList(${collection}) failed: ${err?.message}`);
+      return { data: [] as T[], total: 0 };
+    }
+  }
+
   // Convenience: find one by filter
   async findOne<T = LightbaseDocument>(
     collection: string,

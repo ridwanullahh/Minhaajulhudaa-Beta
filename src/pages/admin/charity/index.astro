@@ -8,12 +8,12 @@ const [donationsAgg, activeCampaigns, allCampaigns, volunteerCount, pendingVolun
     aggregations: [{ field: 'amount', op: 'sum', alias: 'totalDonations' }],
   }).catch(() => ({ totalDonations: 0 })),
   lightbase.count('charity_campaigns', { field: 'status', op: 'eq', value: 'active' }),
-  lightbase.query('charity_campaigns', { sort: 'createdAt:desc', limit: 5 }),
+  lightbase.safeQuery('charity_campaigns', { sort: 'createdAt:desc', limit: 5 }),
   lightbase.count('charity_volunteers'),
   lightbase.count('charity_volunteers', { field: 'status', op: 'eq', value: 'pending' }),
   lightbase.count('charity_beneficiaries'),
-  lightbase.query('charity_donations', { sort: 'createdAt:desc', limit: 5 }),
-  lightbase.query('charity_volunteers', { sort: 'createdAt:desc', limit: 5 }),
+  lightbase.safeQuery('charity_donations', { sort: 'createdAt:desc', limit: 5 }),
+  lightbase.safeQuery('charity_volunteers', { sort: 'createdAt:desc', limit: 5 }),
 ]);
 
 const stats = [

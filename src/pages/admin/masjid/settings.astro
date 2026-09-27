@@ -4,7 +4,7 @@ import { lightbase } from '../../../lib/lightbase';
 
 let settings: any = null;
 try {
-  settings = await lightbase.findOne('masjid_settings', {});
+  settings = await lightbase.safeFindOne('masjid_settings', {});
 } catch {}
 ---
 

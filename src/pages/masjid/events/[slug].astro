@@ -7,7 +7,7 @@ const { slug } = Astro.params;
 
 let event: any = null;
 try {
-  event = await lightbase.findOne('masjid_events', { field: 'slug', op: 'eq', value: slug });
+  event = await lightbase.safeFindOne('masjid_events', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[masjid/events/[slug].astro] fetch error:', err);
 }

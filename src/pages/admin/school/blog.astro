@@ -4,7 +4,7 @@ import { lightbase } from '../../../lib/lightbase';
 import { generateCSRFToken } from '../../../lib/utils';
 import { slugify } from '../../../lib/utils';
 
-const posts = await lightbase.query('school_blog_posts', { sort: 'publishedAt:desc', limit: 100 });
+const posts = await lightbase.safeQuery('school_blog_posts', { sort: 'publishedAt:desc', limit: 100 });
 const allPosts = posts.data || [];
 const csrfToken = generateCSRFToken();
 ---

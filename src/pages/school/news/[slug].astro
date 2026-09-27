@@ -9,7 +9,7 @@ const { slug } = Astro.params;
 
 let post: any = null;
 try {
-  post = await lightbase.findOne('school_blog_posts', { and: [{ field: 'status', op: 'eq', value: "published" }, { field: 'slug', op: 'eq', value: slug }] });
+  post = await lightbase.safeFindOne('school_blog_posts', { and: [{ field: 'status', op: 'eq', value: "published" }, { field: 'slug', op: 'eq', value: slug }] });
 } catch (err) {
   console.error('[school/news/[slug].astro] fetch error:', err);
 }
@@ -21,7 +21,7 @@ if (!post) {
 
 let relatedData: any[] = [];
 try {
-  const related = await lightbase.query('school_blog_posts', {
+  const related = await lightbase.safeQuery('school_blog_posts', {
     filter: { and: [
       { field: 'status', op: 'eq', value: 'published' },
       { field: 'category', op: 'eq', value: post.category },

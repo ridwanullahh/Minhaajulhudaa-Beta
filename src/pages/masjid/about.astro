@@ -2,8 +2,8 @@
 import PlatformLayout from '../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../lib/lightbase';
 
-const page = await lightbase.findOne('masjid_pages', { field: 'slug', op: 'eq', value: 'about' });
-const imams = await lightbase.query('masjid_imams', { filter: { field: 'active', op: 'eq', value: true }, limit: 4 });
+const page = await lightbase.safeFindOne('masjid_pages', { field: 'slug', op: 'eq', value: 'about' });
+const imams = await lightbase.safeQuery('masjid_imams', { filter: { field: 'active', op: 'eq', value: true }, limit: 4 });
 ---
 
 <PlatformLayout title="About - Minhaajulhudaa Masjid" platform="masjid">

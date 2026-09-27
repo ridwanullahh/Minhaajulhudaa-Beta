@@ -2,7 +2,7 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const result = await lightbase.query('travels_courses', {
+const result = await lightbase.safeQuery('travels_courses', {
   filter: { field: 'status', op: 'eq', value: 'published' },
   sort: 'isFeatured:desc,_created_at:desc',
   limit: 100,

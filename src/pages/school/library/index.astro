@@ -2,7 +2,7 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const result = await lightbase.query('school_library_books', {
+const result = await lightbase.safeQuery('school_library_books', {
   sort: 'title:asc',
   limit: 50,
 });

@@ -3,7 +3,7 @@ import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { generateCSRFToken } from '../../../lib/utils';
 
-const beneficiaries = await lightbase.query('charity_beneficiaries', { sort: 'createdAt:desc', limit: 100 });
+const beneficiaries = await lightbase.safeQuery('charity_beneficiaries', { sort: 'createdAt:desc', limit: 100 });
 const allBeneficiaries = beneficiaries.data || [];
 const verifiedCount = allBeneficiaries.filter((b) => b.verificationStatus === 'verified').length;
 const pendingCount = allBeneficiaries.filter((b) => b.verificationStatus === 'pending').length;

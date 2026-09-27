@@ -10,14 +10,14 @@ const [bookingsToday, bookingsMonth, pendingPayments, upcomingDepartures, revenu
   lightbase.count('travels_bookings', { field: 'bookedAt', op: 'gte', value: today }).catch(() => 0),
   lightbase.count('travels_bookings', { field: 'bookedAt', op: 'gte', value: monthStart }).catch(() => 0),
   lightbase.count('travels_bookings', { field: 'paymentStatus', op: 'eq', value: 'unpaid' }).catch(() => 0),
-  lightbase.query('travels_bookings', { filter: { field: 'status', op: 'eq', value: 'confirmed' }, sort: 'startDate:asc', limit: 5 }).catch(() => ({ data: [] })),
+  lightbase.safeQuery('travels_bookings', { filter: { field: 'status', op: 'eq', value: 'confirmed' }, sort: 'startDate:asc', limit: 5 }).catch(() => ({ data: [] })),
   lightbase.aggregate('travels_payments', {
     aggregations: [{ field: 'amount', op: 'sum', alias: 'totalRevenue' }],
   }).catch(() => ({ totalRevenue: 0 })),
   lightbase.count('travels_packages', { field: 'status', op: 'eq', value: 'active' }).catch(() => 0),
 ]);
 
-const recentBookings = await lightbase.query('travels_bookings', {
+const recentBookings = await lightbase.safeQuery('travels_bookings', {
   sort: 'bookedAt:desc',
   limit: 8,
 }).catch(() => ({ data: [] }));

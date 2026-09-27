@@ -3,8 +3,8 @@ import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
 const [assignmentsResult, coursesResult] = await Promise.all([
-  lightbase.query('school_assignments', { sort: 'title:asc', limit: 200 }),
-  lightbase.query('school_courses', { sort: 'title:asc', limit: 100 }),
+  lightbase.safeQuery('school_assignments', { sort: 'title:asc', limit: 200 }),
+  lightbase.safeQuery('school_courses', { sort: 'title:asc', limit: 100 }),
 ]);
 const assignments = assignmentsResult.data || [];
 const courses = coursesResult.data || [];

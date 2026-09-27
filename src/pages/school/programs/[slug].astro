@@ -8,7 +8,7 @@ const { slug } = Astro.params;
 
 let program: any = null;
 try {
-  program = await lightbase.findOne('school_programs', { field: 'slug', op: 'eq', value: slug });
+  program = await lightbase.safeFindOne('school_programs', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[school/programs/[slug].astro] fetch error:', err);
 }
@@ -20,7 +20,7 @@ if (!program) {
 
 let filteredRelated: any[] = [];
 try {
-  const relatedResult = await lightbase.findMany('school_programs', { field: 'category', op: 'eq', value: program.category }, { limit: 4 });
+  const relatedResult = await lightbase.safeFindMany('school_programs', { field: 'category', op: 'eq', value: program.category }, { limit: 4 });
   filteredRelated = relatedResult.filter(function(p: any) { return p.slug !== program.slug; }).slice(0, 3);
 } catch (err) {
   console.error('[school/programs/[slug]] related query error:', err);

@@ -3,7 +3,7 @@ import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatDate } from '../../../lib/utils';
 
-const result = await lightbase.query('travels_blog_posts', {
+const result = await lightbase.safeQuery('travels_blog_posts', {
   filter: { field: 'status', op: 'eq', value: 'published' },
   sort: 'publishedAt:desc',
   limit: 100,

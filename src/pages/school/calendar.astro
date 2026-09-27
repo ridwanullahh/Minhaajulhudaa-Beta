@@ -3,7 +3,7 @@ import PlatformLayout from '../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../lib/lightbase';
 import { formatDate } from '../../lib/utils';
 
-const result = await lightbase.query('school_events', {
+const result = await lightbase.safeQuery('school_events', {
   sort: 'startDate:asc',
   limit: 50,
 });

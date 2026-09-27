@@ -2,7 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const result = await lightbase.query('school_programs', { sort: 'title', limit: 100 });
+const result = await lightbase.safeQuery('school_programs', { sort: 'title', limit: 100 });
 const allItems = result.data || [];
 ---
 

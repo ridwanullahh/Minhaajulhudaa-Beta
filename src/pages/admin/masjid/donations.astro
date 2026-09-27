@@ -4,8 +4,8 @@ import { lightbase } from '../../../lib/lightbase';
 import { formatCurrency, formatDate } from '../../../lib/utils';
 
 const [campaignsResult, donationsResult] = await Promise.all([
-  lightbase.query('masjid_donation_campaigns', { sort: 'createdAt:desc', limit: 100 }),
-  lightbase.query('masjid_donations', { sort: 'donatedAt:desc', limit: 100 }),
+  lightbase.safeQuery('masjid_donation_campaigns', { sort: 'createdAt:desc', limit: 100 }),
+  lightbase.safeQuery('masjid_donations', { sort: 'donatedAt:desc', limit: 100 }),
 ]);
 
 const campaigns = campaignsResult.data || [];

@@ -2,7 +2,7 @@
 import PlatformLayout from '../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../lib/lightbase';
 
-const classes = await lightbase.query('school_classes', { filter: { field: 'active', op: 'eq', value: true }, limit: 20 });
+const classes = await lightbase.safeQuery('school_classes', { filter: { field: 'active', op: 'eq', value: true }, limit: 20 });
 ---
 
 <PlatformLayout title="Admission - Minhaajulhudaa School" platform="school">

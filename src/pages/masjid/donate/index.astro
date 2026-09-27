@@ -2,7 +2,7 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const campaignsResult = await lightbase.query('masjid_donation_campaigns', {
+const campaignsResult = await lightbase.safeQuery('masjid_donation_campaigns', {
   filter: { field: 'status', op: 'eq', value: 'active' },
   limit: 20,
 });

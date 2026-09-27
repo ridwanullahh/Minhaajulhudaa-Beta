@@ -4,9 +4,9 @@ import { lightbase } from '../../../lib/lightbase';
 import RichTextEditor from '../../../components/RichTextEditor.astro';
 
 const [pages, announcements, events] = await Promise.all([
-  lightbase.query('school_pages', { sort: 'title:asc', limit: 50 }),
-  lightbase.query('school_announcements', { sort: 'createdAt:desc', limit: 20 }),
-  lightbase.query('school_events', { sort: 'startDate:desc', limit: 20 }),
+  lightbase.safeQuery('school_pages', { sort: 'title:asc', limit: 50 }),
+  lightbase.safeQuery('school_announcements', { sort: 'createdAt:desc', limit: 20 }),
+  lightbase.safeQuery('school_events', { sort: 'startDate:desc', limit: 20 }),
 ]);
 
 const allPages = pages.data || [];

@@ -1,7 +1,7 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
-const result = await lightbase.query('school_classes', { sort: 'name', limit: 100 });
+const result = await lightbase.safeQuery('school_classes', { sort: 'name', limit: 100 });
 const allItems = result.data || [];
 ---
 <AdminLayout title="Class Management" platform="school" section="classes">

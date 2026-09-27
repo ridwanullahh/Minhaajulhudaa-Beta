@@ -7,7 +7,7 @@ const { slug } = Astro.params;
 
 let course: any = null;
 try {
-  course = await lightbase.findOne('travels_courses', { field: 'slug', op: 'eq', value: slug });
+  course = await lightbase.safeFindOne('travels_courses', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[travels/courses/[slug].astro] fetch error:', err);
 }
@@ -19,7 +19,7 @@ if (!course) {
 
 let lessons: any[] = [];
 try {
-  const lessonsResult = await lightbase.query('travels_lessons', {
+  const lessonsResult = await lightbase.safeQuery('travels_lessons', {
     filter: { field: 'courseId', op: 'eq', value: course.id },
     sort: 'order:asc',
     limit: 50,

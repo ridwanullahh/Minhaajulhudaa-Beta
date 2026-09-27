@@ -3,7 +3,7 @@ import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import RichTextEditor from '../../../components/RichTextEditor.astro';
 
-const booksResult = await lightbase.query('masjid_books', { sort: 'title:asc', limit: 100 });
+const booksResult = await lightbase.safeQuery('masjid_books', { sort: 'title:asc', limit: 100 });
 const books = booksResult.data || [];
 ---
 

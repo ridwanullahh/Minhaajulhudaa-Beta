@@ -1,7 +1,7 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
-const result = await lightbase.query('charity_success_stories', { sort: 'publishedAt', limit: 100 });
+const result = await lightbase.safeQuery('charity_success_stories', { sort: 'publishedAt', limit: 100 });
 const allItems = result.data || [];
 ---
 <AdminLayout title="Success Stories" platform="charity" section="success-stories">

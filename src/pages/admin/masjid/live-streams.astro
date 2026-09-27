@@ -2,7 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const streamsResult = await lightbase.query('masjid_live_streams', { sort: 'createdAt:desc', limit: 100 });
+const streamsResult = await lightbase.safeQuery('masjid_live_streams', { sort: 'createdAt:desc', limit: 100 });
 const streams = streamsResult.data || [];
 ---
 

@@ -5,12 +5,12 @@ import { lightbase } from '../../lib/lightbase';
 // Fetch real data from Lightbase
 const today = new Date().toISOString().split('T')[0];
 const [prayerTimesResult, announcementsResult, eventsResult, audiosResult, campaignsResult, imamsResult] = await Promise.all([
-  lightbase.findOne('masjid_prayer_times', { field: 'date', op: 'eq', value: today }),
-  lightbase.query('masjid_announcements', { filter: { field: 'active', op: 'eq', value: true }, limit: 3 }),
-  lightbase.query('masjid_events', { sort: 'startDate:asc', limit: 3 }),
-  lightbase.query('masjid_audios', { filter: { field: 'status', op: 'eq', value: 'active' }, sort: 'date:desc', limit: 4 }),
-  lightbase.query('masjid_donation_campaigns', { filter: { field: 'status', op: 'eq', value: 'active' }, limit: 3 }),
-  lightbase.query('masjid_imams', { filter: { field: 'active', op: 'eq', value: true }, limit: 4 }),
+  lightbase.safeFindOne('masjid_prayer_times', { field: 'date', op: 'eq', value: today }),
+  lightbase.safeQuery('masjid_announcements', { filter: { field: 'active', op: 'eq', value: true }, limit: 3 }),
+  lightbase.safeQuery('masjid_events', { sort: 'startDate:asc', limit: 3 }),
+  lightbase.safeQuery('masjid_audios', { filter: { field: 'status', op: 'eq', value: 'active' }, sort: 'date:desc', limit: 4 }),
+  lightbase.safeQuery('masjid_donation_campaigns', { filter: { field: 'status', op: 'eq', value: 'active' }, limit: 3 }),
+  lightbase.safeQuery('masjid_imams', { filter: { field: 'active', op: 'eq', value: true }, limit: 4 }),
 ]);
 
 const prayerTimes = prayerTimesResult;

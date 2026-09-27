@@ -4,7 +4,7 @@ import { lightbase } from '../../../lib/lightbase';
 import { formatDate } from '../../../lib/utils';
 import RichTextEditor from '../../../components/RichTextEditor.astro';
 
-const eventsResult = await lightbase.query('masjid_events', { sort: 'startDate:desc', limit: 100 });
+const eventsResult = await lightbase.safeQuery('masjid_events', { sort: 'startDate:desc', limit: 100 });
 const events = eventsResult.data || [];
 ---
 

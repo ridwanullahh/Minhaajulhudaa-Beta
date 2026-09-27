@@ -5,7 +5,7 @@ import { generateCSRFToken } from '../../../lib/utils';
 
 let settings = {};
 try {
-  const result = await lightbase.query('charity_settings', { limit: 1 });
+  const result = await lightbase.safeQuery('charity_settings', { limit: 1 });
   const docs = result.data || [];
   settings = docs[0] || {};
 } catch {}

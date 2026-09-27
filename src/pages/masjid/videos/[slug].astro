@@ -7,7 +7,7 @@ const { slug } = Astro.params;
 
 let video: any = null;
 try {
-  video = await lightbase.findOne('masjid_videos', { field: 'slug', op: 'eq', value: slug });
+  video = await lightbase.safeFindOne('masjid_videos', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[masjid/videos/[slug]] fetch error:', err);
 }
@@ -19,7 +19,7 @@ if (!video) {
 
 let relatedVideos: any[] = [];
 try {
-  const result = await lightbase.query('masjid_videos', {
+  const result = await lightbase.safeQuery('masjid_videos', {
     filter: { and: [
       { field: 'category', op: 'eq', value: video.category || '' },
       { field: 'slug', op: 'neq', value: video.slug },

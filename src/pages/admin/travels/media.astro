@@ -2,7 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const galleryResult = await lightbase.query('travels_gallery', { sort: '_created_at:desc', limit: 100 }).catch(() => ({ data: [] }));
+const galleryResult = await lightbase.safeQuery('travels_gallery', { sort: '_created_at:desc', limit: 100 }).catch(() => ({ data: [] }));
 const allMedia = galleryResult.data || [];
 
 const categories = [...new Set(allMedia.map((m) => m.category).filter(Boolean))];

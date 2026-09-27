@@ -9,7 +9,7 @@ const { slug } = Astro.params;
 
 let product: any = null;
 try {
-  product = await lightbase.findOne('school_products', { field: 'slug', op: 'eq', value: slug });
+  product = await lightbase.safeFindOne('school_products', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[school/shop/[slug].astro] fetch error:', err);
 }

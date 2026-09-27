@@ -3,7 +3,7 @@ import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatCurrency, generateCSRFToken } from '../../../lib/utils';
 
-const donations = await lightbase.query('charity_donations', { sort: 'createdAt:desc', limit: 100 });
+const donations = await lightbase.safeQuery('charity_donations', { sort: 'createdAt:desc', limit: 100 });
 const allDonations = donations.data || [];
 const csrfToken = generateCSRFToken();
 

@@ -4,7 +4,7 @@ import { lightbase } from '../../../lib/lightbase';
 
 let packages: any[] = [];
 try {
-  const result = await lightbase.query('travels_packages', {
+  const result = await lightbase.safeQuery('travels_packages', {
     filter: { field: 'status', op: 'eq', value: 'active' },
     sort: 'isFeatured:desc',
     limit: 50,

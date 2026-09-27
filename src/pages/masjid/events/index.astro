@@ -5,7 +5,7 @@ import { lightbase } from '../../../lib/lightbase';
 
 let events: any[] = [];
 try {
-  const result = await lightbase.query('masjid_events', {
+  const result = await lightbase.safeQuery('masjid_events', {
     sort: 'startDate:asc',
     limit: 100,
   });

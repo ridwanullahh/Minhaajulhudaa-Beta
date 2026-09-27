@@ -2,7 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const result = await lightbase.query('school_media', {
+const result = await lightbase.safeQuery('school_media', {
   sort: 'createdAt:desc',
   limit: 100,
 });

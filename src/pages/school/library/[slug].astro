@@ -8,7 +8,7 @@ const { slug } = Astro.params;
 
 let book: any = null;
 try {
-  book = await lightbase.findOne('school_library_books', { field: 'slug', op: 'eq', value: slug });
+  book = await lightbase.safeFindOne('school_library_books', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[school/library/[slug].astro] fetch error:', err);
 }

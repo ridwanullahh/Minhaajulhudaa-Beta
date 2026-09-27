@@ -1,7 +1,7 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
-const result = await lightbase.query('charity_volunteers', { sort: 'joinedAt', limit: 100 });
+const result = await lightbase.safeQuery('charity_volunteers', { sort: 'joinedAt', limit: 100 });
 const allItems = result.data || [];
 ---
 <AdminLayout title="Volunteer Management" platform="charity" section="volunteers">

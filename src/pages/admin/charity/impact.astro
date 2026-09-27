@@ -3,7 +3,7 @@ import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { generateCSRFToken } from '../../../lib/utils';
 
-const metrics = await lightbase.query('charity_impact_metrics', { sort: 'value:desc', limit: 100 });
+const metrics = await lightbase.safeQuery('charity_impact_metrics', { sort: 'value:desc', limit: 100 });
 const allMetrics = metrics.data || [];
 const csrfToken = generateCSRFToken();
 
