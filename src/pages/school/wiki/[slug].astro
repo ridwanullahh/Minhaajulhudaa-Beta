@@ -8,7 +8,7 @@ const { slug } = Astro.params;
 
 let article: any = null;
 try {
-  article = await lightbase.findOne('school_wiki_articles', { field: 'slug', op: 'eq', value: slug });
+  article = await lightbase.safeFindOne('school_wiki_articles', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[school/wiki/[slug].astro] fetch error:', err);
 }
@@ -20,7 +20,7 @@ if (!article) {
 
 let related: any[] = [];
 try {
-  const relatedResult = await lightbase.query('school_wiki_articles', {
+  const relatedResult = await lightbase.safeQuery('school_wiki_articles', {
     filter: { field: 'category', op: 'eq', value: article.category || '' },
     sort: 'title:asc',
     limit: 10,

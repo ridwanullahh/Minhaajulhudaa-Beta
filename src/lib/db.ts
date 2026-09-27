@@ -82,32 +82,17 @@ async function ensureLocalDbSeeded(): Promise<void> {
 }
 
 /**
- * Execute an operation on Lightbase, falling back to Local DB on failure.
+ * BismiLLAH (2026-09-27, LIGHTBASE-ONLY MANDATE) — execute the Lightbase
+ * operation. The Local DB fallback is FULLY DISABLED (functionless): the
+ * localOp parameter is retained only for call-site compatibility and is
+ * NEVER invoked. Failures surface as real errors (display reads use the
+ * fail-soft safe* variants at the call sites instead).
  */
 async function withFallback<T>(
   lightbaseOp: () => Promise<T>,
-  localOp: () => Promise<T>
+  _localOp: () => Promise<T>
 ): Promise<T> {
-  const useLightbase = await checkLightbaseHealth();
-  
-  if (useLightbase) {
-    try {
-      return await lightbaseOp();
-    } catch (err) {
-      // If it's a network error or 5xx, fall back to local
-      if (err instanceof LightbaseError && (err.status >= 500 || err.status === 0)) {
-        console.log('[db] Lightbase error, falling back to local DB');
-        lightbaseAvailable = false;
-        lastHealthCheck = Date.now();
-        await ensureLocalDbSeeded();
-        return localOp();
-      }
-      throw err;
-    }
-  } else {
-    await ensureLocalDbSeeded();
-    return localOp();
-  }
+  return lightbaseOp();
 }
 
 /**
@@ -116,20 +101,18 @@ async function withFallback<T>(
  */
 class DbRouter {
   isConfigured(): boolean {
-    return lightbase.isConfigured() || true; // Local DB is always available
+    return lightbase.isConfigured();
   }
 
   async health(): Promise<{ status: string; version: string; timestamp: string; source?: string }> {
-    const useLightbase = await checkLightbaseHealth();
-    if (useLightbase) {
-      try {
-        const h = await lightbase.health();
-        return { ...h, source: 'lightbase' };
-      } catch {
-        return { status: 'ok', version: 'local-1.0.0', timestamp: new Date().toISOString(), source: 'local' };
-      }
+    try {
+      const h = await lightbase.health();
+      return { ...h, source: 'lightbase' };
+    } catch {
+      // BismiLLAH — health reports the TRUTH (degraded), never pretends the
+      // local DB is a healthy replacement.
+      return { status: 'degraded', version: 'lightbase-unreachable', timestamp: new Date().toISOString(), source: 'none' };
     }
-    return { status: 'ok', version: 'local-1.0.0', timestamp: new Date().toISOString(), source: 'local' };
   }
 
   async listCollections(): Promise<{ collections: any[] }> {

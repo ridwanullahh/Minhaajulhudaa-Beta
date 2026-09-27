@@ -8,7 +8,7 @@ const { slug } = Astro.params;
 
 let story: any = null;
 try {
-  story = await lightbase.findOne('charity_success_stories', { field: 'slug', op: 'eq', value: slug });
+  story = await lightbase.safeFindOne('charity_success_stories', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[charity/stories/[slug]] fetch error:', err);
 }
@@ -20,7 +20,7 @@ if (!story) {
 
 let related: any[] = [];
 try {
-  const relatedStories = await lightbase.query('charity_success_stories', {
+  const relatedStories = await lightbase.safeQuery('charity_success_stories', {
     filter: { field: 'status', op: 'eq', value: 'published' },
     sort: 'publishedAt:desc',
     limit: 5,

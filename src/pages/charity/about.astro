@@ -2,9 +2,9 @@
 import PlatformLayout from '../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../lib/lightbase';
 
-const page = await lightbase.findOne('charity_pages', { field: 'slug', op: 'eq', value: 'about' });
-const metrics = await lightbase.query('charity_impact_metrics', { limit: 8 });
-const partners = await lightbase.query('charity_partners', { filter: { field: 'status', op: 'eq', value: 'active' }, limit: 8 });
+const page = await lightbase.safeFindOne('charity_pages', { field: 'slug', op: 'eq', value: 'about' });
+const metrics = await lightbase.safeQuery('charity_impact_metrics', { limit: 8 });
+const partners = await lightbase.safeQuery('charity_partners', { filter: { field: 'status', op: 'eq', value: 'active' }, limit: 8 });
 ---
 
 <PlatformLayout title="About - Minhaajulhudaa Charity" platform="charity">

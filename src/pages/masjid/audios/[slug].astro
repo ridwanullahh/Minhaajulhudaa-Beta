@@ -8,7 +8,7 @@ const { slug } = Astro.params;
 
 let audio: any = null;
 try {
-  audio = await lightbase.findOne('masjid_audios', { field: 'slug', op: 'eq', value: slug });
+  audio = await lightbase.safeFindOne('masjid_audios', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[masjid/audios/[slug]] fetch error:', err);
 }
@@ -20,7 +20,7 @@ if (!audio) {
 
 let relatedAudios: any[] = [];
 try {
-  const result = await lightbase.query('masjid_audios', {
+  const result = await lightbase.safeQuery('masjid_audios', {
     filter: { and: [
       { field: 'category', op: 'eq', value: audio.category || '' },
       { field: 'slug', op: 'neq', value: audio.slug },

@@ -3,9 +3,9 @@ import PlatformLayout from '../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../lib/lightbase';
 
 const [packagesResult, reviewsResult, blogResult] = await Promise.all([
-  lightbase.query('travels_packages', { filter: { field: 'status', op: 'eq', value: 'active' }, sort: 'isFeatured:desc', limit: 4 }),
-  lightbase.query('travels_reviews', { filter: { field: 'status', op: 'eq', value: 'approved' }, limit: 3 }),
-  lightbase.query('travels_blog_posts', { filter: { field: 'status', op: 'eq', value: 'published' }, sort: 'publishedAt:desc', limit: 3 }),
+  lightbase.safeQuery('travels_packages', { filter: { field: 'status', op: 'eq', value: 'active' }, sort: 'isFeatured:desc', limit: 4 }),
+  lightbase.safeQuery('travels_reviews', { filter: { field: 'status', op: 'eq', value: 'approved' }, limit: 3 }),
+  lightbase.safeQuery('travels_blog_posts', { filter: { field: 'status', op: 'eq', value: 'published' }, sort: 'publishedAt:desc', limit: 3 }),
 ]);
 
 const packages = packagesResult.data || [];

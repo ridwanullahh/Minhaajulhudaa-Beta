@@ -4,7 +4,7 @@ import { lightbase } from '../../../lib/lightbase';
 
 let posts: any[] = [];
 try {
-  const result = await lightbase.query('school_blog_posts', {
+  const result = await lightbase.safeQuery('school_blog_posts', {
     filter: { field: 'status', op: 'eq', value: 'published' },
     sort: 'publishedAt:desc',
     limit: 20,

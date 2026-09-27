@@ -6,7 +6,7 @@ const { slug } = Astro.params;
 
 let campaign: any = null;
 try {
-  campaign = await lightbase.findOne('charity_campaigns', { field: 'slug', op: 'eq', value: slug });
+  campaign = await lightbase.safeFindOne('charity_campaigns', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[charity/campaigns/[slug].astro] fetch error:', err);
 }
@@ -18,7 +18,7 @@ if (!campaign) {
 
 let updates: any[] = [];
 try {
-  const updatesResult = await lightbase.query('charity_campaign_updates', {
+  const updatesResult = await lightbase.safeQuery('charity_campaign_updates', {
     filter: { field: 'campaignId', op: 'eq', value: campaign.id },
     limit: 5,
   });

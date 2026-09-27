@@ -5,7 +5,7 @@ import { lightbase } from '../../../lib/lightbase';
 
 let videos: any[] = [];
 try {
-  const result = await lightbase.query('masjid_videos', {
+  const result = await lightbase.safeQuery('masjid_videos', {
     filter: { field: 'status', op: 'eq', value: 'published' },
     sort: 'publishedAt:desc',
     limit: 100,

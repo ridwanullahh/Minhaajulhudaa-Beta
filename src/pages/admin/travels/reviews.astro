@@ -5,7 +5,7 @@ import { lightbase } from '../../../lib/lightbase';
 const statusFilter = Astro.url.searchParams.get('status') || '';
 const filterParam = statusFilter ? { field: 'status', op: 'eq', value: statusFilter } : undefined;
 
-const reviewsResult = await lightbase.query('travels_reviews', {
+const reviewsResult = await lightbase.safeQuery('travels_reviews', {
   filter: filterParam,
   sort: '_created_at:desc',
   limit: 100,

@@ -3,7 +3,7 @@ import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatCurrency } from '../../../lib/utils';
 
-const paymentsResult = await lightbase.query('travels_payments', {
+const paymentsResult = await lightbase.safeQuery('travels_payments', {
   sort: '_created_at:desc',
   limit: 100,
 }).catch(() => ({ data: [] }));

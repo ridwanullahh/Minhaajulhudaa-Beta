@@ -3,7 +3,7 @@ import PlatformLayout from '../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../lib/lightbase';
 
 // Fetch Quran config and available reciters
-const quranConfig = await lightbase.findOne('masjid_quran_config', { field: 'active', op: 'eq', value: true });
+const quranConfig = await lightbase.safeFindOne('masjid_quran_config', { field: 'active', op: 'eq', value: true });
 
 // List of available reciters (from Quran.com API)
 const reciters = [

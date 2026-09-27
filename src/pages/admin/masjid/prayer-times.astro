@@ -13,7 +13,7 @@ const endDate = new Date(year, month, daysInMonth).toISOString().split('T')[0];
 
 let prayerTimes: any[] = [];
 try {
-  const result = await lightbase.query('masjid_prayer_times', {
+  const result = await lightbase.safeQuery('masjid_prayer_times', {
     filter: { field: 'date', op: 'gte', value: startDate },
     sort: 'date:asc',
     limit: 35,

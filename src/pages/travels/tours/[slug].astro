@@ -6,7 +6,7 @@ const { slug } = Astro.params;
 
 let pkg: any = null;
 try {
-  pkg = await lightbase.findOne('travels_packages', { field: 'slug', op: 'eq', value: slug });
+  pkg = await lightbase.safeFindOne('travels_packages', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[travels/tours/[slug].astro] fetch error:', err);
 }
@@ -18,7 +18,7 @@ if (!pkg) {
 
 let itineraries: any[] = [];
 try {
-  const itinResult = await lightbase.query('travels_itineraries', {
+  const itinResult = await lightbase.safeQuery('travels_itineraries', {
     filter: { field: 'packageId', op: 'eq', value: pkg.id },
     sort: 'day:asc',
     limit: 30,

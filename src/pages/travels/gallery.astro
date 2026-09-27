@@ -2,7 +2,7 @@
 import PlatformLayout from '../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../lib/lightbase';
 
-const result = await lightbase.query('travels_gallery', {
+const result = await lightbase.safeQuery('travels_gallery', {
   sort: 'order:asc,title:asc',
   limit: 100,
 });

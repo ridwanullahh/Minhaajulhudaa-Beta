@@ -2,7 +2,7 @@
 import PlatformLayout from '../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../lib/lightbase';
 
-const packages = await lightbase.query('travels_packages', {
+const packages = await lightbase.safeQuery('travels_packages', {
   filter: { field: 'status', op: 'eq', value: 'active' },
   sort: 'isFeatured:desc',
   limit: 50,

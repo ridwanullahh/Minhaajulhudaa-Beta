@@ -6,7 +6,7 @@ import { formatCurrency } from '../../../lib/utils';
 const statusFilter = Astro.url.searchParams.get('status') || '';
 const filterParam = statusFilter ? { field: 'status', op: 'eq', value: statusFilter } : undefined;
 
-const bookingsResult = await lightbase.query('travels_bookings', {
+const bookingsResult = await lightbase.safeQuery('travels_bookings', {
   filter: filterParam,
   sort: 'bookedAt:desc',
   limit: 100,

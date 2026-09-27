@@ -4,8 +4,8 @@ import { lightbase } from '../../../lib/lightbase';
 import { formatCurrency } from '../../../lib/utils';
 
 const [invoices, payments] = await Promise.all([
-  lightbase.query('school_invoices', { sort: 'createdAt:desc', limit: 50 }),
-  lightbase.query('school_payments', { sort: 'createdAt:desc', limit: 50 }),
+  lightbase.safeQuery('school_invoices', { sort: 'createdAt:desc', limit: 50 }),
+  lightbase.safeQuery('school_payments', { sort: 'createdAt:desc', limit: 50 }),
 ]);
 const allInvoices = invoices.data || [];
 const allPayments = payments.data || [];

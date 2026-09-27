@@ -4,7 +4,7 @@ import { lightbase } from '../../../lib/lightbase';
 
 let articles: any[] = [];
 try {
-  const result = await lightbase.query('school_wiki_articles', {
+  const result = await lightbase.safeQuery('school_wiki_articles', {
     sort: 'title:asc',
     limit: 100,
   });

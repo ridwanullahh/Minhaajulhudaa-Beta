@@ -4,7 +4,7 @@ import { lightbase } from '../../../lib/lightbase';
 
 let quranConfig: any = null;
 try {
-  quranConfig = await lightbase.findOne('masjid_quran_config', {});
+  quranConfig = await lightbase.safeFindOne('masjid_quran_config', {});
 } catch {}
 ---
 

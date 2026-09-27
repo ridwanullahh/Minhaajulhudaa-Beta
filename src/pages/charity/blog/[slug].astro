@@ -9,7 +9,7 @@ const { slug } = Astro.params;
 
 let post: any = null;
 try {
-  post = await lightbase.findOne('charity_blog_posts', { field: 'slug', op: 'eq', value: slug });
+  post = await lightbase.safeFindOne('charity_blog_posts', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[charity/blog/[slug]] fetch error:', err);
 }
@@ -22,7 +22,7 @@ if (!post) {
 let relatedPosts: any[] = [];
 try {
   if (post.category) {
-    const result = await lightbase.query('charity_blog_posts', {
+    const result = await lightbase.safeQuery('charity_blog_posts', {
       filter: { field: 'category', op: 'eq', value: post.category },
       sort: 'publishedAt:desc',
       limit: 3,

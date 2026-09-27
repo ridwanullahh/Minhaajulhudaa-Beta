@@ -8,7 +8,7 @@ const { slug } = Astro.params;
 
 let resource: any = null;
 try {
-  resource = await lightbase.findOne('travels_resources', { field: 'slug', op: 'eq', value: slug });
+  resource = await lightbase.safeFindOne('travels_resources', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[travels/guide/[slug]] fetch error:', err);
 }

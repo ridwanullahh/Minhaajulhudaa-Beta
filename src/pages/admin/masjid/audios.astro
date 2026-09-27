@@ -4,7 +4,7 @@ import { lightbase } from '../../../lib/lightbase';
 import { formatDate } from '../../../lib/utils';
 import RichTextEditor from '../../../components/RichTextEditor.astro';
 
-const audiosResult = await lightbase.query('masjid_audios', { sort: 'date:desc', limit: 100 });
+const audiosResult = await lightbase.safeQuery('masjid_audios', { sort: 'date:desc', limit: 100 });
 const audios = audiosResult.data || [];
 ---
 

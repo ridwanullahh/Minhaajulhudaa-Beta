@@ -2,7 +2,7 @@
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const allResult = await lightbase.query('school_admission_applications', {
+const allResult = await lightbase.safeQuery('school_admission_applications', {
   sort: 'submittedAt:desc',
   limit: 100,
 });

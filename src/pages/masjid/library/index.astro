@@ -5,7 +5,7 @@ import { lightbase } from '../../../lib/lightbase';
 
 let books: any[] = [];
 try {
-  const result = await lightbase.query('masjid_books', {
+  const result = await lightbase.safeQuery('masjid_books', {
     filter: { field: 'status', op: 'eq', value: 'published' },
     sort: 'title:asc',
     limit: 100,

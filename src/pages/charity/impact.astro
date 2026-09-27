@@ -4,7 +4,7 @@ import { lightbase } from '../../lib/lightbase';
 
 let metrics: any[] = [];
 try {
-  const result = await lightbase.query('charity_impact_metrics', { sort: 'value:desc', limit: 50 });
+  const result = await lightbase.safeQuery('charity_impact_metrics', { sort: 'value:desc', limit: 50 });
   metrics = result.data || [];
 } catch {}
 

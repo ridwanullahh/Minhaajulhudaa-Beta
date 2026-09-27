@@ -5,7 +5,7 @@ import { formatCurrency } from '../../../lib/utils';
 
 let courses: any[] = [];
 try {
-  const result = await lightbase.query('school_courses', {
+  const result = await lightbase.safeQuery('school_courses', {
     filter: { field: 'status', op: 'eq', value: 'published' },
     sort: 'title:asc',
     limit: 50,

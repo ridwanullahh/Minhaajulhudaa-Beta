@@ -4,7 +4,7 @@ import { lightbase } from '../../../lib/lightbase';
 
 let classes: any[] = [];
 try {
-  const result = await lightbase.query('school_classes', {
+  const result = await lightbase.safeQuery('school_classes', {
     sort: 'name:asc',
     limit: 50,
   });

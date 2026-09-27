@@ -9,7 +9,7 @@ const { slug } = Astro.params;
 
 let post: any = null;
 try {
-  post = await lightbase.findOne('travels_blog_posts', { field: 'slug', op: 'eq', value: slug });
+  post = await lightbase.safeFindOne('travels_blog_posts', { field: 'slug', op: 'eq', value: slug });
 } catch (err) {
   console.error('[travels/blog/[slug]] fetch error:', err);
 }

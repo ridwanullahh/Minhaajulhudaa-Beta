@@ -2,10 +2,10 @@
 import PlatformLayout from '../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../lib/lightbase';
 
-const page = await lightbase.findOne('school_pages', { field: 'slug', op: 'eq', value: 'about' });
+const page = await lightbase.safeFindOne('school_pages', { field: 'slug', op: 'eq', value: 'about' });
 const [staffResult, testimonialsResult] = await Promise.all([
-  lightbase.query('school_staff', { filter: { field: 'status', op: 'eq', value: 'active' }, limit: 8 }),
-  lightbase.query('school_testimonials', { filter: { field: 'status', op: 'eq', value: 'approved' }, limit: 3 }),
+  lightbase.safeQuery('school_staff', { filter: { field: 'status', op: 'eq', value: 'active' }, limit: 8 }),
+  lightbase.safeQuery('school_testimonials', { filter: { field: 'status', op: 'eq', value: 'approved' }, limit: 3 }),
 ]);
 
 const staff = staffResult.data || [];

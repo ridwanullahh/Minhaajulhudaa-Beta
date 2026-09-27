@@ -3,7 +3,7 @@ import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatDate } from '../../../lib/utils';
 
-const galleryResult = await lightbase.query('masjid_gallery', { sort: 'createdAt:desc', limit: 100 });
+const galleryResult = await lightbase.safeQuery('masjid_gallery', { sort: 'createdAt:desc', limit: 100 });
 const gallery = galleryResult.data || [];
 
 const albums = [...new Set(gallery.map(g => g.album).filter(Boolean))];

@@ -4,7 +4,7 @@ import { lightbase } from '../../lib/lightbase';
 
 let testimonials: any[] = [];
 try {
-  const result = await lightbase.query('charity_testimonials', {
+  const result = await lightbase.safeQuery('charity_testimonials', {
     filter: { field: 'status', op: 'eq', value: 'approved' },
     sort: 'createdAt:desc',
     limit: 100,

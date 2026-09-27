@@ -3,7 +3,7 @@ import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 import { formatCurrency } from '../../../lib/utils';
 
-const rules = await lightbase.query('travels_pricing_rules', { sort: 'priority:desc', limit: 100 }).catch(() => ({ data: [] }));
+const rules = await lightbase.safeQuery('travels_pricing_rules', { sort: 'priority:desc', limit: 100 }).catch(() => ({ data: [] }));
 const allRules = rules.data || [];
 
 const typeBadge = (type) => {

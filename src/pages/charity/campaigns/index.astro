@@ -4,7 +4,7 @@ import { lightbase } from '../../../lib/lightbase';
 
 let campaigns: any[] = [];
 try {
-  const result = await lightbase.query('charity_campaigns', {
+  const result = await lightbase.safeQuery('charity_campaigns', {
     filter: { field: 'status', op: 'eq', value: 'active' },
     sort: 'isUrgent:desc',
     limit: 50,

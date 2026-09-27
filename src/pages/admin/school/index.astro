@@ -12,13 +12,13 @@ const [studentsCount, pendingApps, activeCourses, paymentsAgg] = await Promise.a
   }).catch(() => ({ totalRevenue: 0 })),
 ]);
 
-const recentApps = await lightbase.query('school_admission_applications', {
+const recentApps = await lightbase.safeQuery('school_admission_applications', {
   filter: { field: 'status', op: 'eq', value: 'pending' },
   sort: 'submittedAt:desc',
   limit: 5,
 });
 
-const recentPayments = await lightbase.query('school_payments', {
+const recentPayments = await lightbase.safeQuery('school_payments', {
   sort: 'createdAt:desc',
   limit: 5,
 });

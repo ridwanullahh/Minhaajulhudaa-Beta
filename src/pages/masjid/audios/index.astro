@@ -2,7 +2,7 @@
 import PlatformLayout from '../../../layouts/PlatformLayout.astro';
 import { lightbase } from '../../../lib/lightbase';
 
-const result = await lightbase.query('masjid_audios', {
+const result = await lightbase.safeQuery('masjid_audios', {
   filter: { field: 'status', op: 'eq', value: 'active' },
   sort: 'date:desc',
   limit: 50,

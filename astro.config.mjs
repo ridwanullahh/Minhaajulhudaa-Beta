@@ -2,32 +2,21 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import cloudflare from '@astrojs/cloudflare';
 import node from '@astrojs/node';
 
-// Bismillah — dual-adapter preamble (BirrPaas battle fix).
+// Bismillah — FULL-SSR NODE MANDATE (2026-09-27).
 //
-// The default target stays Cloudflare Pages exactly as before. When the
-// platform builds the app with BUILD_TARGET=node (full SSR on a Node host),
-// the Node adapter takes over instead — the Cloudflare adapter's output
-// (_worker.js) cannot run on plain Node, which is what broke deployments.
-//   BUILD_TARGET=node  ASTRO_NODE_MODE=middleware  → mountable middleware build
-//   BUILD_TARGET=node  (default)                   → standalone node server
-//     → dist/server/entry.mjs, started with: node dist/server/entry.mjs
-const BUILD_TARGET = (process.env.BUILD_TARGET || '').trim();
+// The platform builds and runs EXCLUSIVELY as a standalone Node server
+// (full SSR, full Node runtime) for Zoho Catalyst AppSail / any Node host.
+// The former Cloudflare Pages/Workers dual-adapter path is REMOVED — no
+// static/edge deployment path, no wrangler, no _worker.js.
+// Production start: node dist/server/entry.mjs (honours $HOST/$PORT).
 const NODE_MODE = (process.env.ASTRO_NODE_MODE || 'standalone').trim();
 
 export default defineConfig({
-  site: process.env.SITE_URL || 'https://minhaajulhudaa.pages.dev',
+  site: process.env.SITE_URL || 'https://minhaajulhudaa-10133292663.development.catalystappsail.com',
   output: 'server',
-  adapter:
-    BUILD_TARGET === 'node'
-      ? node({ mode: /** @type {'standalone'|'middleware'} */ (NODE_MODE) })
-      : cloudflare({
-          platformProxy: {
-            enabled: true,
-          },
-        }),
+  adapter: node({ mode: /** @type {'standalone'|'middleware'} */ (NODE_MODE) }),
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],

@@ -21,11 +21,11 @@ const [donationsAgg, donationsMonthAgg, audiosCount, eventsCount, announcementsC
 ]);
 
 const today = new Date().toISOString().split('T')[0];
-const todayPrayerTimes = await lightbase.findOne('masjid_prayer_times', { field: 'date', op: 'eq', value: today }).catch(() => null);
+const todayPrayerTimes = await lightbase.safeFindOne('masjid_prayer_times', { field: 'date', op: 'eq', value: today }).catch(() => null);
 
-const recentAnnouncements = await lightbase.query('masjid_announcements', { sort: 'createdAt:desc', limit: 5 });
-const recentDonations = await lightbase.query('masjid_donations', { sort: 'donatedAt:desc', limit: 5 });
-const activeCampaigns = await lightbase.query('masjid_donation_campaigns', { filter: { field: 'status', op: 'eq', value: 'active' }, limit: 5 });
+const recentAnnouncements = await lightbase.safeQuery('masjid_announcements', { sort: 'createdAt:desc', limit: 5 });
+const recentDonations = await lightbase.safeQuery('masjid_donations', { sort: 'donatedAt:desc', limit: 5 });
+const activeCampaigns = await lightbase.safeQuery('masjid_donation_campaigns', { filter: { field: 'status', op: 'eq', value: 'active' }, limit: 5 });
 
 const stats = [
   { label: 'Total Donations', value: formatCurrency(donationsAgg?.totalDonations || 0), icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>', color: 'rgb(5,179,77,0.1)', textColor: 'var(--color-primary)' },
