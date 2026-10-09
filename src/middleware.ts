@@ -3,11 +3,14 @@
  * Only applies to server-rendered routes, not prerendered static pages
  */
 import { defineMiddleware } from 'astro:middleware';
+import { getSessionCookieValue, hasAccess } from './lib/auth';
 
 const RATE_LIMIT_MAP = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_WINDOW = 60000;
 const RATE_LIMIT_MAX = 60;
 const AUTH_RATE_LIMIT_MAX = 10;
+
+const ADMIN_PLATFORMS = ['school', 'masjid', 'charity', 'travels'];
 
 function getClientIP(request: Request): string {
   return request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
@@ -57,6 +60,23 @@ export const onRequest = defineMiddleware(async (context, next) => {
           headers: { 'Content-Type': 'application/json' },
         });
       }
+    }
+  }
+
+  // BismiLLAH (edge-hardening): admin guard runs HERE, before any page
+  // frontmatter. Astro.redirect() inside a layout COMPONENT is unsupported —
+  // the redirect Response was swallowed, rendering continued and crashed with
+  // ResponseSentError (live edge catch: /admin/masjid hung 30s+). A 302 from
+  // middleware is clean, universal and runs before any response is sent.
+  if (url.pathname.startsWith('/admin/') && url.pathname !== '/admin/login') {
+    const session = getSessionCookieValue(request);
+    const pathPlatform = url.pathname.split('/')[2] || '';
+    if (!session || session.expiresAt < Date.now()) {
+      const target = `/admin/login?redirect=${encodeURIComponent(url.pathname)}`;
+      return new Response(null, { status: 302, headers: { Location: target } });
+    }
+    if (ADMIN_PLATFORMS.includes(pathPlatform) && !hasAccess(session, pathPlatform)) {
+      return new Response(null, { status: 302, headers: { Location: '/admin/login' } });
     }
   }
 
