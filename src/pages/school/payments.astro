@@ -81,7 +81,7 @@ import PlatformLayout from '../../layouts/PlatformLayout.astro';
           if (data.payments.length > 0) {
             html += '<h3 class="font-bold mt-6 mb-3">Payment History</h3>';
             html += '<div class="space-y-3">' + data.payments.map(pay => {
-              return '<div class="card p-4 flex justify-between items-center"><div><div class="font-medium text-sm">' + (pay.reference || 'Payment') + '</div><div class="text-xs" style="color: var(--color-muted);">' + new Date(pay.createdAt).toLocaleDateString() + '</div></div><div class="text-right"><div class="font-bold">\u20A6' + (pay.amount || 0).toLocaleString() + '</div><span class="badge badge-primary">' + pay.status + '</span></div></div>';
+              return '<div class="card p-4 flex justify-between items-center"><div><div class="font-medium text-sm">' + (pay.reference || 'Payment') + '</div><div class="text-xs" style="color: var(--color-muted);">' + (pay.paidAt || pay.createdAt ? new Date(pay.paidAt || pay.createdAt).toLocaleDateString() : '') + '</div></div><div class="text-right"><div class="font-bold">\u20A6' + (pay.amount || 0).toLocaleString() + '</div><span class="badge badge-primary">' + pay.status + '</span></div></div>';
             }).join('') + '</div>';
           }
           results.innerHTML = html;
