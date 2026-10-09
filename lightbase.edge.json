@@ -1,0 +1,12 @@
+{
+  "appId": "minhaajulhudaa",
+  "name": "Minhaajulhudaa Platform",
+  "framework": "astro",
+  "entry": "dist/server/entry.mjs",
+  "staticOut": "dist-pages",
+  "clientDir": "dist/client",
+  "assetPrefixes": ["/_astro/", "/fonts/", "/images/", "/favicon", "/icons/"],
+  "corsOpen": false,
+  "timeoutMs": 60000,
+  "auth": "public"
+}
