@@ -180,8 +180,17 @@ function getAllEnvAdmins(): EnvAdmin[] {
 }
 
 export async function authenticateAdmin(email: string, password: string, platform?: string): Promise<AdminUser | null> {
-  // 1. Check env-based admins first
-  const envAdmins = getAllEnvAdmins();
+  // 1. Check env-based admins first.
+  // BismiLLAH (fleet-hardening): SUPER admins are evaluated FIRST so an
+  // owner account present in both ADMIN_USERS_SUPER and a platform list
+  // always authenticates with full cross-platform access (previously the
+  // first platform entry shadowed the super entry and the owner silently
+  // lost masjid/charity/travels reach).
+  const allEnvAdmins = getAllEnvAdmins();
+  const envAdmins = [
+    ...allEnvAdmins.filter(a => a.role === 'super_admin'),
+    ...allEnvAdmins.filter(a => a.role !== 'super_admin'),
+  ];
   // Use constant-time comparison to prevent timing attacks
   const envAdmin = envAdmins.find(a =>
     a.email.toLowerCase() === email.toLowerCase() &&
